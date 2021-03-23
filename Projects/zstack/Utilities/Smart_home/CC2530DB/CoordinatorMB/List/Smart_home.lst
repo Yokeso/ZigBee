@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         23/Mar/2021  19:32:06 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         24/Mar/2021  00:43:43 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -164,94 +164,95 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
      43            3.23
      44            + Warn 代码初始化后会产生直接进入key的情况,需debug
      45                   OK键问题无法修复，放弃使用OK键，修改为Cencel组网 禁止组网
-     46             
-     47            经调试程序无bug，可以接收各个传感器消息。//3.22
-     48            当我没说。。好像出了内存问题//3.22
-     49            项目重构啦！，现在又只有一个小问题了/3.23
-     50          *********************************************************************/
-     51          
-     52          /*********************************************************************
-     53           * INCLUDES
-     54           */
-     55          
-     56          #include "OSAL.h"
-     57          #include "AF.h"
-     58          #include "ZDObject.h"
-     59          #include "ZDProfile.h"
-     60          #include "nwk_util.h"
-     61          
-     62          #include "Smart_home.h"
-     63          #include "OnBoard.h"
-     64          
-     65          #include "DebugTrace.h"
-     66          #include "string.h"
-     67          
-     68          /* HAL */
-     69          #include "hal_lcd.h"
-     70          #include "hal_led.h"
-     71          #include "hal_key.h"
-     72          #include "hal_uart.h"
-     73          
-     74          /*********************************************************************
-     75           * MACROS
-     76           */
-     77          /*设备链接相关设置*/
-     78          /*判断设备是否在线的最大次数*/
-     79          #define DEVICE_HEART_BEAT    3
-     80          #define DEVICE_CHECK_DELAY   5000
-     81          
-     82          /*LCD相关设置*/
-     83          /*单屏显示时常   MS*/
-     84          #define LCD_DISPLAY_LENGTH   10000
-     85          #define LCD_DISPLAY_TIMER    3000  //多久更新一次 
-     86          
-     87          /*********************************************************************
-     88           * CONSTANTS
-     89           */
-     90          
-     91          #if !defined( SMART_HOME_PORT )
-     92          #define SMART_HOME_PORT  0
-     93          #endif
-     94          
-     95          #if !defined( SMART_HOME_BAUD )
-     96          #define SMART_HOME_BAUD  HAL_UART_BR_38400
-     97          //#define SMART_HOME_BAUD  HAL_UART_BR_115200
-     98          #endif
-     99          
-    100          // When the Rx buf space is less than this threshold, invoke the Rx callback.
-    101          #if !defined( SMART_HOME_THRESH )
-    102          #define SMART_HOME_THRESH  64
-    103          #endif
-    104          
-    105          #if !defined( SMART_HOME_RX_SZ )
-    106          #define SMART_HOME_RX_SZ  128
-    107          #endif
-    108          
-    109          #if !defined( SMART_HOME_TX_SZ )
-    110          #define SMART_HOME_TX_SZ  128
-    111          #endif
-    112          
-    113          // Millisecs of idle time after a byte is received before invoking Rx callback.
-    114          #if !defined( SMART_HOME_IDLE )
-    115          #define SMART_HOME_IDLE  6
-    116          #endif
-    117          
-    118          // Loopback Rx bytes to Tx for throughput testing.
-    119          #if !defined( SMART_HOME_LOOPBACK )
-    120          #define SMART_HOME_LOOPBACK  FALSE
-    121          #endif
-    122          
-    123          // This is the max byte count per OTA message.
-    124          #if !defined( SMART_HOME_TX_MAX )
-    125          #define SMART_HOME_TX_MAX  80
-    126          #endif
-    127          
-    128          #define SMART_HOME_RSP_CNT  4
-    129          
-    130          //3.14 This list should be filled with Application specific Cluster IDs.
+     46            3.23 正式完成网关节点部分，（显示函数部分除外）
+     47             
+     48            经调试程序无bug，可以接收各个传感器消息。//3.22
+     49            当我没说。。好像出了内存问题//3.22
+     50            项目重构啦！，现在又只有一个小问题了/3.23
+     51          *********************************************************************/
+     52          
+     53          /*********************************************************************
+     54           * INCLUDES
+     55           */
+     56          
+     57          #include "OSAL.h"
+     58          #include "AF.h"
+     59          #include "ZDObject.h"
+     60          #include "ZDProfile.h"
+     61          #include "nwk_util.h"
+     62          
+     63          #include "Smart_home.h"
+     64          #include "OnBoard.h"
+     65          
+     66          #include "DebugTrace.h"
+     67          #include "string.h"
+     68          
+     69          /* HAL */
+     70          #include "hal_lcd.h"
+     71          #include "hal_led.h"
+     72          #include "hal_key.h"
+     73          #include "hal_uart.h"
+     74          
+     75          /*********************************************************************
+     76           * MACROS
+     77           */
+     78          /*设备链接相关设置*/
+     79          /*判断设备是否在线的最大次数*/
+     80          #define DEVICE_HEART_BEAT    3
+     81          #define DEVICE_CHECK_DELAY   5000
+     82          
+     83          /*LCD相关设置*/
+     84          /*单屏显示时常   MS*/
+     85          #define LCD_DISPLAY_LENGTH   10000
+     86          #define LCD_DISPLAY_TIMER    3000  //多久更新一次 
+     87          
+     88          /*********************************************************************
+     89           * CONSTANTS
+     90           */
+     91          
+     92          #if !defined( SMART_HOME_PORT )
+     93          #define SMART_HOME_PORT  0
+     94          #endif
+     95          
+     96          #if !defined( SMART_HOME_BAUD )
+     97          #define SMART_HOME_BAUD  HAL_UART_BR_38400
+     98          //#define SMART_HOME_BAUD  HAL_UART_BR_115200
+     99          #endif
+    100          
+    101          // When the Rx buf space is less than this threshold, invoke the Rx callback.
+    102          #if !defined( SMART_HOME_THRESH )
+    103          #define SMART_HOME_THRESH  64
+    104          #endif
+    105          
+    106          #if !defined( SMART_HOME_RX_SZ )
+    107          #define SMART_HOME_RX_SZ  128
+    108          #endif
+    109          
+    110          #if !defined( SMART_HOME_TX_SZ )
+    111          #define SMART_HOME_TX_SZ  128
+    112          #endif
+    113          
+    114          // Millisecs of idle time after a byte is received before invoking Rx callback.
+    115          #if !defined( SMART_HOME_IDLE )
+    116          #define SMART_HOME_IDLE  6
+    117          #endif
+    118          
+    119          // Loopback Rx bytes to Tx for throughput testing.
+    120          #if !defined( SMART_HOME_LOOPBACK )
+    121          #define SMART_HOME_LOOPBACK  FALSE
+    122          #endif
+    123          
+    124          // This is the max byte count per OTA message.
+    125          #if !defined( SMART_HOME_TX_MAX )
+    126          #define SMART_HOME_TX_MAX  80
+    127          #endif
+    128          
+    129          #define SMART_HOME_RSP_CNT  4
+    130          
+    131          //3.14 This list should be filled with Application specific Cluster IDs.
 
    \                                 In  segment XDATA_ROM_C, align 1
-    131          const cId_t Smart_home_ClusterList_IN[Smart_home_MAX_INCLUSTERS ] =
+    132          const cId_t Smart_home_ClusterList_IN[Smart_home_MAX_INCLUSTERS ] =
    \                     Smart_home_ClusterList_IN:
    \   000000   0100         DW 1
    \   000002   0200         DW 2
@@ -262,20 +263,20 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00000C   0700         DW 7
    \   00000E   0800         DW 8
    \   000010   0000         DW 0
-    132          {
-    133            Smart_home_CLUSTERID_HUMITMSG,              // 温湿度
-    134            Smart_home_CLUSTERID_TEMPLIGHTMSG,          // 温度光照
-    135            Smart_home_CLUSTERID_RFIDMSG,               // 射频卡
-    136            Smart_home_CLUSTERID_GASFLAMEMSG,           // 烟雾火焰
-    137            Smart_home_CLUSTERID_INFRAREDMSG,           // 人体红外
-    138            Smart_home_CLUSTERID_SOUNDVBMSG,            // 声音振动
-    139            Smart_home_CLUSTERID_MOTORSTATUSMSG,        // 直流电机状态信息
-    140            Smart_home_CLUSTERID_RELAYSTATUSMSG         // 继电器
-    141          };
-    142          
+    133          {
+    134            Smart_home_CLUSTERID_HUMITMSG,              // 温湿度
+    135            Smart_home_CLUSTERID_TEMPLIGHTMSG,          // 温度光照
+    136            Smart_home_CLUSTERID_RFIDMSG,               // 射频卡
+    137            Smart_home_CLUSTERID_GASFLAMEMSG,           // 烟雾火焰
+    138            Smart_home_CLUSTERID_INFRAREDMSG,           // 人体红外
+    139            Smart_home_CLUSTERID_SOUNDVBMSG,            // 声音振动
+    140            Smart_home_CLUSTERID_MOTORSTATUSMSG,        // 直流电机状态信息
+    141            Smart_home_CLUSTERID_RELAYSTATUSMSG         // 继电器
+    142          };
+    143          
 
    \                                 In  segment XDATA_ROM_C, align 1
-    143          const cId_t Smart_home_ClusterList_OUT[Smart_home_MAX_INCLUSTERS ] =
+    144          const cId_t Smart_home_ClusterList_OUT[Smart_home_MAX_INCLUSTERS ] =
    \                     Smart_home_ClusterList_OUT:
    \   000000   0B00         DW 11
    \   000002   0A00         DW 10
@@ -286,14 +287,14 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00000C   0000         DW 0
    \   00000E   0000         DW 0
    \   000010   0000         DW 0
-    144          {
-    145            Smart_home_CLUSTERID_MOTORCTRL,             //直流电机控制
-    146            Smart_home_CLUSTERID_RELAYCTRL              //继电器控制
-    147          };
-    148          
+    145          {
+    146            Smart_home_CLUSTERID_MOTORCTRL,             //直流电机控制
+    147            Smart_home_CLUSTERID_RELAYCTRL              //继电器控制
+    148          };
+    149          
 
    \                                 In  segment XDATA_ROM_C, align 1
-    149          const SimpleDescriptionFormat_t Smart_home_SimpleDesc =
+    150          const SimpleDescriptionFormat_t Smart_home_SimpleDesc =
    \                     Smart_home_SimpleDesc:
    \   000000   01           DB 1
    \   000001   050F         DW 3845
@@ -303,162 +304,168 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000007   ....         DW Smart_home_ClusterList_IN
    \   000009   03           DB 3
    \   00000A   ....         DW Smart_home_ClusterList_OUT
-    150          {
-    151            Smart_home_ENDPOINT,              //  int   Endpoint;
-    152            Smart_home_PROFID,                //  uint16 AppProfId[2];
-    153            Smart_home_DEVICEID,              //  uint16 AppDeviceId[2];
-    154            Smart_home_DEVICE_VERSION,        //  int   AppDevVer:4;
-    155            Smart_home_FLAGS,                 //  int   AppFlags:4;
-    156            Smart_home_MAX_INCLUSTERS,          //  byte  AppNumInClusters;
-    157            (cId_t *)Smart_home_ClusterList_IN,  //  byte *pAppInClusterList;
-    158            Smart_home_MAX_OUTCLUSTERS,          //  byte  AppNumOutClusters;
-    159            (cId_t *)Smart_home_ClusterList_OUT   //  byte *pAppOutClusterList;
-    160          };
-    161          
+    151          {
+    152            Smart_home_ENDPOINT,              //  int   Endpoint;
+    153            Smart_home_PROFID,                //  uint16 AppProfId[2];
+    154            Smart_home_DEVICEID,              //  uint16 AppDeviceId[2];
+    155            Smart_home_DEVICE_VERSION,        //  int   AppDevVer:4;
+    156            Smart_home_FLAGS,                 //  int   AppFlags:4;
+    157            Smart_home_MAX_INCLUSTERS,          //  byte  AppNumInClusters;
+    158            (cId_t *)Smart_home_ClusterList_IN,  //  byte *pAppInClusterList;
+    159            Smart_home_MAX_OUTCLUSTERS,          //  byte  AppNumOutClusters;
+    160            (cId_t *)Smart_home_ClusterList_OUT   //  byte *pAppOutClusterList;
+    161          };
+    162          
 
    \                                 In  segment XDATA_ROM_C, align 1
-    162          const endPointDesc_t Smart_home_epDesc =
+    163          const endPointDesc_t Smart_home_epDesc =
    \                     Smart_home_epDesc:
    \   000000   01           DB 1
    \   000001   ....         DW Smart_home_TaskID
    \   000003   ....         DW Smart_home_SimpleDesc
    \   000005   00           DB 0
-    163          {
-    164            Smart_home_ENDPOINT,
-    165            &Smart_home_TaskID,
-    166            (SimpleDescriptionFormat_t *)&Smart_home_SimpleDesc,
-    167            noLatencyReqs
-    168          };
-    169          
-    170          /*********************************************************************
-    171           * TYPEDEFS
-    172           */
-    173          
-    174          /*********************************************************************
-    175           * GLOBAL VARIABLES
-    176           */
-    177          
+    164          {
+    165            Smart_home_ENDPOINT,
+    166            &Smart_home_TaskID,
+    167            (SimpleDescriptionFormat_t *)&Smart_home_SimpleDesc,
+    168            noLatencyReqs
+    169          };
+    170          
+    171          /*********************************************************************
+    172           * TYPEDEFS
+    173           */
+    174          
+    175          /*********************************************************************
+    176           * GLOBAL VARIABLES
+    177           */
+    178          
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    178          uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
+    179          uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
    \                     Smart_home_TaskID:
    \   000000                DS 1
    \   000001                REQUIRE __INIT_XDATA_Z
-    179          
-    180          /*********************************************************************
-    181           * EXTERNAL VARIABLES
-    182           */
-    183          
-    184          /*********************************************************************
-    185           * EXTERNAL FUNCTIONS
-    186           */
-    187          
-    188          /*********************************************************************
-    189           * LOCAL VARIABLES
-    190           */
-    191          
-    192          /*3.18 终端节点的设备详细信息缓存*/
+    180          
+    181          /*********************************************************************
+    182           * EXTERNAL VARIABLES
+    183           */
+    184          
+    185          /*********************************************************************
+    186           * EXTERNAL FUNCTIONS
+    187           */
+    188          
+    189          /*********************************************************************
+    190           * LOCAL VARIABLES
+    191           */
+    192          
+    193          /*3.18 终端节点的设备详细信息缓存*/
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    193          static uint8 DeviceCnt[Smart_home_MAX_INCLUSTERS];
+    194          static uint8 DeviceCnt[Smart_home_MAX_INCLUSTERS];
    \                     DeviceCnt:
    \   000000                DS 9
    \   000009                REQUIRE __INIT_XDATA_Z
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    194          DeviceInfo DeviceList[Smart_home_MAX_INCLUSTERS];                      //设备列表  
+    195          static int8 Ctrlcase = 0;    //0用来控制屏幕显示，1控制继电器，2控制电机
+   \                     Ctrlcase:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    196          DeviceInfo DeviceList[Smart_home_MAX_INCLUSTERS];                      //设备列表  
    \                     DeviceList:
    \   000000                DS 63
    \   00003F                REQUIRE __INIT_XDATA_Z
-    195          /*********************************************************************************
-    196          //这些似乎会引起内存问题  3.22
-    197          DeviceInfo *Humit = DeviceList+Smart_home_CLUSTERID_HUMITMSG;          //温湿度缓存
-    198          DeviceInfo *TempLight = DeviceList+Smart_home_CLUSTERID_TEMPLIGHTMSG;  // 温度光照缓存
-    199          DeviceInfo *RfID = DeviceList+Smart_home_CLUSTERID_RFIDMSG;            // RFID 信息缓存
-    200          DeviceInfo *gasFlame = DeviceList+Smart_home_CLUSTERID_GASFLAMEMSG;    //气体火焰缓存
-    201          DeviceInfo *infrared = DeviceList+Smart_home_CLUSTERID_INFRAREDMSG;    //人体红外
-    202          DeviceInfo *motor = DeviceList+Smart_home_CLUSTERID_MOTORSTATUSMSG;     //电机状态
-    203          DeviceInfo *relay = DeviceList+Smart_home_CLUSTERID_RELAYSTATUSMSG;    //继电器状态
-    204          DeviceInfo *soundVb = DeviceList+Smart_home_CLUSTERID_SOUNDVBMSG;      //声音震动
-    205          修改如下
-    206          ***********************************************************************************/
-    207          #define Humit     1     //温湿度缓存
-    208          #define TempLight 2     // 温度光照缓存
-    209          #define RfID      3     // RFID 信息缓存
-    210          #define gasFlame  4     //气体火焰缓存
-    211          #define infrared  5     //人体红外
-    212          #define motor     6     //电机状态
-    213          #define relay     7     //继电器状态
-    214          #define soundVb   8     //声音震动
-    215          
-    216          /*3.14 消息发送部分*/
-    217          /*3.17短地址存储*/
+    197          /*********************************************************************************
+    198          //这些似乎会引起内存问题  3.22
+    199          DeviceInfo *Humit = DeviceList+Smart_home_CLUSTERID_HUMITMSG;          //温湿度缓存
+    200          DeviceInfo *TempLight = DeviceList+Smart_home_CLUSTERID_TEMPLIGHTMSG;  // 温度光照缓存
+    201          DeviceInfo *RfID = DeviceList+Smart_home_CLUSTERID_RFIDMSG;            // RFID 信息缓存
+    202          DeviceInfo *gasFlame = DeviceList+Smart_home_CLUSTERID_GASFLAMEMSG;    //气体火焰缓存
+    203          DeviceInfo *infrared = DeviceList+Smart_home_CLUSTERID_INFRAREDMSG;    //人体红外
+    204          DeviceInfo *motor = DeviceList+Smart_home_CLUSTERID_MOTORSTATUSMSG;     //电机状态
+    205          DeviceInfo *relay = DeviceList+Smart_home_CLUSTERID_RELAYSTATUSMSG;    //继电器状态
+    206          DeviceInfo *soundVb = DeviceList+Smart_home_CLUSTERID_SOUNDVBMSG;      //声音震动
+    207          修改如下
+    208          ***********************************************************************************/
+    209          #define Humit     1     //温湿度缓存
+    210          #define TempLight 2     // 温度光照缓存
+    211          #define RfID      3     // RFID 信息缓存
+    212          #define gasFlame  4     //气体火焰缓存
+    213          #define infrared  5     //人体红外
+    214          #define motor     6     //电机状态
+    215          #define relay     7     //继电器状态
+    216          #define soundVb   8     //声音震动
+    217          
+    218          /*3.14 消息发送部分*/
+    219          /*3.17短地址存储*/
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    218          static afAddrType_t Relay_addr;
+    220          static afAddrType_t Relay_addr;
    \                     Relay_addr:
    \   000000                DS 12
    \   00000C                REQUIRE __INIT_XDATA_Z
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    219          static afAddrType_t Motor_addr;
+    221          static afAddrType_t Motor_addr;
    \                     Motor_addr:
    \   000000                DS 12
    \   00000C                REQUIRE __INIT_XDATA_Z
-    220          
-    221          /*消息发送数组*/
+    222          
+    223          /*消息发送数组*/
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    222          byte Coordinator_Msg[MSG_MAX_LEN];
+    224          byte Coordinator_Msg[MSG_MAX_LEN];
    \                     Coordinator_Msg:
    \   000000                DS 102
    \   000066                REQUIRE __INIT_XDATA_Z
-    223          
-    224          
-    225          /*3.19 协议栈中有但暂时不知道要他们干嘛的东西*/
-    226          /*3.21 现在我会了！！！*/
-    227          /*3.22 那些没用！删掉了！*/
-    228          //static uint8 Smart_home_MsgID;
+    225          
+    226          
+    227          /*3.19 协议栈中有但暂时不知道要他们干嘛的东西*/
+    228          /*3.21 现在我会了！！！*/
+    229          /*3.22 那些没用！删掉了！*/
+    230          //static uint8 Smart_home_MsgID;
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    229          static uint8 RelayTransID;  // This is the unique message ID (counter)
+    231          static uint8 RelayTransID;  // This is the unique message ID (counter)
    \                     RelayTransID:
    \   000000                DS 1
    \   000001                REQUIRE __INIT_XDATA_Z
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    230          static uint8 MotorTransID;  // This is the unique message ID (counter)
+    232          static uint8 MotorTransID;  // This is the unique message ID (counter)
    \                     MotorTransID:
    \   000000                DS 1
    \   000001                REQUIRE __INIT_XDATA_Z
-    231          
-    232          /*********************************************************************
-    233           * LOCAL FUNCTIONS
-    234           */
-    235          
-    236          static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
-    237          static void Smart_home_Key_add(uint8 Ctrlcase);
-    238          static void Smart_home_HandleKeys( byte shift, byte keys );
-    239          static void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt );
-    240          static void Smart_home_Device_check(void);
-    241          static void Smart_home_Relay_Ctl(uint8 cmd);
-    242          static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed);
-    243          static void Smart_home_Display(uint8 page);
-    244          
-    245          /*********************************************************************
-    246           * @fn      Smart_home_Init
-    247           *
-    248           * @brief   This is called during OSAL tasks' initialization.
+    233          
+    234          /*********************************************************************
+    235           * LOCAL FUNCTIONS
+    236           */
+    237          
+    238          static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
+    239          static void Smart_home_Key_add(uint8 Ctrlcase);
+    240          static void Smart_home_HandleKeys( byte shift, byte keys );
+    241          static void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt );
+    242          static void Smart_home_Device_check(void);
+    243          static void Smart_home_Relay_Ctl(uint8 cmd);
+    244          static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed);
+    245          static void Smart_home_Display(uint8 page);
+    246          
+    247          /*********************************************************************
+    248           * @fn      Smart_home_Init
     249           *
-    250           * @param   task_id - the Task ID assigned by OSAL.
+    250           * @brief   This is called during OSAL tasks' initialization.
     251           *
-    252           * @return  none
-    253           */
+    252           * @param   task_id - the Task ID assigned by OSAL.
+    253           *
+    254           * @return  none
+    255           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    254          void Smart_home_Init( uint8 task_id )
+    256          void Smart_home_Init( uint8 task_id )
    \                     Smart_home_Init:
-    255          {
+    257          {
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
@@ -467,46 +474,46 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000007   12....       LCALL   ?ALLOC_XSTACK8
    \   00000A   E9           MOV     A,R1
    \   00000B   FE           MOV     R6,A
-    256            halUARTCfg_t uartConfig;
-    257            uint8 DeviceNum;                                    //DeviceList初始化用变量
-    258          
-    259            Smart_home_TaskID = task_id;
+    258            halUARTCfg_t uartConfig;
+    259            uint8 DeviceNum;                                    //DeviceList初始化用变量
+    260          
+    261            Smart_home_TaskID = task_id;
    \   00000C   90....       MOV     DPTR,#Smart_home_TaskID
    \   00000F   F0           MOVX    @DPTR,A
-    260            MotorTransID = 0;
+    262            MotorTransID = 0;
    \   000010   90....       MOV     DPTR,#MotorTransID
    \   000013   E4           CLR     A
    \   000014   F0           MOVX    @DPTR,A
-    261            RelayTransID = 0;
+    263            RelayTransID = 0;
    \   000015   90....       MOV     DPTR,#RelayTransID
    \   000018   F0           MOVX    @DPTR,A
-    262          
-    263            afRegister( (endPointDesc_t *)&Smart_home_epDesc );
+    264          
+    265            afRegister( (endPointDesc_t *)&Smart_home_epDesc );
    \   000019                ; Setup parameters for call to function afRegister
    \   000019   7A..         MOV     R2,#Smart_home_epDesc & 0xff
    \   00001B   7B..         MOV     R3,#(Smart_home_epDesc >> 8) & 0xff
    \   00001D   12....       LCALL   ??afRegister?relay
-    264          
-    265            RegisterForKeys( task_id );
+    266          
+    267            RegisterForKeys( task_id );
    \   000020                ; Setup parameters for call to function RegisterForKeys
    \   000020   EE           MOV     A,R6
    \   000021   F9           MOV     R1,A
    \   000022   12....       LCALL   ??RegisterForKeys?relay
-    266          
-    267            uartConfig.configured           = TRUE;              // 2x30 don't care - see uart driver.
+    268          
+    269            uartConfig.configured           = TRUE;              // 2x30 don't care - see uart driver.
    \   000025   85..82       MOV     DPL,?XSP + 0
    \   000028   85..83       MOV     DPH,?XSP + 1
    \   00002B   7401         MOV     A,#0x1
    \   00002D   F0           MOVX    @DPTR,A
-    268            uartConfig.baudRate             = SMART_HOME_BAUD;
+    270            uartConfig.baudRate             = SMART_HOME_BAUD;
    \   00002E   12....       LCALL   ?XSTACK_DISP0_8
    \   000031   7402         MOV     A,#0x2
    \   000033   F0           MOVX    @DPTR,A
-    269            uartConfig.flowControl          = TRUE;
+    271            uartConfig.flowControl          = TRUE;
    \   000034   12....       LCALL   ?XSTACK_DISP0_8
    \   000037   7401         MOV     A,#0x1
    \   000039   F0           MOVX    @DPTR,A
-    270            uartConfig.flowControlThreshold = SMART_HOME_THRESH; // 2x30 don't care - see uart driver.
+    272            uartConfig.flowControlThreshold = SMART_HOME_THRESH; // 2x30 don't care - see uart driver.
    \   00003A   7403         MOV     A,#0x3
    \   00003C   12....       LCALL   ?XSTACK_DISP0_8
    \   00003F   7440         MOV     A,#0x40
@@ -514,7 +521,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000042   A3           INC     DPTR
    \   000043   E4           CLR     A
    \   000044   F0           MOVX    @DPTR,A
-    271            uartConfig.rx.maxBufSize        = SMART_HOME_RX_SZ;  // 2x30 don't care - see uart driver.
+    273            uartConfig.rx.maxBufSize        = SMART_HOME_RX_SZ;  // 2x30 don't care - see uart driver.
    \   000045   740A         MOV     A,#0xa
    \   000047   12....       LCALL   ?XSTACK_DISP0_8
    \   00004A   7480         MOV     A,#-0x80
@@ -522,7 +529,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00004D   A3           INC     DPTR
    \   00004E   E4           CLR     A
    \   00004F   F0           MOVX    @DPTR,A
-    272            uartConfig.tx.maxBufSize        = SMART_HOME_TX_SZ;  // 2x30 don't care - see uart driver.
+    274            uartConfig.tx.maxBufSize        = SMART_HOME_TX_SZ;  // 2x30 don't care - see uart driver.
    \   000050   7412         MOV     A,#0x12
    \   000052   12....       LCALL   ?XSTACK_DISP0_8
    \   000055   7480         MOV     A,#-0x80
@@ -530,18 +537,18 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000058   A3           INC     DPTR
    \   000059   E4           CLR     A
    \   00005A   F0           MOVX    @DPTR,A
-    273            uartConfig.idleTimeout          = SMART_HOME_IDLE;   // 2x30 don't care - see uart driver.
+    275            uartConfig.idleTimeout          = SMART_HOME_IDLE;   // 2x30 don't care - see uart driver.
    \   00005B   7405         MOV     A,#0x5
    \   00005D   12....       LCALL   ?XSTACK_DISP0_8
    \   000060   7406         MOV     A,#0x6
    \   000062   F0           MOVX    @DPTR,A
-    274            uartConfig.intEnable            = TRUE;              // 2x30 don't care - see uart driver.
+    276            uartConfig.intEnable            = TRUE;              // 2x30 don't care - see uart driver.
    \   000063   7416         MOV     A,#0x16
    \   000065   12....       LCALL   ?XSTACK_DISP0_8
    \   000068   7401         MOV     A,#0x1
    \   00006A   F0           MOVX    @DPTR,A
-    275            //uartConfig.callBackFunc         = Smart_home_CallBack;
-    276            HalUARTOpen (SMART_HOME_PORT, &uartConfig);
+    277            //uartConfig.callBackFunc         = Smart_home_CallBack;
+    278            HalUARTOpen (SMART_HOME_PORT, &uartConfig);
    \   00006B                ; Setup parameters for call to function HalUARTOpen
    \   00006B   85..82       MOV     DPL,?XSP + 0
    \   00006E   85..83       MOV     DPH,?XSP + 1
@@ -549,17 +556,17 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000073   AB83         MOV     R3,DPH
    \   000075   7900         MOV     R1,#0x0
    \   000077   12....       LCALL   ??HalUARTOpen?relay
-    277          
-    278          #if defined ( LCD_SUPPORTED )
-    279            HalLcdWriteString( "Smart_home", HAL_LCD_LINE_2 );
+    279          
+    280          #if defined ( LCD_SUPPORTED )
+    281            HalLcdWriteString( "Smart_home", HAL_LCD_LINE_2 );
    \   00007A                ; Setup parameters for call to function HalLcdWriteString
    \   00007A   7902         MOV     R1,#0x2
    \   00007C   7A..         MOV     R2,#`?<Constant "Smart_home">` & 0xff
    \   00007E   7B..         MOV     R3,#(`?<Constant "Smart_home">` >> 8) & 0xff
    \   000080   12....       LCALL   ??HalLcdWriteString?relay
-    280          #endif
-    281            
-    282            ZDO_RegisterForZDOMsg( Smart_home_TaskID, End_Device_Bind_rsp );
+    282          #endif
+    283            
+    284            ZDO_RegisterForZDOMsg( Smart_home_TaskID, End_Device_Bind_rsp );
    \   000083                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
    \   000083   7A20         MOV     R2,#0x20
    \   000085   7B80         MOV     R3,#-0x80
@@ -567,7 +574,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00008A   E0           MOVX    A,@DPTR
    \   00008B   F9           MOV     R1,A
    \   00008C   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
-    283            ZDO_RegisterForZDOMsg( Smart_home_TaskID, Match_Desc_rsp );
+    285            ZDO_RegisterForZDOMsg( Smart_home_TaskID, Match_Desc_rsp );
    \   00008F                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
    \   00008F   7A06         MOV     R2,#0x6
    \   000091   7B80         MOV     R3,#-0x80
@@ -575,42 +582,42 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000096   E0           MOVX    A,@DPTR
    \   000097   F9           MOV     R1,A
    \   000098   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
-    284            
-    285            //3.22 显示延时
-    286            osal_start_timerEx( Smart_home_TaskID, SMART_HOME_DISPLAY_EVT, 
-    287                                SMART_HOME_DEVICE_DISPLAY_DELAY);
+    286            
+    287            //3.22 显示延时
+    288            osal_start_timerEx( Smart_home_TaskID, SMART_HOME_DISPLAY_EVT, 
+    289                                SMART_HOME_DEVICE_DISPLAY_DELAY);
    \   00009B                ; Setup parameters for call to function osal_start_timerEx
    \   00009B   7C10         MOV     R4,#0x10
    \   00009D   7D27         MOV     R5,#0x27
    \   00009F   7A10         MOV     R2,#0x10
-   \   0000A1   12....       LCALL   ??Subroutine25_0 & 0xFFFF
-    288            
-    289            
-    290            //3.14 打开设备在线检测，第一次开启检测延时较长时间
-    291            osal_start_timerEx( Smart_home_TaskID, SMART_HOME_DEVICE_CHECK_EVT, 
-    292                                SMART_HOME_DEVICE_CHECK_DELAY);
-   \                     ??CrossCallReturnLabel_54:
+   \   0000A1   12....       LCALL   ??Subroutine29_0 & 0xFFFF
+    290            
+    291            
+    292            //3.14 打开设备在线检测，第一次开启检测延时较长时间
+    293            osal_start_timerEx( Smart_home_TaskID, SMART_HOME_DEVICE_CHECK_EVT, 
+    294                                SMART_HOME_DEVICE_CHECK_DELAY);
+   \                     ??CrossCallReturnLabel_61:
    \   0000A4                ; Setup parameters for call to function osal_start_timerEx
-   \   0000A4   12....       LCALL   ?Subroutine12 & 0xFFFF
-    293           
-    294            //3.13 关闭LED灯(D4)，表示协调器默认不允许组网
-    295            NLME_PermitJoiningRequest(0x00);
-   \                     ??CrossCallReturnLabel_52:
+   \   0000A4   12....       LCALL   ?Subroutine14 & 0xFFFF
+    295           
+    296            //3.13 关闭LED灯(D4)，表示协调器默认不允许组网
+    297            NLME_PermitJoiningRequest(0x00);
+   \                     ??CrossCallReturnLabel_59:
    \   0000A7                ; Setup parameters for call to function NLME_PermitJoiningRequest
    \   0000A7   7900         MOV     R1,#0x0
-   \   0000A9   12....       LCALL   ?Subroutine16 & 0xFFFF
-    296            HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);
-    297            
-    298            //3.21 初始化页面为0 第一页
-    299            //LCD_Page=0;
-    300            
-    301            //3.13 设备离线状态检测初始化，初始化为离线
-    302            //3.21 修改为DeviceList方式，初始化DeviceCnt
-    303            for(DeviceNum=1;DeviceNum<Smart_home_MAX_INCLUSTERS;DeviceNum++) //只初始化终端
-   \                     ??CrossCallReturnLabel_33:
+   \   0000A9   12....       LCALL   ?Subroutine18 & 0xFFFF
+    298            HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);
+    299            
+    300            //3.21 初始化页面为0 第一页
+    301            //LCD_Page=0;
+    302            
+    303            //3.13 设备离线状态检测初始化，初始化为离线
+    304            //3.21 修改为DeviceList方式，初始化DeviceCnt
+    305            for(DeviceNum=1;DeviceNum<Smart_home_MAX_INCLUSTERS;DeviceNum++) //只初始化终端
+   \                     ??CrossCallReturnLabel_36:
    \   0000AC   7D01         MOV     R5,#0x1
-    304            {
-    305              DeviceList[DeviceNum].deviceid = DeviceNum;
+    306            {
+    307              DeviceList[DeviceNum].deviceid = DeviceNum;
    \                     ??Smart_home_Init_0:
    \   0000AE   8D82         MOV     DPL,R5
    \   0000B0   A882         MOV     R0,DPL
@@ -627,14 +634,14 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   0000C2   F583         MOV     DPH,A
    \   0000C4   ED           MOV     A,R5
    \   0000C5   F0           MOVX    @DPTR,A
-    306              DeviceList[DeviceNum].deviceStatus = DEVICE_OFFLINE;
+    308              DeviceList[DeviceNum].deviceStatus = DEVICE_OFFLINE;
    \   0000C6   A3           INC     DPTR
    \   0000C7   7402         MOV     A,#0x2
    \   0000C9   F0           MOVX    @DPTR,A
-    307              DeviceCnt[DeviceNum]=0;
-   \   0000CA   12....       LCALL   ?Subroutine21 & 0xFFFF
-    308            }
-   \                     ??CrossCallReturnLabel_43:
+    309              DeviceCnt[DeviceNum]=0;
+   \   0000CA   12....       LCALL   ?Subroutine24 & 0xFFFF
+    310            }
+   \                     ??CrossCallReturnLabel_48:
    \   0000CD   E4           CLR     A
    \   0000CE   F0           MOVX    @DPTR,A
    \   0000CF   0D           INC     R5
@@ -642,7 +649,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   0000D1   C3           CLR     C
    \   0000D2   9409         SUBB    A,#0x9
    \   0000D4   40D8         JC      ??Smart_home_Init_0
-    309          }
+    311          }
    \   0000D6   741D         MOV     A,#0x1d
    \   0000D8   12....       LCALL   ?DEALLOC_XSTACK8
    \   0000DB                REQUIRE ?Subroutine0
@@ -654,15 +661,15 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine12:
+   \                     ?Subroutine14:
    \   000000   7C88         MOV     R4,#-0x78
    \   000002   7D13         MOV     R5,#0x13
    \   000004   7A80         MOV     R2,#-0x80
-   \   000006                REQUIRE ??Subroutine25_0
-   \   000006                ; // Fall through to label ??Subroutine25_0
+   \   000006                REQUIRE ??Subroutine29_0
+   \   000006                ; // Fall through to label ??Subroutine29_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine25_0:
+   \                     ??Subroutine29_0:
    \   000000   7B00         MOV     R3,#0x0
    \   000002   90....       MOV     DPTR,#Smart_home_TaskID
    \   000005   E0           MOVX    A,@DPTR
@@ -671,7 +678,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00000A   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine21:
+   \                     ?Subroutine24:
    \   000000   74..         MOV     A,#DeviceCnt & 0xff
    \   000002   28           ADD     A,R0
    \   000003   F582         MOV     DPL,A
@@ -681,7 +688,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00000B   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine16:
+   \                     ?Subroutine18:
    \   000000   12....       LCALL   ??NLME_PermitJoiningRequest?relay
    \   000003                ; Setup parameters for call to function HalLedSet
    \   000003                ; Setup parameters for call to function HalLedSet
@@ -689,22 +696,22 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000005   7901         MOV     R1,#0x1
    \   000007   12....       LCALL   ??HalLedSet?relay
    \   00000A   22           RET
-    310          
-    311          /*********************************************************************
-    312           * @fn      Smart_home_ProcessEvent
-    313           *
-    314           * @brief   Generic Application Task event processor.
+    312          
+    313          /*********************************************************************
+    314           * @fn      Smart_home_ProcessEvent
     315           *
-    316           * @param   task_id  - The OSAL assigned task ID.
-    317           * @param   events   - Bit map of events to process.
-    318           *
-    319           * @return  Event flags of all unprocessed events.
-    320           */
+    316           * @brief   Generic Application Task event processor.
+    317           *
+    318           * @param   task_id  - The OSAL assigned task ID.
+    319           * @param   events   - Bit map of events to process.
+    320           *
+    321           * @return  Event flags of all unprocessed events.
+    322           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    321          UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
+    323          UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
    \                     Smart_home_ProcessEvent:
-    322          {
+    324          {
    \   000000   74F2         MOV     A,#-0xe
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 14
@@ -713,85 +720,85 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000006   FE           MOV     R6,A
    \   000007   EB           MOV     A,R3
    \   000008   FF           MOV     R7,A
-    323            (void)task_id;  // Intentionally unreferenced parameter
-    324            afDataConfirm_t *afDataConfirm;
-    325            
-    326            //3.13 数据确认消息字段
-    327            ZStatus_t sentStatus;
-    328            byte sentEP;
-    329            
-    330            if ( events & SYS_EVENT_MSG )   //3.13 系统消息事件
+    325            (void)task_id;  // Intentionally unreferenced parameter
+    326            afDataConfirm_t *afDataConfirm;
+    327            
+    328            //3.13 数据确认消息字段
+    329            ZStatus_t sentStatus;
+    330            byte sentEP;
+    331            
+    332            if ( events & SYS_EVENT_MSG )   //3.13 系统消息事件
    \   000009   5480         ANL     A,#0x80
    \   00000B   7020         JNZ     ??Smart_home_ProcessEvent_0
-    331            {
-    332              afIncomingMSGPacket_t *MSGpkt;
-    333          
-    334              while ( (MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( Smart_home_TaskID )) )
-    335              {
-    336                switch ( MSGpkt->hdr.event )
-    337                {
-    338                  case ZDO_CB_MSG:           //3.13 ZDO传入消息回调
-    339                    Smart_home_ProcessZDOMsgs( (zdoIncomingMsg_t *)MSGpkt );
-    340                    break;
-    341                    
-    342                  case KEY_CHANGE:           //3.13 按键事件
-    343                    Smart_home_HandleKeys( ((keyChange_t *)MSGpkt)->state, ((keyChange_t *)MSGpkt)->keys );
-    344                    break;
-    345                   
-    346                  case AF_DATA_CONFIRM_CMD:
-    347                  //3.13 接收到此消息，作为对发送的数据包的确认。
-    348                  //状态为ZStatus_t类型[在ZComDef.h中定义]
-    349                  //消息字段在AF.h中定义
-    350                    afDataConfirm = (afDataConfirm_t *)MSGpkt;
-    351                    sentEP = afDataConfirm->endpoint;
-    352                    sentStatus = afDataConfirm->hdr.status;
-    353           
-    354                    if ( (ZSuccess == sentStatus) &&
-    355                         (Smart_home_epDesc.endPoint == sentEP) )
-    356                    {  
-    357                      //3.13 在消息发送确认成功后绿灯闪烁一下
-    358                      HalLedSet(HAL_LED_1, HAL_LED_MODE_BLINK);
-    359                    }
-    360                    else
-    361                    {
-    362                      //3.13 红灯闪烁一下  硬件还没实现
-    363                      //HalLedSet(HAL_LED_2, HAL_LED_MODE_BLINK);
-    364                    }
-    365                    break;
-    366                    
-    367                  case AF_INCOMING_MSG_CMD:   //3.13 消息传入处理
-    368                    //3.13 在消息接收确认成功后绿灯闪烁一下
-    369                    Smart_home_ProcessMSGCmd( MSGpkt );
-    370                    break;
-    371                  default:
+    333            {
+    334              afIncomingMSGPacket_t *MSGpkt;
+    335          
+    336              while ( (MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( Smart_home_TaskID )) )
+    337              {
+    338                switch ( MSGpkt->hdr.event )
+    339                {
+    340                  case ZDO_CB_MSG:           //3.13 ZDO传入消息回调
+    341                    Smart_home_ProcessZDOMsgs( (zdoIncomingMsg_t *)MSGpkt );
+    342                    break;
+    343                    
+    344                  case KEY_CHANGE:           //3.13 按键事件
+    345                    Smart_home_HandleKeys( ((keyChange_t *)MSGpkt)->state, ((keyChange_t *)MSGpkt)->keys );
+    346                    break;
+    347                   
+    348                  case AF_DATA_CONFIRM_CMD:
+    349                  //3.13 接收到此消息，作为对发送的数据包的确认。
+    350                  //状态为ZStatus_t类型[在ZComDef.h中定义]
+    351                  //消息字段在AF.h中定义
+    352                    afDataConfirm = (afDataConfirm_t *)MSGpkt;
+    353                    sentEP = afDataConfirm->endpoint;
+    354                    sentStatus = afDataConfirm->hdr.status;
+    355           
+    356                    if ( (ZSuccess == sentStatus) &&
+    357                         (Smart_home_epDesc.endPoint == sentEP) )
+    358                    {  
+    359                      //3.13 在消息发送确认成功后绿灯闪烁一下
+    360                      HalLedSet(HAL_LED_1, HAL_LED_MODE_BLINK);
+    361                    }
+    362                    else
+    363                    {
+    364                      //3.13 红灯闪烁一下  硬件还没实现
+    365                      //HalLedSet(HAL_LED_2, HAL_LED_MODE_BLINK);
+    366                    }
+    367                    break;
+    368                    
+    369                  case AF_INCOMING_MSG_CMD:   //3.13 消息传入处理
+    370                    //3.13 在消息接收确认成功后绿灯闪烁一下
+    371                    Smart_home_ProcessMSGCmd( MSGpkt );
     372                    break;
-    373                }
-    374          
-    375                osal_msg_deallocate( (uint8 *)MSGpkt );
-    376                
-    377                // Next
-    378                MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( Smart_home_TaskID );
-    379              }
-    380              
-    381              // Squash compiler warnings until values are used.
-    382              (void)sentStatus;
-    383              (void)sentEP;
-    384              
-    385              return ( events ^ SYS_EVENT_MSG );
-    386            }
-    387          
-    388            if ( events & SMART_HOME_SEND_MSG_EVT )
+    373                  default:
+    374                    break;
+    375                }
+    376          
+    377                osal_msg_deallocate( (uint8 *)MSGpkt );
+    378                
+    379                // Next
+    380                MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( Smart_home_TaskID );
+    381              }
+    382              
+    383              // Squash compiler warnings until values are used.
+    384              (void)sentStatus;
+    385              (void)sentEP;
+    386              
+    387              return ( events ^ SYS_EVENT_MSG );
+    388            }
+    389          
+    390            if ( events & SMART_HOME_SEND_MSG_EVT )
    \   00000D   EE           MOV     A,R6
    \   00000E   A2E0         MOV     C,0xE0 /* A   */.0
    \   000010   4003         JC      $+5
    \   000012   02....       LJMP    ??Smart_home_ProcessEvent_1 & 0xFFFF
-    389            {
-    390              //Smart_home_Send();
-    391              return ( events ^ SMART_HOME_SEND_MSG_EVT );
+    391            {
+    392              //Smart_home_Send();
+    393              return ( events ^ SMART_HOME_SEND_MSG_EVT );
    \   000015   6401         XRL     A,#0x1
    \   000017   FA           MOV     R2,A
    \   000018   02....       LJMP    ??Smart_home_ProcessEvent_2 & 0xFFFF
-    392            }
+    394            }
    \                     ??Smart_home_ProcessEvent_3:
    \   00001B                ; Setup parameters for call to function Smart_home_ProcessMSGCmd
    \   00001B   12....       LCALL   ??Smart_home_ProcessMSGCmd?relay
@@ -823,235 +830,230 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000046   24E6         ADD     A,#-0x1a
    \   000048   60D1         JZ      ??Smart_home_ProcessEvent_3
    \   00004A   245A         ADD     A,#0x5a
-   \   00004C   606F         JZ      ??Smart_home_ProcessEvent_6
+   \   00004C   6079         JZ      ??Smart_home_ProcessEvent_6
    \   00004E   24ED         ADD     A,#-0x13
-   \   000050   6006         JZ      ??Smart_home_ProcessEvent_7
+   \   000050   6009         JZ      ??Smart_home_ProcessEvent_7
    \   000052   24D6         ADD     A,#-0x2a
-   \   000054   607B         JZ      ??Smart_home_ProcessEvent_8
-   \   000056   80C6         SJMP    ??Smart_home_ProcessEvent_4
+   \   000054   7003         JNZ     $+5
+   \   000056   02....       LJMP    ??Smart_home_ProcessEvent_8 & 0xFFFF
+   \   000059   80C3         SJMP    ??Smart_home_ProcessEvent_4
    \                     ??Smart_home_ProcessEvent_7:
-   \   000058   EA           MOV     A,R2
-   \   000059   240C         ADD     A,#0xc
-   \   00005B   F582         MOV     DPL,A
-   \   00005D   EB           MOV     A,R3
-   \   00005E   3400         ADDC    A,#0x0
-   \   000060   F583         MOV     DPH,A
-   \   000062   E0           MOVX    A,@DPTR
-   \   000063   F5..         MOV     ?V0 + 2,A
-   \   000065   A3           INC     DPTR
-   \   000066   E0           MOVX    A,@DPTR
-   \   000067   F5..         MOV     ?V0 + 3,A
-   \   000069   78..         MOV     R0,#?V0 + 2
-   \   00006B   12....       LCALL   ?US_SWITCH_SPARSE
+   \   00005B   EA           MOV     A,R2
+   \   00005C   240C         ADD     A,#0xc
+   \   00005E   F582         MOV     DPL,A
+   \   000060   EB           MOV     A,R3
+   \   000061   3400         ADDC    A,#0x0
+   \   000063   F583         MOV     DPH,A
+   \   000065   E0           MOVX    A,@DPTR
+   \   000066   F5..         MOV     ?V0 + 2,A
+   \   000068   A3           INC     DPTR
+   \   000069   E0           MOVX    A,@DPTR
+   \   00006A   F5..         MOV     ?V0 + 3,A
+   \   00006C   78..         MOV     R0,#?V0 + 2
+   \   00006E   12....       LCALL   ?US_SWITCH_SPARSE
    \                     `?<Jumptable for Smart_home_ProcessEvent>_0`:
-   \   00006E   0000         DW        0
-   \   000070   0200         DW        2
-   \   000072   0680         DW        32774
-   \   000074   ....         DW        ??Smart_home_ProcessEvent_9
-   \   000076   2080         DW        32800
-   \   000078   ....         DW        ??Smart_home_ProcessEvent_10
-   \   00007A   ....         DW        ??Smart_home_ProcessEvent_4
+   \   000071   0000         DW        0
+   \   000073   0200         DW        2
+   \   000075   0680         DW        32774
+   \   000077   ....         DW        ??Smart_home_ProcessEvent_9
+   \   000079   2080         DW        32800
+   \   00007B   ....         DW        ??Smart_home_ProcessEvent_10
+   \   00007D   ....         DW        ??Smart_home_ProcessEvent_4
    \                     ??Smart_home_ProcessEvent_9:
-   \   00007C                ; Setup parameters for call to function ZDO_ParseEPListRsp
-   \   00007C   12....       LCALL   ??ZDO_ParseEPListRsp?relay
-   \   00007F   8A..         MOV     ?V0 + 2,R2
-   \   000081   8B..         MOV     ?V0 + 3,R3
-   \   000083   EA           MOV     A,R2
-   \   000084   45..         ORL     A,?V0 + 3
-   \   000086   6096         JZ      ??Smart_home_ProcessEvent_4
-   \   000088   8A82         MOV     DPL,R2
-   \   00008A   8B83         MOV     DPH,R3
-   \   00008C   E0           MOVX    A,@DPTR
-   \   00008D   700D         JNZ     ??Smart_home_ProcessEvent_11
-   \   00008F   A3           INC     DPTR
-   \   000090   A3           INC     DPTR
-   \   000091   A3           INC     DPTR
-   \   000092   E0           MOVX    A,@DPTR
-   \   000093   6007         JZ      ??Smart_home_ProcessEvent_11
-   \   000095                ; Setup parameters for call to function HalLedSet
-   \   000095   7A01         MOV     R2,#0x1
-   \   000097   7908         MOV     R1,#0x8
-   \   000099   12....       LCALL   ??HalLedSet?relay
+   \   00007F                ; Setup parameters for call to function ZDO_ParseEPListRsp
+   \   00007F   12....       LCALL   ??ZDO_ParseEPListRsp?relay
+   \   000082   8A..         MOV     ?V0 + 2,R2
+   \   000084   8B..         MOV     ?V0 + 3,R3
+   \   000086   EA           MOV     A,R2
+   \   000087   45..         ORL     A,?V0 + 3
+   \   000089   6093         JZ      ??Smart_home_ProcessEvent_4
+   \   00008B   8A82         MOV     DPL,R2
+   \   00008D   8B83         MOV     DPH,R3
+   \   00008F   E0           MOVX    A,@DPTR
+   \   000090   700D         JNZ     ??Smart_home_ProcessEvent_11
+   \   000092   A3           INC     DPTR
+   \   000093   A3           INC     DPTR
+   \   000094   A3           INC     DPTR
+   \   000095   E0           MOVX    A,@DPTR
+   \   000096   6007         JZ      ??Smart_home_ProcessEvent_11
+   \   000098                ; Setup parameters for call to function HalLedSet
+   \   000098   7A01         MOV     R2,#0x1
+   \   00009A   7908         MOV     R1,#0x8
+   \   00009C   12....       LCALL   ??HalLedSet?relay
    \                     ??Smart_home_ProcessEvent_11:
-   \   00009C                ; Setup parameters for call to function osal_mem_free
-   \   00009C   AA..         MOV     R2,?V0 + 2
-   \   00009E   AB..         MOV     R3,?V0 + 3
-   \   0000A0   12....       LCALL   ??osal_mem_free?relay
-   \   0000A3   02....       LJMP    ??Smart_home_ProcessEvent_4 & 0xFFFF
+   \   00009F                ; Setup parameters for call to function osal_mem_free
+   \   00009F   AA..         MOV     R2,?V0 + 2
+   \   0000A1   AB..         MOV     R3,?V0 + 3
+   \   0000A3   12....       LCALL   ??osal_mem_free?relay
+   \   0000A6   02....       LJMP    ??Smart_home_ProcessEvent_4 & 0xFFFF
    \                     ??Smart_home_ProcessEvent_10:
-   \   0000A6   EA           MOV     A,R2
-   \   0000A7   2413         ADD     A,#0x13
-   \   0000A9   12....       LCALL   ?Subroutine20 & 0xFFFF
-   \                     ??CrossCallReturnLabel_41:
-   \   0000AC   E0           MOVX    A,@DPTR
-   \   0000AD   700A         JNZ     ??Smart_home_ProcessEvent_12
-   \   0000AF                ; Setup parameters for call to function HalLedSet
-   \   0000AF   7A01         MOV     R2,#0x1
-   \                     ??Smart_home_ProcessEvent_13:
-   \   0000B1   7908         MOV     R1,#0x8
-   \                     ??Smart_home_ProcessEvent_14:
-   \   0000B3   12....       LCALL   ??HalLedSet?relay
-   \   0000B6   02....       LJMP    ??Smart_home_ProcessEvent_4 & 0xFFFF
-   \                     ??Smart_home_ProcessEvent_12:
+   \   0000A9   EA           MOV     A,R2
+   \   0000AA   2413         ADD     A,#0x13
+   \   0000AC   F582         MOV     DPL,A
+   \   0000AE   EB           MOV     A,R3
+   \   0000AF   3400         ADDC    A,#0x0
+   \   0000B1   F583         MOV     DPH,A
+   \   0000B3   12....       LCALL   ?Subroutine27 & 0xFFFF
+   \                     ??CrossCallReturnLabel_54:
+   \   0000B6   E0           MOVX    A,@DPTR
+   \   0000B7   700A         JNZ     ??Smart_home_ProcessEvent_12
    \   0000B9                ; Setup parameters for call to function HalLedSet
-   \   0000B9   7A04         MOV     R2,#0x4
-   \   0000BB   80F4         SJMP    ??Smart_home_ProcessEvent_13
+   \   0000B9   7A01         MOV     R2,#0x1
+   \                     ??Smart_home_ProcessEvent_13:
+   \   0000BB   7908         MOV     R1,#0x8
+   \                     ??Smart_home_ProcessEvent_14:
+   \   0000BD   12....       LCALL   ??HalLedSet?relay
+   \   0000C0   02....       LJMP    ??Smart_home_ProcessEvent_4 & 0xFFFF
+   \                     ??Smart_home_ProcessEvent_12:
+   \   0000C3                ; Setup parameters for call to function HalLedSet
+   \   0000C3   7A04         MOV     R2,#0x4
+   \   0000C5   80F4         SJMP    ??Smart_home_ProcessEvent_13
    \                     ??Smart_home_ProcessEvent_6:
-   \   0000BD                ; Setup parameters for call to function Smart_home_HandleKeys
-   \   0000BD   A3           INC     DPTR
-   \   0000BE   A3           INC     DPTR
-   \   0000BF   A3           INC     DPTR
-   \   0000C0   E0           MOVX    A,@DPTR
-   \   0000C1   FA           MOV     R2,A
-   \   0000C2   85..82       MOV     DPL,?V0 + 0
-   \   0000C5   8B83         MOV     DPH,R3
+   \   0000C7                ; Setup parameters for call to function Smart_home_HandleKeys
    \   0000C7   A3           INC     DPTR
    \   0000C8   A3           INC     DPTR
-   \   0000C9   E0           MOVX    A,@DPTR
-   \   0000CA   F9           MOV     R1,A
-   \   0000CB   12....       LCALL   ??Smart_home_HandleKeys?relay
-   \   0000CE   02....       LJMP    ??Smart_home_ProcessEvent_4 & 0xFFFF
-   \                     ??Smart_home_ProcessEvent_8:
+   \   0000C9   A3           INC     DPTR
+   \   0000CA   E0           MOVX    A,@DPTR
+   \   0000CB   FA           MOV     R2,A
+   \   0000CC   85..82       MOV     DPL,?V0 + 0
+   \   0000CF   8B83         MOV     DPH,R3
    \   0000D1   A3           INC     DPTR
-   \   0000D2   E0           MOVX    A,@DPTR
-   \   0000D3   6003         JZ      $+5
-   \   0000D5   02....       LJMP    ??Smart_home_ProcessEvent_4 & 0xFFFF
-   \   0000D8   8A82         MOV     DPL,R2
-   \   0000DA   8B83         MOV     DPH,R3
-   \   0000DC   A3           INC     DPTR
-   \   0000DD   A3           INC     DPTR
-   \   0000DE   E0           MOVX    A,@DPTR
-   \   0000DF   6401         XRL     A,#0x1
-   \   0000E1   6003         JZ      $+5
-   \   0000E3   02....       LJMP    ??Smart_home_ProcessEvent_4 & 0xFFFF
-   \   0000E6                ; Setup parameters for call to function HalLedSet
-   \   0000E6   7A02         MOV     R2,#0x2
-   \   0000E8   7901         MOV     R1,#0x1
-   \   0000EA   80C7         SJMP    ??Smart_home_ProcessEvent_14
+   \   0000D2   A3           INC     DPTR
+   \   0000D3   E0           MOVX    A,@DPTR
+   \   0000D4   F9           MOV     R1,A
+   \   0000D5   12....       LCALL   ??Smart_home_HandleKeys?relay
+   \   0000D8   02....       LJMP    ??Smart_home_ProcessEvent_4 & 0xFFFF
+   \                     ??Smart_home_ProcessEvent_8:
+   \   0000DB   A3           INC     DPTR
+   \   0000DC   E0           MOVX    A,@DPTR
+   \   0000DD   6003         JZ      $+5
+   \   0000DF   02....       LJMP    ??Smart_home_ProcessEvent_4 & 0xFFFF
+   \   0000E2   8A82         MOV     DPL,R2
+   \   0000E4   8B83         MOV     DPH,R3
+   \   0000E6   A3           INC     DPTR
+   \   0000E7   A3           INC     DPTR
+   \   0000E8   E0           MOVX    A,@DPTR
+   \   0000E9   6401         XRL     A,#0x1
+   \   0000EB   6003         JZ      $+5
+   \   0000ED   02....       LJMP    ??Smart_home_ProcessEvent_4 & 0xFFFF
+   \   0000F0                ; Setup parameters for call to function HalLedSet
+   \   0000F0   7A02         MOV     R2,#0x2
+   \   0000F2   7901         MOV     R1,#0x1
+   \   0000F4   80C7         SJMP    ??Smart_home_ProcessEvent_14
    \                     ??Smart_home_ProcessEvent_5:
-   \   0000EC   EE           MOV     A,R6
-   \   0000ED   FA           MOV     R2,A
-   \   0000EE   EF           MOV     A,R7
-   \   0000EF   6480         XRL     A,#0x80
+   \   0000F6   EE           MOV     A,R6
+   \   0000F7   FA           MOV     R2,A
+   \   0000F8   EF           MOV     A,R7
+   \   0000F9   6480         XRL     A,#0x80
    \                     ??Smart_home_ProcessEvent_15:
-   \   0000F1   FB           MOV     R3,A
-   \   0000F2   8070         SJMP    ??Smart_home_ProcessEvent_2
-    393            
-    394            if ( events & SMART_HOME_DEVICE_CHECK_EVT )  //终端设备检查事件
+   \   0000FB   FB           MOV     R3,A
+   \   0000FC   8070         SJMP    ??Smart_home_ProcessEvent_2
+    395            
+    396            if ( events & SMART_HOME_DEVICE_CHECK_EVT )  //终端设备检查事件
    \                     ??Smart_home_ProcessEvent_1:
-   \   0000F4   5480         ANL     A,#0x80
-   \   0000F6   6053         JZ      ??Smart_home_ProcessEvent_16
-    395            {
-    396              Smart_home_Device_check();  //调用终端设备检查函数
-   \   0000F8   90....       MOV     DPTR,#??DeviceID
-   \   0000FB   7401         MOV     A,#0x1
-   \   0000FD   F0           MOVX    @DPTR,A
+   \   0000FE   5480         ANL     A,#0x80
+   \   000100   6053         JZ      ??Smart_home_ProcessEvent_16
+    397            {
+    398              Smart_home_Device_check();  //调用终端设备检查函数
+   \   000102   90....       MOV     DPTR,#??DeviceID
+   \   000105   7401         MOV     A,#0x1
+   \   000107   F0           MOVX    @DPTR,A
    \                     ??Smart_home_ProcessEvent_17:
-   \   0000FE   E0           MOVX    A,@DPTR
-   \   0000FF   12....       LCALL   ?Subroutine15 & 0xFFFF
-   \                     ??CrossCallReturnLabel_50:
-   \   000102   E0           MOVX    A,@DPTR
-   \   000103   6401         XRL     A,#0x1
-   \   000105   90....       MOV     DPTR,#??DeviceID
-   \   000108   6030         JZ      ??Smart_home_ProcessEvent_18
-   \   00010A   12....       LCALL   ?Subroutine9 & 0xFFFF
-   \                     ??CrossCallReturnLabel_18:
-   \   00010D   E0           MOVX    A,@DPTR
-   \   00010E   04           INC     A
-   \   00010F   F0           MOVX    @DPTR,A
-   \   000110   C3           CLR     C
-   \   000111   9404         SUBB    A,#0x4
-   \   000113   4010         JC      ??Smart_home_ProcessEvent_19
-   \   000115   90....       MOV     DPTR,#??DeviceID
-   \   000118   12....       LCALL   ?Subroutine9 & 0xFFFF
+   \   000108   E0           MOVX    A,@DPTR
+   \   000109   12....       LCALL   ?Subroutine17 & 0xFFFF
+   \                     ??CrossCallReturnLabel_57:
+   \   00010C   E0           MOVX    A,@DPTR
+   \   00010D   6401         XRL     A,#0x1
+   \   00010F   90....       MOV     DPTR,#??DeviceID
+   \   000112   6030         JZ      ??Smart_home_ProcessEvent_18
+   \   000114   12....       LCALL   ?Subroutine10 & 0xFFFF
    \                     ??CrossCallReturnLabel_19:
-   \   00011B   7403         MOV     A,#0x3
-   \   00011D   F0           MOVX    @DPTR,A
-   \   00011E   E8           MOV     A,R0
-   \   00011F   12....       LCALL   ?Subroutine15 & 0xFFFF
-   \                     ??CrossCallReturnLabel_51:
-   \   000122   7402         MOV     A,#0x2
-   \                     ??Smart_home_ProcessEvent_20:
-   \   000124   F0           MOVX    @DPTR,A
-   \                     ??Smart_home_ProcessEvent_19:
-   \   000125   90....       MOV     DPTR,#??DeviceID
-   \   000128   E0           MOVX    A,@DPTR
-   \   000129   04           INC     A
-   \   00012A   F0           MOVX    @DPTR,A
-   \   00012B   C3           CLR     C
-   \   00012C   9409         SUBB    A,#0x9
-   \   00012E   40CE         JC      ??Smart_home_ProcessEvent_17
-    397              
-    398              osal_start_timerEx(Smart_home_TaskID,SMART_HOME_DEVICE_CHECK_EVT,
-    399                                 DEVICE_CHECK_DELAY);
-   \   000130                ; Setup parameters for call to function osal_start_timerEx
-   \   000130   12....       LCALL   ?Subroutine12 & 0xFFFF
-    400              return (events ^ SMART_HOME_DEVICE_CHECK_EVT);
-   \                     ??CrossCallReturnLabel_53:
-   \   000133   EE           MOV     A,R6
-   \   000134   6480         XRL     A,#0x80
-   \                     ??Smart_home_ProcessEvent_21:
-   \   000136   FA           MOV     R2,A
-   \   000137   EF           MOV     A,R7
-   \   000138   80B7         SJMP    ??Smart_home_ProcessEvent_15
-   \                     ??Smart_home_ProcessEvent_18:
-   \   00013A   12....       LCALL   ?Subroutine9 & 0xFFFF
+   \   000117   E0           MOVX    A,@DPTR
+   \   000118   04           INC     A
+   \   000119   F0           MOVX    @DPTR,A
+   \   00011A   C3           CLR     C
+   \   00011B   9404         SUBB    A,#0x4
+   \   00011D   4010         JC      ??Smart_home_ProcessEvent_19
+   \   00011F   90....       MOV     DPTR,#??DeviceID
+   \   000122   12....       LCALL   ?Subroutine10 & 0xFFFF
    \                     ??CrossCallReturnLabel_20:
-   \   00013D   E4           CLR     A
-   \   00013E   F0           MOVX    @DPTR,A
-   \   00013F   E8           MOV     A,R0
-   \   000140   75F007       MOV     B,#0x7
-   \   000143   A4           MUL     AB
-   \   000144   F8           MOV     R0,A
-   \   000145   12....       LCALL   ??Subroutine24_0 & 0xFFFF
-    401            }
-   \                     ??CrossCallReturnLabel_49:
-   \   000148   E4           CLR     A
-   \   000149   80D9         SJMP    ??Smart_home_ProcessEvent_20
-    402            
-    403            if( events & SMART_HOME_DISPLAY_EVT )
+   \   000125   7403         MOV     A,#0x3
+   \   000127   F0           MOVX    @DPTR,A
+   \   000128   E8           MOV     A,R0
+   \   000129   12....       LCALL   ?Subroutine17 & 0xFFFF
+   \                     ??CrossCallReturnLabel_58:
+   \   00012C   7402         MOV     A,#0x2
+   \                     ??Smart_home_ProcessEvent_20:
+   \   00012E   F0           MOVX    @DPTR,A
+   \                     ??Smart_home_ProcessEvent_19:
+   \   00012F   90....       MOV     DPTR,#??DeviceID
+   \   000132   E0           MOVX    A,@DPTR
+   \   000133   04           INC     A
+   \   000134   F0           MOVX    @DPTR,A
+   \   000135   C3           CLR     C
+   \   000136   9409         SUBB    A,#0x9
+   \   000138   40CE         JC      ??Smart_home_ProcessEvent_17
+    399              
+    400              osal_start_timerEx(Smart_home_TaskID,SMART_HOME_DEVICE_CHECK_EVT,
+    401                                 DEVICE_CHECK_DELAY);
+   \   00013A                ; Setup parameters for call to function osal_start_timerEx
+   \   00013A   12....       LCALL   ?Subroutine14 & 0xFFFF
+    402              return (events ^ SMART_HOME_DEVICE_CHECK_EVT);
+   \                     ??CrossCallReturnLabel_60:
+   \   00013D   EE           MOV     A,R6
+   \   00013E   6480         XRL     A,#0x80
+   \                     ??Smart_home_ProcessEvent_21:
+   \   000140   FA           MOV     R2,A
+   \   000141   EF           MOV     A,R7
+   \   000142   80B7         SJMP    ??Smart_home_ProcessEvent_15
+   \                     ??Smart_home_ProcessEvent_18:
+   \   000144   12....       LCALL   ?Subroutine10 & 0xFFFF
+   \                     ??CrossCallReturnLabel_21:
+   \   000147   E4           CLR     A
+   \   000148   F0           MOVX    @DPTR,A
+   \   000149   E8           MOV     A,R0
+   \   00014A   75F007       MOV     B,#0x7
+   \   00014D   A4           MUL     AB
+   \   00014E   F8           MOV     R0,A
+   \   00014F   12....       LCALL   ??Subroutine28_0 & 0xFFFF
+    403            }
+   \                     ??CrossCallReturnLabel_56:
+   \   000152   E4           CLR     A
+   \   000153   80D9         SJMP    ??Smart_home_ProcessEvent_20
+    404            
+    405            if( events & SMART_HOME_DISPLAY_EVT )
    \                     ??Smart_home_ProcessEvent_16:
-   \   00014B   EE           MOV     A,R6
-   \   00014C   5410         ANL     A,#0x10
-   \   00014E   6010         JZ      ??Smart_home_ProcessEvent_22
-    404            {
-    405              //Smart_home_Display( dispPage);
-    406              osal_start_timerEx( Smart_home_TaskID,events & SMART_HOME_DISPLAY_EVT,LCD_DISPLAY_TIMER);
-   \   000150                ; Setup parameters for call to function osal_start_timerEx
-   \   000150   7CB8         MOV     R4,#-0x48
-   \   000152   7D0B         MOV     R5,#0xb
-   \   000154   EE           MOV     A,R6
-   \   000155   5410         ANL     A,#0x10
-   \   000157   FA           MOV     R2,A
-   \   000158   12....       LCALL   ??Subroutine25_0 & 0xFFFF
-    407              return (events ^ SMART_HOME_DISPLAY_EVT);
-   \                     ??CrossCallReturnLabel_55:
-   \   00015B   EE           MOV     A,R6
-   \   00015C   6410         XRL     A,#0x10
-   \   00015E   80D6         SJMP    ??Smart_home_ProcessEvent_21
-    408            }
-    409          
-    410            return ( 0 );  // Discard unknown events.
+   \   000155   EE           MOV     A,R6
+   \   000156   5410         ANL     A,#0x10
+   \   000158   6010         JZ      ??Smart_home_ProcessEvent_22
+    406            {
+    407              //Smart_home_Display( dispPage);
+    408              osal_start_timerEx( Smart_home_TaskID,events & SMART_HOME_DISPLAY_EVT,LCD_DISPLAY_TIMER);
+   \   00015A                ; Setup parameters for call to function osal_start_timerEx
+   \   00015A   7CB8         MOV     R4,#-0x48
+   \   00015C   7D0B         MOV     R5,#0xb
+   \   00015E   EE           MOV     A,R6
+   \   00015F   5410         ANL     A,#0x10
+   \   000161   FA           MOV     R2,A
+   \   000162   12....       LCALL   ??Subroutine29_0 & 0xFFFF
+    409              return (events ^ SMART_HOME_DISPLAY_EVT);
+   \                     ??CrossCallReturnLabel_62:
+   \   000165   EE           MOV     A,R6
+   \   000166   6410         XRL     A,#0x10
+   \   000168   80D6         SJMP    ??Smart_home_ProcessEvent_21
+    410            }
+    411          
+    412            return ( 0 );  // Discard unknown events.
    \                     ??Smart_home_ProcessEvent_22:
-   \   000160   7A00         MOV     R2,#0x0
-   \   000162   7B00         MOV     R3,#0x0
+   \   00016A   7A00         MOV     R2,#0x0
+   \   00016C   7B00         MOV     R3,#0x0
    \                     ??Smart_home_ProcessEvent_2:
-   \   000164   7F06         MOV     R7,#0x6
-   \   000166   02....       LJMP    ?BANKED_LEAVE_XDATA
-    411          }
+   \   00016E   7F06         MOV     R7,#0x6
+   \   000170   02....       LJMP    ?BANKED_LEAVE_XDATA
+    413          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine20:
-   \   000000   F582         MOV     DPL,A
-   \   000002   EB           MOV     A,R3
-   \   000003   3400         ADDC    A,#0x0
-   \   000005   F583         MOV     DPH,A
-   \   000007   12....       LCALL   ?Subroutine23 & 0xFFFF
-   \                     ??CrossCallReturnLabel_48:
-   \   00000A   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine23:
+   \                     ?Subroutine27:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   F8           MOV     R0,A
    \   000002   A3           INC     DPTR
@@ -1059,259 +1061,296 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000004   F583         MOV     DPH,A
    \   000006   8882         MOV     DPL,R0
    \   000008   22           RET
-    412          
-    413          /*********************************************************************
-    414           * @fn      Smart_home_ProcessZDOMsgs()
-    415           *
-    416           * @brief   Process response messages
+    414          
+    415          /*********************************************************************
+    416           * @fn      Smart_home_ProcessZDOMsgs()
     417           *
-    418           * @param   none
+    418           * @brief   Process response messages
     419           *
-    420           * @return  none
-    421           */
-    422          static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
-    423          {
-    424            switch ( inMsg->clusterID )
-    425            {
-    426              case End_Device_Bind_rsp:
-    427                if ( ZDO_ParseBindRsp( inMsg ) == ZSuccess )
-    428                {
-    429                  // Light LED
-    430                  HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
-    431                }
-    432          #if defined(BLINK_LEDS)
-    433                else
-    434                {
-    435                  // Flash LED to show failure
-    436                  HalLedSet ( HAL_LED_4, HAL_LED_MODE_FLASH );
-    437                }
-    438          #endif
-    439                break;
-    440                
-    441              case Match_Desc_rsp:
-    442                {
-    443                  ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
-    444                  if ( pRsp )
-    445                  {
-    446                    if ( pRsp->status == ZSuccess && pRsp->cnt )
-    447                    {
-    448                      /*
-    449                      Smart_home_TxAddr.addrMode = (afAddrMode_t)Addr16Bit;
-    450                      Smart_home_TxAddr.addr.shortAddr = pRsp->nwkAddr;
-    451                      // Take the first endpoint, Can be changed to search through endpoints
-    452                      Smart_home_TxAddr.endPoint = pRsp->epList[0];
-    453                      */
-    454                      
-    455                      // Light LED
-    456                      HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
-    457                    }
-    458                    osal_mem_free( pRsp );
-    459                  }
-    460                }
-    461                break;
-    462            }
-    463          }
-    464          
-    465          /*********************************************************************
-    466           * @fn      Smart_home_Key_add
-    467           *
-    468           * @brief   3.21新增，用来标识目前处于的控制状态，是附加项
-    469           *          0 控制屏幕 1 控制继电器 2 控制电机
-    470           *            
-    471           *
-    472           * @param   Ctrlcase 目前的控制号
+    420           * @param   none
+    421           *
+    422           * @return  none
+    423           */
+    424          static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
+    425          {
+    426            switch ( inMsg->clusterID )
+    427            {
+    428              case End_Device_Bind_rsp:
+    429                if ( ZDO_ParseBindRsp( inMsg ) == ZSuccess )
+    430                {
+    431                  // Light LED
+    432                  HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
+    433                }
+    434          #if defined(BLINK_LEDS)
+    435                else
+    436                {
+    437                  // Flash LED to show failure
+    438                  HalLedSet ( HAL_LED_4, HAL_LED_MODE_FLASH );
+    439                }
+    440          #endif
+    441                break;
+    442                
+    443              case Match_Desc_rsp:
+    444                {
+    445                  ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
+    446                  if ( pRsp )
+    447                  {
+    448                    if ( pRsp->status == ZSuccess && pRsp->cnt )
+    449                    {
+    450                      /*
+    451                      Smart_home_TxAddr.addrMode = (afAddrMode_t)Addr16Bit;
+    452                      Smart_home_TxAddr.addr.shortAddr = pRsp->nwkAddr;
+    453                      // Take the first endpoint, Can be changed to search through endpoints
+    454                      Smart_home_TxAddr.endPoint = pRsp->epList[0];
+    455                      */
+    456                      
+    457                      // Light LED
+    458                      HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
+    459                    }
+    460                    osal_mem_free( pRsp );
+    461                  }
+    462                }
+    463                break;
+    464            }
+    465          }
+    466          
+    467          /*********************************************************************
+    468           * @fn      Smart_home_Key_add
+    469           *
+    470           * @brief   3.21新增，用来标识目前处于的控制状态，是附加项
+    471           *          0 控制屏幕 1 控制继电器 2 控制电机
+    472           *            
     473           *
-    474           * @return  屏幕回显
-    475           */
+    474           * @param   Ctrlcase 目前的控制号
+    475           *
+    476           * @return  屏幕回显
+    477           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    476          static void Smart_home_Key_add(uint8 Ctrlcase)
+    478          static void Smart_home_Key_add(uint8 Ctrlcase)
    \                     Smart_home_Key_add:
-    477          {
+    479          {
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
+    480          #if defined ( LCD_SUPPORTED )
+    481            switch(Ctrlcase)
    \   000005   E9           MOV     A,R1
-    478          #if defined ( LCD_SUPPORTED )
-    479            switch(Ctrlcase)
    \   000006   14           DEC     A
-   \   000007   600B         JZ      ??Smart_home_Key_add_0
+   \   000007   600E         JZ      ??Smart_home_Key_add_0
    \   000009   14           DEC     A
    \   00000A   7904         MOV     R1,#0x4
-   \   00000C   6030         JZ      ??Smart_home_Key_add_1
-    480            {
-    481              default:    
-    482              case 0:
-    483                HalLcdWriteString( "Flip use UP/DOWN", HAL_LCD_LINE_4 ); 
+   \   00000C   6033         JZ      ??Smart_home_Key_add_1
+    482            {
+    483              default:    
+    484              case 0:
+    485                HalLcdWriteString( "Flip use UP/DOWN", HAL_LCD_LINE_4 ); 
    \   00000E                ; Setup parameters for call to function HalLcdWriteString
    \   00000E   7A..         MOV     R2,#`?<Constant "Flip use UP/DOWN">` & 0xff
    \   000010   7B..         MOV     R3,#(`?<Constant "Flip use UP/DOWN">` >> 8) & 0xff
-   \   000012   8050         SJMP    ??Smart_home_Key_add_2
-    484                break;
-    485              
-    486              case 1:
-    487                HalLcdWriteString( "Relay Contrling", HAL_LCD_LINE_4 ); 
+   \   000012   12....       LCALL   ?Subroutine21 & 0xFFFF
+    486                //清除屏幕显示
+    487                HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
+    488                HalLcdWriteString( " ", HAL_LCD_LINE_3 );
+   \                     ??CrossCallReturnLabel_42:
+   \   000015   8050         SJMP    ??Smart_home_Key_add_2
+    489                break;
+    490              
+    491              case 1:
+    492                HalLcdWriteString( "Relay Contrling", HAL_LCD_LINE_4 ); 
    \                     ??Smart_home_Key_add_0:
-   \   000014                ; Setup parameters for call to function HalLcdWriteString
-   \   000014   7904         MOV     R1,#0x4
-   \   000016   7A..         MOV     R2,#`?<Constant "Relay Contrling">` & 0xff
-   \   000018   7B..         MOV     R3,#(`?<Constant "Relay Contrling">` >> 8) & 0xff
-   \   00001A   12....       LCALL   ??HalLcdWriteString?relay
-    488                if(DeviceList[relay].deviceStatus == DEVICE_ONLINE)  //设备在线回显
-   \   00001D   90....       MOV     DPTR,#DeviceList + 50
-   \   000020   E0           MOVX    A,@DPTR
-   \   000021   6401         XRL     A,#0x1
-   \   000023   7009         JNZ     ??Smart_home_Key_add_3
-    489                {
-    490                  HalLcdWriteString( "Relay Online", HAL_LCD_LINE_1 );
-   \   000025                ; Setup parameters for call to function HalLcdWriteString
-   \   000025   7901         MOV     R1,#0x1
-   \   000027   7A..         MOV     R2,#`?<Constant "Relay Online">` & 0xff
-   \   000029   7B..         MOV     R3,#(`?<Constant "Relay Online">` >> 8) & 0xff
-   \   00002B   12....       LCALL   ??HalLcdWriteString?relay
-    491                }
-    492                if(DeviceList[relay].deviceStatus != DEVICE_ONLINE)
+   \   000017                ; Setup parameters for call to function HalLcdWriteString
+   \   000017   7904         MOV     R1,#0x4
+   \   000019   7A..         MOV     R2,#`?<Constant "Relay Contrling">` & 0xff
+   \   00001B   7B..         MOV     R3,#(`?<Constant "Relay Contrling">` >> 8) & 0xff
+   \   00001D   12....       LCALL   ?Subroutine4 & 0xFFFF
+    493                //清除屏幕显示
+    494                HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
+    495                HalLcdWriteString( " ", HAL_LCD_LINE_3 );
+    496                if(DeviceList[relay].deviceStatus == DEVICE_ONLINE)  //设备在线回显
+   \                     ??CrossCallReturnLabel_7:
+   \   000020   90....       MOV     DPTR,#DeviceList + 50
+   \   000023   E0           MOVX    A,@DPTR
+   \   000024   6401         XRL     A,#0x1
+   \   000026   7009         JNZ     ??Smart_home_Key_add_3
+    497                {
+    498                  HalLcdWriteString( "Relay Online", HAL_LCD_LINE_1 );     
+   \   000028                ; Setup parameters for call to function HalLcdWriteString
+   \   000028   7901         MOV     R1,#0x1
+   \   00002A   7A..         MOV     R2,#`?<Constant "Relay Online">` & 0xff
+   \   00002C   7B..         MOV     R3,#(`?<Constant "Relay Online">` >> 8) & 0xff
+   \   00002E   12....       LCALL   ??HalLcdWriteString?relay
+    499                }
+    500                if(DeviceList[relay].deviceStatus != DEVICE_ONLINE)
    \                     ??Smart_home_Key_add_3:
-   \   00002E   90....       MOV     DPTR,#DeviceList + 50
-   \   000031   E0           MOVX    A,@DPTR
-   \   000032   6401         XRL     A,#0x1
-   \   000034   6031         JZ      ??Smart_home_Key_add_4
-    493                {
-    494                  HalLcdWriteString( "Relay Offline", HAL_LCD_LINE_1 );      
-   \   000036                ; Setup parameters for call to function HalLcdWriteString
-   \   000036   7901         MOV     R1,#0x1
-   \   000038   7A..         MOV     R2,#`?<Constant "Relay Offline">` & 0xff
-   \   00003A   7B..         MOV     R3,#(`?<Constant "Relay Offline">` >> 8) & 0xff
-   \   00003C   8026         SJMP    ??Smart_home_Key_add_2
-    495                }
-    496                break;
-    497              
-    498              case 2:
-    499                HalLcdWriteString( "Motor Contrling", HAL_LCD_LINE_4 );
-   \                     ??Smart_home_Key_add_1:
-   \   00003E                ; Setup parameters for call to function HalLcdWriteString
-   \   00003E   7A..         MOV     R2,#`?<Constant "Motor Contrling">` & 0xff
-   \   000040   7B..         MOV     R3,#(`?<Constant "Motor Contrling">` >> 8) & 0xff
-   \   000042   12....       LCALL   ??HalLcdWriteString?relay
-    500                if(DeviceList[motor].deviceStatus == DEVICE_ONLINE)  //设备在线回显
-   \   000045   90....       MOV     DPTR,#DeviceList + 43
-   \   000048   E0           MOVX    A,@DPTR
-   \   000049   6401         XRL     A,#0x1
-   \   00004B   7009         JNZ     ??Smart_home_Key_add_5
+   \   000031   90....       MOV     DPTR,#DeviceList + 50
+   \   000034   E0           MOVX    A,@DPTR
+   \   000035   6401         XRL     A,#0x1
+   \   000037   6031         JZ      ??Smart_home_Key_add_4
     501                {
-    502                  HalLcdWriteString( "Motor Online", HAL_LCD_LINE_1 );
-   \   00004D                ; Setup parameters for call to function HalLcdWriteString
-   \   00004D   7901         MOV     R1,#0x1
-   \   00004F   7A..         MOV     R2,#`?<Constant "Motor Online">` & 0xff
-   \   000051   7B..         MOV     R3,#(`?<Constant "Motor Online">` >> 8) & 0xff
-   \   000053   12....       LCALL   ??HalLcdWriteString?relay
+    502                  HalLcdWriteString( "Relay Offline", HAL_LCD_LINE_1 );      
+   \   000039                ; Setup parameters for call to function HalLcdWriteString
+   \   000039   7901         MOV     R1,#0x1
+   \   00003B   7A..         MOV     R2,#`?<Constant "Relay Offline">` & 0xff
+   \   00003D   7B..         MOV     R3,#(`?<Constant "Relay Offline">` >> 8) & 0xff
+   \   00003F   8026         SJMP    ??Smart_home_Key_add_2
     503                }
-    504                if(DeviceList[motor].deviceStatus != DEVICE_ONLINE)
+    504                break;
+    505              
+    506              case 2:
+    507                HalLcdWriteString( "Motor Contrling", HAL_LCD_LINE_4 );
+   \                     ??Smart_home_Key_add_1:
+   \   000041                ; Setup parameters for call to function HalLcdWriteString
+   \   000041   7A..         MOV     R2,#`?<Constant "Motor Contrling">` & 0xff
+   \   000043   7B..         MOV     R3,#(`?<Constant "Motor Contrling">` >> 8) & 0xff
+   \   000045   12....       LCALL   ?Subroutine4 & 0xFFFF
+    508                //清除屏幕显示
+    509                HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
+    510                HalLcdWriteString( " ", HAL_LCD_LINE_3 );
+    511                if(DeviceList[motor].deviceStatus == DEVICE_ONLINE)  //设备在线回显
+   \                     ??CrossCallReturnLabel_8:
+   \   000048   90....       MOV     DPTR,#DeviceList + 43
+   \   00004B   E0           MOVX    A,@DPTR
+   \   00004C   6401         XRL     A,#0x1
+   \   00004E   7009         JNZ     ??Smart_home_Key_add_5
+    512                {
+    513                  HalLcdWriteString( "Motor Online", HAL_LCD_LINE_1 );
+   \   000050                ; Setup parameters for call to function HalLcdWriteString
+   \   000050   7901         MOV     R1,#0x1
+   \   000052   7A..         MOV     R2,#`?<Constant "Motor Online">` & 0xff
+   \   000054   7B..         MOV     R3,#(`?<Constant "Motor Online">` >> 8) & 0xff
+   \   000056   12....       LCALL   ??HalLcdWriteString?relay
+    514                }
+    515                if(DeviceList[motor].deviceStatus != DEVICE_ONLINE)
    \                     ??Smart_home_Key_add_5:
-   \   000056   90....       MOV     DPTR,#DeviceList + 43
-   \   000059   E0           MOVX    A,@DPTR
-   \   00005A   6401         XRL     A,#0x1
-   \   00005C   6009         JZ      ??Smart_home_Key_add_4
-    505                {
-    506                  HalLcdWriteString( "Motor Offline", HAL_LCD_LINE_1 );      
-   \   00005E                ; Setup parameters for call to function HalLcdWriteString
-   \   00005E   7901         MOV     R1,#0x1
-   \   000060   7A..         MOV     R2,#`?<Constant "Motor Offline">` & 0xff
-   \   000062   7B..         MOV     R3,#(`?<Constant "Motor Offline">` >> 8) & 0xff
+   \   000059   90....       MOV     DPTR,#DeviceList + 43
+   \   00005C   E0           MOVX    A,@DPTR
+   \   00005D   6401         XRL     A,#0x1
+   \   00005F   6009         JZ      ??Smart_home_Key_add_4
+    516                {
+    517                  HalLcdWriteString( "Motor Offline", HAL_LCD_LINE_1 );      
+   \   000061                ; Setup parameters for call to function HalLcdWriteString
+   \   000061   7901         MOV     R1,#0x1
+   \   000063   7A..         MOV     R2,#`?<Constant "Motor Offline">` & 0xff
+   \   000065   7B..         MOV     R3,#(`?<Constant "Motor Offline">` >> 8) & 0xff
    \                     ??Smart_home_Key_add_2:
-   \   000064   12....       LCALL   ??HalLcdWriteString?relay
-    507                }      
-    508                break;
-    509          #endif     
-    510            }
-    511          }
+   \   000067   12....       LCALL   ??HalLcdWriteString?relay
+    518                }      
+    519                break;
+    520          #endif     
+    521            }
+    522          }
    \                     ??Smart_home_Key_add_4:
-   \   000067   02....       LJMP    ?Subroutine0 & 0xFFFF
-    512          
-    513          /*********************************************************************
-    514           * @fn      Smart_home_HandleKeys
-    515           *
-    516           * @brief   设置按键事件
-    517           *          目前事件设置    3.19
-    518           *
-    519           *          HAL_KEY_SW_1--UP     (上翻一页)
-    520           *          HAL_KEY_SW_2--RIGHT  (选项向右)
-    521           *          HAL_KEY_SW_3--DOWN   (下翻一页)
-    522           *          HAL_KEY_SW_4--LEFT   (选项向左)
-    523           *          HAL_KEY_SW_5--OK     (组网开)
-    524           *          HAL_KEY_SW_7--CANCEL (组网关) 
-    525           * + 3.21 新增  选项总共有3种，控制屏幕显示，控制继电器和控制电机
-    526           *              控制继电器时 UP控制1，DOWN控制2
-    527           *              控制电机时   UP加速， DOWN减速
-    528           *
-    529           * @param   shift - true if in shift/alt.
-    530           * @param   keys  - bit field for key events.
-    531           *
-    532           * @return  none
-    533           */
+   \   00006A   02....       LJMP    ?Subroutine0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    534          void Smart_home_HandleKeys( byte shift, byte keys )
+   \                     ?Subroutine4:
+   \   000000   12....       LCALL   ?Subroutine21 & 0xFFFF
+   \                     ??CrossCallReturnLabel_43:
+   \   000003   12....       LCALL   ??HalLcdWriteString?relay
+   \   000006   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine21:
+   \   000000   12....       LCALL   ??HalLcdWriteString?relay
+   \   000003                ; Setup parameters for call to function HalLcdWriteString
+   \   000003                ; Setup parameters for call to function HalLcdWriteString
+   \   000003                ; Setup parameters for call to function HalLcdWriteString
+   \   000003   7902         MOV     R1,#0x2
+   \   000005   7A..         MOV     R2,#`?<Constant " ">` & 0xff
+   \   000007   7B..         MOV     R3,#(`?<Constant " ">` >> 8) & 0xff
+   \   000009   12....       LCALL   ??HalLcdWriteString?relay
+   \   00000C                ; Setup parameters for call to function HalLcdWriteString
+   \   00000C                ; Setup parameters for call to function HalLcdWriteString
+   \   00000C                ; Setup parameters for call to function HalLcdWriteString
+   \   00000C   7903         MOV     R1,#0x3
+   \   00000E   7A..         MOV     R2,#`?<Constant " ">` & 0xff
+   \   000010   7B..         MOV     R3,#(`?<Constant " ">` >> 8) & 0xff
+   \   000012   22           RET
+    523          
+    524          /*********************************************************************
+    525           * @fn      Smart_home_HandleKeys
+    526           *
+    527           * @brief   设置按键事件
+    528           *          目前事件设置    3.19
+    529           *
+    530           *          HAL_KEY_SW_1--UP     (上翻一页)
+    531           *          HAL_KEY_SW_2--RIGHT  (选项向右)
+    532           *          HAL_KEY_SW_3--DOWN   (下翻一页)
+    533           *          HAL_KEY_SW_4--LEFT   (选项向左)
+    534           *          HAL_KEY_SW_5--OK     (组网开)
+    535           *          HAL_KEY_SW_7--CANCEL (组网关) 
+    536           * + 3.21 新增  选项总共有3种，控制屏幕显示，控制继电器和控制电机
+    537           *              控制继电器时 UP控制1，DOWN控制2
+    538           *              控制电机时   UP加速， DOWN减速
+    539           *
+    540           * @param   shift - true if in shift/alt.
+    541           * @param   keys  - bit field for key events.
+    542           *
+    543           * @return  none
+    544           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    545          void Smart_home_HandleKeys( byte shift, byte keys )
    \                     Smart_home_HandleKeys:
-    535          {
+    546          {
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
    \   000005   EA           MOV     A,R2
    \   000006   FE           MOV     R6,A
-    536            //zAddrType_t txAddr;
-    537            static int8 Ctrlcase = 0;    //0用来控制屏幕显示，1控制继电器，2控制电机
-    538            static int8 MotorSpeed = 0;
-    539            static uint8 NetWorkAllow = 0;
-    540            /*这里这么设置似乎会出现内存问题
-    541            static uint8 Relay1_on = 0x02;  //两个默认都是关闭
-    542            static uint8 Relay2_on = 0x10;
-    543            */
-    544            /*3.21 LCD 显示*/
-    545            static int8 LCD_Page  =  0;
-    546            static uint8 Relay1_on = 0;  //两个默认都是关闭
-    547            static uint8 Relay2_on = 0;
-    548            
-    549            
-    550            if ( keys & HAL_KEY_SW_1 )  //UP
+    547            //zAddrType_t txAddr;
+    548            static int8 MotorSpeed = 0;
+    549            static uint8 NetWorkAllow = 0;
+    550            /*这里这么设置似乎会出现内存问题
+    551            static uint8 Relay1_on = 0x02;  //两个默认都是关闭
+    552            static uint8 Relay2_on = 0x10;
+    553            */
+    554            /*3.21 LCD 显示*/
+    555            static int8 LCD_Page  =  0;
+    556            static uint8 Relay1_on = 0;  //两个默认都是关闭
+    557            static uint8 Relay2_on = 0;
+    558            
+    559            
+    560            if ( keys & HAL_KEY_SW_1 )  //UP
    \   000007   A2E0         MOV     C,0xE0 /* A   */.0
    \   000009   5053         JNC     ??Smart_home_HandleKeys_0
-    551            {
-    552              switch(Ctrlcase)
-   \   00000B   90....       MOV     DPTR,#??Ctrlcase
+    561            {
+    562              switch(Ctrlcase)
+   \   00000B   90....       MOV     DPTR,#Ctrlcase
    \   00000E   E0           MOVX    A,@DPTR
    \   00000F   14           DEC     A
    \   000010   6016         JZ      ??Smart_home_HandleKeys_1
    \   000012   14           DEC     A
    \   000013   6029         JZ      ??Smart_home_HandleKeys_2
-    553              {
-    554                default:    
-    555                case 0:
-    556                {
-    557                  if(LCD_Page < 3)       {LCD_Page++;}
+    563              {
+    564                default:    
+    565                case 0:
+    566                {
+    567                  if(LCD_Page < 3)       {LCD_Page++;}
    \   000015   90....       MOV     DPTR,#??LCD_Page
-   \   000018   12....       LCALL   ?Subroutine10 & 0xFFFF
-   \                     ??CrossCallReturnLabel_21:
+   \   000018   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \                     ??CrossCallReturnLabel_22:
    \   00001B   5003         JNC     ??Smart_home_HandleKeys_3
    \   00001D   E0           MOVX    A,@DPTR
    \   00001E   04           INC     A
    \   00001F   F0           MOVX    @DPTR,A
-    558                  if(LCD_Page > 2)       {LCD_Page=0;}
+    568                  if(LCD_Page > 2)       {LCD_Page=0;}
    \                     ??Smart_home_HandleKeys_3:
-   \   000020   12....       LCALL   ?Subroutine10 & 0xFFFF
-   \                     ??CrossCallReturnLabel_22:
+   \   000020   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \                     ??CrossCallReturnLabel_23:
    \   000023   4039         JC      ??Smart_home_HandleKeys_0
    \   000025   E4           CLR     A
    \   000026   8035         SJMP    ??Smart_home_HandleKeys_4
-    559                  Smart_home_Display(LCD_Page);
-    560                  break;
-    561                }
-    562                case 1:
-    563                {  
-    564                  uint8 switch1;
-    565                  if(Relay1_on == 0)  {Relay1_on = 1 ; switch1 = 0x02;}
+    569                  Smart_home_Display(LCD_Page);
+    570                  break;
+    571                }
+    572                case 1:
+    573                {  
+    574                  uint8 switch1;
+    575                  if(Relay1_on == 0)  {Relay1_on = 1 ; switch1 = 0x02;}
    \                     ??Smart_home_HandleKeys_1:
    \   000028   90....       MOV     DPTR,#??Relay1_on
    \   00002B   E0           MOVX    A,@DPTR
@@ -1320,95 +1359,95 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000030   F0           MOVX    @DPTR,A
    \   000031   7902         MOV     R1,#0x2
    \   000033   8004         SJMP    ??Smart_home_HandleKeys_6
-    566                  else if(Relay1_on == 1)  {Relay1_on = 0; switch1 = 0x01;}
+    576                  else if(Relay1_on == 1)  {Relay1_on = 0; switch1 = 0x01;}
    \                     ??Smart_home_HandleKeys_5:
    \   000035   E4           CLR     A
    \   000036   F0           MOVX    @DPTR,A
    \   000037   7901         MOV     R1,#0x1
-    567                  else  {Relay1_on = 0; switch1 = 0x01;}       
-    568                  Smart_home_Relay_Ctl(switch1);  
+    577                  else  {Relay1_on = 0; switch1 = 0x01;}       
+    578                  Smart_home_Relay_Ctl(switch1);  
    \                     ??Smart_home_HandleKeys_6:
    \   000039                ; Setup parameters for call to function Smart_home_Relay_Ctl
    \   000039   12....       LCALL   ??Smart_home_Relay_Ctl?relay
-    569                  break;
+    579                  break;
    \   00003C   8020         SJMP    ??Smart_home_HandleKeys_0
-    570                } 
-    571                case 2:
-    572                {
-    573                  if(MotorSpeed < 80)     {MotorSpeed += 10;}
+    580                } 
+    581                case 2:
+    582                {
+    583                  if(MotorSpeed < 80)     {MotorSpeed += 10;}
    \                     ??Smart_home_HandleKeys_2:
    \   00003E   90....       MOV     DPTR,#??MotorSpeed
-   \   000041   12....       LCALL   ?Subroutine13 & 0xFFFF
-   \                     ??CrossCallReturnLabel_29:
+   \   000041   12....       LCALL   ?Subroutine15 & 0xFFFF
+   \                     ??CrossCallReturnLabel_32:
    \   000044   5004         JNC     ??Smart_home_HandleKeys_7
    \   000046   E0           MOVX    A,@DPTR
    \   000047   240A         ADD     A,#0xa
    \   000049   F0           MOVX    @DPTR,A
-    574                  if(MotorSpeed >= 80)     
+    584                  if(MotorSpeed >= 80)     
    \                     ??Smart_home_HandleKeys_7:
-   \   00004A   12....       LCALL   ?Subroutine13 & 0xFFFF
-   \                     ??CrossCallReturnLabel_30:
+   \   00004A   12....       LCALL   ?Subroutine15 & 0xFFFF
+   \                     ??CrossCallReturnLabel_33:
    \   00004D   400F         JC      ??Smart_home_HandleKeys_0
-    575                  {
-    576          #if defined ( LCD_SUPPORTED )
-    577                     HalLcdWriteString( "Motor max Speed", HAL_LCD_LINE_4 );
+    585                  {
+    586          #if defined ( LCD_SUPPORTED )
+    587                     HalLcdWriteString( "Motor max Speed", HAL_LCD_LINE_4 );
    \   00004F                ; Setup parameters for call to function HalLcdWriteString
    \   00004F   7904         MOV     R1,#0x4
    \   000051   7A..         MOV     R2,#`?<Constant "Motor max Speed">` & 0xff
    \   000053   7B..         MOV     R3,#(`?<Constant "Motor max Speed">` >> 8) & 0xff
    \   000055   12....       LCALL   ??HalLcdWriteString?relay
-    578          #endif 
-    579                     MotorSpeed = 80;
+    588          #endif 
+    589                     MotorSpeed = 80;
    \   000058   90....       MOV     DPTR,#??MotorSpeed
    \   00005B   7450         MOV     A,#0x50
    \                     ??Smart_home_HandleKeys_4:
    \   00005D   F0           MOVX    @DPTR,A
-    580                  }
-    581                  break;
-    582                }
-    583                   
-    584              }    
-    585            }
-    586            
-    587            if ( keys & HAL_KEY_SW_3 )  //DOWN
+    590                  }
+    591                  break;
+    592                }
+    593                   
+    594              }    
+    595            }
+    596            
+    597            if ( keys & HAL_KEY_SW_3 )  //DOWN
    \                     ??Smart_home_HandleKeys_0:
    \   00005E   EE           MOV     A,R6
    \   00005F   A2E4         MOV     C,0xE0 /* A   */.4
    \   000061   505E         JNC     ??Smart_home_HandleKeys_8
-    588            {
-    589              switch(Ctrlcase)
-   \   000063   90....       MOV     DPTR,#??Ctrlcase
+    598            {
+    599              switch(Ctrlcase)
+   \   000063   90....       MOV     DPTR,#Ctrlcase
    \   000066   E0           MOVX    A,@DPTR
    \   000067   14           DEC     A
    \   000068   6017         JZ      ??Smart_home_HandleKeys_9
    \   00006A   14           DEC     A
    \   00006B   6034         JZ      ??Smart_home_HandleKeys_10
-    590              {
-    591                default:    
-    592                case 0:
-    593                {
-    594                  if(LCD_Page >= 0)       {LCD_Page--;}
+    600              {
+    601                default:    
+    602                case 0:
+    603                {
+    604                  if(LCD_Page >= 0)       {LCD_Page--;}
    \   00006D   90....       MOV     DPTR,#??LCD_Page
-   \   000070   12....       LCALL   ?Subroutine11 & 0xFFFF
-   \                     ??CrossCallReturnLabel_25:
+   \   000070   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \                     ??CrossCallReturnLabel_26:
    \   000073   4003         JC      ??Smart_home_HandleKeys_11
    \   000075   E0           MOVX    A,@DPTR
    \   000076   14           DEC     A
    \   000077   F0           MOVX    @DPTR,A
-    595                  if(LCD_Page < 0)        {LCD_Page=2;}
+    605                  if(LCD_Page < 0)        {LCD_Page=2;}
    \                     ??Smart_home_HandleKeys_11:
-   \   000078   12....       LCALL   ?Subroutine11 & 0xFFFF
-   \                     ??CrossCallReturnLabel_26:
+   \   000078   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \                     ??CrossCallReturnLabel_27:
    \   00007B   5044         JNC     ??Smart_home_HandleKeys_8
    \   00007D   7402         MOV     A,#0x2
    \   00007F   803F         SJMP    ??Smart_home_HandleKeys_12
-    596                  Smart_home_Display(LCD_Page);
-    597                  break;
-    598                }
-    599                case 1:  
-    600                {
-    601                  uint8 switch2;
-    602                  if(Relay2_on == 0)  {Relay2_on = 1 ; switch2 = 0x20;}
+    606                  Smart_home_Display(LCD_Page);
+    607                  break;
+    608                }
+    609                case 1:  
+    610                {
+    611                  uint8 switch2;
+    612                  if(Relay2_on == 0)  {Relay2_on = 1 ; switch2 = 0x20;}
    \                     ??Smart_home_HandleKeys_9:
    \   000081   90....       MOV     DPTR,#??Relay2_on
    \   000084   E0           MOVX    A,@DPTR
@@ -1417,7 +1456,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000089   F0           MOVX    @DPTR,A
    \   00008A   7920         MOV     R1,#0x20
    \   00008C   800E         SJMP    ??Smart_home_HandleKeys_14
-    603                  else if(Relay2_on == 1)  {Relay2_on = 0; switch2 = 0x10;}
+    613                  else if(Relay2_on == 1)  {Relay2_on = 0; switch2 = 0x10;}
    \                     ??Smart_home_HandleKeys_13:
    \   00008E   6401         XRL     A,#0x1
    \   000090   7006         JNZ     ??Smart_home_HandleKeys_15
@@ -1425,181 +1464,181 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000093   F0           MOVX    @DPTR,A
    \   000094   7910         MOV     R1,#0x10
    \   000096   8004         SJMP    ??Smart_home_HandleKeys_14
-    604                  else  {Relay2_on = 0; switch2 = 0x01;}       
+    614                  else  {Relay2_on = 0; switch2 = 0x01;}       
    \                     ??Smart_home_HandleKeys_15:
    \   000098   E4           CLR     A
    \   000099   F0           MOVX    @DPTR,A
    \   00009A   7901         MOV     R1,#0x1
-    605                  Smart_home_Relay_Ctl(switch2);       
+    615                  Smart_home_Relay_Ctl(switch2);       
    \                     ??Smart_home_HandleKeys_14:
    \   00009C                ; Setup parameters for call to function Smart_home_Relay_Ctl
    \   00009C   12....       LCALL   ??Smart_home_Relay_Ctl?relay
-    606                  break;
+    616                  break;
    \   00009F   8020         SJMP    ??Smart_home_HandleKeys_8
-    607                } 
-    608                case 2:
-    609                {
-    610                  if(MotorSpeed > -80)     {MotorSpeed -= 10;}
+    617                } 
+    618                case 2:
+    619                {
+    620                  if(MotorSpeed > -80)     {MotorSpeed -= 10;}
    \                     ??Smart_home_HandleKeys_10:
    \   0000A1   90....       MOV     DPTR,#??MotorSpeed
-   \   0000A4   12....       LCALL   ?Subroutine14 & 0xFFFF
-   \                     ??CrossCallReturnLabel_31:
+   \   0000A4   12....       LCALL   ?Subroutine16 & 0xFFFF
+   \                     ??CrossCallReturnLabel_34:
    \   0000A7   4004         JC      ??Smart_home_HandleKeys_16
    \   0000A9   E0           MOVX    A,@DPTR
    \   0000AA   24F6         ADD     A,#-0xa
    \   0000AC   F0           MOVX    @DPTR,A
-    611                  if(MotorSpeed <= -80)     
+    621                  if(MotorSpeed <= -80)     
    \                     ??Smart_home_HandleKeys_16:
-   \   0000AD   12....       LCALL   ?Subroutine14 & 0xFFFF
-   \                     ??CrossCallReturnLabel_32:
+   \   0000AD   12....       LCALL   ?Subroutine16 & 0xFFFF
+   \                     ??CrossCallReturnLabel_35:
    \   0000B0   500F         JNC     ??Smart_home_HandleKeys_8
-    612                  {
-    613          #if defined ( LCD_SUPPORTED )
-    614                     HalLcdWriteString( "Motor min Speed", HAL_LCD_LINE_4 );
+    622                  {
+    623          #if defined ( LCD_SUPPORTED )
+    624                     HalLcdWriteString( "Motor min Speed", HAL_LCD_LINE_4 );
    \   0000B2                ; Setup parameters for call to function HalLcdWriteString
    \   0000B2   7904         MOV     R1,#0x4
    \   0000B4   7A..         MOV     R2,#`?<Constant "Motor min Speed">` & 0xff
    \   0000B6   7B..         MOV     R3,#(`?<Constant "Motor min Speed">` >> 8) & 0xff
    \   0000B8   12....       LCALL   ??HalLcdWriteString?relay
-    615          #endif 
-    616                     MotorSpeed = -80;
+    625          #endif 
+    626                     MotorSpeed = -80;
    \   0000BB   90....       MOV     DPTR,#??MotorSpeed
    \   0000BE   74B0         MOV     A,#-0x50
    \                     ??Smart_home_HandleKeys_12:
    \   0000C0   F0           MOVX    @DPTR,A
-    617                  }
-    618                  break; 
-    619                }
-    620              }
-    621            }
-    622            
-    623            if ( keys & HAL_KEY_SW_2 )  //RIGHT  
+    627                  }
+    628                  break; 
+    629                }
+    630              }
+    631            }
+    632            
+    633            if ( keys & HAL_KEY_SW_2 )  //RIGHT  
    \                     ??Smart_home_HandleKeys_8:
    \   0000C1   EE           MOV     A,R6
    \   0000C2   A2E1         MOV     C,0xE0 /* A   */.1
    \   0000C4   5017         JNC     ??Smart_home_HandleKeys_17
-    624            /*3.22 这里在调试时出现问题，具体问题为 点击up时会出现屏幕变为禁止组网
-    625              控制方面变为控制电机，问题在于汇编中的key值会出现  keys & HAL_KEY_SW_2 = 2
-    626              的情况，暂时禁止，需要等待研究  还有key_7*/
-    627            {
-    628               if(Ctrlcase < 3)   { Ctrlcase++;}
-   \   0000C6   90....       MOV     DPTR,#??Ctrlcase
-   \   0000C9   12....       LCALL   ?Subroutine10 & 0xFFFF
-   \                     ??CrossCallReturnLabel_23:
+    634            /*3.22 这里在调试时出现问题，具体问题为 点击up时会出现屏幕变为禁止组网
+    635              控制方面变为控制电机，问题在于汇编中的key值会出现  keys & HAL_KEY_SW_2 = 2
+    636              的情况，暂时禁止，需要等待研究  还有key_7*/
+    637            {
+    638               if(Ctrlcase < 3)   { Ctrlcase++;}
+   \   0000C6   90....       MOV     DPTR,#Ctrlcase
+   \   0000C9   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \                     ??CrossCallReturnLabel_24:
    \   0000CC   5003         JNC     ??Smart_home_HandleKeys_18
    \   0000CE   E0           MOVX    A,@DPTR
    \   0000CF   04           INC     A
    \   0000D0   F0           MOVX    @DPTR,A
-    629               if(Ctrlcase > 2)   { Ctrlcase=0;}
+    639               if(Ctrlcase > 2)   { Ctrlcase=0;}
    \                     ??Smart_home_HandleKeys_18:
-   \   0000D1   12....       LCALL   ?Subroutine10 & 0xFFFF
-   \                     ??CrossCallReturnLabel_24:
+   \   0000D1   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \                     ??CrossCallReturnLabel_25:
    \   0000D4   4002         JC      ??Smart_home_HandleKeys_19
    \   0000D6   E4           CLR     A
    \   0000D7   F0           MOVX    @DPTR,A
-    630               Smart_home_Key_add(Ctrlcase);
+    640               Smart_home_Key_add(Ctrlcase);
    \                     ??Smart_home_HandleKeys_19:
    \   0000D8                ; Setup parameters for call to function Smart_home_Key_add
    \   0000D8   E0           MOVX    A,@DPTR
    \   0000D9   F9           MOV     R1,A
    \   0000DA   12....       LCALL   ??Smart_home_Key_add?relay
-    631            }
-    632            
-    633            if ( keys & HAL_KEY_SW_4 )  //LEFT
+    641            }
+    642            
+    643            if ( keys & HAL_KEY_SW_4 )  //LEFT
    \                     ??Smart_home_HandleKeys_17:
    \   0000DD   EE           MOV     A,R6
    \   0000DE   A2E3         MOV     C,0xE0 /* A   */.3
    \   0000E0   5018         JNC     ??Smart_home_HandleKeys_20
-    634            {
-    635               if(Ctrlcase > -1)   { Ctrlcase--;}
-   \   0000E2   90....       MOV     DPTR,#??Ctrlcase
-   \   0000E5   12....       LCALL   ?Subroutine11 & 0xFFFF
-   \                     ??CrossCallReturnLabel_27:
+    644            {
+    645               if(Ctrlcase > -1)   { Ctrlcase--;}
+   \   0000E2   90....       MOV     DPTR,#Ctrlcase
+   \   0000E5   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \                     ??CrossCallReturnLabel_28:
    \   0000E8   4003         JC      ??Smart_home_HandleKeys_21
    \   0000EA   E0           MOVX    A,@DPTR
    \   0000EB   14           DEC     A
    \   0000EC   F0           MOVX    @DPTR,A
-    636               if(Ctrlcase < 0)    { Ctrlcase=2;}
+    646               if(Ctrlcase < 0)    { Ctrlcase=2;}
    \                     ??Smart_home_HandleKeys_21:
-   \   0000ED   12....       LCALL   ?Subroutine11 & 0xFFFF
-   \                     ??CrossCallReturnLabel_28:
+   \   0000ED   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \                     ??CrossCallReturnLabel_29:
    \   0000F0   5003         JNC     ??Smart_home_HandleKeys_22
    \   0000F2   7402         MOV     A,#0x2
    \   0000F4   F0           MOVX    @DPTR,A
-    637               Smart_home_Key_add(Ctrlcase);    
+    647               Smart_home_Key_add(Ctrlcase);    
    \                     ??Smart_home_HandleKeys_22:
    \   0000F5                ; Setup parameters for call to function Smart_home_Key_add
    \   0000F5   E0           MOVX    A,@DPTR
    \   0000F6   F9           MOV     R1,A
    \   0000F7   12....       LCALL   ??Smart_home_Key_add?relay
-    638            }
-    639            
-    640            if ( keys & HAL_KEY_SW_5 )  //OK
-    641            {
-    642          
-    643            }
-    644            
-    645            if ( keys & HAL_KEY_SW_7 )  //CENCEL
+    648            }
+    649            
+    650            if ( keys & HAL_KEY_SW_5 )  //OK
+    651            {
+    652          
+    653            }
+    654            
+    655            if ( keys & HAL_KEY_SW_7 )  //CENCEL
    \                     ??Smart_home_HandleKeys_20:
    \   0000FA   EE           MOV     A,R6
    \   0000FB   A2E6         MOV     C,0xE0 /* A   */.6
    \   0000FD   502C         JNC     ??Smart_home_HandleKeys_23
-    646            {
-    647               if(NetWorkAllow == 0)
+    656            {
+    657               if(NetWorkAllow == 0)
    \   0000FF   90....       MOV     DPTR,#??NetWorkAllow
    \   000102   E0           MOVX    A,@DPTR
    \   000103   7017         JNZ     ??Smart_home_HandleKeys_24
-    648               {
-    649                 NetWorkAllow = 1;
+    658               {
+    659                 NetWorkAllow = 1;
    \   000105   7401         MOV     A,#0x1
    \   000107   F0           MOVX    @DPTR,A
-    650                 NLME_PermitJoiningRequest(0xFF); // 组网，允许随时加入
+    660                 NLME_PermitJoiningRequest(0xFF); // 组网，允许随时加入
    \   000108                ; Setup parameters for call to function NLME_PermitJoiningRequest
    \   000108   79FF         MOV     R1,#-0x1
    \   00010A   12....       LCALL   ??NLME_PermitJoiningRequest?relay
-    651                 HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
+    661                 HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
    \   00010D                ; Setup parameters for call to function HalLedSet
    \   00010D   7A01         MOV     R2,#0x1
    \   00010F   7901         MOV     R1,#0x1
    \   000111   12....       LCALL   ??HalLedSet?relay
-    652          #if defined ( LCD_SUPPORTED )
-    653                 HalLcdWriteString( "Allow networking", HAL_LCD_LINE_4 );
+    662          #if defined ( LCD_SUPPORTED )
+    663                 HalLcdWriteString( "Allow networking", HAL_LCD_LINE_4 );
    \   000114                ; Setup parameters for call to function HalLcdWriteString
    \   000114   7904         MOV     R1,#0x4
    \   000116   7A..         MOV     R2,#`?<Constant "Allow networking">` & 0xff
    \   000118   7B..         MOV     R3,#(`?<Constant "Allow networking">` >> 8) & 0xff
    \   00011A   800C         SJMP    ??Smart_home_HandleKeys_25
-    654          #endif
-    655               }
-    656               else
-    657               {
-    658                 NetWorkAllow = 0;
+    664          #endif
+    665               }
+    666               else
+    667               {
+    668                 NetWorkAllow = 0;
    \                     ??Smart_home_HandleKeys_24:
    \   00011C   E4           CLR     A
    \   00011D   F0           MOVX    @DPTR,A
-    659                 NLME_PermitJoiningRequest(0x00); // 不允许组网
+    669                 NLME_PermitJoiningRequest(0x00); // 不允许组网
    \   00011E                ; Setup parameters for call to function NLME_PermitJoiningRequest
    \   00011E   F9           MOV     R1,A
-   \   00011F   12....       LCALL   ?Subroutine16 & 0xFFFF
-    660                 HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);  
-    661          #if defined ( LCD_SUPPORTED )
-    662                 HalLcdWriteString( "Ban   networking", HAL_LCD_LINE_4 );
-   \                     ??CrossCallReturnLabel_34:
+   \   00011F   12....       LCALL   ?Subroutine18 & 0xFFFF
+    670                 HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);  
+    671          #if defined ( LCD_SUPPORTED )
+    672                 HalLcdWriteString( "Ban   networking", HAL_LCD_LINE_4 );
+   \                     ??CrossCallReturnLabel_37:
    \   000122                ; Setup parameters for call to function HalLcdWriteString
    \   000122   7904         MOV     R1,#0x4
    \   000124   7A..         MOV     R2,#`?<Constant "Ban   networking">` & 0xff
    \   000126   7B..         MOV     R3,#(`?<Constant "Ban   networking">` >> 8) & 0xff
    \                     ??Smart_home_HandleKeys_25:
    \   000128   12....       LCALL   ??HalLcdWriteString?relay
-    663          #endif        
-    664               }
-    665            }
-    666          }
+    673          #endif        
+    674               }
+    675            }
+    676          }
    \                     ??Smart_home_HandleKeys_23:
    \   00012B   02....       LJMP    ?Subroutine0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine14:
+   \                     ?Subroutine16:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   C3           CLR     C
    \   000002   94B1         SUBB    A,#-0x4f
@@ -1609,7 +1648,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000009   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine13:
+   \                     ?Subroutine15:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   C3           CLR     C
    \   000002   9450         SUBB    A,#0x50
@@ -1619,7 +1658,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000009   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine11:
+   \                     ?Subroutine12:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   C3           CLR     C
    \   000002   9400         SUBB    A,#0x0
@@ -1629,7 +1668,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000009   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine10:
+   \                     ?Subroutine11:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   C3           CLR     C
    \   000002   9403         SUBB    A,#0x3
@@ -1637,11 +1676,6 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000006   65D0         XRL     A,PSW
    \   000008   33           RLC     A
    \   000009   22           RET
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
-   \                     ??Ctrlcase:
-   \   000000                DS 1
-   \   000001                REQUIRE __INIT_XDATA_Z
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
    \                     ??MotorSpeed:
@@ -1667,251 +1701,316 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \                     ??Relay2_on:
    \   000000                DS 1
    \   000001                REQUIRE __INIT_XDATA_Z
-    667          
-    668          /*********************************************************************
-    669           * @fn      Smart_home_ProcessMSGCmd
-    670           *
-    671           * @brief   Data message processor callback. This function processes
-    672           *          any incoming data - probably from other devices. Based
-    673           *          on the cluster ID, perform the intended action.
-    674           *
-    675           * @param   pkt - pointer to the incoming message packet
-    676           *
-    677           * @return  TRUE if the 'pkt' parameter is being used and will be freed later,
-    678           *          FALSE otherwise.
-    679           */
+    677          
+    678          /*********************************************************************
+    679           * @fn      Smart_home_ProcessMSGCmd
+    680           *
+    681           * @brief   Data message processor callback. This function processes
+    682           *          any incoming data - probably from other devices. Based
+    683           *          on the cluster ID, perform the intended action.
+    684           *
+    685           * @param   pkt - pointer to the incoming message packet
+    686           *
+    687           * @return  TRUE if the 'pkt' parameter is being used and will be freed later,
+    688           *          FALSE otherwise.
+    689           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    680          void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
+    690          void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
    \                     Smart_home_ProcessMSGCmd:
-    681          {
+    691          {
    \   000000   74F6         MOV     A,#-0xa
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 10
    \   000005                ; Auto size: 0
-    682            switch ( pkt->clusterId )
-   \   000005   8A82         MOV     DPL,R2
-   \   000007   8B83         MOV     DPH,R3
-   \   000009   A3           INC     DPTR
-   \   00000A   A3           INC     DPTR
-   \   00000B   A3           INC     DPTR
-   \   00000C   A3           INC     DPTR
-   \   00000D   E0           MOVX    A,@DPTR
-   \   00000E   F5..         MOV     ?V0 + 0,A
+   \   000005   EA           MOV     A,R2
+   \   000006   FE           MOV     R6,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FF           MOV     R7,A
+    692            switch ( pkt->clusterId )
+   \   000009   8E82         MOV     DPL,R6
+   \   00000B   8F83         MOV     DPH,R7
+   \   00000D   A3           INC     DPTR
+   \   00000E   A3           INC     DPTR
+   \   00000F   A3           INC     DPTR
    \   000010   A3           INC     DPTR
    \   000011   E0           MOVX    A,@DPTR
-   \   000012   F5..         MOV     ?V0 + 1,A
-   \   000014   78..         MOV     R0,#?V0 + 0
-   \   000016   12....       LCALL   ?US_SWITCH_DENSE
+   \   000012   F5..         MOV     ?V0 + 0,A
+   \   000014   A3           INC     DPTR
+   \   000015   E0           MOVX    A,@DPTR
+   \   000016   F5..         MOV     ?V0 + 1,A
+   \   000018   78..         MOV     R0,#?V0 + 0
+   \   00001A   12....       LCALL   ?US_SWITCH_DENSE
    \                     `?<Jumptable for Smart_home_ProcessMSGCmd>_0`:
-   \   000019   0100         DW        1
-   \   00001B   07           DB        7
-   \   00001C   ....         DW        ??Smart_home_ProcessMSGCmd_0
-   \   00001E   ....         DW        ??Smart_home_ProcessMSGCmd_1
-   \   000020   ....         DW        ??Smart_home_ProcessMSGCmd_2
-   \   000022   ....         DW        ??Smart_home_ProcessMSGCmd_3
-   \   000024   ....         DW        ??Smart_home_ProcessMSGCmd_4
-   \   000026   ....         DW        ??Smart_home_ProcessMSGCmd_5
-   \   000028   ....         DW        ??Smart_home_ProcessMSGCmd_6
-   \   00002A   ....         DW        ??Smart_home_ProcessMSGCmd_7
-   \   00002C   ....         DW        ??Smart_home_ProcessMSGCmd_8
-    683            {
-    684            /***********************************************************************
-    685              目前总共8种case
-    686             #define Smart_home_CLUSTERID_HUMITMSG            1  // 温湿度
-    687             #define Smart_home_CLUSTERID_TEMPLIGHTMSG        2  // 温度光照
-    688             #define Smart_home_CLUSTERID_RFIDMSG             3  // 射频卡
-    689             #define Smart_home_CLUSTERID_GASFLAMEMSG         4  // 烟雾火焰
-    690             #define Smart_home_CLUSTERID_INFRAREDMSG         5  // 人体红外
-    691             #define Smart_home_CLUSTERID_SOUNDVBMSG          6  // 声音振动
-    692             #define Smart_home_CLUSTERID_MOTORSTATUSMSG      7  // 直流电机状态信息
-    693             #define Smart_home_CLUSTERID_RELAYSTATUSMSG      8  // 继电器状态信息
-    694              
-    695             设备描述
-    696             typedef struct DeviceInfo
-    697             {
-    698               uint8 deviceID;
-    699               uint8 deviceStatus;
-    700               uint8 data[5];
-    701             } DeviceInfo; 
-    702             ************************************************************************/ 
-    703              //3.14 消息处理模块，共8个，行为类似 
-    704              //3.21 修改为指针方法（DeviceList相关）
-    705              case Smart_home_CLUSTERID_HUMITMSG:         // 温湿度
-    706                DeviceList[Humit].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线
+   \   00001D   0100         DW        1
+   \   00001F   07           DB        7
+   \   000020   ....         DW        ??Smart_home_ProcessMSGCmd_0
+   \   000022   ....         DW        ??Smart_home_ProcessMSGCmd_1
+   \   000024   ....         DW        ??Smart_home_ProcessMSGCmd_2
+   \   000026   ....         DW        ??Smart_home_ProcessMSGCmd_3
+   \   000028   ....         DW        ??Smart_home_ProcessMSGCmd_4
+   \   00002A   ....         DW        ??Smart_home_ProcessMSGCmd_5
+   \   00002C   ....         DW        ??Smart_home_ProcessMSGCmd_6
+   \   00002E   ....         DW        ??Smart_home_ProcessMSGCmd_7
+   \   000030   ....         DW        ??Smart_home_ProcessMSGCmd_8
+    693            {
+    694            /***********************************************************************
+    695              目前总共8种case
+    696             #define Smart_home_CLUSTERID_HUMITMSG            1  // 温湿度
+    697             #define Smart_home_CLUSTERID_TEMPLIGHTMSG        2  // 温度光照
+    698             #define Smart_home_CLUSTERID_RFIDMSG             3  // 射频卡
+    699             #define Smart_home_CLUSTERID_GASFLAMEMSG         4  // 烟雾火焰
+    700             #define Smart_home_CLUSTERID_INFRAREDMSG         5  // 人体红外
+    701             #define Smart_home_CLUSTERID_SOUNDVBMSG          6  // 声音振动
+    702             #define Smart_home_CLUSTERID_MOTORSTATUSMSG      7  // 直流电机状态信息
+    703             #define Smart_home_CLUSTERID_RELAYSTATUSMSG      8  // 继电器状态信息
+    704              
+    705             设备描述
+    706             typedef struct DeviceInfo
+    707             {
+    708               uint8 deviceID;
+    709               uint8 deviceStatus;
+    710               uint8 data[5];
+    711             } DeviceInfo; 
+    712             ************************************************************************/ 
+    713              //3.14 消息处理模块，共8个，行为类似 
+    714              //3.21 修改为指针方法（DeviceList相关）
+    715              case Smart_home_CLUSTERID_HUMITMSG:         // 温湿度
+    716                DeviceList[Humit].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线
    \                     ??Smart_home_ProcessMSGCmd_1:
-   \   00002E   90....       MOV     DPTR,#DeviceList + 8
-   \   000031   12....       LCALL   ?Subroutine2 & 0xFFFF
-    707                DeviceList[Humit].data[0] = pkt->cmd.Data[4]; // 湿度 
+   \   000032   90....       MOV     DPTR,#DeviceList + 8
+   \   000035   12....       LCALL   ?Subroutine2 & 0xFFFF
+    717                DeviceList[Humit].data[0] = pkt->cmd.Data[4]; // 湿度 
    \                     ??CrossCallReturnLabel_0:
-   \   000034   90....       MOV     DPTR,#DeviceList + 9
-   \   000037   12....       LCALL   ?Subroutine6 & 0xFFFF
-    708                DeviceList[Humit].data[1] = pkt->cmd.Data[5]; // 温度
-   \                     ??CrossCallReturnLabel_12:
-   \   00003A   90....       MOV     DPTR,#DeviceList + 10
-   \   00003D   02....       LJMP    ??Smart_home_ProcessMSGCmd_9 & 0xFFFF
-    709                break;
-    710                
-    711              case Smart_home_CLUSTERID_TEMPLIGHTMSG:     // 温度光照
-    712                DeviceList[TempLight].deviceStatus = DEVICE_ONLINE;   //收到消息设置为在线
+   \   000038   90....       MOV     DPTR,#DeviceList + 9
+   \   00003B   12....       LCALL   ?Subroutine7 & 0xFFFF
+    718                DeviceList[Humit].data[1] = pkt->cmd.Data[5]; // 温度
+   \                     ??CrossCallReturnLabel_13:
+   \   00003E   90....       MOV     DPTR,#DeviceList + 10
+   \   000041   02....       LJMP    ??Smart_home_ProcessMSGCmd_9 & 0xFFFF
+    719                break;
+    720                
+    721              case Smart_home_CLUSTERID_TEMPLIGHTMSG:     // 温度光照
+    722                DeviceList[TempLight].deviceStatus = DEVICE_ONLINE;   //收到消息设置为在线
    \                     ??Smart_home_ProcessMSGCmd_2:
-   \   000040   90....       MOV     DPTR,#DeviceList + 15
-   \   000043   12....       LCALL   ?Subroutine2 & 0xFFFF
-    713                DeviceList[TempLight].data[0] = pkt->cmd.Data[4]; // 温度整数
+   \   000044   90....       MOV     DPTR,#DeviceList + 15
+   \   000047   12....       LCALL   ?Subroutine2 & 0xFFFF
+    723                DeviceList[TempLight].data[0] = pkt->cmd.Data[4]; // 温度整数
    \                     ??CrossCallReturnLabel_1:
-   \   000046   90....       MOV     DPTR,#DeviceList + 16
-   \   000049   12....       LCALL   ?Subroutine7 & 0xFFFF
-    714                DeviceList[TempLight].data[1] = pkt->cmd.Data[5]; // 温度小数
-   \                     ??CrossCallReturnLabel_14:
-   \   00004C   90....       MOV     DPTR,#DeviceList + 17
-   \   00004F   12....       LCALL   ?Subroutine5 & 0xFFFF
-    715                DeviceList[TempLight].data[2] = pkt->cmd.Data[6]; // 光照
-   \                     ??CrossCallReturnLabel_10:
-   \   000052   90....       MOV     DPTR,#DeviceList + 18
-   \   000055   12....       LCALL   ?Subroutine4 & 0xFFFF
-    716                DeviceList[TempLight].data[3] = pkt->cmd.Data[7]; // 光照
-   \                     ??CrossCallReturnLabel_8:
-   \   000058   E0           MOVX    A,@DPTR
-   \   000059   90....       MOV     DPTR,#DeviceList + 19
-   \   00005C   02....       LJMP    ??Smart_home_ProcessMSGCmd_9 & 0xFFFF
-    717                break;
-    718                
-    719              case Smart_home_CLUSTERID_RFIDMSG:          // 射频卡
-    720                DeviceList[RfID].deviceStatus = DEVICE_ONLINE;        //收到消息设置为在线
-   \                     ??Smart_home_ProcessMSGCmd_3:
-   \   00005F   90....       MOV     DPTR,#DeviceList + 22
-   \   000062   12....       LCALL   ?Subroutine2 & 0xFFFF
-    721                DeviceList[RfID].data[0] = pkt->cmd.Data[4]; // 射频卡类型
-   \                     ??CrossCallReturnLabel_2:
-   \   000065   90....       MOV     DPTR,#DeviceList + 23
-   \   000068   12....       LCALL   ?Subroutine7 & 0xFFFF
-    722                DeviceList[RfID].data[1] = pkt->cmd.Data[5]; // 4个字节的ID号
+   \   00004A   90....       MOV     DPTR,#DeviceList + 16
+   \   00004D   12....       LCALL   ?Subroutine8 & 0xFFFF
+    724                DeviceList[TempLight].data[1] = pkt->cmd.Data[5]; // 温度小数
    \                     ??CrossCallReturnLabel_15:
-   \   00006B   90....       MOV     DPTR,#DeviceList + 24
-   \   00006E   12....       LCALL   ?Subroutine5 & 0xFFFF
-    723                DeviceList[RfID].data[2] = pkt->cmd.Data[6]; //
+   \   000050   90....       MOV     DPTR,#DeviceList + 17
+   \   000053   12....       LCALL   ?Subroutine6 & 0xFFFF
+    725                DeviceList[TempLight].data[2] = pkt->cmd.Data[6]; // 光照
    \                     ??CrossCallReturnLabel_11:
-   \   000071   90....       MOV     DPTR,#DeviceList + 25
-   \   000074   12....       LCALL   ?Subroutine17 & 0xFFFF
-    724                DeviceList[RfID].data[3] = pkt->cmd.Data[7]; //
-   \                     ??CrossCallReturnLabel_35:
-   \   000077   A3           INC     DPTR
-   \   000078   E0           MOVX    A,@DPTR
-   \   000079   90....       MOV     DPTR,#DeviceList + 26
-   \   00007C   12....       LCALL   ?Subroutine4 & 0xFFFF
-    725                DeviceList[RfID].data[4] = pkt->cmd.Data[8]; //  
+   \   000056   90....       MOV     DPTR,#DeviceList + 18
+   \   000059   12....       LCALL   ?Subroutine5 & 0xFFFF
+    726                DeviceList[TempLight].data[3] = pkt->cmd.Data[7]; // 光照
    \                     ??CrossCallReturnLabel_9:
-   \   00007F   A3           INC     DPTR
-   \   000080   E0           MOVX    A,@DPTR
-   \   000081   90....       MOV     DPTR,#DeviceList + 27
-   \   000084   8063         SJMP    ??Smart_home_ProcessMSGCmd_9
-    726                break;
-    727                
-    728              case Smart_home_CLUSTERID_GASFLAMEMSG:      // 烟雾火焰
-    729                DeviceList[gasFlame].deviceStatus = DEVICE_ONLINE;    //收到消息设置为在线
-   \                     ??Smart_home_ProcessMSGCmd_4:
-   \   000086   90....       MOV     DPTR,#DeviceList + 29
-   \   000089   12....       LCALL   ?Subroutine3 & 0xFFFF
-    730                DeviceList[gasFlame].data[0] = pkt->cmd.Data[4]; // 烟雾与火焰报警信息
-   \                     ??CrossCallReturnLabel_4:
-   \   00008C   90....       MOV     DPTR,#DeviceList + 30
-   \   00008F   8058         SJMP    ??Smart_home_ProcessMSGCmd_9
-    731                break;
-    732                
-    733              case Smart_home_CLUSTERID_INFRAREDMSG:      // 人体红外
-    734                DeviceList[infrared].deviceStatus = DEVICE_ONLINE;    //收到消息设置为在线
-   \                     ??Smart_home_ProcessMSGCmd_5:
-   \   000091   90....       MOV     DPTR,#DeviceList + 36
-   \   000094   12....       LCALL   ?Subroutine3 & 0xFFFF
-    735                DeviceList[infrared].data[0] = pkt->cmd.Data[4]; // 人体红外 
-   \                     ??CrossCallReturnLabel_5:
-   \   000097   90....       MOV     DPTR,#DeviceList + 37
-   \   00009A   804D         SJMP    ??Smart_home_ProcessMSGCmd_9
+   \   00005C   E0           MOVX    A,@DPTR
+   \   00005D   90....       MOV     DPTR,#DeviceList + 19
+   \   000060   02....       LJMP    ??Smart_home_ProcessMSGCmd_9 & 0xFFFF
+    727                break;
+    728                
+    729              case Smart_home_CLUSTERID_RFIDMSG:          // 射频卡
+    730                DeviceList[RfID].deviceStatus = DEVICE_ONLINE;        //收到消息设置为在线
+   \                     ??Smart_home_ProcessMSGCmd_3:
+   \   000063   90....       MOV     DPTR,#DeviceList + 22
+   \   000066   12....       LCALL   ?Subroutine2 & 0xFFFF
+    731                DeviceList[RfID].data[0] = pkt->cmd.Data[4]; // 射频卡类型
+   \                     ??CrossCallReturnLabel_2:
+   \   000069   90....       MOV     DPTR,#DeviceList + 23
+   \   00006C   12....       LCALL   ?Subroutine8 & 0xFFFF
+    732                DeviceList[RfID].data[1] = pkt->cmd.Data[5]; // 4个字节的ID号
+   \                     ??CrossCallReturnLabel_16:
+   \   00006F   90....       MOV     DPTR,#DeviceList + 24
+   \   000072   12....       LCALL   ?Subroutine6 & 0xFFFF
+    733                DeviceList[RfID].data[2] = pkt->cmd.Data[6]; //
+   \                     ??CrossCallReturnLabel_12:
+   \   000075   90....       MOV     DPTR,#DeviceList + 25
+   \   000078   12....       LCALL   ?Subroutine19 & 0xFFFF
+    734                DeviceList[RfID].data[3] = pkt->cmd.Data[7]; //
+   \                     ??CrossCallReturnLabel_38:
+   \   00007B   A3           INC     DPTR
+   \   00007C   E0           MOVX    A,@DPTR
+   \   00007D   90....       MOV     DPTR,#DeviceList + 26
+   \   000080   12....       LCALL   ?Subroutine5 & 0xFFFF
+    735                DeviceList[RfID].data[4] = pkt->cmd.Data[8]; //  
+   \                     ??CrossCallReturnLabel_10:
+   \   000083   A3           INC     DPTR
+   \   000084   E0           MOVX    A,@DPTR
+   \   000085   90....       MOV     DPTR,#DeviceList + 27
+   \   000088   02....       LJMP    ??Smart_home_ProcessMSGCmd_9 & 0xFFFF
     736                break;
-    737          
-    738              case Smart_home_CLUSTERID_SOUNDVBMSG:       // 声音振动
-    739                DeviceList[soundVb].deviceStatus = DEVICE_ONLINE;     //收到消息设置为在线
-   \                     ??Smart_home_ProcessMSGCmd_6:
-   \   00009C   90....       MOV     DPTR,#DeviceList + 57
-   \   00009F   12....       LCALL   ?Subroutine3 & 0xFFFF
-    740                DeviceList[soundVb].data[0] = pkt->cmd.Data[4]; // 声音震动信息
-   \                     ??CrossCallReturnLabel_6:
-   \   0000A2   90....       MOV     DPTR,#DeviceList + 58
-   \   0000A5   8042         SJMP    ??Smart_home_ProcessMSGCmd_9
+    737                
+    738              case Smart_home_CLUSTERID_GASFLAMEMSG:      // 烟雾火焰
+    739                DeviceList[gasFlame].deviceStatus = DEVICE_ONLINE;    //收到消息设置为在线
+   \                     ??Smart_home_ProcessMSGCmd_4:
+   \   00008B   90....       MOV     DPTR,#DeviceList + 29
+   \   00008E   12....       LCALL   ?Subroutine3 & 0xFFFF
+    740                DeviceList[gasFlame].data[0] = pkt->cmd.Data[4]; // 烟雾与火焰报警信息
+   \                     ??CrossCallReturnLabel_4:
+   \   000091   90....       MOV     DPTR,#DeviceList + 30
+   \   000094   02....       LJMP    ??Smart_home_ProcessMSGCmd_9 & 0xFFFF
     741                break;
     742                
-    743              case Smart_home_CLUSTERID_MOTORSTATUSMSG:   // 直流电机状态信息
-    744                DeviceList[motor].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线
+    743              case Smart_home_CLUSTERID_INFRAREDMSG:      // 人体红外
+    744                DeviceList[infrared].deviceStatus = DEVICE_ONLINE;    //收到消息设置为在线
+   \                     ??Smart_home_ProcessMSGCmd_5:
+   \   000097   90....       MOV     DPTR,#DeviceList + 36
+   \   00009A   12....       LCALL   ?Subroutine3 & 0xFFFF
+    745                DeviceList[infrared].data[0] = pkt->cmd.Data[4]; // 人体红外 
+   \                     ??CrossCallReturnLabel_5:
+   \   00009D   90....       MOV     DPTR,#DeviceList + 37
+   \   0000A0   02....       LJMP    ??Smart_home_ProcessMSGCmd_9 & 0xFFFF
+    746                break;
+    747          
+    748              case Smart_home_CLUSTERID_SOUNDVBMSG:       // 声音振动
+    749                DeviceList[soundVb].deviceStatus = DEVICE_ONLINE;     //收到消息设置为在线
+   \                     ??Smart_home_ProcessMSGCmd_6:
+   \   0000A3   90....       MOV     DPTR,#DeviceList + 57
+   \   0000A6   12....       LCALL   ?Subroutine3 & 0xFFFF
+    750                DeviceList[soundVb].data[0] = pkt->cmd.Data[4]; // 声音震动信息
+   \                     ??CrossCallReturnLabel_6:
+   \   0000A9   90....       MOV     DPTR,#DeviceList + 58
+   \   0000AC   02....       LJMP    ??Smart_home_ProcessMSGCmd_9 & 0xFFFF
+    751                break;
+    752                
+    753              case Smart_home_CLUSTERID_MOTORSTATUSMSG:   // 直流电机状态信息
+    754                DeviceList[motor].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线
    \                     ??Smart_home_ProcessMSGCmd_7:
-   \   0000A7   90....       MOV     DPTR,#DeviceList + 43
-   \   0000AA   7401         MOV     A,#0x1
-   \   0000AC   F0           MOVX    @DPTR,A
-    745                // 储存电机设备的网络地址，用于发送控制命令
-    746                Motor_addr.addrMode = (afAddrMode_t)Addr16Bit;
-   \   0000AD   90....       MOV     DPTR,#Motor_addr + 8
-   \   0000B0   12....       LCALL   ?Subroutine8 & 0xFFFF
-    747                Motor_addr.addr.shortAddr = pkt->srcAddr.addr.shortAddr;
-   \                     ??CrossCallReturnLabel_16:
-   \   0000B3   90....       MOV     DPTR,#Motor_addr
-   \   0000B6   E8           MOV     A,R0
-   \   0000B7   F0           MOVX    @DPTR,A
-   \   0000B8   A3           INC     DPTR
-   \   0000B9   E9           MOV     A,R1
-   \   0000BA   F0           MOVX    @DPTR,A
-    748                
-    749                Motor_addr.endPoint = 1;  // 目的节点的端口号
-   \   0000BB   90....       MOV     DPTR,#Motor_addr + 9
-   \   0000BE   12....       LCALL   ?Subroutine2 & 0xFFFF
-    750                //TransmitApp_DstMotorAddr->endPoint = TRANSMITAPP_ENDPOINT;
-    751               
-    752                DeviceList[motor].data[0] = pkt->cmd.Data[4]; // 电机转速
-   \                     ??CrossCallReturnLabel_3:
-   \   0000C1   90....       MOV     DPTR,#DeviceList + 44
-   \   0000C4   12....       LCALL   ?Subroutine6 & 0xFFFF
-    753                DeviceList[motor].data[1] = pkt->cmd.Data[5]; // 电机状态
-   \                     ??CrossCallReturnLabel_13:
-   \   0000C7   90....       MOV     DPTR,#DeviceList + 45
-   \   0000CA   801D         SJMP    ??Smart_home_ProcessMSGCmd_9
-    754                break;
-    755                
-    756              case Smart_home_CLUSTERID_RELAYSTATUSMSG:   // 继电器状态信息
-    757                DeviceList[relay].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线    
-   \                     ??Smart_home_ProcessMSGCmd_8:
-   \   0000CC   90....       MOV     DPTR,#DeviceList + 50
-   \   0000CF   7401         MOV     A,#0x1
-   \   0000D1   F0           MOVX    @DPTR,A
-    758                
-    759                // 储存继电器设备的网络地址，用于发送控制命令
-    760                Relay_addr.addrMode = (afAddrMode_t)Addr16Bit;
-   \   0000D2   90....       MOV     DPTR,#Relay_addr + 8
-   \   0000D5   12....       LCALL   ?Subroutine8 & 0xFFFF
-    761                Relay_addr.addr.shortAddr = pkt->srcAddr.addr.shortAddr;
+   \   0000AF   90....       MOV     DPTR,#DeviceList + 43
+   \   0000B2   7401         MOV     A,#0x1
+   \   0000B4   F0           MOVX    @DPTR,A
+    755                // 储存电机设备的网络地址，用于发送控制命令
+    756                Motor_addr.addrMode = (afAddrMode_t)Addr16Bit;
+   \   0000B5   90....       MOV     DPTR,#Motor_addr + 8
+   \   0000B8   12....       LCALL   ?Subroutine9 & 0xFFFF
+    757                Motor_addr.addr.shortAddr = pkt->srcAddr.addr.shortAddr;
    \                     ??CrossCallReturnLabel_17:
-   \   0000D8   90....       MOV     DPTR,#Relay_addr
-   \   0000DB   E8           MOV     A,R0
-   \   0000DC   F0           MOVX    @DPTR,A
-   \   0000DD   A3           INC     DPTR
-   \   0000DE   E9           MOV     A,R1
-   \   0000DF   F0           MOVX    @DPTR,A
-    762                
-    763                Relay_addr.endPoint = 1; // 目的节点的端口号
-   \   0000E0   90....       MOV     DPTR,#Relay_addr + 9
-   \   0000E3   12....       LCALL   ?Subroutine3 & 0xFFFF
-    764                
-    765                DeviceList[relay].data[0] = pkt->cmd.Data[4]; 
-   \                     ??CrossCallReturnLabel_7:
-   \   0000E6   90....       MOV     DPTR,#DeviceList + 51
+   \   0000BB   90....       MOV     DPTR,#Motor_addr
+   \   0000BE   E8           MOV     A,R0
+   \   0000BF   F0           MOVX    @DPTR,A
+   \   0000C0   A3           INC     DPTR
+   \   0000C1   E9           MOV     A,R1
+   \   0000C2   F0           MOVX    @DPTR,A
+    758                
+    759                Motor_addr.endPoint = 1;  // 目的节点的端口号
+   \   0000C3   90....       MOV     DPTR,#Motor_addr + 9
+   \   0000C6   12....       LCALL   ?Subroutine2 & 0xFFFF
+    760                //TransmitApp_DstMotorAddr->endPoint = TRANSMITAPP_ENDPOINT;
+    761               
+    762                DeviceList[motor].data[0] = pkt->cmd.Data[4]; // 电机转速
+   \                     ??CrossCallReturnLabel_3:
+   \   0000C9   90....       MOV     DPTR,#DeviceList + 44
+   \   0000CC   12....       LCALL   ?Subroutine7 & 0xFFFF
+    763                DeviceList[motor].data[1] = pkt->cmd.Data[5]; // 电机状态
+   \                     ??CrossCallReturnLabel_14:
+   \   0000CF   90....       MOV     DPTR,#DeviceList + 45
+   \   0000D2   8070         SJMP    ??Smart_home_ProcessMSGCmd_9
+    764                break;
+    765                
+    766              case Smart_home_CLUSTERID_RELAYSTATUSMSG:   // 继电器状态信息
+    767                DeviceList[relay].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线    
+   \                     ??Smart_home_ProcessMSGCmd_8:
+   \   0000D4   90....       MOV     DPTR,#DeviceList + 50
+   \   0000D7   7401         MOV     A,#0x1
+   \   0000D9   F0           MOVX    @DPTR,A
+    768                
+    769                // 储存继电器设备的网络地址，用于发送控制命令
+    770                Relay_addr.addrMode = (afAddrMode_t)Addr16Bit;
+   \   0000DA   90....       MOV     DPTR,#Relay_addr + 8
+   \   0000DD   12....       LCALL   ?Subroutine9 & 0xFFFF
+    771                Relay_addr.addr.shortAddr = pkt->srcAddr.addr.shortAddr;
+   \                     ??CrossCallReturnLabel_18:
+   \   0000E0   90....       MOV     DPTR,#Relay_addr
+   \   0000E3   E8           MOV     A,R0
+   \   0000E4   F0           MOVX    @DPTR,A
+   \   0000E5   A3           INC     DPTR
+   \   0000E6   E9           MOV     A,R1
+   \   0000E7   F0           MOVX    @DPTR,A
+    772                
+    773                Relay_addr.endPoint = 1; // 目的节点的端口号
+   \   0000E8   90....       MOV     DPTR,#Relay_addr + 9
+   \   0000EB   7401         MOV     A,#0x1
+   \   0000ED   F0           MOVX    @DPTR,A
+    774          #if defined ( LCD_SUPPORTED )
+    775                if(Ctrlcase == 1)
+   \   0000EE   90....       MOV     DPTR,#Ctrlcase
+   \   0000F1   E0           MOVX    A,@DPTR
+   \   0000F2   6401         XRL     A,#0x1
+   \   0000F4   7048         JNZ     ??Smart_home_ProcessMSGCmd_10
+    776                {
+    777                  const uint8 cmd =  pkt->cmd.Data[4];
+   \   0000F6   12....       LCALL   ?Subroutine13 & 0xFFFF
+   \                     ??CrossCallReturnLabel_30:
+   \   0000F9   F5..         MOV     ?V0 + 0,A
+    778                  //消除抖动
+    779                  Onboard_wait(1000);
+   \   0000FB                ; Setup parameters for call to function Onboard_wait
+   \   0000FB   7AE8         MOV     R2,#-0x18
+   \   0000FD   7B03         MOV     R3,#0x3
+   \   0000FF   12....       LCALL   ??Onboard_wait?relay
+    780                  if((cmd & 0x02) == 0x02) {HalLcdWriteString( "K1:ON", HAL_LCD_LINE_2 );}
+   \   000102   E5..         MOV     A,?V0 + 0
+   \   000104   A2E1         MOV     C,0xE0 /* A   */.1
+   \   000106   5009         JNC     ??Smart_home_ProcessMSGCmd_11
+   \   000108                ; Setup parameters for call to function HalLcdWriteString
+   \   000108   7902         MOV     R1,#0x2
+   \   00010A   7A..         MOV     R2,#`?<Constant "K1:ON">` & 0xff
+   \   00010C   7B..         MOV     R3,#(`?<Constant "K1:ON">` >> 8) & 0xff
+   \   00010E   12....       LCALL   ??HalLcdWriteString?relay
+    781                  if((cmd & 0x01) == 0x01) {HalLcdWriteString( "K1:OFF", HAL_LCD_LINE_2 );}
+   \                     ??Smart_home_ProcessMSGCmd_11:
+   \   000111   E5..         MOV     A,?V0 + 0
+   \   000113   A2E0         MOV     C,0xE0 /* A   */.0
+   \   000115   5009         JNC     ??Smart_home_ProcessMSGCmd_12
+   \   000117                ; Setup parameters for call to function HalLcdWriteString
+   \   000117   7902         MOV     R1,#0x2
+   \   000119   7A..         MOV     R2,#`?<Constant "K1:OFF">` & 0xff
+   \   00011B   7B..         MOV     R3,#(`?<Constant "K1:OFF">` >> 8) & 0xff
+   \   00011D   12....       LCALL   ??HalLcdWriteString?relay
+    782                  if((cmd & 0x20) == 0x20) {HalLcdWriteString( "K2:ON", HAL_LCD_LINE_3 );}
+   \                     ??Smart_home_ProcessMSGCmd_12:
+   \   000120   E5..         MOV     A,?V0 + 0
+   \   000122   A2E5         MOV     C,0xE0 /* A   */.5
+   \   000124   5009         JNC     ??Smart_home_ProcessMSGCmd_13
+   \   000126                ; Setup parameters for call to function HalLcdWriteString
+   \   000126   7903         MOV     R1,#0x3
+   \   000128   7A..         MOV     R2,#`?<Constant "K2:ON">` & 0xff
+   \   00012A   7B..         MOV     R3,#(`?<Constant "K2:ON">` >> 8) & 0xff
+   \   00012C   12....       LCALL   ??HalLcdWriteString?relay
+    783                  if((cmd & 0x10) == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}      
+   \                     ??Smart_home_ProcessMSGCmd_13:
+   \   00012F   E5..         MOV     A,?V0 + 0
+   \   000131   A2E4         MOV     C,0xE0 /* A   */.4
+   \   000133   5009         JNC     ??Smart_home_ProcessMSGCmd_10
+   \   000135                ; Setup parameters for call to function HalLcdWriteString
+   \   000135   7903         MOV     R1,#0x3
+   \   000137   7A..         MOV     R2,#`?<Constant "K2:OFF">` & 0xff
+   \   000139   7B..         MOV     R3,#(`?<Constant "K2:OFF">` >> 8) & 0xff
+   \   00013B   12....       LCALL   ??HalLcdWriteString?relay
+    784                }
+    785            
+    786          #endif 
+    787                DeviceList[relay].data[0] = pkt->cmd.Data[4]; 
+   \                     ??Smart_home_ProcessMSGCmd_10:
+   \   00013E   12....       LCALL   ?Subroutine13 & 0xFFFF
+   \                     ??CrossCallReturnLabel_31:
+   \   000141   90....       MOV     DPTR,#DeviceList + 51
    \                     ??Smart_home_ProcessMSGCmd_9:
-   \   0000E9   F0           MOVX    @DPTR,A
-    766                break;
-    767                
-    768              default:
-    769                break;
-    770            }
-    771          }
+   \   000144   F0           MOVX    @DPTR,A
+    788                break;
+    789                
+    790              default:
+    791                break;
+    792            }
+    793          }
    \                     ??Smart_home_ProcessMSGCmd_0:
-   \   0000EA                REQUIRE ?Subroutine1
-   \   0000EA                ; // Fall through to label ?Subroutine1
+   \   000145                REQUIRE ?Subroutine1
+   \   000145                ; // Fall through to label ?Subroutine1
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine1:
@@ -1919,11 +2018,17 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine8:
+   \                     ?Subroutine13:
+   \   000000   12....       LCALL   ?Subroutine22 & 0xFFFF
+   \                     ??CrossCallReturnLabel_45:
+   \   000003   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine9:
    \   000000   04           INC     A
    \   000001   F0           MOVX    @DPTR,A
-   \   000002   8A82         MOV     DPL,R2
-   \   000004   8B83         MOV     DPH,R3
+   \   000002   8E82         MOV     DPL,R6
+   \   000004   8F83         MOV     DPH,R7
    \   000006   A3           INC     DPTR
    \   000007   A3           INC     DPTR
    \   000008   A3           INC     DPTR
@@ -1938,97 +2043,109 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000011   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine7:
+   \                     ?Subroutine8:
    \   000000   F0           MOVX    @DPTR,A
-   \   000001   12....       LCALL   ?Subroutine19 & 0xFFFF
-   \                     ??CrossCallReturnLabel_40:
+   \   000001   12....       LCALL   ?Subroutine23 & 0xFFFF
+   \                     ??CrossCallReturnLabel_47:
    \   000004   A3           INC     DPTR
    \   000005   E0           MOVX    A,@DPTR
    \   000006   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine7:
+   \   000000   12....       LCALL   ?Subroutine20 & 0xFFFF
+   \                     ??CrossCallReturnLabel_40:
+   \   000003   E0           MOVX    A,@DPTR
+   \   000004   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine6:
-   \   000000   12....       LCALL   ?Subroutine18 & 0xFFFF
-   \                     ??CrossCallReturnLabel_37:
+   \   000000   12....       LCALL   ?Subroutine19 & 0xFFFF
+   \                     ??CrossCallReturnLabel_39:
    \   000003   E0           MOVX    A,@DPTR
    \   000004   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine5:
-   \   000000   12....       LCALL   ?Subroutine17 & 0xFFFF
-   \                     ??CrossCallReturnLabel_36:
-   \   000003   E0           MOVX    A,@DPTR
-   \   000004   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine17:
+   \                     ?Subroutine19:
    \   000000   F0           MOVX    @DPTR,A
-   \   000001   12....       LCALL   ?Subroutine22 & 0xFFFF
-   \                     ??CrossCallReturnLabel_45:
+   \   000001   12....       LCALL   ?Subroutine26 & 0xFFFF
+   \                     ??CrossCallReturnLabel_52:
    \   000004   A3           INC     DPTR
    \   000005   A3           INC     DPTR
    \   000006   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine4:
-   \   000000   12....       LCALL   ?Subroutine18 & 0xFFFF
-   \                     ??CrossCallReturnLabel_38:
+   \                     ?Subroutine5:
+   \   000000   12....       LCALL   ?Subroutine20 & 0xFFFF
+   \                     ??CrossCallReturnLabel_41:
    \   000003   A3           INC     DPTR
    \   000004   A3           INC     DPTR
    \   000005   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine18:
+   \                     ?Subroutine20:
    \   000000   F0           MOVX    @DPTR,A
    \   000001   8882         MOV     DPL,R0
    \   000003   8983         MOV     DPH,R1
-   \   000005   12....       LCALL   ?Subroutine23 & 0xFFFF
-   \                     ??CrossCallReturnLabel_47:
+   \   000005   12....       LCALL   ?Subroutine25 & 0xFFFF
+   \                     ??CrossCallReturnLabel_50:
    \   000008   A3           INC     DPTR
-   \   000009   A3           INC     DPTR
-   \   00000A   A3           INC     DPTR
-   \   00000B   A3           INC     DPTR
-   \   00000C   A3           INC     DPTR
-   \   00000D   22           RET
+   \   000009   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine3:
    \   000000   7401         MOV     A,#0x1
    \   000002   F0           MOVX    @DPTR,A
-   \   000003   EA           MOV     A,R2
-   \   000004   2422         ADD     A,#0x22
-   \   000006   12....       LCALL   ?Subroutine20 & 0xFFFF
-   \                     ??CrossCallReturnLabel_42:
-   \   000009   A3           INC     DPTR
-   \   00000A   A3           INC     DPTR
-   \   00000B   A3           INC     DPTR
-   \   00000C   A3           INC     DPTR
+   \   000003   12....       LCALL   ?Subroutine22 & 0xFFFF
+   \                     ??CrossCallReturnLabel_44:
+   \   000006   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine22:
+   \   000000   EE           MOV     A,R6
+   \   000001   2422         ADD     A,#0x22
+   \   000003   F582         MOV     DPL,A
+   \   000005   EF           MOV     A,R7
+   \   000006   3400         ADDC    A,#0x0
+   \   000008   F583         MOV     DPH,A
+   \   00000A   12....       LCALL   ?Subroutine25 & 0xFFFF
+   \                     ??CrossCallReturnLabel_51:
    \   00000D   E0           MOVX    A,@DPTR
    \   00000E   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine25:
+   \   000000   12....       LCALL   ?Subroutine27 & 0xFFFF
+   \                     ??CrossCallReturnLabel_55:
+   \   000003   A3           INC     DPTR
+   \   000004   A3           INC     DPTR
+   \   000005   A3           INC     DPTR
+   \   000006   A3           INC     DPTR
+   \   000007   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine2:
    \   000000   7401         MOV     A,#0x1
    \   000002   F0           MOVX    @DPTR,A
-   \   000003   EA           MOV     A,R2
+   \   000003   EE           MOV     A,R6
    \   000004   2422         ADD     A,#0x22
    \   000006   F8           MOV     R0,A
-   \   000007   EB           MOV     A,R3
+   \   000007   EF           MOV     A,R7
    \   000008   3400         ADDC    A,#0x0
    \   00000A   F9           MOV     R1,A
-   \   00000B   12....       LCALL   ?Subroutine19 & 0xFFFF
-   \                     ??CrossCallReturnLabel_39:
+   \   00000B   12....       LCALL   ?Subroutine23 & 0xFFFF
+   \                     ??CrossCallReturnLabel_46:
    \   00000E   E0           MOVX    A,@DPTR
    \   00000F   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine19:
-   \   000000   12....       LCALL   ?Subroutine22 & 0xFFFF
-   \                     ??CrossCallReturnLabel_46:
+   \                     ?Subroutine23:
+   \   000000   12....       LCALL   ?Subroutine26 & 0xFFFF
+   \                     ??CrossCallReturnLabel_53:
    \   000003   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine22:
+   \                     ?Subroutine26:
    \   000000   8882         MOV     DPL,R0
    \   000002   8983         MOV     DPH,R1
    \   000004   E0           MOVX    A,@DPTR
@@ -2042,85 +2159,85 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00000E   A3           INC     DPTR
    \   00000F   A3           INC     DPTR
    \   000010   22           RET
-    772          
-    773          /*********************************************************************
-    774           * @fn     Smart_home_Device_check
-    775           *
-    776           * @brief   设备计数器，用来检查设备在开始组网后多久在线.
-    777           *          目前搜索为4次HeartBeat  (DEVICE_HEART_BEAT 3)
-    778           *          3.21
-    779           * @param   none
-    780           *
-    781           * @return  none
-    782           */
-    783          static void Smart_home_Device_check(void)
-    784          {
+    794          
+    795          /*********************************************************************
+    796           * @fn     Smart_home_Device_check
+    797           *
+    798           * @brief   设备计数器，用来检查设备在开始组网后多久在线.
+    799           *          目前搜索为4次HeartBeat  (DEVICE_HEART_BEAT 3)
+    800           *          3.21
+    801           * @param   none
+    802           *
+    803           * @return  none
+    804           */
+    805          static void Smart_home_Device_check(void)
+    806          {
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    785            static uint8 DeviceID;
+    807            static uint8 DeviceID;
    \                     ??DeviceID:
    \   000000                DS 1
    \   000001                REQUIRE __INIT_XDATA_Z
-    786            for(DeviceID=1;DeviceID<Smart_home_MAX_INCLUSTERS;DeviceID++)
-    787            {
-    788              if(DeviceList[DeviceID].deviceStatus != DEVICE_ONLINE)    //设备离线
-    789              {
-    790                DeviceCnt[DeviceID]++;
-    791              }
-    792              if(DeviceList[DeviceID].deviceStatus == DEVICE_ONLINE)    //设备在线
-    793              {
-    794                DeviceCnt[DeviceID] = 0;
-    795                DeviceList[DeviceID].deviceStatus = 0;
-    796              }
-    797              if(DeviceCnt[DeviceID] > DEVICE_HEART_BEAT)
-    798              {
-    799                DeviceCnt[DeviceID] = DEVICE_HEART_BEAT;
-    800                DeviceList[DeviceID].deviceStatus = DEVICE_OFFLINE;
-    801              }
-    802            }
-    803            /*温湿度缓存 温度光照缓存 RFID 信息缓存 气体火焰缓存 
-    804            人体红外 电机状态 继电器状态 声音震动*/
-    805          }
-    806          
-    807          
-    808          /*********************************************************************
-    809           * @fn      Smart_home_Relay_Ctl
-    810           *
-    811           * @brief   发送继电器控制消息
-    812           *
-    813           * @param   none
-    814           *
-    815           * @return  none
-    816           */
+    808            for(DeviceID=1;DeviceID<Smart_home_MAX_INCLUSTERS;DeviceID++)
+    809            {
+    810              if(DeviceList[DeviceID].deviceStatus != DEVICE_ONLINE)    //设备离线
+    811              {
+    812                DeviceCnt[DeviceID]++;
+    813              }
+    814              if(DeviceList[DeviceID].deviceStatus == DEVICE_ONLINE)    //设备在线
+    815              {
+    816                DeviceCnt[DeviceID] = 0;
+    817                DeviceList[DeviceID].deviceStatus = 0;
+    818              }
+    819              if(DeviceCnt[DeviceID] > DEVICE_HEART_BEAT)
+    820              {
+    821                DeviceCnt[DeviceID] = DEVICE_HEART_BEAT;
+    822                DeviceList[DeviceID].deviceStatus = DEVICE_OFFLINE;
+    823              }
+    824            }
+    825            /*温湿度缓存 温度光照缓存 RFID 信息缓存 气体火焰缓存 
+    826            人体红外 电机状态 继电器状态 声音震动*/
+    827          }
+    828          
+    829          
+    830          /*********************************************************************
+    831           * @fn      Smart_home_Relay_Ctl
+    832           *
+    833           * @brief   发送继电器控制消息
+    834           *
+    835           * @param   none
+    836           *
+    837           * @return  none
+    838           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    817          static void Smart_home_Relay_Ctl(uint8 cmd)
+    839          static void Smart_home_Relay_Ctl(uint8 cmd)
    \                     Smart_home_Relay_Ctl:
-    818          {
+    840          {
    \   000000   74F6         MOV     A,#-0xa
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 10
    \   000005                ; Auto size: 0
    \   000005   E9           MOV     A,R1
    \   000006   FE           MOV     R6,A
-    819            uint8 tmp;
-    820            
-    821            // 只有设备在线时, 方发送控制命令
-    822            if (DeviceList[relay].deviceStatus != DEVICE_OFFLINE)
+    841            uint8 tmp;
+    842            
+    843            // 只有设备在线时, 方发送控制命令
+    844            if (DeviceList[relay].deviceStatus != DEVICE_OFFLINE)
    \   000007   90....       MOV     DPTR,#DeviceList + 50
    \   00000A   E0           MOVX    A,@DPTR
    \   00000B   6402         XRL     A,#0x2
    \   00000D   7003         JNZ     $+5
    \   00000F   02....       LJMP    ??Smart_home_Relay_Ctl_0 & 0xFFFF
-    823            {
-    824              // put the sequence number in the message
-    825              tmp = HI_UINT8( RelayTransID );
+    845            {
+    846              // put the sequence number in the message
+    847              tmp = HI_UINT8( RelayTransID );
    \   000012   90....       MOV     DPTR,#RelayTransID
    \   000015   E0           MOVX    A,@DPTR
    \   000016   C4           SWAP    A
    \   000017   540F         ANL     A,#0xf
    \   000019   FA           MOV     R2,A
-    826              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+    848              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
    \   00001A   C3           CLR     C
    \   00001B   940A         SUBB    A,#0xa
    \   00001D   5004         JNC     ??Smart_home_Relay_Ctl_1
@@ -2128,18 +2245,18 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000021   8002         SJMP    ??Smart_home_Relay_Ctl_2
    \                     ??Smart_home_Relay_Ctl_1:
    \   000023   7837         MOV     R0,#0x37
-    827              Coordinator_Msg[2] = tmp;
+    849              Coordinator_Msg[2] = tmp;
    \                     ??Smart_home_Relay_Ctl_2:
    \   000025   E8           MOV     A,R0
    \   000026   2A           ADD     A,R2
    \   000027   90....       MOV     DPTR,#Coordinator_Msg + 2
    \   00002A   F0           MOVX    @DPTR,A
-    828              tmp = LO_UINT8( RelayTransID );
+    850              tmp = LO_UINT8( RelayTransID );
    \   00002B   90....       MOV     DPTR,#RelayTransID
    \   00002E   E0           MOVX    A,@DPTR
    \   00002F   540F         ANL     A,#0xf
    \   000031   FA           MOV     R2,A
-    829              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+    851              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
    \   000032   C3           CLR     C
    \   000033   940A         SUBB    A,#0xa
    \   000035   5004         JNC     ??Smart_home_Relay_Ctl_3
@@ -2147,22 +2264,22 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000039   8002         SJMP    ??Smart_home_Relay_Ctl_4
    \                     ??Smart_home_Relay_Ctl_3:
    \   00003B   7837         MOV     R0,#0x37
-    830              Coordinator_Msg[3] = tmp;
+    852              Coordinator_Msg[3] = tmp;
    \                     ??Smart_home_Relay_Ctl_4:
    \   00003D   E8           MOV     A,R0
    \   00003E   2A           ADD     A,R2
    \   00003F   90....       MOV     DPTR,#Coordinator_Msg + 3
    \   000042   F0           MOVX    @DPTR,A
-    831              
-    832              // 发送给继电器的控制命令 
-    833              Coordinator_Msg[4] = cmd;
+    853              
+    854              // 发送给继电器的控制命令 
+    855              Coordinator_Msg[4] = cmd;
    \   000043   EE           MOV     A,R6
    \   000044   A3           INC     DPTR
    \   000045   F0           MOVX    @DPTR,A
-    834              /********************************************
-    835              *   屏幕显示部分*/
-    836          #if defined ( LCD_SUPPORTED )
-    837              if(cmd == 0x02) {HalLcdWriteString( "K1:ON", HAL_LCD_LINE_2 );}
+    856              /********************************************
+    857              *   屏幕显示部分*/
+    858          #if defined ( LCD_SUPPORTED )
+    859              if(cmd == 0x02) {HalLcdWriteString( "K1:ON", HAL_LCD_LINE_2 );}
    \   000046   7402         MOV     A,#0x2
    \   000048   6E           XRL     A,R6
    \   000049   7008         JNZ     ??Smart_home_Relay_Ctl_5
@@ -2171,7 +2288,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00004D   7A..         MOV     R2,#`?<Constant "K1:ON">` & 0xff
    \   00004F   7B..         MOV     R3,#(`?<Constant "K1:ON">` >> 8) & 0xff
    \   000051   8025         SJMP    ??Smart_home_Relay_Ctl_6
-    838              if(cmd == 0x01) {HalLcdWriteString( "K1:OFF", HAL_LCD_LINE_2 );}
+    860              if(cmd == 0x01) {HalLcdWriteString( "K1:OFF", HAL_LCD_LINE_2 );}
    \                     ??Smart_home_Relay_Ctl_5:
    \   000053   7401         MOV     A,#0x1
    \   000055   6E           XRL     A,R6
@@ -2181,7 +2298,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00005A   7A..         MOV     R2,#`?<Constant "K1:OFF">` & 0xff
    \   00005C   7B..         MOV     R3,#(`?<Constant "K1:OFF">` >> 8) & 0xff
    \   00005E   8018         SJMP    ??Smart_home_Relay_Ctl_6
-    839              if(cmd == 0x20) {HalLcdWriteString( "K2:ON", HAL_LCD_LINE_3 );}
+    861              if(cmd == 0x20) {HalLcdWriteString( "K2:ON", HAL_LCD_LINE_3 );}
    \                     ??Smart_home_Relay_Ctl_7:
    \   000060   7420         MOV     A,#0x20
    \   000062   6E           XRL     A,R6
@@ -2191,7 +2308,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000067   7A..         MOV     R2,#`?<Constant "K2:ON">` & 0xff
    \   000069   7B..         MOV     R3,#(`?<Constant "K2:ON">` >> 8) & 0xff
    \   00006B   800B         SJMP    ??Smart_home_Relay_Ctl_6
-    840              if(cmd == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}
+    862              if(cmd == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}
    \                     ??Smart_home_Relay_Ctl_8:
    \   00006D   7410         MOV     A,#0x10
    \   00006F   6E           XRL     A,R6
@@ -2202,16 +2319,16 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000076   7B..         MOV     R3,#(`?<Constant "K2:OFF">` >> 8) & 0xff
    \                     ??Smart_home_Relay_Ctl_6:
    \   000078   12....       LCALL   ??HalLcdWriteString?relay
-    841          #endif     
-    842              /********************************************/
-    843              tmp = AF_DataRequest( &Relay_addr,                         
-    844                                    (endPointDesc_t *)&Smart_home_epDesc,                  
-    845                                     Smart_home_CLUSTERID_RELAYCTRL,
-    846                                     RELAYSTATUSMSG_LEN,                 
-    847                                     Coordinator_Msg,                    
-    848                                    &RelayTransID,                       
-    849                                     AF_DISCV_ROUTE,                     
-    850                                     AF_DEFAULT_RADIUS );
+    863          #endif     
+    864              /********************************************/
+    865              tmp = AF_DataRequest( &Relay_addr,                         
+    866                                    (endPointDesc_t *)&Smart_home_epDesc,                  
+    867                                     Smart_home_CLUSTERID_RELAYCTRL,
+    868                                     RELAYSTATUSMSG_LEN,                 
+    869                                     Coordinator_Msg,                    
+    870                                    &RelayTransID,                       
+    871                                     AF_DISCV_ROUTE,                     
+    872                                     AF_DEFAULT_RADIUS );
    \                     ??Smart_home_Relay_Ctl_9:
    \   00007B                ; Setup parameters for call to function AF_DataRequest
    \   00007B   75..1E       MOV     ?V0 + 0,#0x1e
@@ -2240,22 +2357,22 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   0000B6   12....       LCALL   ??AF_DataRequest?relay
    \   0000B9   7409         MOV     A,#0x9
    \   0000BB   12....       LCALL   ?DEALLOC_XSTACK8
-    851            } 
-    852          }
+    873            } 
+    874          }
    \                     ??Smart_home_Relay_Ctl_0:
    \   0000BE   02....       LJMP    ?Subroutine1 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine15:
+   \                     ?Subroutine17:
    \   000000   75F007       MOV     B,#0x7
    \   000003   A4           MUL     AB
    \   000004   F8           MOV     R0,A
    \   000005   A9F0         MOV     R1,B
-   \   000007                REQUIRE ??Subroutine24_0
-   \   000007                ; // Fall through to label ??Subroutine24_0
+   \   000007                REQUIRE ??Subroutine28_0
+   \   000007                ; // Fall through to label ??Subroutine28_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine24_0:
+   \                     ??Subroutine28_0:
    \   000000   74..         MOV     A,#(DeviceList + 1) & 0xff
    \   000002   28           ADD     A,R0
    \   000003   F582         MOV     DPL,A
@@ -2265,11 +2382,11 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00000A   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine9:
+   \                     ?Subroutine10:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   F8           MOV     R0,A
-   \   000002   12....       LCALL   ?Subroutine21 & 0xFFFF
-   \                     ??CrossCallReturnLabel_44:
+   \   000002   12....       LCALL   ?Subroutine24 & 0xFFFF
+   \                     ??CrossCallReturnLabel_49:
    \   000005   22           RET
 
    \                                 In  segment BANK_RELAYS, align 1
@@ -2315,6 +2432,10 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \            2055502F
    \            444F574E
    \            00      
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant " ">`:
+   \   000000   2000         DB " "
 
    \                                 In  segment XDATA_ROM_C, align 1
    \                     `?<Constant "Relay Contrling">`:
@@ -2407,85 +2528,87 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \                     `?<Constant "K2:OFF">`:
    \   000000   4B323A4F     DB "K2:OFF"
    \            464600  
-    853          
-    854          /*********************************************************************
-    855           * @fn      Smart_home_Motor_Ctl
-    856           *
-    857           * @brief   发送电机控制消息
-    858           *
-    859           * @param   none
-    860           *
-    861           * @return  none
-    862           */
-    863          static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed)
+    875          
+    876          /*********************************************************************
+    877           * @fn      Smart_home_Motor_Ctl
+    878           *
+    879           * @brief   发送电机控制消息
+    880           *
+    881           * @param   none
+    882           *
+    883           * @return  none
+    884           */
+    885          static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed)
                              ^
 Warning[Pe177]: function "Smart_home_Motor_Ctl" was declared but never
           referenced
-    864          {
-    865            uint8 tmp;
-    866            
-    867            // 只有设备在线时, 方发送控制命令
-    868            if (DeviceList[motor].deviceStatus != DEVICE_OFFLINE)
-    869            {
-    870              // put the sequence number in the message
-    871              tmp = HI_UINT8( MotorTransID );
-    872              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
-    873              Coordinator_Msg[2] = tmp;
-    874              tmp = LO_UINT8( RelayTransID );
-    875              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
-    876              Coordinator_Msg[3] = tmp;
-    877              
-    878              // 发送给继电器的控制命令 
-    879              Coordinator_Msg[4] = speed;
-    880              Coordinator_Msg[5] = cmd;
-    881              /*********************************************
-    882              *   屏幕显示部分
-    883          #if defined ( LCD_SUPPORTED )
-    884              char* spe_c     = &speed;
-    885              char* cmd_c     = &cmd;
-    886              const char SpeStr[3]  = {"ON"};
-    887              const char CmdStr[4] = {"OFF"};
-    888              char* LCD_Display1;
-    889              char* LCD_Display2;
-    890              
-    891              if(cmd == 0x02) {LCD_Display1 = strcat(K1,OnStr);}
-    892              if(cmd == 0x01) {LCD_Display1 = strcat(K1,OffStr);}
-    893              if(cmd == 0x10) {LCD_Display2 = strcat(K2,OnStr);}
-    894              if(cmd == 0x20) {LCD_Display2 = strcat(K2,OffStr);}
-    895              
-    896              HalLcdWriteString( LCD_Display1, HAL_LCD_LINE_2 );
-    897              HalLcdWriteString( LCD_Display2, HAL_LCD_LINE_3 );
-    898          #endif     
-    899              ********************************************/
-    900              
-    901              tmp = AF_DataRequest( &Motor_addr,                         
-    902                                    (endPointDesc_t *)&Smart_home_epDesc,                  
-    903                                     Smart_home_CLUSTERID_MOTORCTRL,
-    904                                     MOTORSTATUSMSG_LEN,                 
-    905                                     Coordinator_Msg,                    
-    906                                    &MotorTransID,                       
-    907                                     AF_DISCV_ROUTE,                     
-    908                                     AF_DEFAULT_RADIUS );
-    909            }   
-    910          }
-    911          
-    912          
-    913          /*********************************************************************
-    914           * @fn      Smart_home_Display
-    915           *
-    916           * @brief   屏幕回显函数，定义了内容如何显示.
-    917           *
-    918           * @param   port - UART port.
-    919           * @param   event - the UART port event flag.
-    920           *
-    921           * @return  none
-    922           */
-    923          static void Smart_home_Display(uint8 page)
-    924          {
-    925             
-    926          }
-    927          
-    928          
+    886          {
+    887            uint8 tmp;
+    888            
+    889            // 只有设备在线时, 方发送控制命令
+    890            if (DeviceList[motor].deviceStatus != DEVICE_OFFLINE)
+    891            {
+    892              // put the sequence number in the message
+    893              tmp = HI_UINT8( MotorTransID );
+    894              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+    895              Coordinator_Msg[2] = tmp;
+    896              tmp = LO_UINT8( RelayTransID );
+    897              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+    898              Coordinator_Msg[3] = tmp;
+    899              
+    900              // 发送给继电器的控制命令 
+    901              Coordinator_Msg[4] = speed;
+    902              Coordinator_Msg[5] = cmd;
+    903              /*********************************************
+    904              *   屏幕显示部分
+    905          #if defined ( LCD_SUPPORTED )
+    906              char* spe_c     = &speed;
+    907              char* cmd_c     = &cmd;
+    908              const char SpeStr[3]  = {"ON"};
+    909              const char CmdStr[4] = {"OFF"};
+    910              char* LCD_Display1;
+    911              char* LCD_Display2;
+    912              
+    913              if(cmd == 0x02) {LCD_Display1 = strcat(K1,OnStr);}
+    914              if(cmd == 0x01) {LCD_Display1 = strcat(K1,OffStr);}
+    915              if(cmd == 0x10) {LCD_Display2 = strcat(K2,OnStr);}
+    916              if(cmd == 0x20) {LCD_Display2 = strcat(K2,OffStr);}
+    917              
+    918              HalLcdWriteString( LCD_Display1, HAL_LCD_LINE_2 );
+    919              HalLcdWriteString( LCD_Display2, HAL_LCD_LINE_3 );
+    920          #endif     
+    921              ********************************************/
+    922              
+    923              tmp = AF_DataRequest( &Motor_addr,                         
+    924                                    (endPointDesc_t *)&Smart_home_epDesc,                  
+    925                                     Smart_home_CLUSTERID_MOTORCTRL,
+    926                                     MOTORSTATUSMSG_LEN,                 
+    927                                     Coordinator_Msg,                    
+    928                                    &MotorTransID,                       
+    929                                     AF_DISCV_ROUTE,                     
+    930                                     AF_DEFAULT_RADIUS );
+    931            }   
+    932          }
+    933          
+    934          
+    935          /*********************************************************************
+    936           * @fn      Smart_home_Display
+    937           *
+    938           * @brief   屏幕回显函数，定义了内容如何显示.
+    939           *
+    940           * @param   port - UART port.
+    941           * @param   event - the UART port event flag.
+    942           *
+    943           * @return  none
+    944           */
+    945          static void Smart_home_Display(uint8 page)
+    946          {
+    947          #if defined LCD_SUPPORTED
+    948          
+    949          #endif // LCD_SUPPORTED  
+    950          }
+    951          
+    952          
 
    Maximum stack usage in bytes:
 
@@ -2523,6 +2646,12 @@ Warning[Pe177]: function "Smart_home_Motor_Ctl" was declared but never
        -> HalLcdWriteString             0      0     18
        -> HalLcdWriteString             0      0     18
        -> HalLcdWriteString             0      0     18
+       -> HalLcdWriteString             0      0     18
+       -> HalLcdWriteString             0      0     18
+       -> HalLcdWriteString             0      0     18
+       -> HalLcdWriteString             0      0     18
+       -> HalLcdWriteString             0      0     18
+       -> HalLcdWriteString             0      0     18
      Smart_home_ProcessEvent            0      0     14
        -> Smart_home_ProcessMSGCmd      0      0     28
        -> osal_msg_deallocate           0      0     28
@@ -2538,6 +2667,11 @@ Warning[Pe177]: function "Smart_home_Motor_Ctl" was declared but never
        -> osal_start_timerEx            0      0     28
        -> osal_start_timerEx            0      0     28
      Smart_home_ProcessMSGCmd           0      0     24
+       -> Onboard_wait                  0      0     20
+       -> HalLcdWriteString             0      0     20
+       -> HalLcdWriteString             0      0     20
+       -> HalLcdWriteString             0      0     20
+       -> HalLcdWriteString             0      0     20
      Smart_home_Relay_Ctl               0      0     28
        -> HalLcdWriteString             0      0     20
        -> HalLcdWriteString             0      0     20
@@ -2556,6 +2690,7 @@ Warning[Pe177]: function "Smart_home_Motor_Ctl" was declared but never
      Smart_home_epDesc                   6
      Smart_home_TaskID                   1
      DeviceCnt                           9
+     Ctrlcase                            1
      DeviceList                         63
      Relay_addr                         12
      Motor_addr                         12
@@ -2564,43 +2699,46 @@ Warning[Pe177]: function "Smart_home_Motor_Ctl" was declared but never
      MotorTransID                        1
      Smart_home_Init                   219
      ?Subroutine0                        5
-     ?Subroutine12                       6
-     ??Subroutine25_0                   11
-     ?Subroutine21                      12
-     ?Subroutine16                      11
-     Smart_home_ProcessEvent           361
-     ?Subroutine20                      11
-     ?Subroutine23                       9
-     Smart_home_Key_add                106
+     ?Subroutine14                       6
+     ??Subroutine29_0                   11
+     ?Subroutine24                      12
+     ?Subroutine18                      11
+     Smart_home_ProcessEvent           371
+     ?Subroutine27                       9
+     Smart_home_Key_add                109
+     ?Subroutine4                        7
+     ?Subroutine21                      19
      Smart_home_HandleKeys             302
-     ?Subroutine14                      10
-     ?Subroutine13                      10
+     ?Subroutine16                      10
+     ?Subroutine15                      10
+     ?Subroutine12                      10
      ?Subroutine11                      10
-     ?Subroutine10                      10
-     Ctrlcase                            1
      MotorSpeed                          1
      NetWorkAllow                        1
      LCD_Page                            1
      Relay1_on                           1
      Relay2_on                           1
-     Smart_home_ProcessMSGCmd          234
+     Smart_home_ProcessMSGCmd          325
      ?Subroutine1                        5
-     ?Subroutine8                       18
-     ?Subroutine7                        7
+     ?Subroutine13                       4
+     ?Subroutine9                       18
+     ?Subroutine8                        7
+     ?Subroutine7                        5
      ?Subroutine6                        5
-     ?Subroutine5                        5
-     ?Subroutine17                       7
-     ?Subroutine4                        6
-     ?Subroutine18                      14
-     ?Subroutine3                       15
+     ?Subroutine19                       7
+     ?Subroutine5                        6
+     ?Subroutine20                      10
+     ?Subroutine3                        7
+     ?Subroutine22                      15
+     ?Subroutine25                       8
      ?Subroutine2                       16
-     ?Subroutine19                       4
-     ?Subroutine22                      17
+     ?Subroutine23                       4
+     ?Subroutine26                      17
      DeviceID                            1
      Smart_home_Relay_Ctl              193
-     ?Subroutine15                       7
-     ??Subroutine24_0                   11
-     ?Subroutine9                        6
+     ?Subroutine17                       7
+     ??Subroutine28_0                   11
+     ?Subroutine10                       6
      ??Smart_home_Init?relay             6
      ??Smart_home_ProcessEvent?relay     6
      ??Smart_home_Key_add?relay          6
@@ -2609,6 +2747,7 @@ Warning[Pe177]: function "Smart_home_Motor_Ctl" was declared but never
      ??Smart_home_Relay_Ctl?relay        6
      ?<Constant "Smart_home">           11
      ?<Constant "Flip use UP/DOWN">     17
+     ?<Constant " ">                     2
      ?<Constant "Relay Contrling">      16
      ?<Constant "Relay Online">         13
      ?<Constant "Relay Offline">        14
@@ -2625,13 +2764,13 @@ Warning[Pe177]: function "Smart_home_Motor_Ctl" was declared but never
      ?<Constant "K2:OFF">                7
 
  
- 1 663 bytes in segment BANKED_CODE
+ 1 797 bytes in segment BANKED_CODE
     36 bytes in segment BANK_RELAYS
-   260 bytes in segment XDATA_ROM_C
+   262 bytes in segment XDATA_ROM_C
    208 bytes in segment XDATA_Z
  
- 1 699 bytes of CODE  memory
-   260 bytes of CONST memory
+ 1 833 bytes of CODE  memory
+   262 bytes of CONST memory
    208 bytes of XDATA memory
 
 Errors: none

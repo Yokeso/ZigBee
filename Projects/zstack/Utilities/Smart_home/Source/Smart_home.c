@@ -192,6 +192,7 @@ uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
 
 /*3.18 终端节点的设备详细信息缓存*/
 static uint8 DeviceCnt[Smart_home_MAX_INCLUSTERS];
+static int8 Ctrlcase = 0;    //0用来控制屏幕显示，1控制继电器，2控制电机
 DeviceInfo DeviceList[Smart_home_MAX_INCLUSTERS];                      //设备列表  
 /*********************************************************************************
 //这些似乎会引起内存问题  3.22
@@ -482,13 +483,19 @@ static void Smart_home_Key_add(uint8 Ctrlcase)
     default:    
     case 0:
       HalLcdWriteString( "Flip use UP/DOWN", HAL_LCD_LINE_4 ); 
+      //清除屏幕显示
+      HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
+      HalLcdWriteString( " ", HAL_LCD_LINE_3 );
       break;
     
     case 1:
       HalLcdWriteString( "Relay Contrling", HAL_LCD_LINE_4 ); 
+      //清除屏幕显示
+      HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
+      HalLcdWriteString( " ", HAL_LCD_LINE_3 );
       if(DeviceList[relay].deviceStatus == DEVICE_ONLINE)  //设备在线回显
       {
-        HalLcdWriteString( "Relay Online", HAL_LCD_LINE_1 );
+        HalLcdWriteString( "Relay Online", HAL_LCD_LINE_1 );     
       }
       if(DeviceList[relay].deviceStatus != DEVICE_ONLINE)
       {
@@ -498,6 +505,9 @@ static void Smart_home_Key_add(uint8 Ctrlcase)
     
     case 2:
       HalLcdWriteString( "Motor Contrling", HAL_LCD_LINE_4 );
+      //清除屏幕显示
+      HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
+      HalLcdWriteString( " ", HAL_LCD_LINE_3 );
       if(DeviceList[motor].deviceStatus == DEVICE_ONLINE)  //设备在线回显
       {
         HalLcdWriteString( "Motor Online", HAL_LCD_LINE_1 );
@@ -535,7 +545,6 @@ static void Smart_home_Key_add(uint8 Ctrlcase)
 void Smart_home_HandleKeys( byte shift, byte keys )
 {
   //zAddrType_t txAddr;
-  static int8 Ctrlcase = 0;    //0用来控制屏幕显示，1控制继电器，2控制电机
   static int8 MotorSpeed = 0;
   static uint8 NetWorkAllow = 0;
   /*这里这么设置似乎会出现内存问题
@@ -762,7 +771,19 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
       Relay_addr.addr.shortAddr = pkt->srcAddr.addr.shortAddr;
       
       Relay_addr.endPoint = 1; // 目的节点的端口号
-      
+#if defined ( LCD_SUPPORTED )
+      if(Ctrlcase == 1)
+      {
+        const uint8 cmd =  pkt->cmd.Data[4];
+        //消除抖动
+        Onboard_wait(1000);
+        if((cmd & 0x02) == 0x02) {HalLcdWriteString( "K1:ON", HAL_LCD_LINE_2 );}
+        if((cmd & 0x01) == 0x01) {HalLcdWriteString( "K1:OFF", HAL_LCD_LINE_2 );}
+        if((cmd & 0x20) == 0x20) {HalLcdWriteString( "K2:ON", HAL_LCD_LINE_3 );}
+        if((cmd & 0x10) == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}      
+      }
+  
+#endif 
       DeviceList[relay].data[0] = pkt->cmd.Data[4]; 
       break;
       
@@ -924,7 +945,7 @@ static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed)
 static void Smart_home_Display(uint8 page)
 {
 #if defined LCD_SUPPORTED
-  
+
 #endif // LCD_SUPPORTED  
 }
 

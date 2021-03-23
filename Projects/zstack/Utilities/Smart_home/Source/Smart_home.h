@@ -36,8 +36,6 @@ extern "C"
  * CONSTANTS
  */
 
-// These constants are only for example and should be changed to the
-// device's needs
 #define Smart_home_ENDPOINT           1
 
 #define Smart_home_PROFID             0x0F05
