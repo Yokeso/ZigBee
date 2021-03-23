@@ -42,6 +42,7 @@
          ³öÏÖÎŞ·¨³õÊ¼»¯µÄÎÊÌâ£¬ĞèÒªÏîÄ¿ÖØ¹¹
   3.23
   + Warn ´úÂë³õÊ¼»¯ºó»á²úÉúÖ±½Ó½øÈëkeyµÄÇé¿ö,Ğèdebug
+         OK¼üÎÊÌâÎŞ·¨ĞŞ¸´£¬·ÅÆúÊ¹ÓÃOK¼ü£¬ĞŞ¸ÄÎªCencel×éÍø ½ûÖ¹×éÍø
    
   ¾­µ÷ÊÔ³ÌĞòÎŞbug£¬¿ÉÒÔ½ÓÊÕ¸÷¸ö´«¸ĞÆ÷ÏûÏ¢¡£//3.22
   µ±ÎÒÃ»Ëµ¡£¡£ºÃÏñ³öÁËÄÚ´æÎÊÌâ//3.22
@@ -212,10 +213,6 @@ DeviceInfo *soundVb = DeviceList+Smart_home_CLUSTERID_SOUNDVBMSG;      //ÉùÒôÕğ¶
 #define relay     7     //¼ÌµçÆ÷×´Ì¬
 #define soundVb   8     //ÉùÒôÕğ¶¯
 
-
-/*3.21 LCD ÏÔÊ¾*/
-uint8 LCD_Page;
-
 /*3.14 ÏûÏ¢·¢ËÍ²¿·Ö*/
 /*3.17¶ÌµØÖ·´æ´¢*/
 static afAddrType_t Relay_addr;
@@ -246,7 +243,7 @@ static uint8 Smart_home_RspBuf[SMART_HOME_RSP_CNT];
 
 static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
 static void Smart_home_Key_add(uint8 Ctrlcase);
-static void Smart_home_HandleKeys( uint8 shift, uint8 keys );
+static void Smart_home_HandleKeys( byte shift, byte keys );
 static void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt );
 static void Smart_home_Device_check(void);
 static void SerialApp_Send(void);
@@ -310,7 +307,7 @@ void Smart_home_Init( uint8 task_id )
   HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);
   
   //3.21 ³õÊ¼»¯Ò³ÃæÎª0 µÚÒ»Ò³
-  LCD_Page=0;
+  //LCD_Page=0;
   
   //3.13 Éè±¸ÀëÏß×´Ì¬¼ì²â³õÊ¼»¯£¬³õÊ¼»¯ÎªÀëÏß
   //3.21 ĞŞ¸ÄÎªDeviceList·½Ê½£¬³õÊ¼»¯DeviceCnt
@@ -369,12 +366,12 @@ UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
                (Smart_home_epDesc.endPoint == sentEP) )
           {  
             //3.13 ÔÚÏûÏ¢·¢ËÍÈ·ÈÏ³É¹¦ºóÂÌµÆÉÁË¸Ò»ÏÂ
-            HalLedSet(HAL_LED_2, HAL_LED_MODE_BLINK);
+            HalLedSet(HAL_LED_1, HAL_LED_MODE_BLINK);
           }
           else
           {
             //3.13 ºìµÆÉÁË¸Ò»ÏÂ  Ó²¼ş»¹Ã»ÊµÏÖ
-            HalLedSet(HAL_LED_2, HAL_LED_MODE_BLINK);
+            //HalLedSet(HAL_LED_2, HAL_LED_MODE_BLINK);
           }
           break;
           
@@ -391,6 +388,10 @@ UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
       // Next
       MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( Smart_home_TaskID );
     }
+    
+    // Squash compiler warnings until values are used.
+    (void)sentStatus;
+    (void)sentEP;
     
     return ( events ^ SYS_EVENT_MSG );
   }
@@ -541,19 +542,21 @@ static void Smart_home_Key_add(uint8 Ctrlcase)
  *
  * @return  none
  */
-void Smart_home_HandleKeys( uint8 shift, uint8 keys )
+void Smart_home_HandleKeys( byte shift, byte keys )
 {
   //zAddrType_t txAddr;
   static int8 Ctrlcase = 0;    //0ÓÃÀ´¿ØÖÆÆÁÄ»ÏÔÊ¾£¬1¿ØÖÆ¼ÌµçÆ÷£¬2¿ØÖÆµç»ú
   static uint8 MotorSpeed = 0;
+  static uint8 NetWorkAllow = 0;
   /*ÕâÀïÕâÃ´ÉèÖÃËÆºõ»á³öÏÖÄÚ´æÎÊÌâ
   static uint8 Relay1_on = 0x02;  //Á½¸öÄ¬ÈÏ¶¼ÊÇ¹Ø±Õ
   static uint8 Relay2_on = 0x10;
   */
+  /*3.21 LCD ÏÔÊ¾*/
+  static uint8 LCD_Page  =  0;
   static uint8 Relay1_on = 0;  //Á½¸öÄ¬ÈÏ¶¼ÊÇ¹Ø±Õ
   static uint8 Relay2_on = 0;
   
-  //static char* debug;          //µ÷ÊÔÊä³öÓÃ 
   
   if ( keys & HAL_KEY_SW_1 )  //UP
   {
@@ -647,23 +650,30 @@ void Smart_home_HandleKeys( uint8 shift, uint8 keys )
   
   if ( keys & HAL_KEY_SW_5 )  //OK
   {
-     NLME_PermitJoiningRequest(0xFF); // ×éÍø£¬ÔÊĞíËæÊ±¼ÓÈë
-     HalLedSet(HAL_LED_2, HAL_LED_MODE_ON);
-#if defined ( LCD_SUPPORTED )
-    HalLcdWriteString( "Allow networking", HAL_LCD_LINE_4 );
-#endif
+
   }
   
   if ( keys & HAL_KEY_SW_7 )  //CENCEL
-  /*bug Çé¿öÍ¬ÉÏ*/
   {
-     NLME_PermitJoiningRequest(0x00); // ²»ÔÊĞí×éÍø
-     HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);  
+     if(NetWorkAllow == 0)
+     {
+       NetWorkAllow = 1;
+       NLME_PermitJoiningRequest(0xFF); // ×éÍø£¬ÔÊĞíËæÊ±¼ÓÈë
+       HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
 #if defined ( LCD_SUPPORTED )
-    HalLcdWriteString( "Ban   networking", HAL_LCD_LINE_4 );
+       HalLcdWriteString( "Allow networking", HAL_LCD_LINE_4 );
 #endif
+     }
+     else
+     {
+       NetWorkAllow = 0;
+       NLME_PermitJoiningRequest(0x00); // ²»ÔÊĞí×éÍø
+       HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);  
+#if defined ( LCD_SUPPORTED )
+       HalLcdWriteString( "Ban   networking", HAL_LCD_LINE_4 );
+#endif        
+     }
   }
-
 }
 
 /*********************************************************************

@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         23/Mar/2021  10:55:54 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         23/Mar/2021  13:11:25 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -9,17 +9,17 @@
 #    Calling convention =  xdata reentrant                                    #
 #    Constant location  =  data_rom                                           #
 #    Dptr setup         =  1,16                                               #
-#    Source file        =  D:\毕设\CC2530-smart_home-1\Components\mac\high_le #
-#                          vel\mac_cfg.c                                      #
-#    Command line       =  -f D:\毕设\CC2530-smart_home-1\Projects\zstack\Uti #
-#                          lities\Smart_home\CC2530DB\..\..\..\Tools\CC2530DB #
-#                          \f8wCoord.cfg (-DCPU32MHZ -DROOT=__near_func       #
+#    Source file        =  D:\毕设\CC2530-smart_home\Components\mac\high_leve #
+#                          l\mac_cfg.c                                        #
+#    Command line       =  -f D:\毕设\CC2530-smart_home\Projects\zstack\Utili #
+#                          ties\Smart_home\CC2530DB\..\..\..\Tools\CC2530DB\f #
+#                          8wCoord.cfg (-DCPU32MHZ -DROOT=__near_func         #
 #                          -DMAC_CFG_APP_PENDING_QUEUE=TRUE                   #
 #                          -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8         #
 #                          -DMAC_CFG_RX_MAX=5 -DZDO_COORDINATOR -DRTR_NWK)    #
-#                          -f D:\毕设\CC2530-smart_home-1\Projects\zstack\Uti #
-#                          lities\Smart_home\CC2530DB\..\..\..\Tools\CC2530DB #
-#                          \f8wConfig.cfg (-DZIGBEEPRO -DSECURE=0             #
+#                          -f D:\毕设\CC2530-smart_home\Projects\zstack\Utili #
+#                          ties\Smart_home\CC2530DB\..\..\..\Tools\CC2530DB\f #
+#                          8wConfig.cfg (-DZIGBEEPRO -DSECURE=0               #
 #                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
 #                          -DDEFAULT_CHANLIST=0x02000000                      #
 #                          -DZDAPP_CONFIG_PAN_ID=0x1001                       #
@@ -42,83 +42,82 @@
 #                          __code" -DGENERIC=__generic                        #
 #                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
-#                          -DREJOIN_POLL_RATE=440 D:\毕设\CC2530-smart_home-1 #
-#                          \Components\mac\high_level\mac_cfg.c -D            #
+#                          -DREJOIN_POLL_RATE=440 D:\毕设\CC2530-smart_home\C #
+#                          omponents\mac\high_level\mac_cfg.c -D              #
 #                          LCD_SUPPORTED -D ZDO_COORDINATOR -D xNV_RESTORE    #
 #                          -D xNV_INIT -D xREFLECTOR -D xHAL_UART=TRUE -D     #
-#                          xHAL_UART_TEST -lC D:\毕设\CC2530-smart_home-1\Pro #
-#                          jects\zstack\Utilities\Smart_home\CC2530DB\Coordin #
-#                          atorMB\List\ -lA D:\毕设\CC2530-smart_home-1\Proje #
+#                          xHAL_UART_TEST -lC D:\毕设\CC2530-smart_home\Proje #
 #                          cts\zstack\Utilities\Smart_home\CC2530DB\Coordinat #
-#                          orMB\List\ --diag_suppress Pe001,Pa010 -o          #
-#                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utilit #
-#                          ies\Smart_home\CC2530DB\CoordinatorMB\Obj\ -e      #
+#                          orMB\List\ -lA D:\毕设\CC2530-smart_home\Projects\ #
+#                          zstack\Utilities\Smart_home\CC2530DB\CoordinatorMB #
+#                          \List\ --diag_suppress Pe001,Pa010 -o              #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\CoordinatorMB\Obj\ -e        #
 #                          --no_code_motion --debug --core=plain --dptr=16,1  #
 #                          --data_model=large --code_model=banked             #
 #                          --calling_convention=xdata_reentrant               #
 #                          --place_constants=data_rom --nr_virtual_regs 16    #
-#                          -I D:\毕设\CC2530-smart_home-1\Projects\zstack\Uti #
-#                          lities\Smart_home\CC2530DB\ -I                     #
-#                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utilit #
-#                          ies\Smart_home\CC2530DB\..\Source\ -I              #
-#                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utilit #
-#                          ies\Smart_home\CC2530DB\..\..\..\ZMain\TI2530DB\   #
-#                          -I D:\毕设\CC2530-smart_home-1\Projects\zstack\Uti #
-#                          lities\Smart_home\CC2530DB\..\..\..\..\..\Componen #
-#                          ts\hal\include\ -I D:\毕设\CC2530-smart_home-1\Pro #
-#                          jects\zstack\Utilities\Smart_home\CC2530DB\..\..\. #
-#                          .\..\..\Components\hal\target\CC2530MB\ -I         #
-#                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utilit #
-#                          ies\Smart_home\CC2530DB\..\..\..\..\..\Components\ #
-#                          mac\include\ -I D:\毕设\CC2530-smart_home-1\Projec #
-#                          ts\zstack\Utilities\Smart_home\CC2530DB\..\..\..\. #
-#                          .\..\Components\mac\high_level\ -I                 #
-#                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utilit #
-#                          ies\Smart_home\CC2530DB\..\..\..\..\..\Components\ #
-#                          mac\low_level\srf04\ -I D:\毕设\CC2530-smart_home- #
-#                          1\Projects\zstack\Utilities\Smart_home\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\low_level\srf04\single #
-#                          _chip\ -I D:\毕设\CC2530-smart_home-1\Projects\zst #
-#                          ack\Utilities\Smart_home\CC2530DB\..\..\..\..\..\C #
-#                          omponents\mt\ -I D:\毕设\CC2530-smart_home-1\Proje #
-#                          cts\zstack\Utilities\Smart_home\CC2530DB\..\..\..\ #
-#                          ..\..\Components\osal\include\ -I                  #
-#                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utilit #
-#                          ies\Smart_home\CC2530DB\..\..\..\..\..\Components\ #
-#                          services\saddr\ -I D:\毕设\CC2530-smart_home-1\Pro #
-#                          jects\zstack\Utilities\Smart_home\CC2530DB\..\..\. #
-#                          .\..\..\Components\services\sdata\ -I              #
-#                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utilit #
-#                          ies\Smart_home\CC2530DB\..\..\..\..\..\Components\ #
-#                          stack\af\ -I D:\毕设\CC2530-smart_home-1\Projects\ #
-#                          zstack\Utilities\Smart_home\CC2530DB\..\..\..\..\. #
-#                          .\Components\stack\nwk\ -I                         #
-#                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utilit #
-#                          ies\Smart_home\CC2530DB\..\..\..\..\..\Components\ #
-#                          stack\sapi\ -I D:\毕设\CC2530-smart_home-1\Project #
-#                          s\zstack\Utilities\Smart_home\CC2530DB\..\..\..\.. #
-#                          \..\Components\stack\sec\ -I                       #
-#                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utilit #
-#                          ies\Smart_home\CC2530DB\..\..\..\..\..\Components\ #
-#                          stack\sys\ -I D:\毕设\CC2530-smart_home-1\Projects #
-#                          \zstack\Utilities\Smart_home\CC2530DB\..\..\..\..\ #
-#                          ..\Components\stack\zdo\ -I                        #
-#                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utilit #
-#                          ies\Smart_home\CC2530DB\..\..\..\..\..\Components\ #
-#                          zmac\ -I D:\毕设\CC2530-smart_home-1\Projects\zsta #
+#                          -I D:\毕设\CC2530-smart_home\Projects\zstack\Utili #
+#                          ties\Smart_home\CC2530DB\ -I                       #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\Source\ -I                #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\ZMain\TI2530DB\ -I  #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\ha #
+#                          l\include\ -I D:\毕设\CC2530-smart_home\Projects\z #
+#                          stack\Utilities\Smart_home\CC2530DB\..\..\..\..\.. #
+#                          \Components\hal\target\CC2530MB\ -I                #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\ma #
+#                          c\include\ -I D:\毕设\CC2530-smart_home\Projects\z #
+#                          stack\Utilities\Smart_home\CC2530DB\..\..\..\..\.. #
+#                          \Components\mac\high_level\ -I                     #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\ma #
+#                          c\low_level\srf04\ -I D:\毕设\CC2530-smart_home\Pr #
+#                          ojects\zstack\Utilities\Smart_home\CC2530DB\..\..\ #
+#                          ..\..\..\Components\mac\low_level\srf04\single_chi #
+#                          p\ -I D:\毕设\CC2530-smart_home\Projects\zstack\Ut #
+#                          ilities\Smart_home\CC2530DB\..\..\..\..\..\Compone #
+#                          nts\mt\ -I D:\毕设\CC2530-smart_home\Projects\zsta #
 #                          ck\Utilities\Smart_home\CC2530DB\..\..\..\..\..\Co #
-#                          mponents\zmac\f8w\ -Ohz                            #
-#    List file          =  D:\毕设\CC2530-smart_home-1\Projects\zstack\Utilit #
-#                          ies\Smart_home\CC2530DB\CoordinatorMB\List\mac_cfg #
-#                          .lst                                               #
-#    Object file        =  D:\毕设\CC2530-smart_home-1\Projects\zstack\Utilit #
-#                          ies\Smart_home\CC2530DB\CoordinatorMB\Obj\mac_cfg. #
-#                          r51                                                #
+#                          mponents\osal\include\ -I                          #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\se #
+#                          rvices\saddr\ -I D:\毕设\CC2530-smart_home\Project #
+#                          s\zstack\Utilities\Smart_home\CC2530DB\..\..\..\.. #
+#                          \..\Components\services\sdata\ -I                  #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\st #
+#                          ack\af\ -I D:\毕设\CC2530-smart_home\Projects\zsta #
+#                          ck\Utilities\Smart_home\CC2530DB\..\..\..\..\..\Co #
+#                          mponents\stack\nwk\ -I D:\毕设\CC2530-smart_home\P #
+#                          rojects\zstack\Utilities\Smart_home\CC2530DB\..\.. #
+#                          \..\..\..\Components\stack\sapi\ -I                #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\st #
+#                          ack\sec\ -I D:\毕设\CC2530-smart_home\Projects\zst #
+#                          ack\Utilities\Smart_home\CC2530DB\..\..\..\..\..\C #
+#                          omponents\stack\sys\ -I D:\毕设\CC2530-smart_home\ #
+#                          Projects\zstack\Utilities\Smart_home\CC2530DB\..\. #
+#                          .\..\..\..\Components\stack\zdo\ -I                #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\zm #
+#                          ac\ -I D:\毕设\CC2530-smart_home\Projects\zstack\U #
+#                          tilities\Smart_home\CC2530DB\..\..\..\..\..\Compon #
+#                          ents\zmac\f8w\ -Ohz                                #
+#    List file          =  D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\CoordinatorMB\List\mac_cfg.l #
+#                          st                                                 #
+#    Object file        =  D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\CoordinatorMB\Obj\mac_cfg.r5 #
+#                          1                                                  #
 #                                                                             #
 #                                                                             #
 ###############################################################################
 
-D:\毕设\CC2530-smart_home-1\Components\mac\high_level\mac_cfg.c
+D:\毕设\CC2530-smart_home\Components\mac\high_level\mac_cfg.c
       1          /**************************************************************************************************
       2            Filename:       mac_cfg.c
       3            Revised:        $Date: 2007-10-29 22:37:25 -0700 (Mon, 29 Oct 2007) $

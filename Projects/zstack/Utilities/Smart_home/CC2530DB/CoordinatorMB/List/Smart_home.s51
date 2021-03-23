@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        23/Mar/2021  10:55:49 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        23/Mar/2021  13:12:29 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -9,17 +9,17 @@
 //    Calling convention =  xdata reentrant                                   /
 //    Constant location  =  data_rom                                          /
 //    Dptr setup         =  1,16                                              /
-//    Source file        =  D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\Source\Smart_home.c               /
-//    Command line       =  -f D:\毕设\CC2530-smart_home-1\Projects\zstack\Ut /
-//                          ilities\Smart_home\CC2530DB\..\..\..\Tools\CC2530 /
-//                          DB\f8wCoord.cfg (-DCPU32MHZ -DROOT=__near_func    /
+//    Source file        =  D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\Source\Smart_home.c                 /
+//    Command line       =  -f D:\毕设\CC2530-smart_home\Projects\zstack\Util /
+//                          ities\Smart_home\CC2530DB\..\..\..\Tools\CC2530DB /
+//                          \f8wCoord.cfg (-DCPU32MHZ -DROOT=__near_func      /
 //                          -DMAC_CFG_APP_PENDING_QUEUE=TRUE                  /
 //                          -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8        /
 //                          -DMAC_CFG_RX_MAX=5 -DZDO_COORDINATOR -DRTR_NWK)   /
-//                          -f D:\毕设\CC2530-smart_home-1\Projects\zstack\Ut /
-//                          ilities\Smart_home\CC2530DB\..\..\..\Tools\CC2530 /
-//                          DB\f8wConfig.cfg (-DZIGBEEPRO -DSECURE=0          /
+//                          -f D:\毕设\CC2530-smart_home\Projects\zstack\Util /
+//                          ities\Smart_home\CC2530DB\..\..\..\Tools\CC2530DB /
+//                          \f8wConfig.cfg (-DZIGBEEPRO -DSECURE=0            /
 //                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                 /
 //                          -DDEFAULT_CHANLIST=0x02000000                     /
 //                          -DZDAPP_CONFIG_PAN_ID=0x1001                      /
@@ -42,78 +42,78 @@
 //                          __code" -DGENERIC=__generic                       /
 //                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000       /
 //                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
-//                          -DREJOIN_POLL_RATE=440 D:\毕设\CC2530-smart_home- /
-//                          1\Projects\zstack\Utilities\Smart_home\Source\Sma /
-//                          rt_home.c -D LCD_SUPPORTED -D ZDO_COORDINATOR -D  /
+//                          -DREJOIN_POLL_RATE=440 D:\毕设\CC2530-smart_home\ /
+//                          Projects\zstack\Utilities\Smart_home\Source\Smart /
+//                          _home.c -D LCD_SUPPORTED -D ZDO_COORDINATOR -D    /
 //                          xNV_RESTORE -D xNV_INIT -D xREFLECTOR -D          /
 //                          xHAL_UART=TRUE -D xHAL_UART_TEST -lC              /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\CoordinatorMB\List\ -lA  /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\CoordinatorMB\List\      /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\CoordinatorMB\List\ -lA    /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\CoordinatorMB\List\        /
 //                          --diag_suppress Pe001,Pa010 -o                    /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\CoordinatorMB\Obj\ -e    /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\CoordinatorMB\Obj\ -e      /
 //                          --no_code_motion --debug --core=plain             /
 //                          --dptr=16,1 --data_model=large                    /
 //                          --code_model=banked --calling_convention=xdata_re /
 //                          entrant --place_constants=data_rom                /
 //                          --nr_virtual_regs 16 -I                           /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\ -I                      /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\..\Source\ -I            /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\..\..\..\ZMain\TI2530DB\ /
-//                           -I D:\毕设\CC2530-smart_home-1\Projects\zstack\U /
-//                          tilities\Smart_home\CC2530DB\..\..\..\..\..\Compo /
-//                          nents\hal\include\ -I D:\毕设\CC2530-smart_home-1 /
-//                          \Projects\zstack\Utilities\Smart_home\CC2530DB\.. /
-//                          \..\..\..\..\Components\hal\target\CC2530MB\ -I   /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\..\..\..\..\..\Component /
-//                          s\mac\include\ -I D:\毕设\CC2530-smart_home-1\Pro /
-//                          jects\zstack\Utilities\Smart_home\CC2530DB\..\..\ /
-//                          ..\..\..\Components\mac\high_level\ -I            /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\..\..\..\..\..\Component /
-//                          s\mac\low_level\srf04\ -I                         /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\..\..\..\..\..\Component /
-//                          s\mac\low_level\srf04\single_chip\ -I             /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\..\..\..\..\..\Component /
-//                          s\mt\ -I D:\毕设\CC2530-smart_home-1\Projects\zst /
-//                          ack\Utilities\Smart_home\CC2530DB\..\..\..\..\..\ /
-//                          Components\osal\include\ -I                       /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\..\..\..\..\..\Component /
-//                          s\services\saddr\ -I D:\毕设\CC2530-smart_home-1\ /
-//                          Projects\zstack\Utilities\Smart_home\CC2530DB\..\ /
-//                          ..\..\..\..\Components\services\sdata\ -I         /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\..\..\..\..\..\Component /
-//                          s\stack\af\ -I D:\毕设\CC2530-smart_home-1\Projec /
-//                          ts\zstack\Utilities\Smart_home\CC2530DB\..\..\..\ /
-//                          ..\..\Components\stack\nwk\ -I                    /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\..\..\..\..\..\Component /
-//                          s\stack\sapi\ -I D:\毕设\CC2530-smart_home-1\Proj /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\ -I                        /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\..\Source\ -I              /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\..\..\..\ZMain\TI2530DB\   /
+//                          -I D:\毕设\CC2530-smart_home\Projects\zstack\Util /
+//                          ities\Smart_home\CC2530DB\..\..\..\..\..\Componen /
+//                          ts\hal\include\ -I D:\毕设\CC2530-smart_home\Proj /
 //                          ects\zstack\Utilities\Smart_home\CC2530DB\..\..\. /
-//                          .\..\..\Components\stack\sec\ -I                  /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\..\..\..\..\..\Component /
-//                          s\stack\sys\ -I D:\毕设\CC2530-smart_home-1\Proje /
-//                          cts\zstack\Utilities\Smart_home\CC2530DB\..\..\.. /
-//                          \..\..\Components\stack\zdo\ -I                   /
-//                          D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\..\..\..\..\..\Component /
-//                          s\zmac\ -I D:\毕设\CC2530-smart_home-1\Projects\z /
+//                          .\..\..\Components\hal\target\CC2530MB\ -I        /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\..\..\..\..\..\Components\ /
+//                          mac\include\ -I D:\毕设\CC2530-smart_home\Project /
+//                          s\zstack\Utilities\Smart_home\CC2530DB\..\..\..\. /
+//                          .\..\Components\mac\high_level\ -I                /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\..\..\..\..\..\Components\ /
+//                          mac\low_level\srf04\ -I                           /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\..\..\..\..\..\Components\ /
+//                          mac\low_level\srf04\single_chip\ -I               /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\..\..\..\..\..\Components\ /
+//                          mt\ -I D:\毕设\CC2530-smart_home\Projects\zstack\ /
+//                          Utilities\Smart_home\CC2530DB\..\..\..\..\..\Comp /
+//                          onents\osal\include\ -I                           /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\..\..\..\..\..\Components\ /
+//                          services\saddr\ -I D:\毕设\CC2530-smart_home\Proj /
+//                          ects\zstack\Utilities\Smart_home\CC2530DB\..\..\. /
+//                          .\..\..\Components\services\sdata\ -I             /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\..\..\..\..\..\Components\ /
+//                          stack\af\ -I D:\毕设\CC2530-smart_home\Projects\z /
 //                          stack\Utilities\Smart_home\CC2530DB\..\..\..\..\. /
-//                          .\Components\zmac\f8w\ -Ohz                       /
-//    List file          =  D:\毕设\CC2530-smart_home-1\Projects\zstack\Utili /
-//                          ties\Smart_home\CC2530DB\CoordinatorMB\List\Smart /
-//                          _home.s51                                         /
+//                          .\Components\stack\nwk\ -I                        /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\..\..\..\..\..\Components\ /
+//                          stack\sapi\ -I D:\毕设\CC2530-smart_home\Projects /
+//                          \zstack\Utilities\Smart_home\CC2530DB\..\..\..\.. /
+//                          \..\Components\stack\sec\ -I                      /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\..\..\..\..\..\Components\ /
+//                          stack\sys\ -I D:\毕设\CC2530-smart_home\Projects\ /
+//                          zstack\Utilities\Smart_home\CC2530DB\..\..\..\..\ /
+//                          ..\Components\stack\zdo\ -I                       /
+//                          D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\..\..\..\..\..\Components\ /
+//                          zmac\ -I D:\毕设\CC2530-smart_home\Projects\zstac /
+//                          k\Utilities\Smart_home\CC2530DB\..\..\..\..\..\Co /
+//                          mponents\zmac\f8w\ -Ohz                           /
+//    List file          =  D:\毕设\CC2530-smart_home\Projects\zstack\Utiliti /
+//                          es\Smart_home\CC2530DB\CoordinatorMB\List\Smart_h /
+//                          ome.s51                                           /
 //                                                                            /
 //                                                                            /
 ///////////////////////////////////////////////////////////////////////////////
@@ -161,7 +161,6 @@
         FUNCTION ??Smart_home_Relay_Ctl?relay,0203H
         PUBLIC Coordinator_Msg
         PUBLIC DeviceList
-        PUBLIC LCD_Page
         PUBLIC Smart_home_ClusterList_IN
         PUBLIC Smart_home_ClusterList_OUT
         FUNCTION Smart_home_HandleKeys,021203H
@@ -501,7 +500,7 @@ Smart_home_ProcessEvent SYMBOL "Smart_home_ProcessEvent"
         EXTERN ??osal_start_timerEx?relay
         FUNCTION ??osal_start_timerEx?relay,00H
 
-// D:\毕设\CC2530-smart_home-1\Projects\zstack\Utilities\Smart_home\Source\Smart_home.c
+// D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home.c
 //    1 /**************************************************************************************************
 //    2   文件名：Smart_home.c
 //    3   作 者： 柳成林
@@ -543,94 +542,98 @@ Smart_home_ProcessEvent SYMBOL "Smart_home_ProcessEvent"
 //   39   + 修改 Smart_home_Display()    （屏幕显示，补全）
 //   40          Smart_home_Key_add()     (屏幕显示中的电机与继电器部分加入这里)
 //   41          重写别名方式减少内存损耗
-//   42    
-//   43   经调试程序无bug，可以接收各个传感器消息。//3.22
-//   44   当我没说。。好像出了内存问题//3.22
-//   45 *********************************************************************/
-//   46 
-//   47 /*********************************************************************
-//   48  * INCLUDES
-//   49  */
+//   42          出现无法初始化的问题，需要项目重构
+//   43   3.23
+//   44   + Warn 代码初始化后会产生直接进入key的情况,需debug
+//   45    
+//   46   经调试程序无bug，可以接收各个传感器消息。//3.22
+//   47   当我没说。。好像出了内存问题//3.22
+//   48   项目重构啦！，现在又只有一个小问题了/3.23
+//   49 *********************************************************************/
 //   50 
-//   51 #include "OSAL.h"
-//   52 #include "AF.h"
-//   53 #include "ZDObject.h"
-//   54 #include "ZDProfile.h"
-//   55 #include "nwk_util.h"
-//   56 
-//   57 #include "Smart_home.h"
-//   58 #include "OnBoard.h"
-//   59 
-//   60 #include "DebugTrace.h"
-//   61 #include "string.h"
-//   62 
-//   63 /* HAL */
-//   64 #include "hal_lcd.h"
-//   65 #include "hal_led.h"
-//   66 #include "hal_key.h"
-//   67 #include "hal_uart.h"
-//   68 
-//   69 /*********************************************************************
-//   70  * MACROS
-//   71  */
-//   72 /*设备链接相关设置*/
-//   73 /*判断设备是否在线的最大次数*/
-//   74 #define DEVICE_HEART_BEAT    3
-//   75 #define DEVICE_CHECK_DELAY   5000
-//   76 
-//   77 /*LCD相关设置*/
-//   78 /*单屏显示时常   MS*/
-//   79 #define LCD_DISPLAY_LENGTH   10000
-//   80 #define LCD_DISPLAY_TIMER    3000  //多久更新一次 
-//   81 
-//   82 /*********************************************************************
-//   83  * CONSTANTS
-//   84  */
+//   51 /*********************************************************************
+//   52  * INCLUDES
+//   53  */
+//   54 
+//   55 #include "OSAL.h"
+//   56 #include "AF.h"
+//   57 #include "ZDObject.h"
+//   58 #include "ZDProfile.h"
+//   59 #include "nwk_util.h"
+//   60 
+//   61 #include "Smart_home.h"
+//   62 #include "OnBoard.h"
+//   63 
+//   64 #include "DebugTrace.h"
+//   65 #include "string.h"
+//   66 
+//   67 /* HAL */
+//   68 #include "hal_lcd.h"
+//   69 #include "hal_led.h"
+//   70 #include "hal_key.h"
+//   71 #include "hal_uart.h"
+//   72 
+//   73 /*********************************************************************
+//   74  * MACROS
+//   75  */
+//   76 /*设备链接相关设置*/
+//   77 /*判断设备是否在线的最大次数*/
+//   78 #define DEVICE_HEART_BEAT    3
+//   79 #define DEVICE_CHECK_DELAY   5000
+//   80 
+//   81 /*LCD相关设置*/
+//   82 /*单屏显示时常   MS*/
+//   83 #define LCD_DISPLAY_LENGTH   10000
+//   84 #define LCD_DISPLAY_TIMER    3000  //多久更新一次 
 //   85 
-//   86 #if !defined( SMART_HOME_PORT )
-//   87 #define SMART_HOME_PORT  0
-//   88 #endif
+//   86 /*********************************************************************
+//   87  * CONSTANTS
+//   88  */
 //   89 
-//   90 #if !defined( SMART_HOME_BAUD )
-//   91 #define SMART_HOME_BAUD  HAL_UART_BR_38400
-//   92 //#define SMART_HOME_BAUD  HAL_UART_BR_115200
-//   93 #endif
-//   94 
-//   95 // When the Rx buf space is less than this threshold, invoke the Rx callback.
-//   96 #if !defined( SMART_HOME_THRESH )
-//   97 #define SMART_HOME_THRESH  64
-//   98 #endif
-//   99 
-//  100 #if !defined( SMART_HOME_RX_SZ )
-//  101 #define SMART_HOME_RX_SZ  128
+//   90 #if !defined( SMART_HOME_PORT )
+//   91 #define SMART_HOME_PORT  0
+//   92 #endif
+//   93 
+//   94 #if !defined( SMART_HOME_BAUD )
+//   95 #define SMART_HOME_BAUD  HAL_UART_BR_38400
+//   96 //#define SMART_HOME_BAUD  HAL_UART_BR_115200
+//   97 #endif
+//   98 
+//   99 // When the Rx buf space is less than this threshold, invoke the Rx callback.
+//  100 #if !defined( SMART_HOME_THRESH )
+//  101 #define SMART_HOME_THRESH  64
 //  102 #endif
 //  103 
-//  104 #if !defined( SMART_HOME_TX_SZ )
-//  105 #define SMART_HOME_TX_SZ  128
+//  104 #if !defined( SMART_HOME_RX_SZ )
+//  105 #define SMART_HOME_RX_SZ  128
 //  106 #endif
 //  107 
-//  108 // Millisecs of idle time after a byte is received before invoking Rx callback.
-//  109 #if !defined( SMART_HOME_IDLE )
-//  110 #define SMART_HOME_IDLE  6
-//  111 #endif
-//  112 
-//  113 // Loopback Rx bytes to Tx for throughput testing.
-//  114 #if !defined( SMART_HOME_LOOPBACK )
-//  115 #define SMART_HOME_LOOPBACK  FALSE
-//  116 #endif
-//  117 
-//  118 // This is the max byte count per OTA message.
-//  119 #if !defined( SMART_HOME_TX_MAX )
-//  120 #define SMART_HOME_TX_MAX  80
-//  121 #endif
-//  122 
-//  123 #define SMART_HOME_RSP_CNT  4
-//  124 
-//  125 //3.14 This list should be filled with Application specific Cluster IDs.
+//  108 #if !defined( SMART_HOME_TX_SZ )
+//  109 #define SMART_HOME_TX_SZ  128
+//  110 #endif
+//  111 
+//  112 // Millisecs of idle time after a byte is received before invoking Rx callback.
+//  113 #if !defined( SMART_HOME_IDLE )
+//  114 #define SMART_HOME_IDLE  6
+//  115 #endif
+//  116 
+//  117 // Loopback Rx bytes to Tx for throughput testing.
+//  118 #if !defined( SMART_HOME_LOOPBACK )
+//  119 #define SMART_HOME_LOOPBACK  FALSE
+//  120 #endif
+//  121 
+//  122 // This is the max byte count per OTA message.
+//  123 #if !defined( SMART_HOME_TX_MAX )
+//  124 #define SMART_HOME_TX_MAX  80
+//  125 #endif
+//  126 
+//  127 #define SMART_HOME_RSP_CNT  4
+//  128 
+//  129 //3.14 This list should be filled with Application specific Cluster IDs.
 
         RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
         DATA8
-//  126 const cId_t Smart_home_ClusterList_IN[Smart_home_MAX_INCLUSTERS ] =
+//  130 const cId_t Smart_home_ClusterList_IN[Smart_home_MAX_INCLUSTERS ] =
 Smart_home_ClusterList_IN:
         DATA16
         DW 1
@@ -642,21 +645,21 @@ Smart_home_ClusterList_IN:
         DW 7
         DW 8
         DW 0
-//  127 {
-//  128   Smart_home_CLUSTERID_HUMITMSG,              // 温湿度
-//  129   Smart_home_CLUSTERID_TEMPLIGHTMSG,          // 温度光照
-//  130   Smart_home_CLUSTERID_RFIDMSG,               // 射频卡
-//  131   Smart_home_CLUSTERID_GASFLAMEMSG,           // 烟雾火焰
-//  132   Smart_home_CLUSTERID_INFRAREDMSG,           // 人体红外
-//  133   Smart_home_CLUSTERID_SOUNDVBMSG,            // 声音振动
-//  134   Smart_home_CLUSTERID_MOTORSTATUSMSG,        // 直流电机状态信息
-//  135   Smart_home_CLUSTERID_RELAYSTATUSMSG         // 继电器
-//  136 };
-//  137 
+//  131 {
+//  132   Smart_home_CLUSTERID_HUMITMSG,              // 温湿度
+//  133   Smart_home_CLUSTERID_TEMPLIGHTMSG,          // 温度光照
+//  134   Smart_home_CLUSTERID_RFIDMSG,               // 射频卡
+//  135   Smart_home_CLUSTERID_GASFLAMEMSG,           // 烟雾火焰
+//  136   Smart_home_CLUSTERID_INFRAREDMSG,           // 人体红外
+//  137   Smart_home_CLUSTERID_SOUNDVBMSG,            // 声音振动
+//  138   Smart_home_CLUSTERID_MOTORSTATUSMSG,        // 直流电机状态信息
+//  139   Smart_home_CLUSTERID_RELAYSTATUSMSG         // 继电器
+//  140 };
+//  141 
 
         RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
         DATA8
-//  138 const cId_t Smart_home_ClusterList_OUT[Smart_home_MAX_INCLUSTERS ] =
+//  142 const cId_t Smart_home_ClusterList_OUT[Smart_home_MAX_INCLUSTERS ] =
 Smart_home_ClusterList_OUT:
         DATA16
         DW 11
@@ -668,15 +671,15 @@ Smart_home_ClusterList_OUT:
         DW 0
         DW 0
         DW 0
-//  139 {
-//  140   Smart_home_CLUSTERID_MOTORCTRL,             //直流电机控制
-//  141   Smart_home_CLUSTERID_RELAYCTRL              //继电器控制
-//  142 };
-//  143 
+//  143 {
+//  144   Smart_home_CLUSTERID_MOTORCTRL,             //直流电机控制
+//  145   Smart_home_CLUSTERID_RELAYCTRL              //继电器控制
+//  146 };
+//  147 
 
         RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
         DATA8
-//  144 const SimpleDescriptionFormat_t Smart_home_SimpleDesc =
+//  148 const SimpleDescriptionFormat_t Smart_home_SimpleDesc =
 Smart_home_SimpleDesc:
         DB 1
         DATA16
@@ -691,22 +694,22 @@ Smart_home_SimpleDesc:
         DB 3
         DATA16
         DW Smart_home_ClusterList_OUT
-//  145 {
-//  146   Smart_home_ENDPOINT,              //  int   Endpoint;
-//  147   Smart_home_PROFID,                //  uint16 AppProfId[2];
-//  148   Smart_home_DEVICEID,              //  uint16 AppDeviceId[2];
-//  149   Smart_home_DEVICE_VERSION,        //  int   AppDevVer:4;
-//  150   Smart_home_FLAGS,                 //  int   AppFlags:4;
-//  151   Smart_home_MAX_INCLUSTERS,          //  byte  AppNumInClusters;
-//  152   (cId_t *)Smart_home_ClusterList_IN,  //  byte *pAppInClusterList;
-//  153   Smart_home_MAX_OUTCLUSTERS,          //  byte  AppNumOutClusters;
-//  154   (cId_t *)Smart_home_ClusterList_OUT   //  byte *pAppOutClusterList;
-//  155 };
-//  156 
+//  149 {
+//  150   Smart_home_ENDPOINT,              //  int   Endpoint;
+//  151   Smart_home_PROFID,                //  uint16 AppProfId[2];
+//  152   Smart_home_DEVICEID,              //  uint16 AppDeviceId[2];
+//  153   Smart_home_DEVICE_VERSION,        //  int   AppDevVer:4;
+//  154   Smart_home_FLAGS,                 //  int   AppFlags:4;
+//  155   Smart_home_MAX_INCLUSTERS,          //  byte  AppNumInClusters;
+//  156   (cId_t *)Smart_home_ClusterList_IN,  //  byte *pAppInClusterList;
+//  157   Smart_home_MAX_OUTCLUSTERS,          //  byte  AppNumOutClusters;
+//  158   (cId_t *)Smart_home_ClusterList_OUT   //  byte *pAppOutClusterList;
+//  159 };
+//  160 
 
         RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
         DATA8
-//  157 const endPointDesc_t Smart_home_epDesc =
+//  161 const endPointDesc_t Smart_home_epDesc =
 Smart_home_epDesc:
         DB 1
         DATA16
@@ -714,86 +717,76 @@ Smart_home_epDesc:
         DW Smart_home_SimpleDesc
         DATA8
         DB 0
-//  158 {
-//  159   Smart_home_ENDPOINT,
-//  160   &Smart_home_TaskID,
-//  161   (SimpleDescriptionFormat_t *)&Smart_home_SimpleDesc,
-//  162   noLatencyReqs
-//  163 };
-//  164 
-//  165 /*********************************************************************
-//  166  * TYPEDEFS
-//  167  */
+//  162 {
+//  163   Smart_home_ENDPOINT,
+//  164   &Smart_home_TaskID,
+//  165   (SimpleDescriptionFormat_t *)&Smart_home_SimpleDesc,
+//  166   noLatencyReqs
+//  167 };
 //  168 
 //  169 /*********************************************************************
-//  170  * GLOBAL VARIABLES
+//  170  * TYPEDEFS
 //  171  */
 //  172 
+//  173 /*********************************************************************
+//  174  * GLOBAL VARIABLES
+//  175  */
+//  176 
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//  173 uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
+//  177 uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
 Smart_home_TaskID:
         DS 1
         REQUIRE __INIT_XDATA_Z
-//  174 
-//  175 /*********************************************************************
-//  176  * EXTERNAL VARIABLES
-//  177  */
 //  178 
 //  179 /*********************************************************************
-//  180  * EXTERNAL FUNCTIONS
+//  180  * EXTERNAL VARIABLES
 //  181  */
 //  182 
 //  183 /*********************************************************************
-//  184  * LOCAL VARIABLES
+//  184  * EXTERNAL FUNCTIONS
 //  185  */
 //  186 
-//  187 /*3.18 终端节点的设备详细信息缓存*/
+//  187 /*********************************************************************
+//  188  * LOCAL VARIABLES
+//  189  */
+//  190 
+//  191 /*3.18 终端节点的设备详细信息缓存*/
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//  188 static uint8 DeviceCnt[Smart_home_MAX_INCLUSTERS];
+//  192 static uint8 DeviceCnt[Smart_home_MAX_INCLUSTERS];
 DeviceCnt:
         DS 9
         REQUIRE __INIT_XDATA_Z
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//  189 DeviceInfo DeviceList[Smart_home_MAX_INCLUSTERS];                      //设备列表  
+//  193 DeviceInfo DeviceList[Smart_home_MAX_INCLUSTERS];                      //设备列表  
 DeviceList:
         DS 63
         REQUIRE __INIT_XDATA_Z
-//  190 /*********************************************************************************
-//  191 //这些似乎会引起内存问题  3.22
-//  192 DeviceInfo *Humit = DeviceList+Smart_home_CLUSTERID_HUMITMSG;          //温湿度缓存
-//  193 DeviceInfo *TempLight = DeviceList+Smart_home_CLUSTERID_TEMPLIGHTMSG;  // 温度光照缓存
-//  194 DeviceInfo *RfID = DeviceList+Smart_home_CLUSTERID_RFIDMSG;            // RFID 信息缓存
-//  195 DeviceInfo *gasFlame = DeviceList+Smart_home_CLUSTERID_GASFLAMEMSG;    //气体火焰缓存
-//  196 DeviceInfo *infrared = DeviceList+Smart_home_CLUSTERID_INFRAREDMSG;    //人体红外
-//  197 DeviceInfo *motor = DeviceList+Smart_home_CLUSTERID_MOTORSTATUSMSG;     //电机状态
-//  198 DeviceInfo *relay = DeviceList+Smart_home_CLUSTERID_RELAYSTATUSMSG;    //继电器状态
-//  199 DeviceInfo *soundVb = DeviceList+Smart_home_CLUSTERID_SOUNDVBMSG;      //声音震动
-//  200 修改如下
-//  201 ***********************************************************************************/
-//  202 #define Humit     1     //温湿度缓存
-//  203 #define TempLight 2     // 温度光照缓存
-//  204 #define RfID      3     // RFID 信息缓存
-//  205 #define gasFlame  4     //气体火焰缓存
-//  206 #define infrared  5     //人体红外
-//  207 #define motor     6     //电机状态
-//  208 #define relay     7     //继电器状态
-//  209 #define soundVb   8     //声音震动
-//  210 
-//  211 
-//  212 /*3.21 LCD 显示*/
-
-        RSEG XDATA_Z:XDATA:NOROOT(0)
-        DATA8
-//  213 uint8 LCD_Page;
-LCD_Page:
-        DS 1
-        REQUIRE __INIT_XDATA_Z
+//  194 /*********************************************************************************
+//  195 //这些似乎会引起内存问题  3.22
+//  196 DeviceInfo *Humit = DeviceList+Smart_home_CLUSTERID_HUMITMSG;          //温湿度缓存
+//  197 DeviceInfo *TempLight = DeviceList+Smart_home_CLUSTERID_TEMPLIGHTMSG;  // 温度光照缓存
+//  198 DeviceInfo *RfID = DeviceList+Smart_home_CLUSTERID_RFIDMSG;            // RFID 信息缓存
+//  199 DeviceInfo *gasFlame = DeviceList+Smart_home_CLUSTERID_GASFLAMEMSG;    //气体火焰缓存
+//  200 DeviceInfo *infrared = DeviceList+Smart_home_CLUSTERID_INFRAREDMSG;    //人体红外
+//  201 DeviceInfo *motor = DeviceList+Smart_home_CLUSTERID_MOTORSTATUSMSG;     //电机状态
+//  202 DeviceInfo *relay = DeviceList+Smart_home_CLUSTERID_RELAYSTATUSMSG;    //继电器状态
+//  203 DeviceInfo *soundVb = DeviceList+Smart_home_CLUSTERID_SOUNDVBMSG;      //声音震动
+//  204 修改如下
+//  205 ***********************************************************************************/
+//  206 #define Humit     1     //温湿度缓存
+//  207 #define TempLight 2     // 温度光照缓存
+//  208 #define RfID      3     // RFID 信息缓存
+//  209 #define gasFlame  4     //气体火焰缓存
+//  210 #define infrared  5     //人体红外
+//  211 #define motor     6     //电机状态
+//  212 #define relay     7     //继电器状态
+//  213 #define soundVb   8     //声音震动
 //  214 
 //  215 /*3.14 消息发送部分*/
 //  216 /*3.17短地址存储*/
@@ -855,7 +848,7 @@ MotorTransID:
 //  242 
 //  243 static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
 //  244 static void Smart_home_Key_add(uint8 Ctrlcase);
-//  245 static void Smart_home_HandleKeys( uint8 shift, uint8 keys );
+//  245 static void Smart_home_HandleKeys( byte shift, byte keys );
 //  246 static void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt );
 //  247 static void Smart_home_Device_check(void);
 //  248 static void SerialApp_Send(void);
@@ -1142,19 +1135,17 @@ Smart_home_Init:
 //  305   NLME_PermitJoiningRequest(0x00);
 ??CrossCallReturnLabel_46:
         ; Setup parameters for call to function NLME_PermitJoiningRequest
+        MOV     R1,#0x0
         LCALL   ?Subroutine15 & 0xFFFF
 //  306   HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);
 //  307   
 //  308   //3.21 初始化页面为0 第一页
-//  309   LCD_Page=0;
-??CrossCallReturnLabel_27:
-        MOV     DPTR,#LCD_Page
-        CLR     A
-        MOVX    @DPTR,A
+//  309   //LCD_Page=0;
 //  310   
 //  311   //3.13 设备离线状态检测初始化，初始化为离线
 //  312   //3.21 修改为DeviceList方式，初始化DeviceCnt
 //  313   for(DeviceNum=1;DeviceNum<Smart_home_MAX_INCLUSTERS;DeviceNum++) //只初始化终端
+??CrossCallReturnLabel_27:
         MOV     R5,#0x1
 //  314   {
 //  315     DeviceList[DeviceNum].deviceid = DeviceNum;
@@ -1437,12 +1428,12 @@ Smart_home_ProcessEvent:
 //  365                (Smart_home_epDesc.endPoint == sentEP) )
 //  366           {  
 //  367             //3.13 在消息发送确认成功后绿灯闪烁一下
-//  368             HalLedSet(HAL_LED_2, HAL_LED_MODE_BLINK);
+//  368             HalLedSet(HAL_LED_1, HAL_LED_MODE_BLINK);
 //  369           }
 //  370           else
 //  371           {
 //  372             //3.13 红灯闪烁一下  硬件还没实现
-//  373             HalLedSet(HAL_LED_2, HAL_LED_MODE_BLINK);
+//  373             //HalLedSet(HAL_LED_2, HAL_LED_MODE_BLINK);
 //  374           }
 //  375           break;
 //  376           
@@ -1460,21 +1451,25 @@ Smart_home_ProcessEvent:
 //  388       MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( Smart_home_TaskID );
 //  389     }
 //  390     
-//  391     return ( events ^ SYS_EVENT_MSG );
-//  392   }
-//  393 
-//  394   if ( events & SMART_HOME_SEND_MSG_EVT )
+//  391     // Squash compiler warnings until values are used.
+//  392     (void)sentStatus;
+//  393     (void)sentEP;
+//  394     
+//  395     return ( events ^ SYS_EVENT_MSG );
+//  396   }
+//  397 
+//  398   if ( events & SMART_HOME_SEND_MSG_EVT )
         MOV     A,R6
         MOV     C,0xE0 /* A   */.0
         JC      $+5
         LJMP    ??Smart_home_ProcessEvent_1 & 0xFFFF
-//  395   {
-//  396     //Smart_home_Send();
-//  397     return ( events ^ SMART_HOME_SEND_MSG_EVT );
+//  399   {
+//  400     //Smart_home_Send();
+//  401     return ( events ^ SMART_HOME_SEND_MSG_EVT );
         XRL     A,#0x1
         MOV     R2,A
         LJMP    ??Smart_home_ProcessEvent_2 & 0xFFFF
-//  398   }
+//  402   }
 ??Smart_home_ProcessEvent_3:
         ; Setup parameters for call to function Smart_home_ProcessMSGCmd
         LCALL   ??Smart_home_ProcessMSGCmd?relay
@@ -1636,9 +1631,21 @@ Smart_home_ProcessEvent:
         LCALL   ??Smart_home_HandleKeys?relay
         LJMP    ??Smart_home_ProcessEvent_4 & 0xFFFF
 ??Smart_home_ProcessEvent_8:
+        INC     DPTR
+        MOVX    A,@DPTR
+        JZ      $+5
+        LJMP    ??Smart_home_ProcessEvent_4 & 0xFFFF
+        MOV     DPL,R2
+        MOV     DPH,R3
+        INC     DPTR
+        INC     DPTR
+        MOVX    A,@DPTR
+        XRL     A,#0x1
+        JZ      $+5
+        LJMP    ??Smart_home_ProcessEvent_4 & 0xFFFF
         ; Setup parameters for call to function HalLedSet
         MOV     R2,#0x2
-        MOV     R1,#0x2
+        MOV     R1,#0x1
         SJMP    ??Smart_home_ProcessEvent_14
 ??Smart_home_ProcessEvent_5:
         MOV     A,R6
@@ -1648,13 +1655,13 @@ Smart_home_ProcessEvent:
 ??Smart_home_ProcessEvent_15:
         MOV     R3,A
         SJMP    ??Smart_home_ProcessEvent_2
-//  399   
-//  400   if ( events & SMART_HOME_DEVICE_CHECK_EVT )  //终端设备检查事件
+//  403   
+//  404   if ( events & SMART_HOME_DEVICE_CHECK_EVT )  //终端设备检查事件
 ??Smart_home_ProcessEvent_1:
         ANL     A,#0x80
         JZ      ??Smart_home_ProcessEvent_16
-//  401   {
-//  402     Smart_home_Device_check();  //调用终端设备检查函数
+//  405   {
+//  406     Smart_home_Device_check();  //调用终端设备检查函数
         MOV     DPTR,#??DeviceID
         MOV     A,#0x1
         MOVX    @DPTR,A
@@ -1693,12 +1700,12 @@ Smart_home_ProcessEvent:
         CLR     C
         SUBB    A,#0x9
         JC      ??Smart_home_ProcessEvent_17
-//  403     
-//  404     osal_start_timerEx(Smart_home_TaskID,SMART_HOME_DEVICE_CHECK_EVT,
-//  405                        DEVICE_CHECK_DELAY);
+//  407     
+//  408     osal_start_timerEx(Smart_home_TaskID,SMART_HOME_DEVICE_CHECK_EVT,
+//  409                        DEVICE_CHECK_DELAY);
         ; Setup parameters for call to function osal_start_timerEx
         LCALL   ?Subroutine11 & 0xFFFF
-//  406     return (events ^ SMART_HOME_DEVICE_CHECK_EVT);
+//  410     return (events ^ SMART_HOME_DEVICE_CHECK_EVT);
 ??CrossCallReturnLabel_47:
         MOV     A,R6
         XRL     A,#0x80
@@ -1716,19 +1723,19 @@ Smart_home_ProcessEvent:
         MUL     AB
         MOV     R0,A
         LCALL   ??Subroutine23_0 & 0xFFFF
-//  407   }
+//  411   }
 ??CrossCallReturnLabel_43:
         CLR     A
         SJMP    ??Smart_home_ProcessEvent_20
-//  408   
-//  409   if( events & SMART_HOME_DISPLAY_EVT )
+//  412   
+//  413   if( events & SMART_HOME_DISPLAY_EVT )
 ??Smart_home_ProcessEvent_16:
         MOV     A,R6
         ANL     A,#0x10
         JZ      ??Smart_home_ProcessEvent_22
-//  410   {
-//  411     //Smart_home_Display( dispPage);
-//  412     osal_start_timerEx( Smart_home_TaskID,events & SMART_HOME_DISPLAY_EVT,LCD_DISPLAY_TIMER);
+//  414   {
+//  415     //Smart_home_Display( dispPage);
+//  416     osal_start_timerEx( Smart_home_TaskID,events & SMART_HOME_DISPLAY_EVT,LCD_DISPLAY_TIMER);
         ; Setup parameters for call to function osal_start_timerEx
         MOV     R4,#-0x48
         MOV     R5,#0xb
@@ -1736,14 +1743,14 @@ Smart_home_ProcessEvent:
         ANL     A,#0x10
         MOV     R2,A
         LCALL   ??Subroutine24_0 & 0xFFFF
-//  413     return (events ^ SMART_HOME_DISPLAY_EVT);
+//  417     return (events ^ SMART_HOME_DISPLAY_EVT);
 ??CrossCallReturnLabel_49:
         MOV     A,R6
         XRL     A,#0x10
         SJMP    ??Smart_home_ProcessEvent_21
-//  414   }
-//  415 
-//  416   return ( 0 );  // Discard unknown events.
+//  418   }
+//  419 
+//  420   return ( 0 );  // Discard unknown events.
 ??Smart_home_ProcessEvent_22:
         MOV     R2,#0x0
         MOV     R3,#0x0
@@ -1751,7 +1758,7 @@ Smart_home_ProcessEvent:
         MOV     R7,#0x6
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock2
-//  417 }
+//  421 }
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
 ?Subroutine14:
@@ -2170,78 +2177,78 @@ Smart_home_ProcessEvent:
         CFI EndBlock cfiCond24
         CFI EndBlock cfiCond25
         CFI EndBlock cfiPicker26
-//  418 
-//  419 /*********************************************************************
-//  420  * @fn      Smart_home_ProcessZDOMsgs()
-//  421  *
-//  422  * @brief   Process response messages
-//  423  *
-//  424  * @param   none
+//  422 
+//  423 /*********************************************************************
+//  424  * @fn      Smart_home_ProcessZDOMsgs()
 //  425  *
-//  426  * @return  none
-//  427  */
-//  428 static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
-//  429 {
-//  430   switch ( inMsg->clusterID )
-//  431   {
-//  432     case End_Device_Bind_rsp:
-//  433       if ( ZDO_ParseBindRsp( inMsg ) == ZSuccess )
-//  434       {
-//  435         // Light LED
-//  436         HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
-//  437       }
-//  438 #if defined(BLINK_LEDS)
-//  439       else
-//  440       {
-//  441         // Flash LED to show failure
-//  442         HalLedSet ( HAL_LED_4, HAL_LED_MODE_FLASH );
-//  443       }
-//  444 #endif
-//  445       break;
-//  446       
-//  447     case Match_Desc_rsp:
-//  448       {
-//  449         ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
-//  450         if ( pRsp )
-//  451         {
-//  452           if ( pRsp->status == ZSuccess && pRsp->cnt )
-//  453           {
-//  454             /*
-//  455             Smart_home_TxAddr.addrMode = (afAddrMode_t)Addr16Bit;
-//  456             Smart_home_TxAddr.addr.shortAddr = pRsp->nwkAddr;
-//  457             // Take the first endpoint, Can be changed to search through endpoints
-//  458             Smart_home_TxAddr.endPoint = pRsp->epList[0];
-//  459             */
-//  460             
-//  461             // Light LED
-//  462             HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
-//  463           }
-//  464           osal_mem_free( pRsp );
-//  465         }
-//  466       }
-//  467       break;
-//  468   }
-//  469 }
-//  470 
-//  471 /*********************************************************************
-//  472  * @fn      Smart_home_Key_add
-//  473  *
-//  474  * @brief   3.21新增，用来标识目前处于的控制状态，是附加项
-//  475  *          0 控制屏幕 1 控制继电器 2 控制电机
-//  476  *            
+//  426  * @brief   Process response messages
+//  427  *
+//  428  * @param   none
+//  429  *
+//  430  * @return  none
+//  431  */
+//  432 static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
+//  433 {
+//  434   switch ( inMsg->clusterID )
+//  435   {
+//  436     case End_Device_Bind_rsp:
+//  437       if ( ZDO_ParseBindRsp( inMsg ) == ZSuccess )
+//  438       {
+//  439         // Light LED
+//  440         HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
+//  441       }
+//  442 #if defined(BLINK_LEDS)
+//  443       else
+//  444       {
+//  445         // Flash LED to show failure
+//  446         HalLedSet ( HAL_LED_4, HAL_LED_MODE_FLASH );
+//  447       }
+//  448 #endif
+//  449       break;
+//  450       
+//  451     case Match_Desc_rsp:
+//  452       {
+//  453         ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
+//  454         if ( pRsp )
+//  455         {
+//  456           if ( pRsp->status == ZSuccess && pRsp->cnt )
+//  457           {
+//  458             /*
+//  459             Smart_home_TxAddr.addrMode = (afAddrMode_t)Addr16Bit;
+//  460             Smart_home_TxAddr.addr.shortAddr = pRsp->nwkAddr;
+//  461             // Take the first endpoint, Can be changed to search through endpoints
+//  462             Smart_home_TxAddr.endPoint = pRsp->epList[0];
+//  463             */
+//  464             
+//  465             // Light LED
+//  466             HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
+//  467           }
+//  468           osal_mem_free( pRsp );
+//  469         }
+//  470       }
+//  471       break;
+//  472   }
+//  473 }
+//  474 
+//  475 /*********************************************************************
+//  476  * @fn      Smart_home_Key_add
 //  477  *
-//  478  * @param   Ctrlcase 目前的控制号
-//  479  *
-//  480  * @return  屏幕回显
-//  481  */
+//  478  * @brief   3.21新增，用来标识目前处于的控制状态，是附加项
+//  479  *          0 控制屏幕 1 控制继电器 2 控制电机
+//  480  *            
+//  481  *
+//  482  * @param   Ctrlcase 目前的控制号
+//  483  *
+//  484  * @return  屏幕回显
+//  485  */
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  482 static void Smart_home_Key_add(uint8 Ctrlcase)
+//  486 static void Smart_home_Key_add(uint8 Ctrlcase)
 Smart_home_Key_add:
         CFI Block cfiBlock27 Using cfiCommon0
         CFI Function Smart_home_Key_add
         CODE
-//  483 {
+//  487 {
         FUNCALL Smart_home_Key_add, HalLcdWriteString
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -2335,132 +2342,132 @@ Smart_home_Key_add:
         ; Saved register size: 9
         ; Auto size: 0
         MOV     A,R1
-//  484 #if defined ( LCD_SUPPORTED )
-//  485   switch(Ctrlcase)
+//  488 #if defined ( LCD_SUPPORTED )
+//  489   switch(Ctrlcase)
         DEC     A
         JZ      ??Smart_home_Key_add_0
         DEC     A
         MOV     R1,#0x4
         JZ      ??Smart_home_Key_add_1
-//  486   {
-//  487     default:    
-//  488     case 0:
-//  489       HalLcdWriteString( "Flip use UP/DOWN", HAL_LCD_LINE_4 ); 
+//  490   {
+//  491     default:    
+//  492     case 0:
+//  493       HalLcdWriteString( "Flip use UP/DOWN", HAL_LCD_LINE_4 ); 
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R2,#`?<Constant "Flip use UP/DOWN">` & 0xff
         MOV     R3,#(`?<Constant "Flip use UP/DOWN">` >> 8) & 0xff
         SJMP    ??Smart_home_Key_add_2
-//  490       break;
-//  491     
-//  492     case 1:
-//  493       HalLcdWriteString( "Relay Contrling", HAL_LCD_LINE_4 ); 
+//  494       break;
+//  495     
+//  496     case 1:
+//  497       HalLcdWriteString( "Relay Contrling", HAL_LCD_LINE_4 ); 
 ??Smart_home_Key_add_0:
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,#0x4
         MOV     R2,#`?<Constant "Relay Contrling">` & 0xff
         MOV     R3,#(`?<Constant "Relay Contrling">` >> 8) & 0xff
         LCALL   ??HalLcdWriteString?relay
-//  494       if(DeviceList[relay].deviceStatus == DEVICE_ONLINE)  //设备在线回显
+//  498       if(DeviceList[relay].deviceStatus == DEVICE_ONLINE)  //设备在线回显
         MOV     DPTR,#DeviceList + 50
         MOVX    A,@DPTR
         XRL     A,#0x1
         JNZ     ??Smart_home_Key_add_3
-//  495       {
-//  496         HalLcdWriteString( "Relay Online", HAL_LCD_LINE_1 );
+//  499       {
+//  500         HalLcdWriteString( "Relay Online", HAL_LCD_LINE_1 );
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,#0x1
         MOV     R2,#`?<Constant "Relay Online">` & 0xff
         MOV     R3,#(`?<Constant "Relay Online">` >> 8) & 0xff
         LCALL   ??HalLcdWriteString?relay
-//  497       }
-//  498       if(DeviceList[relay].deviceStatus != DEVICE_ONLINE)
+//  501       }
+//  502       if(DeviceList[relay].deviceStatus != DEVICE_ONLINE)
 ??Smart_home_Key_add_3:
         MOV     DPTR,#DeviceList + 50
         MOVX    A,@DPTR
         XRL     A,#0x1
         JZ      ??Smart_home_Key_add_4
-//  499       {
-//  500         HalLcdWriteString( "Relay Offline", HAL_LCD_LINE_1 );      
+//  503       {
+//  504         HalLcdWriteString( "Relay Offline", HAL_LCD_LINE_1 );      
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,#0x1
         MOV     R2,#`?<Constant "Relay Offline">` & 0xff
         MOV     R3,#(`?<Constant "Relay Offline">` >> 8) & 0xff
         SJMP    ??Smart_home_Key_add_2
-//  501       }
-//  502       break;
-//  503     
-//  504     case 2:
-//  505       HalLcdWriteString( "Motor Contrling", HAL_LCD_LINE_4 );
+//  505       }
+//  506       break;
+//  507     
+//  508     case 2:
+//  509       HalLcdWriteString( "Motor Contrling", HAL_LCD_LINE_4 );
 ??Smart_home_Key_add_1:
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R2,#`?<Constant "Motor Contrling">` & 0xff
         MOV     R3,#(`?<Constant "Motor Contrling">` >> 8) & 0xff
         LCALL   ??HalLcdWriteString?relay
-//  506       if(DeviceList[motor].deviceStatus == DEVICE_ONLINE)  //设备在线回显
+//  510       if(DeviceList[motor].deviceStatus == DEVICE_ONLINE)  //设备在线回显
         MOV     DPTR,#DeviceList + 43
         MOVX    A,@DPTR
         XRL     A,#0x1
         JNZ     ??Smart_home_Key_add_5
-//  507       {
-//  508         HalLcdWriteString( "Motor Online", HAL_LCD_LINE_1 );
+//  511       {
+//  512         HalLcdWriteString( "Motor Online", HAL_LCD_LINE_1 );
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,#0x1
         MOV     R2,#`?<Constant "Motor Online">` & 0xff
         MOV     R3,#(`?<Constant "Motor Online">` >> 8) & 0xff
         LCALL   ??HalLcdWriteString?relay
-//  509       }
-//  510       if(DeviceList[motor].deviceStatus != DEVICE_ONLINE)
+//  513       }
+//  514       if(DeviceList[motor].deviceStatus != DEVICE_ONLINE)
 ??Smart_home_Key_add_5:
         MOV     DPTR,#DeviceList + 43
         MOVX    A,@DPTR
         XRL     A,#0x1
         JZ      ??Smart_home_Key_add_4
-//  511       {
-//  512         HalLcdWriteString( "Motor Offline", HAL_LCD_LINE_1 );      
+//  515       {
+//  516         HalLcdWriteString( "Motor Offline", HAL_LCD_LINE_1 );      
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,#0x1
         MOV     R2,#`?<Constant "Motor Offline">` & 0xff
         MOV     R3,#(`?<Constant "Motor Offline">` >> 8) & 0xff
 ??Smart_home_Key_add_2:
         LCALL   ??HalLcdWriteString?relay
-//  513       }      
-//  514       break;
-//  515 #endif     
-//  516   }
-//  517 }
+//  517       }      
+//  518       break;
+//  519 #endif     
+//  520   }
+//  521 }
 ??Smart_home_Key_add_4:
         LJMP    ?Subroutine0 & 0xFFFF
         CFI EndBlock cfiBlock27
-//  518 
-//  519 /*********************************************************************
-//  520  * @fn      Smart_home_HandleKeys
-//  521  *
-//  522  * @brief   设置按键事件
-//  523  *          目前事件设置    3.19
-//  524  *
-//  525  *          HAL_KEY_SW_1--UP     (上翻一页)
-//  526  *          HAL_KEY_SW_2--RIGHT  (选项向右)
-//  527  *          HAL_KEY_SW_3--DOWN   (下翻一页)
-//  528  *          HAL_KEY_SW_4--LEFT   (选项向左)
-//  529  *          HAL_KEY_SW_5--OK     (组网开)
-//  530  *          HAL_KEY_SW_7--CANCEL (组网关) 
-//  531  * + 3.21 新增  选项总共有3种，控制屏幕显示，控制继电器和控制电机
-//  532  *              控制继电器时 UP控制1，DOWN控制2
-//  533  *              控制电机时   UP加速， DOWN减速
-//  534  *
-//  535  * @param   shift - true if in shift/alt.
-//  536  * @param   keys  - bit field for key events.
-//  537  *
-//  538  * @return  none
-//  539  */
+//  522 
+//  523 /*********************************************************************
+//  524  * @fn      Smart_home_HandleKeys
+//  525  *
+//  526  * @brief   设置按键事件
+//  527  *          目前事件设置    3.19
+//  528  *
+//  529  *          HAL_KEY_SW_1--UP     (上翻一页)
+//  530  *          HAL_KEY_SW_2--RIGHT  (选项向右)
+//  531  *          HAL_KEY_SW_3--DOWN   (下翻一页)
+//  532  *          HAL_KEY_SW_4--LEFT   (选项向左)
+//  533  *          HAL_KEY_SW_5--OK     (组网开)
+//  534  *          HAL_KEY_SW_7--CANCEL (组网关) 
+//  535  * + 3.21 新增  选项总共有3种，控制屏幕显示，控制继电器和控制电机
+//  536  *              控制继电器时 UP控制1，DOWN控制2
+//  537  *              控制电机时   UP加速， DOWN减速
+//  538  *
+//  539  * @param   shift - true if in shift/alt.
+//  540  * @param   keys  - bit field for key events.
+//  541  *
+//  542  * @return  none
+//  543  */
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  540 void Smart_home_HandleKeys( uint8 shift, uint8 keys )
+//  544 void Smart_home_HandleKeys( byte shift, byte keys )
 Smart_home_HandleKeys:
         CFI Block cfiBlock28 Using cfiCommon0
         CFI Function Smart_home_HandleKeys
         CODE
-//  541 {
+//  545 {
         FUNCALL Smart_home_HandleKeys, Smart_home_Relay_Ctl
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -2610,35 +2617,37 @@ Smart_home_HandleKeys:
         ; Auto size: 0
         MOV     A,R2
         MOV     R6,A
-//  542   //zAddrType_t txAddr;
-//  543   static int8 Ctrlcase = 0;    //0用来控制屏幕显示，1控制继电器，2控制电机
-//  544   static uint8 MotorSpeed = 0;
-//  545   /*这里这么设置似乎会出现内存问题
-//  546   static uint8 Relay1_on = 0x02;  //两个默认都是关闭
-//  547   static uint8 Relay2_on = 0x10;
-//  548   */
-//  549   static uint8 Relay1_on = 0;  //两个默认都是关闭
-//  550   static uint8 Relay2_on = 0;
-//  551   
-//  552   //static char* debug;          //调试输出用 
-//  553   
-//  554   if ( keys & HAL_KEY_SW_1 )  //UP
+//  546   //zAddrType_t txAddr;
+//  547   static int8 Ctrlcase = 0;    //0用来控制屏幕显示，1控制继电器，2控制电机
+//  548   static uint8 MotorSpeed = 0;
+//  549   static uint8 NetWorkAllow = 0;
+//  550   /*这里这么设置似乎会出现内存问题
+//  551   static uint8 Relay1_on = 0x02;  //两个默认都是关闭
+//  552   static uint8 Relay2_on = 0x10;
+//  553   */
+//  554   /*3.21 LCD 显示*/
+//  555   static uint8 LCD_Page  =  0;
+//  556   static uint8 Relay1_on = 0;  //两个默认都是关闭
+//  557   static uint8 Relay2_on = 0;
+//  558   
+//  559   
+//  560   if ( keys & HAL_KEY_SW_1 )  //UP
         MOV     C,0xE0 /* A   */.0
         JNC     ??Smart_home_HandleKeys_0
-//  555   {
-//  556     switch(Ctrlcase)
+//  561   {
+//  562     switch(Ctrlcase)
         MOV     DPTR,#??Ctrlcase
         MOVX    A,@DPTR
         DEC     A
         JZ      ??Smart_home_HandleKeys_1
         DEC     A
         JZ      ??Smart_home_HandleKeys_2
-//  557     {
-//  558       default:    
-//  559       case 0:
-//  560       {
-//  561         if(LCD_Page < 3)       {LCD_Page++;}
-        MOV     DPTR,#LCD_Page
+//  563     {
+//  564       default:    
+//  565       case 0:
+//  566       {
+//  567         if(LCD_Page < 3)       {LCD_Page++;}
+        MOV     DPTR,#??LCD_Page
         MOVX    A,@DPTR
         CLR     C
         SUBB    A,#0x3
@@ -2646,7 +2655,7 @@ Smart_home_HandleKeys:
         MOVX    A,@DPTR
         INC     A
         MOVX    @DPTR,A
-//  562         if(LCD_Page > 2)       {LCD_Page=0;}
+//  568         if(LCD_Page > 2)       {LCD_Page=0;}
 ??Smart_home_HandleKeys_3:
         MOVX    A,@DPTR
         CLR     C
@@ -2654,13 +2663,13 @@ Smart_home_HandleKeys:
         JC      ??Smart_home_HandleKeys_0
         CLR     A
         SJMP    ??Smart_home_HandleKeys_4
-//  563         Smart_home_Display(LCD_Page);
-//  564         break;
-//  565       }
-//  566       case 1:
-//  567       {  
-//  568         uint8 switch1;
-//  569         if(Relay1_on == 0)  {Relay1_on = 1 ; switch1 = 0x02;}
+//  569         Smart_home_Display(LCD_Page);
+//  570         break;
+//  571       }
+//  572       case 1:
+//  573       {  
+//  574         uint8 switch1;
+//  575         if(Relay1_on == 0)  {Relay1_on = 1 ; switch1 = 0x02;}
 ??Smart_home_HandleKeys_1:
         MOV     DPTR,#??Relay1_on
         MOVX    A,@DPTR
@@ -2669,22 +2678,22 @@ Smart_home_HandleKeys:
         MOVX    @DPTR,A
         MOV     R1,#0x2
         SJMP    ??Smart_home_HandleKeys_6
-//  570         else if(Relay1_on == 1)  {Relay1_on = 0; switch1 = 0x01;}
+//  576         else if(Relay1_on == 1)  {Relay1_on = 0; switch1 = 0x01;}
 ??Smart_home_HandleKeys_5:
         CLR     A
         MOVX    @DPTR,A
         MOV     R1,#0x1
-//  571         else  {Relay1_on = 0; switch1 = 0x01;}       
-//  572         Smart_home_Relay_Ctl(switch1);  
+//  577         else  {Relay1_on = 0; switch1 = 0x01;}       
+//  578         Smart_home_Relay_Ctl(switch1);  
 ??Smart_home_HandleKeys_6:
         ; Setup parameters for call to function Smart_home_Relay_Ctl
         LCALL   ??Smart_home_Relay_Ctl?relay
-//  573         break;
+//  579         break;
         SJMP    ??Smart_home_HandleKeys_0
-//  574       } 
-//  575       case 2:
-//  576       {
-//  577         if(MotorSpeed < 80)     {MotorSpeed += 10;}
+//  580       } 
+//  581       case 2:
+//  582       {
+//  583         if(MotorSpeed < 80)     {MotorSpeed += 10;}
 ??Smart_home_HandleKeys_2:
         MOV     DPTR,#??MotorSpeed
         MOVX    A,@DPTR
@@ -2694,63 +2703,63 @@ Smart_home_HandleKeys:
         MOVX    A,@DPTR
         ADD     A,#0xa
         MOVX    @DPTR,A
-//  578         if(MotorSpeed >= 80)     
+//  584         if(MotorSpeed >= 80)     
 ??Smart_home_HandleKeys_7:
         MOVX    A,@DPTR
         CLR     C
         SUBB    A,#0x50
         JC      ??Smart_home_HandleKeys_0
-//  579         {
-//  580 #if defined ( LCD_SUPPORTED )
-//  581            HalLcdWriteString( "Motor max Speed", HAL_LCD_LINE_4 );
+//  585         {
+//  586 #if defined ( LCD_SUPPORTED )
+//  587            HalLcdWriteString( "Motor max Speed", HAL_LCD_LINE_4 );
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,#0x4
         MOV     R2,#`?<Constant "Motor max Speed">` & 0xff
         MOV     R3,#(`?<Constant "Motor max Speed">` >> 8) & 0xff
         LCALL   ??HalLcdWriteString?relay
-//  582 #endif 
-//  583            MotorSpeed = 80;
+//  588 #endif 
+//  589            MotorSpeed = 80;
         MOV     DPTR,#??MotorSpeed
         MOV     A,#0x50
 ??Smart_home_HandleKeys_4:
         MOVX    @DPTR,A
-//  584         }
-//  585         break;
-//  586       }
-//  587          
-//  588     }    
-//  589   }
-//  590   
-//  591   if ( keys & HAL_KEY_SW_3 )  //DOWN
+//  590         }
+//  591         break;
+//  592       }
+//  593          
+//  594     }    
+//  595   }
+//  596   
+//  597   if ( keys & HAL_KEY_SW_3 )  //DOWN
 ??Smart_home_HandleKeys_0:
         MOV     A,R6
         MOV     C,0xE0 /* A   */.4
         JNC     ??Smart_home_HandleKeys_8
-//  592   {
-//  593     switch(Ctrlcase)
+//  598   {
+//  599     switch(Ctrlcase)
         MOV     DPTR,#??Ctrlcase
         MOVX    A,@DPTR
         DEC     A
         JZ      ??Smart_home_HandleKeys_9
         DEC     A
         JZ      ??Smart_home_HandleKeys_10
-//  594     {
-//  595       default:    
-//  596       case 0:
-//  597       {
-//  598         if(LCD_Page >= 0)       {LCD_Page--;}
-        MOV     DPTR,#LCD_Page
+//  600     {
+//  601       default:    
+//  602       case 0:
+//  603       {
+//  604         if(LCD_Page >= 0)       {LCD_Page--;}
+        MOV     DPTR,#??LCD_Page
         MOVX    A,@DPTR
         DEC     A
         SJMP    ??Smart_home_HandleKeys_11
-//  599         if(LCD_Page < 0)        {LCD_Page=2;}
-//  600         Smart_home_Display(LCD_Page);
-//  601         break;
-//  602       }
-//  603       case 1:  
-//  604       {
-//  605         uint8 switch2;
-//  606         if(Relay2_on == 0)  {Relay2_on = 1 ; switch2 = 0x20;}
+//  605         if(LCD_Page < 0)        {LCD_Page=2;}
+//  606         Smart_home_Display(LCD_Page);
+//  607         break;
+//  608       }
+//  609       case 1:  
+//  610       {
+//  611         uint8 switch2;
+//  612         if(Relay2_on == 0)  {Relay2_on = 1 ; switch2 = 0x20;}
 ??Smart_home_HandleKeys_9:
         MOV     DPTR,#??Relay2_on
         MOVX    A,@DPTR
@@ -2759,7 +2768,7 @@ Smart_home_HandleKeys:
         MOVX    @DPTR,A
         MOV     R1,#0x20
         SJMP    ??Smart_home_HandleKeys_13
-//  607         else if(Relay2_on == 1)  {Relay2_on = 0; switch2 = 0x10;}
+//  613         else if(Relay2_on == 1)  {Relay2_on = 0; switch2 = 0x10;}
 ??Smart_home_HandleKeys_12:
         XRL     A,#0x1
         JNZ     ??Smart_home_HandleKeys_14
@@ -2767,21 +2776,21 @@ Smart_home_HandleKeys:
         MOVX    @DPTR,A
         MOV     R1,#0x10
         SJMP    ??Smart_home_HandleKeys_13
-//  608         else  {Relay2_on = 0; switch2 = 0x01;}       
+//  614         else  {Relay2_on = 0; switch2 = 0x01;}       
 ??Smart_home_HandleKeys_14:
         CLR     A
         MOVX    @DPTR,A
         MOV     R1,#0x1
-//  609         Smart_home_Relay_Ctl(switch2);       
+//  615         Smart_home_Relay_Ctl(switch2);       
 ??Smart_home_HandleKeys_13:
         ; Setup parameters for call to function Smart_home_Relay_Ctl
         LCALL   ??Smart_home_Relay_Ctl?relay
-//  610         break;
+//  616         break;
         SJMP    ??Smart_home_HandleKeys_8
-//  611       } 
-//  612       case 2:
-//  613       {
-//  614         if(MotorSpeed > -80)     {MotorSpeed -= 10;}
+//  617       } 
+//  618       case 2:
+//  619       {
+//  620         if(MotorSpeed > -80)     {MotorSpeed -= 10;}
 ??Smart_home_HandleKeys_10:
         MOV     DPTR,#??MotorSpeed
         LCALL   ?Subroutine10 & 0xFFFF
@@ -2790,41 +2799,41 @@ Smart_home_HandleKeys:
         MOVX    A,@DPTR
         ADD     A,#-0xa
         MOVX    @DPTR,A
-//  615         if(MotorSpeed <= -80)     
+//  621         if(MotorSpeed <= -80)     
 ??Smart_home_HandleKeys_15:
         LCALL   ?Subroutine10 & 0xFFFF
 ??CrossCallReturnLabel_22:
         JNC     ??Smart_home_HandleKeys_8
-//  616         {
-//  617 #if defined ( LCD_SUPPORTED )
-//  618            HalLcdWriteString( "Motor min Speed", HAL_LCD_LINE_4 );
+//  622         {
+//  623 #if defined ( LCD_SUPPORTED )
+//  624            HalLcdWriteString( "Motor min Speed", HAL_LCD_LINE_4 );
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,#0x4
         MOV     R2,#`?<Constant "Motor min Speed">` & 0xff
         MOV     R3,#(`?<Constant "Motor min Speed">` >> 8) & 0xff
         LCALL   ??HalLcdWriteString?relay
-//  619 #endif 
-//  620            MotorSpeed = -80;
+//  625 #endif 
+//  626            MotorSpeed = -80;
         MOV     DPTR,#??MotorSpeed
         MOV     A,#-0x50
 ??Smart_home_HandleKeys_11:
         MOVX    @DPTR,A
-//  621         }
-//  622         break; 
-//  623       }
-//  624     }
-//  625   }
-//  626   
-//  627   if ( keys & HAL_KEY_SW_2 )  //RIGHT  
+//  627         }
+//  628         break; 
+//  629       }
+//  630     }
+//  631   }
+//  632   
+//  633   if ( keys & HAL_KEY_SW_2 )  //RIGHT  
 ??Smart_home_HandleKeys_8:
         MOV     A,R6
         MOV     C,0xE0 /* A   */.1
         JNC     ??Smart_home_HandleKeys_16
-//  628   /*3.22 这里在调试时出现问题，具体问题为 点击up时会出现屏幕变为禁止组网
-//  629     控制方面变为控制电机，问题在于汇编中的key值会出现  keys & HAL_KEY_SW_2 = 2
-//  630     的情况，暂时禁止，需要等待研究  还有key_7*/
-//  631   {
-//  632      if(Ctrlcase < 3)   { Ctrlcase++;}
+//  634   /*3.22 这里在调试时出现问题，具体问题为 点击up时会出现屏幕变为禁止组网
+//  635     控制方面变为控制电机，问题在于汇编中的key值会出现  keys & HAL_KEY_SW_2 = 2
+//  636     的情况，暂时禁止，需要等待研究  还有key_7*/
+//  637   {
+//  638      if(Ctrlcase < 3)   { Ctrlcase++;}
         MOV     DPTR,#??Ctrlcase
         LCALL   ?Subroutine12 & 0xFFFF
 ??CrossCallReturnLabel_23:
@@ -2832,28 +2841,28 @@ Smart_home_HandleKeys:
         MOVX    A,@DPTR
         INC     A
         MOVX    @DPTR,A
-//  633      if(Ctrlcase > 2)   { Ctrlcase=0;}
+//  639      if(Ctrlcase > 2)   { Ctrlcase=0;}
 ??Smart_home_HandleKeys_17:
         LCALL   ?Subroutine12 & 0xFFFF
 ??CrossCallReturnLabel_24:
         JC      ??Smart_home_HandleKeys_18
         CLR     A
         MOVX    @DPTR,A
-//  634      Smart_home_Key_add(Ctrlcase);
+//  640      Smart_home_Key_add(Ctrlcase);
 ??Smart_home_HandleKeys_18:
         ; Setup parameters for call to function Smart_home_Key_add
         MOVX    A,@DPTR
         MOV     R1,A
         LCALL   ??Smart_home_Key_add?relay
-//  635   }
-//  636   
-//  637   if ( keys & HAL_KEY_SW_4 )  //LEFT
+//  641   }
+//  642   
+//  643   if ( keys & HAL_KEY_SW_4 )  //LEFT
 ??Smart_home_HandleKeys_16:
         MOV     A,R6
         MOV     C,0xE0 /* A   */.3
         JNC     ??Smart_home_HandleKeys_19
-//  638   {
-//  639      if(Ctrlcase > -1)   { Ctrlcase--;}
+//  644   {
+//  645      if(Ctrlcase > -1)   { Ctrlcase--;}
         MOV     DPTR,#??Ctrlcase
         LCALL   ?Subroutine13 & 0xFFFF
 ??CrossCallReturnLabel_25:
@@ -2861,70 +2870,83 @@ Smart_home_HandleKeys:
         MOVX    A,@DPTR
         DEC     A
         MOVX    @DPTR,A
-//  640      if(Ctrlcase < 0)    { Ctrlcase=2;}
+//  646      if(Ctrlcase < 0)    { Ctrlcase=2;}
 ??Smart_home_HandleKeys_20:
         LCALL   ?Subroutine13 & 0xFFFF
 ??CrossCallReturnLabel_26:
         JNC     ??Smart_home_HandleKeys_21
         MOV     A,#0x2
         MOVX    @DPTR,A
-//  641      Smart_home_Key_add(Ctrlcase);    
+//  647      Smart_home_Key_add(Ctrlcase);    
 ??Smart_home_HandleKeys_21:
         ; Setup parameters for call to function Smart_home_Key_add
         MOVX    A,@DPTR
         MOV     R1,A
         LCALL   ??Smart_home_Key_add?relay
-//  642   }
-//  643   
-//  644   if ( keys & HAL_KEY_SW_5 )  //OK
+//  648   }
+//  649   
+//  650   if ( keys & HAL_KEY_SW_5 )  //OK
+//  651   {
+//  652 
+//  653   }
+//  654   
+//  655   if ( keys & HAL_KEY_SW_7 )  //CENCEL
 ??Smart_home_HandleKeys_19:
         MOV     A,R6
-        MOV     C,0xE0 /* A   */.2
+        MOV     C,0xE0 /* A   */.6
         JNC     ??Smart_home_HandleKeys_22
-//  645   {
-//  646      NLME_PermitJoiningRequest(0xFF); // 组网，允许随时加入
+//  656   {
+//  657      if(NetWorkAllow == 0)
+        MOV     DPTR,#??NetWorkAllow
+        MOVX    A,@DPTR
+        JNZ     ??Smart_home_HandleKeys_23
+//  658      {
+//  659        NetWorkAllow = 1;
+        MOV     A,#0x1
+        MOVX    @DPTR,A
+//  660        NLME_PermitJoiningRequest(0xFF); // 组网，允许随时加入
         ; Setup parameters for call to function NLME_PermitJoiningRequest
         MOV     R1,#-0x1
         LCALL   ??NLME_PermitJoiningRequest?relay
-//  647      HalLedSet(HAL_LED_2, HAL_LED_MODE_ON);
+//  661        HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
         ; Setup parameters for call to function HalLedSet
         MOV     R2,#0x1
-        MOV     R1,#0x2
+        MOV     R1,#0x1
         LCALL   ??HalLedSet?relay
-//  648 #if defined ( LCD_SUPPORTED )
-//  649     HalLcdWriteString( "Allow networking", HAL_LCD_LINE_4 );
+//  662 #if defined ( LCD_SUPPORTED )
+//  663        HalLcdWriteString( "Allow networking", HAL_LCD_LINE_4 );
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,#0x4
         MOV     R2,#`?<Constant "Allow networking">` & 0xff
         MOV     R3,#(`?<Constant "Allow networking">` >> 8) & 0xff
-        LCALL   ??HalLcdWriteString?relay
-//  650 #endif
-//  651   }
-//  652   
-//  653   if ( keys & HAL_KEY_SW_7 )  //CENCEL
-??Smart_home_HandleKeys_22:
-        MOV     A,R6
-        MOV     C,0xE0 /* A   */.6
-        JNC     ??Smart_home_HandleKeys_23
-//  654   /*bug 情况同上*/
-//  655   {
-//  656      NLME_PermitJoiningRequest(0x00); // 不允许组网
+        SJMP    ??Smart_home_HandleKeys_24
+//  664 #endif
+//  665      }
+//  666      else
+//  667      {
+//  668        NetWorkAllow = 0;
+??Smart_home_HandleKeys_23:
+        CLR     A
+        MOVX    @DPTR,A
+//  669        NLME_PermitJoiningRequest(0x00); // 不允许组网
         ; Setup parameters for call to function NLME_PermitJoiningRequest
+        MOV     R1,A
         LCALL   ?Subroutine15 & 0xFFFF
-//  657      HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);  
-//  658 #if defined ( LCD_SUPPORTED )
-//  659     HalLcdWriteString( "Ban   networking", HAL_LCD_LINE_4 );
+//  670        HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);  
+//  671 #if defined ( LCD_SUPPORTED )
+//  672        HalLcdWriteString( "Ban   networking", HAL_LCD_LINE_4 );
 ??CrossCallReturnLabel_28:
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,#0x4
         MOV     R2,#`?<Constant "Ban   networking">` & 0xff
         MOV     R3,#(`?<Constant "Ban   networking">` >> 8) & 0xff
+??Smart_home_HandleKeys_24:
         LCALL   ??HalLcdWriteString?relay
-//  660 #endif
-//  661   }
-//  662 
-//  663 }
-??Smart_home_HandleKeys_23:
+//  673 #endif        
+//  674      }
+//  675   }
+//  676 }
+??Smart_home_HandleKeys_22:
         LJMP    ?Subroutine0 & 0xFFFF
         CFI EndBlock cfiBlock28
 
@@ -2961,7 +2983,6 @@ Smart_home_HandleKeys:
         CFI Block cfiPicker31 Using cfiCommon1
         CFI (cfiPicker31) NoFunction
         CFI (cfiPicker31) Picker
-        MOV     R1,#0x0
         LCALL   ??NLME_PermitJoiningRequest?relay
         ; Setup parameters for call to function HalLedSet
         ; Setup parameters for call to function HalLedSet
@@ -3121,6 +3142,18 @@ Smart_home_HandleKeys:
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
+??NetWorkAllow:
+        DS 1
+        REQUIRE __INIT_XDATA_Z
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA8
+??LCD_Page:
+        DS 1
+        REQUIRE __INIT_XDATA_Z
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA8
 ??Relay1_on:
         DS 1
         REQUIRE __INIT_XDATA_Z
@@ -3130,27 +3163,27 @@ Smart_home_HandleKeys:
 ??Relay2_on:
         DS 1
         REQUIRE __INIT_XDATA_Z
-//  664 
-//  665 /*********************************************************************
-//  666  * @fn      Smart_home_ProcessMSGCmd
-//  667  *
-//  668  * @brief   Data message processor callback. This function processes
-//  669  *          any incoming data - probably from other devices. Based
-//  670  *          on the cluster ID, perform the intended action.
-//  671  *
-//  672  * @param   pkt - pointer to the incoming message packet
-//  673  *
-//  674  * @return  TRUE if the 'pkt' parameter is being used and will be freed later,
-//  675  *          FALSE otherwise.
-//  676  */
+//  677 
+//  678 /*********************************************************************
+//  679  * @fn      Smart_home_ProcessMSGCmd
+//  680  *
+//  681  * @brief   Data message processor callback. This function processes
+//  682  *          any incoming data - probably from other devices. Based
+//  683  *          on the cluster ID, perform the intended action.
+//  684  *
+//  685  * @param   pkt - pointer to the incoming message packet
+//  686  *
+//  687  * @return  TRUE if the 'pkt' parameter is being used and will be freed later,
+//  688  *          FALSE otherwise.
+//  689  */
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  677 void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
+//  690 void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
 Smart_home_ProcessMSGCmd:
         CFI Block cfiBlock41 Using cfiCommon0
         CFI Function Smart_home_ProcessMSGCmd
         CODE
-//  678 {
+//  691 {
         MOV     A,#-0xa
         LCALL   ?BANKED_ENTER_XDATA
         CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
@@ -3167,7 +3200,7 @@ Smart_home_ProcessMSGCmd:
         CFI CFA_XSP16 add(XSP16, 10)
         ; Saved register size: 10
         ; Auto size: 0
-//  679   switch ( pkt->clusterId )
+//  692   switch ( pkt->clusterId )
         MOV     DPL,R2
         MOV     DPH,R3
         INC     DPTR
@@ -3238,142 +3271,142 @@ Smart_home_ProcessMSGCmd:
         DATA16
         DW        ??Smart_home_ProcessMSGCmd_8
         CODE
-//  680   {
-//  681   /***********************************************************************
-//  682     目前总共8种case
-//  683    #define Smart_home_CLUSTERID_HUMITMSG            1  // 温湿度
-//  684    #define Smart_home_CLUSTERID_TEMPLIGHTMSG        2  // 温度光照
-//  685    #define Smart_home_CLUSTERID_RFIDMSG             3  // 射频卡
-//  686    #define Smart_home_CLUSTERID_GASFLAMEMSG         4  // 烟雾火焰
-//  687    #define Smart_home_CLUSTERID_INFRAREDMSG         5  // 人体红外
-//  688    #define Smart_home_CLUSTERID_SOUNDVBMSG          6  // 声音振动
-//  689    #define Smart_home_CLUSTERID_MOTORSTATUSMSG      7  // 直流电机状态信息
-//  690    #define Smart_home_CLUSTERID_RELAYSTATUSMSG      8  // 继电器状态信息
-//  691     
-//  692    设备描述
-//  693    typedef struct DeviceInfo
-//  694    {
-//  695      uint8 deviceID;
-//  696      uint8 deviceStatus;
-//  697      uint8 data[5];
-//  698    } DeviceInfo; 
-//  699    ************************************************************************/ 
-//  700     //3.14 消息处理模块，共8个，行为类似 
-//  701     //3.21 修改为指针方法（DeviceList相关）
-//  702     case Smart_home_CLUSTERID_HUMITMSG:         // 温湿度
-//  703       DeviceList[Humit].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线
+//  693   {
+//  694   /***********************************************************************
+//  695     目前总共8种case
+//  696    #define Smart_home_CLUSTERID_HUMITMSG            1  // 温湿度
+//  697    #define Smart_home_CLUSTERID_TEMPLIGHTMSG        2  // 温度光照
+//  698    #define Smart_home_CLUSTERID_RFIDMSG             3  // 射频卡
+//  699    #define Smart_home_CLUSTERID_GASFLAMEMSG         4  // 烟雾火焰
+//  700    #define Smart_home_CLUSTERID_INFRAREDMSG         5  // 人体红外
+//  701    #define Smart_home_CLUSTERID_SOUNDVBMSG          6  // 声音振动
+//  702    #define Smart_home_CLUSTERID_MOTORSTATUSMSG      7  // 直流电机状态信息
+//  703    #define Smart_home_CLUSTERID_RELAYSTATUSMSG      8  // 继电器状态信息
+//  704     
+//  705    设备描述
+//  706    typedef struct DeviceInfo
+//  707    {
+//  708      uint8 deviceID;
+//  709      uint8 deviceStatus;
+//  710      uint8 data[5];
+//  711    } DeviceInfo; 
+//  712    ************************************************************************/ 
+//  713     //3.14 消息处理模块，共8个，行为类似 
+//  714     //3.21 修改为指针方法（DeviceList相关）
+//  715     case Smart_home_CLUSTERID_HUMITMSG:         // 温湿度
+//  716       DeviceList[Humit].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线
 ??Smart_home_ProcessMSGCmd_1:
         MOV     DPTR,#DeviceList + 8
         LCALL   ?Subroutine2 & 0xFFFF
-//  704       DeviceList[Humit].data[0] = pkt->cmd.Data[4]; // 湿度 
+//  717       DeviceList[Humit].data[0] = pkt->cmd.Data[4]; // 湿度 
 ??CrossCallReturnLabel_0:
         MOV     DPTR,#DeviceList + 9
         LCALL   ?Subroutine6 & 0xFFFF
-//  705       DeviceList[Humit].data[1] = pkt->cmd.Data[5]; // 温度
+//  718       DeviceList[Humit].data[1] = pkt->cmd.Data[5]; // 温度
 ??CrossCallReturnLabel_12:
         MOV     DPTR,#DeviceList + 10
         LJMP    ??Smart_home_ProcessMSGCmd_9 & 0xFFFF
-//  706       break;
-//  707       
-//  708     case Smart_home_CLUSTERID_TEMPLIGHTMSG:     // 温度光照
-//  709       DeviceList[TempLight].deviceStatus = DEVICE_ONLINE;   //收到消息设置为在线
+//  719       break;
+//  720       
+//  721     case Smart_home_CLUSTERID_TEMPLIGHTMSG:     // 温度光照
+//  722       DeviceList[TempLight].deviceStatus = DEVICE_ONLINE;   //收到消息设置为在线
 ??Smart_home_ProcessMSGCmd_2:
         MOV     DPTR,#DeviceList + 15
         LCALL   ?Subroutine2 & 0xFFFF
-//  710       DeviceList[TempLight].data[0] = pkt->cmd.Data[4]; // 温度整数
+//  723       DeviceList[TempLight].data[0] = pkt->cmd.Data[4]; // 温度整数
 ??CrossCallReturnLabel_1:
         MOV     DPTR,#DeviceList + 16
         LCALL   ?Subroutine7 & 0xFFFF
-//  711       DeviceList[TempLight].data[1] = pkt->cmd.Data[5]; // 温度小数
+//  724       DeviceList[TempLight].data[1] = pkt->cmd.Data[5]; // 温度小数
 ??CrossCallReturnLabel_14:
         MOV     DPTR,#DeviceList + 17
         LCALL   ?Subroutine5 & 0xFFFF
-//  712       DeviceList[TempLight].data[2] = pkt->cmd.Data[6]; // 光照
+//  725       DeviceList[TempLight].data[2] = pkt->cmd.Data[6]; // 光照
 ??CrossCallReturnLabel_10:
         MOV     DPTR,#DeviceList + 18
         LCALL   ?Subroutine4 & 0xFFFF
-//  713       DeviceList[TempLight].data[3] = pkt->cmd.Data[7]; // 光照
+//  726       DeviceList[TempLight].data[3] = pkt->cmd.Data[7]; // 光照
 ??CrossCallReturnLabel_8:
         MOVX    A,@DPTR
         MOV     DPTR,#DeviceList + 19
         LJMP    ??Smart_home_ProcessMSGCmd_9 & 0xFFFF
-//  714       break;
-//  715       
-//  716     case Smart_home_CLUSTERID_RFIDMSG:          // 射频卡
-//  717       DeviceList[RfID].deviceStatus = DEVICE_ONLINE;        //收到消息设置为在线
+//  727       break;
+//  728       
+//  729     case Smart_home_CLUSTERID_RFIDMSG:          // 射频卡
+//  730       DeviceList[RfID].deviceStatus = DEVICE_ONLINE;        //收到消息设置为在线
 ??Smart_home_ProcessMSGCmd_3:
         MOV     DPTR,#DeviceList + 22
         LCALL   ?Subroutine2 & 0xFFFF
-//  718       DeviceList[RfID].data[0] = pkt->cmd.Data[4]; // 射频卡类型
+//  731       DeviceList[RfID].data[0] = pkt->cmd.Data[4]; // 射频卡类型
 ??CrossCallReturnLabel_2:
         MOV     DPTR,#DeviceList + 23
         LCALL   ?Subroutine7 & 0xFFFF
-//  719       DeviceList[RfID].data[1] = pkt->cmd.Data[5]; // 4个字节的ID号
+//  732       DeviceList[RfID].data[1] = pkt->cmd.Data[5]; // 4个字节的ID号
 ??CrossCallReturnLabel_15:
         MOV     DPTR,#DeviceList + 24
         LCALL   ?Subroutine5 & 0xFFFF
-//  720       DeviceList[RfID].data[2] = pkt->cmd.Data[6]; //
+//  733       DeviceList[RfID].data[2] = pkt->cmd.Data[6]; //
 ??CrossCallReturnLabel_11:
         MOV     DPTR,#DeviceList + 25
         LCALL   ?Subroutine16 & 0xFFFF
-//  721       DeviceList[RfID].data[3] = pkt->cmd.Data[7]; //
+//  734       DeviceList[RfID].data[3] = pkt->cmd.Data[7]; //
 ??CrossCallReturnLabel_29:
         INC     DPTR
         MOVX    A,@DPTR
         MOV     DPTR,#DeviceList + 26
         LCALL   ?Subroutine4 & 0xFFFF
-//  722       DeviceList[RfID].data[4] = pkt->cmd.Data[8]; //  
+//  735       DeviceList[RfID].data[4] = pkt->cmd.Data[8]; //  
 ??CrossCallReturnLabel_9:
         INC     DPTR
         MOVX    A,@DPTR
         MOV     DPTR,#DeviceList + 27
         SJMP    ??Smart_home_ProcessMSGCmd_9
-//  723       break;
-//  724       
-//  725     case Smart_home_CLUSTERID_GASFLAMEMSG:      // 烟雾火焰
-//  726       DeviceList[gasFlame].deviceStatus = DEVICE_ONLINE;    //收到消息设置为在线
+//  736       break;
+//  737       
+//  738     case Smart_home_CLUSTERID_GASFLAMEMSG:      // 烟雾火焰
+//  739       DeviceList[gasFlame].deviceStatus = DEVICE_ONLINE;    //收到消息设置为在线
 ??Smart_home_ProcessMSGCmd_4:
         MOV     DPTR,#DeviceList + 29
         LCALL   ?Subroutine3 & 0xFFFF
-//  727       DeviceList[gasFlame].data[0] = pkt->cmd.Data[4]; // 烟雾与火焰报警信息
+//  740       DeviceList[gasFlame].data[0] = pkt->cmd.Data[4]; // 烟雾与火焰报警信息
 ??CrossCallReturnLabel_4:
         MOV     DPTR,#DeviceList + 30
         SJMP    ??Smart_home_ProcessMSGCmd_9
-//  728       break;
-//  729       
-//  730     case Smart_home_CLUSTERID_INFRAREDMSG:      // 人体红外
-//  731       DeviceList[infrared].deviceStatus = DEVICE_ONLINE;    //收到消息设置为在线
+//  741       break;
+//  742       
+//  743     case Smart_home_CLUSTERID_INFRAREDMSG:      // 人体红外
+//  744       DeviceList[infrared].deviceStatus = DEVICE_ONLINE;    //收到消息设置为在线
 ??Smart_home_ProcessMSGCmd_5:
         MOV     DPTR,#DeviceList + 36
         LCALL   ?Subroutine3 & 0xFFFF
-//  732       DeviceList[infrared].data[0] = pkt->cmd.Data[4]; // 人体红外 
+//  745       DeviceList[infrared].data[0] = pkt->cmd.Data[4]; // 人体红外 
 ??CrossCallReturnLabel_5:
         MOV     DPTR,#DeviceList + 37
         SJMP    ??Smart_home_ProcessMSGCmd_9
-//  733       break;
-//  734 
-//  735     case Smart_home_CLUSTERID_SOUNDVBMSG:       // 声音振动
-//  736       DeviceList[soundVb].deviceStatus = DEVICE_ONLINE;     //收到消息设置为在线
+//  746       break;
+//  747 
+//  748     case Smart_home_CLUSTERID_SOUNDVBMSG:       // 声音振动
+//  749       DeviceList[soundVb].deviceStatus = DEVICE_ONLINE;     //收到消息设置为在线
 ??Smart_home_ProcessMSGCmd_6:
         MOV     DPTR,#DeviceList + 57
         LCALL   ?Subroutine3 & 0xFFFF
-//  737       DeviceList[soundVb].data[0] = pkt->cmd.Data[4]; // 声音震动信息
+//  750       DeviceList[soundVb].data[0] = pkt->cmd.Data[4]; // 声音震动信息
 ??CrossCallReturnLabel_6:
         MOV     DPTR,#DeviceList + 58
         SJMP    ??Smart_home_ProcessMSGCmd_9
-//  738       break;
-//  739       
-//  740     case Smart_home_CLUSTERID_MOTORSTATUSMSG:   // 直流电机状态信息
-//  741       DeviceList[motor].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线
+//  751       break;
+//  752       
+//  753     case Smart_home_CLUSTERID_MOTORSTATUSMSG:   // 直流电机状态信息
+//  754       DeviceList[motor].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线
 ??Smart_home_ProcessMSGCmd_7:
         MOV     DPTR,#DeviceList + 43
         MOV     A,#0x1
         MOVX    @DPTR,A
-//  742       // 储存电机设备的网络地址，用于发送控制命令
-//  743       Motor_addr.addrMode = (afAddrMode_t)Addr16Bit;
+//  755       // 储存电机设备的网络地址，用于发送控制命令
+//  756       Motor_addr.addrMode = (afAddrMode_t)Addr16Bit;
         MOV     DPTR,#Motor_addr + 8
         LCALL   ?Subroutine8 & 0xFFFF
-//  744       Motor_addr.addr.shortAddr = pkt->srcAddr.addr.shortAddr;
+//  757       Motor_addr.addr.shortAddr = pkt->srcAddr.addr.shortAddr;
 ??CrossCallReturnLabel_16:
         MOV     DPTR,#Motor_addr
         MOV     A,R0
@@ -3381,34 +3414,34 @@ Smart_home_ProcessMSGCmd:
         INC     DPTR
         MOV     A,R1
         MOVX    @DPTR,A
-//  745       
-//  746       Motor_addr.endPoint = 1;  // 目的节点的端口号
+//  758       
+//  759       Motor_addr.endPoint = 1;  // 目的节点的端口号
         MOV     DPTR,#Motor_addr + 9
         LCALL   ?Subroutine2 & 0xFFFF
-//  747       //TransmitApp_DstMotorAddr->endPoint = TRANSMITAPP_ENDPOINT;
-//  748      
-//  749       DeviceList[motor].data[0] = pkt->cmd.Data[4]; // 电机转速
+//  760       //TransmitApp_DstMotorAddr->endPoint = TRANSMITAPP_ENDPOINT;
+//  761      
+//  762       DeviceList[motor].data[0] = pkt->cmd.Data[4]; // 电机转速
 ??CrossCallReturnLabel_3:
         MOV     DPTR,#DeviceList + 44
         LCALL   ?Subroutine6 & 0xFFFF
-//  750       DeviceList[motor].data[1] = pkt->cmd.Data[5]; // 电机状态
+//  763       DeviceList[motor].data[1] = pkt->cmd.Data[5]; // 电机状态
 ??CrossCallReturnLabel_13:
         MOV     DPTR,#DeviceList + 45
         SJMP    ??Smart_home_ProcessMSGCmd_9
-//  751       break;
-//  752       
-//  753     case Smart_home_CLUSTERID_RELAYSTATUSMSG:   // 继电器状态信息
-//  754       DeviceList[relay].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线    
+//  764       break;
+//  765       
+//  766     case Smart_home_CLUSTERID_RELAYSTATUSMSG:   // 继电器状态信息
+//  767       DeviceList[relay].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线    
 ??Smart_home_ProcessMSGCmd_8:
         MOV     DPTR,#DeviceList + 50
         MOV     A,#0x1
         MOVX    @DPTR,A
-//  755       
-//  756       // 储存继电器设备的网络地址，用于发送控制命令
-//  757       Relay_addr.addrMode = (afAddrMode_t)Addr16Bit;
+//  768       
+//  769       // 储存继电器设备的网络地址，用于发送控制命令
+//  770       Relay_addr.addrMode = (afAddrMode_t)Addr16Bit;
         MOV     DPTR,#Relay_addr + 8
         LCALL   ?Subroutine8 & 0xFFFF
-//  758       Relay_addr.addr.shortAddr = pkt->srcAddr.addr.shortAddr;
+//  771       Relay_addr.addr.shortAddr = pkt->srcAddr.addr.shortAddr;
 ??CrossCallReturnLabel_17:
         MOV     DPTR,#Relay_addr
         MOV     A,R0
@@ -3416,23 +3449,23 @@ Smart_home_ProcessMSGCmd:
         INC     DPTR
         MOV     A,R1
         MOVX    @DPTR,A
-//  759       
-//  760       Relay_addr.endPoint = 1; // 目的节点的端口号
+//  772       
+//  773       Relay_addr.endPoint = 1; // 目的节点的端口号
         MOV     DPTR,#Relay_addr + 9
         LCALL   ?Subroutine3 & 0xFFFF
-//  761       
-//  762       DeviceList[relay].data[0] = pkt->cmd.Data[4]; 
+//  774       
+//  775       DeviceList[relay].data[0] = pkt->cmd.Data[4]; 
 ??CrossCallReturnLabel_7:
         MOV     DPTR,#DeviceList + 51
 ??Smart_home_ProcessMSGCmd_9:
         MOVX    @DPTR,A
         CFI EndBlock cfiBlock41
-//  763       break;
-//  764       
-//  765     default:
-//  766       break;
-//  767   }
-//  768 }
+//  776       break;
+//  777       
+//  778     default:
+//  779       break;
+//  780   }
+//  781 }
 ??Smart_home_ProcessMSGCmd_0:
         REQUIRE ?Subroutine1
         ; // Fall through to label ?Subroutine1
@@ -4525,65 +4558,65 @@ Smart_home_ProcessMSGCmd:
         CFI EndBlock cfiCond107
         CFI EndBlock cfiCond108
         CFI EndBlock cfiPicker109
-//  769 
-//  770 /*********************************************************************
-//  771  * @fn     Smart_home_Device_check
-//  772  *
-//  773  * @brief   设备计数器，用来检查设备在开始组网后多久在线.
-//  774  *          目前搜索为4次HeartBeat  (DEVICE_HEART_BEAT 3)
-//  775  *          3.21
-//  776  * @param   none
-//  777  *
-//  778  * @return  none
-//  779  */
-//  780 static void Smart_home_Device_check(void)
-//  781 {
+//  782 
+//  783 /*********************************************************************
+//  784  * @fn     Smart_home_Device_check
+//  785  *
+//  786  * @brief   设备计数器，用来检查设备在开始组网后多久在线.
+//  787  *          目前搜索为4次HeartBeat  (DEVICE_HEART_BEAT 3)
+//  788  *          3.21
+//  789  * @param   none
+//  790  *
+//  791  * @return  none
+//  792  */
+//  793 static void Smart_home_Device_check(void)
+//  794 {
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//  782   static uint8 DeviceID;
+//  795   static uint8 DeviceID;
 ??DeviceID:
         DS 1
         REQUIRE __INIT_XDATA_Z
-//  783   for(DeviceID=1;DeviceID<Smart_home_MAX_INCLUSTERS;DeviceID++)
-//  784   {
-//  785     if(DeviceList[DeviceID].deviceStatus != DEVICE_ONLINE)    //设备离线
-//  786     {
-//  787       DeviceCnt[DeviceID]++;
-//  788     }
-//  789     if(DeviceList[DeviceID].deviceStatus == DEVICE_ONLINE)    //设备在线
-//  790     {
-//  791       DeviceCnt[DeviceID] = 0;
-//  792       DeviceList[DeviceID].deviceStatus = 0;
-//  793     }
-//  794     if(DeviceCnt[DeviceID] > DEVICE_HEART_BEAT)
-//  795     {
-//  796       DeviceCnt[DeviceID] = DEVICE_HEART_BEAT;
-//  797       DeviceList[DeviceID].deviceStatus = DEVICE_OFFLINE;
-//  798     }
-//  799   }
-//  800   /*温湿度缓存 温度光照缓存 RFID 信息缓存 气体火焰缓存 
-//  801   人体红外 电机状态 继电器状态 声音震动*/
-//  802 }
-//  803 
-//  804 
-//  805 /*********************************************************************
-//  806  * @fn      Smart_home_Relay_Ctl
-//  807  *
-//  808  * @brief   发送继电器控制消息
-//  809  *
-//  810  * @param   none
-//  811  *
-//  812  * @return  none
-//  813  */
+//  796   for(DeviceID=1;DeviceID<Smart_home_MAX_INCLUSTERS;DeviceID++)
+//  797   {
+//  798     if(DeviceList[DeviceID].deviceStatus != DEVICE_ONLINE)    //设备离线
+//  799     {
+//  800       DeviceCnt[DeviceID]++;
+//  801     }
+//  802     if(DeviceList[DeviceID].deviceStatus == DEVICE_ONLINE)    //设备在线
+//  803     {
+//  804       DeviceCnt[DeviceID] = 0;
+//  805       DeviceList[DeviceID].deviceStatus = 0;
+//  806     }
+//  807     if(DeviceCnt[DeviceID] > DEVICE_HEART_BEAT)
+//  808     {
+//  809       DeviceCnt[DeviceID] = DEVICE_HEART_BEAT;
+//  810       DeviceList[DeviceID].deviceStatus = DEVICE_OFFLINE;
+//  811     }
+//  812   }
+//  813   /*温湿度缓存 温度光照缓存 RFID 信息缓存 气体火焰缓存 
+//  814   人体红外 电机状态 继电器状态 声音震动*/
+//  815 }
+//  816 
+//  817 
+//  818 /*********************************************************************
+//  819  * @fn      Smart_home_Relay_Ctl
+//  820  *
+//  821  * @brief   发送继电器控制消息
+//  822  *
+//  823  * @param   none
+//  824  *
+//  825  * @return  none
+//  826  */
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  814 static void Smart_home_Relay_Ctl(uint8 cmd)
+//  827 static void Smart_home_Relay_Ctl(uint8 cmd)
 Smart_home_Relay_Ctl:
         CFI Block cfiBlock110 Using cfiCommon0
         CFI Function Smart_home_Relay_Ctl
         CODE
-//  815 {
+//  828 {
         FUNCALL Smart_home_Relay_Ctl, HalLcdWriteString
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -4657,24 +4690,24 @@ Smart_home_Relay_Ctl:
         ; Auto size: 0
         MOV     A,R1
         MOV     R6,A
-//  816   uint8 tmp;
-//  817   
-//  818   // 只有设备在线时, 方发送控制命令
-//  819   if (DeviceList[relay].deviceStatus != DEVICE_OFFLINE)
+//  829   uint8 tmp;
+//  830   
+//  831   // 只有设备在线时, 方发送控制命令
+//  832   if (DeviceList[relay].deviceStatus != DEVICE_OFFLINE)
         MOV     DPTR,#DeviceList + 50
         MOVX    A,@DPTR
         XRL     A,#0x2
         JNZ     $+5
         LJMP    ??Smart_home_Relay_Ctl_0 & 0xFFFF
-//  820   {
-//  821     // put the sequence number in the message
-//  822     tmp = HI_UINT8( RelayTransID );
+//  833   {
+//  834     // put the sequence number in the message
+//  835     tmp = HI_UINT8( RelayTransID );
         MOV     DPTR,#RelayTransID
         MOVX    A,@DPTR
         SWAP    A
         ANL     A,#0xf
         MOV     R2,A
-//  823     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+//  836     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
         CLR     C
         SUBB    A,#0xa
         JNC     ??Smart_home_Relay_Ctl_1
@@ -4682,18 +4715,18 @@ Smart_home_Relay_Ctl:
         SJMP    ??Smart_home_Relay_Ctl_2
 ??Smart_home_Relay_Ctl_1:
         MOV     R0,#0x37
-//  824     Coordinator_Msg[2] = tmp;
+//  837     Coordinator_Msg[2] = tmp;
 ??Smart_home_Relay_Ctl_2:
         MOV     A,R0
         ADD     A,R2
         MOV     DPTR,#Coordinator_Msg + 2
         MOVX    @DPTR,A
-//  825     tmp = LO_UINT8( RelayTransID );
+//  838     tmp = LO_UINT8( RelayTransID );
         MOV     DPTR,#RelayTransID
         MOVX    A,@DPTR
         ANL     A,#0xf
         MOV     R2,A
-//  826     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+//  839     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
         CLR     C
         SUBB    A,#0xa
         JNC     ??Smart_home_Relay_Ctl_3
@@ -4701,22 +4734,22 @@ Smart_home_Relay_Ctl:
         SJMP    ??Smart_home_Relay_Ctl_4
 ??Smart_home_Relay_Ctl_3:
         MOV     R0,#0x37
-//  827     Coordinator_Msg[3] = tmp;
+//  840     Coordinator_Msg[3] = tmp;
 ??Smart_home_Relay_Ctl_4:
         MOV     A,R0
         ADD     A,R2
         MOV     DPTR,#Coordinator_Msg + 3
         MOVX    @DPTR,A
-//  828     
-//  829     // 发送给继电器的控制命令 
-//  830     Coordinator_Msg[4] = cmd;
+//  841     
+//  842     // 发送给继电器的控制命令 
+//  843     Coordinator_Msg[4] = cmd;
         MOV     A,R6
         INC     DPTR
         MOVX    @DPTR,A
-//  831     /********************************************
-//  832     *   屏幕显示部分*/
-//  833 #if defined ( LCD_SUPPORTED )
-//  834     if(cmd == 0x02) {HalLcdWriteString( "K1:ON", HAL_LCD_LINE_2 );}
+//  844     /********************************************
+//  845     *   屏幕显示部分*/
+//  846 #if defined ( LCD_SUPPORTED )
+//  847     if(cmd == 0x02) {HalLcdWriteString( "K1:ON", HAL_LCD_LINE_2 );}
         MOV     A,#0x2
         XRL     A,R6
         JNZ     ??Smart_home_Relay_Ctl_5
@@ -4725,7 +4758,7 @@ Smart_home_Relay_Ctl:
         MOV     R2,#`?<Constant "K1:ON">` & 0xff
         MOV     R3,#(`?<Constant "K1:ON">` >> 8) & 0xff
         SJMP    ??Smart_home_Relay_Ctl_6
-//  835     if(cmd == 0x01) {HalLcdWriteString( "K1:OFF", HAL_LCD_LINE_2 );}
+//  848     if(cmd == 0x01) {HalLcdWriteString( "K1:OFF", HAL_LCD_LINE_2 );}
 ??Smart_home_Relay_Ctl_5:
         MOV     A,#0x1
         XRL     A,R6
@@ -4735,7 +4768,7 @@ Smart_home_Relay_Ctl:
         MOV     R2,#`?<Constant "K1:OFF">` & 0xff
         MOV     R3,#(`?<Constant "K1:OFF">` >> 8) & 0xff
         SJMP    ??Smart_home_Relay_Ctl_6
-//  836     if(cmd == 0x20) {HalLcdWriteString( "K2:ON", HAL_LCD_LINE_3 );}
+//  849     if(cmd == 0x20) {HalLcdWriteString( "K2:ON", HAL_LCD_LINE_3 );}
 ??Smart_home_Relay_Ctl_7:
         MOV     A,#0x20
         XRL     A,R6
@@ -4745,7 +4778,7 @@ Smart_home_Relay_Ctl:
         MOV     R2,#`?<Constant "K2:ON">` & 0xff
         MOV     R3,#(`?<Constant "K2:ON">` >> 8) & 0xff
         SJMP    ??Smart_home_Relay_Ctl_6
-//  837     if(cmd == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}
+//  850     if(cmd == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}
 ??Smart_home_Relay_Ctl_8:
         MOV     A,#0x10
         XRL     A,R6
@@ -4756,16 +4789,16 @@ Smart_home_Relay_Ctl:
         MOV     R3,#(`?<Constant "K2:OFF">` >> 8) & 0xff
 ??Smart_home_Relay_Ctl_6:
         LCALL   ??HalLcdWriteString?relay
-//  838 #endif     
-//  839     /********************************************/
-//  840     tmp = AF_DataRequest( &Relay_addr,                         
-//  841                           (endPointDesc_t *)&Smart_home_epDesc,                  
-//  842                            Smart_home_CLUSTERID_RELAYCTRL,
-//  843                            RELAYSTATUSMSG_LEN,                 
-//  844                            Coordinator_Msg,                    
-//  845                           &RelayTransID,                       
-//  846                            AF_DISCV_ROUTE,                     
-//  847                            AF_DEFAULT_RADIUS );
+//  851 #endif     
+//  852     /********************************************/
+//  853     tmp = AF_DataRequest( &Relay_addr,                         
+//  854                           (endPointDesc_t *)&Smart_home_epDesc,                  
+//  855                            Smart_home_CLUSTERID_RELAYCTRL,
+//  856                            RELAYSTATUSMSG_LEN,                 
+//  857                            Coordinator_Msg,                    
+//  858                           &RelayTransID,                       
+//  859                            AF_DISCV_ROUTE,                     
+//  860                            AF_DEFAULT_RADIUS );
 ??Smart_home_Relay_Ctl_9:
         ; Setup parameters for call to function AF_DataRequest
         MOV     ?V0 + 0,#0x1e
@@ -4800,8 +4833,8 @@ Smart_home_Relay_Ctl:
         MOV     A,#0x9
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 10)
-//  848   } 
-//  849 }
+//  861   } 
+//  862 }
 ??Smart_home_Relay_Ctl_0:
         LJMP    ?Subroutine1 & 0xFFFF
         CFI EndBlock cfiBlock110
@@ -4923,194 +4956,194 @@ Smart_home_Relay_Ctl:
         DB "K2:OFF"
 
         END
-//  850 
-//  851 /*********************************************************************
-//  852  * @fn      Smart_home_Motor_Ctl
-//  853  *
-//  854  * @brief   发送电机控制消息
-//  855  *
-//  856  * @param   none
-//  857  *
-//  858  * @return  none
-//  859  */
-//  860 static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed)
-//  861 {
-//  862   uint8 tmp;
-//  863   
-//  864   // 只有设备在线时, 方发送控制命令
-//  865   if (DeviceList[motor].deviceStatus != DEVICE_OFFLINE)
-//  866   {
-//  867     // put the sequence number in the message
-//  868     tmp = HI_UINT8( MotorTransID );
-//  869     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
-//  870     Coordinator_Msg[2] = tmp;
-//  871     tmp = LO_UINT8( RelayTransID );
-//  872     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
-//  873     Coordinator_Msg[3] = tmp;
-//  874     
-//  875     // 发送给继电器的控制命令 
-//  876     Coordinator_Msg[4] = speed;
-//  877     Coordinator_Msg[5] = cmd;
-//  878     /*********************************************
-//  879     *   屏幕显示部分
-//  880 #if defined ( LCD_SUPPORTED )
-//  881     char* spe_c     = &speed;
-//  882     char* cmd_c     = &cmd;
-//  883     const char SpeStr[3]  = {"ON"};
-//  884     const char CmdStr[4] = {"OFF"};
-//  885     char* LCD_Display1;
-//  886     char* LCD_Display2;
+//  863 
+//  864 /*********************************************************************
+//  865  * @fn      Smart_home_Motor_Ctl
+//  866  *
+//  867  * @brief   发送电机控制消息
+//  868  *
+//  869  * @param   none
+//  870  *
+//  871  * @return  none
+//  872  */
+//  873 static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed)
+//  874 {
+//  875   uint8 tmp;
+//  876   
+//  877   // 只有设备在线时, 方发送控制命令
+//  878   if (DeviceList[motor].deviceStatus != DEVICE_OFFLINE)
+//  879   {
+//  880     // put the sequence number in the message
+//  881     tmp = HI_UINT8( MotorTransID );
+//  882     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+//  883     Coordinator_Msg[2] = tmp;
+//  884     tmp = LO_UINT8( RelayTransID );
+//  885     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+//  886     Coordinator_Msg[3] = tmp;
 //  887     
-//  888     if(cmd == 0x02) {LCD_Display1 = strcat(K1,OnStr);}
-//  889     if(cmd == 0x01) {LCD_Display1 = strcat(K1,OffStr);}
-//  890     if(cmd == 0x10) {LCD_Display2 = strcat(K2,OnStr);}
-//  891     if(cmd == 0x20) {LCD_Display2 = strcat(K2,OffStr);}
-//  892     
-//  893     HalLcdWriteString( LCD_Display1, HAL_LCD_LINE_2 );
-//  894     HalLcdWriteString( LCD_Display2, HAL_LCD_LINE_3 );
-//  895 #endif     
-//  896     ********************************************/
-//  897     
-//  898     tmp = AF_DataRequest( &Motor_addr,                         
-//  899                           (endPointDesc_t *)&Smart_home_epDesc,                  
-//  900                            Smart_home_CLUSTERID_MOTORCTRL,
-//  901                            MOTORSTATUSMSG_LEN,                 
-//  902                            Coordinator_Msg,                    
-//  903                           &MotorTransID,                       
-//  904                            AF_DISCV_ROUTE,                     
-//  905                            AF_DEFAULT_RADIUS );
-//  906   }   
-//  907 }
-//  908 
-//  909 
-//  910 /*********************************************************************
-//  911  * @fn      Smart_home_Display
-//  912  *
-//  913  * @brief   屏幕回显函数，定义了内容如何显示.
-//  914  *
-//  915  * @param   port - UART port.
-//  916  * @param   event - the UART port event flag.
-//  917  *
-//  918  * @return  none
-//  919  */
-//  920 static void Smart_home_Display(uint8 page)
-//  921 {
-//  922    
-//  923 }
-//  924 
-//  925 /*********************************************************************
-//  926  * @fn      Smart_home_Send
+//  888     // 发送给继电器的控制命令 
+//  889     Coordinator_Msg[4] = speed;
+//  890     Coordinator_Msg[5] = cmd;
+//  891     /*********************************************
+//  892     *   屏幕显示部分
+//  893 #if defined ( LCD_SUPPORTED )
+//  894     char* spe_c     = &speed;
+//  895     char* cmd_c     = &cmd;
+//  896     const char SpeStr[3]  = {"ON"};
+//  897     const char CmdStr[4] = {"OFF"};
+//  898     char* LCD_Display1;
+//  899     char* LCD_Display2;
+//  900     
+//  901     if(cmd == 0x02) {LCD_Display1 = strcat(K1,OnStr);}
+//  902     if(cmd == 0x01) {LCD_Display1 = strcat(K1,OffStr);}
+//  903     if(cmd == 0x10) {LCD_Display2 = strcat(K2,OnStr);}
+//  904     if(cmd == 0x20) {LCD_Display2 = strcat(K2,OffStr);}
+//  905     
+//  906     HalLcdWriteString( LCD_Display1, HAL_LCD_LINE_2 );
+//  907     HalLcdWriteString( LCD_Display2, HAL_LCD_LINE_3 );
+//  908 #endif     
+//  909     ********************************************/
+//  910     
+//  911     tmp = AF_DataRequest( &Motor_addr,                         
+//  912                           (endPointDesc_t *)&Smart_home_epDesc,                  
+//  913                            Smart_home_CLUSTERID_MOTORCTRL,
+//  914                            MOTORSTATUSMSG_LEN,                 
+//  915                            Coordinator_Msg,                    
+//  916                           &MotorTransID,                       
+//  917                            AF_DISCV_ROUTE,                     
+//  918                            AF_DEFAULT_RADIUS );
+//  919   }   
+//  920 }
+//  921 
+//  922 
+//  923 /*********************************************************************
+//  924  * @fn      Smart_home_Display
+//  925  *
+//  926  * @brief   屏幕回显函数，定义了内容如何显示.
 //  927  *
-//  928  * @brief   Send data OTA.
-//  929  *
-//  930  * @param   none
-//  931  *
-//  932  * @return  none
-//  933  */
-//  934 static void Smart_home_Send(void)
-//  935 {
-//  936 #if SERIAL_APP_LOOPBACK
-//  937   if (Smart_home_TxLen < SERIAL_APP_TX_MAX)
-//  938   {
-//  939     Smart_home_TxLen += HalUARTRead(SERIAL_APP_PORT, Smart_home_TxBuf+Smart_home_TxLen+1,
-//  940                                                     SERIAL_APP_TX_MAX-Smart_home_TxLen);
-//  941   }
-//  942 
-//  943   if (Smart_home_TxLen)
-//  944   {
-//  945     (void)Smart_home_TxAddr;
-//  946     if (HalUARTWrite(SERIAL_APP_PORT, Smart_home_TxBuf+1, Smart_home_TxLen))
-//  947     {
-//  948       Smart_home_TxLen = 0;
-//  949     }
-//  950     else
-//  951     {
-//  952       osal_set_event(Smart_home_TaskID, Smart_home_SEND_EVT);
-//  953     }
+//  928  * @param   port - UART port.
+//  929  * @param   event - the UART port event flag.
+//  930  *
+//  931  * @return  none
+//  932  */
+//  933 static void Smart_home_Display(uint8 page)
+//  934 {
+//  935    
+//  936 }
+//  937 
+//  938 /*********************************************************************
+//  939  * @fn      Smart_home_Send
+//  940  *
+//  941  * @brief   Send data OTA.
+//  942  *
+//  943  * @param   none
+//  944  *
+//  945  * @return  none
+//  946  */
+//  947 static void Smart_home_Send(void)
+//  948 {
+//  949 #if SERIAL_APP_LOOPBACK
+//  950   if (Smart_home_TxLen < SERIAL_APP_TX_MAX)
+//  951   {
+//  952     Smart_home_TxLen += HalUARTRead(SERIAL_APP_PORT, Smart_home_TxBuf+Smart_home_TxLen+1,
+//  953                                                     SERIAL_APP_TX_MAX-Smart_home_TxLen);
 //  954   }
-//  955 #else
-//  956   if (!Smart_home_TxLen && 
-//  957       (Smart_home_TxLen = HalUARTRead(SMART_HOME_PORT, Smart_home_TxBuf+1, SMART_HOME_TX_MAX)))
-//  958   {
-//  959     // Pre-pend sequence number to the Tx message.
-//  960     Smart_home_TxBuf[0] = ++Smart_home_TxSeq;
-//  961   }
-//  962 
-//  963   if (Smart_home_TxLen)
-//  964   {
-//  965     /*
-//  966     if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_TxAddr,
-//  967                                            (endPointDesc_t *)&Smart_home_epDesc,
-//  968                                             Smart_home_CLUSTERID1,
-//  969                                             Smart_home_TxLen+1, Smart_home_TxBuf,
-//  970                                             &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
-//  971     {
-//  972       osal_set_event(Smart_home_TaskID, Smart_home_SEND_EVT);
-//  973     }
-//  974     */
-//  975   }
-//  976 #endif
-//  977 }
-//  978 
-//  979 /*********************************************************************
-//  980  * @fn      Smart_home_Resp
-//  981  *
-//  982  * @brief   Send data OTA.
-//  983  *
-//  984  * @param   none
-//  985  *
-//  986  * @return  none
-//  987  */
-//  988 static void Smart_home_Resp(void)
-//  989 {
-//  990   /*
-//  991   if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_RxAddr,
-//  992                                          (endPointDesc_t *)&Smart_home_epDesc,
-//  993                                           Smart_home_CLUSTERID2,
-//  994                                           SERIAL_APP_RSP_CNT, Smart_home_RspBuf,
-//  995                                          &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
-//  996   {
-//  997     osal_set_event(Smart_home_TaskID, Smart_home_RESP_EVT);
-//  998   }
-//  999   */
-// 1000 }
-// 1001 
-// 1002 /*********************************************************************
-// 1003  * @fn      Smart_home_CallBack
-// 1004  *
-// 1005  * @brief   Send data OTA.
-// 1006  *
-// 1007  * @param   port - UART port.
-// 1008  * @param   event - the UART port event flag.
-// 1009  *
-// 1010  * @return  none
-// 1011  */
-// 1012 static void Smart_home_CallBack(uint8 port, uint8 event)
-// 1013 {
-// 1014   (void)port;
-// 1015 
-// 1016   if ((event & (HAL_UART_RX_FULL | HAL_UART_RX_ABOUT_FULL | HAL_UART_RX_TIMEOUT)) &&
-// 1017 #if SERIAL_APP_LOOPBACK
-// 1018       (Smart_home_TxLen < SERIAL_APP_TX_MAX))
-// 1019 #else
-// 1020       !Smart_home_TxLen)
-// 1021 #endif
-// 1022   {
-// 1023     Smart_home_Send();
-// 1024   }
-// 1025 }
-// 1026 
-// 1027 /*********************************************************************
-// 1028 *********************************************************************/
+//  955 
+//  956   if (Smart_home_TxLen)
+//  957   {
+//  958     (void)Smart_home_TxAddr;
+//  959     if (HalUARTWrite(SERIAL_APP_PORT, Smart_home_TxBuf+1, Smart_home_TxLen))
+//  960     {
+//  961       Smart_home_TxLen = 0;
+//  962     }
+//  963     else
+//  964     {
+//  965       osal_set_event(Smart_home_TaskID, Smart_home_SEND_EVT);
+//  966     }
+//  967   }
+//  968 #else
+//  969   if (!Smart_home_TxLen && 
+//  970       (Smart_home_TxLen = HalUARTRead(SMART_HOME_PORT, Smart_home_TxBuf+1, SMART_HOME_TX_MAX)))
+//  971   {
+//  972     // Pre-pend sequence number to the Tx message.
+//  973     Smart_home_TxBuf[0] = ++Smart_home_TxSeq;
+//  974   }
+//  975 
+//  976   if (Smart_home_TxLen)
+//  977   {
+//  978     /*
+//  979     if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_TxAddr,
+//  980                                            (endPointDesc_t *)&Smart_home_epDesc,
+//  981                                             Smart_home_CLUSTERID1,
+//  982                                             Smart_home_TxLen+1, Smart_home_TxBuf,
+//  983                                             &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
+//  984     {
+//  985       osal_set_event(Smart_home_TaskID, Smart_home_SEND_EVT);
+//  986     }
+//  987     */
+//  988   }
+//  989 #endif
+//  990 }
+//  991 
+//  992 /*********************************************************************
+//  993  * @fn      Smart_home_Resp
+//  994  *
+//  995  * @brief   Send data OTA.
+//  996  *
+//  997  * @param   none
+//  998  *
+//  999  * @return  none
+// 1000  */
+// 1001 static void Smart_home_Resp(void)
+// 1002 {
+// 1003   /*
+// 1004   if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_RxAddr,
+// 1005                                          (endPointDesc_t *)&Smart_home_epDesc,
+// 1006                                           Smart_home_CLUSTERID2,
+// 1007                                           SERIAL_APP_RSP_CNT, Smart_home_RspBuf,
+// 1008                                          &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
+// 1009   {
+// 1010     osal_set_event(Smart_home_TaskID, Smart_home_RESP_EVT);
+// 1011   }
+// 1012   */
+// 1013 }
+// 1014 
+// 1015 /*********************************************************************
+// 1016  * @fn      Smart_home_CallBack
+// 1017  *
+// 1018  * @brief   Send data OTA.
+// 1019  *
+// 1020  * @param   port - UART port.
+// 1021  * @param   event - the UART port event flag.
+// 1022  *
+// 1023  * @return  none
+// 1024  */
+// 1025 static void Smart_home_CallBack(uint8 port, uint8 event)
+// 1026 {
+// 1027   (void)port;
+// 1028 
+// 1029   if ((event & (HAL_UART_RX_FULL | HAL_UART_RX_ABOUT_FULL | HAL_UART_RX_TIMEOUT)) &&
+// 1030 #if SERIAL_APP_LOOPBACK
+// 1031       (Smart_home_TxLen < SERIAL_APP_TX_MAX))
+// 1032 #else
+// 1033       !Smart_home_TxLen)
+// 1034 #endif
+// 1035   {
+// 1036     Smart_home_Send();
+// 1037   }
+// 1038 }
+// 1039 
+// 1040 /*********************************************************************
+// 1041 *********************************************************************/
 // 
-// 1 625 bytes in segment BANKED_CODE
+// 1 647 bytes in segment BANKED_CODE
 //    36 bytes in segment BANK_RELAYS
 //   260 bytes in segment XDATA_ROM_C
-//   207 bytes in segment XDATA_Z
+//   208 bytes in segment XDATA_Z
 // 
-// 1 661 bytes of CODE  memory
+// 1 683 bytes of CODE  memory
 //   260 bytes of CONST memory
-//   207 bytes of XDATA memory
+//   208 bytes of XDATA memory
 //
 //Errors: none
 //Warnings: 15
