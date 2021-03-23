@@ -1,0 +1,460 @@
+///////////////////////////////////////////////////////////////////////////////
+//                                                                            /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        22/Mar/2021  21:33:01 /
+// Copyright 2004-2011 IAR Systems AB.                                        /
+//                                                                            /
+//    Core               =  plain                                             /
+//    Code model         =  banked                                            /
+//    Data model         =  large                                             /
+//    Calling convention =  xdata reentrant                                   /
+//    Constant location  =  data_rom                                          /
+//    Dptr setup         =  1,16                                              /
+//    Source file        =  D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03      /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Components /
+//                          \hal\target\CC2530SB\hal_soundvibration.c         /
+//    Command line       =  -f "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03  /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\..\..\..\Tools\CC253 /
+//                          0DB\f8wEndev.cfg" (-DCPU32MHZ -DROOT=__near_func  /
+//                          -DMAC_CFG_TX_DATA_MAX=3 -DMAC_CFG_TX_MAX=6        /
+//                          -DMAC_CFG_RX_MAX=3) -f "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ /
+//                          ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530- /
+//                          2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ /
+//                          ..\..\..\Tools\CC2530DB\f8wConfig.cfg"            /
+//                          (-DZIGBEEPRO -DSECURE=0 -DZG_SECURE_DYNAMIC=0     /
+//                          -DREFLECTOR -DDEFAULT_CHANLIST=0x02000000         /
+//                          -DZDAPP_CONFIG_PAN_ID=0x1001                      /
+//                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
+//                          ASK=0x007F -DBEACON_REQUEST_DELAY=100             /
+//                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
+//                          -DLINK_STATUS_JITTER_MASK=0x007F                  /
+//                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_P /
+//                          OLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7           /
+//                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3   /
+//                          -DNWK_MAX_DATA_RETRIES=2                          /
+//                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9        /
+//                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40          /
+//                          -DNWK_MAX_BINDING_ENTRIES=4                       /
+//                          -DMAX_BINDING_CLUSTER_IDS=4                       /
+//                          "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07, 0x09,     /
+//                          0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08,   /
+//                          0x0A, 0x0C, 0x0D}" -DMAC_MAX_FRAME_SIZE=116       /
+//                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const    /
+//                          __code" -DGENERIC=__generic                       /
+//                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000       /
+//                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
+//                          -DREJOIN_POLL_RATE=440 "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ /
+//                          ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530- /
+//                          2.5.1a_EB\Components\hal\target\CC2530SB\hal_soun /
+//                          dvibration.c" -D HAL_UART=TRUE -D HAL_UART_TEST   /
+//                          -D xPOWER_SAVING -lC "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷Íø /
+//                          Âç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2. /
+//                          5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\En /
+//                          dDeviceSBRelay\List\" -lA                         /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\EndDeviceSBRelay\Lis /
+//                          t\" --diag_suppress Pe001,Pa010 -o                /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\EndDeviceSBRelay\Obj /
+//                          \" -e --no_code_motion --debug --core=plain       /
+//                          --dptr=16,1 --data_model=large                    /
+//                          --code_model=banked --calling_convention=xdata_re /
+//                          entrant --place_constants=data_rom                /
+//                          --nr_virtual_regs 16 -I                           /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\" -I                 /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\..\Source\" -I       /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\..\..\..\ZMain\TI253 /
+//                          0DB\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½ /
+//                          Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Proj /
+//                          ects\zstack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\.. /
+//                          \Components\hal\include\" -I                      /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compo /
+//                          nents\hal\target\CC2530SB\" -I                    /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compo /
+//                          nents\mac\include\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ /
+//                          ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530- /
+//                          2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ /
+//                          ..\..\..\..\..\Components\mac\high_level\" -I     /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compo /
+//                          nents\mac\low_level\srf04\" -I                    /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compo /
+//                          nents\mac\low_level\srf04\single_chip\" -I        /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compo /
+//                          nents\mt\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊ /
+//                          µ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB /
+//                          \Projects\zstack\MY_BOARD\Exp4\CC2530DB\..\..\..\ /
+//                          ..\..\Components\osal\include\" -I                /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compo /
+//                          nents\services\saddr\" -I                         /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compo /
+//                          nents\services\sdata\" -I                         /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compo /
+//                          nents\stack\af\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂ /
+//                          ç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5 /
+//                          .1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\..\ /
+//                          ..\..\..\..\Components\stack\nwk\" -I             /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compo /
+//                          nents\stack\sapi\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷Í /
+//                          øÂç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2 /
+//                          .5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\. /
+//                          .\..\..\..\..\Components\stack\sec\" -I           /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compo /
+//                          nents\stack\sys\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷Íø /
+//                          Âç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2. /
+//                          5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\.. /
+//                          \..\..\..\..\Components\stack\zdo\" -I            /
+//                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03     /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compo /
+//                          nents\zmac\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×Ûº /
+//                          ÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_ /
+//                          EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\..\..\. /
+//                          .\..\..\Components\zmac\f8w\" -Ohz                /
+//    List file          =  D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03      /
+//                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\z /
+//                          stack\MY_BOARD\Exp4\CC2530DB\EndDeviceSBRelay\Lis /
+//                          t\hal_soundvibration.s51                          /
+//                                                                            /
+//                                                                            /
+///////////////////////////////////////////////////////////////////////////////
+
+        NAME hal_soundvibration
+
+        RTMODEL "__SystemLibrary", "CLib"
+        RTMODEL "__calling_convention", "xdata_reentrant"
+        RTMODEL "__code_model", "banked"
+        RTMODEL "__core", "plain"
+        RTMODEL "__data_model", "large"
+        RTMODEL "__dptr_size", "16"
+        RTMODEL "__extended_stack", "disabled"
+        RTMODEL "__location_for_constants", "data"
+        RTMODEL "__number_of_dptrs", "1"
+        RTMODEL "__rt_version", "1"
+
+        RSEG DOVERLAY:DATA:NOROOT(0)
+        RSEG IOVERLAY:IDATA:NOROOT(0)
+        RSEG ISTACK:IDATA:NOROOT(0)
+        RSEG PSTACK:XDATA:NOROOT(0)
+        RSEG XSTACK:XDATA:NOROOT(0)
+
+        EXTERN ?BDISPATCH
+        EXTERN ?BRET
+
+        PUBLIC ??HalSoundCheck?relay
+        FUNCTION ??HalSoundCheck?relay,0203H
+        PUBLIC ??HalSoundVbInit?relay
+        FUNCTION ??HalSoundVbInit?relay,0203H
+        PUBLIC ??HalVibrationCheck?relay
+        FUNCTION ??HalVibrationCheck?relay,0203H
+        PUBLIC HalSoundCheck
+        FUNCTION HalSoundCheck,0201H
+        ARGFRAME XSTACK, 0, STACK
+        PUBLIC HalSoundVbInit
+        FUNCTION HalSoundVbInit,0201H
+        ARGFRAME XSTACK, 0, STACK
+        PUBLIC HalVibrationCheck
+        FUNCTION HalVibrationCheck,0201H
+        ARGFRAME XSTACK, 0, STACK
+        PUBWEAK P1DIR
+        PUBWEAK _A_P1
+        
+        CFI Names cfiNames0
+        CFI StackFrame CFA_SP SP IDATA
+        CFI StackFrame CFA_PSP16 PSP16 XDATA
+        CFI StackFrame CFA_XSP16 XSP16 XDATA
+        CFI StaticOverlayFrame CFA_IOVERLAY IOVERLAY
+        CFI StaticOverlayFrame CFA_DOVERLAY DOVERLAY
+        CFI Resource `PSW.CY`:1, `B.BR0`:1, `B.BR1`:1, `B.BR2`:1, `B.BR3`:1
+        CFI Resource `B.BR4`:1, `B.BR5`:1, `B.BR6`:1, `B.BR7`:1, `VB.BR8`:1
+        CFI Resource `VB.BR9`:1, `VB.BR10`:1, `VB.BR11`:1, `VB.BR12`:1
+        CFI Resource `VB.BR13`:1, `VB.BR14`:1, `VB.BR15`:1, VB:8, B:8, A:8
+        CFI Resource PSW:8, DPL0:8, DPH0:8, R0:8, R1:8, R2:8, R3:8, R4:8, R5:8
+        CFI Resource R6:8, R7:8, V0:8, V1:8, V2:8, V3:8, V4:8, V5:8, V6:8, V7:8
+        CFI Resource V8:8, V9:8, V10:8, V11:8, V12:8, V13:8, V14:8, V15:8, SP:8
+        CFI Resource PSPH:8, PSPL:8, PSP16:16, XSPH:8, XSPL:8, XSP16:16
+        CFI VirtualResource ?RET:24
+        CFI Resource ?BRET_EXT:8
+        CFI VirtualResource ?RET_HIGH:8, ?RET_LOW:8
+        CFI ResourceParts PSP16 PSPH, PSPL
+        CFI ResourceParts XSP16 XSPH, XSPL
+        CFI ResourceParts ?RET ?BRET_EXT, ?RET_HIGH, ?RET_LOW
+        CFI EndNames cfiNames0
+        
+        CFI Common cfiCommon0 Using cfiNames0
+        CFI CodeAlign 1
+        CFI DataAlign -1
+        CFI ReturnAddress ?RET CODE
+        CFI CFA_DOVERLAY Used
+        CFI CFA_IOVERLAY Used
+        CFI CFA_SP SP+-3
+        CFI CFA_PSP16 PSP16+0
+        CFI CFA_XSP16 XSP16+0
+        CFI `PSW.CY` SameValue
+        CFI `B.BR0` SameValue
+        CFI `B.BR1` SameValue
+        CFI `B.BR2` SameValue
+        CFI `B.BR3` SameValue
+        CFI `B.BR4` SameValue
+        CFI `B.BR5` SameValue
+        CFI `B.BR6` SameValue
+        CFI `B.BR7` SameValue
+        CFI `VB.BR8` SameValue
+        CFI `VB.BR9` SameValue
+        CFI `VB.BR10` SameValue
+        CFI `VB.BR11` SameValue
+        CFI `VB.BR12` SameValue
+        CFI `VB.BR13` SameValue
+        CFI `VB.BR14` SameValue
+        CFI `VB.BR15` SameValue
+        CFI VB SameValue
+        CFI B Undefined
+        CFI A Undefined
+        CFI PSW SameValue
+        CFI DPL0 SameValue
+        CFI DPH0 SameValue
+        CFI R0 Undefined
+        CFI R1 Undefined
+        CFI R2 Undefined
+        CFI R3 Undefined
+        CFI R4 Undefined
+        CFI R5 Undefined
+        CFI R6 SameValue
+        CFI R7 SameValue
+        CFI V0 SameValue
+        CFI V1 SameValue
+        CFI V2 SameValue
+        CFI V3 SameValue
+        CFI V4 SameValue
+        CFI V5 SameValue
+        CFI V6 SameValue
+        CFI V7 SameValue
+        CFI V8 SameValue
+        CFI V9 SameValue
+        CFI V10 SameValue
+        CFI V11 SameValue
+        CFI V12 SameValue
+        CFI V13 SameValue
+        CFI V14 SameValue
+        CFI V15 SameValue
+        CFI PSPH Undefined
+        CFI PSPL Undefined
+        CFI XSPH Undefined
+        CFI XSPL Undefined
+        CFI ?RET Concat
+        CFI ?BRET_EXT Frame(CFA_SP, 3)
+        CFI ?RET_HIGH Frame(CFA_SP, 2)
+        CFI ?RET_LOW Frame(CFA_SP, 1)
+        CFI EndCommon cfiCommon0
+        
+HalSoundCheck       SYMBOL "HalSoundCheck"
+??HalSoundCheck?relay SYMBOL "?relay", HalSoundCheck
+HalSoundVbInit      SYMBOL "HalSoundVbInit"
+??HalSoundVbInit?relay SYMBOL "?relay", HalSoundVbInit
+HalVibrationCheck   SYMBOL "HalVibrationCheck"
+??HalVibrationCheck?relay SYMBOL "?relay", HalVibrationCheck
+
+// D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Components\hal\target\CC2530SB\hal_soundvibration.c
+//    1 //*****************************************************************************/
+//    2 //
+//    3 // ÎÄ ¼þ Ãû£ºhal_soundvibration.c
+//    4 //
+//    5 // ×÷    Õß£ºyizedxl
+//    6 //
+//    7 // ´´½¨Ê±¼ä£º2013.10
+//    8 //
+//    9 // ÐÞ¸ÄÊ±¼ä£º2013.11.26
+//   10 //
+//   11 // IAR °æ±¾£ºIAR for 8051 V8.10.1
+//   12 //
+//   13 // ²âÊÔÆ½Ì¨£ºSensor Battery MotherBoard V2.0
+//   14 //
+//   15 // Ëµ    Ã÷£ºÉùÒôÕñ¶¯¼ì²âÄ£¿é£¬Õñ¶¯Ä£¿éÁ¬½ÓµÄÊÇP1_1£¬ÉùÒôÄ£¿éÁ¬½ÓµÄÊÇP1_2¡£
+//   16 //           Á½¸öÄ£¿é¾ùÊÇÔÚIO¼ì²âµ½µÍµçÆ½Ê±±íÊ¾ÓÐÉùÒô»òÕßÊÇÕñ¶¯³öÏÖ¡£
+//   17 //
+//   18 //*****************************************************************************/
+//   19 
+//   20 #include <iocc2530.h>
+
+        ASEGN SFR_AN:DATA:NOROOT,090H
+// union <unnamed> volatile __sfr _A_P1
+_A_P1:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0feH
+// unsigned char volatile __sfr P1DIR
+P1DIR:
+        DATA8
+        DS 1
+//   21 #include "hal_defs.h"
+//   22 #include "hal_types.h"
+//   23 
+//   24 //*****************************************************************************/
+//   25 //
+//   26 //º¯ÊýÃû£ºHalSoundVbInit
+//   27 //
+//   28 //¹¦  ÄÜ£ºÉùÒôÕð¶¯Ä£¿éIO³õÊ¼»¯
+//   29 //
+//   30 //²Î  Êý£ºÎÞ
+//   31 //
+//   32 //·µ»ØÖµ£ºÎÞ
+//   33 //
+//   34 //*****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//   35 void HalSoundVbInit()
+HalSoundVbInit:
+        CFI Block cfiBlock0 Using cfiCommon0
+        CFI Function HalSoundVbInit
+        CODE
+//   36 {
+        ; Saved register size: 0
+        ; Auto size: 0
+//   37     P1DIR &= ~(BV(1) + BV(2));
+        ANL     0xfe,#0xf9
+//   38 }
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock0
+        REQUIRE P1DIR
+//   39 
+//   40 //*****************************************************************************/
+//   41 //
+//   42 //º¯ÊýÃû£ºHalSoundCheck
+//   43 //
+//   44 //¹¦  ÄÜ£º¼ì²âÁ¬½ÓÉùÒôÄ£¿éµÄIOµçÆ½
+//   45 //
+//   46 //²Î  Êý£ºÎÞ
+//   47 //
+//   48 //·µ»ØÖµ£º0-Ã»ÓÐÉùÒô£»
+//   49 //        1-ÓÐÉùÒô£»
+//   50 //
+//   51 //*****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//   52 uint8 HalSoundCheck()
+HalSoundCheck:
+        CFI Block cfiBlock1 Using cfiCommon0
+        CFI Function HalSoundCheck
+        CODE
+//   53 {
+        ; Saved register size: 0
+        ; Auto size: 0
+//   54     if (P1_2)
+        MOV     C,0x90.2
+        JNC     ??HalSoundCheck_0
+//   55     {
+//   56         return 0;
+        MOV     R1,#0x0
+        SJMP    ??HalSoundCheck_1
+//   57     }
+//   58     else 
+//   59     {
+//   60         return 1;
+??HalSoundCheck_0:
+        MOV     R1,#0x1
+??HalSoundCheck_1:
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock1
+        REQUIRE _A_P1
+//   61     }
+//   62 }
+//   63 
+//   64 //*****************************************************************************/
+//   65 //
+//   66 //º¯ÊýÃû£ºHalVibrationCheck
+//   67 //
+//   68 //¹¦  ÄÜ£º¼ì²âÁ¬½ÓÕñ¶¯Ä£¿éµÄIOµçÆ½
+//   69 //
+//   70 //²Î  Êý£ºÎÞ
+//   71 //
+//   72 //·µ»ØÖµ£º0-Ã»ÓÐÕñ¶¯
+//   73 //        1-ÓÐÕñ¶¯
+//   74 //
+//   75 //*****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//   76 uint8 HalVibrationCheck()
+HalVibrationCheck:
+        CFI Block cfiBlock2 Using cfiCommon0
+        CFI Function HalVibrationCheck
+        CODE
+//   77 {
+        ; Saved register size: 0
+        ; Auto size: 0
+//   78     if (P1_1)
+        MOV     C,0x90.1
+        JNC     ??HalVibrationCheck_0
+//   79     {
+//   80         return 0;
+        MOV     R1,#0x0
+        SJMP    ??HalVibrationCheck_1
+//   81     }
+//   82     else 
+//   83     {
+//   84         return 1;
+??HalVibrationCheck_0:
+        MOV     R1,#0x1
+??HalVibrationCheck_1:
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock2
+        REQUIRE _A_P1
+//   85     }
+//   86 }
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalSoundVbInit?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalSoundVbInit
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalSoundCheck?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalSoundCheck
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalVibrationCheck?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalVibrationCheck
+
+        END
+// 
+// 32 bytes in segment BANKED_CODE
+// 18 bytes in segment BANK_RELAYS
+//  2 bytes in segment SFR_AN
+// 
+// 50 bytes of CODE memory
+//  0 bytes of DATA memory (+ 2 bytes shared)
+//
+//Errors: none
+//Warnings: none

@@ -1,0 +1,382 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.1.40194/W32 for 8051         04/Jan/2021  17:15:13 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data_rom                                           #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Components\hal\target\CC2530SB\hal_rela #
+#                          y.c                                                #
+#    Command line       =  -f D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\..\..\..\Tools\CC2530DB\f8wEndev.cfg            #
+#                          (-DCPU32MHZ -DROOT=__near_func                     #
+#                          -DMAC_CFG_TX_DATA_MAX=3 -DMAC_CFG_TX_MAX=6         #
+#                          -DMAC_CFG_RX_MAX=3) -f D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\ #
+#                          MY_BOARD\Exp4\CC2530DB\..\..\..\Tools\CC2530DB\f8w #
+#                          Config.cfg (-DZIGBEEPRO -DSECURE=0                 #
+#                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
+#                          -DDEFAULT_CHANLIST=0x02000000                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0x1001                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
+#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
+#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DMAC_MAX_FRAME_SIZE=116                           #
+#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
+#                          __code" -DGENERIC=__generic                        #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\t #
+#                          arget\CC2530SB\hal_relay.c -D HAL_UART=TRUE -D     #
+#                          HAL_UART_TEST -D xPOWER_SAVING -lC                 #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBDHT11\List\ -lA                         #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBDHT11\List\ --diag_suppress             #
+#                          Pe001,Pa010 -o D:\Projects_IAR\IAR_C8051\WSN-CC253 #
+#                          0\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD #
+#                          \Exp4\CC2530DB\EndDeviceSBDHT11\Obj\ -e --no_cse   #
+#                          --no_unroll --no_inline --no_code_motion           #
+#                          --no_tbaa --debug --core=plain --dptr=16,1         #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data_rom --nr_virtual_regs 16    #
+#                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack #
+#                          -CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC #
+#                          2530DB\..\Source\ -I D:\Projects_IAR\IAR_C8051\WSN #
+#                          -CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY #
+#                          _BOARD\Exp4\CC2530DB\..\..\..\ZMain\TI2530DB\ -I   #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\target\CC2530SB\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\high_level\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\sing #
+#                          le_chip\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\Z #
+#                          Stack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Ex #
+#                          p4\CC2530DB\..\..\..\..\..\Components\mt\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\osal\include\ -I         #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\saddr\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\sdata\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\af\ -I             #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\nwk\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sapi\ -I           #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sec\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sys\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\zdo\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\ -I                 #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\f8w\ -On            #
+#    List file          =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBDHT11\List\hal_relay.lst                #
+#    Object file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBDHT11\Obj\hal_relay.r51                 #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\target\CC2530SB\hal_relay.c
+      1          //*****************************************************************************/
+      2          //
+      3          // 文 件 名：hal_relay.c
+      4          //
+      5          // 作    者：yizedxl
+      6          //
+      7          // 创建时间：2013.9.23
+      8          //
+      9          // 修改时间：2013.10.31
+     10          //
+     11          // 说    明：继电器驱动程序，继电器模块由两个IO管脚驱动，P1_2(继电器K1)和P1_3(继电器K2)；
+     12          //           管脚置高电平，继电器模块开关打开，相反，管脚低电平，继电器模块关闭；
+     13          //                        
+     14          //
+     15          //*****************************************************************************/
+     16          
+     17          #include "iocc2530.h"
+
+   \                                 In  segment SFR_AN, at 0x90
+   \   union <unnamed> volatile __sfr _A_P1
+   \                     _A_P1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xfe
+   \   unsigned char volatile __sfr P1DIR
+   \                     P1DIR:
+   \   000000                DS 1
+     18          #include "hal_types.h"
+     19          #include "hal_defs.h"
+     20          
+     21          //*****************************************************************************/
+     22          #define  RELAY_MODULE_1_PIN_SET  P1DIR |= BV(2) 
+     23          #define  RELAY_MODULE_2_PIN_SET  P1DIR |= BV(3)
+     24          #define  RELAY_MODULE_1_TOGGLE   P1_2  ^= 1
+     25          #define  RELAY_MODULE_2_TOGGLE   P1_3  ^= 1
+     26          
+     27          #define  RELAY_MODULE_1_PIN      P1_2
+     28          #define  RELAY_MODULE_2_PIN      P1_3
+     29          
+     30          #define  RELAY_SWITCH_ON         1
+     31          #define  RELAY_SWITCH_OFF        0
+     32          
+     33          //*****************************************************************************/
+     34          //本地变量
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     35          static uint8 relayStatus; // 继电器当前状态
+   \                     relayStatus:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     36          
+     37          //*****************************************************************************/
+     38          //函数名：HalRelayCtl
+     39          //功  能：继电器四种模式配置
+     40          //参  数：uint8 mode：继电器模式切换：
+     41          //              0x11：K1关闭(1), K2关闭(1)
+     42          //              0x12：K1打开(2), K2关闭(1)
+     43          //              0x21：K1关闭(1), K2打开(2)
+     44          //              0x22：K1打开(2), K2打开(2)
+     45          //              0x00：无任何操作
+     46          //返回值：无
+     47          //*****************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     48          void HalRelayCtl(uint8 mode)
+   \                     HalRelayCtl:
+     49          {
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 0
+     50              RELAY_MODULE_1_PIN_SET;
+   \   000005   43FE04       ORL     0xfe,#0x4
+     51              RELAY_MODULE_2_PIN_SET;
+   \   000008   43FE08       ORL     0xfe,#0x8
+     52            
+     53              // 继电器K1状态切换
+     54              switch(mode & 0x0F)
+   \   00000B   89..         MOV     ?V0 + 0,R1
+   \   00000D   75..00       MOV     ?V0 + 1,#0x0
+   \   000010   E5..         MOV     A,?V0 + 0
+   \   000012   540F         ANL     A,#0xf
+   \   000014   FA           MOV     R2,A
+   \   000015   E5..         MOV     A,?V0 + 1
+   \   000017   5400         ANL     A,#0x0
+   \   000019   FB           MOV     R3,A
+   \   00001A   EA           MOV     A,R2
+   \   00001B   14           DEC     A
+   \   00001C   6013         JZ      ??HalRelayCtl_0
+   \   00001E   14           DEC     A
+   \   00001F   701E         JNZ     ??HalRelayCtl_1
+     55              {
+     56              case 0x02: // 打开
+     57                {
+     58                  RELAY_MODULE_1_PIN =  RELAY_SWITCH_ON;
+   \   000021   D292         SETB    0x90.2
+     59                  relayStatus = (relayStatus&0xF0) | 0x02;
+   \   000023   90....       MOV     DPTR,#relayStatus
+   \   000026   E0           MOVX    A,@DPTR
+   \   000027   54F0         ANL     A,#0xf0
+   \   000029   4402         ORL     A,#0x2
+   \   00002B   90....       MOV     DPTR,#relayStatus
+   \   00002E   F0           MOVX    @DPTR,A
+     60                  break;
+   \   00002F   800E         SJMP    ??HalRelayCtl_1
+     61                }
+     62              case 0x01: // 关闭
+     63                {
+     64                  RELAY_MODULE_1_PIN =  RELAY_SWITCH_OFF;
+   \                     ??HalRelayCtl_0:
+   \   000031   C292         CLR     0x90.2
+     65                  relayStatus = (relayStatus&0xF0) | 0x01;
+   \   000033   90....       MOV     DPTR,#relayStatus
+   \   000036   E0           MOVX    A,@DPTR
+   \   000037   54F0         ANL     A,#0xf0
+   \   000039   4401         ORL     A,#0x1
+   \   00003B   90....       MOV     DPTR,#relayStatus
+   \   00003E   F0           MOVX    @DPTR,A
+     66                  break;
+     67                }
+     68              default:
+     69                  break;
+     70              }
+     71              
+     72              // 继电器K2状态切换
+     73              switch(mode & 0xF0)
+   \                     ??HalRelayCtl_1:
+   \   00003F   89..         MOV     ?V0 + 0,R1
+   \   000041   75..00       MOV     ?V0 + 1,#0x0
+   \   000044   E5..         MOV     A,?V0 + 0
+   \   000046   54F0         ANL     A,#0xf0
+   \   000048   FA           MOV     R2,A
+   \   000049   E5..         MOV     A,?V0 + 1
+   \   00004B   5400         ANL     A,#0x0
+   \   00004D   FB           MOV     R3,A
+   \   00004E   EA           MOV     A,R2
+   \   00004F   24F0         ADD     A,#-0x10
+   \   000051   6006         JZ      ??HalRelayCtl_2
+   \   000053   24F0         ADD     A,#-0x10
+   \   000055   6012         JZ      ??HalRelayCtl_3
+   \   000057   801E         SJMP    ??HalRelayCtl_4
+     74              {
+     75              case 0x10: // 关闭
+     76                {
+     77                  RELAY_MODULE_2_PIN =  RELAY_SWITCH_OFF;
+   \                     ??HalRelayCtl_2:
+   \   000059   C293         CLR     0x90.3
+     78                  relayStatus = (relayStatus&0x0F) | 0x10;
+   \   00005B   90....       MOV     DPTR,#relayStatus
+   \   00005E   E0           MOVX    A,@DPTR
+   \   00005F   540F         ANL     A,#0xf
+   \   000061   4410         ORL     A,#0x10
+   \   000063   90....       MOV     DPTR,#relayStatus
+   \   000066   F0           MOVX    @DPTR,A
+     79                  break;
+   \   000067   800E         SJMP    ??HalRelayCtl_4
+     80                }
+     81              case 0x20: // 打开
+     82                {
+     83                  RELAY_MODULE_2_PIN =  RELAY_SWITCH_ON;
+   \                     ??HalRelayCtl_3:
+   \   000069   D293         SETB    0x90.3
+     84                  relayStatus = (relayStatus&0x0F) | 0x20;
+   \   00006B   90....       MOV     DPTR,#relayStatus
+   \   00006E   E0           MOVX    A,@DPTR
+   \   00006F   540F         ANL     A,#0xf
+   \   000071   4420         ORL     A,#0x20
+   \   000073   90....       MOV     DPTR,#relayStatus
+   \   000076   F0           MOVX    @DPTR,A
+     85                  break;
+     86                }
+     87              default:
+     88                  break;
+     89              }
+     90          }
+   \                     ??HalRelayCtl_4:
+   \   000077   7F02         MOV     R7,#0x2
+   \   000079   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   00007C                REQUIRE P1DIR
+   \   00007C                REQUIRE _A_P1
+     91          
+     92          //*****************************************************************************/
+     93          //函数名：HalRelayStatus
+     94          //功  能：将存储的继电器的状态通过函数返回
+     95          //参  数：无
+     96          //返回值：返回继电器设置的状态
+     97          //*****************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     98          uint8 HalRelayStatus()
+   \                     HalRelayStatus:
+     99          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    100              return relayStatus;
+   \   000004   90....       MOV     DPTR,#relayStatus
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   F9           MOV     R1,A
+   \   000009   D083         POP     DPH
+   \   00000B   D082         POP     DPL
+   \   00000D   02....       LJMP    ?BRET
+    101          }
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalRelayCtl?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalRelayCtl
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalRelayStatus?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalRelayStatus
+
+   Maximum stack usage in bytes:
+
+     Function       ISTACK PSTACK XSTACK
+     --------       ------ ------ ------
+     HalRelayCtl        0      0     10
+     HalRelayStatus     2      0      0
+
+
+   Segment part sizes:
+
+     Function/Label         Bytes
+     --------------         -----
+     _A_P1                     1
+     P1DIR                     1
+     relayStatus               1
+     HalRelayCtl             124
+     HalRelayStatus           16
+     ??HalRelayCtl?relay       6
+     ??HalRelayStatus?relay    6
+
+ 
+ 140 bytes in segment BANKED_CODE
+  12 bytes in segment BANK_RELAYS
+   2 bytes in segment SFR_AN
+   1 byte  in segment XDATA_Z
+ 
+ 152 bytes of CODE  memory
+   0 bytes of DATA  memory (+ 2 bytes shared)
+   1 byte  of XDATA memory
+
+Errors: none
+Warnings: none

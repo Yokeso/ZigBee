@@ -1,0 +1,2541 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.1.40194/W32 for 8051         04/Jan/2021  17:14:33 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data_rom                                           #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Components\hal\target\CC2530SB\hal_lcd. #
+#                          c                                                  #
+#    Command line       =  -f D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\..\..\..\Tools\CC2530DB\f8wEndev.cfg            #
+#                          (-DCPU32MHZ -DROOT=__near_func                     #
+#                          -DMAC_CFG_TX_DATA_MAX=3 -DMAC_CFG_TX_MAX=6         #
+#                          -DMAC_CFG_RX_MAX=3) -f D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\ #
+#                          MY_BOARD\Exp4\CC2530DB\..\..\..\Tools\CC2530DB\f8w #
+#                          Config.cfg (-DZIGBEEPRO -DSECURE=0                 #
+#                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
+#                          -DDEFAULT_CHANLIST=0x02000000                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0x1001                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
+#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
+#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DMAC_MAX_FRAME_SIZE=116                           #
+#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
+#                          __code" -DGENERIC=__generic                        #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\t #
+#                          arget\CC2530SB\hal_lcd.c -D HAL_UART=TRUE -D       #
+#                          HAL_UART_TEST -D xPOWER_SAVING -lC                 #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBSoundVb\List\ -lA                       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBSoundVb\List\ --diag_suppress           #
+#                          Pe001,Pa010 -o D:\Projects_IAR\IAR_C8051\WSN-CC253 #
+#                          0\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD #
+#                          \Exp4\CC2530DB\EndDeviceSBSoundVb\Obj\ -e          #
+#                          --no_code_motion --debug --core=plain --dptr=16,1  #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data_rom --nr_virtual_regs 16    #
+#                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack #
+#                          -CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC #
+#                          2530DB\..\Source\ -I D:\Projects_IAR\IAR_C8051\WSN #
+#                          -CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY #
+#                          _BOARD\Exp4\CC2530DB\..\..\..\ZMain\TI2530DB\ -I   #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\target\CC2530SB\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\high_level\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\sing #
+#                          le_chip\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\Z #
+#                          Stack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Ex #
+#                          p4\CC2530DB\..\..\..\..\..\Components\mt\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\osal\include\ -I         #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\saddr\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\sdata\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\af\ -I             #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\nwk\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sapi\ -I           #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sec\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sys\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\zdo\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\ -I                 #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\f8w\ -Ohz           #
+#    List file          =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBSoundVb\List\hal_lcd.lst                #
+#    Object file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBSoundVb\Obj\hal_lcd.r51                 #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\target\CC2530SB\hal_lcd.c
+      1          /****************************************************************************************
+      2            Filename:       hal_lcd.c
+      3            Revised:        $Date: 2019-03-16 $
+      4            
+      5            Description:    
+      6            This file contains the interface to the HAL LCD Service.
+      7          
+      8          
+      9            Copyright 2007-2019 Texas Instruments Incorporated. All rights reserved.
+     10          
+     11            IMPORTANT: Your use of this Software is limited to those specific rights
+     12            granted under the terms of a software license agreement between the user
+     13            who downloaded the software, his/her employer (which must be your employer)
+     14            and Texas Instruments Incorporated (the "License").  You may not use this
+     15            Software unless you agree to abide by the terms of the License. The License
+     16            limits your use, and you acknowledge, that the Software may not be modified,
+     17            copied or distributed unless embedded on a Texas Instruments microcontroller
+     18            or used solely and exclusively in conjunction with a Texas Instruments radio
+     19            frequency transceiver, which is integrated into your product.  Other than for
+     20            the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+     21            works of, modify, distribute, perform, display or sell this Software and/or
+     22            its documentation for any purpose.
+     23          
+     24            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+     25            PROVIDED 揂S IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+     26            INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
+     27            NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+     28            TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     29            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+     30            LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+     31            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
+     32            OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
+     33            OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+     34            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     35          
+     36            Should you have any questions regarding your right to use this Software,
+     37            contact Texas Instruments Incorporated at www.TI.com.
+     38          **************************************************************************************************/
+     39          
+     40          /**************************************************************************************************
+     41           *                                           INCLUDES
+     42           **************************************************************************************************/
+     43          //#include <ioCC2530.h>
+     44          #include "hal_types.h"
+     45          #include "hal_lcd.h"
+     46          #include "OSAL.h"
+     47          #include "OnBoard.h"
+     48          #include "hal_assert.h"
+     49          #include "hal_defs.h"
+     50          #include "font.h"
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \   unsigned char const __xdata_rom ascii_table_8x16[95][16]
+   \                     ascii_table_8x16:
+   \   000000   00           DB 0
+   \   000001   00           DB 0
+   \   000002   00           DB 0
+   \   000003   00           DB 0
+   \   000004   00           DB 0
+   \   000005   00           DB 0
+   \   000006   00           DB 0
+   \   000007   00           DB 0
+   \   000008   00           DB 0
+   \   000009   00           DB 0
+   \   00000A   00           DB 0
+   \   00000B   00           DB 0
+   \   00000C   00           DB 0
+   \   00000D   00           DB 0
+   \   00000E   00           DB 0
+   \   00000F   00           DB 0
+   \   000010   00           DB 0
+   \   000011   00           DB 0
+   \   000012   00           DB 0
+   \   000013   F8           DB 248
+   \   000014   00           DB 0
+   \   000015   00           DB 0
+   \   000016   00           DB 0
+   \   000017   00           DB 0
+   \   000018   00           DB 0
+   \   000019   00           DB 0
+   \   00001A   00           DB 0
+   \   00001B   33           DB 51
+   \   00001C   30           DB 48
+   \   00001D   00           DB 0
+   \   00001E   00           DB 0
+   \   00001F   00           DB 0
+   \   000020   00           DB 0
+   \   000021   10           DB 16
+   \   000022   0C           DB 12
+   \   000023   06           DB 6
+   \   000024   10           DB 16
+   \   000025   0C           DB 12
+   \   000026   06           DB 6
+   \   000027   00           DB 0
+   \   000028   00           DB 0
+   \   000029   00           DB 0
+   \   00002A   00           DB 0
+   \   00002B   00           DB 0
+   \   00002C   00           DB 0
+   \   00002D   00           DB 0
+   \   00002E   00           DB 0
+   \   00002F   00           DB 0
+   \   000030   40           DB 64
+   \   000031   C0           DB 192
+   \   000032   78           DB 120
+   \   000033   40           DB 64
+   \   000034   C0           DB 192
+   \   000035   78           DB 120
+   \   000036   40           DB 64
+   \   000037   00           DB 0
+   \   000038   04           DB 4
+   \   000039   3F           DB 63
+   \   00003A   04           DB 4
+   \   00003B   04           DB 4
+   \   00003C   3F           DB 63
+   \   00003D   04           DB 4
+   \   00003E   04           DB 4
+   \   00003F   00           DB 0
+   \   000040   00           DB 0
+   \   000041   70           DB 112
+   \   000042   88           DB 136
+   \   000043   FC           DB 252
+   \   000044   08           DB 8
+   \   000045   30           DB 48
+   \   000046   00           DB 0
+   \   000047   00           DB 0
+   \   000048   00           DB 0
+   \   000049   18           DB 24
+   \   00004A   20           DB 32
+   \   00004B   FF           DB 255
+   \   00004C   21           DB 33
+   \   00004D   1E           DB 30
+   \   00004E   00           DB 0
+   \   00004F   00           DB 0
+   \   000050   F0           DB 240
+   \   000051   08           DB 8
+   \   000052   F0           DB 240
+   \   000053   00           DB 0
+   \   000054   E0           DB 224
+   \   000055   18           DB 24
+   \   000056   00           DB 0
+   \   000057   00           DB 0
+   \   000058   00           DB 0
+   \   000059   21           DB 33
+   \   00005A   1C           DB 28
+   \   00005B   03           DB 3
+   \   00005C   1E           DB 30
+   \   00005D   21           DB 33
+   \   00005E   1E           DB 30
+   \   00005F   00           DB 0
+   \   000060   00           DB 0
+   \   000061   F0           DB 240
+   \   000062   08           DB 8
+   \   000063   88           DB 136
+   \   000064   70           DB 112
+   \   000065   00           DB 0
+   \   000066   00           DB 0
+   \   000067   00           DB 0
+   \   000068   1E           DB 30
+   \   000069   21           DB 33
+   \   00006A   23           DB 35
+   \   00006B   24           DB 36
+   \   00006C   19           DB 25
+   \   00006D   27           DB 39
+   \   00006E   21           DB 33
+   \   00006F   10           DB 16
+   \   000070   10           DB 16
+   \   000071   16           DB 22
+   \   000072   0E           DB 14
+   \   000073   00           DB 0
+   \   000074   00           DB 0
+   \   000075   00           DB 0
+   \   000076   00           DB 0
+   \   000077   00           DB 0
+   \   000078   00           DB 0
+   \   000079   00           DB 0
+   \   00007A   00           DB 0
+   \   00007B   00           DB 0
+   \   00007C   00           DB 0
+   \   00007D   00           DB 0
+   \   00007E   00           DB 0
+   \   00007F   00           DB 0
+   \   000080   00           DB 0
+   \   000081   00           DB 0
+   \   000082   00           DB 0
+   \   000083   E0           DB 224
+   \   000084   18           DB 24
+   \   000085   04           DB 4
+   \   000086   02           DB 2
+   \   000087   00           DB 0
+   \   000088   00           DB 0
+   \   000089   00           DB 0
+   \   00008A   00           DB 0
+   \   00008B   07           DB 7
+   \   00008C   18           DB 24
+   \   00008D   20           DB 32
+   \   00008E   40           DB 64
+   \   00008F   00           DB 0
+   \   000090   00           DB 0
+   \   000091   02           DB 2
+   \   000092   04           DB 4
+   \   000093   18           DB 24
+   \   000094   E0           DB 224
+   \   000095   00           DB 0
+   \   000096   00           DB 0
+   \   000097   00           DB 0
+   \   000098   00           DB 0
+   \   000099   40           DB 64
+   \   00009A   20           DB 32
+   \   00009B   18           DB 24
+   \   00009C   07           DB 7
+   \   00009D   00           DB 0
+   \   00009E   00           DB 0
+   \   00009F   00           DB 0
+   \   0000A0   40           DB 64
+   \   0000A1   40           DB 64
+   \   0000A2   80           DB 128
+   \   0000A3   F0           DB 240
+   \   0000A4   80           DB 128
+   \   0000A5   40           DB 64
+   \   0000A6   40           DB 64
+   \   0000A7   00           DB 0
+   \   0000A8   02           DB 2
+   \   0000A9   02           DB 2
+   \   0000AA   01           DB 1
+   \   0000AB   0F           DB 15
+   \   0000AC   01           DB 1
+   \   0000AD   02           DB 2
+   \   0000AE   02           DB 2
+   \   0000AF   00           DB 0
+   \   0000B0   00           DB 0
+   \   0000B1   00           DB 0
+   \   0000B2   00           DB 0
+   \   0000B3   F0           DB 240
+   \   0000B4   00           DB 0
+   \   0000B5   00           DB 0
+   \   0000B6   00           DB 0
+   \   0000B7   00           DB 0
+   \   0000B8   01           DB 1
+   \   0000B9   01           DB 1
+   \   0000BA   01           DB 1
+   \   0000BB   1F           DB 31
+   \   0000BC   01           DB 1
+   \   0000BD   01           DB 1
+   \   0000BE   01           DB 1
+   \   0000BF   00           DB 0
+   \   0000C0   00           DB 0
+   \   0000C1   00           DB 0
+   \   0000C2   00           DB 0
+   \   0000C3   00           DB 0
+   \   0000C4   00           DB 0
+   \   0000C5   00           DB 0
+   \   0000C6   00           DB 0
+   \   0000C7   00           DB 0
+   \   0000C8   80           DB 128
+   \   0000C9   B0           DB 176
+   \   0000CA   70           DB 112
+   \   0000CB   00           DB 0
+   \   0000CC   00           DB 0
+   \   0000CD   00           DB 0
+   \   0000CE   00           DB 0
+   \   0000CF   00           DB 0
+   \   0000D0   00           DB 0
+   \   0000D1   00           DB 0
+   \   0000D2   00           DB 0
+   \   0000D3   00           DB 0
+   \   0000D4   00           DB 0
+   \   0000D5   00           DB 0
+   \   0000D6   00           DB 0
+   \   0000D7   00           DB 0
+   \   0000D8   00           DB 0
+   \   0000D9   01           DB 1
+   \   0000DA   01           DB 1
+   \   0000DB   01           DB 1
+   \   0000DC   01           DB 1
+   \   0000DD   01           DB 1
+   \   0000DE   01           DB 1
+   \   0000DF   01           DB 1
+   \   0000E0   00           DB 0
+   \   0000E1   00           DB 0
+   \   0000E2   00           DB 0
+   \   0000E3   00           DB 0
+   \   0000E4   00           DB 0
+   \   0000E5   00           DB 0
+   \   0000E6   00           DB 0
+   \   0000E7   00           DB 0
+   \   0000E8   00           DB 0
+   \   0000E9   30           DB 48
+   \   0000EA   30           DB 48
+   \   0000EB   00           DB 0
+   \   0000EC   00           DB 0
+   \   0000ED   00           DB 0
+   \   0000EE   00           DB 0
+   \   0000EF   00           DB 0
+   \   0000F0   00           DB 0
+   \   0000F1   00           DB 0
+   \   0000F2   00           DB 0
+   \   0000F3   00           DB 0
+   \   0000F4   80           DB 128
+   \   0000F5   60           DB 96
+   \   0000F6   18           DB 24
+   \   0000F7   04           DB 4
+   \   0000F8   00           DB 0
+   \   0000F9   60           DB 96
+   \   0000FA   18           DB 24
+   \   0000FB   06           DB 6
+   \   0000FC   01           DB 1
+   \   0000FD   00           DB 0
+   \   0000FE   00           DB 0
+   \   0000FF   00           DB 0
+   \   000100   00           DB 0
+   \   000101   E0           DB 224
+   \   000102   10           DB 16
+   \   000103   08           DB 8
+   \   000104   08           DB 8
+   \   000105   10           DB 16
+   \   000106   E0           DB 224
+   \   000107   00           DB 0
+   \   000108   00           DB 0
+   \   000109   0F           DB 15
+   \   00010A   10           DB 16
+   \   00010B   20           DB 32
+   \   00010C   20           DB 32
+   \   00010D   10           DB 16
+   \   00010E   0F           DB 15
+   \   00010F   00           DB 0
+   \   000110   00           DB 0
+   \   000111   10           DB 16
+   \   000112   10           DB 16
+   \   000113   F8           DB 248
+   \   000114   00           DB 0
+   \   000115   00           DB 0
+   \   000116   00           DB 0
+   \   000117   00           DB 0
+   \   000118   00           DB 0
+   \   000119   20           DB 32
+   \   00011A   20           DB 32
+   \   00011B   3F           DB 63
+   \   00011C   20           DB 32
+   \   00011D   20           DB 32
+   \   00011E   00           DB 0
+   \   00011F   00           DB 0
+   \   000120   00           DB 0
+   \   000121   70           DB 112
+   \   000122   08           DB 8
+   \   000123   08           DB 8
+   \   000124   08           DB 8
+   \   000125   88           DB 136
+   \   000126   70           DB 112
+   \   000127   00           DB 0
+   \   000128   00           DB 0
+   \   000129   30           DB 48
+   \   00012A   28           DB 40
+   \   00012B   24           DB 36
+   \   00012C   22           DB 34
+   \   00012D   21           DB 33
+   \   00012E   30           DB 48
+   \   00012F   00           DB 0
+   \   000130   00           DB 0
+   \   000131   30           DB 48
+   \   000132   08           DB 8
+   \   000133   88           DB 136
+   \   000134   88           DB 136
+   \   000135   48           DB 72
+   \   000136   30           DB 48
+   \   000137   00           DB 0
+   \   000138   00           DB 0
+   \   000139   18           DB 24
+   \   00013A   20           DB 32
+   \   00013B   20           DB 32
+   \   00013C   20           DB 32
+   \   00013D   11           DB 17
+   \   00013E   0E           DB 14
+   \   00013F   00           DB 0
+   \   000140   00           DB 0
+   \   000141   00           DB 0
+   \   000142   C0           DB 192
+   \   000143   20           DB 32
+   \   000144   10           DB 16
+   \   000145   F8           DB 248
+   \   000146   00           DB 0
+   \   000147   00           DB 0
+   \   000148   00           DB 0
+   \   000149   07           DB 7
+   \   00014A   04           DB 4
+   \   00014B   24           DB 36
+   \   00014C   24           DB 36
+   \   00014D   3F           DB 63
+   \   00014E   24           DB 36
+   \   00014F   00           DB 0
+   \   000150   00           DB 0
+   \   000151   F8           DB 248
+   \   000152   08           DB 8
+   \   000153   88           DB 136
+   \   000154   88           DB 136
+   \   000155   08           DB 8
+   \   000156   08           DB 8
+   \   000157   00           DB 0
+   \   000158   00           DB 0
+   \   000159   19           DB 25
+   \   00015A   21           DB 33
+   \   00015B   20           DB 32
+   \   00015C   20           DB 32
+   \   00015D   11           DB 17
+   \   00015E   0E           DB 14
+   \   00015F   00           DB 0
+   \   000160   00           DB 0
+   \   000161   E0           DB 224
+   \   000162   10           DB 16
+   \   000163   88           DB 136
+   \   000164   88           DB 136
+   \   000165   18           DB 24
+   \   000166   00           DB 0
+   \   000167   00           DB 0
+   \   000168   00           DB 0
+   \   000169   0F           DB 15
+   \   00016A   11           DB 17
+   \   00016B   20           DB 32
+   \   00016C   20           DB 32
+   \   00016D   11           DB 17
+   \   00016E   0E           DB 14
+   \   00016F   00           DB 0
+   \   000170   00           DB 0
+   \   000171   38           DB 56
+   \   000172   08           DB 8
+   \   000173   08           DB 8
+   \   000174   C8           DB 200
+   \   000175   38           DB 56
+   \   000176   08           DB 8
+   \   000177   00           DB 0
+   \   000178   00           DB 0
+   \   000179   00           DB 0
+   \   00017A   00           DB 0
+   \   00017B   3F           DB 63
+   \   00017C   00           DB 0
+   \   00017D   00           DB 0
+   \   00017E   00           DB 0
+   \   00017F   00           DB 0
+   \   000180   00           DB 0
+   \   000181   70           DB 112
+   \   000182   88           DB 136
+   \   000183   08           DB 8
+   \   000184   08           DB 8
+   \   000185   88           DB 136
+   \   000186   70           DB 112
+   \   000187   00           DB 0
+   \   000188   00           DB 0
+   \   000189   1C           DB 28
+   \   00018A   22           DB 34
+   \   00018B   21           DB 33
+   \   00018C   21           DB 33
+   \   00018D   22           DB 34
+   \   00018E   1C           DB 28
+   \   00018F   00           DB 0
+   \   000190   00           DB 0
+   \   000191   E0           DB 224
+   \   000192   10           DB 16
+   \   000193   08           DB 8
+   \   000194   08           DB 8
+   \   000195   10           DB 16
+   \   000196   E0           DB 224
+   \   000197   00           DB 0
+   \   000198   00           DB 0
+   \   000199   00           DB 0
+   \   00019A   31           DB 49
+   \   00019B   22           DB 34
+   \   00019C   22           DB 34
+   \   00019D   11           DB 17
+   \   00019E   0F           DB 15
+   \   00019F   00           DB 0
+   \   0001A0   00           DB 0
+   \   0001A1   00           DB 0
+   \   0001A2   00           DB 0
+   \   0001A3   C0           DB 192
+   \   0001A4   C0           DB 192
+   \   0001A5   00           DB 0
+   \   0001A6   00           DB 0
+   \   0001A7   00           DB 0
+   \   0001A8   00           DB 0
+   \   0001A9   00           DB 0
+   \   0001AA   00           DB 0
+   \   0001AB   30           DB 48
+   \   0001AC   30           DB 48
+   \   0001AD   00           DB 0
+   \   0001AE   00           DB 0
+   \   0001AF   00           DB 0
+   \   0001B0   00           DB 0
+   \   0001B1   00           DB 0
+   \   0001B2   00           DB 0
+   \   0001B3   80           DB 128
+   \   0001B4   00           DB 0
+   \   0001B5   00           DB 0
+   \   0001B6   00           DB 0
+   \   0001B7   00           DB 0
+   \   0001B8   00           DB 0
+   \   0001B9   00           DB 0
+   \   0001BA   80           DB 128
+   \   0001BB   60           DB 96
+   \   0001BC   00           DB 0
+   \   0001BD   00           DB 0
+   \   0001BE   00           DB 0
+   \   0001BF   00           DB 0
+   \   0001C0   00           DB 0
+   \   0001C1   00           DB 0
+   \   0001C2   80           DB 128
+   \   0001C3   40           DB 64
+   \   0001C4   20           DB 32
+   \   0001C5   10           DB 16
+   \   0001C6   08           DB 8
+   \   0001C7   00           DB 0
+   \   0001C8   00           DB 0
+   \   0001C9   01           DB 1
+   \   0001CA   02           DB 2
+   \   0001CB   04           DB 4
+   \   0001CC   08           DB 8
+   \   0001CD   10           DB 16
+   \   0001CE   20           DB 32
+   \   0001CF   00           DB 0
+   \   0001D0   40           DB 64
+   \   0001D1   40           DB 64
+   \   0001D2   40           DB 64
+   \   0001D3   40           DB 64
+   \   0001D4   40           DB 64
+   \   0001D5   40           DB 64
+   \   0001D6   40           DB 64
+   \   0001D7   00           DB 0
+   \   0001D8   04           DB 4
+   \   0001D9   04           DB 4
+   \   0001DA   04           DB 4
+   \   0001DB   04           DB 4
+   \   0001DC   04           DB 4
+   \   0001DD   04           DB 4
+   \   0001DE   04           DB 4
+   \   0001DF   00           DB 0
+   \   0001E0   00           DB 0
+   \   0001E1   08           DB 8
+   \   0001E2   10           DB 16
+   \   0001E3   20           DB 32
+   \   0001E4   40           DB 64
+   \   0001E5   80           DB 128
+   \   0001E6   00           DB 0
+   \   0001E7   00           DB 0
+   \   0001E8   00           DB 0
+   \   0001E9   20           DB 32
+   \   0001EA   10           DB 16
+   \   0001EB   08           DB 8
+   \   0001EC   04           DB 4
+   \   0001ED   02           DB 2
+   \   0001EE   01           DB 1
+   \   0001EF   00           DB 0
+   \   0001F0   00           DB 0
+   \   0001F1   70           DB 112
+   \   0001F2   48           DB 72
+   \   0001F3   08           DB 8
+   \   0001F4   08           DB 8
+   \   0001F5   08           DB 8
+   \   0001F6   F0           DB 240
+   \   0001F7   00           DB 0
+   \   0001F8   00           DB 0
+   \   0001F9   00           DB 0
+   \   0001FA   00           DB 0
+   \   0001FB   30           DB 48
+   \   0001FC   36           DB 54
+   \   0001FD   01           DB 1
+   \   0001FE   00           DB 0
+   \   0001FF   00           DB 0
+   \   000200   C0           DB 192
+   \   000201   30           DB 48
+   \   000202   C8           DB 200
+   \   000203   28           DB 40
+   \   000204   E8           DB 232
+   \   000205   10           DB 16
+   \   000206   E0           DB 224
+   \   000207   00           DB 0
+   \   000208   07           DB 7
+   \   000209   18           DB 24
+   \   00020A   27           DB 39
+   \   00020B   24           DB 36
+   \   00020C   23           DB 35
+   \   00020D   14           DB 20
+   \   00020E   0B           DB 11
+   \   00020F   00           DB 0
+   \   000210   00           DB 0
+   \   000211   00           DB 0
+   \   000212   C0           DB 192
+   \   000213   38           DB 56
+   \   000214   E0           DB 224
+   \   000215   00           DB 0
+   \   000216   00           DB 0
+   \   000217   00           DB 0
+   \   000218   20           DB 32
+   \   000219   3C           DB 60
+   \   00021A   23           DB 35
+   \   00021B   02           DB 2
+   \   00021C   02           DB 2
+   \   00021D   27           DB 39
+   \   00021E   38           DB 56
+   \   00021F   20           DB 32
+   \   000220   08           DB 8
+   \   000221   F8           DB 248
+   \   000222   88           DB 136
+   \   000223   88           DB 136
+   \   000224   88           DB 136
+   \   000225   70           DB 112
+   \   000226   00           DB 0
+   \   000227   00           DB 0
+   \   000228   20           DB 32
+   \   000229   3F           DB 63
+   \   00022A   20           DB 32
+   \   00022B   20           DB 32
+   \   00022C   20           DB 32
+   \   00022D   11           DB 17
+   \   00022E   0E           DB 14
+   \   00022F   00           DB 0
+   \   000230   C0           DB 192
+   \   000231   30           DB 48
+   \   000232   08           DB 8
+   \   000233   08           DB 8
+   \   000234   08           DB 8
+   \   000235   08           DB 8
+   \   000236   38           DB 56
+   \   000237   00           DB 0
+   \   000238   07           DB 7
+   \   000239   18           DB 24
+   \   00023A   20           DB 32
+   \   00023B   20           DB 32
+   \   00023C   20           DB 32
+   \   00023D   10           DB 16
+   \   00023E   08           DB 8
+   \   00023F   00           DB 0
+   \   000240   08           DB 8
+   \   000241   F8           DB 248
+   \   000242   08           DB 8
+   \   000243   08           DB 8
+   \   000244   08           DB 8
+   \   000245   10           DB 16
+   \   000246   E0           DB 224
+   \   000247   00           DB 0
+   \   000248   20           DB 32
+   \   000249   3F           DB 63
+   \   00024A   20           DB 32
+   \   00024B   20           DB 32
+   \   00024C   20           DB 32
+   \   00024D   10           DB 16
+   \   00024E   0F           DB 15
+   \   00024F   00           DB 0
+   \   000250   08           DB 8
+   \   000251   F8           DB 248
+   \   000252   88           DB 136
+   \   000253   88           DB 136
+   \   000254   E8           DB 232
+   \   000255   08           DB 8
+   \   000256   10           DB 16
+   \   000257   00           DB 0
+   \   000258   20           DB 32
+   \   000259   3F           DB 63
+   \   00025A   20           DB 32
+   \   00025B   20           DB 32
+   \   00025C   23           DB 35
+   \   00025D   20           DB 32
+   \   00025E   18           DB 24
+   \   00025F   00           DB 0
+   \   000260   08           DB 8
+   \   000261   F8           DB 248
+   \   000262   88           DB 136
+   \   000263   88           DB 136
+   \   000264   E8           DB 232
+   \   000265   08           DB 8
+   \   000266   10           DB 16
+   \   000267   00           DB 0
+   \   000268   20           DB 32
+   \   000269   3F           DB 63
+   \   00026A   20           DB 32
+   \   00026B   00           DB 0
+   \   00026C   03           DB 3
+   \   00026D   00           DB 0
+   \   00026E   00           DB 0
+   \   00026F   00           DB 0
+   \   000270   C0           DB 192
+   \   000271   30           DB 48
+   \   000272   08           DB 8
+   \   000273   08           DB 8
+   \   000274   08           DB 8
+   \   000275   38           DB 56
+   \   000276   00           DB 0
+   \   000277   00           DB 0
+   \   000278   07           DB 7
+   \   000279   18           DB 24
+   \   00027A   20           DB 32
+   \   00027B   20           DB 32
+   \   00027C   22           DB 34
+   \   00027D   1E           DB 30
+   \   00027E   02           DB 2
+   \   00027F   00           DB 0
+   \   000280   08           DB 8
+   \   000281   F8           DB 248
+   \   000282   08           DB 8
+   \   000283   00           DB 0
+   \   000284   00           DB 0
+   \   000285   08           DB 8
+   \   000286   F8           DB 248
+   \   000287   08           DB 8
+   \   000288   20           DB 32
+   \   000289   3F           DB 63
+   \   00028A   21           DB 33
+   \   00028B   01           DB 1
+   \   00028C   01           DB 1
+   \   00028D   21           DB 33
+   \   00028E   3F           DB 63
+   \   00028F   20           DB 32
+   \   000290   00           DB 0
+   \   000291   08           DB 8
+   \   000292   08           DB 8
+   \   000293   F8           DB 248
+   \   000294   08           DB 8
+   \   000295   08           DB 8
+   \   000296   00           DB 0
+   \   000297   00           DB 0
+   \   000298   00           DB 0
+   \   000299   20           DB 32
+   \   00029A   20           DB 32
+   \   00029B   3F           DB 63
+   \   00029C   20           DB 32
+   \   00029D   20           DB 32
+   \   00029E   00           DB 0
+   \   00029F   00           DB 0
+   \   0002A0   00           DB 0
+   \   0002A1   00           DB 0
+   \   0002A2   08           DB 8
+   \   0002A3   08           DB 8
+   \   0002A4   F8           DB 248
+   \   0002A5   08           DB 8
+   \   0002A6   08           DB 8
+   \   0002A7   00           DB 0
+   \   0002A8   C0           DB 192
+   \   0002A9   80           DB 128
+   \   0002AA   80           DB 128
+   \   0002AB   80           DB 128
+   \   0002AC   7F           DB 127
+   \   0002AD   00           DB 0
+   \   0002AE   00           DB 0
+   \   0002AF   00           DB 0
+   \   0002B0   08           DB 8
+   \   0002B1   F8           DB 248
+   \   0002B2   88           DB 136
+   \   0002B3   C0           DB 192
+   \   0002B4   28           DB 40
+   \   0002B5   18           DB 24
+   \   0002B6   08           DB 8
+   \   0002B7   00           DB 0
+   \   0002B8   20           DB 32
+   \   0002B9   3F           DB 63
+   \   0002BA   20           DB 32
+   \   0002BB   01           DB 1
+   \   0002BC   26           DB 38
+   \   0002BD   38           DB 56
+   \   0002BE   20           DB 32
+   \   0002BF   00           DB 0
+   \   0002C0   08           DB 8
+   \   0002C1   F8           DB 248
+   \   0002C2   08           DB 8
+   \   0002C3   00           DB 0
+   \   0002C4   00           DB 0
+   \   0002C5   00           DB 0
+   \   0002C6   00           DB 0
+   \   0002C7   00           DB 0
+   \   0002C8   20           DB 32
+   \   0002C9   3F           DB 63
+   \   0002CA   20           DB 32
+   \   0002CB   20           DB 32
+   \   0002CC   20           DB 32
+   \   0002CD   20           DB 32
+   \   0002CE   30           DB 48
+   \   0002CF   00           DB 0
+   \   0002D0   08           DB 8
+   \   0002D1   F8           DB 248
+   \   0002D2   F8           DB 248
+   \   0002D3   00           DB 0
+   \   0002D4   F8           DB 248
+   \   0002D5   F8           DB 248
+   \   0002D6   08           DB 8
+   \   0002D7   00           DB 0
+   \   0002D8   20           DB 32
+   \   0002D9   3F           DB 63
+   \   0002DA   00           DB 0
+   \   0002DB   3F           DB 63
+   \   0002DC   00           DB 0
+   \   0002DD   3F           DB 63
+   \   0002DE   20           DB 32
+   \   0002DF   00           DB 0
+   \   0002E0   08           DB 8
+   \   0002E1   F8           DB 248
+   \   0002E2   30           DB 48
+   \   0002E3   C0           DB 192
+   \   0002E4   00           DB 0
+   \   0002E5   08           DB 8
+   \   0002E6   F8           DB 248
+   \   0002E7   08           DB 8
+   \   0002E8   20           DB 32
+   \   0002E9   3F           DB 63
+   \   0002EA   20           DB 32
+   \   0002EB   00           DB 0
+   \   0002EC   07           DB 7
+   \   0002ED   18           DB 24
+   \   0002EE   3F           DB 63
+   \   0002EF   00           DB 0
+   \   0002F0   E0           DB 224
+   \   0002F1   10           DB 16
+   \   0002F2   08           DB 8
+   \   0002F3   08           DB 8
+   \   0002F4   08           DB 8
+   \   0002F5   10           DB 16
+   \   0002F6   E0           DB 224
+   \   0002F7   00           DB 0
+   \   0002F8   0F           DB 15
+   \   0002F9   10           DB 16
+   \   0002FA   20           DB 32
+   \   0002FB   20           DB 32
+   \   0002FC   20           DB 32
+   \   0002FD   10           DB 16
+   \   0002FE   0F           DB 15
+   \   0002FF   00           DB 0
+   \   000300   08           DB 8
+   \   000301   F8           DB 248
+   \   000302   08           DB 8
+   \   000303   08           DB 8
+   \   000304   08           DB 8
+   \   000305   08           DB 8
+   \   000306   F0           DB 240
+   \   000307   00           DB 0
+   \   000308   20           DB 32
+   \   000309   3F           DB 63
+   \   00030A   21           DB 33
+   \   00030B   01           DB 1
+   \   00030C   01           DB 1
+   \   00030D   01           DB 1
+   \   00030E   00           DB 0
+   \   00030F   00           DB 0
+   \   000310   E0           DB 224
+   \   000311   10           DB 16
+   \   000312   08           DB 8
+   \   000313   08           DB 8
+   \   000314   08           DB 8
+   \   000315   10           DB 16
+   \   000316   E0           DB 224
+   \   000317   00           DB 0
+   \   000318   0F           DB 15
+   \   000319   18           DB 24
+   \   00031A   24           DB 36
+   \   00031B   24           DB 36
+   \   00031C   38           DB 56
+   \   00031D   50           DB 80
+   \   00031E   4F           DB 79
+   \   00031F   00           DB 0
+   \   000320   08           DB 8
+   \   000321   F8           DB 248
+   \   000322   88           DB 136
+   \   000323   88           DB 136
+   \   000324   88           DB 136
+   \   000325   88           DB 136
+   \   000326   70           DB 112
+   \   000327   00           DB 0
+   \   000328   20           DB 32
+   \   000329   3F           DB 63
+   \   00032A   20           DB 32
+   \   00032B   00           DB 0
+   \   00032C   03           DB 3
+   \   00032D   0C           DB 12
+   \   00032E   30           DB 48
+   \   00032F   20           DB 32
+   \   000330   00           DB 0
+   \   000331   70           DB 112
+   \   000332   88           DB 136
+   \   000333   08           DB 8
+   \   000334   08           DB 8
+   \   000335   08           DB 8
+   \   000336   38           DB 56
+   \   000337   00           DB 0
+   \   000338   00           DB 0
+   \   000339   38           DB 56
+   \   00033A   20           DB 32
+   \   00033B   21           DB 33
+   \   00033C   21           DB 33
+   \   00033D   22           DB 34
+   \   00033E   1C           DB 28
+   \   00033F   00           DB 0
+   \   000340   18           DB 24
+   \   000341   08           DB 8
+   \   000342   08           DB 8
+   \   000343   F8           DB 248
+   \   000344   08           DB 8
+   \   000345   08           DB 8
+   \   000346   18           DB 24
+   \   000347   00           DB 0
+   \   000348   00           DB 0
+   \   000349   00           DB 0
+   \   00034A   20           DB 32
+   \   00034B   3F           DB 63
+   \   00034C   20           DB 32
+   \   00034D   00           DB 0
+   \   00034E   00           DB 0
+   \   00034F   00           DB 0
+   \   000350   08           DB 8
+   \   000351   F8           DB 248
+   \   000352   08           DB 8
+   \   000353   00           DB 0
+   \   000354   00           DB 0
+   \   000355   08           DB 8
+   \   000356   F8           DB 248
+   \   000357   08           DB 8
+   \   000358   00           DB 0
+   \   000359   1F           DB 31
+   \   00035A   20           DB 32
+   \   00035B   20           DB 32
+   \   00035C   20           DB 32
+   \   00035D   20           DB 32
+   \   00035E   1F           DB 31
+   \   00035F   00           DB 0
+   \   000360   08           DB 8
+   \   000361   78           DB 120
+   \   000362   88           DB 136
+   \   000363   00           DB 0
+   \   000364   00           DB 0
+   \   000365   C8           DB 200
+   \   000366   38           DB 56
+   \   000367   08           DB 8
+   \   000368   00           DB 0
+   \   000369   00           DB 0
+   \   00036A   07           DB 7
+   \   00036B   38           DB 56
+   \   00036C   0E           DB 14
+   \   00036D   01           DB 1
+   \   00036E   00           DB 0
+   \   00036F   00           DB 0
+   \   000370   F8           DB 248
+   \   000371   08           DB 8
+   \   000372   00           DB 0
+   \   000373   F8           DB 248
+   \   000374   00           DB 0
+   \   000375   08           DB 8
+   \   000376   F8           DB 248
+   \   000377   00           DB 0
+   \   000378   03           DB 3
+   \   000379   3C           DB 60
+   \   00037A   07           DB 7
+   \   00037B   00           DB 0
+   \   00037C   07           DB 7
+   \   00037D   3C           DB 60
+   \   00037E   03           DB 3
+   \   00037F   00           DB 0
+   \   000380   08           DB 8
+   \   000381   18           DB 24
+   \   000382   68           DB 104
+   \   000383   80           DB 128
+   \   000384   80           DB 128
+   \   000385   68           DB 104
+   \   000386   18           DB 24
+   \   000387   08           DB 8
+   \   000388   20           DB 32
+   \   000389   30           DB 48
+   \   00038A   2C           DB 44
+   \   00038B   03           DB 3
+   \   00038C   03           DB 3
+   \   00038D   2C           DB 44
+   \   00038E   30           DB 48
+   \   00038F   20           DB 32
+   \   000390   08           DB 8
+   \   000391   38           DB 56
+   \   000392   C8           DB 200
+   \   000393   00           DB 0
+   \   000394   C8           DB 200
+   \   000395   38           DB 56
+   \   000396   08           DB 8
+   \   000397   00           DB 0
+   \   000398   00           DB 0
+   \   000399   00           DB 0
+   \   00039A   20           DB 32
+   \   00039B   3F           DB 63
+   \   00039C   20           DB 32
+   \   00039D   00           DB 0
+   \   00039E   00           DB 0
+   \   00039F   00           DB 0
+   \   0003A0   10           DB 16
+   \   0003A1   08           DB 8
+   \   0003A2   08           DB 8
+   \   0003A3   08           DB 8
+   \   0003A4   C8           DB 200
+   \   0003A5   38           DB 56
+   \   0003A6   08           DB 8
+   \   0003A7   00           DB 0
+   \   0003A8   20           DB 32
+   \   0003A9   38           DB 56
+   \   0003AA   26           DB 38
+   \   0003AB   21           DB 33
+   \   0003AC   20           DB 32
+   \   0003AD   20           DB 32
+   \   0003AE   18           DB 24
+   \   0003AF   00           DB 0
+   \   0003B0   00           DB 0
+   \   0003B1   00           DB 0
+   \   0003B2   00           DB 0
+   \   0003B3   FE           DB 254
+   \   0003B4   02           DB 2
+   \   0003B5   02           DB 2
+   \   0003B6   02           DB 2
+   \   0003B7   00           DB 0
+   \   0003B8   00           DB 0
+   \   0003B9   00           DB 0
+   \   0003BA   00           DB 0
+   \   0003BB   7F           DB 127
+   \   0003BC   40           DB 64
+   \   0003BD   40           DB 64
+   \   0003BE   40           DB 64
+   \   0003BF   00           DB 0
+   \   0003C0   00           DB 0
+   \   0003C1   0C           DB 12
+   \   0003C2   30           DB 48
+   \   0003C3   C0           DB 192
+   \   0003C4   00           DB 0
+   \   0003C5   00           DB 0
+   \   0003C6   00           DB 0
+   \   0003C7   00           DB 0
+   \   0003C8   00           DB 0
+   \   0003C9   00           DB 0
+   \   0003CA   00           DB 0
+   \   0003CB   01           DB 1
+   \   0003CC   06           DB 6
+   \   0003CD   38           DB 56
+   \   0003CE   C0           DB 192
+   \   0003CF   00           DB 0
+   \   0003D0   00           DB 0
+   \   0003D1   02           DB 2
+   \   0003D2   02           DB 2
+   \   0003D3   02           DB 2
+   \   0003D4   FE           DB 254
+   \   0003D5   00           DB 0
+   \   0003D6   00           DB 0
+   \   0003D7   00           DB 0
+   \   0003D8   00           DB 0
+   \   0003D9   40           DB 64
+   \   0003DA   40           DB 64
+   \   0003DB   40           DB 64
+   \   0003DC   7F           DB 127
+   \   0003DD   00           DB 0
+   \   0003DE   00           DB 0
+   \   0003DF   00           DB 0
+   \   0003E0   00           DB 0
+   \   0003E1   00           DB 0
+   \   0003E2   04           DB 4
+   \   0003E3   02           DB 2
+   \   0003E4   02           DB 2
+   \   0003E5   02           DB 2
+   \   0003E6   04           DB 4
+   \   0003E7   00           DB 0
+   \   0003E8   00           DB 0
+   \   0003E9   00           DB 0
+   \   0003EA   00           DB 0
+   \   0003EB   00           DB 0
+   \   0003EC   00           DB 0
+   \   0003ED   00           DB 0
+   \   0003EE   00           DB 0
+   \   0003EF   00           DB 0
+   \   0003F0   00           DB 0
+   \   0003F1   00           DB 0
+   \   0003F2   00           DB 0
+   \   0003F3   00           DB 0
+   \   0003F4   00           DB 0
+   \   0003F5   00           DB 0
+   \   0003F6   00           DB 0
+   \   0003F7   00           DB 0
+   \   0003F8   80           DB 128
+   \   0003F9   80           DB 128
+   \   0003FA   80           DB 128
+   \   0003FB   80           DB 128
+   \   0003FC   80           DB 128
+   \   0003FD   80           DB 128
+   \   0003FE   80           DB 128
+   \   0003FF   80           DB 128
+   \   000400   00           DB 0
+   \   000401   02           DB 2
+   \   000402   02           DB 2
+   \   000403   04           DB 4
+   \   000404   00           DB 0
+   \   000405   00           DB 0
+   \   000406   00           DB 0
+   \   000407   00           DB 0
+   \   000408   00           DB 0
+   \   000409   00           DB 0
+   \   00040A   00           DB 0
+   \   00040B   00           DB 0
+   \   00040C   00           DB 0
+   \   00040D   00           DB 0
+   \   00040E   00           DB 0
+   \   00040F   00           DB 0
+   \   000410   00           DB 0
+   \   000411   00           DB 0
+   \   000412   80           DB 128
+   \   000413   80           DB 128
+   \   000414   80           DB 128
+   \   000415   80           DB 128
+   \   000416   00           DB 0
+   \   000417   00           DB 0
+   \   000418   00           DB 0
+   \   000419   19           DB 25
+   \   00041A   24           DB 36
+   \   00041B   22           DB 34
+   \   00041C   22           DB 34
+   \   00041D   22           DB 34
+   \   00041E   3F           DB 63
+   \   00041F   20           DB 32
+   \   000420   08           DB 8
+   \   000421   F8           DB 248
+   \   000422   00           DB 0
+   \   000423   80           DB 128
+   \   000424   80           DB 128
+   \   000425   00           DB 0
+   \   000426   00           DB 0
+   \   000427   00           DB 0
+   \   000428   00           DB 0
+   \   000429   3F           DB 63
+   \   00042A   11           DB 17
+   \   00042B   20           DB 32
+   \   00042C   20           DB 32
+   \   00042D   11           DB 17
+   \   00042E   0E           DB 14
+   \   00042F   00           DB 0
+   \   000430   00           DB 0
+   \   000431   00           DB 0
+   \   000432   00           DB 0
+   \   000433   80           DB 128
+   \   000434   80           DB 128
+   \   000435   80           DB 128
+   \   000436   00           DB 0
+   \   000437   00           DB 0
+   \   000438   00           DB 0
+   \   000439   0E           DB 14
+   \   00043A   11           DB 17
+   \   00043B   20           DB 32
+   \   00043C   20           DB 32
+   \   00043D   20           DB 32
+   \   00043E   11           DB 17
+   \   00043F   00           DB 0
+   \   000440   00           DB 0
+   \   000441   00           DB 0
+   \   000442   00           DB 0
+   \   000443   80           DB 128
+   \   000444   80           DB 128
+   \   000445   88           DB 136
+   \   000446   F8           DB 248
+   \   000447   00           DB 0
+   \   000448   00           DB 0
+   \   000449   0E           DB 14
+   \   00044A   11           DB 17
+   \   00044B   20           DB 32
+   \   00044C   20           DB 32
+   \   00044D   10           DB 16
+   \   00044E   3F           DB 63
+   \   00044F   20           DB 32
+   \   000450   00           DB 0
+   \   000451   00           DB 0
+   \   000452   80           DB 128
+   \   000453   80           DB 128
+   \   000454   80           DB 128
+   \   000455   80           DB 128
+   \   000456   00           DB 0
+   \   000457   00           DB 0
+   \   000458   00           DB 0
+   \   000459   1F           DB 31
+   \   00045A   22           DB 34
+   \   00045B   22           DB 34
+   \   00045C   22           DB 34
+   \   00045D   22           DB 34
+   \   00045E   13           DB 19
+   \   00045F   00           DB 0
+   \   000460   00           DB 0
+   \   000461   80           DB 128
+   \   000462   80           DB 128
+   \   000463   F0           DB 240
+   \   000464   88           DB 136
+   \   000465   88           DB 136
+   \   000466   88           DB 136
+   \   000467   18           DB 24
+   \   000468   00           DB 0
+   \   000469   20           DB 32
+   \   00046A   20           DB 32
+   \   00046B   3F           DB 63
+   \   00046C   20           DB 32
+   \   00046D   20           DB 32
+   \   00046E   00           DB 0
+   \   00046F   00           DB 0
+   \   000470   00           DB 0
+   \   000471   00           DB 0
+   \   000472   80           DB 128
+   \   000473   80           DB 128
+   \   000474   80           DB 128
+   \   000475   80           DB 128
+   \   000476   80           DB 128
+   \   000477   00           DB 0
+   \   000478   00           DB 0
+   \   000479   6B           DB 107
+   \   00047A   94           DB 148
+   \   00047B   94           DB 148
+   \   00047C   94           DB 148
+   \   00047D   93           DB 147
+   \   00047E   60           DB 96
+   \   00047F   00           DB 0
+   \   000480   08           DB 8
+   \   000481   F8           DB 248
+   \   000482   00           DB 0
+   \   000483   80           DB 128
+   \   000484   80           DB 128
+   \   000485   80           DB 128
+   \   000486   00           DB 0
+   \   000487   00           DB 0
+   \   000488   20           DB 32
+   \   000489   3F           DB 63
+   \   00048A   21           DB 33
+   \   00048B   00           DB 0
+   \   00048C   00           DB 0
+   \   00048D   20           DB 32
+   \   00048E   3F           DB 63
+   \   00048F   20           DB 32
+   \   000490   00           DB 0
+   \   000491   80           DB 128
+   \   000492   98           DB 152
+   \   000493   98           DB 152
+   \   000494   00           DB 0
+   \   000495   00           DB 0
+   \   000496   00           DB 0
+   \   000497   00           DB 0
+   \   000498   00           DB 0
+   \   000499   20           DB 32
+   \   00049A   20           DB 32
+   \   00049B   3F           DB 63
+   \   00049C   20           DB 32
+   \   00049D   20           DB 32
+   \   00049E   00           DB 0
+   \   00049F   00           DB 0
+   \   0004A0   00           DB 0
+   \   0004A1   00           DB 0
+   \   0004A2   00           DB 0
+   \   0004A3   80           DB 128
+   \   0004A4   98           DB 152
+   \   0004A5   98           DB 152
+   \   0004A6   00           DB 0
+   \   0004A7   00           DB 0
+   \   0004A8   00           DB 0
+   \   0004A9   C0           DB 192
+   \   0004AA   80           DB 128
+   \   0004AB   80           DB 128
+   \   0004AC   80           DB 128
+   \   0004AD   7F           DB 127
+   \   0004AE   00           DB 0
+   \   0004AF   00           DB 0
+   \   0004B0   08           DB 8
+   \   0004B1   F8           DB 248
+   \   0004B2   00           DB 0
+   \   0004B3   00           DB 0
+   \   0004B4   80           DB 128
+   \   0004B5   80           DB 128
+   \   0004B6   80           DB 128
+   \   0004B7   00           DB 0
+   \   0004B8   20           DB 32
+   \   0004B9   3F           DB 63
+   \   0004BA   24           DB 36
+   \   0004BB   02           DB 2
+   \   0004BC   2D           DB 45
+   \   0004BD   30           DB 48
+   \   0004BE   20           DB 32
+   \   0004BF   00           DB 0
+   \   0004C0   00           DB 0
+   \   0004C1   08           DB 8
+   \   0004C2   08           DB 8
+   \   0004C3   F8           DB 248
+   \   0004C4   00           DB 0
+   \   0004C5   00           DB 0
+   \   0004C6   00           DB 0
+   \   0004C7   00           DB 0
+   \   0004C8   00           DB 0
+   \   0004C9   20           DB 32
+   \   0004CA   20           DB 32
+   \   0004CB   3F           DB 63
+   \   0004CC   20           DB 32
+   \   0004CD   20           DB 32
+   \   0004CE   00           DB 0
+   \   0004CF   00           DB 0
+   \   0004D0   80           DB 128
+   \   0004D1   80           DB 128
+   \   0004D2   80           DB 128
+   \   0004D3   80           DB 128
+   \   0004D4   80           DB 128
+   \   0004D5   80           DB 128
+   \   0004D6   80           DB 128
+   \   0004D7   00           DB 0
+   \   0004D8   20           DB 32
+   \   0004D9   3F           DB 63
+   \   0004DA   20           DB 32
+   \   0004DB   00           DB 0
+   \   0004DC   3F           DB 63
+   \   0004DD   20           DB 32
+   \   0004DE   00           DB 0
+   \   0004DF   3F           DB 63
+   \   0004E0   80           DB 128
+   \   0004E1   80           DB 128
+   \   0004E2   00           DB 0
+   \   0004E3   80           DB 128
+   \   0004E4   80           DB 128
+   \   0004E5   80           DB 128
+   \   0004E6   00           DB 0
+   \   0004E7   00           DB 0
+   \   0004E8   20           DB 32
+   \   0004E9   3F           DB 63
+   \   0004EA   21           DB 33
+   \   0004EB   00           DB 0
+   \   0004EC   00           DB 0
+   \   0004ED   20           DB 32
+   \   0004EE   3F           DB 63
+   \   0004EF   20           DB 32
+   \   0004F0   00           DB 0
+   \   0004F1   00           DB 0
+   \   0004F2   80           DB 128
+   \   0004F3   80           DB 128
+   \   0004F4   80           DB 128
+   \   0004F5   80           DB 128
+   \   0004F6   00           DB 0
+   \   0004F7   00           DB 0
+   \   0004F8   00           DB 0
+   \   0004F9   1F           DB 31
+   \   0004FA   20           DB 32
+   \   0004FB   20           DB 32
+   \   0004FC   20           DB 32
+   \   0004FD   20           DB 32
+   \   0004FE   1F           DB 31
+   \   0004FF   00           DB 0
+   \   000500   80           DB 128
+   \   000501   80           DB 128
+   \   000502   00           DB 0
+   \   000503   80           DB 128
+   \   000504   80           DB 128
+   \   000505   00           DB 0
+   \   000506   00           DB 0
+   \   000507   00           DB 0
+   \   000508   80           DB 128
+   \   000509   FF           DB 255
+   \   00050A   A1           DB 161
+   \   00050B   20           DB 32
+   \   00050C   20           DB 32
+   \   00050D   11           DB 17
+   \   00050E   0E           DB 14
+   \   00050F   00           DB 0
+   \   000510   00           DB 0
+   \   000511   00           DB 0
+   \   000512   00           DB 0
+   \   000513   80           DB 128
+   \   000514   80           DB 128
+   \   000515   80           DB 128
+   \   000516   80           DB 128
+   \   000517   00           DB 0
+   \   000518   00           DB 0
+   \   000519   0E           DB 14
+   \   00051A   11           DB 17
+   \   00051B   20           DB 32
+   \   00051C   20           DB 32
+   \   00051D   A0           DB 160
+   \   00051E   FF           DB 255
+   \   00051F   80           DB 128
+   \   000520   80           DB 128
+   \   000521   80           DB 128
+   \   000522   80           DB 128
+   \   000523   00           DB 0
+   \   000524   80           DB 128
+   \   000525   80           DB 128
+   \   000526   80           DB 128
+   \   000527   00           DB 0
+   \   000528   20           DB 32
+   \   000529   20           DB 32
+   \   00052A   3F           DB 63
+   \   00052B   21           DB 33
+   \   00052C   20           DB 32
+   \   00052D   00           DB 0
+   \   00052E   01           DB 1
+   \   00052F   00           DB 0
+   \   000530   00           DB 0
+   \   000531   00           DB 0
+   \   000532   80           DB 128
+   \   000533   80           DB 128
+   \   000534   80           DB 128
+   \   000535   80           DB 128
+   \   000536   80           DB 128
+   \   000537   00           DB 0
+   \   000538   00           DB 0
+   \   000539   33           DB 51
+   \   00053A   24           DB 36
+   \   00053B   24           DB 36
+   \   00053C   24           DB 36
+   \   00053D   24           DB 36
+   \   00053E   19           DB 25
+   \   00053F   00           DB 0
+   \   000540   00           DB 0
+   \   000541   80           DB 128
+   \   000542   80           DB 128
+   \   000543   E0           DB 224
+   \   000544   80           DB 128
+   \   000545   80           DB 128
+   \   000546   00           DB 0
+   \   000547   00           DB 0
+   \   000548   00           DB 0
+   \   000549   00           DB 0
+   \   00054A   00           DB 0
+   \   00054B   1F           DB 31
+   \   00054C   20           DB 32
+   \   00054D   20           DB 32
+   \   00054E   00           DB 0
+   \   00054F   00           DB 0
+   \   000550   80           DB 128
+   \   000551   80           DB 128
+   \   000552   00           DB 0
+   \   000553   00           DB 0
+   \   000554   00           DB 0
+   \   000555   80           DB 128
+   \   000556   80           DB 128
+   \   000557   00           DB 0
+   \   000558   00           DB 0
+   \   000559   1F           DB 31
+   \   00055A   20           DB 32
+   \   00055B   20           DB 32
+   \   00055C   20           DB 32
+   \   00055D   10           DB 16
+   \   00055E   3F           DB 63
+   \   00055F   20           DB 32
+   \   000560   80           DB 128
+   \   000561   80           DB 128
+   \   000562   80           DB 128
+   \   000563   00           DB 0
+   \   000564   00           DB 0
+   \   000565   80           DB 128
+   \   000566   80           DB 128
+   \   000567   80           DB 128
+   \   000568   00           DB 0
+   \   000569   01           DB 1
+   \   00056A   0E           DB 14
+   \   00056B   30           DB 48
+   \   00056C   08           DB 8
+   \   00056D   06           DB 6
+   \   00056E   01           DB 1
+   \   00056F   00           DB 0
+   \   000570   80           DB 128
+   \   000571   80           DB 128
+   \   000572   00           DB 0
+   \   000573   80           DB 128
+   \   000574   00           DB 0
+   \   000575   80           DB 128
+   \   000576   80           DB 128
+   \   000577   80           DB 128
+   \   000578   0F           DB 15
+   \   000579   30           DB 48
+   \   00057A   0C           DB 12
+   \   00057B   03           DB 3
+   \   00057C   0C           DB 12
+   \   00057D   30           DB 48
+   \   00057E   0F           DB 15
+   \   00057F   00           DB 0
+   \   000580   00           DB 0
+   \   000581   80           DB 128
+   \   000582   80           DB 128
+   \   000583   00           DB 0
+   \   000584   80           DB 128
+   \   000585   80           DB 128
+   \   000586   80           DB 128
+   \   000587   00           DB 0
+   \   000588   00           DB 0
+   \   000589   20           DB 32
+   \   00058A   31           DB 49
+   \   00058B   2E           DB 46
+   \   00058C   0E           DB 14
+   \   00058D   31           DB 49
+   \   00058E   20           DB 32
+   \   00058F   00           DB 0
+   \   000590   80           DB 128
+   \   000591   80           DB 128
+   \   000592   80           DB 128
+   \   000593   00           DB 0
+   \   000594   00           DB 0
+   \   000595   80           DB 128
+   \   000596   80           DB 128
+   \   000597   80           DB 128
+   \   000598   80           DB 128
+   \   000599   81           DB 129
+   \   00059A   8E           DB 142
+   \   00059B   70           DB 112
+   \   00059C   18           DB 24
+   \   00059D   06           DB 6
+   \   00059E   01           DB 1
+   \   00059F   00           DB 0
+   \   0005A0   00           DB 0
+   \   0005A1   80           DB 128
+   \   0005A2   80           DB 128
+   \   0005A3   80           DB 128
+   \   0005A4   80           DB 128
+   \   0005A5   80           DB 128
+   \   0005A6   80           DB 128
+   \   0005A7   00           DB 0
+   \   0005A8   00           DB 0
+   \   0005A9   21           DB 33
+   \   0005AA   30           DB 48
+   \   0005AB   2C           DB 44
+   \   0005AC   22           DB 34
+   \   0005AD   21           DB 33
+   \   0005AE   30           DB 48
+   \   0005AF   00           DB 0
+   \   0005B0   00           DB 0
+   \   0005B1   00           DB 0
+   \   0005B2   00           DB 0
+   \   0005B3   00           DB 0
+   \   0005B4   80           DB 128
+   \   0005B5   7C           DB 124
+   \   0005B6   02           DB 2
+   \   0005B7   02           DB 2
+   \   0005B8   00           DB 0
+   \   0005B9   00           DB 0
+   \   0005BA   00           DB 0
+   \   0005BB   00           DB 0
+   \   0005BC   00           DB 0
+   \   0005BD   3F           DB 63
+   \   0005BE   40           DB 64
+   \   0005BF   40           DB 64
+   \   0005C0   00           DB 0
+   \   0005C1   00           DB 0
+   \   0005C2   00           DB 0
+   \   0005C3   00           DB 0
+   \   0005C4   FF           DB 255
+   \   0005C5   00           DB 0
+   \   0005C6   00           DB 0
+   \   0005C7   00           DB 0
+   \   0005C8   00           DB 0
+   \   0005C9   00           DB 0
+   \   0005CA   00           DB 0
+   \   0005CB   00           DB 0
+   \   0005CC   FF           DB 255
+   \   0005CD   00           DB 0
+   \   0005CE   00           DB 0
+   \   0005CF   00           DB 0
+   \   0005D0   00           DB 0
+   \   0005D1   02           DB 2
+   \   0005D2   02           DB 2
+   \   0005D3   7C           DB 124
+   \   0005D4   80           DB 128
+   \   0005D5   00           DB 0
+   \   0005D6   00           DB 0
+   \   0005D7   00           DB 0
+   \   0005D8   00           DB 0
+   \   0005D9   40           DB 64
+   \   0005DA   40           DB 64
+   \   0005DB   3F           DB 63
+   \   0005DC   00           DB 0
+   \   0005DD   00           DB 0
+   \   0005DE   00           DB 0
+   \   0005DF   00           DB 0
+   \   0005E0   00           DB 0
+   \   0005E1   06           DB 6
+   \   0005E2   01           DB 1
+   \   0005E3   01           DB 1
+   \   0005E4   02           DB 2
+   \   0005E5   02           DB 2
+   \   0005E6   04           DB 4
+   \   0005E7   04           DB 4
+   \   0005E8   00           DB 0
+   \   0005E9   00           DB 0
+   \   0005EA   00           DB 0
+   \   0005EB   00           DB 0
+   \   0005EC   00           DB 0
+   \   0005ED   00           DB 0
+   \   0005EE   00           DB 0
+   \   0005EF   00           DB 0
+     51          
+     52          #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+     53              #include "DebugTrace.h"
+     54          #endif
+     55          
+     56          /**************************************************************************************************
+     57           *                                          CONSTANTS
+     58           **************************************************************************************************/
+     59          /*
+     60              LCD pins
+     61              // control
+     62              P1.1 - LCD_BACKLIGHT
+     63              P2.0 - LCD_RESET
+     64              
+     65              // spi
+     66              P1.7 - LCD_CS
+     67              P1.5 - RS
+     68              P1.4 - SCLK
+     69              P1.6 - SDA
+     70          */
+     71          
+     72          /* LCD Control lines */
+     73          // control
+     74          #define HAL_LCD_BACKLIGHT_PORT 1
+     75          #define HAL_LCD_BACKLIGHT_PIN  1
+     76          
+     77          #define HAL_LCD_RESET_PORT 2
+     78          #define HAL_LCD_RESET_PIN  0
+     79          
+     80          // spi
+     81          #define HAL_LCD_CS_PORT 1
+     82          #define HAL_LCD_CS_PIN  7
+     83          
+     84          #define HAL_LCD_RS_PORT 1
+     85          #define HAL_LCD_RS_PIN  5
+     86          
+     87          #define HAL_LCD_SCLK_PORT 1
+     88          #define HAL_LCD_SCLK_PIN  4
+     89          
+     90          #define HAL_LCD_SDA_PORT 1
+     91          #define HAL_LCD_SDA_PIN  6
+     92          
+     93          /* LCD Parameters */
+     94          #define LCD_MAX_LINE_COUNT              4
+     95          #define LCD_MAX_LINE_LENGTH             16
+     96          #define LCD_MAX_BUF                     25
+     97          
+     98          /* Defines for HW LCD */
+     99          
+    100          /* Bias control */
+    101          #define BIAS_1_7                        0x01
+    102          #define BIAS_1_9                        0x00
+    103          #define SET_BIAS_CTRL(bias)             HalLcd_HW_Control(0xA2 | (bias))
+    104          
+    105          /* Power control */
+    106          #define LCD_POWER_CONTROL_1             0x04
+    107          #define LCD_POWER_CONTROL_2             0x06
+    108          #define LCD_POWER_CONTROL_3             0x07
+    109          #define LCD_POWER_CONTROL(options)      HalLcd_HW_Control(0x28 + options)
+    110          
+    111          /* LCD commands */
+    112          #define LCD_SOFT_RESET                  0xE2
+    113          #define LCD_CMD_SET_CONTRAST            0x20
+    114          
+    115          
+    116          /**************************************************************************************************
+    117           *                                           MACROS
+    118           **************************************************************************************************/
+    119          
+    120          #define HAL_IO_SET(port, pin, val)                HAL_IO_SET_PREP(port, pin, val)
+    121          #define HAL_IO_SET_PREP(port, pin, val)           st( P##port##_##pin = val; )
+    122          
+    123          #define HAL_CONFIG_IO_OUTPUT(port, pin, val)      HAL_CONFIG_IO_OUTPUT_PREP(port, pin, val)
+    124          #define HAL_CONFIG_IO_OUTPUT_PREP(port, pin, val) st( P##port##SEL &= ~BV(pin); \
+    125                                                                P##port##_##pin = val; \
+    126                                                                P##port##DIR |= BV(pin); )
+    127          
+    128          #define HAL_CONFIG_IO_PERIPHERAL(port, pin)       HAL_CONFIG_IO_PERIPHERAL_PREP(port, pin)
+    129          #define HAL_CONFIG_IO_PERIPHERAL_PREP(port, pin)  st( P##port##SEL |= BV(pin); )
+    130          
+    131          
+    132          /* Control macros */
+    133          #define LCD_BACKLIGHT_OFF()     HAL_IO_SET(HAL_LCD_BACKLIGHT_PORT, HAL_LCD_BACKLIGHT_PIN, 1);
+    134          #define LCD_BACKLIGHT_ON()      HAL_IO_SET(HAL_LCD_BACKLIGHT_PORT, HAL_LCD_BACKLIGHT_PIN, 0);
+    135          
+    136          #define LCD_SCLK_H              HAL_IO_SET(HAL_LCD_SCLK_PORT, HAL_LCD_SCLK_PIN, 1);
+    137          #define LCD_SCLK_L              HAL_IO_SET(HAL_LCD_SCLK_PORT, HAL_LCD_SCLK_PIN, 0);
+    138          
+    139          #define LCD_SDA_H               HAL_IO_SET(HAL_LCD_SDA_PORT, HAL_LCD_SDA_PIN, 1);
+    140          #define LCD_SDA_L               HAL_IO_SET(HAL_LCD_SDA_PORT, HAL_LCD_SDA_PIN, 0);
+    141          
+    142          #define LCD_ACTIVATE_CS()       HAL_IO_SET(HAL_LCD_CS_PORT, HAL_LCD_CS_PIN, 0);
+    143          #define LCD_RELEASE_CS()        HAL_IO_SET(HAL_LCD_CS_PORT, HAL_LCD_CS_PIN, 1);
+    144          
+    145          #define LCD_RS_CMD()            HAL_IO_SET(HAL_LCD_RS_PORT, HAL_LCD_RS_PIN, 0);
+    146          #define LCD_RS_DATA()           HAL_IO_SET(HAL_LCD_RS_PORT, HAL_LCD_RS_PIN, 1);
+    147          
+    148          #define LCD_ACTIVATE_RESET()    HAL_IO_SET(HAL_LCD_RESET_PORT, HAL_LCD_RESET_PIN, 0);//低电平复位
+    149          #define LCD_RELEASE_RESET()     HAL_IO_SET(HAL_LCD_RESET_PORT, HAL_LCD_RESET_PIN, 1);
+    150          
+    151          #if (HAL_LCD == TRUE)
+    152          /**************************************************************************************************
+    153           *                                       LOCAL VARIABLES
+    154           **************************************************************************************************/
+    155          
+    156          static uint8 *Lcd_Line1;
+    157          
+    158          /**************************************************************************************************
+    159           *                                       FUNCTIONS - API
+    160           **************************************************************************************************/
+    161          
+    162          void HalLcd_HW_Init(void);
+    163          void HalLcd_HW_WaitUs(uint16 i);
+    164          void HalLcd_HW_SET_DDRAM_ADDR(uint8 page, uint8 column);
+    165          void HalLcd_HW_Clear(void);
+    166          void HalLcd_HW_Control(uint8 cmd);
+    167          void HalLcd_HW_Write(uint8 data);
+    168          void HalLcd_HW_SetContrast(uint8 value);
+    169          void HalLcd_HW_SetVoltage(uint8 value);
+    170          void HalLcd_HW_WriteChar(uint8 line, uint8 col, char text);
+    171          void HalLcd_HW_WriteLine(uint8 line, const char *pText);
+    172          #endif //LCD
+    173          
+    174          /**************************************************************************************************
+    175           * @fn      HalLcdInit
+    176           *
+    177           * @brief   Initilize LCD Service
+    178           *
+    179           * @param   init - pointer to void that contains the initialized value
+    180           *
+    181           * @return  None
+    182           **************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    183          void HalLcdInit(void)
+   \                     HalLcdInit:
+    184          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    185          #if (HAL_LCD == TRUE)
+    186              Lcd_Line1 = NULL;
+    187              HalLcd_HW_Init();
+    188          #endif
+    189          }
+   \   000000   02....       LJMP    ?BRET
+    190          
+    191          /*************************************************************************************************
+    192           *                    LCD EMULATION FUNCTIONS
+    193           *
+    194           * Some evaluation boards are equipped with Liquid Crystal Displays
+    195           * (LCD) which may be used to display diagnostic information. These
+    196           * functions provide LCD emulation, sending the diagnostic strings
+    197           * to Z-Tool via the RS232 serial port. These functions are enabled
+    198           * when the "LCD_SUPPORTED" compiler flag is placed in the makefile.
+    199           *
+    200           * Most applications update both lines (1 and 2) of the LCD whenever
+    201           * text is posted to the device. This emulator assumes that line 1 is
+    202           * updated first (saved locally) and the formatting and send operation
+    203           * is triggered by receipt of line 2. Nothing will be transmitted if
+    204           * only line 1 is updated.
+    205           *
+    206           *************************************************************************************************/
+    207          
+    208          /**************************************************************************************************
+    209           * @fn      HalLcdWriteString
+    210           *
+    211           * @brief   Write a string to the LCD
+    212           *
+    213           * @param   str    - pointer to the string that will be displayed
+    214           *          option - display options
+    215           *
+    216           * @return  None
+    217           **************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    218          void HalLcdWriteString ( char *str, uint8 option)
+   \                     HalLcdWriteString:
+    219          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    220          #if (HAL_LCD == TRUE)
+    221              uint8 strLen = 0;
+    222              uint8 totalLen = 0;
+    223              uint8 *buf;
+    224              uint8 tmpLen;
+    225            
+    226              if ( Lcd_Line1 == NULL )
+    227              {
+    228                  Lcd_Line1 = osal_mem_alloc( HAL_LCD_MAX_CHARS+1 );
+    229                  HalLcdWriteString( "TexasInstruments", 1 );
+    230              }
+    231            
+    232              strLen = (uint8)osal_strlen( (char*)str );
+    233            
+    234              /* Check boundries */
+    235              if ( strLen > HAL_LCD_MAX_CHARS )
+    236                  strLen = HAL_LCD_MAX_CHARS;
+    237            
+    238              if ( option == HAL_LCD_LINE_1 )
+    239              {
+    240                  /* Line 1 gets saved for later */
+    241                  osal_memcpy( Lcd_Line1, str, strLen );
+    242                  Lcd_Line1[strLen] = '\0';
+    243              }
+    244              else
+    245              {
+    246                  /* Line 2 triggers action */
+    247                  tmpLen = (uint8)osal_strlen( (char*)Lcd_Line1 );
+    248                  totalLen =  tmpLen + 1 + strLen + 1;
+    249                  buf = osal_mem_alloc( totalLen );
+    250                  if ( buf != NULL )
+    251                  {
+    252                      /* Concatenate strings */
+    253                      osal_memcpy( buf, Lcd_Line1, tmpLen );
+    254                      buf[tmpLen++] = ' ';
+    255                      osal_memcpy( &buf[tmpLen], str, strLen );
+    256                      buf[tmpLen+strLen] = '\0';
+    257            
+    258                      /* Send it out */
+    259          #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+    260          #if defined(SERIAL_DEBUG_SUPPORTED)
+    261                      debug_str( (uint8*)buf );
+    262          #endif //LCD_SUPPORTED
+    263          #endif //ZTOOL_P1
+    264                      /* Free mem */
+    265                      osal_mem_free( buf );
+    266                  }
+    267              }
+    268            
+    269              /* Display the string */
+    270              HalLcd_HW_WriteLine (option, str);
+    271          #endif //HAL_LCD
+    272          }
+   \   000000   02....       LJMP    ?BRET
+    273          
+    274          /**************************************************************************************************
+    275           * @fn      HalLcdWriteValue
+    276           *
+    277           * @brief   Write a value to the LCD
+    278           *
+    279           * @param   value  - value that will be displayed
+    280           *          radix  - 8, 10, 16(进制)
+    281           *          option - display options
+    282           *
+    283           * @return  None
+    284           **************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    285          void HalLcdWriteValue ( uint32 value, const uint8 radix, uint8 option)
+   \                     HalLcdWriteValue:
+    286          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    287          #if (HAL_LCD == TRUE)
+    288              uint8 buf[LCD_MAX_BUF];
+    289          
+    290              // 将value按照radix的进制转换存到buf中
+    291              _ltoa( value, &buf[0], radix ); 
+    292              HalLcdWriteString( (char*)buf, option );
+    293          #endif
+    294          }
+   \   000000   02....       LJMP    ?BRET
+    295          
+    296          /**************************************************************************************************
+    297           * @fn      HalLcdWriteScreen
+    298           *
+    299           * @brief   Write a value to the LCD
+    300           *
+    301           * @param   line1  - string that will be displayed on line 1
+    302           *          line2  - string that will be displayed on line 2
+    303           *
+    304           * @return  None
+    305           **************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    306          void HalLcdWriteScreen( char *line1, char *line2 )
+   \                     HalLcdWriteScreen:
+    307          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    308          #if (HAL_LCD == TRUE)
+    309              HalLcdWriteString( line1, 1 );
+    310              HalLcdWriteString( line2, 2 );
+    311          #endif
+    312          }
+   \   000000   02....       LJMP    ?BRET
+    313          
+    314          /**************************************************************************************************
+    315           * @fn      HalLcdWriteStringValue
+    316           *
+    317           * @brief   Write a string followed by a value to the LCD
+    318           *
+    319           * @param   title  - Title that will be displayed before the value
+    320           *          value  - value
+    321           *          format - redix
+    322           *          line   - line number
+    323           *
+    324           * @return  None
+    325           **************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    326          void HalLcdWriteStringValue( char *title, uint16 value, uint8 format, uint8 line )
+   \                     HalLcdWriteStringValue:
+    327          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    328          #if (HAL_LCD == TRUE)
+    329              uint8 tmpLen;
+    330              uint8 buf[LCD_MAX_BUF];
+    331              uint32 err;
+    332            
+    333              tmpLen = (uint8)osal_strlen( (char*)title );
+    334              osal_memcpy( buf, title, tmpLen );
+    335              buf[tmpLen] = ' ';
+    336              err = (uint32)(value);
+    337              _ltoa( err, &buf[tmpLen+1], format );
+    338              HalLcdWriteString( (char*)buf, line );		
+    339          #endif
+    340          }
+   \   000000   02....       LJMP    ?BRET
+    341          
+    342          /**************************************************************************************************
+    343           * @fn      HalLcdWriteStringValueValue
+    344           *
+    345           * @brief   Write a string followed by a value to the LCD
+    346           *
+    347           * @param   title   - Title that will be displayed before the value
+    348           *          value1  - value #1
+    349           *          format1 - redix of value #1
+    350           *          value2  - value #2
+    351           *          format2 - redix of value #2
+    352           *          line    - line number
+    353           *
+    354           * @return  None
+    355           **************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    356          void HalLcdWriteStringValueValue( char *title, uint16 value1, uint8 format1,
+   \                     HalLcdWriteStringValueValue:
+    357                                            uint16 value2, uint8 format2, uint8 line )
+    358          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    359          #if (HAL_LCD == TRUE)
+    360              uint8 tmpLen;
+    361              uint8 buf[LCD_MAX_BUF];
+    362              uint32 err;
+    363            
+    364              tmpLen = (uint8)osal_strlen( (char*)title );
+    365              if ( tmpLen )
+    366              {
+    367                  osal_memcpy( buf, title, tmpLen );
+    368                  buf[tmpLen++] = ' ';
+    369              }
+    370            
+    371              err = (uint32)(value1);
+    372              _ltoa( err, &buf[tmpLen], format1 );
+    373              tmpLen = (uint8)osal_strlen( (char*)buf );
+    374            
+    375              buf[tmpLen++] = ',';
+    376              buf[tmpLen++] = ' ';
+    377              err = (uint32)(value2);
+    378              _ltoa( err, &buf[tmpLen], format2 );
+    379            
+    380              HalLcdWriteString( (char *)buf, line );		
+    381          #endif
+    382          }
+   \   000000   02....       LJMP    ?BRET
+    383          
+    384          /**************************************************************************************************
+    385           * @fn      HalLcdDisplayPercentBar
+    386           *
+    387           * @brief   Display percentage bar on the LCD
+    388           *
+    389           * @param   title   -
+    390           *          value   -
+    391           *
+    392           * @return  None
+    393           **************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    394          void HalLcdDisplayPercentBar( char *title, uint8 value )
+   \                     HalLcdDisplayPercentBar:
+    395          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    396          #if (HAL_LCD == TRUE)
+    397              uint8 percent;
+    398              uint8 leftOver;
+    399              uint8 buf[17];
+    400              uint32 err;
+    401              uint8 x;
+    402            
+    403              /* Write the title: */
+    404              HalLcdWriteString( title, HAL_LCD_LINE_1 );
+    405            
+    406              if ( value > 100 )
+    407                value = 100;
+    408            
+    409              /* convert to blocks */
+    410              percent = (uint8)(value / 10);
+    411              leftOver = (uint8)(value % 10);
+    412            
+    413              /* Make window */
+    414              osal_memcpy( buf, "[          ]  ", 15 );
+    415            
+    416              for ( x = 0; x < percent; x ++ )
+    417              {
+    418                  buf[1+x] = '>';
+    419              }
+    420            
+    421              if ( leftOver >= 5 )
+    422                buf[1+x] = '+';
+    423            
+    424              err = (uint32)value;
+    425              _ltoa( err, (uint8*)&buf[13], 10 );
+    426            
+    427              HalLcdWriteString( (char*)buf, HAL_LCD_LINE_2 );
+    428          #endif
+    429          }                     
+   \   000000   02....       LJMP    ?BRET
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLcdInit?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLcdInit
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLcdWriteString?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLcdWriteString
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLcdWriteValue?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLcdWriteValue
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLcdWriteScreen?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLcdWriteScreen
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLcdWriteStringValue?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLcdWriteStringValue
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLcdWriteStringValueValue?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLcdWriteStringValueValue
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLcdDisplayPercentBar?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLcdDisplayPercentBar
+    430          
+    431          
+    432          #if (HAL_LCD == TRUE)
+    433          /**************************************************************************************************
+    434           *                                    HARDWARE LCD
+    435           **************************************************************************************************/
+    436          
+    437          /**************************************************************************************************
+    438           * @fn      halLcd_ConfigIO
+    439           *
+    440           * @brief   Configure IO lines needed for LCD control.
+    441           *
+    442           * @param   None
+    443           *
+    444           * @return  None
+    445           **************************************************************************************************/
+    446          static void halLcd_ConfigIO(void)
+    447          {
+    448              /* GPIO configuration */
+    449              HAL_CONFIG_IO_OUTPUT(HAL_LCD_BACKLIGHT_PORT, HAL_LCD_BACKLIGHT_PIN, 1);
+    450              HAL_CONFIG_IO_OUTPUT(HAL_LCD_RESET_PORT,     HAL_LCD_RESET_PIN,     1);
+    451              HAL_CONFIG_IO_OUTPUT(HAL_LCD_CS_PORT,        HAL_LCD_CS_PIN,        1);
+    452              HAL_CONFIG_IO_OUTPUT(HAL_LCD_SCLK_PORT,      HAL_LCD_SCLK_PIN,      1);
+    453              HAL_CONFIG_IO_OUTPUT(HAL_LCD_RS_PORT,        HAL_LCD_RS_PIN,        1);
+    454              HAL_CONFIG_IO_OUTPUT(HAL_LCD_SDA_PORT,       HAL_LCD_SDA_PIN,       1);
+    455          }
+    456          
+    457          /**************************************************************************************************
+    458           * @fn      HalLcd_HW_SET_DDRAM_ADDR
+    459           *
+    460           * @brief   Set DDRAM address, 一共128列，8页(每页8行)
+    461           *
+    462           * @param   uint8 page, uint8 column
+    463           *
+    464           * @return  None
+    465           **************************************************************************************************/
+    466          void HalLcd_HW_SET_DDRAM_ADDR(uint8 page, uint8 column)
+    467          {
+    468              LCD_ACTIVATE_CS();
+    469              page   -= 1; 
+    470              column -= 1;
+    471              HalLcd_HW_Control(0xb0 + page);
+    472              HalLcd_HW_Control(((column >> 4) & 0x0F) + 0x10);
+    473              HalLcd_HW_Control(column & 0x0F);
+    474              // LCD_RELEASE_CS();
+    475          }
+    476          
+    477          /**************************************************************************************************
+    478           * @fn      HalLcd_HW_Control
+    479           *
+    480           * @brief   Write 1 command to the LCD
+    481           *
+    482           * @param   uint8 cmd - command to be written to the LCD
+    483           *
+    484           * @return  None
+    485           **************************************************************************************************/
+    486          void HalLcd_HW_Control(uint8 cmd)
+    487          {
+    488              uint8 i;
+    489              
+    490              LCD_ACTIVATE_CS();
+    491              LCD_RS_CMD();
+    492              
+    493              for (i = 0; i < 8; i++) 
+    494              { 
+    495                  LCD_SCLK_L; 
+    496                  if (cmd & 0x80) 
+    497                  {
+    498                      LCD_SDA_H;
+    499                  }
+    500                  else 
+    501                  {
+    502                      LCD_SDA_L;
+    503                  }
+    504                  
+    505                  LCD_SCLK_H; 
+    506                  cmd <<= 1; 
+    507              }
+    508              // LCD_RELEASE_CS();
+    509          }
+    510          
+    511          /**************************************************************************************************
+    512           * @fn      HalLcd_HW_Write
+    513           *
+    514           * @brief   Write 1 byte to the LCD
+    515           *
+    516           * @param   uint8 data - data to be written to the LCD
+    517           *
+    518           * @return  None
+    519           **************************************************************************************************/
+    520          void HalLcd_HW_Write(uint8 data)
+    521          {
+    522              uint8 i; 
+    523              
+    524              LCD_ACTIVATE_CS();
+    525              LCD_RS_DATA(); 
+    526              
+    527              for (i = 0; i < 8; i++) 
+    528              { 
+    529                  LCD_SCLK_L; 
+    530                  if (data & 0x80) 
+    531                  {
+    532                      LCD_SDA_H;
+    533                  }
+    534                  else 
+    535                  {
+    536                      LCD_SDA_L;
+    537                  }
+    538                  
+    539                  LCD_SCLK_H; 
+    540                  data <<= 1; 
+    541              }
+    542              // LCD_RELEASE_CS();
+    543          }
+    544          
+    545          /**************************************************************************************************
+    546           * @fn          HalLcd_HW_SetContrast
+    547           *
+    548           * @brief       Set display contrast
+    549           *
+    550           * @param       uint8 value - contrast value: 0~7;
+    551           *
+    552           * @return      none
+    553           **************************************************************************************************/
+    554          void HalLcd_HW_SetContrast(uint8 value)
+    555          {
+    556              if (value <= 7)
+    557              {
+    558                  // 粗调对比度，可设置范围 0x20～0x27
+    559                  HalLcd_HW_Control(LCD_CMD_SET_CONTRAST + value);  
+    560              }
+    561              else 
+    562              {
+    563                  // 输入数值溢出，默认3  
+    564                  HalLcd_HW_Control(LCD_CMD_SET_CONTRAST + 3); 
+    565              }
+    566          }
+    567          
+    568          /**************************************************************************************************
+    569           * @fn          HalLcd_HW_SetVoltage
+    570           *
+    571           * @brief       Set LCD Voltage
+    572           *
+    573           * @param       uint8 value - voltage value: 0x00~0x3F;
+    574           *
+    575           * @return      none
+    576           **************************************************************************************************/
+    577          void HalLcd_HW_SetVoltage(uint8 value)
+    578          {
+    579              HalLcd_HW_Control(0x81); 
+    580              if (value <= 0x3F)
+    581              {
+    582                  // 0x1a,微调对比度的值，可设置范围 0x00～0x3f   
+    583                  HalLcd_HW_Control(value);  
+    584              }
+    585              else
+    586              {
+    587                  // 数据溢出，默认0x28;  
+    588                  HalLcd_HW_Control(0x28);   
+    589              }
+    590          }
+    591          
+    592          /**************************************************************************************************
+    593           * @fn      HalLcd_HW_Clear
+    594           *
+    595           * @brief   Clear the HW LCD
+    596           *
+    597           * @param   None
+    598           *
+    599           * @return  None
+    600           **************************************************************************************************/
+    601          void HalLcd_HW_Clear(void)
+    602          {
+    603              LCD_ACTIVATE_CS();
+    604              uint8 i,j;
+    605              
+    606              for (i = 0; i < 9; i++) 
+    607              { 
+    608                  HalLcd_HW_SET_DDRAM_ADDR((i + 1), 1); // 第一页，第一列
+    609                  for( j = 0; j < 132; j++) 
+    610                  { 
+    611                      HalLcd_HW_Write(0x00); 
+    612                  } 
+    613              }
+    614              // LCD_RELEASE_CS();
+    615          }
+    616          
+    617          /**************************************************************************************************
+    618           * @fn      HalLcd_HW_Init
+    619           *
+    620           * @brief   Initilize HW LCD Driver.
+    621           *
+    622           * @param   None
+    623           *
+    624           * @return  None
+    625           **************************************************************************************************/
+    626          void HalLcd_HW_Init(void)
+    627          {
+    628              /* Initialize LCD IO lines */
+    629              halLcd_ConfigIO();
+    630              
+    631              LCD_ACTIVATE_CS();
+    632              
+    633              LCD_BACKLIGHT_ON(); // 打开LCD背光灯
+    634            
+    635              /* Perform reset */
+    636              LCD_ACTIVATE_RESET();
+    637              HalLcd_HW_WaitUs(1500); // >1ms
+    638              LCD_RELEASE_RESET();
+    639              HalLcd_HW_WaitUs(5000); // >5ms
+    640            
+    641              HalLcd_HW_Control(LCD_SOFT_RESET);
+    642              HalLcd_HW_WaitUs(500);  
+    643          
+    644              /* Perform the Power initialization sequence */
+    645              LCD_POWER_CONTROL(LCD_POWER_CONTROL_1);
+    646              HalLcd_HW_WaitUs(500);   
+    647              LCD_POWER_CONTROL(LCD_POWER_CONTROL_2);
+    648              HalLcd_HW_WaitUs(500); 
+    649              LCD_POWER_CONTROL(LCD_POWER_CONTROL_3);  
+    650              HalLcd_HW_WaitUs(500); 
+    651             
+    652              /* Set contrast 对比度*/
+    653              HalLcd_HW_SetContrast(3);
+    654          
+    655              /* Set power */
+    656              //内部电阻微调
+    657              HalLcd_HW_SetVoltage(0x28);
+    658              
+    659              SET_BIAS_CTRL(BIAS_1_9);
+    660              HalLcd_HW_WaitUs(1000);  // 1 ms
+    661              
+    662              HalLcd_HW_Control(0xc8); // 行扫描顺序：从上到下 
+    663              HalLcd_HW_Control(0xa0); // 列扫描顺序：从左到右 
+    664              HalLcd_HW_Control(0x40); // 起始行：第一行开始
+    665              HalLcd_HW_Control(0xaf); // 打开显示 
+    666          
+    667              /* Clear the display */
+    668              HalLcd_HW_Clear();
+    669          
+    670              LCD_RELEASE_CS();
+    671          }
+    672          
+    673          /**************************************************************************************************
+    674           * @fn      HalLcd_HW_WriteChar
+    675           *
+    676           * @brief   Write one char to the display
+    677           *
+    678           * @param   uint8 line - line number that the char will be displayed
+    679           *          uint8 col - colum where the char will be displayed
+    680           *
+    681           * @return  None
+    682           **************************************************************************************************/
+    683          void HalLcd_HW_WriteChar(uint8 line, uint8 col, char text)
+    684          {
+    685              uint8 j, k, n;
+    686              
+    687              if (col <= LCD_MAX_LINE_LENGTH)
+    688              {   
+    689                  //字符大小：16(行)x8(列)
+    690                  if ((text >= 0x20) && (text <= 0x7e)) 
+    691                  { 
+    692                      j = text - 0x20; 
+    693                      for (n = 0; n < 2; n++) // 两页
+    694                      {    
+    695                          HalLcd_HW_SET_DDRAM_ADDR((line * 2 - 1 + n), ((col - 1) * 8 + 1)); // 页和列 
+    696                          for (k = 0; k < 8; k++) 
+    697                          { 
+    698                              // j为字符对应的，
+    699                              // 写数据到 LCD, 每写一次(即写一个 8 位的数据)后列地址自动加 1
+    700                              HalLcd_HW_Write(ascii_table_8x16[j][k + 8 * n]);
+    701                          } 
+    702                      }  
+    703                  } 
+    704              }
+    705              else
+    706              {
+    707                  return;
+    708              }
+    709          }
+    710          
+    711          /**************************************************************************************************
+    712           * @fn          halLcdWriteLine
+    713           *
+    714           * @brief       Write one line on display
+    715           *
+    716           * @param       uint8 line - display line
+    717           *              char *pText - text buffer to write
+    718           *
+    719           * @return      none
+    720           **************************************************************************************************/
+    721          void HalLcd_HW_WriteLine(uint8 line, const char *pText)
+    722          {
+    723              uint8 count;
+    724              uint8 totalLength = (uint8)osal_strlen( (char *)pText );
+    725            
+    726              /* Write the content first */
+    727              for (count = 0; count < totalLength; count++)
+    728              {
+    729                  HalLcd_HW_WriteChar(line, (count + 1), (*(pText++)));
+    730              }
+    731            
+    732              /* Write blank spaces to rest of the line */
+    733              for (count = totalLength; count < LCD_MAX_LINE_LENGTH; count++)
+    734              {
+    735                 HalLcd_HW_WriteChar(line, (count + 1), ' ');
+    736              }
+    737          }
+    738          
+    739          /**************************************************************************************************
+    740           * @fn      HalLcd_HW_WaitUs
+    741           *
+    742           * @brief   wait for x us. @ 32MHz MCU clock it takes 32 "nop"s for 1 us delay.
+    743           *
+    744           * @param   x us. range[0-65536]
+    745           *
+    746           * @return  None
+    747           **************************************************************************************************/
+    748          void HalLcd_HW_WaitUs(uint16 microSecs)
+    749          {
+    750              while(microSecs--)
+    751              {
+    752                  // 32 NOPs == 1 usecs
+    753                  asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+    754                  asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+    755                  asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+    756                  asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+    757                  asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+    758                  asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+    759                  asm("nop"); asm("nop");
+    760              }
+    761          }
+    762          #endif
+
+   Maximum stack usage in bytes:
+
+     Function                    ISTACK PSTACK XSTACK
+     --------                    ------ ------ ------
+     HalLcdDisplayPercentBar         0      0      0
+     HalLcdInit                      0      0      0
+     HalLcdWriteScreen               0      0      0
+     HalLcdWriteString               0      0      0
+     HalLcdWriteStringValue          0      0      1
+     HalLcdWriteStringValueValue     0      0      4
+     HalLcdWriteValue                0      0      1
+
+
+   Segment part sizes:
+
+     Function/Label                      Bytes
+     --------------                      -----
+     ascii_table_8x16                    1520
+     HalLcdInit                             3
+     HalLcdWriteString                      3
+     HalLcdWriteValue                       3
+     HalLcdWriteScreen                      3
+     HalLcdWriteStringValue                 3
+     HalLcdWriteStringValueValue            3
+     HalLcdDisplayPercentBar                3
+     ??HalLcdInit?relay                     6
+     ??HalLcdWriteString?relay              6
+     ??HalLcdWriteValue?relay               6
+     ??HalLcdWriteScreen?relay              6
+     ??HalLcdWriteStringValue?relay         6
+     ??HalLcdWriteStringValueValue?relay    6
+     ??HalLcdDisplayPercentBar?relay        6
+
+ 
+    21 bytes in segment BANKED_CODE
+    42 bytes in segment BANK_RELAYS
+ 1 520 bytes in segment XDATA_ROM_C
+ 
+    63 bytes of CODE  memory
+ 1 520 bytes of CONST memory
+
+Errors: none
+Warnings: none

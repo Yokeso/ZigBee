@@ -1,0 +1,427 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.1.40194/W32 for 8051         04/Jan/2021  17:15:28 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data_rom                                           #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\Source\OS #
+#                          AL_TransmitApp.c                                   #
+#    Command line       =  -f D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\..\..\..\Tools\CC2530DB\f8wEndev.cfg            #
+#                          (-DCPU32MHZ -DROOT=__near_func                     #
+#                          -DMAC_CFG_TX_DATA_MAX=3 -DMAC_CFG_TX_MAX=6         #
+#                          -DMAC_CFG_RX_MAX=3) -f D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\ #
+#                          MY_BOARD\Exp4\CC2530DB\..\..\..\Tools\CC2530DB\f8w #
+#                          Config.cfg (-DZIGBEEPRO -DSECURE=0                 #
+#                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
+#                          -DDEFAULT_CHANLIST=0x02000000                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0x1001                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
+#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
+#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DMAC_MAX_FRAME_SIZE=116                           #
+#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
+#                          __code" -DGENERIC=__generic                        #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\ #
+#                          MY_BOARD\Exp4\Source\OSAL_TransmitApp.c -D         #
+#                          HAL_UART=TRUE -D HAL_UART_TEST -D xPOWER_SAVING    #
+#                          -lC D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC #
+#                          2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC253 #
+#                          0DB\EndDeviceSBDHT11\List\ -lA                     #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBDHT11\List\ --diag_suppress             #
+#                          Pe001,Pa010 -o D:\Projects_IAR\IAR_C8051\WSN-CC253 #
+#                          0\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD #
+#                          \Exp4\CC2530DB\EndDeviceSBDHT11\Obj\ -e --no_cse   #
+#                          --no_unroll --no_inline --no_code_motion           #
+#                          --no_tbaa --debug --core=plain --dptr=16,1         #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data_rom --nr_virtual_regs 16    #
+#                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack #
+#                          -CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC #
+#                          2530DB\..\Source\ -I D:\Projects_IAR\IAR_C8051\WSN #
+#                          -CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY #
+#                          _BOARD\Exp4\CC2530DB\..\..\..\ZMain\TI2530DB\ -I   #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\target\CC2530SB\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\high_level\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\sing #
+#                          le_chip\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\Z #
+#                          Stack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Ex #
+#                          p4\CC2530DB\..\..\..\..\..\Components\mt\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\osal\include\ -I         #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\saddr\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\sdata\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\af\ -I             #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\nwk\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sapi\ -I           #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sec\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sys\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\zdo\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\ -I                 #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\f8w\ -On            #
+#    List file          =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBDHT11\List\OSAL_TransmitApp.lst         #
+#    Object file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBDHT11\Obj\OSAL_TransmitApp.r51          #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\Source\OSAL_TransmitApp.c
+      1          /**************************************************************************************************
+      2            Filename:       OSAL_TransmitApp.c
+      3            Revised:        $Date: 2008-02-07 12:10:00 -0800 (Thu, 07 Feb 2008) $
+      4            Revision:       $Revision: 16360 $
+      5          
+      6          
+      7            Description:    This file contains all the settings and other functions
+      8                            that the user should set and change.
+      9          
+     10          
+     11            Copyright 2004-2007 Texas Instruments Incorporated. All rights reserved.
+     12          
+     13            IMPORTANT: Your use of this Software is limited to those specific rights
+     14            granted under the terms of a software license agreement between the user
+     15            who downloaded the software, his/her employer (which must be your employer)
+     16            and Texas Instruments Incorporated (the "License").  You may not use this
+     17            Software unless you agree to abide by the terms of the License. The License
+     18            limits your use, and you acknowledge, that the Software may not be modified,
+     19            copied or distributed unless embedded on a Texas Instruments microcontroller
+     20            or used solely and exclusively in conjunction with a Texas Instruments radio
+     21            frequency transceiver, which is integrated into your product.  Other than for
+     22            the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+     23            works of, modify, distribute, perform, display or sell this Software and/or
+     24            its documentation for any purpose.
+     25          
+     26            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+     27            PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+     28            INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
+     29            NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+     30            TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     31            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+     32            LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+     33            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
+     34            OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
+     35            OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+     36            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     37          
+     38            Should you have any questions regarding your right to use this Software,
+     39            contact Texas Instruments Incorporated at www.TI.com.
+     40          **************************************************************************************************/
+     41          
+     42          /*********************************************************************
+     43           * INCLUDES
+     44           */
+     45          
+     46          #include "ZComDef.h"
+     47          #include "hal_drivers.h"
+     48          #include "OSAL.h"
+     49          #include "OSAL_Tasks.h"
+     50          
+     51          #if defined ( MT_TASK )
+     52            #include "MT.h"
+     53            #include "MT_TASK.h"
+     54          #endif
+     55          
+     56          #include "nwk.h"
+     57          #include "APS.h"
+     58          #include "ZDApp.h"
+     59          #if defined ( ZIGBEE_FREQ_AGILITY ) || defined ( ZIGBEE_PANID_CONFLICT )
+     60            #include "ZDNwkMgr.h"
+     61          #endif
+     62          #if defined ( ZIGBEE_FRAGMENTATION )
+     63            #include "aps_frag.h"
+     64          #endif
+     65          
+     66          #include "TransmitApp.h"
+     67          
+     68          /*********************************************************************
+     69           * GLOBAL VARIABLES
+     70           */
+     71          
+     72          // The order in this table must be identical to the task initialization calls below in osalInitTask.
+
+   \                                 In  segment XDATA_ROM_C, align 1
+     73          const pTaskEventHandlerFn tasksArr[] = {
+   \                     tasksArr:
+   \   000000   ....         DW ??macEventLoop?relay
+   \   000002   ....         DW ??nwk_event_loop?relay
+   \   000004   ....         DW ??Hal_ProcessEvent?relay
+   \   000006   ....         DW ??APS_event_loop?relay
+   \   000008   ....         DW ??APSF_ProcessEvent?relay
+   \   00000A   ....         DW ??ZDApp_event_loop?relay
+   \   00000C   ....         DW ??TransmitApp_ProcessEvent?relay
+     74            macEventLoop,
+     75            nwk_event_loop,
+     76            Hal_ProcessEvent,
+     77          #if defined( MT_TASK )
+     78            MT_ProcessEvent,
+     79          #endif
+     80            APS_event_loop,
+     81          #if defined ( ZIGBEE_FRAGMENTATION )
+     82            APSF_ProcessEvent,
+     83          #endif
+     84            ZDApp_event_loop,
+     85          #if defined ( ZIGBEE_FREQ_AGILITY ) || defined ( ZIGBEE_PANID_CONFLICT )
+     86            ZDNwkMgr_event_loop,
+     87          #endif
+     88            TransmitApp_ProcessEvent
+     89          };
+     90          
+
+   \                                 In  segment XDATA_ROM_C, align 1
+     91          const uint8 tasksCnt = sizeof( tasksArr ) / sizeof( tasksArr[0] );
+   \                     tasksCnt:
+   \   000000   07           DB 7
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     92          uint16 *tasksEvents;
+   \                     tasksEvents:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+     93          
+     94          /*********************************************************************
+     95           * FUNCTIONS
+     96           *********************************************************************/
+     97          
+     98          /*********************************************************************
+     99           * @fn      osalInitTasks
+    100           *
+    101           * @brief   This function invokes the initialization function for each task.
+    102           *
+    103           * @param   void
+    104           *
+    105           * @return  none
+    106           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    107          void osalInitTasks( void )
+   \                     osalInitTasks:
+    108          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+    109            uint8 taskID = 0;
+   \   000005   7E00         MOV     R6,#0x0
+    110          
+    111            tasksEvents = (uint16 *)osal_mem_alloc( sizeof( uint16 ) * tasksCnt);
+   \   000007                ; Setup parameters for call to function osal_mem_alloc
+   \   000007   90....       MOV     DPTR,#tasksCnt
+   \   00000A   E0           MOVX    A,@DPTR
+   \   00000B   FA           MOV     R2,A
+   \   00000C   7B00         MOV     R3,#0x0
+   \   00000E   EA           MOV     A,R2
+   \   00000F   75F002       MOV     B,#0x2
+   \   000012   A4           MUL     AB
+   \   000013   CA           XCH     A,R2
+   \   000014   A8F0         MOV     R0,B
+   \   000016   75F000       MOV     B,#0x0
+   \   000019   A4           MUL     AB
+   \   00001A   28           ADD     A,R0
+   \   00001B   F8           MOV     R0,A
+   \   00001C   75F002       MOV     B,#0x2
+   \   00001F   EB           MOV     A,R3
+   \   000020   A4           MUL     AB
+   \   000021   28           ADD     A,R0
+   \   000022   FB           MOV     R3,A
+   \   000023   12....       LCALL   ??osal_mem_alloc?relay
+   \   000026   90....       MOV     DPTR,#tasksEvents
+   \   000029   EA           MOV     A,R2
+   \   00002A   F0           MOVX    @DPTR,A
+   \   00002B   A3           INC     DPTR
+   \   00002C   EB           MOV     A,R3
+   \   00002D   F0           MOVX    @DPTR,A
+    112            osal_memset( tasksEvents, 0, (sizeof( uint16 ) * tasksCnt));
+   \   00002E                ; Setup parameters for call to function osal_memset
+   \   00002E   90....       MOV     DPTR,#tasksCnt
+   \   000031   E0           MOVX    A,@DPTR
+   \   000032   FC           MOV     R4,A
+   \   000033   7D00         MOV     R5,#0x0
+   \   000035   EC           MOV     A,R4
+   \   000036   75F002       MOV     B,#0x2
+   \   000039   A4           MUL     AB
+   \   00003A   CC           XCH     A,R4
+   \   00003B   A8F0         MOV     R0,B
+   \   00003D   75F000       MOV     B,#0x0
+   \   000040   A4           MUL     AB
+   \   000041   28           ADD     A,R0
+   \   000042   F8           MOV     R0,A
+   \   000043   75F002       MOV     B,#0x2
+   \   000046   ED           MOV     A,R5
+   \   000047   A4           MUL     AB
+   \   000048   28           ADD     A,R0
+   \   000049   FD           MOV     R5,A
+   \   00004A   7900         MOV     R1,#0x0
+   \   00004C   90....       MOV     DPTR,#tasksEvents
+   \   00004F   E0           MOVX    A,@DPTR
+   \   000050   FA           MOV     R2,A
+   \   000051   A3           INC     DPTR
+   \   000052   E0           MOVX    A,@DPTR
+   \   000053   FB           MOV     R3,A
+   \   000054   12....       LCALL   ??osal_memset?relay
+    113          
+    114            macTaskInit( taskID++ );
+   \   000057                ; Setup parameters for call to function macTaskInit
+   \   000057   EE           MOV     A,R6
+   \   000058   F9           MOV     R1,A
+   \   000059   12....       LCALL   ??macTaskInit?relay
+   \   00005C   0E           INC     R6
+    115            nwk_init( taskID++ );
+   \   00005D                ; Setup parameters for call to function nwk_init
+   \   00005D   EE           MOV     A,R6
+   \   00005E   F9           MOV     R1,A
+   \   00005F   12....       LCALL   ??nwk_init?relay
+   \   000062   0E           INC     R6
+    116            Hal_Init( taskID++ );
+   \   000063                ; Setup parameters for call to function Hal_Init
+   \   000063   EE           MOV     A,R6
+   \   000064   F9           MOV     R1,A
+   \   000065   12....       LCALL   ??Hal_Init?relay
+   \   000068   0E           INC     R6
+    117          #if defined( MT_TASK )
+    118            MT_TaskInit( taskID++ );
+    119          #endif
+    120            APS_Init( taskID++ );
+   \   000069                ; Setup parameters for call to function APS_Init
+   \   000069   EE           MOV     A,R6
+   \   00006A   F9           MOV     R1,A
+   \   00006B   12....       LCALL   ??APS_Init?relay
+   \   00006E   0E           INC     R6
+    121          #if defined ( ZIGBEE_FRAGMENTATION )
+    122            APSF_Init( taskID++ );
+   \   00006F                ; Setup parameters for call to function APSF_Init
+   \   00006F   EE           MOV     A,R6
+   \   000070   F9           MOV     R1,A
+   \   000071   12....       LCALL   ??APSF_Init?relay
+   \   000074   0E           INC     R6
+    123          #endif
+    124            ZDApp_Init( taskID++ );
+   \   000075                ; Setup parameters for call to function ZDApp_Init
+   \   000075   EE           MOV     A,R6
+   \   000076   F9           MOV     R1,A
+   \   000077   12....       LCALL   ??ZDApp_Init?relay
+   \   00007A   0E           INC     R6
+    125          #if defined ( ZIGBEE_FREQ_AGILITY ) || defined ( ZIGBEE_PANID_CONFLICT )
+    126            ZDNwkMgr_Init( taskID++ );
+    127          #endif
+    128            TransmitApp_Init( taskID );
+   \   00007B                ; Setup parameters for call to function TransmitApp_Init
+   \   00007B   EE           MOV     A,R6
+   \   00007C   F9           MOV     R1,A
+   \   00007D   12....       LCALL   ??TransmitApp_Init?relay
+    129          }
+   \   000080   7F01         MOV     R7,#0x1
+   \   000082   02....       LJMP    ?BANKED_LEAVE_XDATA
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??osalInitTasks?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    osalInitTasks
+    130          
+    131          /*********************************************************************
+    132          *********************************************************************/
+
+   Maximum stack usage in bytes:
+
+     Function              ISTACK PSTACK XSTACK
+     --------              ------ ------ ------
+     osalInitTasks             0      0      9
+       -> osal_mem_alloc       0      0     18
+       -> osal_memset          0      0     18
+       -> macTaskInit          0      0     18
+       -> nwk_init             0      0     18
+       -> Hal_Init             0      0     18
+       -> APS_Init             0      0     18
+       -> APSF_Init            0      0     18
+       -> ZDApp_Init           0      0     18
+       -> TransmitApp_Init     0      0     18
+
+
+   Segment part sizes:
+
+     Function/Label        Bytes
+     --------------        -----
+     tasksArr                14
+     tasksCnt                 1
+     tasksEvents              2
+     osalInitTasks          133
+     ??osalInitTasks?relay    6
+
+ 
+ 133 bytes in segment BANKED_CODE
+   6 bytes in segment BANK_RELAYS
+  15 bytes in segment XDATA_ROM_C
+   2 bytes in segment XDATA_Z
+ 
+ 139 bytes of CODE  memory
+  15 bytes of CONST memory
+   2 bytes of XDATA memory
+
+Errors: none
+Warnings: none

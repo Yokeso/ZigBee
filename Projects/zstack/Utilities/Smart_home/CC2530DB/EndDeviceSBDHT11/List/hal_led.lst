@@ -1,0 +1,1562 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.1.40194/W32 for 8051         04/Jan/2021  17:15:13 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data_rom                                           #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Components\hal\target\CC2530SB\hal_led. #
+#                          c                                                  #
+#    Command line       =  -f D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\..\..\..\Tools\CC2530DB\f8wEndev.cfg            #
+#                          (-DCPU32MHZ -DROOT=__near_func                     #
+#                          -DMAC_CFG_TX_DATA_MAX=3 -DMAC_CFG_TX_MAX=6         #
+#                          -DMAC_CFG_RX_MAX=3) -f D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\ #
+#                          MY_BOARD\Exp4\CC2530DB\..\..\..\Tools\CC2530DB\f8w #
+#                          Config.cfg (-DZIGBEEPRO -DSECURE=0                 #
+#                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
+#                          -DDEFAULT_CHANLIST=0x02000000                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0x1001                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
+#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
+#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DMAC_MAX_FRAME_SIZE=116                           #
+#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
+#                          __code" -DGENERIC=__generic                        #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\t #
+#                          arget\CC2530SB\hal_led.c -D HAL_UART=TRUE -D       #
+#                          HAL_UART_TEST -D xPOWER_SAVING -lC                 #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBDHT11\List\ -lA                         #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBDHT11\List\ --diag_suppress             #
+#                          Pe001,Pa010 -o D:\Projects_IAR\IAR_C8051\WSN-CC253 #
+#                          0\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD #
+#                          \Exp4\CC2530DB\EndDeviceSBDHT11\Obj\ -e --no_cse   #
+#                          --no_unroll --no_inline --no_code_motion           #
+#                          --no_tbaa --debug --core=plain --dptr=16,1         #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data_rom --nr_virtual_regs 16    #
+#                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack #
+#                          -CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC #
+#                          2530DB\..\Source\ -I D:\Projects_IAR\IAR_C8051\WSN #
+#                          -CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY #
+#                          _BOARD\Exp4\CC2530DB\..\..\..\ZMain\TI2530DB\ -I   #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\target\CC2530SB\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\high_level\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\sing #
+#                          le_chip\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\Z #
+#                          Stack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Ex #
+#                          p4\CC2530DB\..\..\..\..\..\Components\mt\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\osal\include\ -I         #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\saddr\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\sdata\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\af\ -I             #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\nwk\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sapi\ -I           #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sec\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sys\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\zdo\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\ -I                 #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\f8w\ -On            #
+#    List file          =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBDHT11\List\hal_led.lst                  #
+#    Object file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBDHT11\Obj\hal_led.r51                   #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\target\CC2530SB\hal_led.c
+      1          /**************************************************************************************************
+      2            Filename:       hal_led.c
+      3            Revised:        $Date: 2012-02-14 12:43:32 -0800 (Tue, 14 Feb 2012) $
+      4            Revision:       $Revision: 29281 $
+      5          
+      6            Description:    This file contains the interface to the HAL LED Service.
+      7          
+      8          
+      9            Copyright 2006-2012 Texas Instruments Incorporated. All rights reserved.
+     10          
+     11            IMPORTANT: Your use of this Software is limited to those specific rights
+     12            granted under the terms of a software license agreement between the user
+     13            who downloaded the software, his/her employer (which must be your employer)
+     14            and Texas Instruments Incorporated (the "License"). You may not use this
+     15            Software unless you agree to abide by the terms of the License. The License
+     16            limits your use, and you acknowledge, that the Software may not be modified,
+     17            copied or distributed unless embedded on a Texas Instruments microcontroller
+     18            or used solely and exclusively in conjunction with a Texas Instruments radio
+     19            frequency transceiver, which is integrated into your product. Other than for
+     20            the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+     21            works of, modify, distribute, perform, display or sell this Software and/or
+     22            its documentation for any purpose.
+     23          
+     24            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+     25            PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+     26            INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
+     27            NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+     28            TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     29            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+     30            LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+     31            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
+     32            OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
+     33            OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+     34            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     35          
+     36            Should you have any questions regarding your right to use this Software,
+     37            contact Texas Instruments Incorporated at www.TI.com.
+     38          **************************************************************************************************/
+     39          
+     40          /***************************************************************************************************
+     41           *                                             INCLUDES
+     42           ***************************************************************************************************/
+     43          #include "hal_mcu.h"
+
+   \                                 In  segment SFR_AN, at 0x90
+   \   union <unnamed> volatile __sfr _A_P1
+   \                     _A_P1:
+   \   000000                DS 1
+     44          #include "hal_defs.h"
+     45          #include "hal_types.h"
+     46          #include "hal_drivers.h"
+     47          #include "hal_led.h"
+     48          #include "osal.h"
+     49          #include "hal_board.h"
+     50          
+     51          /***************************************************************************************************
+     52           *                                             CONSTANTS
+     53           ***************************************************************************************************/
+     54          
+     55          /***************************************************************************************************
+     56           *                                              MACROS
+     57           ***************************************************************************************************/
+     58          
+     59          /***************************************************************************************************
+     60           *                                              TYPEDEFS
+     61           ***************************************************************************************************/
+     62          /* LED control structure */
+     63          typedef struct {
+     64            uint8 mode;       /* Operation mode */
+     65            uint8 todo;       /* Blink cycles left */
+     66            uint8 onPct;      /* On cycle percentage */
+     67            uint16 time;      /* On/off cycle time (msec) */
+     68            uint32 next;      /* Time for next change */
+     69          } HalLedControl_t;
+     70          
+     71          typedef struct
+     72          {
+     73            HalLedControl_t HalLedControlTable[HAL_LED_DEFAULT_MAX_LEDS];
+     74            uint8           sleepActive;
+     75          } HalLedStatus_t;
+     76          
+     77          
+     78          /***************************************************************************************************
+     79           *                                           GLOBAL VARIABLES
+     80           ***************************************************************************************************/
+     81          
+     82          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     83          static uint8 HalLedState;              // LED state at last set/clr/blink update
+   \                     HalLedState:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     84          
+     85          #if HAL_LED == TRUE
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     86          static uint8 HalSleepLedState;         // LED state at last set/clr/blink update
+   \                     HalSleepLedState:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     87          static uint8 preBlinkState;            // Original State before going to blink mode
+   \                     preBlinkState:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     88                                                 // bit 0, 1, 2, 3 represent led 0, 1, 2, 3
+     89          #endif
+     90          
+     91          #ifdef BLINK_LEDS
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     92            static HalLedStatus_t HalLedStatusControl;
+   \                     HalLedStatusControl:
+   \   000000                DS 37
+   \   000025                REQUIRE __INIT_XDATA_Z
+     93          #endif
+     94          
+     95          /***************************************************************************************************
+     96           *                                            LOCAL FUNCTION
+     97           ***************************************************************************************************/
+     98          #if (HAL_LED == TRUE)
+     99          void HalLedUpdate (void);
+    100          void HalLedOnOff (uint8 leds, uint8 mode);
+    101          #endif /* HAL_LED */
+    102          
+    103          /***************************************************************************************************
+    104           *                                            FUNCTIONS - API
+    105           ***************************************************************************************************/
+    106          
+    107          /***************************************************************************************************
+    108           * @fn      HalLedInit
+    109           *
+    110           * @brief   Initialize LED Service
+    111           *
+    112           * @param   init - pointer to void that contains the initialized value
+    113           *
+    114           * @return  None
+    115           ***************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    116          void HalLedInit (void)
+   \                     HalLedInit:
+    117          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    118          #if (HAL_LED == TRUE)
+    119            /* Initialize all LEDs to OFF */
+    120            HalLedSet (HAL_LED_ALL, HAL_LED_MODE_OFF);
+   \   000004                ; Setup parameters for call to function HalLedSet
+   \   000004   7A00         MOV     R2,#0x0
+   \   000006   790F         MOV     R1,#0xf
+   \   000008   12....       LCALL   ??HalLedSet?relay
+   \   00000B   E9           MOV     A,R1
+    121          #endif /* HAL_LED */
+    122          #ifdef BLINK_LEDS
+    123            /* Initialize sleepActive to FALSE */
+    124            HalLedStatusControl.sleepActive = FALSE;
+   \   00000C   90....       MOV     DPTR,#HalLedStatusControl + 36
+   \   00000F   7400         MOV     A,#0x0
+   \   000011   F0           MOVX    @DPTR,A
+    125          #endif
+    126          }
+   \   000012   D083         POP     DPH
+   \   000014   D082         POP     DPL
+   \   000016   02....       LJMP    ?BRET
+    127          
+    128          /***************************************************************************************************
+    129           * @fn      HalLedSet
+    130           *
+    131           * @brief   Tun ON/OFF/TOGGLE given LEDs
+    132           *
+    133           * @param   led - bit mask value of leds to be turned ON/OFF/TOGGLE
+    134           *          mode - BLINK, FLASH, TOGGLE, ON, OFF
+    135           * @return  None
+    136           ***************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    137          uint8 HalLedSet (uint8 leds, uint8 mode)
+   \                     HalLedSet:
+    138          {
+   \   000000   74F5         MOV     A,#-0xb
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 11
+   \   000005                ; Auto size: 0
+   \   000005   89..         MOV     ?V0 + 0,R1
+   \   000007   8A..         MOV     ?V0 + 2,R2
+    139          
+    140          #if (defined (BLINK_LEDS)) && (HAL_LED == TRUE)
+    141            uint8 led;
+    142            HalLedControl_t *sts;
+    143          
+    144            switch (mode)
+   \   000009   E5..         MOV     A,?V0 + 2
+   \   00000B   602E         JZ      ??HalLedSet_0
+   \   00000D   14           DEC     A
+   \   00000E   602B         JZ      ??HalLedSet_0
+   \   000010   14           DEC     A
+   \   000011   600A         JZ      ??HalLedSet_1
+   \   000013   24FE         ADD     A,#-0x2
+   \   000015   6015         JZ      ??HalLedSet_2
+   \   000017   24FC         ADD     A,#-0x4
+   \   000019   6020         JZ      ??HalLedSet_0
+   \   00001B   806E         SJMP    ??HalLedSet_3
+    145            {
+    146              case HAL_LED_MODE_BLINK:
+    147                /* Default blink, 1 time, D% duty cycle */
+    148                HalLedBlink (leds, 1, HAL_LED_DEFAULT_DUTY_CYCLE, HAL_LED_DEFAULT_FLASH_TIME);
+   \                     ??HalLedSet_1:
+   \   00001D                ; Setup parameters for call to function HalLedBlink
+   \   00001D   7CE8         MOV     R4,#-0x18
+   \   00001F   7D03         MOV     R5,#0x3
+   \   000021   7B05         MOV     R3,#0x5
+   \   000023   7A01         MOV     R2,#0x1
+   \   000025   A9..         MOV     R1,?V0 + 0
+   \   000027   12....       LCALL   ??HalLedBlink?relay
+    149                break;
+   \   00002A   805F         SJMP    ??HalLedSet_3
+    150          
+    151              case HAL_LED_MODE_FLASH:
+    152                /* Default flash, N times, D% duty cycle */
+    153                HalLedBlink (leds, HAL_LED_DEFAULT_FLASH_COUNT, HAL_LED_DEFAULT_DUTY_CYCLE, HAL_LED_DEFAULT_FLASH_TIME);
+   \                     ??HalLedSet_2:
+   \   00002C                ; Setup parameters for call to function HalLedBlink
+   \   00002C   7CE8         MOV     R4,#-0x18
+   \   00002E   7D03         MOV     R5,#0x3
+   \   000030   7B05         MOV     R3,#0x5
+   \   000032   7A32         MOV     R2,#0x32
+   \   000034   A9..         MOV     R1,?V0 + 0
+   \   000036   12....       LCALL   ??HalLedBlink?relay
+    154                break;
+   \   000039   8050         SJMP    ??HalLedSet_3
+    155          
+    156              case HAL_LED_MODE_ON:
+    157              case HAL_LED_MODE_OFF:
+    158              case HAL_LED_MODE_TOGGLE:
+    159          
+    160                led = HAL_LED_1;
+   \                     ??HalLedSet_0:
+   \   00003B   75..01       MOV     ?V0 + 1,#0x1
+    161                leds &= HAL_LED_ALL;
+   \   00003E   53..0F       ANL     ?V0 + 0,#0xf
+    162                sts = HalLedStatusControl.HalLedControlTable;
+   \   000041   7E..         MOV     R6,#HalLedStatusControl & 0xff
+   \   000043   7F..         MOV     R7,#(HalLedStatusControl >> 8) & 0xff
+    163          
+    164                while (leds)
+   \                     ??HalLedSet_4:
+   \   000045   E5..         MOV     A,?V0 + 0
+   \   000047   6042         JZ      ??HalLedSet_3
+    165                {
+    166                  if (leds & led)
+   \   000049   E5..         MOV     A,?V0 + 0
+   \   00004B   55..         ANL     A,?V0 + 1
+   \   00004D   6028         JZ      ??HalLedSet_5
+    167                  {
+    168                    if (mode != HAL_LED_MODE_TOGGLE)
+   \   00004F   7408         MOV     A,#0x8
+   \   000051   65..         XRL     A,?V0 + 2
+   \   000053   600B         JZ      ??HalLedSet_6
+    169                    {
+    170                      sts->mode = mode;  /* ON or OFF */
+   \   000055   E5..         MOV     A,?V0 + 2
+   \   000057   8E82         MOV     DPL,R6
+   \   000059   8F83         MOV     DPH,R7
+   \   00005B   E5..         MOV     A,?V0 + 2
+   \   00005D   F0           MOVX    @DPTR,A
+   \   00005E   8008         SJMP    ??HalLedSet_7
+    171                    }
+    172                    else
+    173                    {
+    174                      sts->mode ^= HAL_LED_MODE_ON;  /* Toggle */
+   \                     ??HalLedSet_6:
+   \   000060   8E82         MOV     DPL,R6
+   \   000062   8F83         MOV     DPH,R7
+   \   000064   E0           MOVX    A,@DPTR
+   \   000065   6401         XRL     A,#0x1
+   \   000067   F0           MOVX    @DPTR,A
+    175                    }
+    176                    HalLedOnOff (led, sts->mode);
+   \                     ??HalLedSet_7:
+   \   000068                ; Setup parameters for call to function HalLedOnOff
+   \   000068   8E82         MOV     DPL,R6
+   \   00006A   8F83         MOV     DPH,R7
+   \   00006C   E0           MOVX    A,@DPTR
+   \   00006D   FA           MOV     R2,A
+   \   00006E   A9..         MOV     R1,?V0 + 1
+   \   000070   12....       LCALL   ??HalLedOnOff?relay
+    177                    leds ^= led;
+   \   000073   E5..         MOV     A,?V0 + 1
+   \   000075   62..         XRL     ?V0 + 0,A
+    178                  }
+    179                  led <<= 1;
+   \                     ??HalLedSet_5:
+   \   000077   E5..         MOV     A,?V0 + 1
+   \   000079   C3           CLR     C
+   \   00007A   33           RLC     A
+   \   00007B   F5..         MOV     ?V0 + 1,A
+    180                  sts++;
+   \   00007D   EE           MOV     A,R6
+   \   00007E   2409         ADD     A,#0x9
+   \   000080   F8           MOV     R0,A
+   \   000081   EF           MOV     A,R7
+   \   000082   3400         ADDC    A,#0x0
+   \   000084   F9           MOV     R1,A
+   \   000085   E8           MOV     A,R0
+   \   000086   FE           MOV     R6,A
+   \   000087   E9           MOV     A,R1
+   \   000088   FF           MOV     R7,A
+   \   000089   80BA         SJMP    ??HalLedSet_4
+    181                }
+    182                break;
+    183          
+    184              default:
+    185                break;
+    186            }
+    187          
+    188          #elif (HAL_LED == TRUE)
+    189            LedOnOff(leds, mode);
+    190          #else
+    191            // HAL LED is disabled, suppress unused argument warnings
+    192            (void) leds;
+    193            (void) mode;
+    194          #endif /* BLINK_LEDS && HAL_LED   */
+    195          
+    196            return ( HalLedState );
+   \                     ??HalLedSet_3:
+   \   00008B   90....       MOV     DPTR,#HalLedState
+   \   00008E   E0           MOVX    A,@DPTR
+   \   00008F   F9           MOV     R1,A
+   \   000090   7F03         MOV     R7,#0x3
+   \   000092   02....       LJMP    ?BANKED_LEAVE_XDATA
+    197          
+    198          }
+    199          
+    200          /***************************************************************************************************
+    201           * @fn      HalLedBlink
+    202           *
+    203           * @brief   Blink the leds
+    204           *
+    205           * @param   leds       - bit mask value of leds to be blinked
+    206           *          numBlinks  - number of blinks
+    207           *          percent    - the percentage in each period where the led
+    208           *                       will be on
+    209           *          period     - length of each cycle in milliseconds
+    210           *
+    211           * @return  None
+    212           ***************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    213          void HalLedBlink (uint8 leds, uint8 numBlinks, uint8 percent, uint16 period)
+   \                     HalLedBlink:
+    214          {
+   \   000000   74F2         MOV     A,#-0xe
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 14
+   \   000005                ; Auto size: 0
+   \   000005   89..         MOV     ?V0 + 0,R1
+   \   000007   8A..         MOV     ?V0 + 1,R2
+   \   000009   8B..         MOV     ?V0 + 2,R3
+   \   00000B   8C..         MOV     ?V0 + 4,R4
+   \   00000D   8D..         MOV     ?V0 + 5,R5
+    215          #if (defined (BLINK_LEDS)) && (HAL_LED == TRUE)
+    216            uint8 led;
+    217            HalLedControl_t *sts;
+    218          
+    219            if (leds && percent && period)
+   \   00000F   E5..         MOV     A,?V0 + 0
+   \   000011   7003         JNZ     $+5
+   \   000013   02....       LJMP    ??HalLedBlink_0 & 0xFFFF
+   \   000016   E5..         MOV     A,?V0 + 2
+   \   000018   7003         JNZ     $+5
+   \   00001A   02....       LJMP    ??HalLedBlink_0 & 0xFFFF
+   \   00001D   E5..         MOV     A,?V0 + 4
+   \   00001F   45..         ORL     A,?V0 + 5
+   \   000021   7003         JNZ     $+5
+   \   000023   02....       LJMP    ??HalLedBlink_0 & 0xFFFF
+    220            {
+    221              if (percent < 100)
+   \   000026   E5..         MOV     A,?V0 + 2
+   \   000028   C3           CLR     C
+   \   000029   9464         SUBB    A,#0x64
+   \   00002B   4003         JC      $+5
+   \   00002D   02....       LJMP    ??HalLedBlink_1 & 0xFFFF
+    222              {
+    223                led = HAL_LED_1;
+   \   000030   75..01       MOV     ?V0 + 3,#0x1
+    224                leds &= HAL_LED_ALL;
+   \   000033   53..0F       ANL     ?V0 + 0,#0xf
+    225                sts = HalLedStatusControl.HalLedControlTable;
+   \   000036   7E..         MOV     R6,#HalLedStatusControl & 0xff
+   \   000038   7F..         MOV     R7,#(HalLedStatusControl >> 8) & 0xff
+    226          
+    227                while (leds)
+   \                     ??HalLedBlink_2:
+   \   00003A   E5..         MOV     A,?V0 + 0
+   \   00003C   607F         JZ      ??HalLedBlink_3
+    228                {
+    229                  if (leds & led)
+   \   00003E   E5..         MOV     A,?V0 + 0
+   \   000040   55..         ANL     A,?V0 + 3
+   \   000042   6068         JZ      ??HalLedBlink_4
+    230                  {
+    231                    /* Store the current state of the led before going to blinking if not already blinking */
+    232                    if(sts->mode < HAL_LED_MODE_BLINK )
+   \   000044   8E82         MOV     DPL,R6
+   \   000046   8F83         MOV     DPH,R7
+   \   000048   E0           MOVX    A,@DPTR
+   \   000049   C3           CLR     C
+   \   00004A   9402         SUBB    A,#0x2
+   \   00004C   500D         JNC     ??HalLedBlink_5
+    233                    	preBlinkState |= (led & HalLedState);
+   \   00004E   90....       MOV     DPTR,#HalLedState
+   \   000051   E0           MOVX    A,@DPTR
+   \   000052   55..         ANL     A,?V0 + 3
+   \   000054   F8           MOV     R0,A
+   \   000055   90....       MOV     DPTR,#preBlinkState
+   \   000058   E0           MOVX    A,@DPTR
+   \   000059   48           ORL     A,R0
+   \   00005A   F0           MOVX    @DPTR,A
+    234          
+    235                    sts->mode  = HAL_LED_MODE_OFF;                    /* Stop previous blink */
+   \                     ??HalLedBlink_5:
+   \   00005B   8E82         MOV     DPL,R6
+   \   00005D   8F83         MOV     DPH,R7
+   \   00005F   7400         MOV     A,#0x0
+   \   000061   F0           MOVX    @DPTR,A
+    236                    sts->time  = period;                              /* Time for one on/off cycle */
+   \   000062   8E82         MOV     DPL,R6
+   \   000064   8F83         MOV     DPH,R7
+   \   000066   A3           INC     DPTR
+   \   000067   A3           INC     DPTR
+   \   000068   A3           INC     DPTR
+   \   000069   E5..         MOV     A,?V0 + 4
+   \   00006B   F0           MOVX    @DPTR,A
+   \   00006C   A3           INC     DPTR
+   \   00006D   E5..         MOV     A,?V0 + 5
+   \   00006F   F0           MOVX    @DPTR,A
+    237                    sts->onPct = percent;                             /* % of cycle LED is on */
+   \   000070   E5..         MOV     A,?V0 + 2
+   \   000072   8E82         MOV     DPL,R6
+   \   000074   8F83         MOV     DPH,R7
+   \   000076   A3           INC     DPTR
+   \   000077   A3           INC     DPTR
+   \   000078   E5..         MOV     A,?V0 + 2
+   \   00007A   F0           MOVX    @DPTR,A
+    238                    sts->todo  = numBlinks;                           /* Number of blink cycles */
+   \   00007B   E5..         MOV     A,?V0 + 1
+   \   00007D   8E82         MOV     DPL,R6
+   \   00007F   8F83         MOV     DPH,R7
+   \   000081   A3           INC     DPTR
+   \   000082   E5..         MOV     A,?V0 + 1
+   \   000084   F0           MOVX    @DPTR,A
+    239                    if (!numBlinks) sts->mode |= HAL_LED_MODE_FLASH;  /* Continuous */
+   \   000085   E5..         MOV     A,?V0 + 1
+   \   000087   7008         JNZ     ??HalLedBlink_6
+   \   000089   8E82         MOV     DPL,R6
+   \   00008B   8F83         MOV     DPH,R7
+   \   00008D   E0           MOVX    A,@DPTR
+   \   00008E   D2E2         SETB    0xE0 /* A   */.2
+   \   000090   F0           MOVX    @DPTR,A
+    240                    sts->next = osal_GetSystemClock();                /* Start now */
+   \                     ??HalLedBlink_6:
+   \   000091                ; Setup parameters for call to function osal_GetSystemClock
+   \   000091   12....       LCALL   ??osal_GetSystemClock?relay
+   \   000094   8E82         MOV     DPL,R6
+   \   000096   8F83         MOV     DPH,R7
+   \   000098   A3           INC     DPTR
+   \   000099   A3           INC     DPTR
+   \   00009A   A3           INC     DPTR
+   \   00009B   A3           INC     DPTR
+   \   00009C   A3           INC     DPTR
+   \   00009D   12....       LCALL   ?XSTORE_R2345
+    241                    sts->mode |= HAL_LED_MODE_BLINK;                  /* Enable blinking */
+   \   0000A0   8E82         MOV     DPL,R6
+   \   0000A2   8F83         MOV     DPH,R7
+   \   0000A4   E0           MOVX    A,@DPTR
+   \   0000A5   D2E1         SETB    0xE0 /* A   */.1
+   \   0000A7   F0           MOVX    @DPTR,A
+    242                    leds ^= led;
+   \   0000A8   E5..         MOV     A,?V0 + 3
+   \   0000AA   62..         XRL     ?V0 + 0,A
+    243                  }
+    244                  led <<= 1;
+   \                     ??HalLedBlink_4:
+   \   0000AC   E5..         MOV     A,?V0 + 3
+   \   0000AE   C3           CLR     C
+   \   0000AF   33           RLC     A
+   \   0000B0   F5..         MOV     ?V0 + 3,A
+    245                  sts++;
+   \   0000B2   EE           MOV     A,R6
+   \   0000B3   2409         ADD     A,#0x9
+   \   0000B5   FE           MOV     R6,A
+   \   0000B6   EF           MOV     A,R7
+   \   0000B7   3400         ADDC    A,#0x0
+   \   0000B9   FF           MOV     R7,A
+   \   0000BA   02....       LJMP    ??HalLedBlink_2 & 0xFFFF
+    246                }
+    247                // Cancel any overlapping timer for blink events
+    248                osal_stop_timerEx(Hal_TaskID, HAL_LED_BLINK_EVENT);
+   \                     ??HalLedBlink_3:
+   \   0000BD                ; Setup parameters for call to function osal_stop_timerEx
+   \   0000BD   7A02         MOV     R2,#0x2
+   \   0000BF   7B00         MOV     R3,#0x0
+   \   0000C1   90....       MOV     DPTR,#Hal_TaskID
+   \   0000C4   E0           MOVX    A,@DPTR
+   \   0000C5   F9           MOV     R1,A
+   \   0000C6   12....       LCALL   ??osal_stop_timerEx?relay
+   \   0000C9   E9           MOV     A,R1
+    249                osal_set_event (Hal_TaskID, HAL_LED_BLINK_EVENT);
+   \   0000CA                ; Setup parameters for call to function osal_set_event
+   \   0000CA   7A02         MOV     R2,#0x2
+   \   0000CC   7B00         MOV     R3,#0x0
+   \   0000CE   90....       MOV     DPTR,#Hal_TaskID
+   \   0000D1   E0           MOVX    A,@DPTR
+   \   0000D2   F9           MOV     R1,A
+   \   0000D3   12....       LCALL   ??osal_set_event?relay
+   \   0000D6   E9           MOV     A,R1
+   \   0000D7   8012         SJMP    ??HalLedBlink_7
+    250              }
+    251              else
+    252              {
+    253                HalLedSet (leds, HAL_LED_MODE_ON);                    /* >= 100%, turn on */
+   \                     ??HalLedBlink_1:
+   \   0000D9                ; Setup parameters for call to function HalLedSet
+   \   0000D9   7A01         MOV     R2,#0x1
+   \   0000DB   A9..         MOV     R1,?V0 + 0
+   \   0000DD   12....       LCALL   ??HalLedSet?relay
+   \   0000E0   E9           MOV     A,R1
+   \   0000E1   8008         SJMP    ??HalLedBlink_7
+    254              }
+    255            }
+    256            else
+    257            {
+    258              HalLedSet (leds, HAL_LED_MODE_OFF);                     /* No on time, turn off */
+   \                     ??HalLedBlink_0:
+   \   0000E3                ; Setup parameters for call to function HalLedSet
+   \   0000E3   7A00         MOV     R2,#0x0
+   \   0000E5   A9..         MOV     R1,?V0 + 0
+   \   0000E7   12....       LCALL   ??HalLedSet?relay
+   \   0000EA   E9           MOV     A,R1
+    259            }
+    260          #elif (HAL_LED == TRUE)
+    261            percent = (leds & HalLedState) ? HAL_LED_MODE_OFF : HAL_LED_MODE_ON;
+    262            HalLedOnOff (leds, percent);                              /* Toggle */
+    263          #else
+    264            // HAL LED is disabled, suppress unused argument warnings
+    265            (void) leds;
+    266            (void) numBlinks;
+    267            (void) percent;
+    268            (void) period;
+    269          #endif /* BLINK_LEDS && HAL_LED */
+    270          }
+   \                     ??HalLedBlink_7:
+   \   0000EB   7F06         MOV     R7,#0x6
+   \   0000ED   02....       LJMP    ?BANKED_LEAVE_XDATA
+    271          
+    272          #if (HAL_LED == TRUE)
+    273          /***************************************************************************************************
+    274           * @fn      HalLedUpdate
+    275           *
+    276           * @brief   Update leds to work with blink
+    277           *
+    278           * @param   none
+    279           *
+    280           * @return  none
+    281           ***************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    282          void HalLedUpdate (void)
+   \                     HalLedUpdate:
+    283          {
+   \   000000   74E8         MOV     A,#-0x18
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 24
+   \   000005                ; Auto size: 3
+   \   000005   74FD         MOV     A,#-0x3
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+    284            uint8 led;
+    285            uint8 pct;
+    286            uint8 leds;
+    287            HalLedControl_t *sts;
+    288            uint32 time;
+    289            uint16 next;
+    290            uint16 wait;
+    291          
+    292            next = 0;
+   \   00000A   75..00       MOV     ?V0 + 14,#0x0
+   \   00000D   75..00       MOV     ?V0 + 15,#0x0
+    293            led  = HAL_LED_1;
+   \   000010   85..82       MOV     DPL,?XSP + 0
+   \   000013   85..83       MOV     DPH,?XSP + 1
+   \   000016   7401         MOV     A,#0x1
+   \   000018   F0           MOVX    @DPTR,A
+    294            leds = HAL_LED_ALL;
+   \   000019   7401         MOV     A,#0x1
+   \   00001B   12....       LCALL   ?XSTACK_DISP0_8
+   \   00001E   740F         MOV     A,#0xf
+   \   000020   F0           MOVX    @DPTR,A
+    295            sts = HalLedStatusControl.HalLedControlTable;
+   \   000021   7E..         MOV     R6,#HalLedStatusControl & 0xff
+   \   000023   7F..         MOV     R7,#(HalLedStatusControl >> 8) & 0xff
+    296          
+    297            /* Check if sleep is active or not */
+    298            if (!HalLedStatusControl.sleepActive)
+   \   000025   90....       MOV     DPTR,#HalLedStatusControl + 36
+   \   000028   E0           MOVX    A,@DPTR
+   \   000029   6003         JZ      $+5
+   \   00002B   02....       LJMP    ??HalLedUpdate_0 & 0xFFFF
+    299            {
+    300              while (leds)
+   \                     ??HalLedUpdate_1:
+   \   00002E   7401         MOV     A,#0x1
+   \   000030   12....       LCALL   ?XSTACK_DISP0_8
+   \   000033   E0           MOVX    A,@DPTR
+   \   000034   7003         JNZ     $+5
+   \   000036   02....       LJMP    ??HalLedUpdate_2 & 0xFFFF
+    301              {
+    302                if (leds & led)
+   \   000039   85..82       MOV     DPL,?XSP + 0
+   \   00003C   85..83       MOV     DPH,?XSP + 1
+   \   00003F   C082         PUSH    DPL
+   \   000041   C083         PUSH    DPH
+   \   000043   7401         MOV     A,#0x1
+   \   000045   12....       LCALL   ?XSTACK_DISP0_8
+   \   000048   E0           MOVX    A,@DPTR
+   \   000049   D083         POP     DPH
+   \   00004B   D082         POP     DPL
+   \   00004D   F8           MOV     R0,A
+   \   00004E   E0           MOVX    A,@DPTR
+   \   00004F   58           ANL     A,R0
+   \   000050   7003         JNZ     $+5
+   \   000052   02....       LJMP    ??HalLedUpdate_3 & 0xFFFF
+    303                {
+    304                  if (sts->mode & HAL_LED_MODE_BLINK)
+   \   000055   8E82         MOV     DPL,R6
+   \   000057   8F83         MOV     DPH,R7
+   \   000059   E0           MOVX    A,@DPTR
+   \   00005A   A2E1         MOV     C,0xE0 /* A   */.1
+   \   00005C   4003         JC      $+5
+   \   00005E   02....       LJMP    ??HalLedUpdate_4 & 0xFFFF
+    305                  {
+    306                    time = osal_GetSystemClock();
+   \   000061                ; Setup parameters for call to function osal_GetSystemClock
+   \   000061   12....       LCALL   ??osal_GetSystemClock?relay
+   \   000064   8A..         MOV     ?V0 + 0,R2
+   \   000066   8B..         MOV     ?V0 + 1,R3
+   \   000068   8C..         MOV     ?V0 + 2,R4
+   \   00006A   8D..         MOV     ?V0 + 3,R5
+   \   00006C   85....       MOV     ?V0 + 4,?V0 + 0
+   \   00006F   85....       MOV     ?V0 + 5,?V0 + 1
+   \   000072   85....       MOV     ?V0 + 6,?V0 + 2
+   \   000075   85....       MOV     ?V0 + 7,?V0 + 3
+    307                    if (time >= sts->next)
+   \   000078   8E82         MOV     DPL,R6
+   \   00007A   8F83         MOV     DPH,R7
+   \   00007C   A3           INC     DPTR
+   \   00007D   A3           INC     DPTR
+   \   00007E   A3           INC     DPTR
+   \   00007F   A3           INC     DPTR
+   \   000080   A3           INC     DPTR
+   \   000081   78..         MOV     R0,#?V0 + 4
+   \   000083   12....       LCALL   ?UL_GE_X
+   \   000086   4003         JC      $+5
+   \   000088   02....       LJMP    ??HalLedUpdate_5 & 0xFFFF
+    308                    {
+    309                      if (sts->mode & HAL_LED_MODE_ON)
+   \   00008B   8E82         MOV     DPL,R6
+   \   00008D   8F83         MOV     DPH,R7
+   \   00008F   E0           MOVX    A,@DPTR
+   \   000090   A2E0         MOV     C,0xE0 /* A   */.0
+   \   000092   503F         JNC     ??HalLedUpdate_6
+    310                      {
+    311                        pct = 100 - sts->onPct;               /* Percentage of cycle for off */
+   \   000094   8E82         MOV     DPL,R6
+   \   000096   8F83         MOV     DPH,R7
+   \   000098   A3           INC     DPTR
+   \   000099   A3           INC     DPTR
+   \   00009A   E0           MOVX    A,@DPTR
+   \   00009B   F8           MOV     R0,A
+   \   00009C   7464         MOV     A,#0x64
+   \   00009E   C3           CLR     C
+   \   00009F   98           SUBB    A,R0
+   \   0000A0   C0E0         PUSH    A
+   \   0000A2   7402         MOV     A,#0x2
+   \   0000A4   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000A7   D0E0         POP     A
+   \   0000A9   F0           MOVX    @DPTR,A
+    312                        sts->mode &= ~HAL_LED_MODE_ON;        /* Say it's not on */
+   \   0000AA   8E82         MOV     DPL,R6
+   \   0000AC   8F83         MOV     DPH,R7
+   \   0000AE   E0           MOVX    A,@DPTR
+   \   0000AF   C2E0         CLR     0xE0 /* A   */.0
+   \   0000B1   F0           MOVX    @DPTR,A
+    313                        HalLedOnOff (led, HAL_LED_MODE_OFF);  /* Turn it off */
+   \   0000B2                ; Setup parameters for call to function HalLedOnOff
+   \   0000B2   7A00         MOV     R2,#0x0
+   \   0000B4   85..82       MOV     DPL,?XSP + 0
+   \   0000B7   85..83       MOV     DPH,?XSP + 1
+   \   0000BA   E0           MOVX    A,@DPTR
+   \   0000BB   F9           MOV     R1,A
+   \   0000BC   12....       LCALL   ??HalLedOnOff?relay
+    314          
+    315                        if (!(sts->mode & HAL_LED_MODE_FLASH))
+   \   0000BF   8E82         MOV     DPL,R6
+   \   0000C1   8F83         MOV     DPH,R7
+   \   0000C3   E0           MOVX    A,@DPTR
+   \   0000C4   A2E2         MOV     C,0xE0 /* A   */.2
+   \   0000C6   404C         JC      ??HalLedUpdate_7
+    316                        {
+    317                          sts->todo--;                        /* Not continuous, reduce count */
+   \   0000C8   8E82         MOV     DPL,R6
+   \   0000CA   8F83         MOV     DPH,R7
+   \   0000CC   A3           INC     DPTR
+   \   0000CD   E0           MOVX    A,@DPTR
+   \   0000CE   24FF         ADD     A,#-0x1
+   \   0000D0   F0           MOVX    @DPTR,A
+   \   0000D1   8041         SJMP    ??HalLedUpdate_7
+    318                        }
+    319                      }            
+    320                      else if ( (!sts->todo) && !(sts->mode & HAL_LED_MODE_FLASH) )
+   \                     ??HalLedUpdate_6:
+   \   0000D3   8E82         MOV     DPL,R6
+   \   0000D5   8F83         MOV     DPH,R7
+   \   0000D7   A3           INC     DPTR
+   \   0000D8   E0           MOVX    A,@DPTR
+   \   0000D9   7013         JNZ     ??HalLedUpdate_8
+   \   0000DB   8E82         MOV     DPL,R6
+   \   0000DD   8F83         MOV     DPH,R7
+   \   0000DF   E0           MOVX    A,@DPTR
+   \   0000E0   A2E2         MOV     C,0xE0 /* A   */.2
+   \   0000E2   400A         JC      ??HalLedUpdate_8
+    321                      {
+    322                        sts->mode ^= HAL_LED_MODE_BLINK;      /* No more blinks */  
+   \   0000E4   8E82         MOV     DPL,R6
+   \   0000E6   8F83         MOV     DPH,R7
+   \   0000E8   E0           MOVX    A,@DPTR
+   \   0000E9   6402         XRL     A,#0x2
+   \   0000EB   F0           MOVX    @DPTR,A
+   \   0000EC   8026         SJMP    ??HalLedUpdate_7
+    323                      }            
+    324                      else
+    325                      {
+    326                        pct = sts->onPct;                     /* Percentage of cycle for on */
+   \                     ??HalLedUpdate_8:
+   \   0000EE   8E82         MOV     DPL,R6
+   \   0000F0   8F83         MOV     DPH,R7
+   \   0000F2   A3           INC     DPTR
+   \   0000F3   A3           INC     DPTR
+   \   0000F4   E0           MOVX    A,@DPTR
+   \   0000F5   C0E0         PUSH    A
+   \   0000F7   7402         MOV     A,#0x2
+   \   0000F9   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000FC   D0E0         POP     A
+   \   0000FE   F0           MOVX    @DPTR,A
+    327                        sts->mode |= HAL_LED_MODE_ON;         /* Say it's on */
+   \   0000FF   8E82         MOV     DPL,R6
+   \   000101   8F83         MOV     DPH,R7
+   \   000103   E0           MOVX    A,@DPTR
+   \   000104   D2E0         SETB    0xE0 /* A   */.0
+   \   000106   F0           MOVX    @DPTR,A
+    328                        HalLedOnOff (led, HAL_LED_MODE_ON);   /* Turn it on */
+   \   000107                ; Setup parameters for call to function HalLedOnOff
+   \   000107   7A01         MOV     R2,#0x1
+   \   000109   85..82       MOV     DPL,?XSP + 0
+   \   00010C   85..83       MOV     DPH,?XSP + 1
+   \   00010F   E0           MOVX    A,@DPTR
+   \   000110   F9           MOV     R1,A
+   \   000111   12....       LCALL   ??HalLedOnOff?relay
+    329                      }
+    330                      if (sts->mode & HAL_LED_MODE_BLINK)
+   \                     ??HalLedUpdate_7:
+   \   000114   8E82         MOV     DPL,R6
+   \   000116   8F83         MOV     DPH,R7
+   \   000118   E0           MOVX    A,@DPTR
+   \   000119   A2E1         MOV     C,0xE0 /* A   */.1
+   \   00011B   506C         JNC     ??HalLedUpdate_9
+    331                      {
+    332                        wait = (((uint32)pct * (uint32)sts->time) / 100);
+   \   00011D   7402         MOV     A,#0x2
+   \   00011F   12....       LCALL   ?XSTACK_DISP0_8
+   \   000122   E0           MOVX    A,@DPTR
+   \   000123   F5..         MOV     ?V0 + 0,A
+   \   000125   E4           CLR     A
+   \   000126   F5..         MOV     ?V0 + 1,A
+   \   000128   F5..         MOV     ?V0 + 2,A
+   \   00012A   F5..         MOV     ?V0 + 3,A
+   \   00012C   8E82         MOV     DPL,R6
+   \   00012E   8F83         MOV     DPH,R7
+   \   000130   A3           INC     DPTR
+   \   000131   A3           INC     DPTR
+   \   000132   A3           INC     DPTR
+   \   000133   E0           MOVX    A,@DPTR
+   \   000134   F5..         MOV     ?V0 + 8,A
+   \   000136   A3           INC     DPTR
+   \   000137   E0           MOVX    A,@DPTR
+   \   000138   F5..         MOV     ?V0 + 9,A
+   \   00013A   E4           CLR     A
+   \   00013B   F5..         MOV     ?V0 + 10,A
+   \   00013D   F5..         MOV     ?V0 + 11,A
+   \   00013F   78..         MOV     R0,#?V0 + 0
+   \   000141   79..         MOV     R1,#?V0 + 8
+   \   000143   12....       LCALL   ?L_MUL
+   \   000146   90....       MOV     DPTR,#__Constant_64
+   \   000149   78..         MOV     R0,#?V0 + 8
+   \   00014B   12....       LCALL   ?L_MOV_X
+   \   00014E   78..         MOV     R0,#?V0 + 0
+   \   000150   79..         MOV     R1,#?V0 + 8
+   \   000152   12....       LCALL   ?UL_DIV_MOD
+   \   000155   85....       MOV     ?V0 + 12,?V0 + 0
+   \   000158   85....       MOV     ?V0 + 13,?V0 + 1
+    333                        sts->next = time + wait;
+   \   00015B   85....       MOV     ?V0 + 0,?V0 + 4
+   \   00015E   85....       MOV     ?V0 + 1,?V0 + 5
+   \   000161   85....       MOV     ?V0 + 2,?V0 + 6
+   \   000164   85....       MOV     ?V0 + 3,?V0 + 7
+   \   000167   85....       MOV     ?V0 + 8,?V0 + 12
+   \   00016A   85....       MOV     ?V0 + 9,?V0 + 13
+   \   00016D   E4           CLR     A
+   \   00016E   F5..         MOV     ?V0 + 10,A
+   \   000170   F5..         MOV     ?V0 + 11,A
+   \   000172   78..         MOV     R0,#?V0 + 0
+   \   000174   79..         MOV     R1,#?V0 + 8
+   \   000176   12....       LCALL   ?L_ADD
+   \   000179   8E82         MOV     DPL,R6
+   \   00017B   8F83         MOV     DPH,R7
+   \   00017D   A3           INC     DPTR
+   \   00017E   A3           INC     DPTR
+   \   00017F   A3           INC     DPTR
+   \   000180   A3           INC     DPTR
+   \   000181   A3           INC     DPTR
+   \   000182   78..         MOV     R0,#?V0 + 0
+   \   000184   12....       LCALL   ?L_MOV_TO_X
+   \   000187   806A         SJMP    ??HalLedUpdate_10
+    334                      }
+    335                      else
+    336                      {
+    337                        /* no more blink, no more wait */
+    338                        wait = 0;
+   \                     ??HalLedUpdate_9:
+   \   000189   75..00       MOV     ?V0 + 12,#0x0
+   \   00018C   75..00       MOV     ?V0 + 13,#0x0
+    339                        /* After blinking, set the LED back to the state before it blinks */
+    340                        HalLedSet (led, ((preBlinkState & led)!=0)?HAL_LED_MODE_ON:HAL_LED_MODE_OFF);
+   \   00018F   85..82       MOV     DPL,?XSP + 0
+   \   000192   85..83       MOV     DPH,?XSP + 1
+   \   000195   C082         PUSH    DPL
+   \   000197   C083         PUSH    DPH
+   \   000199   90....       MOV     DPTR,#preBlinkState
+   \   00019C   E0           MOVX    A,@DPTR
+   \   00019D   D083         POP     DPH
+   \   00019F   D082         POP     DPL
+   \   0001A1   F8           MOV     R0,A
+   \   0001A2   E0           MOVX    A,@DPTR
+   \   0001A3   58           ANL     A,R0
+   \   0001A4   6004         JZ      ??HalLedUpdate_11
+   \   0001A6   7A01         MOV     R2,#0x1
+   \   0001A8   8002         SJMP    ??HalLedUpdate_12
+   \                     ??HalLedUpdate_11:
+   \   0001AA   7A00         MOV     R2,#0x0
+   \                     ??HalLedUpdate_12:
+   \   0001AC                ; Setup parameters for call to function HalLedSet
+   \   0001AC   85..82       MOV     DPL,?XSP + 0
+   \   0001AF   85..83       MOV     DPH,?XSP + 1
+   \   0001B2   E0           MOVX    A,@DPTR
+   \   0001B3   F9           MOV     R1,A
+   \   0001B4   12....       LCALL   ??HalLedSet?relay
+   \   0001B7   E9           MOV     A,R1
+    341                        /* Clear the saved bit */
+    342                        preBlinkState &= (led ^ 0xFF);
+   \   0001B8   85..82       MOV     DPL,?XSP + 0
+   \   0001BB   85..83       MOV     DPH,?XSP + 1
+   \   0001BE   E0           MOVX    A,@DPTR
+   \   0001BF   64FF         XRL     A,#0xff
+   \   0001C1   F8           MOV     R0,A
+   \   0001C2   90....       MOV     DPTR,#preBlinkState
+   \   0001C5   E0           MOVX    A,@DPTR
+   \   0001C6   58           ANL     A,R0
+   \   0001C7   F0           MOVX    @DPTR,A
+   \   0001C8   8029         SJMP    ??HalLedUpdate_10
+    343                      }
+    344                    }
+    345                    else
+    346                    {
+    347                      wait = sts->next - time;  /* Time left */
+   \                     ??HalLedUpdate_5:
+   \   0001CA   8E82         MOV     DPL,R6
+   \   0001CC   8F83         MOV     DPH,R7
+   \   0001CE   A3           INC     DPTR
+   \   0001CF   A3           INC     DPTR
+   \   0001D0   A3           INC     DPTR
+   \   0001D1   A3           INC     DPTR
+   \   0001D2   A3           INC     DPTR
+   \   0001D3   78..         MOV     R0,#?V0 + 0
+   \   0001D5   12....       LCALL   ?L_MOV_X
+   \   0001D8   85....       MOV     ?V0 + 2,?V0 + 0
+   \   0001DB   85....       MOV     ?V0 + 3,?V0 + 1
+   \   0001DE   85....       MOV     ?V0 + 0,?V0 + 4
+   \   0001E1   85....       MOV     ?V0 + 1,?V0 + 5
+   \   0001E4   E5..         MOV     A,?V0 + 2
+   \   0001E6   C3           CLR     C
+   \   0001E7   95..         SUBB    A,?V0 + 0
+   \   0001E9   F8           MOV     R0,A
+   \   0001EA   E5..         MOV     A,?V0 + 3
+   \   0001EC   95..         SUBB    A,?V0 + 1
+   \   0001EE   F9           MOV     R1,A
+   \   0001EF   88..         MOV     ?V0 + 12,R0
+   \   0001F1   89..         MOV     ?V0 + 13,R1
+    348                    }
+    349          
+    350                    if (!next || ( wait && (wait < next) ))
+   \                     ??HalLedUpdate_10:
+   \   0001F3   E5..         MOV     A,?V0 + 14
+   \   0001F5   45..         ORL     A,?V0 + 15
+   \   0001F7   6011         JZ      ??HalLedUpdate_13
+   \   0001F9   E5..         MOV     A,?V0 + 12
+   \   0001FB   45..         ORL     A,?V0 + 13
+   \   0001FD   6011         JZ      ??HalLedUpdate_4
+   \   0001FF   C3           CLR     C
+   \   000200   E5..         MOV     A,?V0 + 12
+   \   000202   95..         SUBB    A,?V0 + 14
+   \   000204   E5..         MOV     A,?V0 + 13
+   \   000206   95..         SUBB    A,?V0 + 15
+   \   000208   5006         JNC     ??HalLedUpdate_4
+    351                    {
+    352                      next = wait;
+   \                     ??HalLedUpdate_13:
+   \   00020A   85....       MOV     ?V0 + 14,?V0 + 12
+   \   00020D   85....       MOV     ?V0 + 15,?V0 + 13
+    353                    }
+    354                  }
+    355                  leds ^= led;
+   \                     ??HalLedUpdate_4:
+   \   000210   85..82       MOV     DPL,?XSP + 0
+   \   000213   85..83       MOV     DPH,?XSP + 1
+   \   000216   E0           MOVX    A,@DPTR
+   \   000217   F8           MOV     R0,A
+   \   000218   7401         MOV     A,#0x1
+   \   00021A   12....       LCALL   ?XSTACK_DISP0_8
+   \   00021D   E0           MOVX    A,@DPTR
+   \   00021E   68           XRL     A,R0
+   \   00021F   F0           MOVX    @DPTR,A
+    356                }
+    357                led <<= 1;
+   \                     ??HalLedUpdate_3:
+   \   000220   85..82       MOV     DPL,?XSP + 0
+   \   000223   85..83       MOV     DPH,?XSP + 1
+   \   000226   E0           MOVX    A,@DPTR
+   \   000227   C3           CLR     C
+   \   000228   33           RLC     A
+   \   000229   85..82       MOV     DPL,?XSP + 0
+   \   00022C   85..83       MOV     DPH,?XSP + 1
+   \   00022F   F0           MOVX    @DPTR,A
+    358                sts++;
+   \   000230   EE           MOV     A,R6
+   \   000231   2409         ADD     A,#0x9
+   \   000233   FE           MOV     R6,A
+   \   000234   EF           MOV     A,R7
+   \   000235   3400         ADDC    A,#0x0
+   \   000237   FF           MOV     R7,A
+   \   000238   02....       LJMP    ??HalLedUpdate_1 & 0xFFFF
+    359              }
+    360          
+    361              if (next)
+   \                     ??HalLedUpdate_2:
+   \   00023B   E5..         MOV     A,?V0 + 14
+   \   00023D   45..         ORL     A,?V0 + 15
+   \   00023F   6011         JZ      ??HalLedUpdate_0
+    362              {
+    363                osal_start_timerEx(Hal_TaskID, HAL_LED_BLINK_EVENT, next);   /* Schedule event */
+   \   000241                ; Setup parameters for call to function osal_start_timerEx
+   \   000241   AC..         MOV     R4,?V0 + 14
+   \   000243   AD..         MOV     R5,?V0 + 15
+   \   000245   7A02         MOV     R2,#0x2
+   \   000247   7B00         MOV     R3,#0x0
+   \   000249   90....       MOV     DPTR,#Hal_TaskID
+   \   00024C   E0           MOVX    A,@DPTR
+   \   00024D   F9           MOV     R1,A
+   \   00024E   12....       LCALL   ??osal_start_timerEx?relay
+   \   000251   E9           MOV     A,R1
+    364              }
+    365            }
+    366          }
+   \                     ??HalLedUpdate_0:
+   \   000252   7403         MOV     A,#0x3
+   \   000254   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000257   7F10         MOV     R7,#0x10
+   \   000259   02....       LJMP    ?BANKED_LEAVE_XDATA
+    367          
+    368          /***************************************************************************************************
+    369           * @fn      HalLedOnOff
+    370           *
+    371           * @brief   Turns specified LED ON or OFF
+    372           *
+    373           * @param   leds - LED bit mask
+    374           *          mode - LED_ON,LED_OFF,
+    375           *
+    376           * @return  none
+    377           ***************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    378          void HalLedOnOff (uint8 leds, uint8 mode)
+   \                     HalLedOnOff:
+    379          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    380              if (leds & HAL_LED_1)
+   \   000004   E9           MOV     A,R1
+   \   000005   A2E0         MOV     C,0xE0 /* A   */.0
+   \   000007   500B         JNC     ??HalLedOnOff_0
+    381              {
+    382                  if (mode == HAL_LED_MODE_ON)
+   \   000009   7401         MOV     A,#0x1
+   \   00000B   6A           XRL     A,R2
+   \   00000C   7004         JNZ     ??HalLedOnOff_1
+    383                  {
+    384                      HAL_TURN_ON_LED1();
+   \   00000E   D290         SETB    0x90.0
+   \   000010   8002         SJMP    ??HalLedOnOff_0
+    385                  }
+    386                  else
+    387                  {
+    388                      HAL_TURN_OFF_LED1();
+   \                     ??HalLedOnOff_1:
+   \   000012   C290         CLR     0x90.0
+    389                  }
+    390              }
+    391              
+    392              if (leds & HAL_LED_2)
+   \                     ??HalLedOnOff_0:
+   \   000014   E9           MOV     A,R1
+   \   000015   A2E1         MOV     C,0xE0 /* A   */.1
+   \   000017   500B         JNC     ??HalLedOnOff_2
+    393              {
+    394                  if (mode == HAL_LED_MODE_ON)
+   \   000019   7401         MOV     A,#0x1
+   \   00001B   6A           XRL     A,R2
+   \   00001C   7004         JNZ     ??HalLedOnOff_3
+    395                  {
+    396                      HAL_TURN_ON_LED2();
+   \   00001E   D290         SETB    0x90.0
+   \   000020   8002         SJMP    ??HalLedOnOff_2
+    397                  }
+    398                  else
+    399                  {
+    400                      HAL_TURN_OFF_LED2();
+   \                     ??HalLedOnOff_3:
+   \   000022   C290         CLR     0x90.0
+    401                  }
+    402              }
+    403              
+    404              if (leds & HAL_LED_3)
+   \                     ??HalLedOnOff_2:
+   \   000024   E9           MOV     A,R1
+   \   000025   A2E2         MOV     C,0xE0 /* A   */.2
+   \   000027   500B         JNC     ??HalLedOnOff_4
+    405              {
+    406                  if (mode == HAL_LED_MODE_ON)
+   \   000029   7401         MOV     A,#0x1
+   \   00002B   6A           XRL     A,R2
+   \   00002C   7004         JNZ     ??HalLedOnOff_5
+    407                  {
+    408                      HAL_TURN_ON_LED3();
+   \   00002E   D290         SETB    0x90.0
+   \   000030   8002         SJMP    ??HalLedOnOff_4
+    409                  }
+    410                  else
+    411                  {
+    412                      HAL_TURN_OFF_LED3();
+   \                     ??HalLedOnOff_5:
+   \   000032   C290         CLR     0x90.0
+    413                  }
+    414              }
+    415              
+    416              if (leds & HAL_LED_4)
+   \                     ??HalLedOnOff_4:
+   \   000034   E9           MOV     A,R1
+   \   000035   A2E3         MOV     C,0xE0 /* A   */.3
+   \   000037   500B         JNC     ??HalLedOnOff_6
+    417              {
+    418                  if (mode == HAL_LED_MODE_ON)
+   \   000039   7401         MOV     A,#0x1
+   \   00003B   6A           XRL     A,R2
+   \   00003C   7004         JNZ     ??HalLedOnOff_7
+    419                  {
+    420                      HAL_TURN_ON_LED4();
+   \   00003E   D290         SETB    0x90.0
+   \   000040   8002         SJMP    ??HalLedOnOff_6
+    421                  }
+    422                  else
+    423                  {
+    424                      HAL_TURN_OFF_LED4();
+   \                     ??HalLedOnOff_7:
+   \   000042   C290         CLR     0x90.0
+    425                  }
+    426              }
+    427              
+    428              /* Remember current state */
+    429              if (mode)
+   \                     ??HalLedOnOff_6:
+   \   000044   EA           MOV     A,R2
+   \   000045   6008         JZ      ??HalLedOnOff_8
+    430              {
+    431                  HalLedState |= leds;
+   \   000047   90....       MOV     DPTR,#HalLedState
+   \   00004A   E0           MOVX    A,@DPTR
+   \   00004B   49           ORL     A,R1
+   \   00004C   F0           MOVX    @DPTR,A
+   \   00004D   800A         SJMP    ??HalLedOnOff_9
+    432              }
+    433              else
+    434              {
+    435                  HalLedState &= (leds ^ 0xFF);
+   \                     ??HalLedOnOff_8:
+   \   00004F   74FF         MOV     A,#-0x1
+   \   000051   69           XRL     A,R1
+   \   000052   F8           MOV     R0,A
+   \   000053   90....       MOV     DPTR,#HalLedState
+   \   000056   E0           MOVX    A,@DPTR
+   \   000057   58           ANL     A,R0
+   \   000058   F0           MOVX    @DPTR,A
+    436              }
+    437          }
+   \                     ??HalLedOnOff_9:
+   \   000059   D083         POP     DPH
+   \   00005B   D082         POP     DPL
+   \   00005D   02....       LJMP    ?BRET
+   \   000060                REQUIRE _A_P1
+    438          #endif /* HAL_LED */
+    439          
+    440          /***************************************************************************************************
+    441           * @fn      HalGetLedState
+    442           *
+    443           * @brief   Dim LED2 - Dim (set level) of LED2
+    444           *
+    445           * @param   none
+    446           *
+    447           * @return  led state
+    448           ***************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    449          uint8 HalLedGetState ()
+   \                     HalLedGetState:
+    450          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    451          #if (HAL_LED == TRUE)
+    452            return HalLedState;
+   \   000004   90....       MOV     DPTR,#HalLedState
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   F9           MOV     R1,A
+   \   000009   D083         POP     DPH
+   \   00000B   D082         POP     DPL
+   \   00000D   02....       LJMP    ?BRET
+    453          #else
+    454            return 0;
+    455          #endif
+    456          }
+    457          
+    458          /***************************************************************************************************
+    459           * @fn      HalLedEnterSleep
+    460           *
+    461           * @brief   Store current LEDs state before sleep
+    462           *
+    463           * @param   none
+    464           *
+    465           * @return  none
+    466           ***************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    467          void HalLedEnterSleep( void )
+   \                     HalLedEnterSleep:
+    468          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    469          #ifdef BLINK_LEDS
+    470            /* Sleep ON */
+    471            HalLedStatusControl.sleepActive = TRUE;
+   \   000004   90....       MOV     DPTR,#HalLedStatusControl + 36
+   \   000007   7401         MOV     A,#0x1
+   \   000009   F0           MOVX    @DPTR,A
+    472          #endif /* BLINK_LEDS */
+    473          
+    474          #if (HAL_LED == TRUE)
+    475            /* Save the state of each led */
+    476            HalSleepLedState = 0;
+   \   00000A   90....       MOV     DPTR,#HalSleepLedState
+   \   00000D   7400         MOV     A,#0x0
+   \   00000F   F0           MOVX    @DPTR,A
+    477            HalSleepLedState |= HAL_STATE_LED1();
+   \   000010   A290         MOV     C,0x90.0
+   \   000012   E4           CLR     A
+   \   000013   33           RLC     A
+   \   000014   F8           MOV     R0,A
+   \   000015   90....       MOV     DPTR,#HalSleepLedState
+   \   000018   E0           MOVX    A,@DPTR
+   \   000019   48           ORL     A,R0
+   \   00001A   F0           MOVX    @DPTR,A
+    478            HalSleepLedState |= HAL_STATE_LED2() << 1;
+   \   00001B   A290         MOV     C,0x90.0
+   \   00001D   E4           CLR     A
+   \   00001E   33           RLC     A
+   \   00001F   C3           CLR     C
+   \   000020   33           RLC     A
+   \   000021   F8           MOV     R0,A
+   \   000022   90....       MOV     DPTR,#HalSleepLedState
+   \   000025   E0           MOVX    A,@DPTR
+   \   000026   48           ORL     A,R0
+   \   000027   F0           MOVX    @DPTR,A
+    479            HalSleepLedState |= HAL_STATE_LED3() << 2;
+   \   000028   A290         MOV     C,0x90.0
+   \   00002A   E4           CLR     A
+   \   00002B   33           RLC     A
+   \   00002C   33           RLC     A
+   \   00002D   33           RLC     A
+   \   00002E   54FC         ANL     A,#0xfc
+   \   000030   F8           MOV     R0,A
+   \   000031   90....       MOV     DPTR,#HalSleepLedState
+   \   000034   E0           MOVX    A,@DPTR
+   \   000035   48           ORL     A,R0
+   \   000036   F0           MOVX    @DPTR,A
+    480            HalSleepLedState |= HAL_STATE_LED4() << 3;
+   \   000037   A290         MOV     C,0x90.0
+   \   000039   E4           CLR     A
+   \   00003A   33           RLC     A
+   \   00003B   33           RLC     A
+   \   00003C   33           RLC     A
+   \   00003D   33           RLC     A
+   \   00003E   54F8         ANL     A,#0xf8
+   \   000040   F8           MOV     R0,A
+   \   000041   90....       MOV     DPTR,#HalSleepLedState
+   \   000044   E0           MOVX    A,@DPTR
+   \   000045   48           ORL     A,R0
+   \   000046   F0           MOVX    @DPTR,A
+    481          
+    482            /* TURN OFF all LEDs to save power */
+    483            HalLedOnOff (HAL_LED_ALL, HAL_LED_MODE_OFF);
+   \   000047                ; Setup parameters for call to function HalLedOnOff
+   \   000047   7A00         MOV     R2,#0x0
+   \   000049   790F         MOV     R1,#0xf
+   \   00004B   12....       LCALL   ??HalLedOnOff?relay
+    484          #endif /* HAL_LED */
+    485          
+    486          }
+   \   00004E   D083         POP     DPH
+   \   000050   D082         POP     DPL
+   \   000052   02....       LJMP    ?BRET
+   \   000055                REQUIRE _A_P1
+    487          
+    488          /***************************************************************************************************
+    489           * @fn      HalLedExitSleep
+    490           *
+    491           * @brief   Restore current LEDs state after sleep
+    492           *
+    493           * @param   none
+    494           *
+    495           * @return  none
+    496           ***************************************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    497          void HalLedExitSleep( void )
+   \                     HalLedExitSleep:
+    498          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    499          #if (HAL_LED == TRUE)
+    500            /* Load back the saved state */
+    501            HalLedOnOff(HalSleepLedState, HAL_LED_MODE_ON);
+   \   000004                ; Setup parameters for call to function HalLedOnOff
+   \   000004   7A01         MOV     R2,#0x1
+   \   000006   90....       MOV     DPTR,#HalSleepLedState
+   \   000009   E0           MOVX    A,@DPTR
+   \   00000A   F9           MOV     R1,A
+   \   00000B   12....       LCALL   ??HalLedOnOff?relay
+    502          
+    503            /* Restart - This takes care BLINKING LEDS */
+    504            HalLedUpdate();
+   \   00000E                ; Setup parameters for call to function HalLedUpdate
+   \   00000E   12....       LCALL   ??HalLedUpdate?relay
+    505          #endif /* HAL_LED */
+    506          
+    507          #ifdef BLINK_LEDS
+    508            /* Sleep OFF */
+    509            HalLedStatusControl.sleepActive = FALSE;
+   \   000011   90....       MOV     DPTR,#HalLedStatusControl + 36
+   \   000014   7400         MOV     A,#0x0
+   \   000016   F0           MOVX    @DPTR,A
+    510          #endif /* BLINK_LEDS */
+    511          }
+   \   000017   D083         POP     DPH
+   \   000019   D082         POP     DPL
+   \   00001B   02....       LJMP    ?BRET
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     __Constant_64:
+   \   000000   64000000     DD 100
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLedInit?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLedInit
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLedSet?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLedSet
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLedBlink?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLedBlink
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLedUpdate?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLedUpdate
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLedOnOff?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLedOnOff
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLedGetState?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLedGetState
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLedEnterSleep?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLedEnterSleep
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalLedExitSleep?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalLedExitSleep
+    512          
+    513          /***************************************************************************************************
+    514          ***************************************************************************************************/
+    515          
+    516          
+    517          
+    518          
+
+   Maximum stack usage in bytes:
+
+     Function                 ISTACK PSTACK XSTACK
+     --------                 ------ ------ ------
+     HalLedBlink                  1      0     25
+       -> osal_GetSystemClock     0      0     28
+       -> osal_stop_timerEx       0      0     28
+       -> osal_set_event          0      0     28
+       -> HalLedSet               0      0     28
+       -> HalLedSet               0      0     28
+     HalLedEnterSleep             2      0      0
+       -> HalLedOnOff             4      0      0
+     HalLedExitSleep              2      0      0
+       -> HalLedOnOff             4      0      0
+       -> HalLedUpdate            4      0      0
+     HalLedGetState               2      0      0
+     HalLedInit                   2      0      0
+       -> HalLedSet               4      0      0
+     HalLedOnOff                  2      0     27
+     HalLedSet                    1      0     38
+       -> HalLedBlink             0      0     22
+       -> HalLedBlink             0      0     22
+       -> HalLedOnOff             0      0     22
+     HalLedUpdate                 2      0     27
+       -> osal_GetSystemClock     0      0     54
+       -> HalLedOnOff             0      0     54
+       -> HalLedOnOff             0      0     54
+       -> HalLedSet               0      0     54
+       -> osal_start_timerEx      0      0     54
+
+
+   Segment part sizes:
+
+     Function/Label           Bytes
+     --------------           -----
+     _A_P1                       1
+     HalLedState                 1
+     HalSleepLedState            1
+     preBlinkState               1
+     HalLedStatusControl        37
+     HalLedInit                 25
+     HalLedSet                 149
+     HalLedBlink               240
+     HalLedUpdate              604
+     HalLedOnOff                96
+     HalLedGetState             16
+     HalLedEnterSleep           85
+     HalLedExitSleep            30
+     __Constant_64               4
+     ??HalLedInit?relay          6
+     ??HalLedSet?relay           6
+     ??HalLedBlink?relay         6
+     ??HalLedUpdate?relay        6
+     ??HalLedOnOff?relay         6
+     ??HalLedGetState?relay      6
+     ??HalLedEnterSleep?relay    6
+     ??HalLedExitSleep?relay     6
+
+ 
+ 1 245 bytes in segment BANKED_CODE
+    48 bytes in segment BANK_RELAYS
+     1 byte  in segment SFR_AN
+     4 bytes in segment XDATA_ROM_C
+    40 bytes in segment XDATA_Z
+ 
+ 1 293 bytes of CODE  memory
+     0 bytes of CONST memory (+ 4 bytes shared)
+     0 bytes of DATA  memory (+ 1 byte  shared)
+    40 bytes of XDATA memory
+
+Errors: none
+Warnings: none

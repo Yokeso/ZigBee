@@ -1,0 +1,1261 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.1.40194/W32 for 8051         03/Jan/2021  17:40:44 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data_rom                                           #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Components\hal\target\CC2530SB\hal_moto #
+#                          r.c                                                #
+#    Command line       =  -f D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\..\..\..\Tools\CC2530DB\f8wEndev.cfg            #
+#                          (-DCPU32MHZ -DROOT=__near_func                     #
+#                          -DMAC_CFG_TX_DATA_MAX=3 -DMAC_CFG_TX_MAX=6         #
+#                          -DMAC_CFG_RX_MAX=3) -f D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\ #
+#                          MY_BOARD\Exp4\CC2530DB\..\..\..\Tools\CC2530DB\f8w #
+#                          Config.cfg (-DZIGBEEPRO -DSECURE=0                 #
+#                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
+#                          -DDEFAULT_CHANLIST=0x02000000                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0x1001                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
+#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
+#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DMAC_MAX_FRAME_SIZE=116                           #
+#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
+#                          __code" -DGENERIC=__generic                        #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\t #
+#                          arget\CC2530SB\hal_motor.c -D HAL_UART=TRUE -D     #
+#                          HAL_UART_TEST -D xPOWER_SAVING -lC                 #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBMotor\List\ -lA                         #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBMotor\List\ --diag_suppress             #
+#                          Pe001,Pa010 -o D:\Projects_IAR\IAR_C8051\WSN-CC253 #
+#                          0\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD #
+#                          \Exp4\CC2530DB\EndDeviceSBMotor\Obj\ -e            #
+#                          --no_code_motion --debug --core=plain --dptr=16,1  #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data_rom --nr_virtual_regs 16    #
+#                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack #
+#                          -CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC #
+#                          2530DB\..\Source\ -I D:\Projects_IAR\IAR_C8051\WSN #
+#                          -CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY #
+#                          _BOARD\Exp4\CC2530DB\..\..\..\ZMain\TI2530DB\ -I   #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\target\CC2530SB\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\high_level\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\sing #
+#                          le_chip\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\Z #
+#                          Stack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Ex #
+#                          p4\CC2530DB\..\..\..\..\..\Components\mt\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\osal\include\ -I         #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\saddr\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\sdata\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\af\ -I             #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\nwk\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sapi\ -I           #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sec\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sys\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\zdo\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\ -I                 #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\f8w\ -Ohz           #
+#    List file          =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBMotor\List\hal_motor.lst                #
+#    Object file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBMotor\Obj\hal_motor.r51                 #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\target\CC2530SB\hal_motor.c
+      1          /*******************************************************************************
+      2            文 件 名: hal_motor.c
+      3            作    者：南京安宸博研电子科技有限公司
+      4            创建时间：2013.9.16
+      5            修改时间：2020.12.22
+      6            说    明：
+      7              (1) CC2530的P1_2输出PWMA波控制直流电机正反转，50%占空比停机，小于50%反转，
+      8                  大于50%正转；请将直流电机板子上的PWM波选择跳线短接在sin，本实验使用
+      9                  单路PWM波输出控制。
+     10              (2) 电机顺时针转动，先过P1_3，然后通过P1_4，此时方向为正方向；
+     11              (3) 本部分程序使用了CC2530的定时器1和定时器3，分别用来产生直流电机的PWM波，
+     12                  和1s的定时中断，1s的定时中断作为节拍来控制转速的测量和转速的调节；
+     13              (4) 电机的转速单位：转/秒；目前支持的转速调节范围是：1~50(Max)转/秒；
+     14              (5) 电机控制方法采用PID控制中的P控制，经过测试可以实现基本调速功能。
+     15              (6) 通过修改定时器的计数值，可以调节电机测速和控制的节拍，具体看定时器
+     16                  的中断说明，这里有测试比较的结果：当测速和控制的节奏提高后，速度的
+     17                  精确度不高，之前是4个脉冲代表1转，提高到1/4秒节拍后是1个脉冲代表1转，
+     18                  在观察中发现虽然可以迅速(4倍于1秒的节拍)的调整速度，但是速度稳定性不高，
+     19                  总结的主要原因应该是测速模块的稳定性问题。
+     20              (7) 测速模块主要是：在IO中断内的脉冲计数；以及定时器中断内的转速转换；
+     21                  测速精度有±1RPM的误差(使用目前1/4秒的测速、控制节拍), 或者
+     22                  ±0.25RPM的误差(使用1秒的测速、控制节拍)。
+     23              (8) 关于PID：P = 设定转速 - 当前转速；
+     24                           I += p；
+     25                           D = 当前转速 - 上一个当前转速；
+     26                           上一个当前转速 = 当前转速；
+     27                           然后选择合适的kp、ki、kd
+     28                           调整量 = kp*P + ki*I + kd*D；
+     29          *******************************************************************************/
+     30          
+     31          #include <iocc2530.h>
+
+   \                                 In  segment SFR_AN, at 0x8a
+   \   unsigned char volatile __sfr P1IFG
+   \                     P1IFG:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x8d
+   \   unsigned char volatile __sfr P1IEN
+   \                     P1IEN:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x9a
+   \   unsigned char volatile __sfr IEN2
+   \                     IEN2:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa8
+   \   union <unnamed> volatile __sfr _A_IEN0
+   \                     _A_IEN0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xb8
+   \   union <unnamed> volatile __sfr _A_IEN1
+   \                     _A_IEN1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xcb
+   \   unsigned char volatile __sfr T3CTL
+   \                     T3CTL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xcc
+   \   unsigned char volatile __sfr T3CCTL0
+   \                     T3CCTL0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xcd
+   \   unsigned char volatile __sfr T3CC0
+   \                     T3CC0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xce
+   \   unsigned char volatile __sfr T3CCTL1
+   \                     T3CCTL1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xcf
+   \   unsigned char volatile __sfr T3CC1
+   \                     T3CC1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xda
+   \   unsigned char volatile __sfr T1CC0L
+   \                     T1CC0L:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xdb
+   \   unsigned char volatile __sfr T1CC0H
+   \                     T1CC0H:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe4
+   \   unsigned char volatile __sfr T1CTL
+   \                     T1CTL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe5
+   \   unsigned char volatile __sfr T1CCTL0
+   \                     T1CCTL0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe8
+   \   union <unnamed> volatile __sfr _A_IRCON2
+   \                     _A_IRCON2:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xf1
+   \   unsigned char volatile __sfr PERCFG
+   \                     PERCFG:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xf4
+   \   unsigned char volatile __sfr P1SEL
+   \                     P1SEL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xfe
+   \   unsigned char volatile __sfr P1DIR
+   \                     P1DIR:
+   \   000000                DS 1
+     32          #include "hal_defs.h"
+     33          #include "hal_types.h"
+     34          #include "hal_motor.h"
+     35          
+     36          //宏定义--电机控制与测速的相关引脚
+     37          #define  HAL_MOTOR_SPEED1          P1_4
+     38          #define  HAL_MOTOR_SPEED2          P1_3
+     39          #define  HAL_MOTOR_SPEED_PIN_SET() st( P1DIR &= ~(BV(3) + BV(4)); \
+     40                                                 P1IEN |= BV(4) + BV(3);    \
+     41                                                 IEN2 |= BV(4);             \
+     42                                                 P1IFG = 0;)
+     43          #define  HAL_MOTOR_PWMA_OUT        P1_2
+     44          #define  HAL_MOTOR_PWMA_PIN_SET()  st( P1DIR |= BV(2); P1SEL |= BV(2);)
+     45          
+     46          //*****************************************************************************/
+     47          //定时器
+     48          /*****************************************
+     49          //T3配置定义
+     50          *****************************************/
+     51          // Where _timer_ must be either 3 or 4
+     52          // Macro for initialising timer 3 or 4
+     53          #define TIMER34_INIT(timer)    st(    T##timer##CTL   = 0x06; \
+     54                                                T##timer##CCTL0 = 0x00; \
+     55                                                T##timer##CC0   = 0x00; \
+     56                                                T##timer##CCTL1 = 0x00; \
+     57                                                T##timer##CC1   = 0x00; \
+     58                                            ) 
+     59          
+     60          //Macro for enabling overflow interrupt
+     61          #define TIMER34_ENABLE_OVERFLOW_INT(timer,val) \
+     62             (T##timer##CTL =  (val) ? T##timer##CTL | 0x08 : T##timer##CTL & ~0x08)
+     63          
+     64          
+     65          
+     66          // Macro for configuring channel 1 of timer 3 or 4 for PWM mode.
+     67          #define TIMER34_PWM_CONFIG(timer)    st ( T##timer##CCTL1 = 0x24;                     \
+     68                                                    if(timer == 3){                             \
+     69                                                       if(PERCFG & 0x20) {                      \
+     70                                                          IO_FUNC_PORT_PIN(1,7,IO_FUNC_PERIPH); \
+     71                                                       }                                        \
+     72                                                       else {                                   \
+     73                                                          IO_FUNC_PORT_PIN(1,4,IO_FUNC_PERIPH); \
+     74                                                       }                                        \
+     75                                                    }                                           \
+     76                                                    else {                                      \
+     77                                                       if(PERCFG & 0x10) {                      \
+     78                                                           IO_FUNC_PORT_PIN(2,3,IO_FUNC_PERIPH);\
+     79                                                       }                                        \
+     80                                                       else {                                   \
+     81                                                          IO_FUNC_PORT_PIN(1,1,IO_FUNC_PERIPH); \
+     82                                                       }                                        \
+     83                                                    }                                           \
+     84                                                 ) 
+     85          
+     86          // Macro for setting pulse length of the timer in PWM mode
+     87          #define  TIMER34_SET_PWM_PULSE_LENGTH(timer, value)  \
+     88                   st( T##timer##CC1 = (BYTE)value; )
+     89          
+     90          
+     91          // Macro for setting timer 3 or 4 as a capture timer
+     92          #define TIMER34_CAPTURE_TIMER(timer,edge)          \
+     93             st(                                             \
+     94                T##timer##CCTL1 = edge;                      \
+     95                if(timer == 3){                              \
+     96                   if(PERCFG & 0x20) {                       \
+     97                      IO_FUNC_PORT_PIN(1,7,IO_FUNC_PERIPH);  \
+     98                   }                                         \
+     99                   else {                                    \
+    100                       IO_FUNC_PORT_PIN(1,4,IO_FUNC_PERIPH); \
+    101                   }                                         \
+    102                }                                            \
+    103                else                                         \
+    104                {                                            \
+    105                   if(PERCFG & 0x10) {                       \
+    106                      IO_FUNC_PORT_PIN(2,3,IO_FUNC_PERIPH);  \
+    107                   }                                         \
+    108                  else {                                     \
+    109                     IO_FUNC_PORT_PIN(1,1,IO_FUNC_PERIPH);   \
+    110                  }                                          \
+    111                } )
+    112          
+    113          //Macro for setting the clock tick for timer3 or 4
+    114          #define  TIMER34_START(timer)  (T##timer##CTL = T##timer##CTL | 0X10)
+    115          
+    116          #define  TIMER34_STOP(timer)   (T##timer##CTL &= ~0X10)
+    117          
+    118          #define TIMER34_SET_CLOCK_DIVIDE(timer,val)                       \
+    119                  st(                                                       \
+    120                        T##timer##CTL &= ~0XE0;                             \
+    121                        (val==2) ? (T##timer##CTL|=0X20):                   \
+    122                        (val==4) ? (T##timer##CTL|=0x40):                   \
+    123                        (val==8) ? (T##timer##CTL|=0X60):                   \
+    124                        (val==16)? (T##timer##CTL|=0x80):                   \
+    125                        (val==32)? (T##timer##CTL|=0xa0):                   \
+    126                        (val==64) ? (T##timer##CTL|=0xc0):                  \
+    127                        (val==128) ? (T##timer##CTL|=0XE0):                 \
+    128                        (T##timer##CTL|=0X00);             /* 1 */          \
+    129                     )
+    130          
+    131          //Macro for setting the mode of timer3 or 4
+    132          #define  TIMER34_SET_MODE(timer,val)                              \
+    133                   st(                                                      \
+    134                      T##timer##CTL &= ~0X03;                               \
+    135                      (val==1)?(T##timer##CTL|=0X01):  /*DOWN        */     \
+    136                      (val==2)?(T##timer##CTL|=0X02):  /*Modulo      */     \
+    137                      (val==3)?(T##timer##CTL|=0X03):  /*UP / DOWN   */     \
+    138                      (T##timer##CTL|=0X00);           /*free runing */     \
+    139                      )
+    140          
+    141          #define  HAL_MOTOR_PWMA_T1CFG      0x40
+    142          #define  HAL_T1MODE_FREE_RUN       0x01
+    143          #define  HAL_T1_COMPARE_MODE       0x04
+    144          #define  HAL_T1_OUTPUT_CLEAR_MODE  0x20
+    145                 
+    146          #define  HAL_T3_SET()              st( T3CTL |= 0xA0 + 0x06; \
+    147                                                 T3CCTL0 = 0;          \
+    148                                                 T3CCTL1 = 0;          \
+    149                                                 T3CC0 = 100;          \
+    150                                                 T3CTL |= 0x10;        \
+    151                                                 T3IE = 1; )
+    152          
+    153          //*****************************************************************************/
+    154          //调速
+    155          //#define  HAL_MOTOR_PWMA_SPEED(x)     st( T1CC0H = 128;   \
+    156                                                   T1CC0L = 0; )
+    157          #define  HAL_MOTOR_PWMA_SPEED(x)   st( T1CC0H = (uint8)(((uint16)x >> 8) & 0xFF);   \
+    158                                                 T1CC0L = (uint8)((uint16)x & 0xFF); )
+    159          
+    160          #define  Ka  210
+    161          #define  Kb  -100
+    162          #define  Kc  10
+    163          //*****************************************************************************/
+    164          // 本地变量
+    165          
+    166          // 电机的方向状态
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    167          static uint8 motorStatus;
+   \                     motorStatus:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+    168          
+    169          // 电机的当前速度
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    170          static uint8 motorCurrentSpeed;
+   \                     motorCurrentSpeed:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+    171          
+    172          // 电机的测速脉冲数
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    173          static uint16 motorPulseCnt1;
+   \                     motorPulseCnt1:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    174          static uint16 motorPulseCnt2;
+   \                     motorPulseCnt2:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+    175          
+    176          // 电机的预置速度
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    177          static uint8 motorSetSpeed;
+   \                     motorSetSpeed:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+    178          
+    179          //*****************************************************************************/
+    180          //内部函数
+    181          /*****************************************
+    182          //函数声明
+    183          *****************************************/
+    184          void Timer3Init(void);
+    185          void Timer1Init(void);
+    186          
+    187          //*****************************************************************************/
+    188          //函数名：Timer3Init
+    189          //功  能：timer3初始化
+    190          //参  数：无
+    191          //返回值：无
+    192          //*****************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    193          void Timer1Init(void)
+   \                     Timer1Init:
+    194          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    195            T1CTL |= HAL_T1MODE_FREE_RUN;
+   \   000000   43E401       ORL     0xe4,#0x1
+    196            T1CCTL0 |= HAL_T1_COMPARE_MODE + HAL_T1_OUTPUT_CLEAR_MODE;
+   \   000003   43E524       ORL     0xe5,#0x24
+    197          }
+   \   000006   02....       LJMP    ?BRET
+   \   000009                REQUIRE T1CTL
+   \   000009                REQUIRE T1CCTL0
+    198          
+    199          //*****************************************************************************/
+    200          //函数名：Timer3Init
+    201          //功  能：timer3初始化
+    202          //参  数：无
+    203          //返回值：无
+    204          //*****************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    205          void Timer3Init(void)
+   \                     Timer3Init:
+    206          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    207            TIMER34_INIT(3);                    //初始化T4
+   \   000000   75CB06       MOV     0xcb,#0x6
+   \   000003   75CC00       MOV     0xcc,#0x0
+   \   000006   75CD00       MOV     0xcd,#0x0
+   \   000009   75CE00       MOV     0xce,#0x0
+   \   00000C   75CF00       MOV     0xcf,#0x0
+    208            TIMER34_ENABLE_OVERFLOW_INT(3, 1);  //开T4中断
+   \   00000F   43CB08       ORL     0xcb,#0x8
+    209            EA = 1;
+   \   000012   D2AF         SETB    0xa8.7
+    210            T3IE = 1;
+   \   000014   D2BB         SETB    0xb8.3
+    211            
+    212            TIMER34_SET_CLOCK_DIVIDE(3, 32);
+   \   000016   53CB1F       ANL     0xcb,#0x1f
+   \   000019   43CBA0       ORL     0xcb,#0xa0
+    213            TIMER34_SET_MODE(3, 1);                 
+   \   00001C   53CBFC       ANL     0xcb,#0xfc
+   \   00001F   43CB01       ORL     0xcb,#0x1
+    214            T3CC0 = 100;
+   \   000022   75CD64       MOV     0xcd,#0x64
+    215            TIMER34_START(3);                    //启动
+   \   000025   43CB10       ORL     0xcb,#0x10
+    216          }
+   \   000028   02....       LJMP    ?BRET
+   \   00002B                REQUIRE T3CTL
+   \   00002B                REQUIRE T3CCTL0
+   \   00002B                REQUIRE T3CC0
+   \   00002B                REQUIRE T3CCTL1
+   \   00002B                REQUIRE T3CC1
+   \   00002B                REQUIRE _A_IEN0
+   \   00002B                REQUIRE _A_IEN1
+    217          
+    218          //*****************************************************************************/
+    219          //函数名：P1_ISR
+    220          //功  能：P1口中断函数，直流电机测速，P1_3、P1_4两个IO口中断
+    221          //参  数：无
+    222          //返回值：无
+    223          //*****************************************************************************/
+    224          #pragma vector = P1INT_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    225          __interrupt void P1_ISR(void)
+   \                     P1_ISR:
+    226          {
+   \   000000   C0E0         PUSH    A
+   \   000002   C0D0         PUSH    PSW
+   \   000004   C082         PUSH    DPL
+   \   000006   C083         PUSH    DPH
+   \   000008                ; Saved register size: 4
+   \   000008                ; Auto size: 0
+    227            if (P1IFG & BV(3))         
+   \   000008   E58A         MOV     A,0x8a
+   \   00000A   A2E3         MOV     C,0xE0 /* A   */.3
+   \   00000C   5009         JNC     ??CrossCallReturnLabel_2
+    228            {
+    229              P1IFG = 0;
+   \   00000E   758A00       MOV     0x8a,#0x0
+    230              motorPulseCnt1++;
+   \   000011   90....       MOV     DPTR,#motorPulseCnt1
+   \   000014   12....       LCALL   ?Subroutine2
+    231            }
+    232            if (P1IFG & BV(4))         
+   \                     ??CrossCallReturnLabel_2:
+   \   000017   E58A         MOV     A,0x8a
+   \   000019   A2E4         MOV     C,0xE0 /* A   */.4
+   \   00001B   5009         JNC     ??CrossCallReturnLabel_3
+    233            {
+    234              P1IFG = 0;
+   \   00001D   758A00       MOV     0x8a,#0x0
+    235              motorPulseCnt2++;
+   \   000020   90....       MOV     DPTR,#motorPulseCnt2
+   \   000023   12....       LCALL   ?Subroutine2
+    236            }
+    237            P1IF = 0;          //清中断标志
+   \                     ??CrossCallReturnLabel_3:
+   \   000026   C2EB         CLR     0xe8.3
+    238          }
+   \   000028   D083         POP     DPH
+   \   00002A   D082         POP     DPL
+   \   00002C   D0D0         POP     PSW
+   \   00002E   D0E0         POP     A
+   \   000030   32           RETI
+   \   000031                REQUIRE P1IFG
+   \   000031                REQUIRE _A_IRCON2
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \                     ?Subroutine2:
+   \   000000   E0           MOVX    A,@DPTR
+   \   000001   2401         ADD     A,#0x1
+   \   000003   F0           MOVX    @DPTR,A
+   \   000004   A3           INC     DPTR
+   \   000005   E0           MOVX    A,@DPTR
+   \   000006   3400         ADDC    A,#0x0
+   \   000008   F0           MOVX    @DPTR,A
+   \   000009   22           RET
+    239          
+    240          //*****************************************************************************/
+    241          //函数名：T3_ISR
+    242          //功  能：Timer3中断，中断100us产生一次，时钟节拍1s：测转速，调整转速;
+    243          //参  数：无
+    244          //返回值：无
+    245          //*****************************************************************************/
+    246          #pragma vector = T3_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    247          __interrupt void T3_ISR(void)
+   \                     T3_ISR:
+    248          {
+   \   000000   C0E0         PUSH    A
+   \   000002   74EB         MOV     A,#-0x15
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 22
+   \   000007                ; Auto size: 0
+    249            static uint16 timerCnt;
+    250            static int16  Ek, Ek1, Ek2; 
+    251            int16 speedDiff;
+    252            uint16 tmpT1CC0H, tmpT1CC0L;
+    253            int32 speedToT1CC0;
+    254            
+    255            // 此处的计数值决定了测速和控制的节拍，2500表示1/4秒测一次速，调一次速；
+    256            // 10000表示1秒测一次速，调一次速；
+    257            if (timerCnt < 2500)
+   \   000007   90....       MOV     DPTR,#??timerCnt
+   \   00000A   C3           CLR     C
+   \   00000B   E0           MOVX    A,@DPTR
+   \   00000C   94C4         SUBB    A,#-0x3c
+   \   00000E   A3           INC     DPTR
+   \   00000F   E0           MOVX    A,@DPTR
+   \   000010   9409         SUBB    A,#0x9
+   \   000012   90....       MOV     DPTR,#??timerCnt
+   \   000015   500B         JNC     ??T3_ISR_0
+    258            {
+    259              timerCnt++;
+   \   000017   12....       LCALL   ?Subroutine2
+    260            }
+    261            else
+    262            {
+    263              timerCnt = 0;
+    264              
+    265              // 此处的脉冲数与测速的周期有关，如果1秒测速一次，那么此处/4;
+    266              // 如果1/4秒测速一次，那么正好等于转速；
+    267              motorCurrentSpeed = (motorPulseCnt1 + motorPulseCnt2)/2;
+    268              motorPulseCnt1 = 0;
+    269              motorPulseCnt2 = 0;
+    270          
+    271              tmpT1CC0H = T1CC0H;
+    272              tmpT1CC0L = T1CC0L;
+    273              speedToT1CC0 = tmpT1CC0H << 8 | tmpT1CC0L;
+    274          
+    275              if (motorSetSpeed == 0)
+    276              {
+    277                HAL_MOTOR_PWMA_SPEED(32768);
+    278              }
+    279              else 
+    280              {
+    281                speedDiff = motorSetSpeed - motorCurrentSpeed;
+    282                Ek2 = Ek1;
+    283                Ek1 = Ek;
+    284                Ek = speedDiff;
+    285                if (motorStatus == HAL_MOTOR_FORWORD)
+    286                {                
+    287                  speedToT1CC0 += Ka * Ek + Kb * Ek1 + Kc * Ek2;
+    288                   
+    289                  // 电机正转，确保PWM波占空比大于50%;
+    290                  if (speedToT1CC0 < 32768)
+    291                  {
+    292                    speedToT1CC0 = 32768;        
+    293                  } 
+    294                  // 防止上溢出
+    295                  if (speedToT1CC0 > 0xFFFF)
+    296                  {
+    297                    speedToT1CC0 = 0xFFFF;
+    298                  }
+    299                  HAL_MOTOR_PWMA_SPEED(speedToT1CC0);
+    300                }            
+    301                else if (motorStatus == HAL_MOTOR_BACKWORD)
+    302                {                
+    303                  speedToT1CC0 -= Ka * Ek + Kb * Ek1 + Kc * Ek2;
+    304                  
+    305                  // 反转，PWM占空比小于50%
+    306                  if (speedToT1CC0 > 32768)
+    307                  {
+    308                    speedToT1CC0 = 32768;        
+    309                  } 
+    310                  // 防止下溢出
+    311                  if (speedToT1CC0 < 1)
+    312                  {
+    313                    speedToT1CC0 = 1;
+    314                  }
+    315                  HAL_MOTOR_PWMA_SPEED(speedToT1CC0);
+    316                }
+    317              }
+    318            }
+    319            
+    320            TIMER34_START(3); // 打开Timer3启动
+   \                     ??CrossCallReturnLabel_4:
+   \   00001A   43CB10       ORL     0xcb,#0x10
+    321          }
+   \   00001D   7F08         MOV     R7,#0x8
+   \   00001F   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+   \                     ??T3_ISR_0:
+   \   000022   E4           CLR     A
+   \   000023   F0           MOVX    @DPTR,A
+   \   000024   A3           INC     DPTR
+   \   000025   F0           MOVX    @DPTR,A
+   \   000026   90....       MOV     DPTR,#motorPulseCnt1
+   \   000029   12....       LCALL   ??Subroutine5_0
+   \                     ??CrossCallReturnLabel_5:
+   \   00002C   90....       MOV     DPTR,#motorPulseCnt2
+   \   00002F   E0           MOVX    A,@DPTR
+   \   000030   28           ADD     A,R0
+   \   000031   F8           MOV     R0,A
+   \   000032   A3           INC     DPTR
+   \   000033   E0           MOVX    A,@DPTR
+   \   000034   39           ADDC    A,R1
+   \   000035   C3           CLR     C
+   \   000036   13           RRC     A
+   \   000037   E8           MOV     A,R0
+   \   000038   13           RRC     A
+   \   000039   90....       MOV     DPTR,#motorCurrentSpeed
+   \   00003C   F0           MOVX    @DPTR,A
+   \   00003D   90....       MOV     DPTR,#motorPulseCnt1
+   \   000040   E4           CLR     A
+   \   000041   F0           MOVX    @DPTR,A
+   \   000042   A3           INC     DPTR
+   \   000043   F0           MOVX    @DPTR,A
+   \   000044   90....       MOV     DPTR,#motorPulseCnt2
+   \   000047   F0           MOVX    @DPTR,A
+   \   000048   A3           INC     DPTR
+   \   000049   F0           MOVX    @DPTR,A
+   \   00004A   E5DB         MOV     A,0xdb
+   \   00004C   F9           MOV     R1,A
+   \   00004D   E5DA         MOV     A,0xda
+   \   00004F   F5..         MOV     ?V0 + 4,A
+   \   000051   E9           MOV     A,R1
+   \   000052   F5..         MOV     ?V0 + 5,A
+   \   000054   E4           CLR     A
+   \   000055   F5..         MOV     ?V0 + 6,A
+   \   000057   F5..         MOV     ?V0 + 7,A
+   \   000059   90....       MOV     DPTR,#motorSetSpeed
+   \   00005C   E0           MOVX    A,@DPTR
+   \   00005D   7008         JNZ     ??T3_ISR_1
+   \   00005F   75DB80       MOV     0xdb,#-0x80
+   \   000062   75DA00       MOV     0xda,#0x0
+   \   000065   80B3         SJMP    ??CrossCallReturnLabel_4
+   \                     ??T3_ISR_1:
+   \   000067   12....       LCALL   ?Subroutine3
+   \                     ??CrossCallReturnLabel_8:
+   \   00006A   90....       MOV     DPTR,#??Ek2
+   \   00006D   E8           MOV     A,R0
+   \   00006E   F0           MOVX    @DPTR,A
+   \   00006F   A3           INC     DPTR
+   \   000070   E9           MOV     A,R1
+   \   000071   F0           MOVX    @DPTR,A
+   \   000072   90....       MOV     DPTR,#??Ek
+   \   000075   12....       LCALL   ??Subroutine5_0
+   \                     ??CrossCallReturnLabel_6:
+   \   000078   90....       MOV     DPTR,#??Ek1
+   \   00007B   E8           MOV     A,R0
+   \   00007C   F0           MOVX    @DPTR,A
+   \   00007D   A3           INC     DPTR
+   \   00007E   E9           MOV     A,R1
+   \   00007F   F0           MOVX    @DPTR,A
+   \   000080   90....       MOV     DPTR,#motorSetSpeed
+   \   000083   E0           MOVX    A,@DPTR
+   \   000084   F8           MOV     R0,A
+   \   000085   90....       MOV     DPTR,#motorCurrentSpeed
+   \   000088   E0           MOVX    A,@DPTR
+   \   000089   FA           MOV     R2,A
+   \   00008A   E8           MOV     A,R0
+   \   00008B   C3           CLR     C
+   \   00008C   9A           SUBB    A,R2
+   \   00008D   F8           MOV     R0,A
+   \   00008E   95E0         SUBB    A,0xE0 /* A   */
+   \   000090   F9           MOV     R1,A
+   \   000091   90....       MOV     DPTR,#??Ek
+   \   000094   E8           MOV     A,R0
+   \   000095   F0           MOVX    @DPTR,A
+   \   000096   A3           INC     DPTR
+   \   000097   E9           MOV     A,R1
+   \   000098   F0           MOVX    @DPTR,A
+   \   000099   90....       MOV     DPTR,#motorStatus
+   \   00009C   E0           MOVX    A,@DPTR
+   \   00009D   6402         XRL     A,#0x2
+   \   00009F   7035         JNZ     ??T3_ISR_2
+   \   0000A1   12....       LCALL   ?Subroutine1
+   \                     ??CrossCallReturnLabel_0:
+   \   0000A4   12....       LCALL   ?L_ADD
+   \   0000A7   90....       MOV     DPTR,#__Constant_8000
+   \   0000AA   78..         MOV     R0,#?V0 + 4
+   \   0000AC   12....       LCALL   ?SL_GE_X
+   \   0000AF   4005         JC      ??T3_ISR_3
+   \                     ??T3_ISR_4:
+   \   0000B1   90....       MOV     DPTR,#__Constant_8000
+   \   0000B4   800D         SJMP    ??T3_ISR_5
+   \                     ??T3_ISR_3:
+   \   0000B6   90....       MOV     DPTR,#__Constant_10000
+   \   0000B9   78..         MOV     R0,#?V0 + 4
+   \   0000BB   12....       LCALL   ?SL_GE_X
+   \   0000BE   5008         JNC     ??T3_ISR_6
+   \   0000C0   90....       MOV     DPTR,#__Constant_ffff
+   \                     ??T3_ISR_5:
+   \   0000C3   78..         MOV     R0,#?V0 + 4
+   \   0000C5   12....       LCALL   ?L_MOV_X
+   \                     ??T3_ISR_6:
+   \   0000C8   85....       MOV     ?V0 + 1,?V0 + 5
+   \   0000CB   E5..         MOV     A,?V0 + 1
+   \   0000CD   F5DB         MOV     0xdb,A
+   \   0000CF   E5..         MOV     A,?V0 + 4
+   \   0000D1   F5DA         MOV     0xda,A
+   \   0000D3   02....       LJMP    ??CrossCallReturnLabel_4
+   \                     ??T3_ISR_2:
+   \   0000D6   E0           MOVX    A,@DPTR
+   \   0000D7   6403         XRL     A,#0x3
+   \   0000D9   6003         JZ      $+5
+   \   0000DB   02....       LJMP    ??CrossCallReturnLabel_4
+   \   0000DE   12....       LCALL   ?Subroutine1
+   \                     ??CrossCallReturnLabel_1:
+   \   0000E1   12....       LCALL   ?L_SUB
+   \   0000E4   90....       MOV     DPTR,#__Constant_8001
+   \   0000E7   78..         MOV     R0,#?V0 + 4
+   \   0000E9   12....       LCALL   ?SL_GE_X
+   \   0000EC   40C3         JC      ??T3_ISR_4
+   \   0000EE   90....       MOV     DPTR,#__Constant_1
+   \   0000F1   78..         MOV     R0,#?V0 + 4
+   \   0000F3   12....       LCALL   ?SL_GE_X
+   \   0000F6   40D0         JC      ??T3_ISR_6
+   \   0000F8   90....       MOV     DPTR,#__Constant_1
+   \   0000FB   80C6         SJMP    ??T3_ISR_5
+   \   0000FD                REQUIRE T1CC0H
+   \   0000FD                REQUIRE T1CC0L
+   \   0000FD                REQUIRE T3CTL
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \                     ?Subroutine1:
+   \   000000   90....       MOV     DPTR,#??Ek
+   \   000003   E0           MOVX    A,@DPTR
+   \   000004   FA           MOV     R2,A
+   \   000005   A3           INC     DPTR
+   \   000006   E0           MOVX    A,@DPTR
+   \   000007   FB           MOV     R3,A
+   \   000008   EA           MOV     A,R2
+   \   000009   75F0D2       MOV     B,#-0x2e
+   \   00000C   A4           MUL     AB
+   \   00000D   FA           MOV     R2,A
+   \   00000E   A8F0         MOV     R0,B
+   \   000010   75F0D2       MOV     B,#-0x2e
+   \   000013   EB           MOV     A,R3
+   \   000014   A4           MUL     AB
+   \   000015   28           ADD     A,R0
+   \   000016   FB           MOV     R3,A
+   \   000017   12....       LCALL   ?Subroutine3
+   \                     ??CrossCallReturnLabel_9:
+   \   00001A   E8           MOV     A,R0
+   \   00001B   75F09C       MOV     B,#-0x64
+   \   00001E   A4           MUL     AB
+   \   00001F   C8           XCH     A,R0
+   \   000020   ACF0         MOV     R4,B
+   \   000022   75F0FF       MOV     B,#-0x1
+   \   000025   A4           MUL     AB
+   \   000026   2C           ADD     A,R4
+   \   000027   FC           MOV     R4,A
+   \   000028   75F09C       MOV     B,#-0x64
+   \   00002B   E9           MOV     A,R1
+   \   00002C   A4           MUL     AB
+   \   00002D   2C           ADD     A,R4
+   \   00002E   F9           MOV     R1,A
+   \   00002F   EA           MOV     A,R2
+   \   000030   28           ADD     A,R0
+   \   000031   FA           MOV     R2,A
+   \   000032   EB           MOV     A,R3
+   \   000033   39           ADDC    A,R1
+   \   000034   FB           MOV     R3,A
+   \   000035   90....       MOV     DPTR,#??Ek2
+   \   000038   12....       LCALL   ??Subroutine5_0
+   \                     ??CrossCallReturnLabel_7:
+   \   00003B   E8           MOV     A,R0
+   \   00003C   75F00A       MOV     B,#0xa
+   \   00003F   A4           MUL     AB
+   \   000040   F8           MOV     R0,A
+   \   000041   ACF0         MOV     R4,B
+   \   000043   75F00A       MOV     B,#0xa
+   \   000046   E9           MOV     A,R1
+   \   000047   A4           MUL     AB
+   \   000048   2C           ADD     A,R4
+   \   000049   F9           MOV     R1,A
+   \   00004A   EA           MOV     A,R2
+   \   00004B   28           ADD     A,R0
+   \   00004C   F5..         MOV     ?V0 + 0,A
+   \   00004E   EB           MOV     A,R3
+   \   00004F   39           ADDC    A,R1
+   \   000050   F5..         MOV     ?V0 + 1,A
+   \   000052   33           RLC     A
+   \   000053   95E0         SUBB    A,0xE0 /* A   */
+   \   000055   F5..         MOV     ?V0 + 2,A
+   \   000057   F5..         MOV     ?V0 + 3,A
+   \   000059   78..         MOV     R0,#?V0 + 4
+   \   00005B   79..         MOV     R1,#?V0 + 0
+   \   00005D   22           RET
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \                     ?Subroutine3:
+   \   000000   90....       MOV     DPTR,#??Ek1
+   \   000003                REQUIRE ??Subroutine5_0
+   \   000003                ; // Fall through to label ??Subroutine5_0
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \                     ??Subroutine5_0:
+   \   000000   E0           MOVX    A,@DPTR
+   \   000001   F8           MOV     R0,A
+   \   000002   A3           INC     DPTR
+   \   000003   E0           MOVX    A,@DPTR
+   \   000004   F9           MOV     R1,A
+   \   000005   22           RET
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \                     ??timerCnt:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \                     ??Ek:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \                     ??Ek1:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \                     ??Ek2:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+    322          
+    323          
+    324          //*****************************************************************************/
+    325          //*****************************************************************************/
+    326          //外部函数
+    327          //*****************************************************************************/
+    328          //函数名：HalMotorInit
+    329          //功  能：直流电机初始化配置
+    330          //参  数：无
+    331          //返回值：无
+    332          //*****************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    333          void HalMotorInit(void)
+   \                     HalMotorInit:
+    334          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    335            PERCFG |= HAL_MOTOR_PWMA_T1CFG;
+   \   000004   43F140       ORL     0xf1,#0x40
+    336            HAL_MOTOR_PWMA_PIN_SET(); 
+   \   000007   43FE04       ORL     0xfe,#0x4
+   \   00000A   43F404       ORL     0xf4,#0x4
+    337            Timer1Init();                   // T1定时器用来输出PWM波
+   \   00000D                ; Setup parameters for call to function Timer1Init
+   \   00000D   12....       LCALL   ??Timer1Init?relay
+    338            HalMotorCtl(HAL_MOTOR_STOP, 0); // 电机初始化状态：停机
+   \   000010                ; Setup parameters for call to function HalMotorCtl
+   \   000010   7A00         MOV     R2,#0x0
+   \   000012   7901         MOV     R1,#0x1
+   \   000014   12....       LCALL   ??HalMotorCtl?relay
+    339            HAL_MOTOR_SPEED_PIN_SET();
+   \   000017   53FEE7       ANL     0xfe,#0xe7
+   \   00001A   438D18       ORL     0x8d,#0x18
+   \   00001D   439A10       ORL     0x9a,#0x10
+   \   000020   758A00       MOV     0x8a,#0x0
+    340            Timer3Init();                   // T3定时器用来产生系统控制周期定时
+   \   000023                ; Setup parameters for call to function Timer3Init
+   \   000023   12....       LCALL   ??Timer3Init?relay
+    341            EA = 1;
+   \   000026   D2AF         SETB    0xa8.7
+    342          }
+   \   000028   80..         SJMP    ??Subroutine4_0
+   \   00002A                REQUIRE PERCFG
+   \   00002A                REQUIRE P1DIR
+   \   00002A                REQUIRE P1SEL
+   \   00002A                REQUIRE P1IEN
+   \   00002A                REQUIRE IEN2
+   \   00002A                REQUIRE P1IFG
+   \   00002A                REQUIRE _A_IEN0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ??Subroutine4_0:
+   \   000000   D083         POP     DPH
+   \   000002   D082         POP     DPL
+   \   000004   02....       LJMP    ?BRET
+    343          
+    344          //*****************************************************************************/
+    345          //函数名：HalMotorCtl
+    346          //功  能：直流电机上层控制;
+    347          //参  数：dir  : 方向，停止、前进、后退；
+    348          //        speed: 速度，在停止状态下，速度设置无效，默认设置为0；
+    349          //返回值：无
+    350          //*****************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    351          void HalMotorCtl(uint8 dir, uint8 speed)
+   \                     HalMotorCtl:
+    352          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    353            switch(dir)
+   \   000004   E9           MOV     A,R1
+   \   000005   24FE         ADD     A,#-0x2
+   \   000007   6009         JZ      ??HalMotorCtl_0
+   \   000009   14           DEC     A
+   \   00000A   6006         JZ      ??HalMotorCtl_0
+    354            {
+    355              case HAL_MOTOR_STOP:
+    356              {
+    357                // 忽略函数的速度设置，停止状态速度为0
+    358                motorSetSpeed = 0;
+   \   00000C   90....       MOV     DPTR,#motorSetSpeed
+   \   00000F   E4           CLR     A
+   \   000010   8004         SJMP    ??HalMotorCtl_1
+    359                break;
+    360              }
+    361              case HAL_MOTOR_FORWORD:
+    362              {
+    363                motorSetSpeed = speed;
+   \                     ??HalMotorCtl_0:
+   \   000012   EA           MOV     A,R2
+   \   000013   90....       MOV     DPTR,#motorSetSpeed
+   \                     ??HalMotorCtl_1:
+   \   000016   F0           MOVX    @DPTR,A
+    364                break;
+    365              }
+    366              case HAL_MOTOR_BACKWORD:
+    367              {
+    368                motorSetSpeed = speed;
+    369                break;
+    370              }
+    371              default:
+    372              {
+    373                motorSetSpeed = 0;
+    374                break;
+    375              }
+    376            }
+    377            motorStatus = dir;
+   \   000017   E9           MOV     A,R1
+   \   000018   90....       MOV     DPTR,#motorStatus
+   \   00001B   F0           MOVX    @DPTR,A
+    378          }
+   \   00001C   80..         SJMP    ??Subroutine4_0
+    379          
+    380          //*****************************************************************************/
+    381          //函数名：HalMotorStatusCheck
+    382          //功  能：返回当前电机的方向状态；
+    383          //参  数：无
+    384          //返回值：返回电机的状态信息；
+    385          //*****************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine0:
+   \   000000   E0           MOVX    A,@DPTR
+   \   000001   F9           MOV     R1,A
+   \   000002                REQUIRE ??Subroutine4_0
+   \   000002                ; // Fall through to label ??Subroutine4_0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    386          uint8 HalMotorStatusCheck(void)
+   \                     HalMotorStatusCheck:
+    387          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    388            return motorStatus;
+   \   000004   90....       MOV     DPTR,#motorStatus
+   \   000007   80..         SJMP    ?Subroutine0
+    389          }
+    390          
+    391          //*****************************************************************************/
+    392          //函数名：HalMotorSpeedCheck
+    393          //功  能：返回电机当前的速度；
+    394          //参  数：无
+    395          //返回值：电机当前的速度，单位：转/秒；
+    396          //*****************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    397          uint8 HalMotorSpeedCheck(void)
+   \                     HalMotorSpeedCheck:
+    398          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    399            return ((uint8)motorCurrentSpeed);
+   \   000004   90....       MOV     DPTR,#motorCurrentSpeed
+   \   000007   80..         SJMP    ?Subroutine0
+    400          }
+    401          
+    402          //*****************************************************************************/
+    403          //函数名：HalTimerTest
+    404          //功  能：测试用途，为了检测定时器配置，T1CC0与PWM波的占空比有关，直观反映了转速的关系
+    405          //参  数：无
+    406          //返回值：16位的T1CC0寄存器数值
+    407          //*****************************************************************************/
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    408          uint16 HalTimerTest()
+   \                     HalTimerTest:
+    409          {
+   \   000000                ; Saved register size: 2
+   \   000000                ; Auto size: 0
+    410            uint16 tmpT1CC0H, tmpT1CC0L;
+    411          
+    412            tmpT1CC0H = T1CC0H;
+   \   000000   E5DB         MOV     A,0xdb
+    413            tmpT1CC0L = T1CC0L;
+    414            return (tmpT1CC0H << 8 | tmpT1CC0L);
+   \   000002   F9           MOV     R1,A
+   \   000003   E5DA         MOV     A,0xda
+   \   000005   FA           MOV     R2,A
+   \   000006   E9           MOV     A,R1
+   \   000007   FB           MOV     R3,A
+   \   000008   02....       LJMP    ?BRET
+   \   00000B                REQUIRE T1CC0H
+   \   00000B                REQUIRE T1CC0L
+    415          }
+
+   \                                 In  segment INTVEC, offset 0x5b, root
+   \                     `??T3_ISR??INTVEC 91`:
+   \   00005B   02....       LJMP       (T3_ISR)
+
+   \                                 In  segment INTVEC, offset 0x7b, root
+   \                     `??P1_ISR??INTVEC 123`:
+   \   00007B   02....       LJMP       (P1_ISR)
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     __Constant_8000:
+   \   000000   00800000     DD 32768
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     __Constant_10000:
+   \   000000   00000100     DD 65536
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     __Constant_ffff:
+   \   000000   FFFF0000     DD 65535
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     __Constant_8001:
+   \   000000   01800000     DD 32769
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     __Constant_1:
+   \   000000   01000000     DD 1
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??Timer1Init?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Timer1Init
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??Timer3Init?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Timer3Init
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalMotorInit?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalMotorInit
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalMotorCtl?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalMotorCtl
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalMotorStatusCheck?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalMotorStatusCheck
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalMotorSpeedCheck?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalMotorSpeedCheck
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalTimerTest?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalTimerTest
+    416          
+    417          //*****************************************************************************/
+    418          //*****************************************************************************/
+
+   Maximum stack usage in bytes:
+
+     Function            ISTACK PSTACK XSTACK
+     --------            ------ ------ ------
+     HalMotorCtl             2      0      0
+     HalMotorInit            2      0      0
+       -> Timer1Init         4      0      0
+       -> HalMotorCtl        4      0      0
+       -> Timer3Init         4      0      0
+     HalMotorSpeedCheck      2      0      0
+     HalMotorStatusCheck     2      0      0
+     HalTimerTest            2      0      0
+     P1_ISR                  4      0      0
+     T3_ISR                  0      0     22
+     Timer1Init              0      0      0
+     Timer3Init              0      0      0
+
+
+   Segment part sizes:
+
+     Function/Label              Bytes
+     --------------              -----
+     P1IFG                          1
+     P1IEN                          1
+     IEN2                           1
+     _A_IEN0                        1
+     _A_IEN1                        1
+     T3CTL                          1
+     T3CCTL0                        1
+     T3CC0                          1
+     T3CCTL1                        1
+     T3CC1                          1
+     T1CC0L                         1
+     T1CC0H                         1
+     T1CTL                          1
+     T1CCTL0                        1
+     _A_IRCON2                      1
+     PERCFG                         1
+     P1SEL                          1
+     P1DIR                          1
+     motorStatus                    1
+     motorCurrentSpeed              1
+     motorPulseCnt1                 2
+     motorPulseCnt2                 2
+     motorSetSpeed                  1
+     Timer1Init                     9
+     Timer3Init                    43
+     P1_ISR                        49
+     ?Subroutine2                  10
+     T3_ISR                       253
+     ?Subroutine1                  94
+     ?Subroutine3                   3
+     ??Subroutine5_0                6
+     timerCnt                       2
+     Ek                             2
+     Ek1                            2
+     Ek2                            2
+     HalMotorInit                  42
+     ??Subroutine4_0                7
+     HalMotorCtl                   30
+     ?Subroutine0                   2
+     HalMotorStatusCheck            9
+     HalMotorSpeedCheck             9
+     HalTimerTest                  11
+     ??T3_ISR??INTVEC 91            3
+     ??P1_ISR??INTVEC 123           3
+     __Constant_8000                4
+     __Constant_10000               4
+     __Constant_ffff                4
+     __Constant_8001                4
+     __Constant_1                   4
+     ??Timer1Init?relay             6
+     ??Timer3Init?relay             6
+     ??HalMotorInit?relay           6
+     ??HalMotorCtl?relay            6
+     ??HalMotorStatusCheck?relay    6
+     ??HalMotorSpeedCheck?relay     6
+     ??HalTimerTest?relay           6
+
+ 
+ 162 bytes in segment BANKED_CODE
+  42 bytes in segment BANK_RELAYS
+   6 bytes in segment INTVEC
+ 415 bytes in segment NEAR_CODE
+  18 bytes in segment SFR_AN
+  20 bytes in segment XDATA_ROM_C
+  15 bytes in segment XDATA_Z
+ 
+ 619 bytes of CODE  memory (+  6 bytes shared)
+   0 bytes of CONST memory (+ 20 bytes shared)
+   0 bytes of DATA  memory (+ 18 bytes shared)
+  15 bytes of XDATA memory
+
+Errors: none
+Warnings: none

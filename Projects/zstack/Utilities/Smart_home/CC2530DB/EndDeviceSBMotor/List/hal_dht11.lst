@@ -1,0 +1,766 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.1.40194/W32 for 8051         03/Jan/2021  17:40:42 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data_rom                                           #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Components\hal\target\CC2530SB\hal_dht1 #
+#                          1.c                                                #
+#    Command line       =  -f D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\..\..\..\Tools\CC2530DB\f8wEndev.cfg            #
+#                          (-DCPU32MHZ -DROOT=__near_func                     #
+#                          -DMAC_CFG_TX_DATA_MAX=3 -DMAC_CFG_TX_MAX=6         #
+#                          -DMAC_CFG_RX_MAX=3) -f D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\ #
+#                          MY_BOARD\Exp4\CC2530DB\..\..\..\Tools\CC2530DB\f8w #
+#                          Config.cfg (-DZIGBEEPRO -DSECURE=0                 #
+#                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
+#                          -DDEFAULT_CHANLIST=0x02000000                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0x1001                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
+#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
+#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DMAC_MAX_FRAME_SIZE=116                           #
+#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
+#                          __code" -DGENERIC=__generic                        #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\t #
+#                          arget\CC2530SB\hal_dht11.c -D HAL_UART=TRUE -D     #
+#                          HAL_UART_TEST -D xPOWER_SAVING -lC                 #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBMotor\List\ -lA                         #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBMotor\List\ --diag_suppress             #
+#                          Pe001,Pa010 -o D:\Projects_IAR\IAR_C8051\WSN-CC253 #
+#                          0\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD #
+#                          \Exp4\CC2530DB\EndDeviceSBMotor\Obj\ -e            #
+#                          --no_code_motion --debug --core=plain --dptr=16,1  #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data_rom --nr_virtual_regs 16    #
+#                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack #
+#                          -CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC #
+#                          2530DB\..\Source\ -I D:\Projects_IAR\IAR_C8051\WSN #
+#                          -CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY #
+#                          _BOARD\Exp4\CC2530DB\..\..\..\ZMain\TI2530DB\ -I   #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\target\CC2530SB\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\high_level\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\sing #
+#                          le_chip\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\Z #
+#                          Stack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Ex #
+#                          p4\CC2530DB\..\..\..\..\..\Components\mt\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\osal\include\ -I         #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\saddr\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\sdata\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\af\ -I             #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\nwk\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sapi\ -I           #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sec\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sys\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\zdo\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\ -I                 #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\f8w\ -Ohz           #
+#    List file          =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBMotor\List\hal_dht11.lst                #
+#    Object file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBMotor\Obj\hal_dht11.r51                 #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\target\CC2530SB\hal_dht11.c
+      1          /*****************************************************************************
+      2          *
+      3          * 文 件 名：hal_dht11.c
+      4          
+      5          * 作    者: 南京安宸博研电子科技有限公司
+      6          
+      7          * 创建时间: 2019.04.01
+      8          
+      9          * 修改时间: 2019.04.21
+     10          
+     11          * IAR 版本: IAR for 8051 V8.10.1
+     12          
+     13          * 测试平台: Sensor MotherBoard V2.3
+     14          
+     15          * 说    明: 1. 实现DHT11温湿度传感器的数据读取, 驱动将来搬迁到Zstack协议栈.
+     16          *           2. 如果测试出现问题(如全0), 请调整函数DHT11_ReadData(void)的判1区间.
+     17          *           3. 根据手册, 每次读出的温湿度数值是上一次测量的结果, 欲获取实时数据,
+     18          *              需连续读取两次, 但不建议连续多次读取传感器, 每次读取传感器间隔
+     19          *              大于5秒即可获得准确的数据.
+     20          *           4. 湿度范围: 20%~90%; 温度范围: 0~50C.
+     21          *           5. 传感器采集到的数据只有整数部分, 暂时没有小数部分(留着扩展).
+     22          *           6. 数据一共5个字节: 第一个为湿度整数, 第二个为湿度小数, 第三个为温度
+     23          *              整数, 第四个为温度小数,第五个校验字节(校验值为前四个字节的和).
+     24          *                               
+     25          *****************************************************************************/
+     26          
+     27          // 头文件
+     28          #include <ioCC2530.h>
+
+   \                                 In  segment SFR_AN, at 0x90
+   \   union <unnamed> volatile __sfr _A_P1
+   \                     _A_P1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa8
+   \   union <unnamed> volatile __sfr _A_IEN0
+   \                     _A_IEN0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xfe
+   \   unsigned char volatile __sfr P1DIR
+   \                     P1DIR:
+   \   000000                DS 1
+     29          #include "hal_mcu.h"
+     30          
+     31          // 引脚宏定义, 输入/输出是针对MCU而言
+     32          #define SET_DHT11_PIN_OUTPUT    (P1DIR |= 0x02)
+     33          #define SET_DHT11_PIN_HIGH      (P1_1   = 1)
+     34          #define SET_DHT11_PIN_LOW       (P1_1   = 0)
+     35          #define SET_DHT11_PIN_INPUT     (P1DIR &= ~0x02)
+     36          #define GET_DHT11_PIN_DATA      (P1_1) 
+     37          
+     38          // 参数宏定义
+     39          #define TIMEOUT_LIMIT 100       // 脉冲等待时限1000ms
+     40          
+     41          /*****************************************************************************
+     42           * @fn          DHT11_Delay100us
+     43           *
+     44           * @brief       裸机条件下、时钟频率为32MHz时延时100微秒左右(不精确).
+     45           *
+     46           * @param       none
+     47           *
+     48           * @return      none
+     49           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     50          void DHT11_Delay100us(void)
+   \                     DHT11_Delay100us:
+     51          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+     52              unsigned char cnt = 85;
+   \   000000   7855         MOV     R0,#0x55
+   \   000002   8003         SJMP    ??DHT11_Delay100us_0
+     53              while (cnt--)
+     54              {
+     55                  asm("NOP");  
+   \                     ??DHT11_Delay100us_1:
+   \   000004   00           NOP
+     56                  asm("NOP");
+   \   000005   00           NOP
+     57                  asm("NOP");
+   \   000006   00           NOP
+     58              }
+   \                     ??DHT11_Delay100us_0:
+   \   000007   E8           MOV     A,R0
+   \   000008   F9           MOV     R1,A
+   \   000009   74FF         MOV     A,#-0x1
+   \   00000B   29           ADD     A,R1
+   \   00000C   18           DEC     R0
+   \   00000D   04           INC     A
+   \   00000E   70F4         JNZ     ??DHT11_Delay100us_1
+     59          }
+   \   000010   02....       LJMP    ?BRET
+     60          
+     61          /*****************************************************************************
+     62           * @fn          DHT11_Delay10us
+     63           *
+     64           * @brief       裸机条件下、时钟频率为32MHz时延时10微秒左右(不精确).
+     65           *
+     66           * @param       none
+     67           *
+     68           * @return      none
+     69           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     70          void DHT11_Delay10us(void)
+   \                     DHT11_Delay10us:
+     71          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+     72              unsigned char cnt = 9;
+   \   000000   7809         MOV     R0,#0x9
+   \   000002   8003         SJMP    ??DHT11_Delay10us_0
+     73              while (cnt--)
+     74              {
+     75                  asm("NOP");  
+   \                     ??DHT11_Delay10us_1:
+   \   000004   00           NOP
+     76                  asm("NOP");
+   \   000005   00           NOP
+     77                  asm("NOP");
+   \   000006   00           NOP
+     78              }
+   \                     ??DHT11_Delay10us_0:
+   \   000007   E8           MOV     A,R0
+   \   000008   F9           MOV     R1,A
+   \   000009   74FF         MOV     A,#-0x1
+   \   00000B   29           ADD     A,R1
+   \   00000C   18           DEC     R0
+   \   00000D   04           INC     A
+   \   00000E   70F4         JNZ     ??DHT11_Delay10us_1
+     79          }
+   \   000010   02....       LJMP    ?BRET
+     80          
+     81          /*****************************************************************************
+     82           * @fn          DHT11_Start
+     83           *
+     84           * @brief       启动DHT11
+     85           *
+     86           * @param       none
+     87           *
+     88           * @return      none
+     89           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     90          void DHT11_Start(void)
+   \                     DHT11_Start:
+     91          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+     92              unsigned char timeCnt;
+     93              
+     94              SET_DHT11_PIN_OUTPUT;   // 设置引脚为输出
+   \   000005   43FE02       ORL     0xfe,#0x2
+     95              SET_DHT11_PIN_LOW;      // 输出低电平, 启动总线
+   \   000008   C291         CLR     0x90.1
+     96              // 低电平保持时间不能小于18ms, 否则DHT11无法启动
+     97              for(timeCnt=0; timeCnt<200; timeCnt++)
+   \   00000A   7EC8         MOV     R6,#-0x38
+     98              {
+     99                  DHT11_Delay100us();
+   \                     ??DHT11_Start_0:
+   \   00000C                ; Setup parameters for call to function DHT11_Delay100us
+   \   00000C   12....       LCALL   ??DHT11_Delay100us?relay
+    100              }
+   \   00000F   1E           DEC     R6
+   \   000010   EE           MOV     A,R6
+   \   000011   70F9         JNZ     ??DHT11_Start_0
+    101              
+    102              SET_DHT11_PIN_HIGH;     // 输出高电平
+   \   000013   D291         SETB    0x90.1
+    103              SET_DHT11_PIN_INPUT;    // 设置为输入引脚(因有上拉电阻, 所以保持为高电平)    
+   \   000015   53FEFD       ANL     0xfe,#0xfd
+    104          
+    105              // 高电平持续20~40us
+    106              for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
+   \   000018   7E00         MOV     R6,#0x0
+    107              {
+    108                  if (!GET_DHT11_PIN_DATA)
+   \                     ??DHT11_Start_1:
+   \   00001A   A291         MOV     C,0x90.1
+   \   00001C   5005         JNC     ??DHT11_Start_2
+    109                  {
+    110                      break;  // 低电平退出循环
+    111                  }
+    112                  DHT11_Delay10us();
+   \   00001E                ; Setup parameters for call to function DHT11_Delay10us
+   \   00001E   12....       LCALL   ?Subroutine0 & 0xFFFF
+    113              }
+   \                     ??CrossCallReturnLabel_0:
+   \   000021   40F7         JC      ??DHT11_Start_1
+    114              // 超时返回
+    115              if (timeCnt == TIMEOUT_LIMIT)
+   \                     ??DHT11_Start_2:
+   \   000023   7464         MOV     A,#0x64
+   \   000025   6E           XRL     A,R6
+   \   000026   601D         JZ      ??DHT11_Start_3
+    116              {
+    117                  return;
+    118              }
+    119              // DHT11输出80微秒的低电平作为应答信号
+    120              for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
+   \   000028   7E00         MOV     R6,#0x0
+    121              {
+    122                  if (GET_DHT11_PIN_DATA)
+   \                     ??DHT11_Start_4:
+   \   00002A   A291         MOV     C,0x90.1
+   \   00002C   4005         JC      ??DHT11_Start_5
+    123                  {
+    124                      break;  // 高电平退出循环
+    125                  }
+    126                  DHT11_Delay10us();
+   \   00002E                ; Setup parameters for call to function DHT11_Delay10us
+   \   00002E   12....       LCALL   ?Subroutine0 & 0xFFFF
+    127              }
+   \                     ??CrossCallReturnLabel_1:
+   \   000031   40F7         JC      ??DHT11_Start_4
+    128              // 超时返回
+    129              if (timeCnt == TIMEOUT_LIMIT)
+   \                     ??DHT11_Start_5:
+   \   000033   7464         MOV     A,#0x64
+   \   000035   6E           XRL     A,R6
+   \   000036   600D         JZ      ??DHT11_Start_3
+    130              {
+    131                  return;
+    132              }
+    133              // DHT11紧接着输出80微秒的高电平通知外设准备接收数据
+    134              for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
+   \   000038   7E64         MOV     R6,#0x64
+    135              {
+    136                  if (!GET_DHT11_PIN_DATA)    // 低电平退出循环
+   \                     ??DHT11_Start_6:
+   \   00003A   A291         MOV     C,0x90.1
+   \   00003C   5007         JNC     ??DHT11_Start_3
+    137                  {
+    138                      break;
+    139                  }
+    140                  DHT11_Delay10us();
+   \   00003E                ; Setup parameters for call to function DHT11_Delay10us
+   \   00003E   12....       LCALL   ??DHT11_Delay10us?relay
+    141              }
+   \   000041   1E           DEC     R6
+   \   000042   EE           MOV     A,R6
+   \   000043   70F5         JNZ     ??DHT11_Start_6
+   \                     ??DHT11_Start_3:
+   \   000045   7F01         MOV     R7,#0x1
+   \   000047   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   00004A                REQUIRE P1DIR
+   \   00004A                REQUIRE _A_P1
+    142              // 超时返回
+    143              if (timeCnt == TIMEOUT_LIMIT)
+    144              {
+    145                  return;
+    146              }
+    147          }
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine0:
+   \   000000   12....       LCALL   ??DHT11_Delay10us?relay
+   \   000003   0E           INC     R6
+   \   000004   EE           MOV     A,R6
+   \   000005   C3           CLR     C
+   \   000006   9464         SUBB    A,#0x64
+   \   000008   22           RET
+    148          
+    149          /*****************************************************************************
+    150           * @fn          DHT11_ReadData
+    151           *
+    152           * @brief       从DHT11读取一个字节数据
+    153           *
+    154           * @param       none
+    155           *
+    156           * @return      读取的数据, 返回0则表示超时报错.
+    157           *              位数据"0"的格式为50微秒的低电平和26-28微秒的高电平，
+    158           *              位数据"1"的格式为50微秒的低电平和70微秒的高电平.	
+    159           * 
+    160           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    161          unsigned char DHT11_ReadData(void)
+   \                     DHT11_ReadData:
+    162          {
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 0
+    163              unsigned char bitCnt, timeCnt;
+    164              unsigned char byteVal = 0;
+   \   000005   7F00         MOV     R7,#0x0
+    165              halIntState_t intState;
+    166              
+    167              for (bitCnt = 0; bitCnt < 8; bitCnt++)
+   \   000007   75..08       MOV     ?V0 + 0,#0x8
+    168              {
+    169                  // DHT11输出50us低电平, 提醒主机数据位已开始传送
+    170                  for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
+   \                     ??DHT11_ReadData_0:
+   \   00000A   7E00         MOV     R6,#0x0
+    171                  {
+    172                      if (GET_DHT11_PIN_DATA)    // 高电平退出循环
+   \                     ??DHT11_ReadData_1:
+   \   00000C   A291         MOV     C,0x90.1
+   \   00000E   4005         JC      ??DHT11_ReadData_2
+    173                      {
+    174                          break;
+    175                      }
+    176                      DHT11_Delay10us();
+   \   000010                ; Setup parameters for call to function DHT11_Delay10us
+   \   000010   12....       LCALL   ?Subroutine0 & 0xFFFF
+    177                  }        
+   \                     ??CrossCallReturnLabel_2:
+   \   000013   40F7         JC      ??DHT11_ReadData_1
+    178                  if (timeCnt == TIMEOUT_LIMIT)   // 超时报错, 返回0
+   \                     ??DHT11_ReadData_2:
+   \   000015   7464         MOV     A,#0x64
+   \   000017   6E           XRL     A,R6
+   \   000018   7004         JNZ     ??DHT11_ReadData_3
+    179                  {
+    180                      return 0;
+   \                     ??DHT11_ReadData_4:
+   \   00001A   7900         MOV     R1,#0x0
+   \   00001C   8034         SJMP    ??DHT11_ReadData_5
+    181                  }
+    182                  
+    183                  HAL_ENTER_CRITICAL_SECTION(intState);
+   \                     ??DHT11_ReadData_3:
+   \   00001E   A2AF         MOV     C,0xa8.7
+   \   000020   E4           CLR     A
+   \   000021   33           RLC     A
+   \   000022   F5..         MOV     ?V0 + 1,A
+   \   000024   C2AF         CLR     0xa8.7
+    184                  // DHT11输出高电平或低电平                   
+    185                  for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
+   \   000026   7E00         MOV     R6,#0x0
+    186                  {
+    187                      if (!GET_DHT11_PIN_DATA)    // 低电平退出循环
+   \                     ??DHT11_ReadData_6:
+   \   000028   A291         MOV     C,0x90.1
+   \   00002A   5005         JNC     ??DHT11_ReadData_7
+    188                      {
+    189                          break;
+    190                      }
+    191                      DHT11_Delay10us();
+   \   00002C                ; Setup parameters for call to function DHT11_Delay10us
+   \   00002C   12....       LCALL   ?Subroutine0 & 0xFFFF
+    192                  }
+   \                     ??CrossCallReturnLabel_3:
+   \   00002F   40F7         JC      ??DHT11_ReadData_6
+    193                  if (timeCnt == TIMEOUT_LIMIT)   // 超时报错, 返回0
+   \                     ??DHT11_ReadData_7:
+   \   000031   7464         MOV     A,#0x64
+   \   000033   6E           XRL     A,R6
+   \   000034   60E4         JZ      ??DHT11_ReadData_4
+    194                  {
+    195                      return 0;
+    196                  }
+    197                  HAL_EXIT_CRITICAL_SECTION(intState);
+   \   000036   E5..         MOV     A,?V0 + 1
+   \   000038   A2E0         MOV     C,0xE0 /* A   */.0
+   \   00003A   92AF         MOV     0xa8.7,C
+    198                  
+    199                  // 存储数据位, DHT11是先发高位
+    200                  byteVal <<= 1;
+   \   00003C   EF           MOV     A,R7
+   \   00003D   C3           CLR     C
+   \   00003E   33           RLC     A
+   \   00003F   FF           MOV     R7,A
+    201                  // 根据高电平的宽度判断是0还是1
+    202                  if (timeCnt > 4) 
+   \   000040   EE           MOV     A,R6
+   \   000041   C3           CLR     C
+   \   000042   9405         SUBB    A,#0x5
+   \   000044   4004         JC      ??DHT11_ReadData_8
+    203                  {
+    204                      byteVal |=  0x01;
+   \   000046   EF           MOV     A,R7
+   \   000047   D2E0         SETB    0xE0 /* A   */.0
+   \   000049   FF           MOV     R7,A
+    205                  }
+    206                  else 
+    207                  {
+    208                      byteVal |= 0x00;
+    209                  }
+    210              }
+   \                     ??DHT11_ReadData_8:
+   \   00004A   15..         DEC     ?V0 + 0
+   \   00004C   E5..         MOV     A,?V0 + 0
+   \   00004E   70BA         JNZ     ??DHT11_ReadData_0
+    211              return byteVal;
+   \   000050   EF           MOV     A,R7
+   \   000051   F9           MOV     R1,A
+   \                     ??DHT11_ReadData_5:
+   \   000052   7F02         MOV     R7,#0x2
+   \   000054   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000057                REQUIRE _A_P1
+   \   000057                REQUIRE _A_IEN0
+    212          }
+    213          
+    214          /*****************************************************************************
+    215           * @fn          HalDht11_Convert
+    216           *
+    217           * @brief       启动DHT11, 并完成一次转换.
+    218           *
+    219           * @param       none
+    220           *
+    221           * @return      转换值存在conversionVal数组中, 如果出错则不更新数据. 
+    222           *              出错时, 可按以下几步进行检查:
+    223           *              1. 检查延时函数的是否准确;
+    224           *              2. 检查DHT11是否启动;
+    225           *              3. 检查判别"0"与"1"的阈值是否合理;
+    226           *              4. 检查校验码是否正确.
+    227           * 
+    228           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    229          void HalDht11_Convert(unsigned char conversionVal[4])
+   \                     HalDht11_Convert:
+    230          {
+   \   000000   74F5         MOV     A,#-0xb
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 11
+   \   000005                ; Auto size: 5
+   \   000005   74FB         MOV     A,#-0x5
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   00000A   EA           MOV     A,R2
+   \   00000B   FE           MOV     R6,A
+   \   00000C   EB           MOV     A,R3
+   \   00000D   FF           MOV     R7,A
+    231              unsigned char checkSum;
+    232              unsigned char tempData[5];
+    233              
+    234              DHT11_Start();      // 启动DHT11
+   \   00000E                ; Setup parameters for call to function DHT11_Start
+   \   00000E   12....       LCALL   ??DHT11_Start?relay
+    235              
+    236              // 读取数据
+    237              tempData[0] = DHT11_ReadData();
+   \   000011                ; Setup parameters for call to function DHT11_ReadData
+   \   000011   12....       LCALL   ??DHT11_ReadData?relay
+   \   000014   E9           MOV     A,R1
+   \   000015   85..82       MOV     DPL,?XSP + 0
+   \   000018   85..83       MOV     DPH,?XSP + 1
+   \   00001B   12....       LCALL   ??Subroutine3_0 & 0xFFFF
+    238              tempData[1] = DHT11_ReadData();
+   \                     ??CrossCallReturnLabel_10:
+   \   00001E   F5..         MOV     ?V0 + 0,A
+   \   000020   7401         MOV     A,#0x1
+   \   000022   12....       LCALL   ?XSTACK_DISP0_8
+   \   000025   12....       LCALL   ?Subroutine1 & 0xFFFF
+    239              tempData[2] = DHT11_ReadData();
+   \                     ??CrossCallReturnLabel_7:
+   \   000028   F5..         MOV     ?V0 + 1,A
+   \   00002A   7402         MOV     A,#0x2
+   \   00002C   12....       LCALL   ?XSTACK_DISP0_8
+   \   00002F   12....       LCALL   ?Subroutine1 & 0xFFFF
+    240              tempData[3] = DHT11_ReadData();
+   \                     ??CrossCallReturnLabel_8:
+   \   000032   F5..         MOV     ?V0 + 2,A
+   \   000034   7403         MOV     A,#0x3
+   \   000036   12....       LCALL   ?XSTACK_DISP0_8
+   \   000039   12....       LCALL   ?Subroutine1 & 0xFFFF
+    241              tempData[4] = DHT11_ReadData();
+   \                     ??CrossCallReturnLabel_9:
+   \   00003C   F8           MOV     R0,A
+   \   00003D   7404         MOV     A,#0x4
+   \   00003F   12....       LCALL   ?XSTACK_DISP0_8
+   \   000042   E8           MOV     A,R0
+   \   000043   F0           MOVX    @DPTR,A
+    242              
+    243              // 计算校验值
+    244              checkSum = (tempData[0] + tempData[1] + tempData[2] + tempData[3]);
+    245              
+    246              // 验证校验值, 出错则不更新数据
+    247              if (tempData[4] == checkSum)
+   \   000044   85..82       MOV     DPL,?XSP + 0
+   \   000047   85..83       MOV     DPH,?XSP + 1
+   \   00004A   E0           MOVX    A,@DPTR
+   \   00004B   25..         ADD     A,?V0 + 0
+   \   00004D   25..         ADD     A,?V0 + 1
+   \   00004F   25..         ADD     A,?V0 + 2
+   \   000051   68           XRL     A,R0
+   \   000052   7024         JNZ     ??HalDht11_Convert_0
+    248              {
+    249                  conversionVal[0] = tempData[0];
+   \   000054   E0           MOVX    A,@DPTR
+   \   000055   8E82         MOV     DPL,R6
+   \   000057   8F83         MOV     DPH,R7
+   \   000059   F0           MOVX    @DPTR,A
+    250                  conversionVal[1] = tempData[1];
+   \   00005A   7401         MOV     A,#0x1
+   \   00005C   12....       LCALL   ?XSTACK_DISP0_8
+   \   00005F   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_4:
+   \   000062   F0           MOVX    @DPTR,A
+    251                  conversionVal[2] = tempData[2];
+   \   000063   7402         MOV     A,#0x2
+   \   000065   12....       LCALL   ?XSTACK_DISP0_8
+   \   000068   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_5:
+   \   00006B   A3           INC     DPTR
+   \   00006C   F0           MOVX    @DPTR,A
+    252                  conversionVal[3] = tempData[3];
+   \   00006D   7403         MOV     A,#0x3
+   \   00006F   12....       LCALL   ?XSTACK_DISP0_8
+   \   000072   12....       LCALL   ?Subroutine2 & 0xFFFF
+    253              }
+   \                     ??CrossCallReturnLabel_6:
+   \   000075   A3           INC     DPTR
+   \   000076   A3           INC     DPTR
+   \   000077   F0           MOVX    @DPTR,A
+    254              
+    255              SET_DHT11_PIN_OUTPUT;   // 设置DHT11的控制引脚为输出引脚
+   \                     ??HalDht11_Convert_0:
+   \   000078   43FE02       ORL     0xfe,#0x2
+    256              SET_DHT11_PIN_HIGH;     // 置高电平, 使DHT11处于低功耗待机模式
+   \   00007B   D291         SETB    0x90.1
+    257          }
+   \   00007D   7405         MOV     A,#0x5
+   \   00007F   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000082   7F03         MOV     R7,#0x3
+   \   000084   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000087                REQUIRE P1DIR
+   \   000087                REQUIRE _A_P1
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine2:
+   \   000000   E0           MOVX    A,@DPTR
+   \   000001   8E82         MOV     DPL,R6
+   \   000003   8F83         MOV     DPH,R7
+   \   000005   A3           INC     DPTR
+   \   000006   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine1:
+   \   000000   E9           MOV     A,R1
+   \   000001                REQUIRE ??Subroutine3_0
+   \   000001                ; // Fall through to label ??Subroutine3_0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ??Subroutine3_0:
+   \   000000   F0           MOVX    @DPTR,A
+   \   000001                ; Setup parameters for call to function DHT11_ReadData
+   \   000001                ; Setup parameters for call to function DHT11_ReadData
+   \   000001                ; Setup parameters for call to function DHT11_ReadData
+   \   000001                ; Setup parameters for call to function DHT11_ReadData
+   \   000001   12....       LCALL   ??DHT11_ReadData?relay
+   \   000004   E9           MOV     A,R1
+   \   000005   22           RET
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??DHT11_Delay100us?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    DHT11_Delay100us
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??DHT11_Delay10us?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    DHT11_Delay10us
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??DHT11_Start?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    DHT11_Start
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??DHT11_ReadData?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    DHT11_ReadData
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalDht11_Convert?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalDht11_Convert
+
+   Maximum stack usage in bytes:
+
+     Function              ISTACK PSTACK XSTACK
+     --------              ------ ------ ------
+     DHT11_Delay100us          0      0      9
+     DHT11_Delay10us           0      0     10
+     DHT11_ReadData            0      0     26
+       -> DHT11_Delay10us      0      0     20
+       -> DHT11_Delay10us      0      0     20
+     DHT11_Start               0      0     25
+       -> DHT11_Delay100us     0      0     18
+       -> DHT11_Delay10us      0      0     18
+       -> DHT11_Delay10us      0      0     18
+       -> DHT11_Delay10us      0      0     18
+     HalDht11_Convert          1      0     16
+       -> DHT11_Start          0      0     32
+       -> DHT11_ReadData       0      0     32
+       -> DHT11_ReadData       0      0     32
+       -> DHT11_ReadData       0      0     32
+       -> DHT11_ReadData       0      0     32
+       -> DHT11_ReadData       0      0     32
+
+
+   Segment part sizes:
+
+     Function/Label           Bytes
+     --------------           -----
+     _A_P1                       1
+     _A_IEN0                     1
+     P1DIR                       1
+     DHT11_Delay100us           19
+     DHT11_Delay10us            19
+     DHT11_Start                74
+     ?Subroutine0                9
+     DHT11_ReadData             87
+     HalDht11_Convert          135
+     ?Subroutine2                7
+     ?Subroutine1                1
+     ??Subroutine3_0             6
+     ??DHT11_Delay100us?relay    6
+     ??DHT11_Delay10us?relay     6
+     ??DHT11_Start?relay         6
+     ??DHT11_ReadData?relay      6
+     ??HalDht11_Convert?relay    6
+
+ 
+ 357 bytes in segment BANKED_CODE
+  30 bytes in segment BANK_RELAYS
+   3 bytes in segment SFR_AN
+ 
+ 387 bytes of CODE memory
+   0 bytes of DATA memory (+ 3 bytes shared)
+
+Errors: none
+Warnings: none

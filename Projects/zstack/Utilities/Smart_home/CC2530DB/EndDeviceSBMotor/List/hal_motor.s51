@@ -1,0 +1,2045 @@
+///////////////////////////////////////////////////////////////////////////////
+//                                                                            /
+// IAR C/C++ Compiler V8.10.1.40194/W32 for 8051        03/Jan/2021  17:40:44 /
+// Copyright 2004-2011 IAR Systems AB.                                        /
+//                                                                            /
+//    Core               =  plain                                             /
+//    Code model         =  banked                                            /
+//    Data model         =  large                                             /
+//    Calling convention =  xdata reentrant                                   /
+//    Constant location  =  data_rom                                          /
+//    Dptr setup         =  1,16                                              /
+//    Source file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Components\hal\target\CC2530SB\hal_mo /
+//                          tor.c                                             /
+//    Command line       =  -f D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC /
+//                          2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC25 /
+//                          30DB\..\..\..\Tools\CC2530DB\f8wEndev.cfg         /
+//                          (-DCPU32MHZ -DROOT=__near_func                    /
+//                          -DMAC_CFG_TX_DATA_MAX=3 -DMAC_CFG_TX_MAX=6        /
+//                          -DMAC_CFG_RX_MAX=3) -f D:\Projects_IAR\IAR_C8051\ /
+//                          WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstac /
+//                          k\MY_BOARD\Exp4\CC2530DB\..\..\..\Tools\CC2530DB\ /
+//                          f8wConfig.cfg (-DZIGBEEPRO -DSECURE=0             /
+//                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                 /
+//                          -DDEFAULT_CHANLIST=0x02000000                     /
+//                          -DZDAPP_CONFIG_PAN_ID=0x1001                      /
+//                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
+//                          ASK=0x007F -DBEACON_REQUEST_DELAY=100             /
+//                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
+//                          -DLINK_STATUS_JITTER_MASK=0x007F                  /
+//                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_P /
+//                          OLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7           /
+//                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3   /
+//                          -DNWK_MAX_DATA_RETRIES=2                          /
+//                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9        /
+//                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40          /
+//                          -DNWK_MAX_BINDING_ENTRIES=4                       /
+//                          -DMAX_BINDING_CLUSTER_IDS=4                       /
+//                          "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07, 0x09,     /
+//                          0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08,   /
+//                          0x0A, 0x0C, 0x0D}" -DMAC_MAX_FRAME_SIZE=116       /
+//                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const    /
+//                          __code" -DGENERIC=__generic                       /
+//                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000       /
+//                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
+//                          -DREJOIN_POLL_RATE=440 D:\Projects_IAR\IAR_C8051\ /
+//                          WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal /
+//                          \target\CC2530SB\hal_motor.c -D HAL_UART=TRUE -D  /
+//                          HAL_UART_TEST -D xPOWER_SAVING -lC                /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\EndDeviceSBMotor\List\ -lA                      /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\EndDeviceSBMotor\List\ --diag_suppress          /
+//                          Pe001,Pa010 -o D:\Projects_IAR\IAR_C8051\WSN-CC25 /
+//                          30\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOA /
+//                          RD\Exp4\CC2530DB\EndDeviceSBMotor\Obj\ -e         /
+//                          --no_code_motion --debug --core=plain             /
+//                          --dptr=16,1 --data_model=large                    /
+//                          --code_model=banked --calling_convention=xdata_re /
+//                          entrant --place_constants=data_rom                /
+//                          --nr_virtual_regs 16 -I                           /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack /
+//                          -CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\C /
+//                          C2530DB\..\Source\ -I D:\Projects_IAR\IAR_C8051\W /
+//                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack /
+//                          \MY_BOARD\Exp4\CC2530DB\..\..\..\ZMain\TI2530DB\  /
+//                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC /
+//                          2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC25 /
+//                          30DB\..\..\..\..\..\Components\hal\include\ -I    /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\hal\target\CC2530SB\  /
+//                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC /
+//                          2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC25 /
+//                          30DB\..\..\..\..\..\Components\mac\include\ -I    /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\mac\high_level\ -I    /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\mac\low_level\srf04\  /
+//                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC /
+//                          2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC25 /
+//                          30DB\..\..\..\..\..\Components\mac\low_level\srf0 /
+//                          4\single_chip\ -I D:\Projects_IAR\IAR_C8051\WSN-C /
+//                          C2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_ /
+//                          BOARD\Exp4\CC2530DB\..\..\..\..\..\Components\mt\ /
+//                           -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-C /
+//                          C2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2 /
+//                          530DB\..\..\..\..\..\Components\osal\include\ -I  /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\services\saddr\ -I    /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\services\sdata\ -I    /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\stack\af\ -I          /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\stack\nwk\ -I         /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\stack\sapi\ -I        /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\stack\sec\ -I         /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\stack\sys\ -I         /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\stack\zdo\ -I         /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\zmac\ -I              /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\zmac\f8w\ -Ohz        /
+//    List file          =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\EndDeviceSBMotor\List\hal_motor.s51             /
+//                                                                            /
+//                                                                            /
+///////////////////////////////////////////////////////////////////////////////
+
+        NAME hal_motor
+
+        RTMODEL "__SystemLibrary", "CLib"
+        RTMODEL "__calling_convention", "xdata_reentrant"
+        RTMODEL "__code_model", "banked"
+        RTMODEL "__core", "plain"
+        RTMODEL "__data_model", "large"
+        RTMODEL "__dptr_size", "16"
+        RTMODEL "__extended_stack", "disabled"
+        RTMODEL "__location_for_constants", "data"
+        RTMODEL "__number_of_dptrs", "1"
+        RTMODEL "__rt_version", "1"
+
+        RSEG DOVERLAY:DATA:NOROOT(0)
+        RSEG IOVERLAY:IDATA:NOROOT(0)
+        RSEG ISTACK:IDATA:NOROOT(0)
+        RSEG PSTACK:XDATA:NOROOT(0)
+        RSEG XSTACK:XDATA:NOROOT(0)
+
+        EXTERN ?BDISPATCH
+        EXTERN ?BRET
+        EXTERN ?INTERRUPT_ENTER_XSP
+        EXTERN ?INTERRUPT_LEAVE_XSP
+        EXTERN ?L_ADD
+        EXTERN ?L_MOV_X
+        EXTERN ?L_SUB
+        EXTERN ?SL_GE_X
+        EXTERN ?V0
+        EXTERN __INIT_XDATA_Z
+
+        PUBLIC ??HalMotorCtl?relay
+        FUNCTION ??HalMotorCtl?relay,0203H
+        PUBLIC ??HalMotorInit?relay
+        FUNCTION ??HalMotorInit?relay,0203H
+        PUBLIC ??HalMotorSpeedCheck?relay
+        FUNCTION ??HalMotorSpeedCheck?relay,0203H
+        PUBLIC ??HalMotorStatusCheck?relay
+        FUNCTION ??HalMotorStatusCheck?relay,0203H
+        PUBLIC ??HalTimerTest?relay
+        FUNCTION ??HalTimerTest?relay,0203H
+        PUBWEAK `??P1_ISR??INTVEC 123`
+        PUBWEAK `??T3_ISR??INTVEC 91`
+        PUBLIC ??Timer1Init?relay
+        FUNCTION ??Timer1Init?relay,0203H
+        PUBLIC ??Timer3Init?relay
+        FUNCTION ??Timer3Init?relay,0203H
+        PUBLIC HalMotorCtl
+        FUNCTION HalMotorCtl,0203H
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        LOCFRAME ISTACK, 2, STACK
+        PUBLIC HalMotorInit
+        FUNCTION HalMotorInit,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 2, STACK
+        PUBLIC HalMotorSpeedCheck
+        FUNCTION HalMotorSpeedCheck,0203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 2, STACK
+        PUBLIC HalMotorStatusCheck
+        FUNCTION HalMotorStatusCheck,0203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 2, STACK
+        PUBLIC HalTimerTest
+        FUNCTION HalTimerTest,0201H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 2, STACK
+        PUBWEAK IEN2
+        PUBWEAK P1DIR
+        PUBWEAK P1IEN
+        PUBWEAK P1IFG
+        PUBWEAK P1SEL
+        PUBLIC P1_ISR
+        FUNCTION P1_ISR,0233H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 4, STACK
+        PUBWEAK PERCFG
+        PUBWEAK T1CC0H
+        PUBWEAK T1CC0L
+        PUBWEAK T1CCTL0
+        PUBWEAK T1CTL
+        PUBWEAK T3CC0
+        PUBWEAK T3CC1
+        PUBWEAK T3CCTL0
+        PUBWEAK T3CCTL1
+        PUBWEAK T3CTL
+        PUBLIC T3_ISR
+        FUNCTION T3_ISR,0233H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME XSTACK, 22, STACK
+        PUBLIC Timer1Init
+        FUNCTION Timer1Init,0203H
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        PUBLIC Timer3Init
+        FUNCTION Timer3Init,0203H
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        PUBWEAK _A_IEN0
+        PUBWEAK _A_IEN1
+        PUBWEAK _A_IRCON2
+        PUBWEAK __Constant_1
+        PUBWEAK __Constant_10000
+        PUBWEAK __Constant_8000
+        PUBWEAK __Constant_8001
+        PUBWEAK __Constant_ffff
+        
+        CFI Names cfiNames0
+        CFI StackFrame CFA_SP SP IDATA
+        CFI StackFrame CFA_PSP16 PSP16 XDATA
+        CFI StackFrame CFA_XSP16 XSP16 XDATA
+        CFI StaticOverlayFrame CFA_IOVERLAY IOVERLAY
+        CFI StaticOverlayFrame CFA_DOVERLAY DOVERLAY
+        CFI Resource `PSW.CY`:1, `B.BR0`:1, `B.BR1`:1, `B.BR2`:1, `B.BR3`:1
+        CFI Resource `B.BR4`:1, `B.BR5`:1, `B.BR6`:1, `B.BR7`:1, `VB.BR8`:1
+        CFI Resource `VB.BR9`:1, `VB.BR10`:1, `VB.BR11`:1, `VB.BR12`:1
+        CFI Resource `VB.BR13`:1, `VB.BR14`:1, `VB.BR15`:1, VB:8, B:8, A:8
+        CFI Resource PSW:8, DPL0:8, DPH0:8, R0:8, R1:8, R2:8, R3:8, R4:8, R5:8
+        CFI Resource R6:8, R7:8, V0:8, V1:8, V2:8, V3:8, V4:8, V5:8, V6:8, V7:8
+        CFI Resource V8:8, V9:8, V10:8, V11:8, V12:8, V13:8, V14:8, V15:8, SP:8
+        CFI Resource PSPH:8, PSPL:8, PSP16:16, XSPH:8, XSPL:8, XSP16:16
+        CFI VirtualResource ?RET:24
+        CFI Resource ?BRET_EXT:8
+        CFI VirtualResource ?RET_HIGH:8, ?RET_LOW:8
+        CFI ResourceParts PSP16 PSPH, PSPL
+        CFI ResourceParts XSP16 XSPH, XSPL
+        CFI ResourceParts ?RET ?BRET_EXT, ?RET_HIGH, ?RET_LOW
+        CFI EndNames cfiNames0
+        
+        CFI Common cfiCommon0 Using cfiNames0
+        CFI CodeAlign 1
+        CFI DataAlign -1
+        CFI ReturnAddress ?RET CODE
+        CFI CFA_DOVERLAY Used
+        CFI CFA_IOVERLAY Used
+        CFI CFA_SP SP+-3
+        CFI CFA_PSP16 PSP16+0
+        CFI CFA_XSP16 XSP16+0
+        CFI `PSW.CY` SameValue
+        CFI `B.BR0` SameValue
+        CFI `B.BR1` SameValue
+        CFI `B.BR2` SameValue
+        CFI `B.BR3` SameValue
+        CFI `B.BR4` SameValue
+        CFI `B.BR5` SameValue
+        CFI `B.BR6` SameValue
+        CFI `B.BR7` SameValue
+        CFI `VB.BR8` SameValue
+        CFI `VB.BR9` SameValue
+        CFI `VB.BR10` SameValue
+        CFI `VB.BR11` SameValue
+        CFI `VB.BR12` SameValue
+        CFI `VB.BR13` SameValue
+        CFI `VB.BR14` SameValue
+        CFI `VB.BR15` SameValue
+        CFI VB SameValue
+        CFI B Undefined
+        CFI A Undefined
+        CFI PSW SameValue
+        CFI DPL0 SameValue
+        CFI DPH0 SameValue
+        CFI R0 Undefined
+        CFI R1 Undefined
+        CFI R2 Undefined
+        CFI R3 Undefined
+        CFI R4 Undefined
+        CFI R5 Undefined
+        CFI R6 SameValue
+        CFI R7 SameValue
+        CFI V0 SameValue
+        CFI V1 SameValue
+        CFI V2 SameValue
+        CFI V3 SameValue
+        CFI V4 SameValue
+        CFI V5 SameValue
+        CFI V6 SameValue
+        CFI V7 SameValue
+        CFI V8 SameValue
+        CFI V9 SameValue
+        CFI V10 SameValue
+        CFI V11 SameValue
+        CFI V12 SameValue
+        CFI V13 SameValue
+        CFI V14 SameValue
+        CFI V15 SameValue
+        CFI PSPH Undefined
+        CFI PSPL Undefined
+        CFI XSPH Undefined
+        CFI XSPL Undefined
+        CFI ?RET Concat
+        CFI ?BRET_EXT Frame(CFA_SP, 3)
+        CFI ?RET_HIGH Frame(CFA_SP, 2)
+        CFI ?RET_LOW Frame(CFA_SP, 1)
+        CFI EndCommon cfiCommon0
+        
+        
+        CFI Common cfiCommon1 Using cfiNames0
+        CFI CodeAlign 1
+        CFI DataAlign -1
+        CFI ReturnAddress ?RET CODE
+        CFI CFA_DOVERLAY Used
+        CFI CFA_IOVERLAY Used
+        CFI CFA_SP SP+-2
+        CFI CFA_PSP16 PSP16+0
+        CFI CFA_XSP16 XSP16+0
+        CFI `PSW.CY` SameValue
+        CFI `B.BR0` SameValue
+        CFI `B.BR1` SameValue
+        CFI `B.BR2` SameValue
+        CFI `B.BR3` SameValue
+        CFI `B.BR4` SameValue
+        CFI `B.BR5` SameValue
+        CFI `B.BR6` SameValue
+        CFI `B.BR7` SameValue
+        CFI `VB.BR8` SameValue
+        CFI `VB.BR9` SameValue
+        CFI `VB.BR10` SameValue
+        CFI `VB.BR11` SameValue
+        CFI `VB.BR12` SameValue
+        CFI `VB.BR13` SameValue
+        CFI `VB.BR14` SameValue
+        CFI `VB.BR15` SameValue
+        CFI VB SameValue
+        CFI B SameValue
+        CFI A SameValue
+        CFI PSW SameValue
+        CFI DPL0 SameValue
+        CFI DPH0 SameValue
+        CFI R0 SameValue
+        CFI R1 SameValue
+        CFI R2 SameValue
+        CFI R3 SameValue
+        CFI R4 SameValue
+        CFI R5 SameValue
+        CFI R6 SameValue
+        CFI R7 SameValue
+        CFI V0 SameValue
+        CFI V1 SameValue
+        CFI V2 SameValue
+        CFI V3 SameValue
+        CFI V4 SameValue
+        CFI V5 SameValue
+        CFI V6 SameValue
+        CFI V7 SameValue
+        CFI V8 SameValue
+        CFI V9 SameValue
+        CFI V10 SameValue
+        CFI V11 SameValue
+        CFI V12 SameValue
+        CFI V13 SameValue
+        CFI V14 SameValue
+        CFI V15 SameValue
+        CFI PSPH Undefined
+        CFI PSPL Undefined
+        CFI XSPH Undefined
+        CFI XSPL Undefined
+        CFI ?RET Concat
+        CFI ?BRET_EXT SameValue
+        CFI ?RET_HIGH Frame(CFA_SP, 2)
+        CFI ?RET_LOW Frame(CFA_SP, 1)
+        CFI EndCommon cfiCommon1
+        
+HalMotorCtl         SYMBOL "HalMotorCtl"
+??HalMotorCtl?relay SYMBOL "?relay", HalMotorCtl
+HalMotorInit        SYMBOL "HalMotorInit"
+??HalMotorInit?relay SYMBOL "?relay", HalMotorInit
+HalMotorSpeedCheck  SYMBOL "HalMotorSpeedCheck"
+??HalMotorSpeedCheck?relay SYMBOL "?relay", HalMotorSpeedCheck
+HalMotorStatusCheck SYMBOL "HalMotorStatusCheck"
+??HalMotorStatusCheck?relay SYMBOL "?relay", HalMotorStatusCheck
+HalTimerTest        SYMBOL "HalTimerTest"
+??HalTimerTest?relay SYMBOL "?relay", HalTimerTest
+P1_ISR              SYMBOL "P1_ISR"
+`??P1_ISR??INTVEC 123` SYMBOL "??INTVEC 123", P1_ISR
+T3_ISR              SYMBOL "T3_ISR"
+`??T3_ISR??INTVEC 91` SYMBOL "??INTVEC 91", T3_ISR
+Timer1Init          SYMBOL "Timer1Init"
+??Timer1Init?relay  SYMBOL "?relay", Timer1Init
+Timer3Init          SYMBOL "Timer3Init"
+??Timer3Init?relay  SYMBOL "?relay", Timer3Init
+
+// D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\target\CC2530SB\hal_motor.c
+//    1 /*******************************************************************************
+//    2   文 件 名: hal_motor.c
+//    3   作    者：南京安宸博研电子科技有限公司
+//    4   创建时间：2013.9.16
+//    5   修改时间：2020.12.22
+//    6   说    明：
+//    7     (1) CC2530的P1_2输出PWMA波控制直流电机正反转，50%占空比停机，小于50%反转，
+//    8         大于50%正转；请将直流电机板子上的PWM波选择跳线短接在sin，本实验使用
+//    9         单路PWM波输出控制。
+//   10     (2) 电机顺时针转动，先过P1_3，然后通过P1_4，此时方向为正方向；
+//   11     (3) 本部分程序使用了CC2530的定时器1和定时器3，分别用来产生直流电机的PWM波，
+//   12         和1s的定时中断，1s的定时中断作为节拍来控制转速的测量和转速的调节；
+//   13     (4) 电机的转速单位：转/秒；目前支持的转速调节范围是：1~50(Max)转/秒；
+//   14     (5) 电机控制方法采用PID控制中的P控制，经过测试可以实现基本调速功能。
+//   15     (6) 通过修改定时器的计数值，可以调节电机测速和控制的节拍，具体看定时器
+//   16         的中断说明，这里有测试比较的结果：当测速和控制的节奏提高后，速度的
+//   17         精确度不高，之前是4个脉冲代表1转，提高到1/4秒节拍后是1个脉冲代表1转，
+//   18         在观察中发现虽然可以迅速(4倍于1秒的节拍)的调整速度，但是速度稳定性不高，
+//   19         总结的主要原因应该是测速模块的稳定性问题。
+//   20     (7) 测速模块主要是：在IO中断内的脉冲计数；以及定时器中断内的转速转换；
+//   21         测速精度有±1RPM的误差(使用目前1/4秒的测速、控制节拍), 或者
+//   22         ±0.25RPM的误差(使用1秒的测速、控制节拍)。
+//   23     (8) 关于PID：P = 设定转速 - 当前转速；
+//   24                  I += p；
+//   25                  D = 当前转速 - 上一个当前转速；
+//   26                  上一个当前转速 = 当前转速；
+//   27                  然后选择合适的kp、ki、kd
+//   28                  调整量 = kp*P + ki*I + kd*D；
+//   29 *******************************************************************************/
+//   30 
+//   31 #include <iocc2530.h>
+
+        ASEGN SFR_AN:DATA:NOROOT,08aH
+// unsigned char volatile __sfr P1IFG
+P1IFG:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,08dH
+// unsigned char volatile __sfr P1IEN
+P1IEN:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,09aH
+// unsigned char volatile __sfr IEN2
+IEN2:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0a8H
+// union <unnamed> volatile __sfr _A_IEN0
+_A_IEN0:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0b8H
+// union <unnamed> volatile __sfr _A_IEN1
+_A_IEN1:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0cbH
+// unsigned char volatile __sfr T3CTL
+T3CTL:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0ccH
+// unsigned char volatile __sfr T3CCTL0
+T3CCTL0:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0cdH
+// unsigned char volatile __sfr T3CC0
+T3CC0:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0ceH
+// unsigned char volatile __sfr T3CCTL1
+T3CCTL1:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0cfH
+// unsigned char volatile __sfr T3CC1
+T3CC1:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0daH
+// unsigned char volatile __sfr T1CC0L
+T1CC0L:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0dbH
+// unsigned char volatile __sfr T1CC0H
+T1CC0H:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0e4H
+// unsigned char volatile __sfr T1CTL
+T1CTL:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0e5H
+// unsigned char volatile __sfr T1CCTL0
+T1CCTL0:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0e8H
+// union <unnamed> volatile __sfr _A_IRCON2
+_A_IRCON2:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0f1H
+// unsigned char volatile __sfr PERCFG
+PERCFG:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0f4H
+// unsigned char volatile __sfr P1SEL
+P1SEL:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0feH
+// unsigned char volatile __sfr P1DIR
+P1DIR:
+        DATA8
+        DS 1
+//   32 #include "hal_defs.h"
+//   33 #include "hal_types.h"
+//   34 #include "hal_motor.h"
+//   35 
+//   36 //宏定义--电机控制与测速的相关引脚
+//   37 #define  HAL_MOTOR_SPEED1          P1_4
+//   38 #define  HAL_MOTOR_SPEED2          P1_3
+//   39 #define  HAL_MOTOR_SPEED_PIN_SET() st( P1DIR &= ~(BV(3) + BV(4)); \ 
+//   40                                        P1IEN |= BV(4) + BV(3);    \ 
+//   41                                        IEN2 |= BV(4);             \ 
+//   42                                        P1IFG = 0;)
+//   43 #define  HAL_MOTOR_PWMA_OUT        P1_2
+//   44 #define  HAL_MOTOR_PWMA_PIN_SET()  st( P1DIR |= BV(2); P1SEL |= BV(2);)
+//   45 
+//   46 //*****************************************************************************/
+//   47 //定时器
+//   48 /*****************************************
+//   49 //T3配置定义
+//   50 *****************************************/
+//   51 // Where _timer_ must be either 3 or 4
+//   52 // Macro for initialising timer 3 or 4
+//   53 #define TIMER34_INIT(timer)    st(    T##timer##CTL   = 0x06; \ 
+//   54                                       T##timer##CCTL0 = 0x00; \ 
+//   55                                       T##timer##CC0   = 0x00; \ 
+//   56                                       T##timer##CCTL1 = 0x00; \ 
+//   57                                       T##timer##CC1   = 0x00; \ 
+//   58                                   ) 
+//   59 
+//   60 //Macro for enabling overflow interrupt
+//   61 #define TIMER34_ENABLE_OVERFLOW_INT(timer,val) \ 
+//   62    (T##timer##CTL =  (val) ? T##timer##CTL | 0x08 : T##timer##CTL & ~0x08)
+//   63 
+//   64 
+//   65 
+//   66 // Macro for configuring channel 1 of timer 3 or 4 for PWM mode.
+//   67 #define TIMER34_PWM_CONFIG(timer)    st ( T##timer##CCTL1 = 0x24;                     \ 
+//   68                                           if(timer == 3){                             \ 
+//   69                                              if(PERCFG & 0x20) {                      \ 
+//   70                                                 IO_FUNC_PORT_PIN(1,7,IO_FUNC_PERIPH); \ 
+//   71                                              }                                        \ 
+//   72                                              else {                                   \ 
+//   73                                                 IO_FUNC_PORT_PIN(1,4,IO_FUNC_PERIPH); \ 
+//   74                                              }                                        \ 
+//   75                                           }                                           \ 
+//   76                                           else {                                      \ 
+//   77                                              if(PERCFG & 0x10) {                      \ 
+//   78                                                  IO_FUNC_PORT_PIN(2,3,IO_FUNC_PERIPH);\ 
+//   79                                              }                                        \ 
+//   80                                              else {                                   \ 
+//   81                                                 IO_FUNC_PORT_PIN(1,1,IO_FUNC_PERIPH); \ 
+//   82                                              }                                        \ 
+//   83                                           }                                           \ 
+//   84                                        ) 
+//   85 
+//   86 // Macro for setting pulse length of the timer in PWM mode
+//   87 #define  TIMER34_SET_PWM_PULSE_LENGTH(timer, value)  \ 
+//   88          st( T##timer##CC1 = (BYTE)value; )
+//   89 
+//   90 
+//   91 // Macro for setting timer 3 or 4 as a capture timer
+//   92 #define TIMER34_CAPTURE_TIMER(timer,edge)          \ 
+//   93    st(                                             \ 
+//   94       T##timer##CCTL1 = edge;                      \ 
+//   95       if(timer == 3){                              \ 
+//   96          if(PERCFG & 0x20) {                       \ 
+//   97             IO_FUNC_PORT_PIN(1,7,IO_FUNC_PERIPH);  \ 
+//   98          }                                         \ 
+//   99          else {                                    \ 
+//  100              IO_FUNC_PORT_PIN(1,4,IO_FUNC_PERIPH); \ 
+//  101          }                                         \ 
+//  102       }                                            \ 
+//  103       else                                         \ 
+//  104       {                                            \ 
+//  105          if(PERCFG & 0x10) {                       \ 
+//  106             IO_FUNC_PORT_PIN(2,3,IO_FUNC_PERIPH);  \ 
+//  107          }                                         \ 
+//  108         else {                                     \ 
+//  109            IO_FUNC_PORT_PIN(1,1,IO_FUNC_PERIPH);   \ 
+//  110         }                                          \ 
+//  111       } )
+//  112 
+//  113 //Macro for setting the clock tick for timer3 or 4
+//  114 #define  TIMER34_START(timer)  (T##timer##CTL = T##timer##CTL | 0X10)
+//  115 
+//  116 #define  TIMER34_STOP(timer)   (T##timer##CTL &= ~0X10)
+//  117 
+//  118 #define TIMER34_SET_CLOCK_DIVIDE(timer,val)                       \ 
+//  119         st(                                                       \ 
+//  120               T##timer##CTL &= ~0XE0;                             \ 
+//  121               (val==2) ? (T##timer##CTL|=0X20):                   \ 
+//  122               (val==4) ? (T##timer##CTL|=0x40):                   \ 
+//  123               (val==8) ? (T##timer##CTL|=0X60):                   \ 
+//  124               (val==16)? (T##timer##CTL|=0x80):                   \ 
+//  125               (val==32)? (T##timer##CTL|=0xa0):                   \ 
+//  126               (val==64) ? (T##timer##CTL|=0xc0):                  \ 
+//  127               (val==128) ? (T##timer##CTL|=0XE0):                 \ 
+//  128               (T##timer##CTL|=0X00);             /* 1 */          \ 
+//  129            )
+//  130 
+//  131 //Macro for setting the mode of timer3 or 4
+//  132 #define  TIMER34_SET_MODE(timer,val)                              \ 
+//  133          st(                                                      \ 
+//  134             T##timer##CTL &= ~0X03;                               \ 
+//  135             (val==1)?(T##timer##CTL|=0X01):  /*DOWN        */     \ 
+//  136             (val==2)?(T##timer##CTL|=0X02):  /*Modulo      */     \ 
+//  137             (val==3)?(T##timer##CTL|=0X03):  /*UP / DOWN   */     \ 
+//  138             (T##timer##CTL|=0X00);           /*free runing */     \ 
+//  139             )
+//  140 
+//  141 #define  HAL_MOTOR_PWMA_T1CFG      0x40
+//  142 #define  HAL_T1MODE_FREE_RUN       0x01
+//  143 #define  HAL_T1_COMPARE_MODE       0x04
+//  144 #define  HAL_T1_OUTPUT_CLEAR_MODE  0x20
+//  145        
+//  146 #define  HAL_T3_SET()              st( T3CTL |= 0xA0 + 0x06; \ 
+//  147                                        T3CCTL0 = 0;          \ 
+//  148                                        T3CCTL1 = 0;          \ 
+//  149                                        T3CC0 = 100;          \ 
+//  150                                        T3CTL |= 0x10;        \ 
+//  151                                        T3IE = 1; )
+//  152 
+//  153 //*****************************************************************************/
+//  154 //调速
+//  155 //#define  HAL_MOTOR_PWMA_SPEED(x)     st( T1CC0H = 128;   \ 
+//  156                                          T1CC0L = 0; )
+//  157 #define  HAL_MOTOR_PWMA_SPEED(x)   st( T1CC0H = (uint8)(((uint16)x >> 8) & 0xFF);   \ 
+//  158                                        T1CC0L = (uint8)((uint16)x & 0xFF); )
+//  159 
+//  160 #define  Ka  210
+//  161 #define  Kb  -100
+//  162 #define  Kc  10
+//  163 //*****************************************************************************/
+//  164 // 本地变量
+//  165 
+//  166 // 电机的方向状态
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA8
+//  167 static uint8 motorStatus;
+motorStatus:
+        DS 1
+        REQUIRE __INIT_XDATA_Z
+//  168 
+//  169 // 电机的当前速度
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA8
+//  170 static uint8 motorCurrentSpeed;
+motorCurrentSpeed:
+        DS 1
+        REQUIRE __INIT_XDATA_Z
+//  171 
+//  172 // 电机的测速脉冲数
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA16
+//  173 static uint16 motorPulseCnt1;
+motorPulseCnt1:
+        DS 2
+        REQUIRE __INIT_XDATA_Z
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA16
+//  174 static uint16 motorPulseCnt2;
+motorPulseCnt2:
+        DS 2
+        REQUIRE __INIT_XDATA_Z
+//  175 
+//  176 // 电机的预置速度
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA8
+//  177 static uint8 motorSetSpeed;
+motorSetSpeed:
+        DS 1
+        REQUIRE __INIT_XDATA_Z
+//  178 
+//  179 //*****************************************************************************/
+//  180 //内部函数
+//  181 /*****************************************
+//  182 //函数声明
+//  183 *****************************************/
+//  184 void Timer3Init(void);
+//  185 void Timer1Init(void);
+//  186 
+//  187 //*****************************************************************************/
+//  188 //函数名：Timer3Init
+//  189 //功  能：timer3初始化
+//  190 //参  数：无
+//  191 //返回值：无
+//  192 //*****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  193 void Timer1Init(void)
+Timer1Init:
+        CFI Block cfiBlock0 Using cfiCommon0
+        CFI Function Timer1Init
+        CODE
+//  194 {
+        ; Saved register size: 0
+        ; Auto size: 0
+//  195   T1CTL |= HAL_T1MODE_FREE_RUN;
+        ORL     0xe4,#0x1
+//  196   T1CCTL0 |= HAL_T1_COMPARE_MODE + HAL_T1_OUTPUT_CLEAR_MODE;
+        ORL     0xe5,#0x24
+//  197 }
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock0
+        REQUIRE T1CTL
+        REQUIRE T1CCTL0
+//  198 
+//  199 //*****************************************************************************/
+//  200 //函数名：Timer3Init
+//  201 //功  能：timer3初始化
+//  202 //参  数：无
+//  203 //返回值：无
+//  204 //*****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  205 void Timer3Init(void)
+Timer3Init:
+        CFI Block cfiBlock1 Using cfiCommon0
+        CFI Function Timer3Init
+        CODE
+//  206 {
+        ; Saved register size: 0
+        ; Auto size: 0
+//  207   TIMER34_INIT(3);                    //初始化T4
+        MOV     0xcb,#0x6
+        MOV     0xcc,#0x0
+        MOV     0xcd,#0x0
+        MOV     0xce,#0x0
+        MOV     0xcf,#0x0
+//  208   TIMER34_ENABLE_OVERFLOW_INT(3, 1);  //开T4中断
+        ORL     0xcb,#0x8
+//  209   EA = 1;
+        SETB    0xa8.7
+//  210   T3IE = 1;
+        SETB    0xb8.3
+//  211   
+//  212   TIMER34_SET_CLOCK_DIVIDE(3, 32);
+        ANL     0xcb,#0x1f
+        ORL     0xcb,#0xa0
+//  213   TIMER34_SET_MODE(3, 1);                 
+        ANL     0xcb,#0xfc
+        ORL     0xcb,#0x1
+//  214   T3CC0 = 100;
+        MOV     0xcd,#0x64
+//  215   TIMER34_START(3);                    //启动
+        ORL     0xcb,#0x10
+//  216 }
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock1
+        REQUIRE T3CTL
+        REQUIRE T3CCTL0
+        REQUIRE T3CC0
+        REQUIRE T3CCTL1
+        REQUIRE T3CC1
+        REQUIRE _A_IEN0
+        REQUIRE _A_IEN1
+//  217 
+//  218 //*****************************************************************************/
+//  219 //函数名：P1_ISR
+//  220 //功  能：P1口中断函数，直流电机测速，P1_3、P1_4两个IO口中断
+//  221 //参  数：无
+//  222 //返回值：无
+//  223 //*****************************************************************************/
+//  224 #pragma vector = P1INT_VECTOR
+
+        RSEG NEAR_CODE:CODE:NOROOT(0)
+//  225 __interrupt void P1_ISR(void)
+P1_ISR:
+        CFI Block cfiBlock2 Using cfiCommon1
+        CFI Function P1_ISR
+        CODE
+//  226 {
+        PUSH    A
+        CFI A Frame(CFA_SP, 3)
+        CFI CFA_SP SP+-3
+        PUSH    PSW
+        CFI PSW Frame(CFA_SP, 4)
+        CFI CFA_SP SP+-4
+        PUSH    DPL
+        CFI DPL0 Frame(CFA_SP, 5)
+        CFI CFA_SP SP+-5
+        PUSH    DPH
+        CFI DPH0 Frame(CFA_SP, 6)
+        CFI CFA_SP SP+-6
+        ; Saved register size: 4
+        ; Auto size: 0
+//  227   if (P1IFG & BV(3))         
+        MOV     A,0x8a
+        MOV     C,0xE0 /* A   */.3
+        JNC     ??CrossCallReturnLabel_2
+//  228   {
+//  229     P1IFG = 0;
+        MOV     0x8a,#0x0
+//  230     motorPulseCnt1++;
+        MOV     DPTR,#motorPulseCnt1
+        LCALL   ?Subroutine2
+//  231   }
+//  232   if (P1IFG & BV(4))         
+??CrossCallReturnLabel_2:
+        MOV     A,0x8a
+        MOV     C,0xE0 /* A   */.4
+        JNC     ??CrossCallReturnLabel_3
+//  233   {
+//  234     P1IFG = 0;
+        MOV     0x8a,#0x0
+//  235     motorPulseCnt2++;
+        MOV     DPTR,#motorPulseCnt2
+        LCALL   ?Subroutine2
+//  236   }
+//  237   P1IF = 0;          //清中断标志
+??CrossCallReturnLabel_3:
+        CLR     0xe8.3
+//  238 }
+        POP     DPH
+        CFI DPH0 SameValue
+        CFI CFA_SP SP+-5
+        POP     DPL
+        CFI DPL0 SameValue
+        CFI CFA_SP SP+-4
+        POP     PSW
+        CFI PSW SameValue
+        CFI CFA_SP SP+-3
+        POP     A
+        CFI A SameValue
+        CFI CFA_SP SP+-2
+        RETI
+        CFI EndBlock cfiBlock2
+        REQUIRE P1IFG
+        REQUIRE _A_IRCON2
+//  239 
+//  240 //*****************************************************************************/
+//  241 //函数名：T3_ISR
+//  242 //功  能：Timer3中断，中断100us产生一次，时钟节拍1s：测转速，调整转速;
+//  243 //参  数：无
+//  244 //返回值：无
+//  245 //*****************************************************************************/
+//  246 #pragma vector = T3_VECTOR
+
+        RSEG NEAR_CODE:CODE:NOROOT(0)
+//  247 __interrupt void T3_ISR(void)
+T3_ISR:
+        CFI Block cfiBlock3 Using cfiCommon1
+        CFI Function T3_ISR
+        CODE
+//  248 {
+        PUSH    A
+        CFI A Frame(CFA_SP, 3)
+        CFI CFA_SP SP+-3
+        MOV     A,#-0x15
+        LCALL   ?INTERRUPT_ENTER_XSP
+        CFI B load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI PSW load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI R5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI R4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI R3 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI R2 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI R1 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI R0 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI CFA_XSP16 add(XSP16, 21)
+        ; Saved register size: 22
+        ; Auto size: 0
+//  249   static uint16 timerCnt;
+//  250   static int16  Ek, Ek1, Ek2; 
+//  251   int16 speedDiff;
+//  252   uint16 tmpT1CC0H, tmpT1CC0L;
+//  253   int32 speedToT1CC0;
+//  254   
+//  255   // 此处的计数值决定了测速和控制的节拍，2500表示1/4秒测一次速，调一次速；
+//  256   // 10000表示1秒测一次速，调一次速；
+//  257   if (timerCnt < 2500)
+        MOV     DPTR,#??timerCnt
+        CLR     C
+        MOVX    A,@DPTR
+        SUBB    A,#-0x3c
+        INC     DPTR
+        MOVX    A,@DPTR
+        SUBB    A,#0x9
+        MOV     DPTR,#??timerCnt
+        JNC     ??T3_ISR_0
+//  258   {
+//  259     timerCnt++;
+        LCALL   ?Subroutine2
+//  260   }
+//  261   else
+//  262   {
+//  263     timerCnt = 0;
+//  264     
+//  265     // 此处的脉冲数与测速的周期有关，如果1秒测速一次，那么此处/4;
+//  266     // 如果1/4秒测速一次，那么正好等于转速；
+//  267     motorCurrentSpeed = (motorPulseCnt1 + motorPulseCnt2)/2;
+//  268     motorPulseCnt1 = 0;
+//  269     motorPulseCnt2 = 0;
+//  270 
+//  271     tmpT1CC0H = T1CC0H;
+//  272     tmpT1CC0L = T1CC0L;
+//  273     speedToT1CC0 = tmpT1CC0H << 8 | tmpT1CC0L;
+//  274 
+//  275     if (motorSetSpeed == 0)
+//  276     {
+//  277       HAL_MOTOR_PWMA_SPEED(32768);
+//  278     }
+//  279     else 
+//  280     {
+//  281       speedDiff = motorSetSpeed - motorCurrentSpeed;
+//  282       Ek2 = Ek1;
+//  283       Ek1 = Ek;
+//  284       Ek = speedDiff;
+//  285       if (motorStatus == HAL_MOTOR_FORWORD)
+//  286       {                
+//  287         speedToT1CC0 += Ka * Ek + Kb * Ek1 + Kc * Ek2;
+//  288          
+//  289         // 电机正转，确保PWM波占空比大于50%;
+//  290         if (speedToT1CC0 < 32768)
+//  291         {
+//  292           speedToT1CC0 = 32768;        
+//  293         } 
+//  294         // 防止上溢出
+//  295         if (speedToT1CC0 > 0xFFFF)
+//  296         {
+//  297           speedToT1CC0 = 0xFFFF;
+//  298         }
+//  299         HAL_MOTOR_PWMA_SPEED(speedToT1CC0);
+//  300       }            
+//  301       else if (motorStatus == HAL_MOTOR_BACKWORD)
+//  302       {                
+//  303         speedToT1CC0 -= Ka * Ek + Kb * Ek1 + Kc * Ek2;
+//  304         
+//  305         // 反转，PWM占空比小于50%
+//  306         if (speedToT1CC0 > 32768)
+//  307         {
+//  308           speedToT1CC0 = 32768;        
+//  309         } 
+//  310         // 防止下溢出
+//  311         if (speedToT1CC0 < 1)
+//  312         {
+//  313           speedToT1CC0 = 1;
+//  314         }
+//  315         HAL_MOTOR_PWMA_SPEED(speedToT1CC0);
+//  316       }
+//  317     }
+//  318   }
+//  319   
+//  320   TIMER34_START(3); // 打开Timer3启动
+??CrossCallReturnLabel_4:
+        ORL     0xcb,#0x10
+//  321 }
+        MOV     R7,#0x8
+        LJMP    ?INTERRUPT_LEAVE_XSP
+??T3_ISR_0:
+        CLR     A
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOVX    @DPTR,A
+        MOV     DPTR,#motorPulseCnt1
+        LCALL   ??Subroutine5_0
+??CrossCallReturnLabel_5:
+        MOV     DPTR,#motorPulseCnt2
+        MOVX    A,@DPTR
+        ADD     A,R0
+        MOV     R0,A
+        INC     DPTR
+        MOVX    A,@DPTR
+        ADDC    A,R1
+        CLR     C
+        RRC     A
+        MOV     A,R0
+        RRC     A
+        MOV     DPTR,#motorCurrentSpeed
+        MOVX    @DPTR,A
+        MOV     DPTR,#motorPulseCnt1
+        CLR     A
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOVX    @DPTR,A
+        MOV     DPTR,#motorPulseCnt2
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOVX    @DPTR,A
+        MOV     A,0xdb
+        MOV     R1,A
+        MOV     A,0xda
+        MOV     ?V0 + 4,A
+        MOV     A,R1
+        MOV     ?V0 + 5,A
+        CLR     A
+        MOV     ?V0 + 6,A
+        MOV     ?V0 + 7,A
+        MOV     DPTR,#motorSetSpeed
+        MOVX    A,@DPTR
+        JNZ     ??T3_ISR_1
+        MOV     0xdb,#-0x80
+        MOV     0xda,#0x0
+        SJMP    ??CrossCallReturnLabel_4
+??T3_ISR_1:
+        LCALL   ?Subroutine3
+??CrossCallReturnLabel_8:
+        MOV     DPTR,#??Ek2
+        MOV     A,R0
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOV     A,R1
+        MOVX    @DPTR,A
+        MOV     DPTR,#??Ek
+        LCALL   ??Subroutine5_0
+??CrossCallReturnLabel_6:
+        MOV     DPTR,#??Ek1
+        MOV     A,R0
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOV     A,R1
+        MOVX    @DPTR,A
+        MOV     DPTR,#motorSetSpeed
+        MOVX    A,@DPTR
+        MOV     R0,A
+        MOV     DPTR,#motorCurrentSpeed
+        MOVX    A,@DPTR
+        MOV     R2,A
+        MOV     A,R0
+        CLR     C
+        SUBB    A,R2
+        MOV     R0,A
+        SUBB    A,0xE0 /* A   */
+        MOV     R1,A
+        MOV     DPTR,#??Ek
+        MOV     A,R0
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOV     A,R1
+        MOVX    @DPTR,A
+        MOV     DPTR,#motorStatus
+        MOVX    A,@DPTR
+        XRL     A,#0x2
+        JNZ     ??T3_ISR_2
+        LCALL   ?Subroutine1
+??CrossCallReturnLabel_0:
+        LCALL   ?L_ADD
+        MOV     DPTR,#__Constant_8000
+        MOV     R0,#?V0 + 4
+        LCALL   ?SL_GE_X
+        JC      ??T3_ISR_3
+??T3_ISR_4:
+        MOV     DPTR,#__Constant_8000
+        SJMP    ??T3_ISR_5
+??T3_ISR_3:
+        MOV     DPTR,#__Constant_10000
+        MOV     R0,#?V0 + 4
+        LCALL   ?SL_GE_X
+        JNC     ??T3_ISR_6
+        MOV     DPTR,#__Constant_ffff
+??T3_ISR_5:
+        MOV     R0,#?V0 + 4
+        LCALL   ?L_MOV_X
+??T3_ISR_6:
+        MOV     ?V0 + 1,?V0 + 5
+        MOV     A,?V0 + 1
+        MOV     0xdb,A
+        MOV     A,?V0 + 4
+        MOV     0xda,A
+        LJMP    ??CrossCallReturnLabel_4
+??T3_ISR_2:
+        MOVX    A,@DPTR
+        XRL     A,#0x3
+        JZ      $+5
+        LJMP    ??CrossCallReturnLabel_4
+        LCALL   ?Subroutine1
+??CrossCallReturnLabel_1:
+        LCALL   ?L_SUB
+        MOV     DPTR,#__Constant_8001
+        MOV     R0,#?V0 + 4
+        LCALL   ?SL_GE_X
+        JC      ??T3_ISR_4
+        MOV     DPTR,#__Constant_1
+        MOV     R0,#?V0 + 4
+        LCALL   ?SL_GE_X
+        JC      ??T3_ISR_6
+        MOV     DPTR,#__Constant_1
+        SJMP    ??T3_ISR_5
+        CFI EndBlock cfiBlock3
+        REQUIRE T1CC0H
+        REQUIRE T1CC0L
+        REQUIRE T3CTL
+
+        RSEG NEAR_CODE:CODE:NOROOT(0)
+?Subroutine2:
+        CFI Block cfiCond4 Using cfiCommon1
+        CFI NoFunction
+        CFI Conditional ??CrossCallReturnLabel_2
+        CFI A Frame(CFA_SP, 3)
+        CFI PSW Frame(CFA_SP, 4)
+        CFI DPL0 Frame(CFA_SP, 5)
+        CFI DPH0 Frame(CFA_SP, 6)
+        CFI CFA_SP SP+-6
+        CFI Block cfiCond5 Using cfiCommon1
+        CFI (cfiCond5) NoFunction
+        CFI (cfiCond5) Conditional ??CrossCallReturnLabel_3
+        CFI (cfiCond5) A Frame(CFA_SP, 3)
+        CFI (cfiCond5) PSW Frame(CFA_SP, 4)
+        CFI (cfiCond5) DPL0 Frame(CFA_SP, 5)
+        CFI (cfiCond5) DPH0 Frame(CFA_SP, 6)
+        CFI (cfiCond5) CFA_SP SP+-6
+        CFI Block cfiCond6 Using cfiCommon1
+        CFI (cfiCond6) NoFunction
+        CFI (cfiCond6) Conditional ??CrossCallReturnLabel_4
+        CFI (cfiCond6) A Frame(CFA_SP, 3)
+        CFI (cfiCond6) R0 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI (cfiCond6) R1 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI (cfiCond6) R2 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI (cfiCond6) R3 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI (cfiCond6) V0 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI (cfiCond6) V1 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI (cfiCond6) V2 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI (cfiCond6) V3 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI (cfiCond6) V4 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI (cfiCond6) V5 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI (cfiCond6) V6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI (cfiCond6) V7 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI (cfiCond6) R4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI (cfiCond6) R5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI (cfiCond6) R6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI (cfiCond6) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI (cfiCond6) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI (cfiCond6) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI (cfiCond6) PSW load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI (cfiCond6) VB load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI (cfiCond6) B load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI (cfiCond6) CFA_SP SP+-3
+        CFI (cfiCond6) CFA_XSP16 add(XSP16, 21)
+        CFI Block cfiPicker7 Using cfiCommon1
+        CFI (cfiPicker7) NoFunction
+        CFI (cfiPicker7) Picker
+        MOVX    A,@DPTR
+        ADD     A,#0x1
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOVX    A,@DPTR
+        ADDC    A,#0x0
+        MOVX    @DPTR,A
+        RET
+        CFI EndBlock cfiCond4
+        CFI EndBlock cfiCond5
+        CFI EndBlock cfiCond6
+        CFI EndBlock cfiPicker7
+
+        RSEG NEAR_CODE:CODE:NOROOT(0)
+?Subroutine1:
+        CFI Block cfiCond8 Using cfiCommon1
+        CFI NoFunction
+        CFI Conditional ??CrossCallReturnLabel_0
+        CFI A Frame(CFA_SP, 3)
+        CFI R0 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI R1 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI R2 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI R3 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI R4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI R5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI PSW load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI B load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI CFA_SP SP+-3
+        CFI CFA_XSP16 add(XSP16, 21)
+        CFI Block cfiCond9 Using cfiCommon1
+        CFI (cfiCond9) NoFunction
+        CFI (cfiCond9) Conditional ??CrossCallReturnLabel_1
+        CFI (cfiCond9) A Frame(CFA_SP, 3)
+        CFI (cfiCond9) R0 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI (cfiCond9) R1 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI (cfiCond9) R2 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI (cfiCond9) R3 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI (cfiCond9) V0 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI (cfiCond9) V1 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI (cfiCond9) V2 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI (cfiCond9) V3 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI (cfiCond9) V4 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI (cfiCond9) V5 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI (cfiCond9) V6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI (cfiCond9) V7 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI (cfiCond9) R4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI (cfiCond9) R5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI (cfiCond9) R6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI (cfiCond9) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI (cfiCond9) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI (cfiCond9) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI (cfiCond9) PSW load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI (cfiCond9) VB load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI (cfiCond9) B load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI (cfiCond9) CFA_SP SP+-3
+        CFI (cfiCond9) CFA_XSP16 add(XSP16, 21)
+        CFI Block cfiPicker10 Using cfiCommon1
+        CFI (cfiPicker10) NoFunction
+        CFI (cfiPicker10) Picker
+        MOV     DPTR,#??Ek
+        MOVX    A,@DPTR
+        MOV     R2,A
+        INC     DPTR
+        MOVX    A,@DPTR
+        MOV     R3,A
+        MOV     A,R2
+        MOV     B,#-0x2e
+        MUL     AB
+        MOV     R2,A
+        MOV     R0,B
+        MOV     B,#-0x2e
+        MOV     A,R3
+        MUL     AB
+        ADD     A,R0
+        MOV     R3,A
+        LCALL   ?Subroutine3
+??CrossCallReturnLabel_9:
+        MOV     A,R0
+        MOV     B,#-0x64
+        MUL     AB
+        XCH     A,R0
+        MOV     R4,B
+        MOV     B,#-0x1
+        MUL     AB
+        ADD     A,R4
+        MOV     R4,A
+        MOV     B,#-0x64
+        MOV     A,R1
+        MUL     AB
+        ADD     A,R4
+        MOV     R1,A
+        MOV     A,R2
+        ADD     A,R0
+        MOV     R2,A
+        MOV     A,R3
+        ADDC    A,R1
+        MOV     R3,A
+        MOV     DPTR,#??Ek2
+        LCALL   ??Subroutine5_0
+??CrossCallReturnLabel_7:
+        MOV     A,R0
+        MOV     B,#0xa
+        MUL     AB
+        MOV     R0,A
+        MOV     R4,B
+        MOV     B,#0xa
+        MOV     A,R1
+        MUL     AB
+        ADD     A,R4
+        MOV     R1,A
+        MOV     A,R2
+        ADD     A,R0
+        MOV     ?V0 + 0,A
+        MOV     A,R3
+        ADDC    A,R1
+        MOV     ?V0 + 1,A
+        RLC     A
+        SUBB    A,0xE0 /* A   */
+        MOV     ?V0 + 2,A
+        MOV     ?V0 + 3,A
+        MOV     R0,#?V0 + 4
+        MOV     R1,#?V0 + 0
+        RET
+        CFI EndBlock cfiCond8
+        CFI EndBlock cfiCond9
+        CFI EndBlock cfiPicker10
+
+        RSEG NEAR_CODE:CODE:NOROOT(0)
+?Subroutine3:
+        CFI Block cfiCond11 Using cfiCommon1
+        CFI NoFunction
+        CFI Conditional ??CrossCallReturnLabel_8
+        CFI A Frame(CFA_SP, 3)
+        CFI R0 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI R1 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI R2 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI R3 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI R4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI R5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI PSW load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI B load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI CFA_SP SP+-3
+        CFI CFA_XSP16 add(XSP16, 21)
+        CFI Block cfiCond12 Using cfiCommon1
+        CFI (cfiCond12) NoFunction
+        CFI (cfiCond12) Conditional ??CrossCallReturnLabel_9, ??CrossCallReturnLabel_0
+        CFI (cfiCond12) A Frame(CFA_SP, 3)
+        CFI (cfiCond12) R0 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI (cfiCond12) R1 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI (cfiCond12) R2 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI (cfiCond12) R3 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI (cfiCond12) V0 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI (cfiCond12) V1 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI (cfiCond12) V2 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI (cfiCond12) V3 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI (cfiCond12) V4 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI (cfiCond12) V5 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI (cfiCond12) V6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI (cfiCond12) V7 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI (cfiCond12) R4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI (cfiCond12) R5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI (cfiCond12) R6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI (cfiCond12) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI (cfiCond12) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI (cfiCond12) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI (cfiCond12) PSW load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI (cfiCond12) VB load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI (cfiCond12) B load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI (cfiCond12) CFA_SP SP+-3
+        CFI (cfiCond12) CFA_XSP16 add(XSP16, 21)
+        CFI Block cfiCond13 Using cfiCommon1
+        CFI (cfiCond13) NoFunction
+        CFI (cfiCond13) Conditional ??CrossCallReturnLabel_9, ??CrossCallReturnLabel_1
+        CFI (cfiCond13) A Frame(CFA_SP, 3)
+        CFI (cfiCond13) R0 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI (cfiCond13) R1 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI (cfiCond13) R2 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI (cfiCond13) R3 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI (cfiCond13) V0 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI (cfiCond13) V1 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI (cfiCond13) V2 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI (cfiCond13) V3 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI (cfiCond13) V4 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI (cfiCond13) V5 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI (cfiCond13) V6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI (cfiCond13) V7 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI (cfiCond13) R4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI (cfiCond13) R5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI (cfiCond13) R6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI (cfiCond13) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI (cfiCond13) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI (cfiCond13) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI (cfiCond13) PSW load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI (cfiCond13) VB load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI (cfiCond13) B load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI (cfiCond13) CFA_SP SP+-3
+        CFI (cfiCond13) CFA_XSP16 add(XSP16, 21)
+        CFI Block cfiPicker14 Using cfiCommon1
+        CFI (cfiPicker14) NoFunction
+        CFI (cfiPicker14) Picker
+        MOV     DPTR,#??Ek1
+        CFI EndBlock cfiCond11
+        CFI EndBlock cfiCond12
+        CFI EndBlock cfiCond13
+        CFI EndBlock cfiPicker14
+        REQUIRE ??Subroutine5_0
+        ; // Fall through to label ??Subroutine5_0
+
+        RSEG NEAR_CODE:CODE:NOROOT(0)
+??Subroutine5_0:
+        CFI Block cfiCond15 Using cfiCommon1
+        CFI NoFunction
+        CFI Conditional ??CrossCallReturnLabel_5
+        CFI A Frame(CFA_SP, 3)
+        CFI R0 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI R1 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI R2 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI R3 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI R4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI R5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI PSW load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI B load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI CFA_SP SP+-3
+        CFI CFA_XSP16 add(XSP16, 21)
+        CFI Block cfiCond16 Using cfiCommon1
+        CFI (cfiCond16) NoFunction
+        CFI (cfiCond16) Conditional ??CrossCallReturnLabel_6
+        CFI (cfiCond16) A Frame(CFA_SP, 3)
+        CFI (cfiCond16) R0 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI (cfiCond16) R1 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI (cfiCond16) R2 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI (cfiCond16) R3 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI (cfiCond16) V0 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI (cfiCond16) V1 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI (cfiCond16) V2 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI (cfiCond16) V3 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI (cfiCond16) V4 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI (cfiCond16) V5 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI (cfiCond16) V6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI (cfiCond16) V7 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI (cfiCond16) R4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI (cfiCond16) R5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI (cfiCond16) R6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI (cfiCond16) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI (cfiCond16) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI (cfiCond16) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI (cfiCond16) PSW load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI (cfiCond16) VB load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI (cfiCond16) B load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI (cfiCond16) CFA_SP SP+-3
+        CFI (cfiCond16) CFA_XSP16 add(XSP16, 21)
+        CFI Block cfiCond17 Using cfiCommon1
+        CFI (cfiCond17) NoFunction
+        CFI (cfiCond17) Conditional ??CrossCallReturnLabel_7, ??CrossCallReturnLabel_0
+        CFI (cfiCond17) A Frame(CFA_SP, 3)
+        CFI (cfiCond17) R0 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI (cfiCond17) R1 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI (cfiCond17) R2 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI (cfiCond17) R3 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI (cfiCond17) V0 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI (cfiCond17) V1 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI (cfiCond17) V2 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI (cfiCond17) V3 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI (cfiCond17) V4 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI (cfiCond17) V5 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI (cfiCond17) V6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI (cfiCond17) V7 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI (cfiCond17) R4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI (cfiCond17) R5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI (cfiCond17) R6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI (cfiCond17) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI (cfiCond17) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI (cfiCond17) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI (cfiCond17) PSW load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI (cfiCond17) VB load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI (cfiCond17) B load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI (cfiCond17) CFA_SP SP+-3
+        CFI (cfiCond17) CFA_XSP16 add(XSP16, 21)
+        CFI Block cfiCond18 Using cfiCommon1
+        CFI (cfiCond18) NoFunction
+        CFI (cfiCond18) Conditional ??CrossCallReturnLabel_7, ??CrossCallReturnLabel_1
+        CFI (cfiCond18) A Frame(CFA_SP, 3)
+        CFI (cfiCond18) R0 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI (cfiCond18) R1 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI (cfiCond18) R2 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI (cfiCond18) R3 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI (cfiCond18) V0 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI (cfiCond18) V1 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI (cfiCond18) V2 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI (cfiCond18) V3 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI (cfiCond18) V4 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI (cfiCond18) V5 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI (cfiCond18) V6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI (cfiCond18) V7 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI (cfiCond18) R4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI (cfiCond18) R5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI (cfiCond18) R6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI (cfiCond18) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI (cfiCond18) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI (cfiCond18) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI (cfiCond18) PSW load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI (cfiCond18) VB load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI (cfiCond18) B load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI (cfiCond18) CFA_SP SP+-3
+        CFI (cfiCond18) CFA_XSP16 add(XSP16, 21)
+        CFI Block cfiCond19 Using cfiCommon1
+        CFI (cfiCond19) NoFunction
+        CFI (cfiCond19) Conditional ??CrossCallReturnLabel_8
+        CFI (cfiCond19) A Frame(CFA_SP, 3)
+        CFI (cfiCond19) R0 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI (cfiCond19) R1 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI (cfiCond19) R2 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI (cfiCond19) R3 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI (cfiCond19) V0 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI (cfiCond19) V1 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI (cfiCond19) V2 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI (cfiCond19) V3 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI (cfiCond19) V4 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI (cfiCond19) V5 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI (cfiCond19) V6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI (cfiCond19) V7 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI (cfiCond19) R4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI (cfiCond19) R5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI (cfiCond19) R6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI (cfiCond19) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI (cfiCond19) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI (cfiCond19) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI (cfiCond19) PSW load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI (cfiCond19) VB load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI (cfiCond19) B load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI (cfiCond19) CFA_SP SP+-3
+        CFI (cfiCond19) CFA_XSP16 add(XSP16, 21)
+        CFI Block cfiCond20 Using cfiCommon1
+        CFI (cfiCond20) NoFunction
+        CFI (cfiCond20) Conditional ??CrossCallReturnLabel_9, ??CrossCallReturnLabel_0
+        CFI (cfiCond20) A Frame(CFA_SP, 3)
+        CFI (cfiCond20) R0 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI (cfiCond20) R1 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI (cfiCond20) R2 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI (cfiCond20) R3 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI (cfiCond20) V0 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI (cfiCond20) V1 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI (cfiCond20) V2 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI (cfiCond20) V3 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI (cfiCond20) V4 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI (cfiCond20) V5 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI (cfiCond20) V6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI (cfiCond20) V7 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI (cfiCond20) R4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI (cfiCond20) R5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI (cfiCond20) R6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI (cfiCond20) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI (cfiCond20) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI (cfiCond20) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI (cfiCond20) PSW load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI (cfiCond20) VB load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI (cfiCond20) B load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI (cfiCond20) CFA_SP SP+-3
+        CFI (cfiCond20) CFA_XSP16 add(XSP16, 21)
+        CFI Block cfiCond21 Using cfiCommon1
+        CFI (cfiCond21) NoFunction
+        CFI (cfiCond21) Conditional ??CrossCallReturnLabel_9, ??CrossCallReturnLabel_1
+        CFI (cfiCond21) A Frame(CFA_SP, 3)
+        CFI (cfiCond21) R0 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI (cfiCond21) R1 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI (cfiCond21) R2 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI (cfiCond21) R3 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI (cfiCond21) V0 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI (cfiCond21) V1 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI (cfiCond21) V2 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI (cfiCond21) V3 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI (cfiCond21) V4 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI (cfiCond21) V5 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI (cfiCond21) V6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI (cfiCond21) V7 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI (cfiCond21) R4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI (cfiCond21) R5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI (cfiCond21) R6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI (cfiCond21) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI (cfiCond21) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI (cfiCond21) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI (cfiCond21) PSW load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI (cfiCond21) VB load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI (cfiCond21) B load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI (cfiCond21) CFA_SP SP+-3
+        CFI (cfiCond21) CFA_XSP16 add(XSP16, 21)
+        CFI Block cfiPicker22 Using cfiCommon1
+        CFI (cfiPicker22) NoFunction
+        CFI (cfiPicker22) Picker
+        MOVX    A,@DPTR
+        MOV     R0,A
+        INC     DPTR
+        MOVX    A,@DPTR
+        MOV     R1,A
+        RET
+        CFI EndBlock cfiCond15
+        CFI EndBlock cfiCond16
+        CFI EndBlock cfiCond17
+        CFI EndBlock cfiCond18
+        CFI EndBlock cfiCond19
+        CFI EndBlock cfiCond20
+        CFI EndBlock cfiCond21
+        CFI EndBlock cfiPicker22
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA16
+??timerCnt:
+        DS 2
+        REQUIRE __INIT_XDATA_Z
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA16
+??Ek:
+        DS 2
+        REQUIRE __INIT_XDATA_Z
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA16
+??Ek1:
+        DS 2
+        REQUIRE __INIT_XDATA_Z
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA16
+??Ek2:
+        DS 2
+        REQUIRE __INIT_XDATA_Z
+//  322 
+//  323 
+//  324 //*****************************************************************************/
+//  325 //*****************************************************************************/
+//  326 //外部函数
+//  327 //*****************************************************************************/
+//  328 //函数名：HalMotorInit
+//  329 //功  能：直流电机初始化配置
+//  330 //参  数：无
+//  331 //返回值：无
+//  332 //*****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  333 void HalMotorInit(void)
+HalMotorInit:
+        CFI Block cfiBlock23 Using cfiCommon0
+        CFI Function HalMotorInit
+        CODE
+//  334 {
+        FUNCALL HalMotorInit, Timer1Init
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL HalMotorInit, HalMotorCtl
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL HalMotorInit, Timer3Init
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        PUSH    DPL
+        CFI DPL0 Frame(CFA_SP, 4)
+        CFI CFA_SP SP+-4
+        PUSH    DPH
+        CFI DPH0 Frame(CFA_SP, 5)
+        CFI CFA_SP SP+-5
+        ; Saved register size: 2
+        ; Auto size: 0
+//  335   PERCFG |= HAL_MOTOR_PWMA_T1CFG;
+        ORL     0xf1,#0x40
+//  336   HAL_MOTOR_PWMA_PIN_SET(); 
+        ORL     0xfe,#0x4
+        ORL     0xf4,#0x4
+//  337   Timer1Init();                   // T1定时器用来输出PWM波
+        ; Setup parameters for call to function Timer1Init
+        LCALL   ??Timer1Init?relay
+//  338   HalMotorCtl(HAL_MOTOR_STOP, 0); // 电机初始化状态：停机
+        ; Setup parameters for call to function HalMotorCtl
+        MOV     R2,#0x0
+        MOV     R1,#0x1
+        LCALL   ??HalMotorCtl?relay
+//  339   HAL_MOTOR_SPEED_PIN_SET();
+        ANL     0xfe,#0xe7
+        ORL     0x8d,#0x18
+        ORL     0x9a,#0x10
+        MOV     0x8a,#0x0
+//  340   Timer3Init();                   // T3定时器用来产生系统控制周期定时
+        ; Setup parameters for call to function Timer3Init
+        LCALL   ??Timer3Init?relay
+//  341   EA = 1;
+        SETB    0xa8.7
+//  342 }
+        SJMP    ??Subroutine4_0
+        CFI EndBlock cfiBlock23
+        REQUIRE PERCFG
+        REQUIRE P1DIR
+        REQUIRE P1SEL
+        REQUIRE P1IEN
+        REQUIRE IEN2
+        REQUIRE P1IFG
+        REQUIRE _A_IEN0
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+?Subroutine0:
+        CFI Block cfiBlock24 Using cfiCommon0
+        CFI NoFunction
+        CFI CFA_SP SP+-5
+        CFI DPL0 Frame(CFA_SP, 4)
+        CFI DPH0 Frame(CFA_SP, 5)
+        MOVX    A,@DPTR
+        MOV     R1,A
+        CFI EndBlock cfiBlock24
+        REQUIRE ??Subroutine4_0
+        ; // Fall through to label ??Subroutine4_0
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+??Subroutine4_0:
+        CFI Block cfiBlock25 Using cfiCommon0
+        CFI NoFunction
+        CFI CFA_SP SP+-5
+        CFI DPL0 Frame(CFA_SP, 4)
+        CFI DPH0 Frame(CFA_SP, 5)
+        POP     DPH
+        CFI CFA_SP SP+-4
+        CFI DPH0 SameValue
+        POP     DPL
+        CFI CFA_SP SP+-3
+        CFI DPL0 SameValue
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock25
+//  343 
+//  344 //*****************************************************************************/
+//  345 //函数名：HalMotorCtl
+//  346 //功  能：直流电机上层控制;
+//  347 //参  数：dir  : 方向，停止、前进、后退；
+//  348 //        speed: 速度，在停止状态下，速度设置无效，默认设置为0；
+//  349 //返回值：无
+//  350 //*****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  351 void HalMotorCtl(uint8 dir, uint8 speed)
+HalMotorCtl:
+        CFI Block cfiBlock26 Using cfiCommon0
+        CFI Function HalMotorCtl
+        CODE
+//  352 {
+        PUSH    DPL
+        CFI DPL0 Frame(CFA_SP, 4)
+        CFI CFA_SP SP+-4
+        PUSH    DPH
+        CFI DPH0 Frame(CFA_SP, 5)
+        CFI CFA_SP SP+-5
+        ; Saved register size: 2
+        ; Auto size: 0
+//  353   switch(dir)
+        MOV     A,R1
+        ADD     A,#-0x2
+        JZ      ??HalMotorCtl_0
+        DEC     A
+        JZ      ??HalMotorCtl_0
+//  354   {
+//  355     case HAL_MOTOR_STOP:
+//  356     {
+//  357       // 忽略函数的速度设置，停止状态速度为0
+//  358       motorSetSpeed = 0;
+        MOV     DPTR,#motorSetSpeed
+        CLR     A
+        SJMP    ??HalMotorCtl_1
+//  359       break;
+//  360     }
+//  361     case HAL_MOTOR_FORWORD:
+//  362     {
+//  363       motorSetSpeed = speed;
+??HalMotorCtl_0:
+        MOV     A,R2
+        MOV     DPTR,#motorSetSpeed
+??HalMotorCtl_1:
+        MOVX    @DPTR,A
+//  364       break;
+//  365     }
+//  366     case HAL_MOTOR_BACKWORD:
+//  367     {
+//  368       motorSetSpeed = speed;
+//  369       break;
+//  370     }
+//  371     default:
+//  372     {
+//  373       motorSetSpeed = 0;
+//  374       break;
+//  375     }
+//  376   }
+//  377   motorStatus = dir;
+        MOV     A,R1
+        MOV     DPTR,#motorStatus
+        MOVX    @DPTR,A
+//  378 }
+        SJMP    ??Subroutine4_0
+        CFI EndBlock cfiBlock26
+//  379 
+//  380 //*****************************************************************************/
+//  381 //函数名：HalMotorStatusCheck
+//  382 //功  能：返回当前电机的方向状态；
+//  383 //参  数：无
+//  384 //返回值：返回电机的状态信息；
+//  385 //*****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  386 uint8 HalMotorStatusCheck(void)
+HalMotorStatusCheck:
+        CFI Block cfiBlock27 Using cfiCommon0
+        CFI Function HalMotorStatusCheck
+        CODE
+//  387 {
+        PUSH    DPL
+        CFI DPL0 Frame(CFA_SP, 4)
+        CFI CFA_SP SP+-4
+        PUSH    DPH
+        CFI DPH0 Frame(CFA_SP, 5)
+        CFI CFA_SP SP+-5
+        ; Saved register size: 2
+        ; Auto size: 0
+//  388   return motorStatus;
+        MOV     DPTR,#motorStatus
+        SJMP    ?Subroutine0
+        CFI EndBlock cfiBlock27
+//  389 }
+//  390 
+//  391 //*****************************************************************************/
+//  392 //函数名：HalMotorSpeedCheck
+//  393 //功  能：返回电机当前的速度；
+//  394 //参  数：无
+//  395 //返回值：电机当前的速度，单位：转/秒；
+//  396 //*****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  397 uint8 HalMotorSpeedCheck(void)
+HalMotorSpeedCheck:
+        CFI Block cfiBlock28 Using cfiCommon0
+        CFI Function HalMotorSpeedCheck
+        CODE
+//  398 {
+        PUSH    DPL
+        CFI DPL0 Frame(CFA_SP, 4)
+        CFI CFA_SP SP+-4
+        PUSH    DPH
+        CFI DPH0 Frame(CFA_SP, 5)
+        CFI CFA_SP SP+-5
+        ; Saved register size: 2
+        ; Auto size: 0
+//  399   return ((uint8)motorCurrentSpeed);
+        MOV     DPTR,#motorCurrentSpeed
+        SJMP    ?Subroutine0
+        CFI EndBlock cfiBlock28
+//  400 }
+//  401 
+//  402 //*****************************************************************************/
+//  403 //函数名：HalTimerTest
+//  404 //功  能：测试用途，为了检测定时器配置，T1CC0与PWM波的占空比有关，直观反映了转速的关系
+//  405 //参  数：无
+//  406 //返回值：16位的T1CC0寄存器数值
+//  407 //*****************************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  408 uint16 HalTimerTest()
+HalTimerTest:
+        CFI Block cfiBlock29 Using cfiCommon0
+        CFI Function HalTimerTest
+        CODE
+//  409 {
+        ; Saved register size: 2
+        ; Auto size: 0
+//  410   uint16 tmpT1CC0H, tmpT1CC0L;
+//  411 
+//  412   tmpT1CC0H = T1CC0H;
+        MOV     A,0xdb
+//  413   tmpT1CC0L = T1CC0L;
+//  414   return (tmpT1CC0H << 8 | tmpT1CC0L);
+        MOV     R1,A
+        MOV     A,0xda
+        MOV     R2,A
+        MOV     A,R1
+        MOV     R3,A
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock29
+        REQUIRE T1CC0H
+        REQUIRE T1CC0L
+//  415 }
+
+        COMMON INTVEC:CODE:ROOT(0)
+        ORG 91
+`??T3_ISR??INTVEC 91`:
+        LJMP       (T3_ISR)
+
+        COMMON INTVEC:CODE:ROOT(0)
+        ORG 123
+`??P1_ISR??INTVEC 123`:
+        LJMP       (P1_ISR)
+
+        RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
+        DATA32
+__Constant_8000:
+        DD 32768
+
+        RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
+        DATA32
+__Constant_10000:
+        DD 65536
+
+        RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
+        DATA32
+__Constant_ffff:
+        DD 65535
+
+        RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
+        DATA32
+__Constant_8001:
+        DD 32769
+
+        RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
+        DATA32
+__Constant_1:
+        DD 1
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??Timer1Init?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    Timer1Init
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??Timer3Init?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    Timer3Init
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalMotorInit?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalMotorInit
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalMotorCtl?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalMotorCtl
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalMotorStatusCheck?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalMotorStatusCheck
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalMotorSpeedCheck?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalMotorSpeedCheck
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalTimerTest?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalTimerTest
+
+        END
+//  416 
+//  417 //*****************************************************************************/
+//  418 //*****************************************************************************/
+// 
+// 162 bytes in segment BANKED_CODE
+//  42 bytes in segment BANK_RELAYS
+//   6 bytes in segment INTVEC
+// 415 bytes in segment NEAR_CODE
+//  18 bytes in segment SFR_AN
+//  20 bytes in segment XDATA_ROM_C
+//  15 bytes in segment XDATA_Z
+// 
+// 619 bytes of CODE  memory (+  6 bytes shared)
+//   0 bytes of CONST memory (+ 20 bytes shared)
+//   0 bytes of DATA  memory (+ 18 bytes shared)
+//  15 bytes of XDATA memory
+//
+//Errors: none
+//Warnings: none

@@ -1,0 +1,1676 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.1.40194/W32 for 8051         04/Jan/2021  16:31:37 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data_rom                                           #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Components\stack\nwk\nwk_globals.c      #
+#    Command line       =  -f D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\..\..\..\Tools\CC2530DB\f8wEndev.cfg            #
+#                          (-DCPU32MHZ -DROOT=__near_func                     #
+#                          -DMAC_CFG_TX_DATA_MAX=3 -DMAC_CFG_TX_MAX=6         #
+#                          -DMAC_CFG_RX_MAX=3) -f D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\ #
+#                          MY_BOARD\Exp4\CC2530DB\..\..\..\Tools\CC2530DB\f8w #
+#                          Config.cfg (-DZIGBEEPRO -DSECURE=0                 #
+#                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
+#                          -DDEFAULT_CHANLIST=0x02000000                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0x1001                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
+#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
+#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DMAC_MAX_FRAME_SIZE=116                           #
+#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
+#                          __code" -DGENERIC=__generic                        #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\stack #
+#                          \nwk\nwk_globals.c -D HAL_UART=TRUE -D             #
+#                          HAL_UART_TEST -D xPOWER_SAVING -D xREFLECTOR -lC   #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBD203\List\ -lA                          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBD203\List\ --diag_suppress Pe001,Pa010  #
+#                          -o D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\EndDeviceSBD203\Obj\ -e --no_code_motion        #
+#                          --debug --core=plain --dptr=16,1                   #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data_rom --nr_virtual_regs 16    #
+#                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack #
+#                          -CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC #
+#                          2530DB\..\Source\ -I D:\Projects_IAR\IAR_C8051\WSN #
+#                          -CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY #
+#                          _BOARD\Exp4\CC2530DB\..\..\..\ZMain\TI2530DB\ -I   #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\target\CC2530SB\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\high_level\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\sing #
+#                          le_chip\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\Z #
+#                          Stack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Ex #
+#                          p4\CC2530DB\..\..\..\..\..\Components\mt\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\osal\include\ -I         #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\saddr\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\sdata\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\af\ -I             #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\nwk\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sapi\ -I           #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sec\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sys\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\zdo\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\ -I                 #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\f8w\ -Ohz           #
+#    List file          =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBD203\List\nwk_globals.lst               #
+#    Object file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBD203\Obj\nwk_globals.r51                #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\stack\nwk\nwk_globals.c
+      1          /**************************************************************************************************
+      2            Filename:       nwk_globals.c
+      3            Revised:        $Date: 2012-03-07 01:04:58 -0800 (Wed, 07 Mar 2012) $
+      4            Revision:       $Revision: 29656 $
+      5          
+      6            Description:    User definable Network Parameters.
+      7          
+      8          
+      9            Copyright 2004-2011 Texas Instruments Incorporated. All rights reserved.
+     10          
+     11            IMPORTANT: Your use of this Software is limited to those specific rights
+     12            granted under the terms of a software license agreement between the user
+     13            who downloaded the software, his/her employer (which must be your employer)
+     14            and Texas Instruments Incorporated (the "License"). You may not use this
+     15            Software unless you agree to abide by the terms of the License. The License
+     16            limits your use, and you acknowledge, that the Software may not be modified,
+     17            copied or distributed unless embedded on a Texas Instruments microcontroller
+     18            or used solely and exclusively in conjunction with a Texas Instruments radio
+     19            frequency transceiver, which is integrated into your product. Other than for
+     20            the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+     21            works of, modify, distribute, perform, display or sell this Software and/or
+     22            its documentation for any purpose.
+     23          
+     24            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+     25            PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+     26            INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
+     27            NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+     28            TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     29            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+     30            LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+     31            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
+     32            OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
+     33            OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+     34            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     35          
+     36            Should you have any questions regarding your right to use this Software,
+     37            contact Texas Instruments Incorporated at www.TI.com.
+     38          **************************************************************************************************/
+     39          
+     40          /*********************************************************************
+     41           * INCLUDES
+     42           */
+     43          #include "ZComdef.h"
+     44          #include "OSAL.h"
+     45          #include "OSAL_Nv.h"
+     46          #include "AddrMgr.h"
+     47          #include "AssocList.h"
+     48          #include "BindingTable.h"
+     49          #include "nwk_util.h"
+     50          #include "nwk_globals.h"
+     51          #include "APS.h"
+     52          #include "ssp.h"
+     53          #include "rtg.h"
+     54          #include "ZDConfig.h"
+     55          #include "ZGlobals.h"
+     56          
+     57          #include <string.h>
+     58          
+     59          #if defined ( LCD_SUPPORTED )
+     60            #include "OnBoard.h"
+     61          #endif
+     62          
+     63          /* HAL */
+     64          #include "hal_lcd.h"
+     65          #include "hal_uart.h"
+     66          
+     67          /*********************************************************************
+     68           * MACROS
+     69           */
+     70          
+     71          /*********************************************************************
+     72           * CONSTANTS
+     73           */
+     74          
+     75          // Maximums for the data buffer queue
+     76          #define NWK_MAX_DATABUFS_WAITING    8     // Waiting to be sent to MAC
+     77          #define NWK_MAX_DATABUFS_SCHEDULED  5     // Timed messages to be sent
+     78          #define NWK_MAX_DATABUFS_CONFIRMED  5     // Held after MAC confirms
+     79          #define NWK_MAX_DATABUFS_TOTAL      12    // Total number of buffers
+     80          
+     81          // 1-255 (0 -> 256) X RTG_TIMER_INTERVAL
+     82          // A known shortcoming is that when a message is enqueued as "hold" for a
+     83          // sleeping device, the timer tick may have counted down to 1, so that msg
+     84          // will not be held as long as expected. If NWK_INDIRECT_MSG_TIMEOUT is set to 1
+     85          // the hold time will vary randomly from 0 - CNT_RTG_TIMER ticks.
+     86          // So the hold time will vary within this interval:
+     87          // { (NWK_INDIRECT_MSG_TIMEOUT-1)*CNT_RTG_TIMER,
+     88          //                                    NWK_INDIRECT_MSG_TIMEOUT*CNT_RTG_TIMER }
+     89          #define NWK_INDIRECT_CNT_RTG_TMR    1
+     90          // To hold msg for sleeping end devices for 30 secs:
+     91          // #define CNT_RTG_TIMER            1
+     92          // #define NWK_INDIRECT_MSG_TIMEOUT 30
+     93          // To hold msg for sleeping end devices for 30 mins:
+     94          // #define CNT_RTG_TIMER            60
+     95          // #define NWK_INDIRECT_MSG_TIMEOUT 30
+     96          // To hold msg for sleeping end devices for 30 days:
+     97          // #define CNT_RTG_TIMER            60
+     98          // #define NWK_INDIRECT_MSG_TIMEOUT (30 * 24 * 60)
+     99          // Maximum msgs to hold per associated device.
+    100          #define NWK_INDIRECT_MSG_MAX_PER    3
+    101          // Maximum total msgs to hold for all associated devices.
+    102          #define NWK_INDIRECT_MSG_MAX_ALL    \
+    103                                      (NWK_MAX_DATABUFS_TOTAL - NWK_INDIRECT_MSG_MAX_PER)
+    104          
+    105          /*********************************************************************
+    106           * TYPEDEFS
+    107           */
+    108          
+    109          /*********************************************************************
+    110           * NWK GLOBAL VARIABLES
+    111           */
+    112          
+    113          // Variables for MAX list size
+
+   \                                 In  segment CODE_C, align 1
+    114          CONST uint16 gNWK_MAX_DEVICE_LIST = NWK_MAX_DEVICES;
+   \                     gNWK_MAX_DEVICE_LIST:
+   \   000000   1500         DW 21
+    115          
+    116          // Variables for MAX Sleeping End Devices
+
+   \                                 In  segment CODE_C, align 1
+    117          CONST uint8 gNWK_MAX_SLEEPING_END_DEVICES = NWK_MAX_DEVICES - NWK_MAX_ROUTERS;
+   \                     gNWK_MAX_SLEEPING_END_DEVICES:
+   \   000000   0F           DB 15
+    118          
+    119          // Variables for MAX data buffer levels
+
+   \                                 In  segment CODE_C, align 1
+    120          CONST uint8 gNWK_MAX_DATABUFS_WAITING = NWK_MAX_DATABUFS_WAITING;
+   \                     gNWK_MAX_DATABUFS_WAITING:
+   \   000000   08           DB 8
+
+   \                                 In  segment CODE_C, align 1
+    121          CONST uint8 gNWK_MAX_DATABUFS_SCHEDULED = NWK_MAX_DATABUFS_SCHEDULED;
+   \                     gNWK_MAX_DATABUFS_SCHEDULED:
+   \   000000   05           DB 5
+
+   \                                 In  segment CODE_C, align 1
+    122          CONST uint8 gNWK_MAX_DATABUFS_CONFIRMED = NWK_MAX_DATABUFS_CONFIRMED;
+   \                     gNWK_MAX_DATABUFS_CONFIRMED:
+   \   000000   05           DB 5
+
+   \                                 In  segment CODE_C, align 1
+    123          CONST uint8 gNWK_MAX_DATABUFS_TOTAL = NWK_MAX_DATABUFS_TOTAL;
+   \                     gNWK_MAX_DATABUFS_TOTAL:
+   \   000000   0C           DB 12
+    124          
+
+   \                                 In  segment CODE_C, align 1
+    125          CONST uint8 gNWK_INDIRECT_CNT_RTG_TMR = NWK_INDIRECT_CNT_RTG_TMR;
+   \                     gNWK_INDIRECT_CNT_RTG_TMR:
+   \   000000   01           DB 1
+
+   \                                 In  segment CODE_C, align 1
+    126          CONST uint8 gNWK_INDIRECT_MSG_MAX_PER = NWK_INDIRECT_MSG_MAX_PER;
+   \                     gNWK_INDIRECT_MSG_MAX_PER:
+   \   000000   03           DB 3
+
+   \                                 In  segment CODE_C, align 1
+    127          CONST uint8 gNWK_INDIRECT_MSG_MAX_ALL = NWK_INDIRECT_MSG_MAX_ALL;
+   \                     gNWK_INDIRECT_MSG_MAX_ALL:
+   \   000000   09           DB 9
+    128          
+    129          // change this if using a different stack profile...
+    130          // Cskip array
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    131          uint16 *Cskip;
+   \                     Cskip:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+    132          
+    133          #if ( STACK_PROFILE_ID == ZIGBEEPRO_PROFILE )
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    134            uint8 CskipRtrs[1] = {0};
+   \                     CskipRtrs:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    135            uint8 CskipChldrn[1] = {0};
+   \                     CskipChldrn:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+    136          #elif ( STACK_PROFILE_ID == HOME_CONTROLS )
+    137            uint8 CskipRtrs[MAX_NODE_DEPTH+1] = {6,6,6,6,6,0};
+    138            uint8 CskipChldrn[MAX_NODE_DEPTH+1] = {20,20,20,20,20,0};
+    139          #elif ( STACK_PROFILE_ID == GENERIC_STAR )
+    140            uint8 CskipRtrs[MAX_NODE_DEPTH+1] = {5,5,5,5,5,0};
+    141            uint8 CskipChldrn[MAX_NODE_DEPTH+1] = {5,5,5,5,5,0};
+    142          #elif ( STACK_PROFILE_ID == NETWORK_SPECIFIC )
+    143            uint8 CskipRtrs[MAX_NODE_DEPTH+1] = {5,5,5,5,5,0};
+    144            uint8 CskipChldrn[MAX_NODE_DEPTH+1] = {5,5,5,5,5,0};
+    145          #endif // STACK_PROFILE_ID
+    146          
+    147          // Minimum lqi value that is required for association
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+    148          uint8 gMIN_TREE_LINK_COST = MIN_LQI_COST_3;
+   \                     gMIN_TREE_LINK_COST:
+   \   000000                DS 1
+   \   000001                REQUIRE `?<Initializer for gMIN_TREE_LINK_COST>`
+   \   000001                REQUIRE __INIT_XDATA_I
+    149          
+    150          // Statically defined Associated Device List
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    151          associated_devices_t AssociatedDevList[NWK_MAX_DEVICES];
+   \                     AssociatedDevList:
+   \   000000                DS 378
+   \   00017A                REQUIRE __INIT_XDATA_Z
+    152          
+    153          #if defined ( ZIGBEE_STOCHASTIC_ADDRESSING )
+
+   \                                 In  segment CODE_C, align 1
+    154            CONST uint16 gNWK_MIN_ROUTER_CHILDREN = NWK_MIN_ROUTER_CHILDREN;
+   \                     gNWK_MIN_ROUTER_CHILDREN:
+   \   000000   0000         DW 0
+
+   \                                 In  segment CODE_C, align 1
+    155            CONST uint16 gNWK_MIN_ENDDEVICE_CHILDREN = NWK_MIN_ENDDEVICE_CHILDREN;
+   \                     gNWK_MIN_ENDDEVICE_CHILDREN:
+   \   000000   0000         DW 0
+    156          #else
+    157            CONST uint16 gNWK_MIN_ROUTER_CHILDREN = 0;
+    158            CONST uint16 gNWK_MIN_ENDDEVICE_CHILDREN = 0;
+    159          #endif
+    160          
+
+   \                                 In  segment CODE_C, align 1
+    161          CONST uint16 gMAX_RTG_ENTRIES = MAX_RTG_ENTRIES;
+   \                     gMAX_RTG_ENTRIES:
+   \   000000   2800         DW 40
+
+   \                                 In  segment CODE_C, align 1
+    162          CONST uint16 gMAX_RTG_SRC_ENTRIES = MAX_RTG_SRC_ENTRIES;
+   \                     gMAX_RTG_SRC_ENTRIES:
+   \   000000   0C00         DW 12
+
+   \                                 In  segment CODE_C, align 1
+    163          CONST uint8 gMAX_RREQ_ENTRIES = MAX_RREQ_ENTRIES;
+   \                     gMAX_RREQ_ENTRIES:
+   \   000000   08           DB 8
+    164          
+
+   \                                 In  segment CODE_C, align 1
+    165          CONST uint8 gMAX_NEIGHBOR_ENTRIES = MAX_NEIGHBOR_ENTRIES;
+   \                     gMAX_NEIGHBOR_ENTRIES:
+   \   000000   04           DB 4
+    166          
+    167           // Table of neighboring nodes (not including child nodes)
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    168          neighborEntry_t neighborTable[MAX_NEIGHBOR_ENTRIES];
+   \                     neighborTable:
+   \   000000                DS 92
+   \   00005C                REQUIRE __INIT_XDATA_Z
+    169          
+
+   \                                 In  segment CODE_C, align 1
+    170          CONST uint8 gMAX_SOURCE_ROUTE = MAX_SOURCE_ROUTE;
+   \                     gMAX_SOURCE_ROUTE:
+   \   000000   0C           DB 12
+    171          
+
+   \                                 In  segment CODE_C, align 1
+    172          CONST uint8 gMAX_BROADCAST_QUEUED = MAX_BROADCAST_QUEUED;
+   \                     gMAX_BROADCAST_QUEUED:
+   \   000000   0A           DB 10
+    173          
+
+   \                                 In  segment CODE_C, align 1
+    174          CONST uint8 gLINK_DOWN_TRIGGER = LINK_DOWN_TRIGGER;
+   \                     gLINK_DOWN_TRIGGER:
+   \   000000   03           DB 3
+    175          
+
+   \                                 In  segment CODE_C, align 1
+    176          CONST uint8 gMAX_PASSIVE_ACK_CNT = MAX_PASSIVE_ACK_CNT;
+   \                     gMAX_PASSIVE_ACK_CNT:
+   \   000000   08           DB 8
+    177          
+    178          // Routing table
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    179          rtgEntry_t rtgTable[MAX_RTG_ENTRIES];
+   \                     rtgTable:
+   \   000000                DS 280
+   \   000118                REQUIRE __INIT_XDATA_Z
+    180          
+    181          #if defined ( ZIGBEE_SOURCE_ROUTING )
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    182            rtgSrcEntry_t rtgSrcTable[MAX_RTG_SRC_ENTRIES];
+   \                     rtgSrcTable:
+   \   000000                DS 72
+   \   000048                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    183            uint16 rtgSrcRelayList[MAX_SOURCE_ROUTE];
+   \                     rtgSrcRelayList:
+   \   000000                DS 24
+   \   000018                REQUIRE __INIT_XDATA_Z
+    184          #endif
+    185          
+    186          // Table of current RREQ packets in the network
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    187          rtDiscEntry_t rtDiscTable[MAX_RREQ_ENTRIES];
+   \                     rtDiscTable:
+   \   000000                DS 64
+   \   000040                REQUIRE __INIT_XDATA_Z
+    188          
+    189          // Table of data broadcast packets currently in circulation.
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    190          bcastEntry_t bcastTable[MAX_BCAST];
+   \                     bcastTable:
+   \   000000                DS 72
+   \   000048                REQUIRE __INIT_XDATA_Z
+    191          
+    192          // These 2 arrays are to be used as an array of struct { uint8, uint32 }.
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    193          uint8 bcastHoldHandle[MAX_BCAST];
+   \                     bcastHoldHandle:
+   \   000000                DS 9
+   \   000009                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    194          uint32 bcastHoldAckMask[MAX_BCAST];
+   \                     bcastHoldAckMask:
+   \   000000                DS 36
+   \   000024                REQUIRE __INIT_XDATA_Z
+    195          
+
+   \                                 In  segment CODE_C, align 1
+    196          CONST uint8 gMAX_BCAST = MAX_BCAST;
+   \                     gMAX_BCAST:
+   \   000000   09           DB 9
+    197          
+    198          // For tree addressing, this switch allows the allocation of a
+    199          // router address to an end device when end device address are
+    200          // all used up.  If this option is enabled, address space
+    201          // could be limited.
+
+   \                                 In  segment CODE_C, align 1
+    202          CONST uint8 gNWK_TREE_ALLOCATE_ROUTERADDR_FOR_ENDDEVICE = FALSE;
+   \                     gNWK_TREE_ALLOCATE_ROUTERADDR_FOR_ENDDEVICE:
+   \   000000   00           DB 0
+    203          
+    204          #if defined ( ZIGBEE_STOCHASTIC_ADDRESSING )
+    205          // number of link status periods after the last received address conflict report
+    206          // (network status command)
+
+   \                                 In  segment CODE_C, align 1
+    207          CONST uint8 gNWK_CONFLICTED_ADDR_EXPIRY_TIME = NWK_CONFLICTED_ADDR_EXPIRY_TIME;
+   \                     gNWK_CONFLICTED_ADDR_EXPIRY_TIME:
+   \   000000   04           DB 4
+    208          #endif
+    209          
+    210          #if defined ( ZIGBEE_FREQ_AGILITY )
+    211          CONST uint8 gNWK_FREQ_AGILITY_ALL_MAC_ERRS = NWK_FREQ_AGILITY_ALL_MAC_ERRS;
+    212          #endif
+    213          
+    214          // The time limited to one MTO RReq (Concentrator Announce) in milliseconds.
+
+   \                                 In  segment CODE_C, align 1
+    215          CONST uint16 gMTO_RREQ_LIMIT_TIME = MTO_RREQ_LIMIT_TIME;
+   \                     gMTO_RREQ_LIMIT_TIME:
+   \   000000   E803         DW 1000
+    216          
+    217          // The number of seconds a MTO routing entry will last.
+
+   \                                 In  segment CODE_C, align 1
+    218          CONST uint8 gMTO_ROUTE_EXPIRY_TIME = MTO_ROUTE_EXPIRY_TIME;
+   \                     gMTO_ROUTE_EXPIRY_TIME:
+   \   000000   FF           DB 255
+    219          
+    220          // Route Discovery Request Default Radius
+
+   \                                 In  segment CODE_C, align 1
+    221          CONST uint8 gDEFAULT_ROUTE_REQUEST_RADIUS = DEFAULT_ROUTE_REQUEST_RADIUS;
+   \                     gDEFAULT_ROUTE_REQUEST_RADIUS:
+   \   000000   1E           DB 30
+    222          
+    223          // Network message radius
+
+   \                                 In  segment CODE_C, align 1
+    224          CONST uint8 gDEF_NWK_RADIUS = DEF_NWK_RADIUS;
+   \                     gDEF_NWK_RADIUS:
+   \   000000   1E           DB 30
+    225          
+    226          #if ( ZSTACK_ROUTER_BUILD )
+    227          CONST uint16 gLINK_STATUS_JITTER_MASK = LINK_STATUS_JITTER_MASK;
+    228          #endif
+    229          
+    230          /*********************************************************************
+    231           * APS GLOBAL VARIABLES
+    232           */
+    233          
+    234          // The Maximum number of binding records
+    235          // This number is defined in f8wConfig.cfg - change it there.
+
+   \                                 In  segment CODE_C, align 1
+    236          CONST uint16 gNWK_MAX_BINDING_ENTRIES = NWK_MAX_BINDING_ENTRIES;
+   \                     gNWK_MAX_BINDING_ENTRIES:
+   \   000000   0400         DW 4
+    237          
+    238          #if defined ( REFLECTOR )
+    239            // The Maximum number of cluster IDs in a binding record
+    240            // This number is defined in f8wConfig.cfg - change it there.
+
+   \                                 In  segment CODE_C, align 1
+    241            CONST uint8 gMAX_BINDING_CLUSTER_IDS = MAX_BINDING_CLUSTER_IDS;
+   \                     gMAX_BINDING_CLUSTER_IDS:
+   \   000000   04           DB 4
+    242          
+
+   \                                 In  segment CODE_C, align 1
+    243            CONST uint16 gBIND_REC_SIZE = sizeof( BindingEntry_t );
+   \                     gBIND_REC_SIZE:
+   \   000000   0E00         DW 14
+    244          
+    245            // Binding Table
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    246            BindingEntry_t BindingTable[NWK_MAX_BINDING_ENTRIES];
+   \                     BindingTable:
+   \   000000                DS 56
+   \   000038                REQUIRE __INIT_XDATA_Z
+    247          #endif
+    248          
+    249          // Maximum number allowed in the groups table.
+
+   \                                 In  segment CODE_C, align 1
+    250          CONST uint8 gAPS_MAX_GROUPS = APS_MAX_GROUPS;
+   \                     gAPS_MAX_GROUPS:
+   \   000000   10           DB 16
+    251          
+    252          // APS End Device Broadcast Table
+    253          #if ( ZG_BUILD_ENDDEVICE_TYPE )
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    254            apsEndDeviceBroadcast_t apsEndDeviceBroadcastTable[APS_MAX_ENDDEVICE_BROADCAST_ENTRIES];
+   \                     apsEndDeviceBroadcastTable:
+   \   000000                DS 90
+   \   00005A                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+    255            uint8 gAPS_MAX_ENDDEVICE_BROADCAST_ENTRIES = APS_MAX_ENDDEVICE_BROADCAST_ENTRIES;
+   \                     gAPS_MAX_ENDDEVICE_BROADCAST_ENTRIES:
+   \   000000                DS 1
+   \   000001                REQUIRE `?<Initializer for gAPS_MAX_ENDDEVICE_BROADCAST`
+   \   000001                REQUIRE __INIT_XDATA_I
+    256          #endif
+    257          
+    258          /*********************************************************************
+    259           * SECURITY GLOBAL VARIABLES
+    260           */
+    261          
+    262          // This is the default pre-configured key,
+    263          // change this to make a unique key
+    264          // SEC_KEY_LEN is defined in ssp.h.
+    265          
+    266          #if defined ( DEFAULT_KEY )
+
+   \                                 In  segment CODE_C, align 1
+    267          CONST uint8 defaultKey[SEC_KEY_LEN] = DEFAULT_KEY;
+   \                     defaultKey:
+   \   000000   01           DB 1
+   \   000001   03           DB 3
+   \   000002   05           DB 5
+   \   000003   07           DB 7
+   \   000004   09           DB 9
+   \   000005   0B           DB 11
+   \   000006   0D           DB 13
+   \   000007   0F           DB 15
+   \   000008   00           DB 0
+   \   000009   02           DB 2
+   \   00000A   04           DB 4
+   \   00000B   06           DB 6
+   \   00000C   08           DB 8
+   \   00000D   0A           DB 10
+   \   00000E   0C           DB 12
+   \   00000F   0D           DB 13
+    268          #else
+    269          CONST uint8 defaultKey[SEC_KEY_LEN] =
+    270          {
+    271          #if defined ( APP_TP ) || defined ( APP_TP2 )
+    272            // Key for ZigBee Conformance Testing
+    273            0xbb, 0xbb, 0xbb, 0xbb, 0xbb, 0xbb, 0xbb, 0xbb,
+    274            0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa
+    275          #else
+    276            // Key for In-House Testing
+    277            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+    278            0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F
+    279          #endif
+    280          };
+    281          #endif
+    282          
+    283          // This is the default pre-configured Trust Center Link key,
+    284          // change this to make a unique key, SEC_KEY_LEN is defined in ssp.h.
+
+   \                                 In  segment CODE_C, align 1
+    285          CONST uint8 defaultTCLinkKey[SEC_KEY_LEN] = DEFAULT_TC_LINK_KEY;
+   \                     defaultTCLinkKey:
+   \   000000   5A           DB 90
+   \   000001   69           DB 105
+   \   000002   67           DB 103
+   \   000003   42           DB 66
+   \   000004   65           DB 101
+   \   000005   65           DB 101
+   \   000006   41           DB 65
+   \   000007   6C           DB 108
+   \   000008   6C           DB 108
+   \   000009   69           DB 105
+   \   00000A   61           DB 97
+   \   00000B   6E           DB 110
+   \   00000C   63           DB 99
+   \   00000D   65           DB 101
+   \   00000E   30           DB 48
+   \   00000F   39           DB 57
+    286          
+    287          /*********************************************************************
+    288           * GLOBAL VARIABLES - Statistics
+    289           */
+    290          
+    291          #if defined ( PACKET_FILTER_STATS )
+    292            uint32 apsInvalidPackets = 0;
+    293            uint32 apsSecurityFailures = 0;
+    294            uint32 nwkInvalidPackets = 0;
+    295            uint32 nwkSecurityFailures = 0;
+    296          #endif
+    297          
+    298          /*********************************************************************
+    299           * STATUS STRINGS
+    300           */
+    301          #if ( LCD_SUPPORTED || HAL_UART_TEST )
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    302            const char PingStr[]         = "Ping Rcvd from";
+   \                     PingStr:
+   \   000000   50696E67     DB "Ping Rcvd from"
+   \            20526376
+   \            64206672
+   \            6F6D00  
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    303            const char AssocCnfStr[]     = "Assoc Cnf";
+   \                     AssocCnfStr:
+   \   000000   4173736F     DB "Assoc Cnf"
+   \            6320436E
+   \            6600    
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    304            const char SuccessStr[]      = "Success";
+   \                     SuccessStr:
+   \   000000   53756363     DB "Success"
+   \            65737300
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    305            const char EndDeviceStr[]    = "EndDevice:";
+   \                     EndDeviceStr:
+   \   000000   456E6444     DB "EndDevice:"
+   \            65766963
+   \            653A00  
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    306            const char ParentStr[]       = "Parent:";
+   \                     ParentStr:
+   \   000000   50617265     DB "Parent:"
+   \            6E743A00
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    307            const char ZigbeeCoordStr[]  = "ZigBee Coord";
+   \                     ZigbeeCoordStr:
+   \   000000   5A696742     DB "ZigBee Coord"
+   \            65652043
+   \            6F6F7264
+   \            00      
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    308            const char NetworkIDStr[]    = "Network ID:";
+   \                     NetworkIDStr:
+   \   000000   4E657477     DB "Network ID:"
+   \            6F726B20
+   \            49443A00
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    309            const char RouterStr[]       = "Router:";
+   \                     RouterStr:
+   \   000000   526F7574     DB "Router:"
+   \            65723A00
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    310            const char OrphanRspStr[]    = "Orphan Response";
+   \                     OrphanRspStr:
+   \   000000   4F727068     DB "Orphan Response"
+   \            616E2052
+   \            6573706F
+   \            6E736500
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    311            const char SentStr[]         = "Sent";
+   \                     SentStr:
+   \   000000   53656E74     DB "Sent"
+   \            00      
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    312            const char FailedStr[]       = "Failed";
+   \                     FailedStr:
+   \   000000   4661696C     DB "Failed"
+   \            656400  
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    313            const char AssocRspFailStr[] = "Assoc Rsp fail";
+   \                     AssocRspFailStr:
+   \   000000   4173736F     DB "Assoc Rsp fail"
+   \            63205273
+   \            70206661
+   \            696C00  
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    314            const char AssocIndStr[]     = "Assoc Ind";
+   \                     AssocIndStr:
+   \   000000   4173736F     DB "Assoc Ind"
+   \            6320496E
+   \            6400    
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    315            const char AssocCnfFailStr[] = "Assoc Cnf fail";
+   \                     AssocCnfFailStr:
+   \   000000   4173736F     DB "Assoc Cnf fail"
+   \            6320436E
+   \            66206661
+   \            696C00  
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    316            const char EnergyLevelStr[]  = "Energy Level";
+   \                     EnergyLevelStr:
+   \   000000   456E6572     DB "Energy Level"
+   \            6779204C
+   \            6576656C
+   \            00      
+
+   \                                 In  segment XDATA_ROM_C, align 1
+    317            const char ScanFailedStr[]   = "Scan Failed";
+   \                     ScanFailedStr:
+   \   000000   5363616E     DB "Scan Failed"
+   \            20466169
+   \            6C656400
+    318          #endif
+    319          
+    320          /*********************************************************************
+    321           * @fn       nwk_globals_init()
+    322           *
+    323           * @brief
+    324           *
+    325           *   Initialize nwk layer globals.  These are the system defaults and
+    326           *   should be changed by the user here.  The default definitions are
+    327           *   defined in nwk.h or NLMEDE.h.
+    328           *
+    329           * @param   none
+    330           *
+    331           * @return  none
+    332           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    333          void nwk_globals_init( void )
+   \                     nwk_globals_init:
+    334          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    335            AddrMgrInit( NWK_MAX_ADDRESSES );
+   \   000004                ; Setup parameters for call to function AddrMgrInit
+   \   000004   7A1A         MOV     R2,#0x1a
+   \   000006   7B00         MOV     R3,#0x0
+   \   000008   12....       LCALL   ??AddrMgrInit?relay
+    336          
+    337          #if !defined ( ZIGBEE_STOCHASTIC_ADDRESSING )
+    338            if ( ZSTACK_ROUTER_BUILD )
+    339            {
+    340              // Initialize the Cskip Table
+    341              Cskip = osal_mem_alloc(sizeof(uint16) *(MAX_NODE_DEPTH+1));
+    342              RTG_FillCSkipTable(CskipChldrn, CskipRtrs, MAX_NODE_DEPTH, Cskip);
+    343            }
+    344          #endif
+    345          
+    346            // To compile out the Link Status Feature, set NWK_LINK_STATUS_PERIOD
+    347            // to 0 (compiler flag).
+    348            if ( ZSTACK_ROUTER_BUILD && NWK_LINK_STATUS_PERIOD )
+    349            {
+    350              NLME_InitLinkStatus();
+    351            }
+    352          
+    353          #if defined ( ZIGBEE_FREQ_AGILITY )
+    354            NwkFreqAgilityInit();
+    355          #endif
+    356          }
+   \   00000B                REQUIRE ?Subroutine0
+   \   00000B                ; // Fall through to label ?Subroutine0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine0:
+   \   000000   D083         POP     DPH
+   \   000002   D082         POP     DPL
+   \   000004   02....       LJMP    ?BRET
+    357          
+    358          /*********************************************************************
+    359           * @fn       NIB_init()
+    360           *
+    361           * @brief
+    362           *
+    363           *   Initialize attribute values in NIB
+    364           *
+    365           * @param   none
+    366           *
+    367           * @return  none
+    368           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    369          void NIB_init()
+   \                     NIB_init:
+    370          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    371            _NIB.SequenceNum = LO_UINT16(osal_rand());
+   \   000004                ; Setup parameters for call to function osal_rand
+   \   000004   12....       LCALL   ??osal_rand?relay
+   \   000007   EA           MOV     A,R2
+   \   000008   90....       MOV     DPTR,#_NIB
+   \   00000B   F0           MOVX    @DPTR,A
+    372          
+    373            _NIB.nwkProtocolVersion = ZB_PROT_VERS;
+   \   00000C   90....       MOV     DPTR,#_NIB + 17
+   \   00000F   7402         MOV     A,#0x2
+   \   000011   F0           MOVX    @DPTR,A
+    374            _NIB.MaxDepth = MAX_NODE_DEPTH;
+   \   000012   90....       MOV     DPTR,#_NIB + 4
+   \   000015   7414         MOV     A,#0x14
+   \   000017   F0           MOVX    @DPTR,A
+    375          
+    376          #if ( NWK_MODE == NWK_MODE_MESH )
+    377            _NIB.beaconOrder = BEACON_ORDER_NO_BEACONS;
+   \   000018   90....       MOV     DPTR,#_NIB + 40
+   \   00001B   740F         MOV     A,#0xf
+   \   00001D   F0           MOVX    @DPTR,A
+    378            _NIB.superFrameOrder = BEACON_ORDER_NO_BEACONS;
+   \   00001E   A3           INC     DPTR
+   \   00001F   F0           MOVX    @DPTR,A
+    379          #endif
+    380          
+    381            // BROADCAST SETTINGS:
+    382            // *******************
+    383            //   Broadcast Delivery Time
+    384            //     - set to multiples of 100ms
+    385            //     - should be 500ms more than the retry time
+    386            //       -  "retry time" = PassiveAckTimeout * (MaxBroadcastRetries + 1)
+    387            //   Passive Ack Timeout
+    388            //     - set to multiples of 100ms
+    389            _NIB.BroadcastDeliveryTime = zgBcastDeliveryTime;
+   \   000020   90....       MOV     DPTR,#zgBcastDeliveryTime
+   \   000023   E0           MOVX    A,@DPTR
+   \   000024   90....       MOV     DPTR,#_NIB + 7
+   \   000027   F0           MOVX    @DPTR,A
+    390            _NIB.PassiveAckTimeout     = zgPassiveAckTimeout;
+   \   000028   90....       MOV     DPTR,#zgPassiveAckTimeout
+   \   00002B   E0           MOVX    A,@DPTR
+   \   00002C   90....       MOV     DPTR,#_NIB + 1
+   \   00002F   F0           MOVX    @DPTR,A
+    391            _NIB.MaxBroadcastRetries   = zgMaxBcastRetires;
+   \   000030   90....       MOV     DPTR,#zgMaxBcastRetires
+   \   000033   E0           MOVX    A,@DPTR
+   \   000034   90....       MOV     DPTR,#_NIB + 2
+   \   000037   F0           MOVX    @DPTR,A
+    392          
+    393            _NIB.ReportConstantCost = 0;
+   \   000038   90....       MOV     DPTR,#_NIB + 8
+   \   00003B   E4           CLR     A
+   \   00003C   F0           MOVX    @DPTR,A
+    394            _NIB.RouteDiscRetries = 0;
+   \   00003D   A3           INC     DPTR
+   \   00003E   F0           MOVX    @DPTR,A
+    395            _NIB.SecureAllFrames = USE_NWK_SECURITY;
+   \   00003F   90....       MOV     DPTR,#_NIB + 11
+   \   000042   F0           MOVX    @DPTR,A
+    396            _NIB.nwkAllFresh = NWK_ALL_FRESH;
+   \   000043   90....       MOV     DPTR,#_NIB + 104
+   \   000046   04           INC     A
+   \   000047   F0           MOVX    @DPTR,A
+    397          
+    398            if ( ZG_SECURE_ENABLED )
+    399            {
+    400              _NIB.SecurityLevel = SECURITY_LEVEL;
+    401            }
+    402            else
+    403            {
+    404              _NIB.SecurityLevel = 0;
+   \   000048   90....       MOV     DPTR,#_NIB + 12
+   \   00004B   E4           CLR     A
+   \   00004C   F0           MOVX    @DPTR,A
+    405            }
+    406          
+    407          #if defined ( ZIGBEEPRO )
+    408            _NIB.SymLink = FALSE;
+   \   00004D   A3           INC     DPTR
+   \   00004E   F0           MOVX    @DPTR,A
+    409          #else
+    410            _NIB.SymLink = TRUE;
+    411          #endif
+    412          
+    413            _NIB.CapabilityFlags = ZDO_Config_Node_Descriptor.CapabilityFlags;
+   \   00004F   90....       MOV     DPTR,#ZDO_Config_Node_Descriptor + 2
+   \   000052   E0           MOVX    A,@DPTR
+   \   000053   90....       MOV     DPTR,#_NIB + 14
+   \   000056   F0           MOVX    @DPTR,A
+    414          
+    415            _NIB.TransactionPersistenceTime = zgIndirectMsgTimeout;
+   \   000057   90....       MOV     DPTR,#zgIndirectMsgTimeout
+   \   00005A   E0           MOVX    A,@DPTR
+   \   00005B   90....       MOV     DPTR,#_NIB + 15
+   \   00005E   F0           MOVX    @DPTR,A
+   \   00005F   A3           INC     DPTR
+   \   000060   E4           CLR     A
+   \   000061   F0           MOVX    @DPTR,A
+    416          
+    417            _NIB.RouteDiscoveryTime = zgRouteDiscoveryTime;
+   \   000062   90....       MOV     DPTR,#zgRouteDiscoveryTime
+   \   000065   E0           MOVX    A,@DPTR
+   \   000066   90....       MOV     DPTR,#_NIB + 18
+   \   000069   F0           MOVX    @DPTR,A
+    418            _NIB.RouteExpiryTime = zgRouteExpiryTime;
+   \   00006A   90....       MOV     DPTR,#zgRouteExpiryTime
+   \   00006D   E0           MOVX    A,@DPTR
+   \   00006E   90....       MOV     DPTR,#_NIB + 19
+   \   000071   12....       LCALL   ?Subroutine2 & 0xFFFF
+    419          
+    420            _NIB.nwkDevAddress = INVALID_NODE_ADDR;
+    421            _NIB.nwkLogicalChannel = 0;
+   \                     ??CrossCallReturnLabel_2:
+   \   000074   A3           INC     DPTR
+   \   000075   E4           CLR     A
+   \   000076   12....       LCALL   ?Subroutine2 & 0xFFFF
+    422            _NIB.nwkCoordAddress = INVALID_NODE_ADDR;
+    423            osal_memset( _NIB.nwkCoordExtAddress, 0, Z_EXTADDR_LEN );
+   \                     ??CrossCallReturnLabel_3:
+   \   000079                ; Setup parameters for call to function osal_memset
+   \   000079   7C08         MOV     R4,#0x8
+   \   00007B   7D00         MOV     R5,#0x0
+   \   00007D   7900         MOV     R1,#0x0
+   \   00007F   7A..         MOV     R2,#(_NIB + 25) & 0xff
+   \   000081   7B..         MOV     R3,#((_NIB + 25) >> 8) & 0xff
+   \   000083   12....       LCALL   ??osal_memset?relay
+    424            _NIB.nwkPanId = INVALID_NODE_ADDR;
+   \   000086   90....       MOV     DPTR,#_NIB + 33
+   \   000089   74FE         MOV     A,#-0x2
+   \   00008B   F0           MOVX    @DPTR,A
+   \   00008C   A3           INC     DPTR
+   \   00008D   04           INC     A
+   \   00008E   F0           MOVX    @DPTR,A
+    425          
+    426            osal_cpyExtAddr( _NIB.extendedPANID, zgExtendedPANID );
+   \   00008F                ; Setup parameters for call to function sAddrExtCpy
+   \   00008F   7C..         MOV     R4,#zgExtendedPANID & 0xff
+   \   000091   7D..         MOV     R5,#(zgExtendedPANID >> 8) & 0xff
+   \   000093   7A..         MOV     R2,#(_NIB + 53) & 0xff
+   \   000095   7B..         MOV     R3,#((_NIB + 53) >> 8) & 0xff
+   \   000097   12....       LCALL   ??sAddrExtCpy?relay
+    427          
+    428            _NIB.nwkKeyLoaded = FALSE;
+   \   00009A   90....       MOV     DPTR,#_NIB + 61
+   \   00009D   E4           CLR     A
+   \   00009E   F0           MOVX    @DPTR,A
+    429          
+    430          #if defined ( ZIGBEE_STOCHASTIC_ADDRESSING )
+    431            _NIB.nwkAddrAlloc  = NWK_ADDRESSING_STOCHASTIC;
+   \   00009F   90....       MOV     DPTR,#_NIB + 96
+   \   0000A2   7402         MOV     A,#0x2
+   \   0000A4   F0           MOVX    @DPTR,A
+    432            _NIB.nwkUniqueAddr = FALSE;
+   \   0000A5   A3           INC     DPTR
+   \   0000A6   E4           CLR     A
+   \   0000A7   F0           MOVX    @DPTR,A
+    433          #else
+    434            _NIB.nwkAddrAlloc  = NWK_ADDRESSING_DISTRIBUTED;
+    435            _NIB.nwkUniqueAddr = TRUE;
+    436          #endif
+    437          
+    438            _NIB.nwkLinkStatusPeriod = NWK_LINK_STATUS_PERIOD;
+   \   0000A8   A3           INC     DPTR
+   \   0000A9   740F         MOV     A,#0xf
+   \   0000AB   F0           MOVX    @DPTR,A
+    439            _NIB.nwkRouterAgeLimit = NWK_ROUTE_AGE_LIMIT;
+   \   0000AC   A3           INC     DPTR
+   \   0000AD   7403         MOV     A,#0x3
+   \   0000AF   F0           MOVX    @DPTR,A
+    440          
+    441            //MTO and source routing
+    442            _NIB.nwkConcentratorDiscoveryTime = zgConcentratorDiscoveryTime;
+   \   0000B0   90....       MOV     DPTR,#zgConcentratorDiscoveryTime
+   \   0000B3   E0           MOVX    A,@DPTR
+   \   0000B4   90....       MOV     DPTR,#_NIB + 102
+   \   0000B7   F0           MOVX    @DPTR,A
+    443            _NIB.nwkIsConcentrator = zgConcentratorEnable;
+   \   0000B8   90....       MOV     DPTR,#zgConcentratorEnable
+   \   0000BB   E0           MOVX    A,@DPTR
+   \   0000BC   90....       MOV     DPTR,#_NIB + 101
+   \   0000BF   F0           MOVX    @DPTR,A
+    444            _NIB.nwkConcentratorRadius = zgConcentratorRadius;
+   \   0000C0   90....       MOV     DPTR,#zgConcentratorRadius
+   \   0000C3   E0           MOVX    A,@DPTR
+   \   0000C4   90....       MOV     DPTR,#_NIB + 103
+   \   0000C7   F0           MOVX    @DPTR,A
+    445          
+    446          #if defined ( ZIGBEE_MULTICAST )
+    447            _NIB.nwkUseMultiCast = TRUE;
+   \   0000C8   90....       MOV     DPTR,#_NIB + 100
+   \   0000CB   7401         MOV     A,#0x1
+   \   0000CD   F0           MOVX    @DPTR,A
+    448          #else
+    449            _NIB.nwkUseMultiCast = FALSE;
+    450          #endif
+    451          
+    452          #if defined ( NV_RESTORE )
+    453            if ( osal_nv_read( ZCD_NV_NWKMGR_ADDR, 0, sizeof( _NIB.nwkManagerAddr ),
+    454                               &_NIB.nwkManagerAddr ) != SUCCESS )
+    455          #endif
+    456            {
+    457              _NIB.nwkManagerAddr = 0x0000;
+   \   0000CE   90....       MOV     DPTR,#_NIB + 105
+   \   0000D1   E4           CLR     A
+   \   0000D2   F0           MOVX    @DPTR,A
+   \   0000D3   A3           INC     DPTR
+   \   0000D4   F0           MOVX    @DPTR,A
+    458            }
+    459          
+    460            _NIB.nwkUpdateId = 0;
+   \   0000D5   90....       MOV     DPTR,#_NIB + 109
+   \   0000D8   F0           MOVX    @DPTR,A
+    461            _NIB.nwkTotalTransmissions = 0;
+   \   0000D9   90....       MOV     DPTR,#_NIB + 107
+   \   0000DC   F0           MOVX    @DPTR,A
+   \   0000DD   A3           INC     DPTR
+   \   0000DE   F0           MOVX    @DPTR,A
+    462          
+    463            if ( ZSTACK_ROUTER_BUILD )
+    464            {
+    465          #if defined ( ZIGBEE_STOCHASTIC_ADDRESSING )
+    466              NLME_InitStochasticAddressing();
+    467          #else
+    468              NLME_InitTreeAddressing();
+    469          #endif
+    470            }
+    471          }
+   \   0000DF   02....       LJMP    ?Subroutine0 & 0xFFFF
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine2:
+   \   000000   F0           MOVX    @DPTR,A
+   \   000001   A3           INC     DPTR
+   \   000002   74FE         MOV     A,#-0x2
+   \   000004   F0           MOVX    @DPTR,A
+   \   000005   A3           INC     DPTR
+   \   000006   04           INC     A
+   \   000007   F0           MOVX    @DPTR,A
+   \   000008   22           RET
+    472          
+    473          /*********************************************************************
+    474           * @fn       nwk_Status()
+    475           *
+    476           * @brief
+    477           *
+    478           *   Status report.
+    479           *
+    480           * @param   statusCode
+    481           * @param   statusValue
+    482           *
+    483           * @return  none
+    484           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    485          void nwk_Status( uint16 statusCode, uint16 statusValue )
+   \                     nwk_Status:
+    486          {
+   \   000000   74F4         MOV     A,#-0xc
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 12
+   \   000005                ; Auto size: 50
+   \   000005   74CE         MOV     A,#-0x32
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   00000A   8C..         MOV     ?V0 + 0,R4
+   \   00000C   8D..         MOV     ?V0 + 1,R5
+    487          #if defined ( LCD_SUPPORTED )
+    488            switch ( statusCode )
+    489            {
+    490              case NWK_STATUS_COORD_ADDR:
+    491                if ( ZSTACK_ROUTER_BUILD )
+    492                {
+    493                  HalLcdWriteString( (char*)ZigbeeCoordStr, HAL_LCD_LINE_1 );
+    494                  HalLcdWriteStringValue( (char*)NetworkIDStr, statusValue, 16, HAL_LCD_LINE_2 );
+    495                  BuzzerControl( BUZZER_BLIP );
+    496                }
+    497                break;
+    498          
+    499              case NWK_STATUS_ROUTER_ADDR:
+    500                if ( ZSTACK_ROUTER_BUILD )
+    501                {
+    502                  HalLcdWriteStringValue( (char*)RouterStr, statusValue, 16, HAL_LCD_LINE_1 );
+    503                }
+    504                break;
+    505          
+    506              case NWK_STATUS_ORPHAN_RSP:
+    507                if ( ZSTACK_ROUTER_BUILD )
+    508                {
+    509                  if ( statusValue == ZSuccess )
+    510                    HalLcdWriteScreen( (char*)OrphanRspStr, (char*)SentStr );
+    511                  else
+    512                    HalLcdWriteScreen( (char*)OrphanRspStr, (char*)FailedStr );
+    513                }
+    514                break;
+    515          
+    516              case NWK_ERROR_ASSOC_RSP:
+    517                if ( ZSTACK_ROUTER_BUILD )
+    518                {
+    519                  HalLcdWriteString( (char*)AssocRspFailStr, HAL_LCD_LINE_1 );
+    520                  HalLcdWriteValue( (uint32)(statusValue), 16, HAL_LCD_LINE_2 );
+    521                }
+    522                break;
+    523          
+    524              case NWK_STATUS_ED_ADDR:
+    525                if ( ZSTACK_END_DEVICE_BUILD )
+    526                {
+    527                  HalLcdWriteStringValue( (char*)EndDeviceStr, statusValue, 16, HAL_LCD_LINE_1 );
+    528                }
+    529                break;
+    530          
+    531              case NWK_STATUS_PARENT_ADDR:
+    532                      HalLcdWriteStringValue( (char*)ParentStr, statusValue, 16, HAL_LCD_LINE_2 );
+    533                break;
+    534          
+    535              case NWK_STATUS_ASSOC_CNF:
+    536                HalLcdWriteScreen( (char*)AssocCnfStr, (char*)SuccessStr );
+    537                break;
+    538          
+    539              case NWK_ERROR_ASSOC_CNF_DENIED:
+    540                HalLcdWriteString((char*)AssocCnfFailStr, HAL_LCD_LINE_1 );
+    541                HalLcdWriteValue( (uint32)(statusValue), 16, HAL_LCD_LINE_2 );
+    542                break;
+    543          
+    544              case NWK_ERROR_ENERGY_SCAN_FAILED:
+    545                HalLcdWriteScreen( (char*)EnergyLevelStr, (char*)ScanFailedStr );
+    546                break;
+    547            }
+    548          #endif
+    549            
+    550          #if defined ( HAL_UART_TEST )
+    551            switch ( statusCode )
+   \   00000E   8A..         MOV     ?V0 + 2,R2
+   \   000010   8B..         MOV     ?V0 + 3,R3
+   \   000012   78..         MOV     R0,#?V0 + 2
+   \   000014   12....       LCALL   ?US_SWITCH_SPARSE
+   \                     `?<Jumptable for nwk_Status>_0`:
+   \   000017   0000         DW        0
+   \   000019   0500         DW        5
+   \   00001B   0200         DW        2
+   \   00001D   ....         DW        ??nwk_Status_0
+   \   00001F   0300         DW        3
+   \   000021   ....         DW        ??nwk_Status_1
+   \   000023   0400         DW        4
+   \   000025   ....         DW        ??nwk_Status_2
+   \   000027   0310         DW        4099
+   \   000029   ....         DW        ??nwk_Status_3
+   \   00002B   0410         DW        4100
+   \   00002D   ....         DW        ??nwk_Status_4
+   \   00002F   ....         DW        ??nwk_Status_5
+    552            {
+    553              char buf[50];
+    554              case NWK_STATUS_COORD_ADDR:
+    555                if ( ZSTACK_ROUTER_BUILD )
+    556                {
+    557                  strcpy(buf, ZigbeeCoordStr);
+    558                  strcat(buf, "\n");
+    559                  strcat(buf, NetworkIDStr);
+    560                  strcat(buf, " ");
+    561                  _ltoa( statusValue, (uint8 *)&buf[strlen(buf)], 16 );
+    562                  strcat(buf, "\n");
+    563                  HalUARTWrite(HAL_UART_PORT_0, (uint8 *)buf, strlen(buf));
+    564                }
+    565                break;
+    566          
+    567              case NWK_STATUS_ROUTER_ADDR:
+    568                if ( ZSTACK_ROUTER_BUILD )
+    569                {
+    570                  strcpy(buf, RouterStr);
+    571                  strcat(buf, " ");
+    572                  _ltoa( statusValue, (uint8 *)&buf[strlen(buf)], 16 );
+    573                  strcat(buf, "\n");
+    574                  HalUARTWrite(HAL_UART_PORT_0, (uint8 *)buf, strlen(buf));
+    575                }
+    576                break;
+    577          
+    578              case NWK_STATUS_ORPHAN_RSP:
+    579                if ( ZSTACK_ROUTER_BUILD )
+    580                {
+    581                  if ( statusValue == ZSuccess )
+    582                  {
+    583                    strcpy(buf, OrphanRspStr);
+    584                    strcat(buf, " ");
+    585                    strcat(buf, SentStr);
+    586                    strcat(buf, "\n");
+    587                    HalUARTWrite(HAL_UART_PORT_0, (uint8 *)buf, strlen(buf));
+    588                  }
+    589                  else
+    590                  {
+    591                    strcpy(buf, OrphanRspStr);
+    592                    strcat(buf, " ");
+    593                    strcat(buf, FailedStr);
+    594                    strcat(buf, "\n");
+    595                    HalUARTWrite(HAL_UART_PORT_0, (uint8 *)buf, strlen(buf));
+    596                  }
+    597                }
+    598                break;
+    599          
+    600              case NWK_ERROR_ASSOC_RSP:
+    601                if ( ZSTACK_ROUTER_BUILD )
+    602                {
+    603                  strcpy(buf, AssocRspFailStr);
+    604                  _ltoa( statusValue, (uint8 *)&buf[strlen(buf)], 16 );
+    605                  strcat(buf, "\n");
+    606                  HalUARTWrite(HAL_UART_PORT_0, (uint8 *)buf, strlen(buf));
+    607                }
+    608                break;
+    609          
+    610              case NWK_STATUS_ED_ADDR:
+    611                if ( ZSTACK_END_DEVICE_BUILD )
+    612                {
+    613                  strcpy(buf, EndDeviceStr);
+   \                     ??nwk_Status_1:
+   \   000031                ; Setup parameters for call to function strcpy
+   \   000031   7C..         MOV     R4,#EndDeviceStr & 0xff
+   \   000033   7D..         MOV     R5,#(EndDeviceStr >> 8) & 0xff
+   \                     ??nwk_Status_6:
+   \   000035   85..82       MOV     DPL,?XSP + 0
+   \   000038   85..83       MOV     DPH,?XSP + 1
+   \   00003B   AA82         MOV     R2,DPL
+   \   00003D   AB83         MOV     R3,DPH
+   \   00003F   12....       LCALL   ??strcpy?relay
+    614                  strcat(buf, " ");
+   \   000042                ; Setup parameters for call to function strcat
+   \   000042   7C..         MOV     R4,#`?<Constant " ">` & 0xff
+   \   000044   7D..         MOV     R5,#(`?<Constant " ">` >> 8) & 0xff
+   \                     ??nwk_Status_7:
+   \   000046   12....       LCALL   ?Subroutine1 & 0xFFFF
+    615                  _ltoa( statusValue, (uint8 *)&buf[strlen(buf)], 16 );
+   \                     ??CrossCallReturnLabel_0:
+   \   000049   8A..         MOV     ?V0 + 2,R2
+   \   00004B   8B..         MOV     ?V0 + 3,R3
+   \   00004D   85..82       MOV     DPL,?XSP + 0
+   \   000050   85..83       MOV     DPH,?XSP + 1
+   \   000053   E582         MOV     A,DPL
+   \   000055   25..         ADD     A,?V0 + 2
+   \   000057   F5..         MOV     ?V0 + 2,A
+   \   000059   E583         MOV     A,DPH
+   \   00005B   35..         ADDC    A,?V0 + 3
+   \   00005D   F5..         MOV     ?V0 + 3,A
+   \   00005F   78..         MOV     R0,#?V0 + 2
+   \   000061   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000064   7910         MOV     R1,#0x10
+   \   000066   AA..         MOV     R2,?V0 + 0
+   \   000068   AB..         MOV     R3,?V0 + 1
+   \   00006A   E4           CLR     A
+   \   00006B   FC           MOV     R4,A
+   \   00006C   FD           MOV     R5,A
+   \   00006D   12....       LCALL   ??_ltoa?relay
+   \   000070   7402         MOV     A,#0x2
+   \   000072   12....       LCALL   ?DEALLOC_XSTACK8
+    616                  strcat(buf, "\n");
+   \   000075                ; Setup parameters for call to function strcat
+   \   000075   8056         SJMP    ??nwk_Status_8
+    617                  HalUARTWrite(HAL_UART_PORT_0, (uint8 *)buf, strlen(buf));
+    618                }
+    619                break;
+    620          
+    621              case NWK_STATUS_PARENT_ADDR:
+    622                  strcpy(buf, ParentStr);
+   \                     ??nwk_Status_2:
+   \   000077                ; Setup parameters for call to function strcpy
+   \   000077   7C..         MOV     R4,#ParentStr & 0xff
+   \   000079   7D..         MOV     R5,#(ParentStr >> 8) & 0xff
+   \   00007B   80B8         SJMP    ??nwk_Status_6
+    623                  strcat(buf, " ");
+    624                  _ltoa( statusValue, (uint8 *)&buf[strlen(buf)], 16 );
+    625                  strcat(buf, "\n");
+    626                  HalUARTWrite(HAL_UART_PORT_0, (uint8 *)buf, strlen(buf));
+    627                break;
+    628          
+    629              case NWK_STATUS_ASSOC_CNF:
+    630                  strcpy(buf, AssocCnfStr);
+   \                     ??nwk_Status_0:
+   \   00007D                ; Setup parameters for call to function strcpy
+   \   00007D   7C..         MOV     R4,#AssocCnfStr & 0xff
+   \   00007F   7D..         MOV     R5,#(AssocCnfStr >> 8) & 0xff
+   \   000081   85..82       MOV     DPL,?XSP + 0
+   \   000084   85..83       MOV     DPH,?XSP + 1
+   \   000087   AA82         MOV     R2,DPL
+   \   000089   AB83         MOV     R3,DPH
+   \   00008B   12....       LCALL   ??strcpy?relay
+    631                  strcat(buf, SuccessStr);
+   \   00008E                ; Setup parameters for call to function strcat
+   \   00008E   7C..         MOV     R4,#SuccessStr & 0xff
+   \   000090   7D..         MOV     R5,#(SuccessStr >> 8) & 0xff
+   \   000092   802C         SJMP    ??nwk_Status_9
+   \   000094                ; Setup parameters for call to function strcat
+    632                  strcat(buf, "\n");
+    633                  HalUARTWrite(HAL_UART_PORT_0, (uint8 *)buf, strlen(buf));
+    634                break;
+    635          
+    636              case NWK_ERROR_ASSOC_CNF_DENIED:
+    637                  strcpy(buf, AssocCnfFailStr);
+   \                     ??nwk_Status_3:
+   \   000094                ; Setup parameters for call to function strcpy
+   \   000094   7C..         MOV     R4,#AssocCnfFailStr & 0xff
+   \   000096   7D..         MOV     R5,#(AssocCnfFailStr >> 8) & 0xff
+   \   000098   85..82       MOV     DPL,?XSP + 0
+   \   00009B   85..83       MOV     DPH,?XSP + 1
+   \   00009E   AA82         MOV     R2,DPL
+   \   0000A0   AB83         MOV     R3,DPH
+   \   0000A2   12....       LCALL   ??strcpy?relay
+    638                  strcat(buf, ": ");
+   \   0000A5                ; Setup parameters for call to function strcat
+   \   0000A5   7C..         MOV     R4,#`?<Constant ": ">` & 0xff
+   \   0000A7   7D..         MOV     R5,#(`?<Constant ": ">` >> 8) & 0xff
+   \   0000A9   809B         SJMP    ??nwk_Status_7
+    639                  _ltoa( statusValue, (uint8 *)&buf[strlen(buf)], 16 );
+    640                  strcat(buf, "\n");
+    641                  HalUARTWrite(HAL_UART_PORT_0, (uint8 *)buf, strlen(buf));
+    642                break;
+    643          
+    644              case NWK_ERROR_ENERGY_SCAN_FAILED:
+    645                  strcpy(buf, EnergyLevelStr);
+   \                     ??nwk_Status_4:
+   \   0000AB                ; Setup parameters for call to function strcpy
+   \   0000AB   7C..         MOV     R4,#EnergyLevelStr & 0xff
+   \   0000AD   7D..         MOV     R5,#(EnergyLevelStr >> 8) & 0xff
+   \   0000AF   85..82       MOV     DPL,?XSP + 0
+   \   0000B2   85..83       MOV     DPH,?XSP + 1
+   \   0000B5   AA82         MOV     R2,DPL
+   \   0000B7   AB83         MOV     R3,DPH
+   \   0000B9   12....       LCALL   ??strcpy?relay
+    646                  strcat(buf, ScanFailedStr);
+   \   0000BC                ; Setup parameters for call to function strcat
+   \   0000BC   7C..         MOV     R4,#ScanFailedStr & 0xff
+   \   0000BE   7D..         MOV     R5,#(ScanFailedStr >> 8) & 0xff
+   \                     ??nwk_Status_9:
+   \   0000C0   85..82       MOV     DPL,?XSP + 0
+   \   0000C3   85..83       MOV     DPH,?XSP + 1
+   \   0000C6   AA82         MOV     R2,DPL
+   \   0000C8   AB83         MOV     R3,DPH
+   \   0000CA   12....       LCALL   ??strcat?relay
+    647                  strcat(buf, "\n");
+   \   0000CD                ; Setup parameters for call to function strcat
+   \                     ??nwk_Status_8:
+   \   0000CD   7C..         MOV     R4,#`?<Constant "\\n">` & 0xff
+   \   0000CF   7D..         MOV     R5,#(`?<Constant "\\n">` >> 8) & 0xff
+   \   0000D1   12....       LCALL   ?Subroutine1 & 0xFFFF
+    648                  HalUARTWrite(HAL_UART_PORT_0, (uint8 *)buf, strlen(buf));
+   \                     ??CrossCallReturnLabel_1:
+   \   0000D4   EA           MOV     A,R2
+   \   0000D5   FC           MOV     R4,A
+   \   0000D6   EB           MOV     A,R3
+   \   0000D7   FD           MOV     R5,A
+   \   0000D8   85..82       MOV     DPL,?XSP + 0
+   \   0000DB   85..83       MOV     DPH,?XSP + 1
+   \   0000DE   AA82         MOV     R2,DPL
+   \   0000E0   AB83         MOV     R3,DPH
+   \   0000E2   7900         MOV     R1,#0x0
+   \   0000E4   12....       LCALL   ??HalUARTWrite?relay
+    649                break;
+    650            }
+    651          #endif
+    652          }
+   \                     ??nwk_Status_5:
+   \   0000E7   7432         MOV     A,#0x32
+   \   0000E9   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0000EC   7F04         MOV     R7,#0x4
+   \   0000EE   02....       LJMP    ?BANKED_LEAVE_XDATA
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine1:
+   \   000000   85..82       MOV     DPL,?XSP + 0
+   \   000003   85..83       MOV     DPH,?XSP + 1
+   \   000006   AA82         MOV     R2,DPL
+   \   000008   AB83         MOV     R3,DPH
+   \   00000A   12....       LCALL   ??strcat?relay
+   \   00000D                ; Setup parameters for call to function _ltoa
+   \   00000D                ; Setup parameters for call to function strlen
+   \   00000D                ; Setup parameters for call to function HalUARTWrite
+   \   00000D                ; Setup parameters for call to function strlen
+   \   00000D   85..82       MOV     DPL,?XSP + 0
+   \   000010   85..83       MOV     DPH,?XSP + 1
+   \   000013   AA82         MOV     R2,DPL
+   \   000015   AB83         MOV     R3,DPH
+   \   000017   12....       LCALL   ??strlen?relay
+   \   00001A   22           RET
+    653          
+    654          /*********************************************************************
+    655           * @fn       nwk_UpdateStatistics()
+    656           *
+    657           * @brief   Update network layer statistic counters
+    658           *
+    659           * @param   statisticCode
+    660           *
+    661           * @return  none
+    662           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    663          void nwk_UpdateStatistics( uint8 statisticCode )
+   \                     nwk_UpdateStatistics:
+    664          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    665          #if defined ( PACKET_FILTER_STATS )
+    666            switch ( statisticCode )
+    667            {
+    668              case STAT_NWK_INVALID_PACKET:
+    669                nwkInvalidPackets++;
+    670                break;
+    671          
+    672              case STAT_NWK_SECURITY_FAILURE:
+    673                nwkInvalidPackets++;
+    674                nwkSecurityFailures++;
+    675                break;
+    676          
+    677              case STAT_APS_INVALID_PACKET:
+    678                apsInvalidPackets++;
+    679                break;
+    680          
+    681              case STAT_APS_SECURITY_FAILURE:
+    682                apsSecurityFailures++;
+    683                break;
+    684            }
+    685          #endif
+    686          }
+   \   000000   02....       LJMP    ?BRET
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for gMIN_TREE_LINK_COST>`:
+   \   000000   06           DB 6
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for gAPS_MAX_ENDDEVICE_BROADCAST`:
+   \   000000   12           DB 18
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??nwk_globals_init?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    nwk_globals_init
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??NIB_init?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    NIB_init
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??nwk_Status?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    nwk_Status
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??nwk_UpdateStatistics?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    nwk_UpdateStatistics
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant "\\n">`:
+   \   000000   0A00         DB "\012"
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant " ">`:
+   \   000000   2000         DB " "
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant ": ">`:
+   \   000000   3A2000       DB ": "
+    687          
+    688          /*********************************************************************
+    689          *********************************************************************/
+
+   Maximum stack usage in bytes:
+
+     Function             ISTACK PSTACK XSTACK
+     --------             ------ ------ ------
+     NIB_init                 2      0      0
+       -> osal_rand           4      0      0
+       -> osal_memset         4      0      0
+       -> sAddrExtCpy         4      0      0
+     nwk_Status               0      0     64
+       -> strcpy              0      0    124
+       -> strcat              0      0    124
+       -> strlen              0      0    124
+       -> _ltoa               0      0    128
+       -> strcat              0      0    124
+       -> strlen              0      0    124
+       -> HalUARTWrite        0      0    124
+       -> strcpy              0      0    124
+       -> strcat              0      0    124
+       -> strlen              0      0    124
+       -> _ltoa               0      0    128
+       -> strcat              0      0    124
+       -> strlen              0      0    124
+       -> HalUARTWrite        0      0    124
+       -> strcpy              0      0    124
+       -> strcat              0      0    124
+       -> strcat              0      0    124
+       -> strlen              0      0    124
+       -> HalUARTWrite        0      0    124
+       -> strcpy              0      0    124
+       -> strcat              0      0    124
+       -> strlen              0      0    124
+       -> _ltoa               0      0    128
+       -> strcat              0      0    124
+       -> strlen              0      0    124
+       -> HalUARTWrite        0      0    124
+       -> strcpy              0      0    124
+       -> strcat              0      0    124
+       -> strcat              0      0    124
+       -> strlen              0      0    124
+       -> HalUARTWrite        0      0    124
+     nwk_UpdateStatistics     0      0      0
+     nwk_globals_init         2      0      0
+       -> AddrMgrInit         4      0      0
+
+
+   Segment part sizes:
+
+     Function/Label                                 Bytes
+     --------------                                 -----
+     gNWK_MAX_DEVICE_LIST                              2
+     gNWK_MAX_SLEEPING_END_DEVICES                     1
+     gNWK_MAX_DATABUFS_WAITING                         1
+     gNWK_MAX_DATABUFS_SCHEDULED                       1
+     gNWK_MAX_DATABUFS_CONFIRMED                       1
+     gNWK_MAX_DATABUFS_TOTAL                           1
+     gNWK_INDIRECT_CNT_RTG_TMR                         1
+     gNWK_INDIRECT_MSG_MAX_PER                         1
+     gNWK_INDIRECT_MSG_MAX_ALL                         1
+     Cskip                                             2
+     CskipRtrs                                         1
+     CskipChldrn                                       1
+     gMIN_TREE_LINK_COST                               1
+     AssociatedDevList                               378
+     gNWK_MIN_ROUTER_CHILDREN                          2
+     gNWK_MIN_ENDDEVICE_CHILDREN                       2
+     gMAX_RTG_ENTRIES                                  2
+     gMAX_RTG_SRC_ENTRIES                              2
+     gMAX_RREQ_ENTRIES                                 1
+     gMAX_NEIGHBOR_ENTRIES                             1
+     neighborTable                                    92
+     gMAX_SOURCE_ROUTE                                 1
+     gMAX_BROADCAST_QUEUED                             1
+     gLINK_DOWN_TRIGGER                                1
+     gMAX_PASSIVE_ACK_CNT                              1
+     rtgTable                                        280
+     rtgSrcTable                                      72
+     rtgSrcRelayList                                  24
+     rtDiscTable                                      64
+     bcastTable                                       72
+     bcastHoldHandle                                   9
+     bcastHoldAckMask                                 36
+     gMAX_BCAST                                        1
+     gNWK_TREE_ALLOCATE_ROUTERADDR_FOR_ENDDEVICE
+                                                       1
+     gNWK_CONFLICTED_ADDR_EXPIRY_TIME
+                                                       1
+     gMTO_RREQ_LIMIT_TIME                              2
+     gMTO_ROUTE_EXPIRY_TIME                            1
+     gDEFAULT_ROUTE_REQUEST_RADIUS                     1
+     gDEF_NWK_RADIUS                                   1
+     gNWK_MAX_BINDING_ENTRIES                          2
+     gMAX_BINDING_CLUSTER_IDS                          1
+     gBIND_REC_SIZE                                    2
+     BindingTable                                     56
+     gAPS_MAX_GROUPS                                   1
+     apsEndDeviceBroadcastTable                       90
+     gAPS_MAX_ENDDEVICE_BROADCAST_ENTRIES
+                                                       1
+     defaultKey                                       16
+     defaultTCLinkKey                                 16
+     PingStr                                          15
+     AssocCnfStr                                      10
+     SuccessStr                                        8
+     EndDeviceStr                                     11
+     ParentStr                                         8
+     ZigbeeCoordStr                                   13
+     NetworkIDStr                                     12
+     RouterStr                                         8
+     OrphanRspStr                                     16
+     SentStr                                           5
+     FailedStr                                         7
+     AssocRspFailStr                                  15
+     AssocIndStr                                      10
+     AssocCnfFailStr                                  15
+     EnergyLevelStr                                   13
+     ScanFailedStr                                    12
+     nwk_globals_init                                 11
+     ?Subroutine0                                      7
+     NIB_init                                        226
+     ?Subroutine2                                      9
+     nwk_Status                                      241
+     ?Subroutine1                                     27
+     nwk_UpdateStatistics                              3
+     ?<Initializer for gMIN_TREE_LINK_COST>            1
+     ?<Initializer for gAPS_MAX_ENDDEVICE_BROADCAST    1
+     ??nwk_globals_init?relay                          6
+     ??NIB_init?relay                                  6
+     ??nwk_Status?relay                                6
+     ??nwk_UpdateStatistics?relay                      6
+     ?<Constant "\n">                                  2
+     ?<Constant " ">                                   2
+     ?<Constant ": ">                                  3
+
+ 
+   524 bytes in segment BANKED_CODE
+    24 bytes in segment BANK_RELAYS
+    70 bytes in segment CODE_C
+     2 bytes in segment XDATA_I
+     2 bytes in segment XDATA_ID
+   185 bytes in segment XDATA_ROM_C
+ 1 177 bytes in segment XDATA_Z
+ 
+   620 bytes of CODE  memory
+   185 bytes of CONST memory
+ 1 179 bytes of XDATA memory
+
+Errors: none
+Warnings: none

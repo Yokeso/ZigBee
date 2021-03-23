@@ -1,0 +1,5125 @@
+///////////////////////////////////////////////////////////////////////////////
+//                                                                            /
+// IAR C/C++ Compiler V8.10.1.40194/W32 for 8051        04/Jan/2021  17:15:34 /
+// Copyright 2004-2011 IAR Systems AB.                                        /
+//                                                                            /
+//    Core               =  plain                                             /
+//    Code model         =  banked                                            /
+//    Data model         =  large                                             /
+//    Calling convention =  xdata reentrant                                   /
+//    Constant location  =  data_rom                                          /
+//    Dptr setup         =  1,16                                              /
+//    Source file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Components\hal\target\CC2530SB\hal_RC /
+//                          522.c                                             /
+//    Command line       =  -f D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC /
+//                          2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC25 /
+//                          30DB\..\..\..\Tools\CC2530DB\f8wEndev.cfg         /
+//                          (-DCPU32MHZ -DROOT=__near_func                    /
+//                          -DMAC_CFG_TX_DATA_MAX=3 -DMAC_CFG_TX_MAX=6        /
+//                          -DMAC_CFG_RX_MAX=3) -f D:\Projects_IAR\IAR_C8051\ /
+//                          WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstac /
+//                          k\MY_BOARD\Exp4\CC2530DB\..\..\..\Tools\CC2530DB\ /
+//                          f8wConfig.cfg (-DZIGBEEPRO -DSECURE=0             /
+//                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                 /
+//                          -DDEFAULT_CHANLIST=0x02000000                     /
+//                          -DZDAPP_CONFIG_PAN_ID=0x1001                      /
+//                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
+//                          ASK=0x007F -DBEACON_REQUEST_DELAY=100             /
+//                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
+//                          -DLINK_STATUS_JITTER_MASK=0x007F                  /
+//                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_P /
+//                          OLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7           /
+//                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3   /
+//                          -DNWK_MAX_DATA_RETRIES=2                          /
+//                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9        /
+//                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40          /
+//                          -DNWK_MAX_BINDING_ENTRIES=4                       /
+//                          -DMAX_BINDING_CLUSTER_IDS=4                       /
+//                          "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07, 0x09,     /
+//                          0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08,   /
+//                          0x0A, 0x0C, 0x0D}" -DMAC_MAX_FRAME_SIZE=116       /
+//                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const    /
+//                          __code" -DGENERIC=__generic                       /
+//                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000       /
+//                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
+//                          -DREJOIN_POLL_RATE=440 D:\Projects_IAR\IAR_C8051\ /
+//                          WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal /
+//                          \target\CC2530SB\hal_RC522.c -D HAL_UART=TRUE -D  /
+//                          HAL_UART_TEST -D xPOWER_SAVING -lC                /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\EndDeviceSBDHT11\List\ -lA                      /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\EndDeviceSBDHT11\List\ --diag_suppress          /
+//                          Pe001,Pa010 -o D:\Projects_IAR\IAR_C8051\WSN-CC25 /
+//                          30\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOA /
+//                          RD\Exp4\CC2530DB\EndDeviceSBDHT11\Obj\ -e         /
+//                          --no_cse --no_unroll --no_inline                  /
+//                          --no_code_motion --no_tbaa --debug --core=plain   /
+//                          --dptr=16,1 --data_model=large                    /
+//                          --code_model=banked --calling_convention=xdata_re /
+//                          entrant --place_constants=data_rom                /
+//                          --nr_virtual_regs 16 -I                           /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack /
+//                          -CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\C /
+//                          C2530DB\..\Source\ -I D:\Projects_IAR\IAR_C8051\W /
+//                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack /
+//                          \MY_BOARD\Exp4\CC2530DB\..\..\..\ZMain\TI2530DB\  /
+//                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC /
+//                          2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC25 /
+//                          30DB\..\..\..\..\..\Components\hal\include\ -I    /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\hal\target\CC2530SB\  /
+//                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC /
+//                          2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC25 /
+//                          30DB\..\..\..\..\..\Components\mac\include\ -I    /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\mac\high_level\ -I    /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\mac\low_level\srf04\  /
+//                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC /
+//                          2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC25 /
+//                          30DB\..\..\..\..\..\Components\mac\low_level\srf0 /
+//                          4\single_chip\ -I D:\Projects_IAR\IAR_C8051\WSN-C /
+//                          C2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_ /
+//                          BOARD\Exp4\CC2530DB\..\..\..\..\..\Components\mt\ /
+//                           -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-C /
+//                          C2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2 /
+//                          530DB\..\..\..\..\..\Components\osal\include\ -I  /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\services\saddr\ -I    /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\services\sdata\ -I    /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\stack\af\ -I          /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\stack\nwk\ -I         /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\stack\sapi\ -I        /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\stack\sec\ -I         /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\stack\sys\ -I         /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\stack\zdo\ -I         /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\zmac\ -I              /
+//                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\..\..\..\..\..\Components\zmac\f8w\ -On         /
+//    List file          =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC253 /
+//                          0-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530D /
+//                          B\EndDeviceSBDHT11\List\hal_RC522.s51             /
+//                                                                            /
+//                                                                            /
+///////////////////////////////////////////////////////////////////////////////
+
+        NAME hal_RC522
+
+        RTMODEL "__SystemLibrary", "CLib"
+        RTMODEL "__calling_convention", "xdata_reentrant"
+        RTMODEL "__code_model", "banked"
+        RTMODEL "__core", "plain"
+        RTMODEL "__data_model", "large"
+        RTMODEL "__dptr_size", "16"
+        RTMODEL "__extended_stack", "disabled"
+        RTMODEL "__location_for_constants", "data"
+        RTMODEL "__number_of_dptrs", "1"
+        RTMODEL "__rt_version", "1"
+
+        RSEG DOVERLAY:DATA:NOROOT(0)
+        RSEG IOVERLAY:IDATA:NOROOT(0)
+        RSEG ISTACK:IDATA:NOROOT(0)
+        RSEG PSTACK:XDATA:NOROOT(0)
+        RSEG XSTACK:XDATA:NOROOT(0)
+
+        EXTERN ?ALLOC_XSTACK8
+        EXTERN ?BANKED_ENTER_XDATA
+        EXTERN ?BANKED_LEAVE_XDATA
+        EXTERN ?BDISPATCH
+        EXTERN ?BRET
+        EXTERN ?DEALLOC_XSTACK8
+        EXTERN ?POP_BIT_ISP
+        EXTERN ?PUSH_XSTACK_I_TWO
+        EXTERN ?US_SHR
+        EXTERN ?V0
+        EXTERN ?XSP
+        EXTERN ?XSTACK_DISP0_8
+
+        PUBLIC ??CalulateCRC?relay
+        FUNCTION ??CalulateCRC?relay,0203H
+        PUBLIC ??ClearBitMask?relay
+        FUNCTION ??ClearBitMask?relay,0203H
+        PUBLIC ??HalRc522Delay?relay
+        FUNCTION ??HalRc522Delay?relay,0203H
+        PUBLIC ??HalRc522Init?relay
+        FUNCTION ??HalRc522Init?relay,0203H
+        PUBLIC ??MIF_Halt?relay
+        FUNCTION ??MIF_Halt?relay,0203H
+        PUBLIC ??PcdAntennaOff?relay
+        FUNCTION ??PcdAntennaOff?relay,0203H
+        PUBLIC ??PcdAntennaOn?relay
+        FUNCTION ??PcdAntennaOn?relay,0203H
+        PUBLIC ??PcdAntennaTestOn?relay
+        FUNCTION ??PcdAntennaTestOn?relay,0203H
+        PUBLIC ??PcdAnticoll?relay
+        FUNCTION ??PcdAnticoll?relay,0203H
+        PUBLIC ??PcdAuthState?relay
+        FUNCTION ??PcdAuthState?relay,0203H
+        PUBLIC ??PcdBakValue?relay
+        FUNCTION ??PcdBakValue?relay,0203H
+        PUBLIC ??PcdComMF522?relay
+        FUNCTION ??PcdComMF522?relay,0203H
+        PUBLIC ??PcdHalt?relay
+        FUNCTION ??PcdHalt?relay,0203H
+        PUBLIC ??PcdRead?relay
+        FUNCTION ??PcdRead?relay,0203H
+        PUBLIC ??PcdRequest?relay
+        FUNCTION ??PcdRequest?relay,0203H
+        PUBLIC ??PcdReset?relay
+        FUNCTION ??PcdReset?relay,0203H
+        PUBLIC ??PcdSelect?relay
+        FUNCTION ??PcdSelect?relay,0203H
+        PUBLIC ??PcdValue?relay
+        FUNCTION ??PcdValue?relay,0203H
+        PUBLIC ??PcdWrite?relay
+        FUNCTION ??PcdWrite?relay,0203H
+        PUBLIC ??ReadRawRC?relay
+        FUNCTION ??ReadRawRC?relay,0203H
+        PUBLIC ??Read_Block?relay
+        FUNCTION ??Read_Block?relay,0203H
+        PUBLIC ??SetBitMask?relay
+        FUNCTION ??SetBitMask?relay,0203H
+        PUBLIC ??WriteRawRC?relay
+        FUNCTION ??WriteRawRC?relay,0203H
+        PUBLIC ??Write_Block?relay
+        FUNCTION ??Write_Block?relay,0203H
+        PUBLIC CalulateCRC
+        FUNCTION CalulateCRC,021203H
+        ARGFRAME XSTACK, 34, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        LOCFRAME ISTACK, 1, STACK
+        LOCFRAME XSTACK, 15, STACK
+        PUBLIC ClearBitMask
+        FUNCTION ClearBitMask,021203H
+        ARGFRAME XSTACK, 36, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        LOCFRAME XSTACK, 10, STACK
+        PUBLIC HalRc522Delay
+        FUNCTION HalRc522Delay,080203H
+        ARGFRAME XSTACK, 9, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        PUBLIC HalRc522Init
+        FUNCTION HalRc522Init,0203H
+        ARGFRAME XSTACK, 0, STACK
+        PUBLIC MIF_Halt
+        FUNCTION MIF_Halt,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME XSTACK, 34, STACK
+        PUBWEAK P1DIR
+        PUBWEAK P2DIR
+        PUBLIC PcdAntennaOff
+        FUNCTION PcdAntennaOff,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 2, STACK
+        PUBLIC PcdAntennaOn
+        FUNCTION PcdAntennaOn,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME XSTACK, 9, STACK
+        PUBLIC PcdAntennaTestOn
+        FUNCTION PcdAntennaTestOn,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 2, STACK
+        PUBLIC PcdAnticoll
+        FUNCTION PcdAnticoll,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 1, STACK
+        LOCFRAME XSTACK, 40, STACK
+        PUBLIC PcdAuthState
+        FUNCTION PcdAuthState,021203H
+        ARGFRAME XSTACK, 14, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        LOCFRAME ISTACK, 1, STACK
+        LOCFRAME XSTACK, 40, STACK
+        PUBLIC PcdBakValue
+        FUNCTION PcdBakValue,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 1, STACK
+        LOCFRAME XSTACK, 36, STACK
+        PUBLIC PcdComMF522
+        FUNCTION PcdComMF522,021203H
+        ARGFRAME XSTACK, 40, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        LOCFRAME ISTACK, 1, STACK
+        LOCFRAME XSTACK, 24, STACK
+        PUBLIC PcdHalt
+        FUNCTION PcdHalt,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME XSTACK, 34, STACK
+        PUBLIC PcdRead
+        FUNCTION PcdRead,021203H
+        ARGFRAME XSTACK, 12, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        LOCFRAME ISTACK, 1, STACK
+        LOCFRAME XSTACK, 38, STACK
+        PUBLIC PcdRequest
+        FUNCTION PcdRequest,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 1, STACK
+        LOCFRAME XSTACK, 36, STACK
+        PUBLIC PcdReset
+        FUNCTION PcdReset,0a1203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 2, STACK
+        PUBLIC PcdSelect
+        FUNCTION PcdSelect,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 1, STACK
+        LOCFRAME XSTACK, 36, STACK
+        PUBLIC PcdValue
+        FUNCTION PcdValue,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 1, STACK
+        LOCFRAME XSTACK, 38, STACK
+        PUBLIC PcdWrite
+        FUNCTION PcdWrite,021203H
+        ARGFRAME XSTACK, 10, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        LOCFRAME ISTACK, 1, STACK
+        LOCFRAME XSTACK, 38, STACK
+        PUBLIC ReadRawRC
+        FUNCTION ReadRawRC,0203H
+        ARGFRAME XSTACK, 36, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        PUBLIC Read_Block
+        FUNCTION Read_Block,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME XSTACK, 14, STACK
+        PUBLIC SetBitMask
+        FUNCTION SetBitMask,021203H
+        ARGFRAME XSTACK, 36, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        LOCFRAME XSTACK, 9, STACK
+        PUBLIC WriteRawRC
+        FUNCTION WriteRawRC,0203H
+        ARGFRAME XSTACK, 36, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        PUBLIC Write_Block
+        FUNCTION Write_Block,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME XSTACK, 12, STACK
+        PUBWEAK _A_P1
+        PUBWEAK _A_P2
+        
+        CFI Names cfiNames0
+        CFI StackFrame CFA_SP SP IDATA
+        CFI StackFrame CFA_PSP16 PSP16 XDATA
+        CFI StackFrame CFA_XSP16 XSP16 XDATA
+        CFI StaticOverlayFrame CFA_IOVERLAY IOVERLAY
+        CFI StaticOverlayFrame CFA_DOVERLAY DOVERLAY
+        CFI Resource `PSW.CY`:1, `B.BR0`:1, `B.BR1`:1, `B.BR2`:1, `B.BR3`:1
+        CFI Resource `B.BR4`:1, `B.BR5`:1, `B.BR6`:1, `B.BR7`:1, `VB.BR8`:1
+        CFI Resource `VB.BR9`:1, `VB.BR10`:1, `VB.BR11`:1, `VB.BR12`:1
+        CFI Resource `VB.BR13`:1, `VB.BR14`:1, `VB.BR15`:1, VB:8, B:8, A:8
+        CFI Resource PSW:8, DPL0:8, DPH0:8, R0:8, R1:8, R2:8, R3:8, R4:8, R5:8
+        CFI Resource R6:8, R7:8, V0:8, V1:8, V2:8, V3:8, V4:8, V5:8, V6:8, V7:8
+        CFI Resource V8:8, V9:8, V10:8, V11:8, V12:8, V13:8, V14:8, V15:8, SP:8
+        CFI Resource PSPH:8, PSPL:8, PSP16:16, XSPH:8, XSPL:8, XSP16:16
+        CFI VirtualResource ?RET:24
+        CFI Resource ?BRET_EXT:8
+        CFI VirtualResource ?RET_HIGH:8, ?RET_LOW:8
+        CFI ResourceParts PSP16 PSPH, PSPL
+        CFI ResourceParts XSP16 XSPH, XSPL
+        CFI ResourceParts ?RET ?BRET_EXT, ?RET_HIGH, ?RET_LOW
+        CFI EndNames cfiNames0
+        
+        CFI Common cfiCommon0 Using cfiNames0
+        CFI CodeAlign 1
+        CFI DataAlign -1
+        CFI ReturnAddress ?RET CODE
+        CFI CFA_DOVERLAY Used
+        CFI CFA_IOVERLAY Used
+        CFI CFA_SP SP+-3
+        CFI CFA_PSP16 PSP16+0
+        CFI CFA_XSP16 XSP16+0
+        CFI `PSW.CY` SameValue
+        CFI `B.BR0` SameValue
+        CFI `B.BR1` SameValue
+        CFI `B.BR2` SameValue
+        CFI `B.BR3` SameValue
+        CFI `B.BR4` SameValue
+        CFI `B.BR5` SameValue
+        CFI `B.BR6` SameValue
+        CFI `B.BR7` SameValue
+        CFI `VB.BR8` SameValue
+        CFI `VB.BR9` SameValue
+        CFI `VB.BR10` SameValue
+        CFI `VB.BR11` SameValue
+        CFI `VB.BR12` SameValue
+        CFI `VB.BR13` SameValue
+        CFI `VB.BR14` SameValue
+        CFI `VB.BR15` SameValue
+        CFI VB SameValue
+        CFI B Undefined
+        CFI A Undefined
+        CFI PSW SameValue
+        CFI DPL0 SameValue
+        CFI DPH0 SameValue
+        CFI R0 Undefined
+        CFI R1 Undefined
+        CFI R2 Undefined
+        CFI R3 Undefined
+        CFI R4 Undefined
+        CFI R5 Undefined
+        CFI R6 SameValue
+        CFI R7 SameValue
+        CFI V0 SameValue
+        CFI V1 SameValue
+        CFI V2 SameValue
+        CFI V3 SameValue
+        CFI V4 SameValue
+        CFI V5 SameValue
+        CFI V6 SameValue
+        CFI V7 SameValue
+        CFI V8 SameValue
+        CFI V9 SameValue
+        CFI V10 SameValue
+        CFI V11 SameValue
+        CFI V12 SameValue
+        CFI V13 SameValue
+        CFI V14 SameValue
+        CFI V15 SameValue
+        CFI PSPH Undefined
+        CFI PSPL Undefined
+        CFI XSPH Undefined
+        CFI XSPL Undefined
+        CFI ?RET Concat
+        CFI ?BRET_EXT Frame(CFA_SP, 3)
+        CFI ?RET_HIGH Frame(CFA_SP, 2)
+        CFI ?RET_LOW Frame(CFA_SP, 1)
+        CFI EndCommon cfiCommon0
+        
+Des_Decrypt         SYMBOL "Des_Decrypt"
+Des_Encrypt         SYMBOL "Des_Encrypt"
+??Des_Decrypt?relay SYMBOL "?relay", Des_Decrypt
+??Des_Encrypt?relay SYMBOL "?relay", Des_Encrypt
+CalulateCRC         SYMBOL "CalulateCRC"
+??CalulateCRC?relay SYMBOL "?relay", CalulateCRC
+ClearBitMask        SYMBOL "ClearBitMask"
+??ClearBitMask?relay SYMBOL "?relay", ClearBitMask
+HalRc522Delay       SYMBOL "HalRc522Delay"
+??HalRc522Delay?relay SYMBOL "?relay", HalRc522Delay
+HalRc522Init        SYMBOL "HalRc522Init"
+??HalRc522Init?relay SYMBOL "?relay", HalRc522Init
+MIF_Halt            SYMBOL "MIF_Halt"
+??MIF_Halt?relay    SYMBOL "?relay", MIF_Halt
+PcdAntennaOff       SYMBOL "PcdAntennaOff"
+??PcdAntennaOff?relay SYMBOL "?relay", PcdAntennaOff
+PcdAntennaOn        SYMBOL "PcdAntennaOn"
+??PcdAntennaOn?relay SYMBOL "?relay", PcdAntennaOn
+PcdAntennaTestOn    SYMBOL "PcdAntennaTestOn"
+??PcdAntennaTestOn?relay SYMBOL "?relay", PcdAntennaTestOn
+PcdAnticoll         SYMBOL "PcdAnticoll"
+??PcdAnticoll?relay SYMBOL "?relay", PcdAnticoll
+PcdAuthState        SYMBOL "PcdAuthState"
+??PcdAuthState?relay SYMBOL "?relay", PcdAuthState
+PcdBakValue         SYMBOL "PcdBakValue"
+??PcdBakValue?relay SYMBOL "?relay", PcdBakValue
+PcdComMF522         SYMBOL "PcdComMF522"
+??PcdComMF522?relay SYMBOL "?relay", PcdComMF522
+PcdHalt             SYMBOL "PcdHalt"
+??PcdHalt?relay     SYMBOL "?relay", PcdHalt
+PcdRead             SYMBOL "PcdRead"
+??PcdRead?relay     SYMBOL "?relay", PcdRead
+PcdRequest          SYMBOL "PcdRequest"
+??PcdRequest?relay  SYMBOL "?relay", PcdRequest
+PcdReset            SYMBOL "PcdReset"
+??PcdReset?relay    SYMBOL "?relay", PcdReset
+PcdSelect           SYMBOL "PcdSelect"
+??PcdSelect?relay   SYMBOL "?relay", PcdSelect
+PcdValue            SYMBOL "PcdValue"
+??PcdValue?relay    SYMBOL "?relay", PcdValue
+PcdWrite            SYMBOL "PcdWrite"
+??PcdWrite?relay    SYMBOL "?relay", PcdWrite
+ReadRawRC           SYMBOL "ReadRawRC"
+??ReadRawRC?relay   SYMBOL "?relay", ReadRawRC
+Read_Block          SYMBOL "Read_Block"
+??Read_Block?relay  SYMBOL "?relay", Read_Block
+SetBitMask          SYMBOL "SetBitMask"
+??SetBitMask?relay  SYMBOL "?relay", SetBitMask
+WriteRawRC          SYMBOL "WriteRawRC"
+??WriteRawRC?relay  SYMBOL "?relay", WriteRawRC
+Write_Block         SYMBOL "Write_Block"
+??Write_Block?relay SYMBOL "?relay", Write_Block
+
+        EXTERN Des_Decrypt
+        FUNCTION Des_Decrypt,0202H
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 14, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        EXTERN Des_Encrypt
+        FUNCTION Des_Encrypt,0202H
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 12, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        EXTERN ??Des_Decrypt?relay
+        FUNCTION ??Des_Decrypt?relay,00H
+        EXTERN ??Des_Encrypt?relay
+        FUNCTION ??Des_Encrypt?relay,00H
+        EXTERN KK
+        EXTERN Password_Buffer
+        EXTERN RF_Buffer
+        EXTERN UID
+        EXTERN des_on
+
+// D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\target\CC2530SB\hal_RC522.c
+//    1 /*******************************************************************************
+//    2  * 文 件 名：RC522.c
+//    3  *
+//    4  * 作    者：yizedxl
+//    5  *
+//    6  * 修改日期：2013.5.23
+//    7  *
+//    8  * 说    明：1、射频驱动芯片MFRC522，程序整体框架来自网络。
+//    9  *           2、移植主要在管脚宏定义部分，程序目前使用的是IO口模拟SPI接口与MFRC522
+//   10  *              芯片通信。
+//   11  *           3、除去本实验的基本功能外，程序后半部分提供了扩展功能，可以读取卡内
+//   12  *              的数据，模拟扣费和充值的动作。这些额外的函数可用于扩展实验。
+//   13  *
+//   14 *******************************************************************************/
+//   15 
+//   16 #include <ioCC2530.h>
+
+        ASEGN SFR_AN:DATA:NOROOT,090H
+// union <unnamed> volatile __sfr _A_P1
+_A_P1:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0a0H
+// union <unnamed> volatile __sfr _A_P2
+_A_P2:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0feH
+// unsigned char volatile __sfr P1DIR
+P1DIR:
+        DATA8
+        DS 1
+
+        ASEGN SFR_AN:DATA:NOROOT,0ffH
+// unsigned char volatile __sfr P2DIR
+P2DIR:
+        DATA8
+        DS 1
+//   17 #include "hal_RC522.H"
+//   18 #include "hal_types.h"
+//   19 #include "hal_defs.h"
+//   20 
+//   21 //****************************************************************************
+//   22 //操作宏定义
+//   23 
+//   24 //------------------------------- RC522操作宏 ------------------------------//
+//   25 //#define    RF_POWER_ON             P8OUT &=~RF_PCTL        // 射频模块上电
+//   26 //#define    RF_POWER_OFF            P8OUT |= RF_PCTL        // 射频模块下电
+//   27 #define    RF_POWER_ON             asm("NOP")                // 射频模块上电
+//   28 #define    RF_POWER_OFF            asm("NOP")                // 射频模块下电
+//   29 #define    RED_LED_ON              P1_0 = 1        // 红灯亮起
+//   30 #define    RED_LED_OFF             P1_0 = 0        // 红灯熄灭
+//   31 
+//   32 #define    RF_SLEEP                P2_0 = 0        // 射频模块唤醒
+//   33 #define    RF_WAKEUP               P2_0 = 1        // 射频模块休眠
+//   34 #define    SCLK_HIGH               P1_5 = 1        // 数据时钟置高
+//   35 #define    SCLK_LOW                P1_5 = 0        // 数据时钟置低
+//   36 #define    DATA_OUT_HIGH           P1_6 = 1        // 数据置高
+//   37 #define    DATA_OUT_LOW            P1_6 = 0        // 数据置低
+//   38 #define    SS_HIGH                 P1_4 = 1        // 从机选择无效
+//   39 #define    SS_LOW                  P1_4 = 0        // 从机选择有效
+//   40 #define    DATA_IN                 P1_7            // 数据输入
+//   41 
+//   42 #define    NSS522_1                SS_HIGH        // 从机选择无效       
+//   43 #define    NSS522_0                SS_LOW         // 从机选择有效
+//   44 #define    SCK522_1                SCLK_HIGH       // 数据时钟置高
+//   45 #define    SCK522_0                SCLK_LOW        // 数据时钟置低
+//   46 #define    SI522_1                 DATA_OUT_HIGH      // 数据置高        
+//   47 #define    SI522_0                 DATA_OUT_LOW       // 数据置低        
+//   48 #define    SO522                   DATA_IN            // 数据输入
+//   49 #define    RST522_1                RF_WAKEUP 
+//   50 #define    RST522_0                RF_SLEEP
+//   51 
+//   52 #define    RC522_EA                P1_3 = 1
+//   53 #define    RC522_I2C               P1_2 = 0
+//   54 
+//   55 //------------------------------ 操作结果  ------------------------------------//
+//   56 #define    SUCCESS      0
+//   57 #define    FAILURE      1
+//   58 #define    CRC_ERROR    2
+//   59 
+//   60 //******************************************************************************/
+//   61 
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//   62 void  HalRc522Init(void)
+HalRc522Init:
+        CFI Block cfiBlock0 Using cfiCommon0
+        CFI Function HalRc522Init
+        CODE
+//   63 {
+        ; Saved register size: 0
+        ; Auto size: 0
+//   64     P1DIR |= BV(6) + BV(5) + BV(4) + BV(3) + BV(2) + BV(0);
+        ORL     0xfe,#0x7d
+//   65     P1DIR &= ~BV(7);
+        ANL     0xfe,#0x7f
+//   66     P2DIR |= BV(0);
+        ORL     0xff,#0x1
+//   67     RC522_EA;
+        SETB    0x90.3
+//   68     RC522_I2C;
+        CLR     0x90.2
+//   69 }
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock0
+        REQUIRE P1DIR
+        REQUIRE P2DIR
+        REQUIRE _A_P1
+//   70 
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//   71 void HalRc522Delay(int i)
+HalRc522Delay:
+        CFI Block cfiBlock1 Using cfiCommon0
+        CFI Function HalRc522Delay
+        CODE
+//   72 {
+        ; Saved register size: 0
+        ; Auto size: 0
+//   73     int j;
+//   74     
+//   75     while(i--)
+??HalRc522Delay_0:
+        MOV     A,R2
+        MOV     R0,A
+        MOV     A,R3
+        MOV     R1,A
+        MOV     A,R0
+        ADD     A,#-0x1
+        MOV     R2,A
+        MOV     A,R1
+        ADDC    A,#-0x1
+        MOV     R3,A
+        MOV     A,R0
+        ORL     A,R1
+        JZ      ??HalRc522Delay_1
+//   76     {
+//   77         for(j = 255; j > 0; j--)
+        MOV     R4,#-0x1
+        MOV     R5,#0x0
+??HalRc522Delay_2:
+        CLR     C
+        MOV     A,R4
+        SUBB    A,#0x1
+        MOV     A,R5
+        SUBB    A,#0x0
+        MOV     C,0xD0 /* PSW */.2
+        XRL     A,PSW
+        RLC     A
+        JC      ??HalRc522Delay_0
+//   78           asm("nop");
+        nop
+        MOV     A,R4
+        ADD     A,#-0x1
+        MOV     R4,A
+        MOV     A,R5
+        ADDC    A,#-0x1
+        MOV     R5,A
+        SJMP    ??HalRc522Delay_2
+//   79     }
+//   80 }
+??HalRc522Delay_1:
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock1
+//   81 
+//   82 //******************************************************************/
+//   83 //功    能：读RC522寄存器
+//   84 //参数说明：Address[IN]:寄存器地址
+//   85 //返    回：读出的值
+//   86 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//   87 uint8 ReadRawRC(uint8 Address)
+ReadRawRC:
+        CFI Block cfiBlock2 Using cfiCommon0
+        CFI Function ReadRawRC
+        CODE
+//   88 {
+        ; Saved register size: 0
+        ; Auto size: 0
+        MOV     A,R1
+        MOV     R2,A
+//   89   uint8 i, ucAddr;
+//   90   uint8 ucResult=0;
+        MOV     R1,#0x0
+//   91   
+//   92   NSS522_0;
+        CLR     0x90.4
+//   93   SCK522_0;
+        CLR     0x90.5
+//   94   ucAddr = ((Address<<1)&0x7E)|0x80;
+        CLR     C
+        RLC     A
+        ORL     A,#0x80
+        MOV     R3,A
+//   95   for (i = 8; i > 0; i--)
+        MOV     R0,#0x8
+??ReadRawRC_0:
+        MOV     A,R0
+        CLR     C
+        SUBB    A,#0x1
+        JC      ??ReadRawRC_1
+//   96   {
+//   97     if ((ucAddr & 0x80) == 0x80)
+        MOV     A,R3
+        MOV     C,0xE0 /* A   */.7
+        JNC     ??ReadRawRC_2
+//   98       SI522_1;
+        SETB    0x90.6
+        SJMP    ??ReadRawRC_3
+//   99     else
+//  100       SI522_0;
+??ReadRawRC_2:
+        CLR     0x90.6
+//  101     
+//  102     SCK522_1;
+??ReadRawRC_3:
+        SETB    0x90.5
+//  103     ucAddr <<= 1;
+        MOV     A,R3
+        CLR     C
+        RLC     A
+        MOV     R3,A
+//  104     SCK522_0;
+        CLR     0x90.5
+//  105   }
+        DEC     R0
+        SJMP    ??ReadRawRC_0
+//  106   
+//  107   for (i = 8; i > 0;i--)
+??ReadRawRC_1:
+        MOV     R0,#0x8
+??ReadRawRC_4:
+        MOV     A,R0
+        CLR     C
+        SUBB    A,#0x1
+        JC      ??ReadRawRC_5
+//  108   {
+//  109     SCK522_1;
+        SETB    0x90.5
+//  110     ucResult <<= 1;
+        MOV     A,R1
+        CLR     C
+        RLC     A
+        MOV     R1,A
+//  111     ucResult |= SO522;
+        MOV     C,0x90.7
+        CLR     A
+        RLC     A
+        XCH     A,R1
+        ORL     A,R1
+        MOV     R1,A
+//  112     SCK522_0;
+        CLR     0x90.5
+//  113   }
+        DEC     R0
+        SJMP    ??ReadRawRC_4
+//  114   
+//  115   SCK522_0;
+??ReadRawRC_5:
+        CLR     0x90.5
+//  116   NSS522_1;
+        SETB    0x90.4
+//  117   return ucResult;
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock2
+        REQUIRE _A_P1
+//  118 }
+//  119 
+//  120 //******************************************************************/
+//  121 //功    能：写RC522寄存器
+//  122 //参数说明：Address[IN]:寄存器地址
+//  123 //          value[IN]:写入的值
+//  124 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  125 void WriteRawRC(uint8 Address, uint8 value)
+WriteRawRC:
+        CFI Block cfiBlock3 Using cfiCommon0
+        CFI Function WriteRawRC
+        CODE
+//  126 {  
+        ; Saved register size: 0
+        ; Auto size: 0
+//  127    uint8 i, ucAddr;
+//  128    NSS522_0;
+        CLR     0x90.4
+//  129    SCK522_0;
+        CLR     0x90.5
+//  130    ucAddr = (Address << 1) & 0x7E;
+        MOV     A,R1
+        CLR     C
+        RLC     A
+        ANL     A,#0x7e
+        MOV     R3,A
+//  131    for (i = 8; i > 0; i--)
+        MOV     R0,#0x8
+??WriteRawRC_0:
+        MOV     A,R0
+        CLR     C
+        SUBB    A,#0x1
+        JC      ??WriteRawRC_1
+//  132    {
+//  133      if ((ucAddr & 0x80) == 0x80)
+        MOV     A,R3
+        MOV     C,0xE0 /* A   */.7
+        JNC     ??WriteRawRC_2
+//  134        SI522_1;
+        SETB    0x90.6
+        SJMP    ??WriteRawRC_3
+//  135      else
+//  136        SI522_0;
+??WriteRawRC_2:
+        CLR     0x90.6
+//  137      SCK522_1;
+??WriteRawRC_3:
+        SETB    0x90.5
+//  138      ucAddr <<= 1;
+        MOV     A,R3
+        CLR     C
+        RLC     A
+        MOV     R3,A
+//  139      SCK522_0;
+        CLR     0x90.5
+//  140    }
+        DEC     R0
+        SJMP    ??WriteRawRC_0
+//  141    for (i = 8; i > 0; i--)
+??WriteRawRC_1:
+        MOV     R0,#0x8
+??WriteRawRC_4:
+        MOV     A,R0
+        CLR     C
+        SUBB    A,#0x1
+        JC      ??WriteRawRC_5
+//  142    {
+//  143      if ((value & 0x80) == 0x80)
+        MOV     A,R2
+        MOV     C,0xE0 /* A   */.7
+        JNC     ??WriteRawRC_6
+//  144        SI522_1;
+        SETB    0x90.6
+        SJMP    ??WriteRawRC_7
+//  145      else
+//  146        SI522_0;
+??WriteRawRC_6:
+        CLR     0x90.6
+//  147      
+//  148      SCK522_1;
+??WriteRawRC_7:
+        SETB    0x90.5
+//  149      value <<= 1;
+        MOV     A,R2
+        CLR     C
+        RLC     A
+        MOV     R2,A
+//  150      SCK522_0;
+        CLR     0x90.5
+//  151    }
+        DEC     R0
+        SJMP    ??WriteRawRC_4
+//  152    SCK522_0;
+??WriteRawRC_5:
+        CLR     0x90.5
+//  153    NSS522_1;
+        SETB    0x90.4
+//  154 }
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock3
+        REQUIRE _A_P1
+//  155 
+//  156 //******************************************************************/
+//  157 //功    能：置RC522寄存器位
+//  158 //参数说明：reg[IN]:寄存器地址
+//  159 //          mask[IN]:置位值
+//  160 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  161 void SetBitMask(uint8 reg,uint8 mask)  
+SetBitMask:
+        CFI Block cfiBlock4 Using cfiCommon0
+        CFI Function SetBitMask
+        CODE
+//  162 {
+        FUNCALL SetBitMask, ReadRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 9, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 9, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL SetBitMask, WriteRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 9, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 9, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0x9
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 9)
+        ; Saved register size: 9
+        ; Auto size: 0
+        MOV     A,R1
+        MOV     R6,A
+        MOV     ?V0 + 0,R2
+//  163   uint8 tmp;
+//  164   
+//  165   tmp = ReadRawRC(reg) | mask;
+        ; Setup parameters for call to function ReadRawRC
+        MOV     A,R6
+        MOV     R1,A
+        LCALL   ??ReadRawRC?relay
+        MOV     A,R1
+        ORL     A,?V0 + 0
+        MOV     R7,A
+//  166   WriteRawRC(reg, tmp);  // set bit mask
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,A
+        MOV     A,R6
+        MOV     R1,A
+        LCALL   ??WriteRawRC?relay
+//  167 }
+        MOV     R7,#0x1
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock4
+//  168 
+//  169 //******************************************************************/
+//  170 //功    能：清RC522寄存器位
+//  171 //参数说明：reg[IN]:寄存器地址
+//  172 //          mask[IN]:清位值
+//  173 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  174 void ClearBitMask(uint8 reg,uint8 mask)  
+ClearBitMask:
+        CFI Block cfiBlock5 Using cfiCommon0
+        CFI Function ClearBitMask
+        CODE
+//  175 {
+        FUNCALL ClearBitMask, ReadRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 10, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 10, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL ClearBitMask, WriteRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 10, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 10, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0xa
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 10)
+        ; Saved register size: 10
+        ; Auto size: 0
+        MOV     A,R1
+        MOV     R6,A
+        MOV     ?V0 + 1,R2
+//  176   uint8 tmp;
+//  177   
+//  178   tmp = ReadRawRC(reg) & (~mask);
+        MOV     A,?V0 + 1
+        CPL     A
+        MOV     ?V0 + 0,A
+        ; Setup parameters for call to function ReadRawRC
+        MOV     A,R6
+        MOV     R1,A
+        LCALL   ??ReadRawRC?relay
+        MOV     A,R1
+        ANL     A,?V0 + 0
+        MOV     R7,A
+//  179   WriteRawRC(reg, tmp);  // clear bit mask
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,A
+        MOV     A,R6
+        MOV     R1,A
+        LCALL   ??WriteRawRC?relay
+//  180 } 
+        MOV     R7,#0x2
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock5
+//  181 
+//  182 //******************************************************************/
+//  183 //功    能：复位RC522
+//  184 //返    回: 成功返回MI_OK
+//  185 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  186 uint8 PcdReset()
+PcdReset:
+        CFI Block cfiBlock6 Using cfiCommon0
+        CFI Function PcdReset
+        CODE
+//  187 {
+        FUNCALL PcdReset, HalRc522Delay
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdReset, HalRc522Delay
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdReset, HalRc522Delay
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdReset, WriteRawRC
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdReset, HalRc522Delay
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdReset, WriteRawRC
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdReset, WriteRawRC
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdReset, WriteRawRC
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdReset, WriteRawRC
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdReset, WriteRawRC
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        PUSH    DPL
+        CFI DPL0 Frame(CFA_SP, 4)
+        CFI CFA_SP SP+-4
+        PUSH    DPH
+        CFI DPH0 Frame(CFA_SP, 5)
+        CFI CFA_SP SP+-5
+        ; Saved register size: 2
+        ; Auto size: 0
+//  188     RF_POWER_ON;
+        NOP
+//  189     RST522_1;
+        SETB    0xa0.0
+//  190     HalRc522Delay(1);
+        ; Setup parameters for call to function HalRc522Delay
+        MOV     R2,#0x1
+        MOV     R3,#0x0
+        LCALL   ??HalRc522Delay?relay
+//  191     RST522_0;
+        CLR     0xa0.0
+//  192     HalRc522Delay(1);
+        ; Setup parameters for call to function HalRc522Delay
+        MOV     R2,#0x1
+        MOV     R3,#0x0
+        LCALL   ??HalRc522Delay?relay
+//  193     RST522_1;
+        SETB    0xa0.0
+//  194     HalRc522Delay(1);
+        ; Setup parameters for call to function HalRc522Delay
+        MOV     R2,#0x1
+        MOV     R3,#0x0
+        LCALL   ??HalRc522Delay?relay
+//  195     WriteRawRC(CommandReg, PCD_RESETPHASE);
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,#0xf
+        MOV     R1,#0x1
+        LCALL   ??WriteRawRC?relay
+//  196     HalRc522Delay(1);
+        ; Setup parameters for call to function HalRc522Delay
+        MOV     R2,#0x1
+        MOV     R3,#0x0
+        LCALL   ??HalRc522Delay?relay
+//  197     WriteRawRC(ModeReg, 0x3D);
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,#0x3d
+        MOV     R1,#0x11
+        LCALL   ??WriteRawRC?relay
+//  198     WriteRawRC(TReloadRegL, 30);
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,#0x1e
+        MOV     R1,#0x2d
+        LCALL   ??WriteRawRC?relay
+//  199     WriteRawRC(TReloadRegH, 0);
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,#0x0
+        MOV     R1,#0x2c
+        LCALL   ??WriteRawRC?relay
+//  200     WriteRawRC(TModeReg, 0x8D);
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,#-0x73
+        MOV     R1,#0x2a
+        LCALL   ??WriteRawRC?relay
+//  201     WriteRawRC(TPrescalerReg, 0x3E);   
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,#0x3e
+        MOV     R1,#0x2b
+        LCALL   ??WriteRawRC?relay
+//  202     return MI_OK; 
+        MOV     R1,#0x0
+        POP     DPH
+        CFI DPH0 SameValue
+        CFI CFA_SP SP+-4
+        POP     DPL
+        CFI DPL0 SameValue
+        CFI CFA_SP SP+-3
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock6
+        REQUIRE _A_P2
+//  203 }
+//  204 
+//  205 //******************************************************************/
+//  206 //开启天线发射  
+//  207 //每次启动或关闭天线发射之间应至少有1ms的间隔
+//  208 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  209 void PcdAntennaOn()
+PcdAntennaOn:
+        CFI Block cfiBlock7 Using cfiCommon0
+        CFI Function PcdAntennaOn
+        CODE
+//  210 {
+        FUNCALL PcdAntennaOn, WriteRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 9, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 9, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdAntennaOn, HalRc522Delay
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 9, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 9, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdAntennaOn, ReadRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 9, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 9, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdAntennaOn, SetBitMask
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 9, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 9, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdAntennaOn, ReadRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 9, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 9, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0x9
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 9)
+        ; Saved register size: 9
+        ; Auto size: 0
+//  211     uint8 i;
+//  212     
+//  213     WriteRawRC(TxASKReg,0x40);
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,#0x40
+        MOV     R1,#0x15
+        LCALL   ??WriteRawRC?relay
+//  214     HalRc522Delay(10);
+        ; Setup parameters for call to function HalRc522Delay
+        MOV     R2,#0xa
+        MOV     R3,#0x0
+        LCALL   ??HalRc522Delay?relay
+//  215     i = ReadRawRC(TxControlReg);
+        ; Setup parameters for call to function ReadRawRC
+        MOV     R1,#0x14
+        LCALL   ??ReadRawRC?relay
+        MOV     A,R1
+        MOV     R6,A
+//  216     if (!(i & 0x03))
+        MOV     A,#0x3
+        ANL     A,R6
+        JNZ     ??PcdAntennaOn_0
+//  217         SetBitMask(TxControlReg, 0x03);
+        ; Setup parameters for call to function SetBitMask
+        MOV     R2,#0x3
+        MOV     R1,#0x14
+        LCALL   ??SetBitMask?relay
+//  218     
+//  219     i = ReadRawRC(TxASKReg);
+??PcdAntennaOn_0:
+        ; Setup parameters for call to function ReadRawRC
+        MOV     R1,#0x15
+        LCALL   ??ReadRawRC?relay
+        MOV     A,R1
+        MOV     R6,A
+//  220 }
+        MOV     R7,#0x1
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock7
+//  221 
+//  222 //******************************************************************/
+//  223 //开启天线发射  测试使用
+//  224 //每次启动或关闭天险发射之间应至少有1ms的间隔
+//  225 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  226 void PcdAntennaTestOn()
+PcdAntennaTestOn:
+        CFI Block cfiBlock8 Using cfiCommon0
+        CFI Function PcdAntennaTestOn
+        CODE
+//  227 {
+        FUNCALL PcdAntennaTestOn, HalRc522Delay
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdAntennaTestOn, WriteRawRC
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        PUSH    DPL
+        CFI DPL0 Frame(CFA_SP, 4)
+        CFI CFA_SP SP+-4
+        PUSH    DPH
+        CFI DPH0 Frame(CFA_SP, 5)
+        CFI CFA_SP SP+-5
+        ; Saved register size: 2
+        ; Auto size: 0
+//  228     RST522_1;
+        SETB    0xa0.0
+//  229     HalRc522Delay(15); // 2010.10.09 ???? FOR DEBUG
+        ; Setup parameters for call to function HalRc522Delay
+        MOV     R2,#0xf
+        MOV     R3,#0x0
+        LCALL   ??HalRc522Delay?relay
+//  230 //  HalRc522Delay(5); // 2010.10.09 ???? FOR DEBUG
+//  231   
+//  232   WriteRawRC(TxControlReg,0x02);
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,#0x2
+        MOV     R1,#0x14
+        LCALL   ??WriteRawRC?relay
+//  233   
+//  234 /*
+//  235   HalRc522Delay(1); 
+//  236   SetBitMask(TxControlReg, 0x03);// FOR DEBUG 
+//  237 */
+//  238 }
+        POP     DPH
+        CFI DPH0 SameValue
+        CFI CFA_SP SP+-4
+        POP     DPL
+        CFI DPL0 SameValue
+        CFI CFA_SP SP+-3
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock8
+        REQUIRE _A_P2
+//  239 
+//  240 
+//  241 //******************************************************************/
+//  242 //关闭天线发射
+//  243 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  244 void PcdAntennaOff()
+PcdAntennaOff:
+        CFI Block cfiBlock9 Using cfiCommon0
+        CFI Function PcdAntennaOff
+        CODE
+//  245 {
+        FUNCALL PcdAntennaOff, ClearBitMask
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        PUSH    DPL
+        CFI DPL0 Frame(CFA_SP, 4)
+        CFI CFA_SP SP+-4
+        PUSH    DPH
+        CFI DPH0 Frame(CFA_SP, 5)
+        CFI CFA_SP SP+-5
+        ; Saved register size: 2
+        ; Auto size: 0
+//  246     ClearBitMask(TxControlReg, 0x03);
+        ; Setup parameters for call to function ClearBitMask
+        MOV     R2,#0x3
+        MOV     R1,#0x14
+        LCALL   ??ClearBitMask?relay
+//  247 }
+        POP     DPH
+        CFI DPH0 SameValue
+        CFI CFA_SP SP+-4
+        POP     DPL
+        CFI DPL0 SameValue
+        CFI CFA_SP SP+-3
+        LJMP    ?BRET
+        CFI EndBlock cfiBlock9
+//  248 
+//  249 //******************************************************************/
+//  250 //功    能：通过RC522和ISO14443卡通讯
+//  251 //参数说明：Command[IN]:RC522命令字
+//  252 //          pInData[IN]:通过RC522发送到卡片的数据
+//  253 //          InLenByte[IN]:发送数据的字节长度
+//  254 //          pOutData[OUT]:接收到的卡片返回数据
+//  255 //          *pOutLenBit[OUT]:返回数据的位长度
+//  256 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  257 uint8 PcdComMF522(uint8 Command  ,uint8 *pInData , 
+PcdComMF522:
+        CFI Block cfiBlock10 Using cfiCommon0
+        CFI Function PcdComMF522
+        CODE
+//  258                  uint8 InLenByte,uint8 *pOutData, 
+//  259                  unsigned int  *pOutLenBit)
+//  260 {
+        FUNCALL PcdComMF522, WriteRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdComMF522, ClearBitMask
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdComMF522, WriteRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdComMF522, SetBitMask
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdComMF522, WriteRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdComMF522, WriteRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdComMF522, SetBitMask
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdComMF522, ReadRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdComMF522, ClearBitMask
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdComMF522, ReadRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdComMF522, ReadRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdComMF522, ReadRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdComMF522, ReadRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdComMF522, SetBitMask
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdComMF522, WriteRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 24, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 24, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0x18
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V15 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V14 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V13 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V12 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI V11 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI V10 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI V9 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI V8 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-17)))
+        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-18)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-19)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-20)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-21)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-22)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-23)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-24)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 24)
+        ; Saved register size: 24
+        ; Auto size: 0
+        MOV     ?V0 + 0,R1
+        MOV     ?V0 + 14,R2
+        MOV     ?V0 + 15,R3
+        MOV     ?V0 + 8,R4
+        MOV     A,#0x18
+        LCALL   ?XSTACK_DISP0_8
+        MOVX    A,@DPTR
+        MOV     ?V0 + 12,A
+        INC     DPTR
+        MOVX    A,@DPTR
+        MOV     ?V0 + 13,A
+        MOV     A,#0x1a
+        LCALL   ?XSTACK_DISP0_8
+        MOVX    A,@DPTR
+        MOV     ?V0 + 10,A
+        INC     DPTR
+        MOVX    A,@DPTR
+        MOV     ?V0 + 11,A
+//  261     uint8 status   = MI_ERR;
+        MOV     ?V0 + 1,#-0x2
+//  262     uint8 irqEn   = 0x00;
+        MOV     ?V0 + 2,#0x0
+//  263     uint8 waitFor = 0x00;
+        MOV     ?V0 + 3,#0x0
+//  264     uint8 lastBits;
+//  265     uint8 n;
+//  266     unsigned int  i;
+//  267     
+//  268     switch (Command)
+        MOV     A,?V0 + 0
+        ADD     A,#-0xc
+        JZ      ??PcdComMF522_0
+        ADD     A,#-0x2
+        JNZ     ??PcdComMF522_1
+//  269     {
+//  270     case PCD_AUTHENT:
+//  271       irqEn   = 0x12;
+        MOV     ?V0 + 2,#0x12
+//  272       waitFor = 0x10;
+        MOV     ?V0 + 3,#0x10
+//  273       break;
+        SJMP    ??PcdComMF522_1
+//  274     case PCD_TRANSCEIVE:
+//  275       irqEn   = 0x77;
+??PcdComMF522_0:
+        MOV     ?V0 + 2,#0x77
+//  276       waitFor = 0x30;
+        MOV     ?V0 + 3,#0x30
+//  277       break;
+//  278     default:
+//  279       break;
+//  280     }
+//  281     WriteRawRC(ComIEnReg,irqEn|0x80); //
+??PcdComMF522_1:
+        ; Setup parameters for call to function WriteRawRC
+        MOV     A,#-0x80
+        ORL     A,?V0 + 2
+        MOV     R2,A
+        MOV     R1,#0x2
+        LCALL   ??WriteRawRC?relay
+//  282     ClearBitMask(ComIrqReg,0x80);
+        ; Setup parameters for call to function ClearBitMask
+        MOV     R2,#-0x80
+        MOV     R1,#0x4
+        LCALL   ??ClearBitMask?relay
+//  283     WriteRawRC(CommandReg,PCD_IDLE);
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,#0x0
+        MOV     R1,#0x1
+        LCALL   ??WriteRawRC?relay
+//  284     SetBitMask(FIFOLevelReg,0x80); // 清空FIFO 
+        ; Setup parameters for call to function SetBitMask
+        MOV     R2,#-0x80
+        MOV     R1,#0xa
+        LCALL   ??SetBitMask?relay
+//  285     
+//  286     for(i = 0; i < InLenByte; i++)
+        MOV     R6,#0x0
+        MOV     R7,#0x0
+??PcdComMF522_2:
+        MOV     ?V0 + 6,?V0 + 8
+        MOV     ?V0 + 7,#0x0
+        CLR     C
+        MOV     A,R6
+        SUBB    A,?V0 + 6
+        MOV     A,R7
+        SUBB    A,?V0 + 7
+        JNC     ??PcdComMF522_3
+//  287         WriteRawRC(FIFODataReg, pInData[i]); // 数据写入FIFO 
+        ; Setup parameters for call to function WriteRawRC
+        MOV     A,?V0 + 14
+        ADD     A,R6
+        MOV     DPL,A
+        MOV     A,?V0 + 15
+        ADDC    A,R7
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        MOV     R2,A
+        MOV     R1,#0x9
+        LCALL   ??WriteRawRC?relay
+        MOV     A,R6
+        ADD     A,#0x1
+        MOV     R6,A
+        MOV     A,R7
+        ADDC    A,#0x0
+        MOV     R7,A
+        SJMP    ??PcdComMF522_2
+//  288     
+//  289     WriteRawRC(CommandReg, Command); // 命令写入命令寄存器
+??PcdComMF522_3:
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,?V0 + 0
+        MOV     R1,#0x1
+        LCALL   ??WriteRawRC?relay
+//  290     if(Command == PCD_TRANSCEIVE)
+        MOV     A,#0xc
+        XRL     A,?V0 + 0
+        JNZ     ??PcdComMF522_4
+//  291         SetBitMask(BitFramingReg,0x80); // 开始发送     
+        ; Setup parameters for call to function SetBitMask
+        MOV     R2,#-0x80
+        MOV     R1,#0xd
+        LCALL   ??SetBitMask?relay
+//  292     
+//  293     i = 25000; //根据时钟频率调整，操作M1卡最大等待时间25ms
+??PcdComMF522_4:
+        MOV     R6,#-0x58
+        MOV     R7,#0x61
+//  294     do 
+//  295     {
+//  296         n = ReadRawRC(ComIrqReg);
+??PcdComMF522_5:
+        ; Setup parameters for call to function ReadRawRC
+        MOV     R1,#0x4
+        LCALL   ??ReadRawRC?relay
+        MOV     A,R1
+        MOV     ?V0 + 4,A
+//  297         i--;
+        MOV     A,R6
+        ADD     A,#-0x1
+        MOV     R6,A
+        MOV     A,R7
+        ADDC    A,#-0x1
+        MOV     R7,A
+//  298     }
+//  299     while ((i != 0) && !(n & 0x01) && !(n & waitFor));
+        MOV     A,R6
+        ORL     A,R7
+        JZ      ??PcdComMF522_6
+        MOV     A,?V0 + 4
+        MOV     C,0xE0 /* A   */.0
+        JC      ??PcdComMF522_6
+        MOV     A,?V0 + 4
+        ANL     A,?V0 + 3
+        JZ      ??PcdComMF522_5
+//  300     
+//  301     ClearBitMask(BitFramingReg, 0x80);
+??PcdComMF522_6:
+        ; Setup parameters for call to function ClearBitMask
+        MOV     R2,#-0x80
+        MOV     R1,#0xd
+        LCALL   ??ClearBitMask?relay
+//  302     
+//  303     if(i!=0)
+        MOV     A,R6
+        ORL     A,R7
+        JNZ     $+5
+        LJMP    ??PcdComMF522_7 & 0xFFFF
+//  304     {
+//  305         if(!(ReadRawRC(ErrorReg)&0x1B))
+        ; Setup parameters for call to function ReadRawRC
+        MOV     R1,#0x6
+        LCALL   ??ReadRawRC?relay
+        MOV     A,R1
+        ANL     A,#0x1b
+        JZ      $+5
+        LJMP    ??PcdComMF522_8 & 0xFFFF
+//  306         {
+//  307             status = MI_OK;
+        MOV     ?V0 + 1,#0x0
+//  308             if (n&irqEn&0x01)
+        MOV     A,?V0 + 2
+        MOV     C,0xE0 /* A   */.0
+        PUSH    PSW
+        CFI CFA_SP SP+-1
+        MOV     A,?V0 + 4
+        MOV     C,0xE0 /* A   */.0
+        MOV     B.0,C
+        LCALL   ?POP_BIT_ISP
+        DEC     SP
+        CFI CFA_SP SP+0
+        ANL     C,B.0
+        JNC     ??PcdComMF522_9
+//  309                 status = MI_NOTAGERR;
+        MOV     ?V0 + 1,#-0x1
+//  310             
+//  311             if(Command==PCD_TRANSCEIVE)
+??PcdComMF522_9:
+        MOV     A,#0xc
+        XRL     A,?V0 + 0
+        JZ      $+5
+        LJMP    ??PcdComMF522_7 & 0xFFFF
+//  312             {
+//  313                 n = ReadRawRC(FIFOLevelReg);
+        ; Setup parameters for call to function ReadRawRC
+        MOV     R1,#0xa
+        LCALL   ??ReadRawRC?relay
+        MOV     A,R1
+        MOV     ?V0 + 4,A
+//  314                 lastBits = ReadRawRC(ControlReg) & 0x07;
+        ; Setup parameters for call to function ReadRawRC
+        MOV     R1,#0xc
+        LCALL   ??ReadRawRC?relay
+        MOV     A,R1
+        ANL     A,#0x7
+        MOV     ?V0 + 5,A
+//  315                 
+//  316                 if(lastBits)
+        MOV     A,?V0 + 5
+        JZ      ??PcdComMF522_10
+//  317                   *pOutLenBit = (n-1)*8 + lastBits;
+        MOV     ?V0 + 6,?V0 + 4
+        MOV     ?V0 + 7,#0x0
+        MOV     A,?V0 + 6
+        ADD     A,#-0x1
+        MOV     R0,A
+        MOV     A,?V0 + 7
+        ADDC    A,#-0x1
+        MOV     R1,A
+        MOV     A,R0
+        MOV     B,#0x8
+        MUL     AB
+        XCH     A,R0
+        MOV     R2,B
+        MOV     B,#0x0
+        MUL     AB
+        ADD     A,R2
+        MOV     R2,A
+        MOV     B,#0x8
+        MOV     A,R1
+        MUL     AB
+        ADD     A,R2
+        MOV     R1,A
+        MOV     ?V0 + 6,?V0 + 5
+        MOV     ?V0 + 7,#0x0
+        MOV     A,R0
+        ADD     A,?V0 + 6
+        MOV     R0,A
+        MOV     A,R1
+        ADDC    A,?V0 + 7
+        MOV     R1,A
+        MOV     DPL,?V0 + 10
+        MOV     DPH,?V0 + 11
+        MOV     A,R0
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOV     A,R1
+        MOVX    @DPTR,A
+        SJMP    ??PcdComMF522_11
+//  318                 else
+//  319                   *pOutLenBit = n*8;
+??PcdComMF522_10:
+        MOV     A,?V0 + 4
+        MOV     R0,?V0 + 4
+        MOV     R1,#0x0
+        MOV     A,R0
+        MOV     B,#0x8
+        MUL     AB
+        XCH     A,R0
+        MOV     R2,B
+        MOV     B,#0x0
+        MUL     AB
+        ADD     A,R2
+        MOV     R2,A
+        MOV     B,#0x8
+        MOV     A,R1
+        MUL     AB
+        ADD     A,R2
+        MOV     R1,A
+        MOV     DPL,?V0 + 10
+        MOV     DPH,?V0 + 11
+        MOV     A,R0
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOV     A,R1
+        MOVX    @DPTR,A
+//  320                 
+//  321                 if(n==0)
+??PcdComMF522_11:
+        MOV     A,?V0 + 4
+        JNZ     ??PcdComMF522_12
+//  322                   n = 1;
+        MOV     ?V0 + 4,#0x1
+//  323                 
+//  324                 if(n>MAXRLEN)
+??PcdComMF522_12:
+        MOV     A,?V0 + 4
+        CLR     C
+        SUBB    A,#0x13
+        JC      ??PcdComMF522_13
+//  325                   n = MAXRLEN;
+        MOV     ?V0 + 4,#0x12
+//  326                 
+//  327                 for (i=0; i<n; i++)
+??PcdComMF522_13:
+        MOV     R6,#0x0
+        MOV     R7,#0x0
+??PcdComMF522_14:
+        MOV     ?V0 + 6,?V0 + 4
+        MOV     ?V0 + 7,#0x0
+        CLR     C
+        MOV     A,R6
+        SUBB    A,?V0 + 6
+        MOV     A,R7
+        SUBB    A,?V0 + 7
+        JNC     ??PcdComMF522_7
+//  328                     pOutData[i] = ReadRawRC(FIFODataReg); 
+        ; Setup parameters for call to function ReadRawRC
+        MOV     R1,#0x9
+        LCALL   ??ReadRawRC?relay
+        MOV     A,R1
+        PUSH    A
+        CFI CFA_SP SP+-1
+        MOV     A,?V0 + 12
+        ADD     A,R6
+        MOV     DPL,A
+        MOV     A,?V0 + 13
+        ADDC    A,R7
+        MOV     DPH,A
+        POP     A
+        CFI CFA_SP SP+0
+        MOVX    @DPTR,A
+        MOV     A,R6
+        ADD     A,#0x1
+        MOV     R6,A
+        MOV     A,R7
+        ADDC    A,#0x0
+        MOV     R7,A
+        SJMP    ??PcdComMF522_14
+//  329             }
+//  330         }
+//  331         else
+//  332           status = MI_ERR;        
+??PcdComMF522_8:
+        MOV     ?V0 + 1,#-0x2
+//  333     }
+//  334     
+//  335     SetBitMask(ControlReg, 0x80);// stop timer now
+??PcdComMF522_7:
+        ; Setup parameters for call to function SetBitMask
+        MOV     R2,#-0x80
+        MOV     R1,#0xc
+        LCALL   ??SetBitMask?relay
+//  336     WriteRawRC(CommandReg, PCD_IDLE); 
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,#0x0
+        MOV     R1,#0x1
+        LCALL   ??WriteRawRC?relay
+//  337     return status;
+        MOV     R1,?V0 + 1
+        MOV     R7,#0x10
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock10
+//  338 }
+//  339 
+//  340 //******************************************************************/
+//  341 //功    能：寻卡                                                    /
+//  342 //参数说明: req_code[IN]:寻卡方式                                   /
+//  343 //                0x52 = 寻感应区内所有符合14443A标准的卡           /
+//  344 //                0x26 = 寻未进入休眠状态的卡                       /
+//  345 //          pTagType[OUT]：卡片类型代码                             /
+//  346 //                0x4400 = Mifare_UltraLight                        /
+//  347 //                0x0400 = Mifare_One(S50)                          /
+//  348 //                0x0200 = Mifare_One(S70)                          /
+//  349 //                0x0800 = Mifare_Pro(X)                            /
+//  350 //                0x4403 = Mifare_DESFire                           /
+//  351 //返    回: 成功返回MI_OK                                           /
+//  352 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  353 uint8 PcdRequest(uint8 req_code, uint8 *pTagType)
+PcdRequest:
+        CFI Block cfiBlock11 Using cfiCommon0
+        CFI Function PcdRequest
+        CODE
+//  354 {
+        FUNCALL PcdRequest, ClearBitMask
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 32, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 32, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdRequest, WriteRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 32, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 32, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdRequest, SetBitMask
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 32, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 32, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdRequest, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 36, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 36, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0xc
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 12)
+        ; Saved register size: 12
+        ; Auto size: 20
+        MOV     A,#-0x14
+        LCALL   ?ALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 32)
+        MOV     ?V0 + 3,R1
+        MOV     A,R2
+        MOV     R6,A
+        MOV     A,R3
+        MOV     R7,A
+//  355   uint8 status;  
+//  356   unsigned int  unLen;
+//  357   uint8 ucComMF522Buf[MAXRLEN]; 
+//  358 
+//  359   ClearBitMask(Status2Reg,0x08);
+        ; Setup parameters for call to function ClearBitMask
+        MOV     R2,#0x8
+        MOV     R1,#0x8
+        LCALL   ??ClearBitMask?relay
+//  360   WriteRawRC(BitFramingReg,0x07);
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,#0x7
+        MOV     R1,#0xd
+        LCALL   ??WriteRawRC?relay
+//  361   SetBitMask(TxControlReg,0x03);
+        ; Setup parameters for call to function SetBitMask
+        MOV     R2,#0x3
+        MOV     R1,#0x14
+        LCALL   ??SetBitMask?relay
+//  362  
+//  363   ucComMF522Buf[0] = req_code;
+        MOV     A,?V0 + 3
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,?V0 + 3
+        MOVX    @DPTR,A
+//  364 
+//  365   status = PcdComMF522(PCD_TRANSCEIVE, ucComMF522Buf, 1, ucComMF522Buf, &unLen);
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 0,DPL
+        MOV     ?V0 + 1,DPH
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 0,DPL
+        MOV     ?V0 + 1,DPH
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     R4,#0x1
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xc
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 32)
+        MOV     A,R1
+        MOV     ?V0 + 2,A
+//  366   
+//  367   if ((status == MI_OK) && (unLen == 0x10))
+        MOV     A,?V0 + 2
+        JNZ     ??PcdRequest_0
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOVX    A,@DPTR
+        XRL     A,#0x10
+        JNZ     ??PcdRequest_1
+        INC     DPTR
+        MOVX    A,@DPTR
+        XRL     A,#0x0
+??PcdRequest_1:
+        JNZ     ??PcdRequest_0
+//  368   {    
+//  369     *pTagType     = ucComMF522Buf[0];
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOVX    A,@DPTR
+        MOV     DPL,R6
+        MOV     DPH,R7
+        MOVX    @DPTR,A
+//  370     *(pTagType + 1) = ucComMF522Buf[1];
+        MOV     A,#0x3
+        LCALL   ?XSTACK_DISP0_8
+        MOVX    A,@DPTR
+        MOV     DPL,R6
+        MOV     DPH,R7
+        INC     DPTR
+        MOVX    @DPTR,A
+        SJMP    ??PcdRequest_2
+//  371   }
+//  372   else
+//  373     status = MI_ERR;
+??PcdRequest_0:
+        MOV     ?V0 + 2,#-0x2
+//  374   return status;
+??PcdRequest_2:
+        MOV     R1,?V0 + 2
+        MOV     A,#0x14
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 12)
+        MOV     R7,#0x4
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock11
+//  375 }
+//  376 
+//  377 //******************************************************************
+//  378 //功    能：防冲撞                                                  
+//  379 //参数说明: pSnr[OUT]:卡片序列号，4字节                             
+//  380 //返    回: 成功返回MI_OK                                           
+//  381 //******************************************************************
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  382 uint8 PcdAnticoll(uint8 *pSnr)
+PcdAnticoll:
+        CFI Block cfiBlock12 Using cfiCommon0
+        CFI Function PcdAnticoll
+        CODE
+//  383 {
+        FUNCALL PcdAnticoll, ClearBitMask
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 36, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 36, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdAnticoll, WriteRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 36, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 36, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdAnticoll, ClearBitMask
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 36, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 36, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdAnticoll, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 40, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 40, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdAnticoll, SetBitMask
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 36, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 36, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0x10
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 16)
+        ; Saved register size: 16
+        ; Auto size: 20
+        MOV     A,#-0x14
+        LCALL   ?ALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     A,R2
+        MOV     R6,A
+        MOV     A,R3
+        MOV     R7,A
+//  384     uint8 status;
+//  385     uint8 i, snr_check=0;
+        MOV     ?V0 + 3,#0x0
+//  386     unsigned int unLen;
+//  387     uint8 ucComMF522Buf[MAXRLEN]; 
+//  388     
+//  389     ClearBitMask(Status2Reg, 0x08);
+        ; Setup parameters for call to function ClearBitMask
+        MOV     R2,#0x8
+        MOV     R1,#0x8
+        LCALL   ??ClearBitMask?relay
+//  390     WriteRawRC(BitFramingReg, 0x00);
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,#0x0
+        MOV     R1,#0xd
+        LCALL   ??WriteRawRC?relay
+//  391     ClearBitMask(CollReg, 0x80);
+        ; Setup parameters for call to function ClearBitMask
+        MOV     R2,#-0x80
+        MOV     R1,#0xe
+        LCALL   ??ClearBitMask?relay
+//  392  
+//  393     ucComMF522Buf[0] = PICC_ANTICOLL1;
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#-0x6d
+        MOVX    @DPTR,A
+//  394     ucComMF522Buf[1] = 0x20;
+        MOV     A,#0x3
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#0x20
+        MOVX    @DPTR,A
+//  395 
+//  396     status = PcdComMF522(PCD_TRANSCEIVE, ucComMF522Buf, 2, ucComMF522Buf, &unLen);
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 0,DPL
+        MOV     ?V0 + 1,DPH
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 38)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 0,DPL
+        MOV     ?V0 + 1,DPH
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 40)
+        MOV     R4,#0x2
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xc
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     A,R1
+        MOV     ?V0 + 2,A
+//  397 
+//  398     if (status == MI_OK)
+        MOV     A,?V0 + 2
+        JZ      $+5
+        LJMP    ??PcdAnticoll_0 & 0xFFFF
+//  399     {
+//  400     	 for (i = 0; i < (unLen/8 - 1); i++)
+        MOV     ?V0 + 4,#0x0
+??PcdAnticoll_1:
+        MOV     ?V0 + 0,?V0 + 4
+        MOV     ?V0 + 1,#0x0
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOVX    A,@DPTR
+        MOV     ?V0 + 6,A
+        INC     DPTR
+        MOVX    A,@DPTR
+        MOV     ?V0 + 7,A
+        MOV     A,#0x3
+        MOV     R0,#?V0 + 6
+        LCALL   ?US_SHR
+        MOV     A,?V0 + 6
+        ADD     A,#-0x1
+        MOV     R0,A
+        MOV     A,?V0 + 7
+        ADDC    A,#-0x1
+        MOV     R1,A
+        CLR     C
+        MOV     A,?V0 + 0
+        SUBB    A,R0
+        MOV     A,?V0 + 1
+        SUBB    A,R1
+        JNC     ??PcdAnticoll_2
+//  401          {   
+//  402              *(pSnr+i)  = ucComMF522Buf[i];
+        MOV     ?V0 + 0,?V0 + 4
+        MOV     ?V0 + 1,#0x0
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,DPL
+        ADD     A,?V0 + 0
+        MOV     DPL,A
+        MOV     A,DPH
+        ADDC    A,?V0 + 1
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        PUSH    A
+        CFI CFA_SP SP+-1
+        MOV     ?V0 + 0,?V0 + 4
+        MOV     ?V0 + 1,#0x0
+        MOV     A,R6
+        ADD     A,?V0 + 0
+        MOV     DPL,A
+        MOV     A,R7
+        ADDC    A,?V0 + 1
+        MOV     DPH,A
+        POP     A
+        CFI CFA_SP SP+0
+        MOVX    @DPTR,A
+//  403              snr_check ^= ucComMF522Buf[i];
+        MOV     ?V0 + 0,?V0 + 4
+        MOV     ?V0 + 1,#0x0
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,DPL
+        ADD     A,?V0 + 0
+        MOV     DPL,A
+        MOV     A,DPH
+        ADDC    A,?V0 + 1
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        XRL     ?V0 + 3,A
+//  404          }
+        INC     ?V0 + 4
+        SJMP    ??PcdAnticoll_1
+//  405          if (snr_check != ucComMF522Buf[i])
+??PcdAnticoll_2:
+        MOV     ?V0 + 0,?V0 + 4
+        MOV     ?V0 + 1,#0x0
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,DPL
+        ADD     A,?V0 + 0
+        MOV     DPL,A
+        MOV     A,DPH
+        ADDC    A,?V0 + 1
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        XRL     A,?V0 + 3
+        JZ      ??PcdAnticoll_0
+//  406          {   
+//  407              status = MI_ERR;    
+        MOV     ?V0 + 2,#-0x2
+//  408          }
+//  409     }
+//  410     
+//  411     SetBitMask(CollReg, 0x80);
+??PcdAnticoll_0:
+        ; Setup parameters for call to function SetBitMask
+        MOV     R2,#-0x80
+        MOV     R1,#0xe
+        LCALL   ??SetBitMask?relay
+//  412     return status;
+        MOV     R1,?V0 + 2
+        MOV     A,#0x14
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 16)
+        MOV     R7,#0x8
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock12
+//  413 }
+//  414 
+//  415 //*********************************************************************/
+//  416 //功    能：选定卡片
+//  417 //参数说明: pSnr[IN]:卡片序列号，4字节
+//  418 //返    回: 成功返回MI_OK
+//  419 //********************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  420 uint8 PcdSelect(uint8 *pSnr)
+PcdSelect:
+        CFI Block cfiBlock13 Using cfiCommon0
+        CFI Function PcdSelect
+        CODE
+//  421 {
+        FUNCALL PcdSelect, CalulateCRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 32, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 32, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdSelect, ClearBitMask
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 32, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 32, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdSelect, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 36, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 36, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0xc
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 12)
+        ; Saved register size: 12
+        ; Auto size: 20
+        MOV     A,#-0x14
+        LCALL   ?ALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 32)
+        MOV     A,R2
+        MOV     R6,A
+        MOV     A,R3
+        MOV     R7,A
+//  422     uint8 status;
+//  423     uint8 i;
+//  424     unsigned int  unLen;
+//  425     uint8 ucComMF522Buf[MAXRLEN]; 
+//  426     
+//  427     ucComMF522Buf[0] = PICC_ANTICOLL1;
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#-0x6d
+        MOVX    @DPTR,A
+//  428     ucComMF522Buf[1] = 0x70;
+        MOV     A,#0x3
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#0x70
+        MOVX    @DPTR,A
+//  429     ucComMF522Buf[6] = 0;
+        MOV     A,#0x8
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#0x0
+        MOVX    @DPTR,A
+//  430     for (i=0; i<4; i++)
+        MOV     ?V0 + 3,#0x0
+??PcdSelect_0:
+        MOV     A,?V0 + 3
+        CLR     C
+        SUBB    A,#0x4
+        JNC     ??PcdSelect_1
+//  431     {
+//  432     	ucComMF522Buf[i+2] = *(pSnr+i);
+        MOV     ?V0 + 0,?V0 + 3
+        MOV     ?V0 + 1,#0x0
+        MOV     A,R6
+        ADD     A,?V0 + 0
+        MOV     DPL,A
+        MOV     A,R7
+        ADDC    A,?V0 + 1
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        PUSH    A
+        CFI CFA_SP SP+-1
+        MOV     ?V0 + 0,?V0 + 3
+        MOV     ?V0 + 1,#0x0
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,DPL
+        ADD     A,?V0 + 0
+        MOV     DPL,A
+        MOV     A,DPH
+        ADDC    A,?V0 + 1
+        MOV     DPH,A
+        INC     DPTR
+        INC     DPTR
+        POP     A
+        CFI CFA_SP SP+0
+        MOVX    @DPTR,A
+//  433     	ucComMF522Buf[6]  ^= *(pSnr+i);
+        MOV     ?V0 + 0,?V0 + 3
+        MOV     ?V0 + 1,#0x0
+        MOV     A,R6
+        ADD     A,?V0 + 0
+        MOV     DPL,A
+        MOV     A,R7
+        ADDC    A,?V0 + 1
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        MOV     R0,A
+        MOV     A,#0x8
+        LCALL   ?XSTACK_DISP0_8
+        MOVX    A,@DPTR
+        XRL     A,R0
+        MOVX    @DPTR,A
+//  434     }
+        INC     ?V0 + 3
+        SJMP    ??PcdSelect_0
+//  435     CalulateCRC(ucComMF522Buf,7,&ucComMF522Buf[7]);
+??PcdSelect_1:
+        ; Setup parameters for call to function CalulateCRC
+        MOV     A,#0x9
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R4,DPL
+        MOV     R5,DPH
+        MOV     R1,#0x7
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        LCALL   ??CalulateCRC?relay
+//  436   
+//  437     ClearBitMask(Status2Reg,0x08);
+        ; Setup parameters for call to function ClearBitMask
+        MOV     R2,#0x8
+        MOV     R1,#0x8
+        LCALL   ??ClearBitMask?relay
+//  438 
+//  439     status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,9,ucComMF522Buf,&unLen);
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 0,DPL
+        MOV     ?V0 + 1,DPH
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 0,DPL
+        MOV     ?V0 + 1,DPH
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     R4,#0x9
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xc
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 32)
+        MOV     A,R1
+        MOV     ?V0 + 2,A
+//  440     
+//  441     if ((status == MI_OK) && (unLen == 0x18))
+        MOV     A,?V0 + 2
+        JNZ     ??PcdSelect_2
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOVX    A,@DPTR
+        XRL     A,#0x18
+        JNZ     ??PcdSelect_3
+        INC     DPTR
+        MOVX    A,@DPTR
+        XRL     A,#0x0
+??PcdSelect_3:
+        JNZ     ??PcdSelect_2
+//  442     {   status = MI_OK;  }
+        MOV     ?V0 + 2,#0x0
+        SJMP    ??PcdSelect_4
+//  443     else
+//  444     {   status = MI_ERR;    }
+??PcdSelect_2:
+        MOV     ?V0 + 2,#-0x2
+//  445 
+//  446     return status;
+??PcdSelect_4:
+        MOV     R1,?V0 + 2
+        MOV     A,#0x14
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 12)
+        MOV     R7,#0x4
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock13
+//  447 }
+//  448 
+//  449 //******************************************************************/
+//  450 //功    能：验证卡片密码
+//  451 //参数说明: auth_mode[IN]: 密码验证模式
+//  452 //                 0x60 = 验证A密钥
+//  453 //                 0x61 = 验证B密钥 
+//  454 //          addr[IN]：块地址
+//  455 //          pKey[IN]：密码
+//  456 //          pSnr[IN]：卡片序列号，4字节
+//  457 //返    回: 成功返回MI_OK
+//  458 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  459 uint8 PcdAuthState(uint8 auth_mode,uint8 addr,
+PcdAuthState:
+        CFI Block cfiBlock14 Using cfiCommon0
+        CFI Function PcdAuthState
+        CODE
+//  460                   uint8 *pKey,uint8 *pSnr    )
+//  461 {
+        FUNCALL PcdAuthState, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 40, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 40, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdAuthState, ReadRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 36, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 36, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0x10
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 16)
+        ; Saved register size: 16
+        ; Auto size: 20
+        MOV     A,#-0x14
+        LCALL   ?ALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     ?V0 + 2,R1
+        MOV     ?V0 + 3,R2
+        MOV     A,R4
+        MOV     R6,A
+        MOV     A,R5
+        MOV     R7,A
+        MOV     A,#0x24
+        LCALL   ?XSTACK_DISP0_8
+        MOVX    A,@DPTR
+        MOV     R0,A
+        INC     DPTR
+        MOVX    A,@DPTR
+        MOV     R1,A
+        MOV     ?V0 + 0,R0
+        MOV     ?V0 + 1,R1
+//  462     uint8 status;
+//  463     unsigned int  unLen;
+//  464     uint8 i, ucComMF522Buf[MAXRLEN]; 
+//  465 
+//  466     ucComMF522Buf[0] = auth_mode;
+        MOV     A,?V0 + 2
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,?V0 + 2
+        MOVX    @DPTR,A
+//  467     ucComMF522Buf[1] = addr;
+        MOV     A,?V0 + 3
+        MOV     A,#0x3
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,?V0 + 3
+        MOVX    @DPTR,A
+//  468     for (i=0; i<6; i++)
+        MOV     ?V0 + 7,#0x0
+??PcdAuthState_0:
+        MOV     A,?V0 + 7
+        CLR     C
+        SUBB    A,#0x6
+        JNC     ??PcdAuthState_1
+//  469     {    ucComMF522Buf[i+2] = *(pKey+i);   }
+        MOV     ?V0 + 4,?V0 + 7
+        MOV     ?V0 + 5,#0x0
+        MOV     A,R6
+        ADD     A,?V0 + 4
+        MOV     DPL,A
+        MOV     A,R7
+        ADDC    A,?V0 + 5
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        PUSH    A
+        CFI CFA_SP SP+-1
+        MOV     ?V0 + 4,?V0 + 7
+        MOV     ?V0 + 5,#0x0
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,DPL
+        ADD     A,?V0 + 4
+        MOV     DPL,A
+        MOV     A,DPH
+        ADDC    A,?V0 + 5
+        MOV     DPH,A
+        INC     DPTR
+        INC     DPTR
+        POP     A
+        CFI CFA_SP SP+0
+        MOVX    @DPTR,A
+        INC     ?V0 + 7
+        SJMP    ??PcdAuthState_0
+//  470     for (i=0; i<6; i++)
+??PcdAuthState_1:
+        MOV     ?V0 + 7,#0x0
+??PcdAuthState_2:
+        MOV     A,?V0 + 7
+        CLR     C
+        SUBB    A,#0x6
+        JNC     ??PcdAuthState_3
+//  471     {    ucComMF522Buf[i+8] = *(pSnr+i);   }
+        MOV     ?V0 + 4,?V0 + 7
+        MOV     ?V0 + 5,#0x0
+        MOV     A,?V0 + 0
+        ADD     A,?V0 + 4
+        MOV     DPL,A
+        MOV     A,?V0 + 1
+        ADDC    A,?V0 + 5
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        PUSH    A
+        CFI CFA_SP SP+-1
+        MOV     ?V0 + 4,?V0 + 7
+        MOV     ?V0 + 5,#0x0
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,DPL
+        ADD     A,?V0 + 4
+        MOV     DPL,A
+        MOV     A,DPH
+        ADDC    A,?V0 + 5
+        MOV     DPH,A
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
+        POP     A
+        CFI CFA_SP SP+0
+        MOVX    @DPTR,A
+        INC     ?V0 + 7
+        SJMP    ??PcdAuthState_2
+//  472     
+//  473     status = PcdComMF522(PCD_AUTHENT,ucComMF522Buf,12,ucComMF522Buf,&unLen);
+??PcdAuthState_3:
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 4,DPL
+        MOV     ?V0 + 5,DPH
+        MOV     R0,#?V0 + 4
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 38)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 4,DPL
+        MOV     ?V0 + 5,DPH
+        MOV     R0,#?V0 + 4
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 40)
+        MOV     R4,#0xc
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xe
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     A,R1
+        MOV     ?V0 + 6,A
+//  474     if ((status != MI_OK) || (!(ReadRawRC(Status2Reg) & 0x08)))
+        MOV     A,?V0 + 6
+        JNZ     ??PcdAuthState_4
+        ; Setup parameters for call to function ReadRawRC
+        MOV     R1,#0x8
+        LCALL   ??ReadRawRC?relay
+        MOV     A,R1
+        MOV     R0,A
+        MOV     C,0xE0 /* A   */.3
+        JC      ??PcdAuthState_5
+//  475     {   status = MI_ERR;   }
+??PcdAuthState_4:
+        MOV     ?V0 + 6,#-0x2
+//  476     
+//  477     return status;
+??PcdAuthState_5:
+        MOV     R1,?V0 + 6
+        MOV     A,#0x14
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 16)
+        MOV     R7,#0x8
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock14
+//  478 }
+//  479 
+//  480 //******************************************************************/
+//  481 //功    能：读取M1卡一块数据
+//  482 //参数说明: addr[IN]：块地址
+//  483 //          pData[OUT]：读出的数据，16字节
+//  484 //返    回: 成功返回MI_OK
+//  485 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  486 uint8 PcdRead(uint8 addr,uint8 *pData)
+PcdRead:
+        CFI Block cfiBlock15 Using cfiCommon0
+        CFI Function PcdRead
+        CODE
+//  487 {
+        FUNCALL PcdRead, CalulateCRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 34, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 34, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdRead, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 38, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 38, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0xe
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 14)
+        ; Saved register size: 14
+        ; Auto size: 20
+        MOV     A,#-0x14
+        LCALL   ?ALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     ?V0 + 1,R1
+        MOV     A,R2
+        MOV     R6,A
+        MOV     A,R3
+        MOV     R7,A
+//  488     uint8 status;
+//  489     unsigned int  unLen;
+//  490     uint8 i,ucComMF522Buf[MAXRLEN]; 
+//  491 
+//  492     ucComMF522Buf[0] = PICC_READ;
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#0x30
+        MOVX    @DPTR,A
+//  493     ucComMF522Buf[1] = addr;
+        MOV     A,?V0 + 1
+        MOV     A,#0x3
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,?V0 + 1
+        MOVX    @DPTR,A
+//  494     CalulateCRC(ucComMF522Buf,2,&ucComMF522Buf[2]);   
+        ; Setup parameters for call to function CalulateCRC
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R4,DPL
+        MOV     R5,DPH
+        MOV     R1,#0x2
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        LCALL   ??CalulateCRC?relay
+//  495     status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,4,
+//  496                          ucComMF522Buf,&unLen           );
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 4,DPL
+        MOV     ?V0 + 5,DPH
+        MOV     R0,#?V0 + 4
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 4,DPL
+        MOV     ?V0 + 5,DPH
+        MOV     R0,#?V0 + 4
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 38)
+        MOV     R4,#0x4
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xc
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     A,R1
+        MOV     ?V0 + 0,A
+//  497     if ((status == MI_OK) && (unLen == 0x90))
+        MOV     A,?V0 + 0
+        JNZ     ??PcdRead_0
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOVX    A,@DPTR
+        XRL     A,#0x90
+        JNZ     ??PcdRead_1
+        INC     DPTR
+        MOVX    A,@DPTR
+        XRL     A,#0x0
+??PcdRead_1:
+        JNZ     ??PcdRead_0
+//  498     {
+//  499         for (i=0; i<16; i++)
+        MOV     ?V0 + 2,#0x0
+??PcdRead_2:
+        MOV     A,?V0 + 2
+        CLR     C
+        SUBB    A,#0x10
+        JNC     ??PcdRead_3
+//  500             *(pData+i) = ucComMF522Buf[i];   
+        MOV     ?V0 + 4,?V0 + 2
+        MOV     ?V0 + 5,#0x0
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,DPL
+        ADD     A,?V0 + 4
+        MOV     DPL,A
+        MOV     A,DPH
+        ADDC    A,?V0 + 5
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        PUSH    A
+        CFI CFA_SP SP+-1
+        MOV     ?V0 + 4,?V0 + 2
+        MOV     ?V0 + 5,#0x0
+        MOV     A,R6
+        ADD     A,?V0 + 4
+        MOV     DPL,A
+        MOV     A,R7
+        ADDC    A,?V0 + 5
+        MOV     DPH,A
+        POP     A
+        CFI CFA_SP SP+0
+        MOVX    @DPTR,A
+        INC     ?V0 + 2
+        SJMP    ??PcdRead_2
+//  501     }
+//  502     else
+//  503       status = MI_ERR;       
+??PcdRead_0:
+        MOV     ?V0 + 0,#-0x2
+//  504     return status;
+??PcdRead_3:
+        MOV     R1,?V0 + 0
+        MOV     A,#0x14
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 14)
+        MOV     R7,#0x6
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock15
+//  505 }
+//  506 
+//  507 //******************************************************************/
+//  508 //功    能：读取M1卡一块数据
+//  509 //参数说明: addr[IN]：块地址
+//  510 //          pData[OUT]：读出的数据，16字节
+//  511 //返    回: 成功返回MI_OK
+//  512 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  513 uint8 Read_Block(uint8 Block,uint8 *Buf)
+Read_Block:
+        CFI Block cfiBlock16 Using cfiCommon0
+        CFI Function Read_Block
+        CODE
+//  514 {
+        FUNCALL Read_Block, PcdAuthState
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 14, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 14, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL Read_Block, PcdRead
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 12, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 12, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL Read_Block, Des_Decrypt
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 14, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 14, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL Read_Block, Des_Decrypt
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 14, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 14, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0xc
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 12)
+        ; Saved register size: 12
+        ; Auto size: 0
+        MOV     A,R1
+        MOV     R7,A
+        MOV     ?V0 + 0,R2
+        MOV     ?V0 + 1,R3
+//  515   uint8 result;
+//  516   result = PcdAuthState(0x60,Block,Password_Buffer,UID);
+        ; Setup parameters for call to function PcdAuthState
+        MOV     ?V0 + 2,#UID & 0xff
+        MOV     ?V0 + 3,#(UID >> 8) & 0xff
+        MOV     R0,#?V0 + 2
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 14)
+        MOV     R4,#Password_Buffer & 0xff
+        MOV     R5,#(Password_Buffer >> 8) & 0xff
+        MOV     A,R7
+        MOV     R2,A
+        MOV     R1,#0x60
+        LCALL   ??PcdAuthState?relay
+        MOV     A,#0x2
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 12)
+        MOV     A,R1
+        MOV     R6,A
+//  517   if(result!=MI_OK)
+        MOV     A,R6
+        JZ      ??Read_Block_0
+//  518     return result;
+        MOV     A,R6
+        MOV     R1,A
+        SJMP    ??Read_Block_1
+//  519   result = PcdRead(Block,Buf);
+??Read_Block_0:
+        ; Setup parameters for call to function PcdRead
+        MOV     R2,?V0 + 0
+        MOV     R3,?V0 + 1
+        MOV     A,R7
+        MOV     R1,A
+        LCALL   ??PcdRead?relay
+        MOV     A,R1
+        MOV     R6,A
+//  520 //  return result; // 2011.01.03
+//  521   
+//  522   if(result!=MI_OK)     return   result;
+        MOV     A,R6
+        JZ      ??Read_Block_2
+        MOV     A,R6
+        MOV     R1,A
+        SJMP    ??Read_Block_1
+//  523   if(Block!=0x00&&des_on)
+??Read_Block_2:
+        MOV     A,R7
+        JZ      ??Read_Block_3
+        MOV     DPTR,#des_on
+        MOVX    A,@DPTR
+        JZ      ??Read_Block_3
+//  524   {
+//  525     Des_Decrypt((uint8 *)Buf    ,KK,(uint8 *)Buf    );
+        ; Setup parameters for call to function Des_Decrypt
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 14)
+        MOV     R4,#KK & 0xff
+        MOV     R5,#(KK >> 8) & 0xff
+        MOV     R2,?V0 + 0
+        MOV     R3,?V0 + 1
+        LCALL   ??Des_Decrypt?relay
+        MOV     A,#0x2
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 12)
+//  526     Des_Decrypt((uint8 *)&Buf[8],KK,(uint8 *)&Buf[8]);  
+        ; Setup parameters for call to function Des_Decrypt
+        MOV     A,?V0 + 0
+        ADD     A,#0x8
+        MOV     ?V0 + 2,A
+        MOV     A,?V0 + 1
+        ADDC    A,#0x0
+        MOV     ?V0 + 3,A
+        MOV     R0,#?V0 + 2
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 14)
+        MOV     R4,#KK & 0xff
+        MOV     R5,#(KK >> 8) & 0xff
+        MOV     A,?V0 + 0
+        ADD     A,#0x8
+        MOV     R2,A
+        MOV     A,?V0 + 1
+        ADDC    A,#0x0
+        MOV     R3,A
+        LCALL   ??Des_Decrypt?relay
+        MOV     A,#0x2
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 12)
+//  527   }
+//  528   return SUCCESS; 
+??Read_Block_3:
+        MOV     R1,#0x0
+??Read_Block_1:
+        MOV     R7,#0x4
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock16
+//  529 }
+//  530 
+//  531 //******************************************************************/
+//  532 //功    能：写数据到M1卡一块
+//  533 //参数说明: addr[IN]：块地址
+//  534 //          pData[IN]：写入的数据，16字节
+//  535 //返    回: 成功返回MI_OK
+//  536 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  537 uint8 PcdWrite(uint8 addr,uint8 *pData)
+PcdWrite:
+        CFI Block cfiBlock17 Using cfiCommon0
+        CFI Function PcdWrite
+        CODE
+//  538 {
+        FUNCALL PcdWrite, CalulateCRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 34, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 34, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdWrite, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 38, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 38, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdWrite, CalulateCRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 34, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 34, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdWrite, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 38, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 38, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0xe
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 14)
+        ; Saved register size: 14
+        ; Auto size: 20
+        MOV     A,#-0x14
+        LCALL   ?ALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     ?V0 + 0,R1
+        MOV     ?V0 + 2,R2
+        MOV     ?V0 + 3,R3
+//  539   uint8 status;
+//  540   unsigned int  unLen;
+//  541   uint8 i,ucComMF522Buf[MAXRLEN]; 
+//  542     
+//  543   ucComMF522Buf[0] = PICC_WRITE;
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#-0x60
+        MOVX    @DPTR,A
+//  544   ucComMF522Buf[1] = addr;
+        MOV     A,?V0 + 0
+        MOV     A,#0x3
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,?V0 + 0
+        MOVX    @DPTR,A
+//  545   CalulateCRC(ucComMF522Buf,2,&ucComMF522Buf[2]);
+        ; Setup parameters for call to function CalulateCRC
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R4,DPL
+        MOV     R5,DPH
+        MOV     R1,#0x2
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        LCALL   ??CalulateCRC?relay
+//  546   status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,4,
+//  547                        ucComMF522Buf,&unLen          );
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 4,DPL
+        MOV     ?V0 + 5,DPH
+        MOV     R0,#?V0 + 4
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 4,DPL
+        MOV     ?V0 + 5,DPH
+        MOV     R0,#?V0 + 4
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 38)
+        MOV     R4,#0x4
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xc
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     A,R1
+        MOV     R6,A
+//  548   if(  ( status != MI_OK)||(unLen != 4)
+//  549      ||((ucComMF522Buf[0]&0x0F)!= 0x0A))
+        MOV     A,R6
+        JNZ     ??PcdWrite_0
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOVX    A,@DPTR
+        XRL     A,#0x4
+        JNZ     ??PcdWrite_1
+        INC     DPTR
+        MOVX    A,@DPTR
+        XRL     A,#0x0
+??PcdWrite_1:
+        JNZ     ??PcdWrite_0
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOVX    A,@DPTR
+        ANL     A,#0xf
+        XRL     A,#0xa
+        JZ      ??PcdWrite_2
+//  550     status = MI_ERR;           
+??PcdWrite_0:
+        MOV     R6,#-0x2
+//  551   if (status == MI_OK)
+??PcdWrite_2:
+        MOV     A,R6
+        JZ      $+5
+        LJMP    ??PcdWrite_3 & 0xFFFF
+//  552   {
+//  553     for (i=0; i<16; i++)
+        MOV     R7,#0x0
+??PcdWrite_4:
+        MOV     A,R7
+        CLR     C
+        SUBB    A,#0x10
+        JNC     ??PcdWrite_5
+//  554       ucComMF522Buf[i] = *(pData+i);  
+        MOV     ?V0 + 4,R7
+        MOV     ?V0 + 5,#0x0
+        MOV     A,?V0 + 2
+        ADD     A,?V0 + 4
+        MOV     DPL,A
+        MOV     A,?V0 + 3
+        ADDC    A,?V0 + 5
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        PUSH    A
+        CFI CFA_SP SP+-1
+        MOV     ?V0 + 4,R7
+        MOV     ?V0 + 5,#0x0
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,DPL
+        ADD     A,?V0 + 4
+        MOV     DPL,A
+        MOV     A,DPH
+        ADDC    A,?V0 + 5
+        MOV     DPH,A
+        POP     A
+        CFI CFA_SP SP+0
+        MOVX    @DPTR,A
+        INC     R7
+        SJMP    ??PcdWrite_4
+//  555     CalulateCRC(ucComMF522Buf,16,&ucComMF522Buf[16]);
+??PcdWrite_5:
+        ; Setup parameters for call to function CalulateCRC
+        MOV     A,#0x12
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R4,DPL
+        MOV     R5,DPH
+        MOV     R1,#0x10
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        LCALL   ??CalulateCRC?relay
+//  556     status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,
+//  557                          18,ucComMF522Buf,&unLen     );
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 4,DPL
+        MOV     ?V0 + 5,DPH
+        MOV     R0,#?V0 + 4
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 4,DPL
+        MOV     ?V0 + 5,DPH
+        MOV     R0,#?V0 + 4
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 38)
+        MOV     R4,#0x12
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xc
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     A,R1
+        MOV     R6,A
+//  558     if(  (status != MI_OK)||(unLen != 4 )
+//  559        ||((ucComMF522Buf[0]&0x0F)!= 0x0A))
+        MOV     A,R6
+        JNZ     ??PcdWrite_6
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOVX    A,@DPTR
+        XRL     A,#0x4
+        JNZ     ??PcdWrite_7
+        INC     DPTR
+        MOVX    A,@DPTR
+        XRL     A,#0x0
+??PcdWrite_7:
+        JNZ     ??PcdWrite_6
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOVX    A,@DPTR
+        ANL     A,#0xf
+        XRL     A,#0xa
+        JZ      ??PcdWrite_3
+//  560       status = MI_ERR;   
+??PcdWrite_6:
+        MOV     R6,#-0x2
+//  561   }    
+//  562   return status;
+??PcdWrite_3:
+        MOV     A,R6
+        MOV     R1,A
+        MOV     A,#0x14
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 14)
+        MOV     R7,#0x6
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock17
+//  563 }
+//  564 //******************************************************************/
+//  565 //功    能：写数据到M1卡一块
+//  566 //参数说明: addr[IN]：块地址
+//  567 //          pData[IN]：写入的数据，16字节
+//  568 //返    回: 成功返回MI_OK
+//  569 //******************************************************************/
+//  570 
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  571 uint8 Write_Block(uint8 Block)
+Write_Block:
+        CFI Block cfiBlock18 Using cfiCommon0
+        CFI Function Write_Block
+        CODE
+//  572 {
+        FUNCALL Write_Block, Des_Encrypt
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 12, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 12, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL Write_Block, Des_Encrypt
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 12, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 12, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL Write_Block, PcdAuthState
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 12, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 12, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL Write_Block, PcdWrite
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 10, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 10, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0xa
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 10)
+        ; Saved register size: 10
+        ; Auto size: 0
+        MOV     A,R1
+        MOV     R7,A
+//  573   uint8 result;
+//  574   if(des_on)
+        MOV     DPTR,#des_on
+        MOVX    A,@DPTR
+        JZ      ??Write_Block_0
+//  575   {
+//  576     Des_Encrypt((uint8 *)RF_Buffer    ,KK,
+//  577                 (uint8 *)RF_Buffer        );// for debug
+        ; Setup parameters for call to function Des_Encrypt
+        MOV     ?V0 + 0,#RF_Buffer & 0xff
+        MOV     ?V0 + 1,#(RF_Buffer >> 8) & 0xff
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 12)
+        MOV     R4,#KK & 0xff
+        MOV     R5,#(KK >> 8) & 0xff
+        MOV     R2,#RF_Buffer & 0xff
+        MOV     R3,#(RF_Buffer >> 8) & 0xff
+        LCALL   ??Des_Encrypt?relay
+        MOV     A,#0x2
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 10)
+//  578     Des_Encrypt((uint8 *)&RF_Buffer[8],KK,
+//  579                 (uint8 *)&RF_Buffer[8]    );// for debug  
+        ; Setup parameters for call to function Des_Encrypt
+        MOV     ?V0 + 0,#(RF_Buffer + 8) & 0xff
+        MOV     ?V0 + 1,#((RF_Buffer + 8) >> 8) & 0xff
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 12)
+        MOV     R4,#KK & 0xff
+        MOV     R5,#(KK >> 8) & 0xff
+        MOV     R2,#(RF_Buffer + 8) & 0xff
+        MOV     R3,#((RF_Buffer + 8) >> 8) & 0xff
+        LCALL   ??Des_Encrypt?relay
+        MOV     A,#0x2
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 10)
+//  580   }
+//  581   result = PcdAuthState(0x60,Block,Password_Buffer,UID);
+??Write_Block_0:
+        ; Setup parameters for call to function PcdAuthState
+        MOV     ?V0 + 0,#UID & 0xff
+        MOV     ?V0 + 1,#(UID >> 8) & 0xff
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 12)
+        MOV     R4,#Password_Buffer & 0xff
+        MOV     R5,#(Password_Buffer >> 8) & 0xff
+        MOV     A,R7
+        MOV     R2,A
+        MOV     R1,#0x60
+        LCALL   ??PcdAuthState?relay
+        MOV     A,#0x2
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 10)
+        MOV     A,R1
+        MOV     R6,A
+//  582   if(result!=MI_OK)
+        MOV     A,R6
+        JZ      ??Write_Block_1
+//  583     return result;  
+        MOV     A,R6
+        MOV     R1,A
+        SJMP    ??Write_Block_2
+//  584   result = PcdWrite(Block,RF_Buffer);
+??Write_Block_1:
+        ; Setup parameters for call to function PcdWrite
+        MOV     R2,#RF_Buffer & 0xff
+        MOV     R3,#(RF_Buffer >> 8) & 0xff
+        MOV     A,R7
+        MOV     R1,A
+        LCALL   ??PcdWrite?relay
+        MOV     A,R1
+        MOV     R6,A
+//  585   return result;  
+        MOV     R1,A
+??Write_Block_2:
+        MOV     R7,#0x2
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock18
+//  586 }
+//  587 
+//  588 //******************************************************************/
+//  589 //功    能：扣款和充值
+//  590 //参数说明: dd_mode[IN]：命令字
+//  591 //               0xC0 = 扣款
+//  592 //               0xC1 = 充值
+//  593 //          addr[IN]：钱包地址
+//  594 //          pValue[IN]：4字节增(减)值，低位在前
+//  595 //返    回: 成功返回MI_OK
+//  596 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  597 uint8 PcdValue(uint8 dd_mode,uint8 addr,uint8 *pValue)
+PcdValue:
+        CFI Block cfiBlock19 Using cfiCommon0
+        CFI Function PcdValue
+        CODE
+//  598 {
+        FUNCALL PcdValue, CalulateCRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 34, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 34, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdValue, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 38, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 38, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdValue, CalulateCRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 34, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 34, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdValue, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 38, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 38, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdValue, CalulateCRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 34, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 34, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdValue, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 38, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 38, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0xe
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 14)
+        ; Saved register size: 14
+        ; Auto size: 20
+        MOV     A,#-0x14
+        LCALL   ?ALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     ?V0 + 1,R1
+        MOV     ?V0 + 0,R2
+        MOV     ?V0 + 2,R4
+        MOV     ?V0 + 3,R5
+//  599     uint8 status;
+//  600     unsigned int  unLen;
+//  601     uint8 i,ucComMF522Buf[MAXRLEN]; 
+//  602     
+//  603     ucComMF522Buf[0] = dd_mode;
+        MOV     A,?V0 + 1
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,?V0 + 1
+        MOVX    @DPTR,A
+//  604     ucComMF522Buf[1] = addr;
+        MOV     A,?V0 + 0
+        MOV     A,#0x3
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,?V0 + 0
+        MOVX    @DPTR,A
+//  605     CalulateCRC(ucComMF522Buf,2,&ucComMF522Buf[2]);
+        ; Setup parameters for call to function CalulateCRC
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R4,DPL
+        MOV     R5,DPH
+        MOV     R1,#0x2
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        LCALL   ??CalulateCRC?relay
+//  606  
+//  607     status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,4,ucComMF522Buf,&unLen);
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 4,DPL
+        MOV     ?V0 + 5,DPH
+        MOV     R0,#?V0 + 4
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 4,DPL
+        MOV     ?V0 + 5,DPH
+        MOV     R0,#?V0 + 4
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 38)
+        MOV     R4,#0x4
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xc
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     A,R1
+        MOV     R6,A
+//  608 
+//  609     if ((status != MI_OK) || (unLen != 4) || ((ucComMF522Buf[0] & 0x0F) != 0x0A))
+        MOV     A,R6
+        JNZ     ??PcdValue_0
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOVX    A,@DPTR
+        XRL     A,#0x4
+        JNZ     ??PcdValue_1
+        INC     DPTR
+        MOVX    A,@DPTR
+        XRL     A,#0x0
+??PcdValue_1:
+        JNZ     ??PcdValue_0
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOVX    A,@DPTR
+        ANL     A,#0xf
+        XRL     A,#0xa
+        JZ      ??PcdValue_2
+//  610     {   status = MI_ERR;   }
+??PcdValue_0:
+        MOV     R6,#-0x2
+//  611         
+//  612     if (status == MI_OK)
+??PcdValue_2:
+        MOV     A,R6
+        JZ      $+5
+        LJMP    ??PcdValue_3 & 0xFFFF
+//  613     {
+//  614         for (i=0; i<16; i++)
+        MOV     R7,#0x0
+??PcdValue_4:
+        MOV     A,R7
+        CLR     C
+        SUBB    A,#0x10
+        JNC     ??PcdValue_5
+//  615         {    ucComMF522Buf[i] = *(pValue+i);   }
+        MOV     ?V0 + 4,R7
+        MOV     ?V0 + 5,#0x0
+        MOV     A,?V0 + 2
+        ADD     A,?V0 + 4
+        MOV     DPL,A
+        MOV     A,?V0 + 3
+        ADDC    A,?V0 + 5
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        PUSH    A
+        CFI CFA_SP SP+-1
+        MOV     ?V0 + 4,R7
+        MOV     ?V0 + 5,#0x0
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,DPL
+        ADD     A,?V0 + 4
+        MOV     DPL,A
+        MOV     A,DPH
+        ADDC    A,?V0 + 5
+        MOV     DPH,A
+        POP     A
+        CFI CFA_SP SP+0
+        MOVX    @DPTR,A
+        INC     R7
+        SJMP    ??PcdValue_4
+//  616         CalulateCRC(ucComMF522Buf,4,&ucComMF522Buf[4]);
+??PcdValue_5:
+        ; Setup parameters for call to function CalulateCRC
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R4,DPL
+        MOV     R5,DPH
+        MOV     R1,#0x4
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        LCALL   ??CalulateCRC?relay
+//  617         unLen = 0;
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     A,#0x0
+        MOVX    @DPTR,A
+        INC     DPTR
+        MOV     A,#0x0
+        MOVX    @DPTR,A
+//  618         status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,6,ucComMF522Buf,&unLen);
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 4,DPL
+        MOV     ?V0 + 5,DPH
+        MOV     R0,#?V0 + 4
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 4,DPL
+        MOV     ?V0 + 5,DPH
+        MOV     R0,#?V0 + 4
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 38)
+        MOV     R4,#0x6
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xc
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     A,R1
+        MOV     R6,A
+//  619         if (status != MI_ERR)
+        MOV     A,#-0x2
+        XRL     A,R6
+        JZ      ??PcdValue_3
+//  620         {    status = MI_OK;    }
+        MOV     R6,#0x0
+//  621     }
+//  622     
+//  623     if (status == MI_OK)
+??PcdValue_3:
+        MOV     A,R6
+        JZ      $+5
+        LJMP    ??PcdValue_6 & 0xFFFF
+//  624     {
+//  625         ucComMF522Buf[0] = PICC_TRANSFER;
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#-0x50
+        MOVX    @DPTR,A
+//  626         ucComMF522Buf[1] = addr;
+        MOV     A,?V0 + 0
+        MOV     A,#0x3
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,?V0 + 0
+        MOVX    @DPTR,A
+//  627         CalulateCRC(ucComMF522Buf,2,&ucComMF522Buf[2]); 
+        ; Setup parameters for call to function CalulateCRC
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R4,DPL
+        MOV     R5,DPH
+        MOV     R1,#0x2
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        LCALL   ??CalulateCRC?relay
+//  628    
+//  629         status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,4,ucComMF522Buf,&unLen);
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 4,DPL
+        MOV     ?V0 + 5,DPH
+        MOV     R0,#?V0 + 4
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 4,DPL
+        MOV     ?V0 + 5,DPH
+        MOV     R0,#?V0 + 4
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 38)
+        MOV     R4,#0x4
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xc
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     A,R1
+        MOV     R6,A
+//  630 
+//  631         if ((status != MI_OK) || (unLen != 4) || ((ucComMF522Buf[0] & 0x0F) != 0x0A))
+        MOV     A,R6
+        JNZ     ??PcdValue_7
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOVX    A,@DPTR
+        XRL     A,#0x4
+        JNZ     ??PcdValue_8
+        INC     DPTR
+        MOVX    A,@DPTR
+        XRL     A,#0x0
+??PcdValue_8:
+        JNZ     ??PcdValue_7
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOVX    A,@DPTR
+        ANL     A,#0xf
+        XRL     A,#0xa
+        JZ      ??PcdValue_6
+//  632         {   status = MI_ERR;   }
+??PcdValue_7:
+        MOV     R6,#-0x2
+//  633     }
+//  634     return status;
+??PcdValue_6:
+        MOV     A,R6
+        MOV     R1,A
+        MOV     A,#0x14
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 14)
+        MOV     R7,#0x6
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock19
+//  635 }
+//  636 
+//  637 //******************************************************************/
+//  638 //功    能：备份钱包
+//  639 //参数说明: sourceaddr[IN]：源地址
+//  640 //          goaladdr[IN]：目标地址
+//  641 //返    回: 成功返回MI_OK
+//  642 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  643 uint8 PcdBakValue(uint8 sourceaddr, uint8 goaladdr)
+PcdBakValue:
+        CFI Block cfiBlock20 Using cfiCommon0
+        CFI Function PcdBakValue
+        CODE
+//  644 {
+        FUNCALL PcdBakValue, CalulateCRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 32, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 32, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdBakValue, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 36, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 36, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdBakValue, CalulateCRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 32, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 32, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdBakValue, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 36, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 36, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdBakValue, CalulateCRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 32, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 32, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdBakValue, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 36, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 36, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0xc
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 12)
+        ; Saved register size: 12
+        ; Auto size: 20
+        MOV     A,#-0x14
+        LCALL   ?ALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 32)
+        MOV     A,R1
+        MOV     R7,A
+        MOV     ?V0 + 0,R2
+//  645     uint8 status;
+//  646     unsigned int  unLen;
+//  647     uint8 ucComMF522Buf[MAXRLEN]; 
+//  648 
+//  649     ucComMF522Buf[0] = PICC_RESTORE;
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#-0x3e
+        MOVX    @DPTR,A
+//  650     ucComMF522Buf[1] = sourceaddr;
+        MOV     A,R7
+        PUSH    A
+        CFI CFA_SP SP+-1
+        MOV     A,#0x3
+        LCALL   ?XSTACK_DISP0_8
+        POP     A
+        CFI CFA_SP SP+0
+        MOVX    @DPTR,A
+//  651     CalulateCRC(ucComMF522Buf,2,&ucComMF522Buf[2]);
+        ; Setup parameters for call to function CalulateCRC
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R4,DPL
+        MOV     R5,DPH
+        MOV     R1,#0x2
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        LCALL   ??CalulateCRC?relay
+//  652  
+//  653     status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,4,ucComMF522Buf,&unLen);
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 2,DPL
+        MOV     ?V0 + 3,DPH
+        MOV     R0,#?V0 + 2
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 2,DPL
+        MOV     ?V0 + 3,DPH
+        MOV     R0,#?V0 + 2
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     R4,#0x4
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xc
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 32)
+        MOV     A,R1
+        MOV     R6,A
+//  654 
+//  655     if ((status != MI_OK) || (unLen != 4) || ((ucComMF522Buf[0] & 0x0F) != 0x0A))
+        MOV     A,R6
+        JNZ     ??PcdBakValue_0
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOVX    A,@DPTR
+        XRL     A,#0x4
+        JNZ     ??PcdBakValue_1
+        INC     DPTR
+        MOVX    A,@DPTR
+        XRL     A,#0x0
+??PcdBakValue_1:
+        JNZ     ??PcdBakValue_0
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOVX    A,@DPTR
+        ANL     A,#0xf
+        XRL     A,#0xa
+        JZ      ??PcdBakValue_2
+//  656     {   status = MI_ERR;   }
+??PcdBakValue_0:
+        MOV     R6,#-0x2
+//  657     
+//  658     if (status == MI_OK)
+??PcdBakValue_2:
+        MOV     A,R6
+        JNZ     ??PcdBakValue_3
+//  659     {
+//  660         ucComMF522Buf[0] = 0;
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#0x0
+        MOVX    @DPTR,A
+//  661         ucComMF522Buf[1] = 0;
+        MOV     A,#0x3
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#0x0
+        MOVX    @DPTR,A
+//  662         ucComMF522Buf[2] = 0;
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#0x0
+        MOVX    @DPTR,A
+//  663         ucComMF522Buf[3] = 0;
+        MOV     A,#0x5
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#0x0
+        MOVX    @DPTR,A
+//  664         CalulateCRC(ucComMF522Buf,4,&ucComMF522Buf[4]);
+        ; Setup parameters for call to function CalulateCRC
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R4,DPL
+        MOV     R5,DPH
+        MOV     R1,#0x4
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        LCALL   ??CalulateCRC?relay
+//  665  
+//  666         status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,6,ucComMF522Buf,&unLen);
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 2,DPL
+        MOV     ?V0 + 3,DPH
+        MOV     R0,#?V0 + 2
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 2,DPL
+        MOV     ?V0 + 3,DPH
+        MOV     R0,#?V0 + 2
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     R4,#0x6
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xc
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 32)
+        MOV     A,R1
+        MOV     R6,A
+//  667         if (status != MI_ERR)
+        MOV     A,#-0x2
+        XRL     A,R6
+        JZ      ??PcdBakValue_3
+//  668         {    status = MI_OK;    }
+        MOV     R6,#0x0
+//  669     }
+//  670     
+//  671     if (status != MI_OK)
+??PcdBakValue_3:
+        MOV     A,R6
+        JZ      ??PcdBakValue_4
+//  672     {    return MI_ERR;   }
+        MOV     R1,#-0x2
+        LJMP    ??PcdBakValue_5 & 0xFFFF
+//  673     
+//  674     ucComMF522Buf[0] = PICC_TRANSFER;
+??PcdBakValue_4:
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#-0x50
+        MOVX    @DPTR,A
+//  675     ucComMF522Buf[1] = goaladdr;
+        MOV     A,?V0 + 0
+        MOV     A,#0x3
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,?V0 + 0
+        MOVX    @DPTR,A
+//  676 
+//  677     CalulateCRC(ucComMF522Buf,2,&ucComMF522Buf[2]);
+        ; Setup parameters for call to function CalulateCRC
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R4,DPL
+        MOV     R5,DPH
+        MOV     R1,#0x2
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        LCALL   ??CalulateCRC?relay
+//  678  
+//  679     status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,4,ucComMF522Buf,&unLen);
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 2,DPL
+        MOV     ?V0 + 3,DPH
+        MOV     R0,#?V0 + 2
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 2,DPL
+        MOV     ?V0 + 3,DPH
+        MOV     R0,#?V0 + 2
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 36)
+        MOV     R4,#0x4
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xc
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 32)
+        MOV     A,R1
+        MOV     R6,A
+//  680 
+//  681     if ((status != MI_OK) || (unLen != 4) || ((ucComMF522Buf[0] & 0x0F) != 0x0A))
+        MOV     A,R6
+        JNZ     ??PcdBakValue_6
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOVX    A,@DPTR
+        XRL     A,#0x4
+        JNZ     ??PcdBakValue_7
+        INC     DPTR
+        MOVX    A,@DPTR
+        XRL     A,#0x0
+??PcdBakValue_7:
+        JNZ     ??PcdBakValue_6
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOVX    A,@DPTR
+        ANL     A,#0xf
+        XRL     A,#0xa
+        JZ      ??PcdBakValue_8
+//  682     {   status = MI_ERR;   }
+??PcdBakValue_6:
+        MOV     R6,#-0x2
+//  683 
+//  684     return status;
+??PcdBakValue_8:
+        MOV     A,R6
+        MOV     R1,A
+??PcdBakValue_5:
+        MOV     A,#0x14
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 12)
+        MOV     R7,#0x4
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock20
+//  685 }
+//  686 
+//  687 
+//  688 //******************************************************************/
+//  689 //功    能：命令卡片进入休眠状态
+//  690 //返    回: 成功返回MI_OK
+//  691 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  692 uint8 PcdHalt(void)
+PcdHalt:
+        CFI Block cfiBlock21 Using cfiCommon0
+        CFI Function PcdHalt
+        CODE
+//  693 {
+        FUNCALL PcdHalt, CalulateCRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 30, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 30, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL PcdHalt, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 34, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 34, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0xa
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 10)
+        ; Saved register size: 10
+        ; Auto size: 20
+        MOV     A,#-0x14
+        LCALL   ?ALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 30)
+//  694     uint8 status;
+//  695     unsigned int  unLen;
+//  696     uint8 ucComMF522Buf[MAXRLEN]; 
+//  697 
+//  698     ucComMF522Buf[0] = PICC_HALT;
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#0x50
+        MOVX    @DPTR,A
+//  699     ucComMF522Buf[1] = 0;
+        MOV     A,#0x3
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#0x0
+        MOVX    @DPTR,A
+//  700     CalulateCRC(ucComMF522Buf,2,&ucComMF522Buf[2]);
+        ; Setup parameters for call to function CalulateCRC
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R4,DPL
+        MOV     R5,DPH
+        MOV     R1,#0x2
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        LCALL   ??CalulateCRC?relay
+//  701  
+//  702     status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,4,ucComMF522Buf,&unLen);
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 0,DPL
+        MOV     ?V0 + 1,DPH
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 32)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 0,DPL
+        MOV     ?V0 + 1,DPH
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     R4,#0x4
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xc
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 30)
+        MOV     A,R1
+        MOV     R6,A
+//  703     return status;
+        MOV     R1,A
+        MOV     A,#0x14
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 10)
+        MOV     R7,#0x2
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock21
+//  704 //    return MI_OK;
+//  705 }
+//  706 
+//  707 //******************************************************************/
+//  708 //功    能：命令卡片进入休眠状态
+//  709 //返    回: 成功返回MI_OK
+//  710 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  711 uint8 MIF_Halt(void)
+MIF_Halt:
+        CFI Block cfiBlock22 Using cfiCommon0
+        CFI Function MIF_Halt
+        CODE
+//  712 {
+        FUNCALL MIF_Halt, CalulateCRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 30, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 30, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL MIF_Halt, PcdComMF522
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 34, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 34, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0xa
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 10)
+        ; Saved register size: 10
+        ; Auto size: 20
+        MOV     A,#-0x14
+        LCALL   ?ALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 30)
+//  713     uint8 status;
+//  714     unsigned int  unLen;
+//  715     uint8 ucComMF522Buf[MAXRLEN]; 
+//  716 
+//  717     ucComMF522Buf[0] = PICC_HALT;
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#0x50
+        MOVX    @DPTR,A
+//  718     ucComMF522Buf[1] = 0;
+        MOV     A,#0x3
+        LCALL   ?XSTACK_DISP0_8
+        MOV     A,#0x0
+        MOVX    @DPTR,A
+//  719     CalulateCRC(ucComMF522Buf,2,&ucComMF522Buf[2]);
+        ; Setup parameters for call to function CalulateCRC
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R4,DPL
+        MOV     R5,DPH
+        MOV     R1,#0x2
+        MOV     A,#0x2
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        LCALL   ??CalulateCRC?relay
+//  720  
+//  721     status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,4,ucComMF522Buf,&unLen);
+        ; Setup parameters for call to function PcdComMF522
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOV     ?V0 + 0,DPL
+        MOV     ?V0 + 1,DPH
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 32)
+        MOV     A,#0x4
+        LCALL   ?XSTACK_DISP0_8
+        MOV     ?V0 + 0,DPL
+        MOV     ?V0 + 1,DPH
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_TWO
+        CFI CFA_XSP16 add(XSP16, 34)
+        MOV     R4,#0x4
+        MOV     A,#0x6
+        LCALL   ?XSTACK_DISP0_8
+        MOV     R2,DPL
+        MOV     R3,DPH
+        MOV     R1,#0xc
+        LCALL   ??PcdComMF522?relay
+        MOV     A,#0x4
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 30)
+        MOV     A,R1
+        MOV     R6,A
+//  722     return status;  
+        MOV     R1,A
+        MOV     A,#0x14
+        LCALL   ?DEALLOC_XSTACK8
+        CFI CFA_XSP16 add(XSP16, 10)
+        MOV     R7,#0x2
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock22
+//  723 }
+//  724 
+//  725 
+//  726 
+//  727 //******************************************************************/
+//  728 //用MF522计算CRC16函数
+//  729 //******************************************************************/
+
+        RSEG BANKED_CODE:CODE:NOROOT(0)
+//  730 void CalulateCRC(uint8 *pIndata,uint8 len,uint8 *pOutData)
+CalulateCRC:
+        CFI Block cfiBlock23 Using cfiCommon0
+        CFI Function CalulateCRC
+        CODE
+//  731 {
+        FUNCALL CalulateCRC, ClearBitMask
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 15, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 15, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL CalulateCRC, WriteRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 15, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 15, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL CalulateCRC, SetBitMask
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 15, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 15, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL CalulateCRC, WriteRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 15, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 15, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL CalulateCRC, WriteRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 15, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 15, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL CalulateCRC, ReadRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 15, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 15, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL CalulateCRC, ReadRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 15, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 15, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL CalulateCRC, ReadRawRC
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 15, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 15, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV     A,#-0xf
+        LCALL   ?BANKED_ENTER_XDATA
+        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+        CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-14)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-15)))
+        CFI CFA_SP SP+0
+        CFI CFA_XSP16 add(XSP16, 15)
+        ; Saved register size: 15
+        ; Auto size: 0
+        MOV     A,R2
+        MOV     R6,A
+        MOV     A,R3
+        MOV     R7,A
+        MOV     ?V0 + 5,R1
+        MOV     ?V0 + 0,R4
+        MOV     ?V0 + 1,R5
+//  732     uint8 i,n;
+//  733     ClearBitMask(DivIrqReg,0x04);
+        ; Setup parameters for call to function ClearBitMask
+        MOV     R2,#0x4
+        MOV     R1,#0x5
+        LCALL   ??ClearBitMask?relay
+//  734     WriteRawRC(CommandReg,PCD_IDLE);
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,#0x0
+        MOV     R1,#0x1
+        LCALL   ??WriteRawRC?relay
+//  735     SetBitMask(FIFOLevelReg,0x80);
+        ; Setup parameters for call to function SetBitMask
+        MOV     R2,#-0x80
+        MOV     R1,#0xa
+        LCALL   ??SetBitMask?relay
+//  736     for (i=0; i<len; i++)
+        MOV     ?V0 + 4,#0x0
+??CalulateCRC_0:
+        MOV     A,?V0 + 4
+        CLR     C
+        SUBB    A,?V0 + 5
+        JNC     ??CalulateCRC_1
+//  737     {   WriteRawRC(FIFODataReg, *(pIndata+i));   }
+        ; Setup parameters for call to function WriteRawRC
+        MOV     ?V0 + 2,?V0 + 4
+        MOV     ?V0 + 3,#0x0
+        MOV     A,R6
+        ADD     A,?V0 + 2
+        MOV     DPL,A
+        MOV     A,R7
+        ADDC    A,?V0 + 3
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        MOV     R2,A
+        MOV     R1,#0x9
+        LCALL   ??WriteRawRC?relay
+        INC     ?V0 + 4
+        SJMP    ??CalulateCRC_0
+//  738     WriteRawRC(CommandReg, PCD_CALCCRC);
+??CalulateCRC_1:
+        ; Setup parameters for call to function WriteRawRC
+        MOV     R2,#0x3
+        MOV     R1,#0x1
+        LCALL   ??WriteRawRC?relay
+//  739     i = 0xFF;
+        MOV     ?V0 + 4,#-0x1
+//  740     do 
+//  741     {
+//  742         n = ReadRawRC(DivIrqReg);
+??CalulateCRC_2:
+        ; Setup parameters for call to function ReadRawRC
+        MOV     R1,#0x5
+        LCALL   ??ReadRawRC?relay
+        MOV     A,R1
+        MOV     ?V0 + 6,A
+//  743         i--;
+        DEC     ?V0 + 4
+//  744     }
+//  745     while ((i!=0) && !(n&0x04));
+        MOV     A,?V0 + 4
+        JZ      ??CalulateCRC_3
+        MOV     A,?V0 + 6
+        MOV     C,0xE0 /* A   */.2
+        JNC     ??CalulateCRC_2
+//  746     pOutData[0] = ReadRawRC(CRCResultRegL);
+??CalulateCRC_3:
+        ; Setup parameters for call to function ReadRawRC
+        MOV     R1,#0x22
+        LCALL   ??ReadRawRC?relay
+        MOV     A,R1
+        MOV     DPL,?V0 + 0
+        MOV     DPH,?V0 + 1
+        MOVX    @DPTR,A
+//  747     pOutData[1] = ReadRawRC(CRCResultRegM);
+        ; Setup parameters for call to function ReadRawRC
+        MOV     R1,#0x21
+        LCALL   ??ReadRawRC?relay
+        MOV     A,R1
+        MOV     DPL,?V0 + 0
+        MOV     DPH,?V0 + 1
+        INC     DPTR
+        MOVX    @DPTR,A
+//  748 }
+        MOV     R7,#0x7
+        LJMP    ?BANKED_LEAVE_XDATA
+        CFI EndBlock cfiBlock23
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalRc522Init?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalRc522Init
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??HalRc522Delay?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    HalRc522Delay
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??ReadRawRC?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    ReadRawRC
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??WriteRawRC?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    WriteRawRC
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??SetBitMask?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    SetBitMask
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??ClearBitMask?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    ClearBitMask
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??PcdReset?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    PcdReset
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??PcdAntennaOn?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    PcdAntennaOn
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??PcdAntennaTestOn?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    PcdAntennaTestOn
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??PcdAntennaOff?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    PcdAntennaOff
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??PcdComMF522?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    PcdComMF522
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??PcdRequest?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    PcdRequest
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??PcdAnticoll?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    PcdAnticoll
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??PcdSelect?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    PcdSelect
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??PcdAuthState?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    PcdAuthState
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??PcdRead?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    PcdRead
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??Read_Block?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    Read_Block
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??PcdWrite?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    PcdWrite
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??Write_Block?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    Write_Block
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??PcdValue?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    PcdValue
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??PcdBakValue?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    PcdBakValue
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??PcdHalt?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    PcdHalt
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??MIF_Halt?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    MIF_Halt
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+??CalulateCRC?relay:
+        LCALL   ?BDISPATCH
+        DATA
+        DC24    CalulateCRC
+
+        END
+//  749 
+// 
+// 3 974 bytes in segment BANKED_CODE
+//   144 bytes in segment BANK_RELAYS
+//     4 bytes in segment SFR_AN
+// 
+// 4 118 bytes of CODE memory
+//     0 bytes of DATA memory (+ 4 bytes shared)
+//
+//Errors: none
+//Warnings: none

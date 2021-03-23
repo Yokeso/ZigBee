@@ -1,0 +1,955 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.1.40194/W32 for 8051         04/Jan/2021  21:01:54 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data_rom                                           #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Components\hal\target\CC2530SB\hal_BH17 #
+#                          50.c                                               #
+#    Command line       =  -f D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\..\..\..\Tools\CC2530DB\f8wRouter.cfg           #
+#                          (-DCPU32MHZ -DROOT=__near_func                     #
+#                          -DMAC_CFG_APP_PENDING_QUEUE=TRUE                   #
+#                          -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8         #
+#                          -DMAC_CFG_RX_MAX=5 -DRTR_NWK) -f                   #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\Tools\CC2530DB\f8wConfig.cfg              #
+#                          (-DZIGBEEPRO -DSECURE=0 -DZG_SECURE_DYNAMIC=0      #
+#                          -DREFLECTOR -DDEFAULT_CHANLIST=0x02000000          #
+#                          -DZDAPP_CONFIG_PAN_ID=0x1001                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
+#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
+#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DMAC_MAX_FRAME_SIZE=116                           #
+#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
+#                          __code" -DGENERIC=__generic                        #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\t #
+#                          arget\CC2530SB\hal_BH1750.c -D xHAL_UART=TRUE -D   #
+#                          xHAL_UART_TEST -D MT_SYS_FUNC -D ZTOOL_P1 -D       #
+#                          MT_TASK -D xMT_APP_FUNC -D MT_ZDO_FUNC -lC         #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          RouterSB\List\ -lA D:\Projects_IAR\IAR_C8051\WSN-C #
+#                          C2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_B #
+#                          OARD\Exp4\CC2530DB\RouterSB\List\ --diag_suppress  #
+#                          Pe001,Pa010 -o D:\Projects_IAR\IAR_C8051\WSN-CC253 #
+#                          0\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD #
+#                          \Exp4\CC2530DB\RouterSB\Obj\ -e --no_code_motion   #
+#                          --debug --core=plain --dptr=16,1                   #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data_rom --nr_virtual_regs 16    #
+#                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack #
+#                          -CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC #
+#                          2530DB\..\Source\ -I D:\Projects_IAR\IAR_C8051\WSN #
+#                          -CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY #
+#                          _BOARD\Exp4\CC2530DB\..\..\..\ZMain\TI2530DB\ -I   #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\target\CC2530SB\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\high_level\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\sing #
+#                          le_chip\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\Z #
+#                          Stack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Ex #
+#                          p4\CC2530DB\..\..\..\..\..\Components\mt\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\osal\include\ -I         #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\saddr\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\sdata\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\af\ -I             #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\nwk\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sapi\ -I           #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sec\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sys\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\zdo\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\ -I                 #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\f8w\ -Ohz           #
+#    List file          =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          RouterSB\List\hal_BH1750.lst                       #
+#    Object file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          RouterSB\Obj\hal_BH1750.r51                        #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\target\CC2530SB\hal_BH1750.c
+      1          /*****************************************************************************
+      2          *
+      3          * 文 件 名：hal_BH1750.c
+      4          
+      5          * 作    者: 南京安宸博研电子科技有限公司
+      6          
+      7          * 创建时间: 2019.04.01
+      8          
+      9          * 修改时间: 2019.04.21
+     10          
+     11          * IAR 版本: IAR for 8051 V8.10.1
+     12          
+     13          * 测试平台: Sensor MotherBoard V2.3
+     14          
+     15          * 说    明: 1. 设置I2C接口涉及的相关GPIO.
+     16          *           2. 利用GPIO口模拟I2C总线的读写等操作.
+     17          *                               
+     18          *****************************************************************************/
+     19          
+     20          #include "iocc2530.h"
+
+   \                                 In  segment SFR_AN, at 0x90
+   \   union <unnamed> volatile __sfr _A_P1
+   \                     _A_P1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa8
+   \   union <unnamed> volatile __sfr _A_IEN0
+   \                     _A_IEN0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xfe
+   \   unsigned char volatile __sfr P1DIR
+   \                     P1DIR:
+   \   000000                DS 1
+     21          #include "hal_types.h"
+     22          #include "hal_mcu.h"
+     23          
+     24          // 功能函数的宏定义
+     25          #define st(x)                             do { x } while (__LINE__ == -1)
+     26          #define HAL_IO_SET(port, pin, val)        HAL_IO_SET_PREP(port, pin, val)
+     27          #define HAL_IO_SET_PREP(port, pin, val)   st( P##port##_##pin## = val; )
+     28          #define HAL_IO_GET(port, pin)             HAL_IO_GET_PREP( port,pin)
+     29          #define HAL_IO_GET_PREP(port, pin)        (P##port##_##pin)
+     30          
+     31          // I2C总线相关GPIO口宏定义, 针对MCU而言
+     32          #define SET_SDA_PIN_OUTPUT     (P1DIR |=0x10  )
+     33          #define SET_SDA_PIN_INPUT      (P1DIR &=~0x10 )
+     34          #define SET_SCL_PIN_OUTPUT     (P1DIR |=0x04  )
+     35          #define SET_DVI_PIN_OUTPUT     (P1DIR |=0x08  )
+     36          
+     37          #define SET_SCL_LOW             HAL_IO_SET(1,2,0)
+     38          #define SET_SCL_HIGH            HAL_IO_SET(1,2,1)
+     39          #define SET_SDA_LOW             HAL_IO_SET(1,4,0)
+     40          #define SET_SDA_HIGH            HAL_IO_SET(1,4,1)
+     41          #define SET_DVI_LOW             HAL_IO_SET(1,3,0)
+     42          #define SET_DVI_HIGH            HAL_IO_SET(1,3,1)
+     43          
+     44          #define GET_SDA_DATA            HAL_IO_GET(1,4)
+     45          
+     46          // ADDR引脚接地, 最低位为读写位
+     47          #define BH1750_ADDR     0x46
+     48          #define READ_CMD        0x01
+     49          
+     50          // BH1750操作命令
+     51          #define POWER_DOWN      0x00    // 断电
+     52          #define POWER_ON        0x01    // 上电
+     53          #define RESET           0x07    // 复位
+     54          #define CON_HR_MODE     0x10    // 连续H分辨率, 1lx分辨率, 测量时间一120ms
+     55          #define CON_HR_MODE2    0x11    // 连续H分辨率2, 0.5lx分辨率, 测量时间为120ms
+     56          #define CON_LR_MODE     0x13    // 连续低分辨, 4lx分辨率, 测量时间一16ms
+     57          // 一次测量后, 自动处于断电模式
+     58          #define ONCE_HR_MODE    0x20    // 一次H分辨率, 1lx分辨率, 测量时间一120ms
+     59          #define ONCE_HR_MODE2   0x21    // 一次H分辨率2, 0.5lx分辨率, 测量时间为120ms
+     60          #define ONCE_LR_MODE    0x23    // 一次L分辨率模式4lx分辨率, 测量时间一16ms
+     61          
+     62          /*****************************************************************************
+     63           * @fn          I2C_DelayNus
+     64           *
+     65           * @brief       裸机条件下、时钟频率为32MHz时实现N个微秒的延时(不精确).
+     66           *
+     67           * @param       n--延时长度
+     68           *
+     69           * @return      none
+     70           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     71          void I2C_DelayNus(uint16 cnt)
+   \                     I2C_DelayNus:
+     72          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+   \   000000   8003         SJMP    ??I2C_DelayNus_0
+     73              while (cnt--)
+     74              {
+     75                  asm("NOP");  
+   \                     ??I2C_DelayNus_1:
+   \   000002   00           NOP
+     76                  asm("NOP");
+   \   000003   00           NOP
+     77                  asm("NOP");
+   \   000004   00           NOP
+     78              }
+   \                     ??I2C_DelayNus_0:
+   \   000005   EA           MOV     A,R2
+   \   000006   F8           MOV     R0,A
+   \   000007   EB           MOV     A,R3
+   \   000008   F9           MOV     R1,A
+   \   000009   E8           MOV     A,R0
+   \   00000A   24FF         ADD     A,#-0x1
+   \   00000C   1A           DEC     R2
+   \   00000D   E9           MOV     A,R1
+   \   00000E   34FF         ADDC    A,#-0x1
+   \   000010   FB           MOV     R3,A
+   \   000011   E8           MOV     A,R0
+   \   000012   49           ORL     A,R1
+   \   000013   70ED         JNZ     ??I2C_DelayNus_1
+     79          }
+   \   000015   02....       LJMP    ?BRET
+     80          
+     81          /*****************************************************************************
+     82           * @fn          I2C_Start
+     83           *
+     84           * @brief       启动I2C, 占用总线, 数据在时钟高电平的时候从高往低跃变.
+     85           *
+     86           * @param       none
+     87           *
+     88           * @return      none
+     89           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     90          void I2C_Start(void)
+   \                     I2C_Start:
+     91          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     92              SET_SDA_PIN_OUTPUT;
+   \   000004   43FE10       ORL     0xfe,#0x10
+     93              SET_SDA_HIGH;
+   \   000007   D294         SETB    0x90.4
+     94              I2C_DelayNus(10);
+   \   000009                ; Setup parameters for call to function I2C_DelayNus
+   \   000009   12....       LCALL   ?Subroutine2 & 0xFFFF
+     95              SET_SCL_HIGH;
+     96              I2C_DelayNus(10);
+     97              SET_SDA_LOW;
+   \                     ??CrossCallReturnLabel_2:
+   \   00000C   C294         CLR     0x90.4
+     98              I2C_DelayNus(10);
+   \   00000E                ; Setup parameters for call to function I2C_DelayNus
+   \   00000E                REQUIRE ?Subroutine0
+   \   00000E                REQUIRE P1DIR
+   \   00000E                REQUIRE _A_P1
+   \   00000E                ; // Fall through to label ?Subroutine0
+     99              SET_SCL_LOW;
+    100              I2C_DelayNus(10);
+    101          }
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine0:
+   \   000000   7A0A         MOV     R2,#0xa
+   \   000002   7B00         MOV     R3,#0x0
+   \   000004   12....       LCALL   ??I2C_DelayNus?relay
+   \   000007   C292         CLR     0x90.2
+   \   000009                ; Setup parameters for call to function I2C_DelayNus
+   \   000009                ; Setup parameters for call to function I2C_DelayNus
+   \   000009   7A0A         MOV     R2,#0xa
+   \   00000B                REQUIRE ??Subroutine5_0
+   \   00000B                ; // Fall through to label ??Subroutine5_0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ??Subroutine5_0:
+   \   000000   7B00         MOV     R3,#0x0
+   \   000002   12....       LCALL   ??I2C_DelayNus?relay
+   \   000005   D083         POP     DPH
+   \   000007   D082         POP     DPL
+   \   000009   02....       LJMP    ?BRET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine2:
+   \   000000   12....       LCALL   ?Subroutine4 & 0xFFFF
+   \                     ??CrossCallReturnLabel_7:
+   \   000003   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine4:
+   \   000000   7A0A         MOV     R2,#0xa
+   \   000002   7B00         MOV     R3,#0x0
+   \   000004   12....       LCALL   ??I2C_DelayNus?relay
+   \   000007   D292         SETB    0x90.2
+   \   000009                ; Setup parameters for call to function I2C_DelayNus
+   \   000009                ; Setup parameters for call to function I2C_DelayNus
+   \   000009                ; Setup parameters for call to function I2C_DelayNus
+   \   000009                ; Setup parameters for call to function I2C_DelayNus
+   \   000009                ; Setup parameters for call to function I2C_DelayNus
+   \   000009   7A0A         MOV     R2,#0xa
+   \   00000B   7B00         MOV     R3,#0x0
+   \   00000D   12....       LCALL   ??I2C_DelayNus?relay
+   \   000010   22           RET
+    102          
+    103          /*****************************************************************************
+    104           * @fn          I2C_Stop
+    105           *
+    106           * @brief       结束I2C, 释放总线, 数据在时钟高电平的时候从低往高跃变.
+    107           *
+    108           * @param       none
+    109           *
+    110           * @return      none
+    111           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    112          void I2C_Stop(void)
+   \                     I2C_Stop:
+    113          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    114              SET_SDA_PIN_OUTPUT ;
+   \   000004   43FE10       ORL     0xfe,#0x10
+    115              SET_SCL_LOW ;
+   \   000007   C292         CLR     0x90.2
+    116              I2C_DelayNus(10);
+   \   000009                ; Setup parameters for call to function I2C_DelayNus
+   \   000009   7A0A         MOV     R2,#0xa
+   \   00000B   7B00         MOV     R3,#0x0
+   \   00000D   12....       LCALL   ??I2C_DelayNus?relay
+    117              SET_SDA_LOW ;
+   \   000010   C294         CLR     0x90.4
+    118              I2C_DelayNus(10);
+   \   000012                ; Setup parameters for call to function I2C_DelayNus
+   \   000012   12....       LCALL   ?Subroutine2 & 0xFFFF
+    119              SET_SCL_HIGH ;
+    120              I2C_DelayNus(10);
+    121              SET_SDA_HIGH ;
+   \                     ??CrossCallReturnLabel_3:
+   \   000015   D294         SETB    0x90.4
+    122              I2C_DelayNus(10);
+   \   000017                ; Setup parameters for call to function I2C_DelayNus
+   \   000017   80..         SJMP    ?Subroutine0
+   \   000019                REQUIRE P1DIR
+   \   000019                REQUIRE _A_P1
+    123              SET_SCL_LOW ;
+    124              I2C_DelayNus(10);
+    125          }
+    126          
+    127          /*****************************************************************************
+    128           * @fn          I2C_Write
+    129           *
+    130           * @brief       发送字节并且判断是否收到ACK(低电平), 高位先发送.
+    131           *
+    132           * @param       none
+    133           *
+    134           * @return      0: 收到ACK; 1: 未收到ACK.
+    135           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    136          uint8 I2C_Write(uint8 val)                 
+   \                     I2C_Write:
+    137          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+   \   000006   FF           MOV     R7,A
+    138              uint8 tmpData, rtnData;
+    139              uint8 cnt;
+    140              halIntState_t intState;
+    141              
+    142              tmpData = 0x80;
+   \   000007   75..80       MOV     ?V0 + 0,#-0x80
+    143              SET_SDA_PIN_OUTPUT;
+   \   00000A   43FE10       ORL     0xfe,#0x10
+    144          
+    145              // 循环发送8位数据   
+    146              for(cnt=0; cnt<8; cnt++)
+   \   00000D   7E08         MOV     R6,#0x8
+    147              {
+    148                  if(val & tmpData)
+   \                     ??I2C_Write_0:
+   \   00000F   EF           MOV     A,R7
+   \   000010   55..         ANL     A,?V0 + 0
+   \   000012   6004         JZ      ??I2C_Write_1
+    149                  {
+    150                      SET_SDA_HIGH;
+   \   000014   D294         SETB    0x90.4
+   \   000016   8002         SJMP    ??I2C_Write_2
+    151                  }
+    152                  else
+    153                  {
+    154                      SET_SDA_LOW;
+   \                     ??I2C_Write_1:
+   \   000018   C294         CLR     0x90.4
+    155                  }
+    156                  I2C_DelayNus(10);
+   \                     ??I2C_Write_2:
+   \   00001A                ; Setup parameters for call to function I2C_DelayNus
+   \   00001A   12....       LCALL   ?Subroutine1 & 0xFFFF
+    157                  SET_SCL_HIGH ; 
+    158                  I2C_DelayNus(10);
+    159                  SET_SCL_LOW ;
+    160                  I2C_DelayNus(10);
+   \                     ??CrossCallReturnLabel_0:
+   \   00001D                ; Setup parameters for call to function I2C_DelayNus
+   \   00001D   7A0A         MOV     R2,#0xa
+   \   00001F   7B00         MOV     R3,#0x0
+   \   000021   12....       LCALL   ??I2C_DelayNus?relay
+    161                  tmpData = tmpData>>1;   // 右移一位             
+   \   000024   E5..         MOV     A,?V0 + 0
+   \   000026   C3           CLR     C
+   \   000027   13           RRC     A
+   \   000028   F5..         MOV     ?V0 + 0,A
+    162               }
+   \   00002A   1E           DEC     R6
+   \   00002B   EE           MOV     A,R6
+   \   00002C   70E1         JNZ     ??I2C_Write_0
+    163          
+    164              // 接收并判别ACK信号
+    165              I2C_DelayNus(10);
+   \   00002E                ; Setup parameters for call to function I2C_DelayNus
+   \   00002E   7A0A         MOV     R2,#0xa
+   \   000030   7B00         MOV     R3,#0x0
+   \   000032   12....       LCALL   ??I2C_DelayNus?relay
+    166              HAL_ENTER_CRITICAL_SECTION(intState);
+   \   000035   E5A8         MOV     A,0xa8
+   \   000037   FE           MOV     R6,A
+   \   000038   C2AF         CLR     0xa8.7
+    167              SET_SDA_PIN_INPUT;
+   \   00003A   53FEEF       ANL     0xfe,#0xef
+    168              I2C_DelayNus(10);
+   \   00003D                ; Setup parameters for call to function I2C_DelayNus
+   \   00003D   12....       LCALL   ?Subroutine2 & 0xFFFF
+    169              SET_SCL_HIGH; 
+    170              I2C_DelayNus(10);
+    171              if(GET_SDA_DATA)
+   \                     ??CrossCallReturnLabel_4:
+   \   000040   E590         MOV     A,0x90
+   \   000042   F5..         MOV     ?V0 + 0,A
+    172              {
+    173                  rtnData = 1; // 未收到ACK信号
+    174              }
+    175              else
+    176              {
+    177                  rtnData = 0; // 收到ACK信号
+    178              }
+    179              HAL_EXIT_CRITICAL_SECTION(intState);
+   \   000044   EE           MOV     A,R6
+   \   000045   A2E7         MOV     C,0xE0 /* A   */.7
+   \   000047   92AF         MOV     0xa8.7,C
+    180              I2C_DelayNus(10);
+   \   000049                ; Setup parameters for call to function I2C_DelayNus
+   \   000049   7A0A         MOV     R2,#0xa
+   \   00004B   7B00         MOV     R3,#0x0
+   \   00004D   12....       LCALL   ??I2C_DelayNus?relay
+    181              SET_SCL_LOW;
+   \   000050   C292         CLR     0x90.2
+    182          
+    183              return(rtnData); 
+   \   000052   E5..         MOV     A,?V0 + 0
+   \   000054   A2E4         MOV     C,0xE0 /* A   */.4
+   \   000056   E4           CLR     A
+   \   000057   33           RLC     A
+   \   000058   F9           MOV     R1,A
+   \   000059   7F01         MOV     R7,#0x1
+   \   00005B   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   00005E                REQUIRE P1DIR
+   \   00005E                REQUIRE _A_P1
+   \   00005E                REQUIRE _A_IEN0
+    184          }
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine1:
+   \   000000   12....       LCALL   ?Subroutine4 & 0xFFFF
+   \                     ??CrossCallReturnLabel_8:
+   \   000003   C292         CLR     0x90.2
+   \   000005   22           RET
+    185          
+    186          /*****************************************************************************
+    187           * @fn          I2C_Read
+    188           *
+    189           * @brief       MCU读取一个字节，根据mode参数, 发送ACK(低电平)或NACK(高电平).
+    190           *
+    191           * @param       mode : 1--数据读取未结束, 0--结束数据读取.
+    192           *
+    193           * @return      读取的数据
+    194           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    195          uint8 I2C_Read(uint8 mode)
+   \                     I2C_Read:
+    196          {
+   \   000000   74F5         MOV     A,#-0xb
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 11
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+   \   000006   FF           MOV     R7,A
+    197              uint8 cnt;
+    198              uint8 val, tmpData;
+    199              halIntState_t intState;
+    200              
+    201              val = 0;
+   \   000007   75..00       MOV     ?V0 + 0,#0x0
+    202              tmpData = 0x80;
+   \   00000A   75..80       MOV     ?V0 + 1,#-0x80
+    203              SET_SDA_HIGH;
+   \   00000D   D294         SETB    0x90.4
+    204              // 循环读取8位数据
+    205              for(cnt=0; cnt<8; cnt++)
+   \   00000F   7E08         MOV     R6,#0x8
+    206              {       
+    207                  SET_SCL_HIGH;
+   \                     ??I2C_Read_0:
+   \   000011   D292         SETB    0x90.2
+    208                  HAL_ENTER_CRITICAL_SECTION(intState);
+   \   000013   A2AF         MOV     C,0xa8.7
+   \   000015   E4           CLR     A
+   \   000016   33           RLC     A
+   \   000017   F5..         MOV     ?V0 + 2,A
+   \   000019   C2AF         CLR     0xa8.7
+    209                  SET_SDA_PIN_INPUT;
+   \   00001B   53FEEF       ANL     0xfe,#0xef
+    210                  I2C_DelayNus(10);
+   \   00001E                ; Setup parameters for call to function I2C_DelayNus
+   \   00001E   7A0A         MOV     R2,#0xa
+   \   000020   7B00         MOV     R3,#0x0
+   \   000022   12....       LCALL   ??I2C_DelayNus?relay
+    211                  if(GET_SDA_DATA)
+   \   000025   A294         MOV     C,0x90.4
+   \   000027   5004         JNC     ??I2C_Read_1
+    212                  {
+    213                      val |= tmpData;
+   \   000029   E5..         MOV     A,?V0 + 1
+   \   00002B   42..         ORL     ?V0 + 0,A
+    214                  }
+    215                  HAL_EXIT_CRITICAL_SECTION(intState);
+   \                     ??I2C_Read_1:
+   \   00002D   E5..         MOV     A,?V0 + 2
+   \   00002F   A2E0         MOV     C,0xE0 /* A   */.0
+   \   000031   92AF         MOV     0xa8.7,C
+    216                  tmpData = tmpData>>1;
+   \   000033   E5..         MOV     A,?V0 + 1
+   \   000035   C3           CLR     C
+   \   000036   13           RRC     A
+   \   000037   F5..         MOV     ?V0 + 1,A
+    217                  I2C_DelayNus(10);
+   \   000039                ; Setup parameters for call to function I2C_DelayNus
+   \   000039   7A0A         MOV     R2,#0xa
+   \   00003B   7B00         MOV     R3,#0x0
+   \   00003D   12....       LCALL   ??I2C_DelayNus?relay
+    218                  SET_SCL_LOW ;
+   \   000040   C292         CLR     0x90.2
+    219                  I2C_DelayNus(10);                    
+   \   000042                ; Setup parameters for call to function I2C_DelayNus
+   \   000042   7A0A         MOV     R2,#0xa
+   \   000044   7B00         MOV     R3,#0x0
+   \   000046   12....       LCALL   ??I2C_DelayNus?relay
+    220              }
+   \   000049   1E           DEC     R6
+   \   00004A   EE           MOV     A,R6
+   \   00004B   70C4         JNZ     ??I2C_Read_0
+    221              // MCU发送ACK或NACK信号
+    222              SET_SDA_PIN_OUTPUT;
+   \   00004D   43FE10       ORL     0xfe,#0x10
+    223              if(mode)
+   \   000050   EF           MOV     A,R7
+   \   000051   6004         JZ      ??I2C_Read_2
+    224              {
+    225                  SET_SDA_LOW;
+   \   000053   C294         CLR     0x90.4
+   \   000055   8002         SJMP    ??I2C_Read_3
+    226              }
+    227              else
+    228              {
+    229                  SET_SDA_HIGH;
+   \                     ??I2C_Read_2:
+   \   000057   D294         SETB    0x90.4
+    230              }
+    231              I2C_DelayNus(10);
+   \                     ??I2C_Read_3:
+   \   000059                ; Setup parameters for call to function I2C_DelayNus
+   \   000059   12....       LCALL   ?Subroutine1 & 0xFFFF
+    232              SET_SCL_HIGH ;
+    233              I2C_DelayNus(10);
+    234              SET_SCL_LOW ;   // 置时钟线为空闲状态
+    235              SET_SDA_HIGH;   // 置数据线为空闲状态
+   \                     ??CrossCallReturnLabel_1:
+   \   00005C   D294         SETB    0x90.4
+    236              
+    237              return val;
+   \   00005E   A9..         MOV     R1,?V0 + 0
+   \   000060   7F03         MOV     R7,#0x3
+   \   000062   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000065                REQUIRE _A_P1
+   \   000065                REQUIRE _A_IEN0
+   \   000065                REQUIRE P1DIR
+    238          }
+    239          
+    240          /*********************************************************************
+    241           * @fn      BH1750_Init
+    242           *
+    243           * @brief   BH1750初始化
+    244           *
+    245           * @param   none
+    246           *
+    247           * @return  none
+    248           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    249          void BH1750_Init(void)
+   \                     BH1750_Init:
+    250          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    251              SET_SCL_PIN_OUTPUT;
+   \   000004   43FE04       ORL     0xfe,#0x4
+    252              SET_DVI_PIN_OUTPUT;
+   \   000007   43FE08       ORL     0xfe,#0x8
+    253              // 复位芯片
+    254              SET_DVI_LOW;
+   \   00000A   C293         CLR     0x90.3
+    255              I2C_DelayNus(10);
+   \   00000C                ; Setup parameters for call to function I2C_DelayNus
+   \   00000C   7A0A         MOV     R2,#0xa
+   \   00000E   7B00         MOV     R3,#0x0
+   \   000010   12....       LCALL   ??I2C_DelayNus?relay
+    256              SET_DVI_HIGH;
+   \   000013   D293         SETB    0x90.3
+    257              I2C_DelayNus(100);
+   \   000015                ; Setup parameters for call to function I2C_DelayNus
+   \   000015   7A64         MOV     R2,#0x64
+   \   000017   02....       LJMP    ??Subroutine5_0 & 0xFFFF
+   \   00001A                REQUIRE P1DIR
+   \   00001A                REQUIRE _A_P1
+    258          }
+    259          
+    260          /*********************************************************************
+    261           * @fn      BH1750_ConvertLight
+    262           *
+    263           * @brief   读取BH1750光照信息
+    264           *
+    265           * @param   none
+    266           *
+    267           * @return  光照度值(1~65535lx)
+    268           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    269          uint16 BH1750_ConvertLight(void)
+   \                     BH1750_ConvertLight:
+    270          {        
+   \   000000   74F0         MOV     A,#-0x10
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 16
+   \   000005                ; Auto size: 0
+    271              uint8 tmpData;
+    272              uint16 lightData = 0;
+    273              
+    274              // 初始化BH1750及其相关引脚
+    275              BH1750_Init();
+   \   000005                ; Setup parameters for call to function BH1750_Init
+   \   000005   12....       LCALL   ??BH1750_Init?relay
+    276              
+    277              // 启动总线
+    278              I2C_Start();
+   \   000008                ; Setup parameters for call to function I2C_Start
+   \   000008   12....       LCALL   ?Subroutine3 & 0xFFFF
+    279              if(I2C_Write(BH1750_ADDR))
+   \                     ??CrossCallReturnLabel_5:
+   \   00000B   6006         JZ      ??BH1750_ConvertLight_0
+    280              {
+    281                  return(0);  // 未收到ACK, 返回０
+   \                     ??BH1750_ConvertLight_1:
+   \   00000D   7A00         MOV     R2,#0x0
+   \   00000F   7B00         MOV     R3,#0x0
+   \   000011   8064         SJMP    ??BH1750_ConvertLight_2
+    282              }
+    283              // 上电
+    284              if(I2C_Write(POWER_ON))
+   \                     ??BH1750_ConvertLight_0:
+   \   000013                ; Setup parameters for call to function I2C_Write
+   \   000013   7901         MOV     R1,#0x1
+   \   000015   12....       LCALL   ??I2C_Write?relay
+   \   000018   E9           MOV     A,R1
+   \   000019   70F2         JNZ     ??BH1750_ConvertLight_1
+    285              {
+    286                   return(0);  // 未收到ACK, 返回０
+    287              }
+    288              I2C_Stop();
+   \   00001B                ; Setup parameters for call to function I2C_Stop
+   \   00001B   12....       LCALL   ??I2C_Stop?relay
+    289              
+    290              // 开始测量
+    291              I2C_Start();
+   \   00001E                ; Setup parameters for call to function I2C_Start
+   \   00001E   12....       LCALL   ?Subroutine3 & 0xFFFF
+    292              if(I2C_Write(BH1750_ADDR))
+   \                     ??CrossCallReturnLabel_6:
+   \   000021   70EA         JNZ     ??BH1750_ConvertLight_1
+    293              {
+    294                  return(0);  // 未收到ACK, 返回０
+    295              }
+    296              // 设置为连续Ｈ分辨率模式
+    297              if(I2C_Write(CON_HR_MODE))
+   \   000023                ; Setup parameters for call to function I2C_Write
+   \   000023   7910         MOV     R1,#0x10
+   \   000025   12....       LCALL   ??I2C_Write?relay
+   \   000028   E9           MOV     A,R1
+   \   000029   70E2         JNZ     ??BH1750_ConvertLight_1
+    298              {
+    299                   return(0);  // 未收到ACK, 返回０
+    300              }
+    301              I2C_Stop();
+   \   00002B                ; Setup parameters for call to function I2C_Stop
+   \   00002B   12....       LCALL   ??I2C_Stop?relay
+    302          
+    303              // 转换时间120ms
+    304              I2C_DelayNus(20000);
+   \   00002E                ; Setup parameters for call to function I2C_DelayNus
+   \   00002E   7A20         MOV     R2,#0x20
+   \   000030   7B4E         MOV     R3,#0x4e
+   \   000032   12....       LCALL   ??I2C_DelayNus?relay
+    305              
+    306              I2C_Start();
+   \   000035                ; Setup parameters for call to function I2C_Start
+   \   000035   12....       LCALL   ??I2C_Start?relay
+    307              if(I2C_Write(BH1750_ADDR + READ_CMD))
+   \   000038                ; Setup parameters for call to function I2C_Write
+   \   000038   7947         MOV     R1,#0x47
+   \   00003A   12....       LCALL   ??I2C_Write?relay
+   \   00003D   E9           MOV     A,R1
+   \   00003E   70CD         JNZ     ??BH1750_ConvertLight_1
+    308              {
+    309                  return(0);  // 未收到ACK, 返回０
+    310              }
+    311              tmpData = I2C_Read(1);      // 高字节数据
+   \   000040                ; Setup parameters for call to function I2C_Read
+   \   000040   7901         MOV     R1,#0x1
+   \   000042   12....       LCALL   ??I2C_Read?relay
+   \   000045   E9           MOV     A,R1
+   \   000046   FE           MOV     R6,A
+    312              lightData = I2C_Read(0);    // 低字节数据
+   \   000047                ; Setup parameters for call to function I2C_Read
+   \   000047   7900         MOV     R1,#0x0
+   \   000049   12....       LCALL   ??I2C_Read?relay
+   \   00004C   E9           MOV     A,R1
+   \   00004D   F5..         MOV     ?V0 + 0,A
+    313              I2C_Stop();
+   \   00004F                ; Setup parameters for call to function I2C_Stop
+   \   00004F   12....       LCALL   ??I2C_Stop?relay
+    314              
+    315              lightData = (uint16)(((tmpData << 8) | lightData) / 1.2);
+    316              return lightData;
+   \   000052   EE           MOV     A,R6
+   \   000053   F5..         MOV     ?V0 + 1,A
+   \   000055   E4           CLR     A
+   \   000056   F5..         MOV     ?V0 + 2,A
+   \   000058   F5..         MOV     ?V0 + 3,A
+   \   00005A   78..         MOV     R0,#?V0 + 0
+   \   00005C   12....       LCALL   ?UL_TO_FLT
+   \   00005F   90....       MOV     DPTR,#__Constant_3f99999a
+   \   000062   78..         MOV     R0,#?V0 + 4
+   \   000064   12....       LCALL   ?L_MOV_X
+   \   000067   78..         MOV     R0,#?V0 + 0
+   \   000069   79..         MOV     R1,#?V0 + 4
+   \   00006B   12....       LCALL   ?FLT_DIV
+   \   00006E   78..         MOV     R0,#?V0 + 0
+   \   000070   12....       LCALL   ?FLT_TO_L
+   \   000073   AA..         MOV     R2,?V0 + 0
+   \   000075   AB..         MOV     R3,?V0 + 1
+   \                     ??BH1750_ConvertLight_2:
+   \   000077   7F08         MOV     R7,#0x8
+   \   000079   02....       LJMP    ?BANKED_LEAVE_XDATA
+    317          }
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine3:
+   \   000000   12....       LCALL   ??I2C_Start?relay
+   \   000003                ; Setup parameters for call to function I2C_Write
+   \   000003                ; Setup parameters for call to function I2C_Write
+   \   000003   7946         MOV     R1,#0x46
+   \   000005   12....       LCALL   ??I2C_Write?relay
+   \   000008   E9           MOV     A,R1
+   \   000009   22           RET
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     __Constant_3f99999a:
+   \   000000   9A99993F     DD 3F99999AH
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??I2C_DelayNus?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    I2C_DelayNus
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??I2C_Start?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    I2C_Start
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??I2C_Stop?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    I2C_Stop
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??I2C_Write?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    I2C_Write
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??I2C_Read?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    I2C_Read
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??BH1750_Init?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    BH1750_Init
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??BH1750_ConvertLight?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    BH1750_ConvertLight
+
+   Maximum stack usage in bytes:
+
+     Function            ISTACK PSTACK XSTACK
+     --------            ------ ------ ------
+     BH1750_ConvertLight     0      0     16
+       -> BH1750_Init        0      0     32
+       -> I2C_Start          0      0     32
+       -> I2C_Write          0      0     32
+       -> I2C_Write          0      0     32
+       -> I2C_Stop           0      0     32
+       -> I2C_Start          0      0     32
+       -> I2C_Write          0      0     32
+       -> I2C_Write          0      0     32
+       -> I2C_Stop           0      0     32
+       -> I2C_DelayNus       0      0     32
+       -> I2C_Start          0      0     32
+       -> I2C_Write          0      0     32
+       -> I2C_Read           0      0     32
+       -> I2C_Read           0      0     32
+       -> I2C_Stop           0      0     32
+     BH1750_Init             2      0     16
+       -> I2C_DelayNus       4      0      0
+       -> I2C_DelayNus       4      0      0
+     I2C_DelayNus            0      0     16
+     I2C_Read                0      0     27
+       -> I2C_DelayNus       0      0     22
+       -> I2C_DelayNus       0      0     22
+       -> I2C_DelayNus       0      0     22
+       -> I2C_DelayNus       0      0     22
+       -> I2C_DelayNus       0      0     22
+     I2C_Start               2      0     16
+       -> I2C_DelayNus       4      0      0
+       -> I2C_DelayNus       4      0      0
+       -> I2C_DelayNus       4      0      0
+       -> I2C_DelayNus       4      0      0
+     I2C_Stop                2      0     16
+       -> I2C_DelayNus       4      0      0
+       -> I2C_DelayNus       4      0      0
+       -> I2C_DelayNus       4      0      0
+       -> I2C_DelayNus       4      0      0
+       -> I2C_DelayNus       4      0      0
+     I2C_Write               0      0     25
+       -> I2C_DelayNus       0      0     18
+       -> I2C_DelayNus       0      0     18
+       -> I2C_DelayNus       0      0     18
+       -> I2C_DelayNus       0      0     18
+       -> I2C_DelayNus       0      0     18
+       -> I2C_DelayNus       0      0     18
+       -> I2C_DelayNus       0      0     18
+
+
+   Segment part sizes:
+
+     Function/Label              Bytes
+     --------------              -----
+     _A_P1                          1
+     _A_IEN0                        1
+     P1DIR                          1
+     I2C_DelayNus                  24
+     I2C_Start                     14
+     ?Subroutine0                  11
+     ??Subroutine5_0               12
+     ?Subroutine2                   4
+     ?Subroutine4                  17
+     I2C_Stop                      25
+     I2C_Write                     94
+     ?Subroutine1                   6
+     I2C_Read                     101
+     BH1750_Init                   26
+     BH1750_ConvertLight          124
+     ?Subroutine3                  10
+     __Constant_3f99999a            4
+     ??I2C_DelayNus?relay           6
+     ??I2C_Start?relay              6
+     ??I2C_Stop?relay               6
+     ??I2C_Write?relay              6
+     ??I2C_Read?relay               6
+     ??BH1750_Init?relay            6
+     ??BH1750_ConvertLight?relay    6
+
+ 
+ 468 bytes in segment BANKED_CODE
+  42 bytes in segment BANK_RELAYS
+   3 bytes in segment SFR_AN
+   4 bytes in segment XDATA_ROM_C
+ 
+ 510 bytes of CODE  memory
+   0 bytes of CONST memory (+ 4 bytes shared)
+   0 bytes of DATA  memory (+ 3 bytes shared)
+
+Errors: none
+Warnings: none

@@ -1,0 +1,1651 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.1.40194/W32 for 8051         04/Jan/2021  17:15:21 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data_rom                                           #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\Source\Tr #
+#                          ansmitAppDHT11.c                                   #
+#    Command line       =  -f D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\..\..\..\Tools\CC2530DB\f8wEndev.cfg            #
+#                          (-DCPU32MHZ -DROOT=__near_func                     #
+#                          -DMAC_CFG_TX_DATA_MAX=3 -DMAC_CFG_TX_MAX=6         #
+#                          -DMAC_CFG_RX_MAX=3) -f D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\ #
+#                          MY_BOARD\Exp4\CC2530DB\..\..\..\Tools\CC2530DB\f8w #
+#                          Config.cfg (-DZIGBEEPRO -DSECURE=0                 #
+#                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
+#                          -DDEFAULT_CHANLIST=0x02000000                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0x1001                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
+#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
+#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DMAC_MAX_FRAME_SIZE=116                           #
+#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
+#                          __code" -DGENERIC=__generic                        #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 D:\Projects_IAR\IAR_C8051\W #
+#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\ #
+#                          MY_BOARD\Exp4\Source\TransmitAppDHT11.c -D         #
+#                          HAL_UART=TRUE -D HAL_UART_TEST -D xPOWER_SAVING    #
+#                          -lC D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC #
+#                          2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC253 #
+#                          0DB\EndDeviceSBDHT11\List\ -lA                     #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBDHT11\List\ --diag_suppress             #
+#                          Pe001,Pa010 -o D:\Projects_IAR\IAR_C8051\WSN-CC253 #
+#                          0\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD #
+#                          \Exp4\CC2530DB\EndDeviceSBDHT11\Obj\ -e --no_cse   #
+#                          --no_unroll --no_inline --no_code_motion           #
+#                          --no_tbaa --debug --core=plain --dptr=16,1         #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data_rom --nr_virtual_regs 16    #
+#                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
+#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
+#                          DB\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack #
+#                          -CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC #
+#                          2530DB\..\Source\ -I D:\Projects_IAR\IAR_C8051\WSN #
+#                          -CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY #
+#                          _BOARD\Exp4\CC2530DB\..\..\..\ZMain\TI2530DB\ -I   #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\hal\target\CC2530SB\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\include\ -I          #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\high_level\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\ -I  #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\mac\low_level\srf04\sing #
+#                          le_chip\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\Z #
+#                          Stack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Ex #
+#                          p4\CC2530DB\..\..\..\..\..\Components\mt\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\osal\include\ -I         #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\saddr\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\services\sdata\ -I       #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\af\ -I             #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\nwk\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sapi\ -I           #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sec\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\sys\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\stack\zdo\ -I            #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\ -I                 #
+#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          ..\..\..\..\..\Components\zmac\f8w\ -On            #
+#    List file          =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBDHT11\List\TransmitAppDHT11.lst         #
+#    Object file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
+#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
+#                          EndDeviceSBDHT11\Obj\TransmitAppDHT11.r51          #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\Source\TransmitAppDHT11.c
+      1          /*******************************************************************************
+      2            文 件 名：TransmitAppDHT11.c
+      3            作    者：南京安宸博研电子科技有限公司
+      4            创建时间：2013.9.20
+      5            修改时间：2020.12.22
+      6            IAR 版本：IAR for 8051 V8.10.1
+      7            测试平台：MotherBoard V2.1
+      8          
+      9            说    明：
+     10            1、这个应用主要用来采集温度和湿度信息，所用的传感器为DHT11。根据手册建议，采样
+     11               周期为5秒，这样可保证设备稳定高效地工作。因此，本应用每5秒采集一次温度和湿
+     12               度信息，然后直接发送给协调器。程序的驱动文件在hal_dht11.c中。
+     13          
+     14            2、本部分的程序使用了以下的编译选项：
+     15               HAL_UART=TRUE
+     16               HAL_UART_TEST
+     17               xPOWER_SAVING (该选项没有打开)
+     18               
+     19               HAL_UART_TEST是为用户增加的编译选项，该选项主要是为了解决在没有LCD的设备上
+     20               观察Z-Stack输出的显示数据。在有LCD的设备上打开LCD_SUPPORTED可以观察网络ID等
+     21               一些基本的信息，打开这个编译选项，有类似的效果。可借助串口显示一些原本在LCD
+     22               上显示的信息，如果串口有其他用途，可通过关闭此编译选项来关闭串口输出的数据。
+     23               
+     24               xPOWER_SAVING选项是终端设备(EndDevice)可以打开的编译选项。
+     25          
+     26            3、程序使用了以下两个事件：
+     27               TRANSMITAPP_SEND_MSG_EVT(发送数据)
+     28               TRANSMITAPP_MATCHRSP_EVT(描述符匹配)
+     29          
+     30            4、按键处理函数在TransmitApp_HandleKeys( byte shift, byte keys )，在本应用中没
+     31               有使用按键SW5，即按键功能预留。
+     32          
+     33            5、设备自动加入网络，通过描述符匹配事件对目标设备的网络地址进行查询，当匹配成
+     34               功后，关闭该事件的定时器，保存目标设备的网络地址，接着打开发送数据事件，周
+     35               期性地发送数据。发送数据的时间间隔由宏定义TRANSMITAPP_SEND_DELAY设置，修改
+     36               此宏定义即可修改设备发送数据的周期。
+     37               注意：设备发送数据的周期与协调器的离线检测功能是关联的，如果此处的发送间隔
+     38               时间过长(大于6s)，那么协调器就会认定设备离线。因此，修改时间间隔需要与协调
+     39               器的离线检测功能协调一致。
+     40          *******************************************************************************/
+     41          
+     42          /*******************************************************************************
+     43           * INCLUDES
+     44           */
+     45          #include "OSAL.h"
+     46          #include "AF.h"
+     47          #include "ZDObject.h"
+     48          #include "ZDProfile.h"
+     49          
+     50          #include "TransmitApp.h"
+     51          #include "OnBoard.h"
+     52          
+     53          #include "DebugTrace.h"
+     54          
+     55          
+     56          #include <string.h>
+     57          
+     58          /* HAL */
+     59          #include "hal_lcd.h"
+     60          #include "hal_led.h"
+     61          #include "hal_key.h"
+     62          #include "hal_uart.h"
+     63          #include "hal_dht11.h"
+     64          
+     65          /*******************************************************************************
+     66           * MACROS
+     67           */
+     68          // 在此处修改延时发送的周期
+     69          #define TRANSMITAPP_SEND_DELAY      5000
+     70          
+     71          // Send with or without APS ACKs
+     72          #define TRANSMITAPP_TX_OPTIONS      AF_DISCV_ROUTE
+     73          
+     74          #define TRANSMITAPP_MATCH_DELAY     1000
+     75          
+     76          /*******************************************************************************
+     77           * GLOBAL VARIABLES
+     78           */
+     79          
+     80          // This is the buffer that is sent out as data.
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     81          byte TransmitApp_Msg[ TRANSMITAPP_DHT11_DATA_LEN ];
+   \                     TransmitApp_Msg:
+   \   000000                DS 8
+   \   000008                REQUIRE __INIT_XDATA_Z
+     82          
+     83          // This is the Cluster ID List and should be filled with Application
+     84          // specific cluster IDs.
+
+   \                                 In  segment XDATA_ROM_C, align 1
+     85          const cId_t TransmitApp_InClusterList[1] =
+   \                     TransmitApp_InClusterList:
+   \   000000   0900         DW 9
+     86          {
+     87            TRANSMITAPP_CLUSTERID_TESTMSG   // MSG Cluster ID
+     88          };
+     89          
+
+   \                                 In  segment XDATA_ROM_C, align 1
+     90          const cId_t TransmitApp_OutClusterList[1] =
+   \                     TransmitApp_OutClusterList:
+   \   000000   0100         DW 1
+     91          {
+     92            TRANSMITAPP_CLUSTERID_HUMITMSG  // MSG Cluster ID
+     93          };
+     94          
+
+   \                                 In  segment XDATA_ROM_C, align 1
+     95          const SimpleDescriptionFormat_t TransmitApp_SimpleDesc =
+   \                     TransmitApp_SimpleDesc:
+   \   000000   01           DB 1
+   \   000001   050F         DW 3845
+   \   000003   0100         DW 1
+   \   000005   00           DB 0
+   \   000006   08           DB 8
+   \   000007   ....         DW TransmitApp_InClusterList
+   \   000009   03           DB 3
+   \   00000A   ....         DW TransmitApp_OutClusterList
+     96          {
+     97            TRANSMITAPP_ENDPOINT,                 //  int    Endpoint;
+     98            TRANSMITAPP_PROFID,                   //  uint16 AppProfId[2];
+     99            TRANSMITAPP_DEVICEID,                 //  uint16 AppDeviceId[2];
+    100            TRANSMITAPP_DEVICE_VERSION,           //  int    AppDevVer:4;
+    101            TRANSMITAPP_FLAGS,                    //  int    AppFlags:4;
+    102            TRANSMITAPP_MAX_INCLUSTERS,           //  byte   AppNumInClusters;
+    103            (cId_t *)TransmitApp_InClusterList,   //  byte   *pAppInClusterList;
+    104            TRANSMITAPP_MAX_OUTCLUSTERS,          //  byte   AppNumOutClusters;
+    105            (cId_t *)TransmitApp_OutClusterList   //  byte   *pAppOutClusterList;
+    106          };
+    107          
+    108          // This is the Endpoint/Interface description.  It is defined here, but
+    109          // filled-in in TransmitApp_Init().  Another way to go would be to fill
+    110          // in the structure here and make it a "const" (in code space).  The
+    111          // way it's defined in this sample app it is define in RAM.
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    112          endPointDesc_t TransmitApp_epDesc;
+   \                     TransmitApp_epDesc:
+   \   000000                DS 6
+   \   000006                REQUIRE __INIT_XDATA_Z
+    113          
+    114          /*******************************************************************************
+    115           * LOCAL VARIABLES
+    116           */
+    117          #if !defined( SERIAL_APP_PORT )
+    118          #define SERIAL_APP_PORT     0
+    119          #endif
+    120          
+    121          #if !defined( SERIAL_APP_BAUD )
+    122          #define SERIAL_APP_BAUD  HAL_UART_BR_38400
+    123          #endif
+    124          
+    125          // When the Rx buf space is less than this threshold, invoke the Rx callback.
+    126          #if !defined( SERIAL_APP_THRESH )
+    127          #define SERIAL_APP_THRESH   64
+    128          #endif
+    129          
+    130          #if !defined( SERIAL_APP_RX_SZ )
+    131          #define SERIAL_APP_RX_SZ    128
+    132          #endif
+    133          
+    134          #if !defined( SERIAL_APP_TX_SZ )
+    135          #define SERIAL_APP_TX_SZ    128
+    136          #endif
+    137          
+    138          // Millisecs of idle time after a byte is received before invoking Rx callback.
+    139          #if !defined( SERIAL_APP_IDLE )
+    140          #define SERIAL_APP_IDLE     6
+    141          #endif
+    142          
+    143          // Loopback Rx bytes to Tx for throughput testing.
+    144          #if !defined( SERIAL_APP_LOOPBACK )
+    145          #define SERIAL_APP_LOOPBACK  FALSE
+    146          #endif
+    147          
+    148          // This is the max byte count per OTA message.
+    149          #if !defined( SERIAL_APP_TX_MAX )
+    150          #define SERIAL_APP_TX_MAX   80
+    151          #endif
+    152          
+    153          #define SERIAL_APP_RSP_CNT  4
+    154          
+    155          // Task ID for event processing - received when TransmitApp_Init() is called.
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    156          byte TransmitApp_TaskID;
+   \                     TransmitApp_TaskID:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+    157          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    158          devStates_t TransmitApp_NwkState;
+   \                     TransmitApp_NwkState:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+    159          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    160          static byte TransmitApp_TransID;  // This is the unique message ID (counter)
+   \                     TransmitApp_TransID:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+    161          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    162          afAddrType_t TransmitApp_DstAddr;
+   \                     TransmitApp_DstAddr:
+   \   000000                DS 12
+   \   00000C                REQUIRE __INIT_XDATA_Z
+    163          
+    164          /*******************************************************************************
+    165           * LOCAL FUNCTIONS
+    166           */
+    167          void TransmitApp_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
+    168          void TransmitApp_HandleKeys( byte shift, byte keys );
+    169          void TransmitApp_MessageMSGCB( afIncomingMSGPacket_t *pckt );
+    170          void TransmitApp_SendTheMessage( void );
+    171          void TransmitApp_CallBack(uint8 port, uint8 event);
+    172          
+    173          /*******************************************************************************
+    174           * NETWORK LAYER CALLBACKS
+    175           */
+    176          
+    177          /*******************************************************************************
+    178           * PUBLIC FUNCTIONS
+    179           */
+    180          void TransmitApp_DisplayResults( void );
+    181          
+    182          /*******************************************************************************
+    183           * @fn      TransmitApp_Init
+    184           *
+    185           * @brief   Initialization function for the Generic App Task.
+    186           *          This is called during initialization and should contain
+    187           *          any application specific initialization (ie. hardware
+    188           *          initialization/setup, table initialization, power up
+    189           *          notificaiton ... ).
+    190           *
+    191           * @param   task_id - the ID assigned by OSAL.  This ID should be
+    192           *                    used to send messages and set timers.
+    193           *
+    194           * @return  none
+    195           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    196          void TransmitApp_Init( byte task_id )
+   \                     TransmitApp_Init:
+    197          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 29
+   \   000005   74E3         MOV     A,#-0x1d
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   00000A   89..         MOV     ?V0 + 0,R1
+    198            uint16 i;
+    199            
+    200          #if HAL_UART==TRUE
+    201            halUARTCfg_t uartConfig;
+    202            
+    203            uartConfig.configured           = TRUE;              // 2x30 don't care - see uart driver.
+   \   00000C   85..82       MOV     DPL,?XSP + 0
+   \   00000F   85..83       MOV     DPH,?XSP + 1
+   \   000012   7401         MOV     A,#0x1
+   \   000014   F0           MOVX    @DPTR,A
+    204            uartConfig.baudRate             = SERIAL_APP_BAUD;
+   \   000015   7401         MOV     A,#0x1
+   \   000017   12....       LCALL   ?XSTACK_DISP0_8
+   \   00001A   7402         MOV     A,#0x2
+   \   00001C   F0           MOVX    @DPTR,A
+    205            uartConfig.flowControl          = FALSE;
+   \   00001D   7402         MOV     A,#0x2
+   \   00001F   12....       LCALL   ?XSTACK_DISP0_8
+   \   000022   7400         MOV     A,#0x0
+   \   000024   F0           MOVX    @DPTR,A
+    206            uartConfig.flowControlThreshold = SERIAL_APP_THRESH; // 2x30 don't care - see uart driver.
+   \   000025   7403         MOV     A,#0x3
+   \   000027   12....       LCALL   ?XSTACK_DISP0_8
+   \   00002A   7440         MOV     A,#0x40
+   \   00002C   F0           MOVX    @DPTR,A
+   \   00002D   A3           INC     DPTR
+   \   00002E   7400         MOV     A,#0x0
+   \   000030   F0           MOVX    @DPTR,A
+    207            uartConfig.rx.maxBufSize        = SERIAL_APP_RX_SZ;  // 2x30 don't care - see uart driver.
+   \   000031   740A         MOV     A,#0xa
+   \   000033   12....       LCALL   ?XSTACK_DISP0_8
+   \   000036   7480         MOV     A,#-0x80
+   \   000038   F0           MOVX    @DPTR,A
+   \   000039   A3           INC     DPTR
+   \   00003A   7400         MOV     A,#0x0
+   \   00003C   F0           MOVX    @DPTR,A
+    208            uartConfig.tx.maxBufSize        = SERIAL_APP_TX_SZ;  // 2x30 don't care - see uart driver.
+   \   00003D   7412         MOV     A,#0x12
+   \   00003F   12....       LCALL   ?XSTACK_DISP0_8
+   \   000042   7480         MOV     A,#-0x80
+   \   000044   F0           MOVX    @DPTR,A
+   \   000045   A3           INC     DPTR
+   \   000046   7400         MOV     A,#0x0
+   \   000048   F0           MOVX    @DPTR,A
+    209            uartConfig.idleTimeout          = SERIAL_APP_IDLE;   // 2x30 don't care - see uart driver.
+   \   000049   7405         MOV     A,#0x5
+   \   00004B   12....       LCALL   ?XSTACK_DISP0_8
+   \   00004E   7406         MOV     A,#0x6
+   \   000050   F0           MOVX    @DPTR,A
+    210            uartConfig.intEnable            = FALSE;             // 2x30 don't care - see uart driver.
+   \   000051   7416         MOV     A,#0x16
+   \   000053   12....       LCALL   ?XSTACK_DISP0_8
+   \   000056   7400         MOV     A,#0x0
+   \   000058   F0           MOVX    @DPTR,A
+    211            uartConfig.callBackFunc         = TransmitApp_CallBack;
+   \   000059   741B         MOV     A,#0x1b
+   \   00005B   12....       LCALL   ?XSTACK_DISP0_8
+   \   00005E   74..         MOV     A,#??TransmitApp_CallBack?relay & 0xff
+   \   000060   F0           MOVX    @DPTR,A
+   \   000061   A3           INC     DPTR
+   \   000062   74..         MOV     A,#(??TransmitApp_CallBack?relay >> 8) & 0xff
+   \   000064   F0           MOVX    @DPTR,A
+    212            HalUARTOpen (HAL_UART_PORT_0, &uartConfig);
+   \   000065                ; Setup parameters for call to function HalUARTOpen
+   \   000065   85..82       MOV     DPL,?XSP + 0
+   \   000068   85..83       MOV     DPH,?XSP + 1
+   \   00006B   AA82         MOV     R2,DPL
+   \   00006D   AB83         MOV     R3,DPH
+   \   00006F   7900         MOV     R1,#0x0
+   \   000071   12....       LCALL   ??HalUARTOpen?relay
+   \   000074   E9           MOV     A,R1
+    213          #endif
+    214            
+    215            TransmitApp_TaskID = task_id;
+   \   000075   E5..         MOV     A,?V0 + 0
+   \   000077   90....       MOV     DPTR,#TransmitApp_TaskID
+   \   00007A   F0           MOVX    @DPTR,A
+    216            TransmitApp_NwkState = DEV_INIT;
+   \   00007B   90....       MOV     DPTR,#TransmitApp_NwkState
+   \   00007E   7401         MOV     A,#0x1
+   \   000080   F0           MOVX    @DPTR,A
+    217            TransmitApp_TransID = 0;
+   \   000081   90....       MOV     DPTR,#TransmitApp_TransID
+   \   000084   7400         MOV     A,#0x0
+   \   000086   F0           MOVX    @DPTR,A
+    218              
+    219            // Device hardware initialization can be added here or in main() (Zmain.c).
+    220            // If the hardware is application specific - add it here.
+    221            // If the hardware is other parts of the device add it in main().
+    222            
+    223            TransmitApp_DstAddr.addrMode = (afAddrMode_t)AddrNotPresent;
+   \   000087   90....       MOV     DPTR,#TransmitApp_DstAddr + 8
+   \   00008A   7400         MOV     A,#0x0
+   \   00008C   F0           MOVX    @DPTR,A
+    224            TransmitApp_DstAddr.endPoint = 0;
+   \   00008D   90....       MOV     DPTR,#TransmitApp_DstAddr + 9
+   \   000090   7400         MOV     A,#0x0
+   \   000092   F0           MOVX    @DPTR,A
+    225            TransmitApp_DstAddr.addr.shortAddr = 0;
+   \   000093   90....       MOV     DPTR,#TransmitApp_DstAddr
+   \   000096   7400         MOV     A,#0x0
+   \   000098   F0           MOVX    @DPTR,A
+   \   000099   A3           INC     DPTR
+   \   00009A   7400         MOV     A,#0x0
+   \   00009C   F0           MOVX    @DPTR,A
+    226            
+    227            // Fill out the endpoint description.
+    228            TransmitApp_epDesc.endPoint = TRANSMITAPP_ENDPOINT;
+   \   00009D   90....       MOV     DPTR,#TransmitApp_epDesc
+   \   0000A0   7401         MOV     A,#0x1
+   \   0000A2   F0           MOVX    @DPTR,A
+    229            TransmitApp_epDesc.task_id = &TransmitApp_TaskID;
+   \   0000A3   90....       MOV     DPTR,#TransmitApp_epDesc + 1
+   \   0000A6   74..         MOV     A,#TransmitApp_TaskID & 0xff
+   \   0000A8   F0           MOVX    @DPTR,A
+   \   0000A9   A3           INC     DPTR
+   \   0000AA   74..         MOV     A,#(TransmitApp_TaskID >> 8) & 0xff
+   \   0000AC   F0           MOVX    @DPTR,A
+    230            TransmitApp_epDesc.simpleDesc
+    231                    = (SimpleDescriptionFormat_t *)&TransmitApp_SimpleDesc;
+   \   0000AD   90....       MOV     DPTR,#TransmitApp_epDesc + 3
+   \   0000B0   74..         MOV     A,#TransmitApp_SimpleDesc & 0xff
+   \   0000B2   F0           MOVX    @DPTR,A
+   \   0000B3   A3           INC     DPTR
+   \   0000B4   74..         MOV     A,#(TransmitApp_SimpleDesc >> 8) & 0xff
+   \   0000B6   F0           MOVX    @DPTR,A
+    232            TransmitApp_epDesc.latencyReq = noLatencyReqs;
+   \   0000B7   90....       MOV     DPTR,#TransmitApp_epDesc + 5
+   \   0000BA   7400         MOV     A,#0x0
+   \   0000BC   F0           MOVX    @DPTR,A
+    233            
+    234            // Register the endpoint/interface description with the AF
+    235            afRegister( &TransmitApp_epDesc );
+   \   0000BD                ; Setup parameters for call to function afRegister
+   \   0000BD   7A..         MOV     R2,#TransmitApp_epDesc & 0xff
+   \   0000BF   7B..         MOV     R3,#(TransmitApp_epDesc >> 8) & 0xff
+   \   0000C1   12....       LCALL   ??afRegister?relay
+   \   0000C4   E9           MOV     A,R1
+    236            
+    237            // Register for all key events - This app will handle all key events
+    238            RegisterForKeys( TransmitApp_TaskID );
+   \   0000C5                ; Setup parameters for call to function RegisterForKeys
+   \   0000C5   90....       MOV     DPTR,#TransmitApp_TaskID
+   \   0000C8   E0           MOVX    A,@DPTR
+   \   0000C9   F9           MOV     R1,A
+   \   0000CA   12....       LCALL   ??RegisterForKeys?relay
+   \   0000CD   E9           MOV     A,R1
+    239              
+    240            // Generate the data
+    241            for (i = 0; i < TRANSMITAPP_DHT11_DATA_LEN; i++)
+   \   0000CE   7E00         MOV     R6,#0x0
+   \   0000D0   7F00         MOV     R7,#0x0
+   \                     ??TransmitApp_Init_0:
+   \   0000D2   C3           CLR     C
+   \   0000D3   EE           MOV     A,R6
+   \   0000D4   9408         SUBB    A,#0x8
+   \   0000D6   EF           MOV     A,R7
+   \   0000D7   9400         SUBB    A,#0x0
+   \   0000D9   5017         JNC     ??TransmitApp_Init_1
+    242            {
+    243              TransmitApp_Msg[i] = 0;
+   \   0000DB   74..         MOV     A,#TransmitApp_Msg & 0xff
+   \   0000DD   2E           ADD     A,R6
+   \   0000DE   F582         MOV     DPL,A
+   \   0000E0   74..         MOV     A,#(TransmitApp_Msg >> 8) & 0xff
+   \   0000E2   3F           ADDC    A,R7
+   \   0000E3   F583         MOV     DPH,A
+   \   0000E5   7400         MOV     A,#0x0
+   \   0000E7   F0           MOVX    @DPTR,A
+    244            }
+   \   0000E8   EE           MOV     A,R6
+   \   0000E9   2401         ADD     A,#0x1
+   \   0000EB   FE           MOV     R6,A
+   \   0000EC   EF           MOV     A,R7
+   \   0000ED   3400         ADDC    A,#0x0
+   \   0000EF   FF           MOV     R7,A
+   \   0000F0   80E0         SJMP    ??TransmitApp_Init_0
+    245            
+    246            ZDO_RegisterForZDOMsg( TransmitApp_TaskID, End_Device_Bind_rsp );
+   \                     ??TransmitApp_Init_1:
+   \   0000F2                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
+   \   0000F2   7A20         MOV     R2,#0x20
+   \   0000F4   7B80         MOV     R3,#-0x80
+   \   0000F6   90....       MOV     DPTR,#TransmitApp_TaskID
+   \   0000F9   E0           MOVX    A,@DPTR
+   \   0000FA   F9           MOV     R1,A
+   \   0000FB   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
+   \   0000FE   E9           MOV     A,R1
+    247            ZDO_RegisterForZDOMsg( TransmitApp_TaskID, Match_Desc_rsp );
+   \   0000FF                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
+   \   0000FF   7A06         MOV     R2,#0x6
+   \   000101   7B80         MOV     R3,#-0x80
+   \   000103   90....       MOV     DPTR,#TransmitApp_TaskID
+   \   000106   E0           MOVX    A,@DPTR
+   \   000107   F9           MOV     R1,A
+   \   000108   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
+   \   00010B   E9           MOV     A,R1
+    248            
+    249            // 描述符匹配事件
+    250            osal_start_reload_timer( TransmitApp_TaskID, TRANSMITAPP_MATCHRSP_EVT, 
+    251                                                         TRANSMITAPP_MATCH_DELAY );
+   \   00010C                ; Setup parameters for call to function osal_start_reload_timer
+   \   00010C   7CE8         MOV     R4,#-0x18
+   \   00010E   7D03         MOV     R5,#0x3
+   \   000110   7A08         MOV     R2,#0x8
+   \   000112   7B00         MOV     R3,#0x0
+   \   000114   90....       MOV     DPTR,#TransmitApp_TaskID
+   \   000117   E0           MOVX    A,@DPTR
+   \   000118   F9           MOV     R1,A
+   \   000119   12....       LCALL   ??osal_start_reload_timer?relay
+   \   00011C   E9           MOV     A,R1
+    252          }
+   \   00011D   741D         MOV     A,#0x1d
+   \   00011F   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000122   7F01         MOV     R7,#0x1
+   \   000124   02....       LJMP    ?BANKED_LEAVE_XDATA
+    253          
+    254          /*******************************************************************************
+    255           * @fn      TransmitApp_ProcessEvent
+    256           *
+    257           * @brief   Generic Application Task event processor.  This function
+    258           *          is called to process all events for the task.  Events
+    259           *          include timers, messages and any other user defined events.
+    260           *
+    261           * @param   task_id  - The OSAL assigned task ID.
+    262           * @param   events - events to process.  This is a bit map and can
+    263           *                   contain more than one event.
+    264           *
+    265           * @return  none
+    266           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    267          UINT16 TransmitApp_ProcessEvent( byte task_id, UINT16 events )
+   \                     TransmitApp_ProcessEvent:
+    268          {
+   \   000000   74EE         MOV     A,#-0x12
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 18
+   \   000005                ; Auto size: 9
+   \   000005   74F7         MOV     A,#-0x9
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   00000A   89..         MOV     ?V0 + 2,R1
+   \   00000C   EA           MOV     A,R2
+   \   00000D   FE           MOV     R6,A
+   \   00000E   EB           MOV     A,R3
+   \   00000F   FF           MOV     R7,A
+    269            afIncomingMSGPacket_t *MSGpkt;
+    270            afDataConfirm_t *afDataConfirm;
+    271            (void)task_id;  // Intentionally unreferenced parameter
+    272            
+    273            // Data Confirmation message fields
+    274            ZStatus_t sentStatus;
+    275            byte sentEP;
+    276              
+    277            if ( events & SYS_EVENT_MSG )
+   \   000010   EE           MOV     A,R6
+   \   000011   5400         ANL     A,#0x0
+   \   000013   F8           MOV     R0,A
+   \   000014   EF           MOV     A,R7
+   \   000015   5480         ANL     A,#0x80
+   \   000017   F9           MOV     R1,A
+   \   000018   E8           MOV     A,R0
+   \   000019   49           ORL     A,R1
+   \   00001A   7003         JNZ     $+5
+   \   00001C   02....       LJMP    ??TransmitApp_ProcessEvent_0 & 0xFFFF
+    278            {
+    279              MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( TransmitApp_TaskID );
+   \   00001F                ; Setup parameters for call to function osal_msg_receive
+   \   00001F   90....       MOV     DPTR,#TransmitApp_TaskID
+   \   000022   E0           MOVX    A,@DPTR
+   \   000023   F9           MOV     R1,A
+   \   000024   12....       LCALL   ??osal_msg_receive?relay
+   \   000027   8A..         MOV     ?V0 + 8,R2
+   \   000029   8B..         MOV     ?V0 + 9,R3
+   \   00002B   85....       MOV     ?V0 + 0,?V0 + 8
+   \   00002E   85....       MOV     ?V0 + 1,?V0 + 9
+    280              while ( MSGpkt )
+   \                     ??TransmitApp_ProcessEvent_1:
+   \   000031   E5..         MOV     A,?V0 + 0
+   \   000033   45..         ORL     A,?V0 + 1
+   \   000035   7003         JNZ     $+5
+   \   000037   02....       LJMP    ??TransmitApp_ProcessEvent_2 & 0xFFFF
+    281              {
+    282                switch ( MSGpkt->hdr.event )
+   \   00003A   85..82       MOV     DPL,?V0 + 0
+   \   00003D   85..83       MOV     DPH,?V0 + 1
+   \   000040   E0           MOVX    A,@DPTR
+   \   000041   24E6         ADD     A,#-0x1a
+   \   000043   6052         JZ      ??TransmitApp_ProcessEvent_3
+   \   000045   245A         ADD     A,#0x5a
+   \   000047   6017         JZ      ??TransmitApp_ProcessEvent_4
+   \   000049   24EF         ADD     A,#-0x11
+   \   00004B   6053         JZ      ??TransmitApp_ProcessEvent_5
+   \   00004D   24FE         ADD     A,#-0x2
+   \   00004F   6006         JZ      ??TransmitApp_ProcessEvent_6
+   \   000051   24D6         ADD     A,#-0x2a
+   \   000053   6025         JZ      ??TransmitApp_ProcessEvent_7
+   \   000055   8055         SJMP    ??TransmitApp_ProcessEvent_8
+    283                {
+    284                  case ZDO_CB_MSG:
+    285                    TransmitApp_ProcessZDOMsgs( (zdoIncomingMsg_t *)MSGpkt );
+   \                     ??TransmitApp_ProcessEvent_6:
+   \   000057                ; Setup parameters for call to function TransmitApp_ProcessZDOMsgs
+   \   000057   AA..         MOV     R2,?V0 + 0
+   \   000059   AB..         MOV     R3,?V0 + 1
+   \   00005B   12....       LCALL   ??TransmitApp_ProcessZDOMsgs?relay
+    286                    break;
+   \   00005E   804C         SJMP    ??TransmitApp_ProcessEvent_8
+    287                  
+    288                  case KEY_CHANGE:
+    289                    TransmitApp_HandleKeys( ((keyChange_t *)MSGpkt)->state, ((keyChange_t *)MSGpkt)->keys );
+   \                     ??TransmitApp_ProcessEvent_4:
+   \   000060                ; Setup parameters for call to function TransmitApp_HandleKeys
+   \   000060   85..82       MOV     DPL,?V0 + 0
+   \   000063   85..83       MOV     DPH,?V0 + 1
+   \   000066   A3           INC     DPTR
+   \   000067   A3           INC     DPTR
+   \   000068   A3           INC     DPTR
+   \   000069   E0           MOVX    A,@DPTR
+   \   00006A   FA           MOV     R2,A
+   \   00006B   85..82       MOV     DPL,?V0 + 0
+   \   00006E   85..83       MOV     DPH,?V0 + 1
+   \   000071   A3           INC     DPTR
+   \   000072   A3           INC     DPTR
+   \   000073   E0           MOVX    A,@DPTR
+   \   000074   F9           MOV     R1,A
+   \   000075   12....       LCALL   ??TransmitApp_HandleKeys?relay
+    290                    break;
+   \   000078   8032         SJMP    ??TransmitApp_ProcessEvent_8
+    291                  
+    292                  case AF_DATA_CONFIRM_CMD:
+    293                    // This message is received as a confirmation of a data packet sent.
+    294                    // The status is of ZStatus_t type [defined in ZComDef.h]
+    295                    // The message fields are defined in AF.h
+    296                    afDataConfirm = (afDataConfirm_t *)MSGpkt;
+   \                     ??TransmitApp_ProcessEvent_7:
+   \   00007A   85....       MOV     ?V0 + 6,?V0 + 0
+   \   00007D   85....       MOV     ?V0 + 7,?V0 + 1
+    297                    sentEP = afDataConfirm->endpoint;
+   \   000080   85..82       MOV     DPL,?V0 + 6
+   \   000083   85..83       MOV     DPH,?V0 + 7
+   \   000086   A3           INC     DPTR
+   \   000087   A3           INC     DPTR
+   \   000088   E0           MOVX    A,@DPTR
+   \   000089   F5..         MOV     ?V0 + 4,A
+    298                    sentStatus = afDataConfirm->hdr.status;
+   \   00008B   85..82       MOV     DPL,?V0 + 6
+   \   00008E   85..83       MOV     DPH,?V0 + 7
+   \   000091   A3           INC     DPTR
+   \   000092   E0           MOVX    A,@DPTR
+   \   000093   F5..         MOV     ?V0 + 3,A
+    299                    break;
+   \   000095   8015         SJMP    ??TransmitApp_ProcessEvent_8
+    300                  
+    301                  case AF_INCOMING_MSG_CMD:
+    302                    TransmitApp_MessageMSGCB( MSGpkt );
+   \                     ??TransmitApp_ProcessEvent_3:
+   \   000097                ; Setup parameters for call to function TransmitApp_MessageMSGCB
+   \   000097   AA..         MOV     R2,?V0 + 0
+   \   000099   AB..         MOV     R3,?V0 + 1
+   \   00009B   12....       LCALL   ??TransmitApp_MessageMSGCB?relay
+    303                    break;
+   \   00009E   800C         SJMP    ??TransmitApp_ProcessEvent_8
+    304                  
+    305                  case ZDO_STATE_CHANGE:
+    306                    TransmitApp_NwkState = (devStates_t)(MSGpkt->hdr.status);
+   \                     ??TransmitApp_ProcessEvent_5:
+   \   0000A0   85..82       MOV     DPL,?V0 + 0
+   \   0000A3   85..83       MOV     DPH,?V0 + 1
+   \   0000A6   A3           INC     DPTR
+   \   0000A7   E0           MOVX    A,@DPTR
+   \   0000A8   90....       MOV     DPTR,#TransmitApp_NwkState
+   \   0000AB   F0           MOVX    @DPTR,A
+    307                    break;
+    308                        
+    309                  default:
+    310                    break;
+    311                }
+    312                
+    313                // Release the memory
+    314                osal_msg_deallocate( (uint8 *)MSGpkt );
+   \                     ??TransmitApp_ProcessEvent_8:
+   \   0000AC                ; Setup parameters for call to function osal_msg_deallocate
+   \   0000AC   AA..         MOV     R2,?V0 + 0
+   \   0000AE   AB..         MOV     R3,?V0 + 1
+   \   0000B0   12....       LCALL   ??osal_msg_deallocate?relay
+   \   0000B3   E9           MOV     A,R1
+    315                
+    316                // Next
+    317                MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( TransmitApp_TaskID );
+   \   0000B4                ; Setup parameters for call to function osal_msg_receive
+   \   0000B4   90....       MOV     DPTR,#TransmitApp_TaskID
+   \   0000B7   E0           MOVX    A,@DPTR
+   \   0000B8   F9           MOV     R1,A
+   \   0000B9   12....       LCALL   ??osal_msg_receive?relay
+   \   0000BC   8A..         MOV     ?V0 + 8,R2
+   \   0000BE   8B..         MOV     ?V0 + 9,R3
+   \   0000C0   85....       MOV     ?V0 + 0,?V0 + 8
+   \   0000C3   85....       MOV     ?V0 + 1,?V0 + 9
+   \   0000C6   02....       LJMP    ??TransmitApp_ProcessEvent_1 & 0xFFFF
+    318              }
+    319              
+    320              // Squash compiler warnings until values are used.
+    321              (void)sentStatus;
+    322              (void)sentEP;
+    323              
+    324              // Return unprocessed events
+    325              return (events ^ SYS_EVENT_MSG);
+   \                     ??TransmitApp_ProcessEvent_2:
+   \   0000C9   EE           MOV     A,R6
+   \   0000CA   6400         XRL     A,#0x0
+   \   0000CC   FA           MOV     R2,A
+   \   0000CD   EF           MOV     A,R7
+   \   0000CE   6480         XRL     A,#0x80
+   \   0000D0   FB           MOV     R3,A
+   \   0000D1   02....       LJMP    ??TransmitApp_ProcessEvent_9 & 0xFFFF
+    326            }
+    327              
+    328            // Send a message out
+    329            if ( events & TRANSMITAPP_SEND_MSG_EVT )
+   \                     ??TransmitApp_ProcessEvent_0:
+   \   0000D4   EE           MOV     A,R6
+   \   0000D5   A2E0         MOV     C,0xE0 /* A   */.0
+   \   0000D7   500E         JNC     ??TransmitApp_ProcessEvent_10
+    330            {
+    331              TransmitApp_SendTheMessage();
+   \   0000D9                ; Setup parameters for call to function TransmitApp_SendTheMessage
+   \   0000D9   12....       LCALL   ??TransmitApp_SendTheMessage?relay
+    332          
+    333              // Return unprocessed events
+    334              return (events ^ TRANSMITAPP_SEND_MSG_EVT);
+   \   0000DC   EE           MOV     A,R6
+   \   0000DD   6401         XRL     A,#0x1
+   \   0000DF   FA           MOV     R2,A
+   \   0000E0   EF           MOV     A,R7
+   \   0000E1   6400         XRL     A,#0x0
+   \   0000E3   FB           MOV     R3,A
+   \   0000E4   02....       LJMP    ??TransmitApp_ProcessEvent_9 & 0xFFFF
+    335            }
+    336              
+    337            if ( events & TRANSMITAPP_MATCHRSP_EVT )
+   \                     ??TransmitApp_ProcessEvent_10:
+   \   0000E7   EE           MOV     A,R6
+   \   0000E8   5408         ANL     A,#0x8
+   \   0000EA   6068         JZ      ??TransmitApp_ProcessEvent_11
+    338            {
+    339              zAddrType_t dstAddr;
+    340              dstAddr.addrMode = AddrBroadcast;
+   \   0000EC   7408         MOV     A,#0x8
+   \   0000EE   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000F1   740F         MOV     A,#0xf
+   \   0000F3   F0           MOVX    @DPTR,A
+    341              dstAddr.addr.shortAddr = NWK_BROADCAST_SHORTADDR;
+   \   0000F4   85..82       MOV     DPL,?XSP + 0
+   \   0000F7   85..83       MOV     DPH,?XSP + 1
+   \   0000FA   74FF         MOV     A,#-0x1
+   \   0000FC   F0           MOVX    @DPTR,A
+   \   0000FD   A3           INC     DPTR
+   \   0000FE   74FF         MOV     A,#-0x1
+   \   000100   F0           MOVX    @DPTR,A
+    342              ZDP_MatchDescReq( &dstAddr, 
+    343                              NWK_BROADCAST_SHORTADDR,
+    344                              TRANSMITAPP_PROFID,
+    345                              TRANSMITAPP_MAX_OUTCLUSTERS, 
+    346                              (cId_t *)TransmitApp_OutClusterList,
+    347                              TRANSMITAPP_MAX_INCLUSTERS, 
+    348                              (cId_t *)TransmitApp_InClusterList,
+    349                              FALSE );
+   \   000101                ; Setup parameters for call to function ZDP_MatchDescReq
+   \   000101   75..00       MOV     ?V0 + 5,#0x0
+   \   000104   78..         MOV     R0,#?V0 + 5
+   \   000106   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   000109   75....       MOV     ?V0 + 8,#TransmitApp_InClusterList & 0xff
+   \   00010C   75....       MOV     ?V0 + 9,#(TransmitApp_InClusterList >> 8) & 0xff
+   \   00010F   78..         MOV     R0,#?V0 + 8
+   \   000111   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000114   75..08       MOV     ?V0 + 5,#0x8
+   \   000117   78..         MOV     R0,#?V0 + 5
+   \   000119   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   00011C   75....       MOV     ?V0 + 8,#TransmitApp_OutClusterList & 0xff
+   \   00011F   75....       MOV     ?V0 + 9,#(TransmitApp_OutClusterList >> 8) & 0xff
+   \   000122   78..         MOV     R0,#?V0 + 8
+   \   000124   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000127   75..05       MOV     ?V0 + 8,#0x5
+   \   00012A   75..0F       MOV     ?V0 + 9,#0xf
+   \   00012D   78..         MOV     R0,#?V0 + 8
+   \   00012F   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000132   7903         MOV     R1,#0x3
+   \   000134   7CFF         MOV     R4,#-0x1
+   \   000136   7DFF         MOV     R5,#-0x1
+   \   000138   7408         MOV     A,#0x8
+   \   00013A   12....       LCALL   ?XSTACK_DISP0_8
+   \   00013D   AA82         MOV     R2,DPL
+   \   00013F   AB83         MOV     R3,DPH
+   \   000141   12....       LCALL   ??ZDP_MatchDescReq?relay
+   \   000144   7408         MOV     A,#0x8
+   \   000146   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000149   E9           MOV     A,R1
+    350                
+    351              // Return unprocessed events
+    352              return (events ^ TRANSMITAPP_MATCHRSP_EVT);
+   \   00014A   EE           MOV     A,R6
+   \   00014B   6408         XRL     A,#0x8
+   \   00014D   FA           MOV     R2,A
+   \   00014E   EF           MOV     A,R7
+   \   00014F   6400         XRL     A,#0x0
+   \   000151   FB           MOV     R3,A
+   \   000152   8016         SJMP    ??TransmitApp_ProcessEvent_9
+    353            }
+    354              
+    355            // Timed wait from error(没有使用)
+    356            if ( events & TRANSMITAPP_SEND_ERR_EVT )
+   \                     ??TransmitApp_ProcessEvent_11:
+   \   000154   EE           MOV     A,R6
+   \   000155   5404         ANL     A,#0x4
+   \   000157   600D         JZ      ??TransmitApp_ProcessEvent_12
+    357            {
+    358              TransmitApp_SetSendEvt();
+   \   000159                ; Setup parameters for call to function TransmitApp_SetSendEvt
+   \   000159   12....       LCALL   ??TransmitApp_SetSendEvt?relay
+    359              
+    360              // Return unprocessed events
+    361              return (events ^ TRANSMITAPP_SEND_ERR_EVT);
+   \   00015C   EE           MOV     A,R6
+   \   00015D   6404         XRL     A,#0x4
+   \   00015F   FA           MOV     R2,A
+   \   000160   EF           MOV     A,R7
+   \   000161   6400         XRL     A,#0x0
+   \   000163   FB           MOV     R3,A
+   \   000164   8004         SJMP    ??TransmitApp_ProcessEvent_9
+    362            }
+    363              
+    364            // Discard unknown events
+    365            return 0;
+   \                     ??TransmitApp_ProcessEvent_12:
+   \   000166   7A00         MOV     R2,#0x0
+   \   000168   7B00         MOV     R3,#0x0
+   \                     ??TransmitApp_ProcessEvent_9:
+   \   00016A   7409         MOV     A,#0x9
+   \   00016C   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00016F   7F0A         MOV     R7,#0xa
+   \   000171   02....       LJMP    ?BANKED_LEAVE_XDATA
+    366          }
+    367          
+    368          /*******************************************************************************
+    369           * @fn      TransmitApp_ProcessZDOMsgs()
+    370           *
+    371           * @brief   Process response messages
+    372           *
+    373           * @param   none
+    374           *
+    375           * @return  none
+    376           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    377          void TransmitApp_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
+   \                     TransmitApp_ProcessZDOMsgs:
+    378          {
+   \   000000   74F4         MOV     A,#-0xc
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 12
+   \   000005                ; Auto size: 0
+   \   000005   8A..         MOV     ?V0 + 0,R2
+   \   000007   8B..         MOV     ?V0 + 1,R3
+    379            switch ( inMsg->clusterID )
+   \   000009   E5..         MOV     A,?V0 + 0
+   \   00000B   240C         ADD     A,#0xc
+   \   00000D   F582         MOV     DPL,A
+   \   00000F   E5..         MOV     A,?V0 + 1
+   \   000011   3400         ADDC    A,#0x0
+   \   000013   F583         MOV     DPH,A
+   \   000015   E0           MOVX    A,@DPTR
+   \   000016   F5..         MOV     ?V0 + 2,A
+   \   000018   A3           INC     DPTR
+   \   000019   E0           MOVX    A,@DPTR
+   \   00001A   F5..         MOV     ?V0 + 3,A
+   \   00001C   78..         MOV     R0,#?V0 + 2
+   \   00001E   12....       LCALL   ?US_SWITCH_SPARSE
+   \                     `?<Jumptable for TransmitApp_ProcessZDOMsgs>_0`:
+   \   000021   0000         DW        0
+   \   000023   0200         DW        2
+   \   000025   0680         DW        32774
+   \   000027   ....         DW        ??TransmitApp_ProcessZDOMsgs_0
+   \   000029   2080         DW        32800
+   \   00002B   ....         DW        ??TransmitApp_ProcessZDOMsgs_1
+   \   00002D   ....         DW        ??TransmitApp_ProcessZDOMsgs_1
+    380            {
+    381              case End_Device_Bind_rsp:
+    382                if ( ZDO_ParseBindRsp( inMsg ) == ZSuccess )
+    383                {
+    384                }
+    385                break;
+    386          
+    387              case Match_Desc_rsp:
+    388                ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
+                       ^
+Warning[Pe1072]: a declaration cannot have a label
+
+    switch ( inMsg->clusterID )
+    ^
+"D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\Source\TransmitAppDHT11.c",379  Warning[Pe546]: 
+          transfer of control bypasses initialization of:
+            variable "pRsp" (declared at line 388 of
+                      "D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530-2.5.1
+                      a_EB\Projects\zstack\MY_BOARD\Exp4\Source\TransmitAppDHT1
+                      1.c")
+   \                     ??TransmitApp_ProcessZDOMsgs_0:
+   \   00002F                ; Setup parameters for call to function ZDO_ParseEPListRsp
+   \   00002F   AA..         MOV     R2,?V0 + 0
+   \   000031   AB..         MOV     R3,?V0 + 1
+   \   000033   12....       LCALL   ??ZDO_ParseEPListRsp?relay
+   \   000036   8A..         MOV     ?V0 + 2,R2
+   \   000038   8B..         MOV     ?V0 + 3,R3
+   \   00003A   AE..         MOV     R6,?V0 + 2
+   \   00003C   AF..         MOV     R7,?V0 + 3
+    389                if ( pRsp )
+   \   00003E   EE           MOV     A,R6
+   \   00003F   4F           ORL     A,R7
+   \   000040   6068         JZ      ??TransmitApp_ProcessZDOMsgs_1
+    390                {
+    391                  if ( pRsp->status == ZSuccess && pRsp->cnt )
+   \   000042   8E82         MOV     DPL,R6
+   \   000044   8F83         MOV     DPH,R7
+   \   000046   E0           MOVX    A,@DPTR
+   \   000047   705A         JNZ     ??TransmitApp_ProcessZDOMsgs_2
+   \   000049   8E82         MOV     DPL,R6
+   \   00004B   8F83         MOV     DPH,R7
+   \   00004D   A3           INC     DPTR
+   \   00004E   A3           INC     DPTR
+   \   00004F   A3           INC     DPTR
+   \   000050   E0           MOVX    A,@DPTR
+   \   000051   6050         JZ      ??TransmitApp_ProcessZDOMsgs_2
+    392                  {
+    393                    // 此处存储绑定对方的地址信息用于发送
+    394                    TransmitApp_DstAddr.addrMode = (afAddrMode_t)Addr16Bit;
+   \   000053   90....       MOV     DPTR,#TransmitApp_DstAddr + 8
+   \   000056   7402         MOV     A,#0x2
+   \   000058   F0           MOVX    @DPTR,A
+    395                    TransmitApp_DstAddr.addr.shortAddr = pRsp->nwkAddr;
+   \   000059   8E82         MOV     DPL,R6
+   \   00005B   8F83         MOV     DPH,R7
+   \   00005D   A3           INC     DPTR
+   \   00005E   E0           MOVX    A,@DPTR
+   \   00005F   F8           MOV     R0,A
+   \   000060   A3           INC     DPTR
+   \   000061   E0           MOVX    A,@DPTR
+   \   000062   F9           MOV     R1,A
+   \   000063   90....       MOV     DPTR,#TransmitApp_DstAddr
+   \   000066   E8           MOV     A,R0
+   \   000067   F0           MOVX    @DPTR,A
+   \   000068   A3           INC     DPTR
+   \   000069   E9           MOV     A,R1
+   \   00006A   F0           MOVX    @DPTR,A
+    396                    // Take the first endpoint, Can be changed to search through endpoints
+    397                    TransmitApp_DstAddr.endPoint = pRsp->epList[0];
+   \   00006B   8E82         MOV     DPL,R6
+   \   00006D   8F83         MOV     DPH,R7
+   \   00006F   A3           INC     DPTR
+   \   000070   A3           INC     DPTR
+   \   000071   A3           INC     DPTR
+   \   000072   A3           INC     DPTR
+   \   000073   E0           MOVX    A,@DPTR
+   \   000074   90....       MOV     DPTR,#TransmitApp_DstAddr + 9
+   \   000077   F0           MOVX    @DPTR,A
+    398                    osal_stop_timerEx( TransmitApp_TaskID, TRANSMITAPP_MATCHRSP_EVT );
+   \   000078                ; Setup parameters for call to function osal_stop_timerEx
+   \   000078   7A08         MOV     R2,#0x8
+   \   00007A   7B00         MOV     R3,#0x0
+   \   00007C   90....       MOV     DPTR,#TransmitApp_TaskID
+   \   00007F   E0           MOVX    A,@DPTR
+   \   000080   F9           MOV     R1,A
+   \   000081   12....       LCALL   ??osal_stop_timerEx?relay
+   \   000084   E9           MOV     A,R1
+    399          #if HAL_UART==TRUE
+    400                    HalUARTWrite(HAL_UART_PORT_0, "Match Success!\n",   strlen("Match Success!\n"));
+   \   000085                ; Setup parameters for call to function HalUARTWrite
+   \   000085   7C0F         MOV     R4,#0xf
+   \   000087   7D00         MOV     R5,#0x0
+   \   000089   7A..         MOV     R2,#`?<Constant "Match Success!\\n">` & 0xff
+   \   00008B   7B..         MOV     R3,#(`?<Constant "Match Success!\\n">` >> 8) & 0xff
+   \   00008D   7900         MOV     R1,#0x0
+   \   00008F   12....       LCALL   ??HalUARTWrite?relay
+    401          #endif
+    402                    osal_start_reload_timer( TransmitApp_TaskID, TRANSMITAPP_SEND_MSG_EVT, 
+    403                                             TRANSMITAPP_SEND_DELAY );
+   \   000092                ; Setup parameters for call to function osal_start_reload_timer
+   \   000092   7C88         MOV     R4,#-0x78
+   \   000094   7D13         MOV     R5,#0x13
+   \   000096   7A01         MOV     R2,#0x1
+   \   000098   7B00         MOV     R3,#0x0
+   \   00009A   90....       MOV     DPTR,#TransmitApp_TaskID
+   \   00009D   E0           MOVX    A,@DPTR
+   \   00009E   F9           MOV     R1,A
+   \   00009F   12....       LCALL   ??osal_start_reload_timer?relay
+   \   0000A2   E9           MOV     A,R1
+    404                  }
+    405                  else
+    406                  {
+    407                  }
+    408                  osal_mem_free( pRsp );
+   \                     ??TransmitApp_ProcessZDOMsgs_2:
+   \   0000A3                ; Setup parameters for call to function osal_mem_free
+   \   0000A3   EE           MOV     A,R6
+   \   0000A4   FA           MOV     R2,A
+   \   0000A5   EF           MOV     A,R7
+   \   0000A6   FB           MOV     R3,A
+   \   0000A7   12....       LCALL   ??osal_mem_free?relay
+    409                }
+    410                break;
+    411                
+    412              default:
+    413                break;
+    414            }
+    415          }
+   \                     ??TransmitApp_ProcessZDOMsgs_1:
+   \   0000AA   7F04         MOV     R7,#0x4
+   \   0000AC   02....       LJMP    ?BANKED_LEAVE_XDATA
+    416          
+    417          /*******************************************************************************
+    418           * @fn      TransmitApp_HandleKeys
+    419           *
+    420           * @brief   Handles all key events for this device.
+    421           *
+    422           * @param   shift - true if in shift/alt.
+    423           * @param   keys - bit field for key events. Valid entries:
+    424           *                 EVAL_SW5
+    425           *
+    426           * @return  none
+    427           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    428          void TransmitApp_HandleKeys( byte shift, byte keys )
+   \                     TransmitApp_HandleKeys:
+    429          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    430            if ( keys & HAL_KEY_SW_5 )
+    431            {
+    432                   
+    433            }
+    434          }
+   \   000000   02....       LJMP    ?BRET
+    435          
+    436          /*******************************************************************************
+    437           * @fn      TransmitApp_MessageMSGCB
+    438           *
+    439           * @brief   Data message processor callback.  This function processes
+    440           *          any incoming data - probably from other devices.  So, based
+    441           *          on cluster ID, perform the intended action.
+    442           *
+    443           * @param   none
+    444           *
+    445           * @return  none
+    446           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    447          void TransmitApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
+   \                     TransmitApp_MessageMSGCB:
+    448          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    449            switch ( pkt->clusterId )
+   \   000004   8A82         MOV     DPL,R2
+   \   000006   8B83         MOV     DPH,R3
+   \   000008   A3           INC     DPTR
+   \   000009   A3           INC     DPTR
+   \   00000A   A3           INC     DPTR
+   \   00000B   A3           INC     DPTR
+   \   00000C   E0           MOVX    A,@DPTR
+   \   00000D   6409         XRL     A,#0x9
+   \   00000F   7004         JNZ     ??TransmitApp_MessageMSGCB_0
+   \   000011   A3           INC     DPTR
+   \   000012   E0           MOVX    A,@DPTR
+   \   000013   6400         XRL     A,#0x0
+    450            {
+    451              case TRANSMITAPP_CLUSTERID_TESTMSG:
+    452                break;
+    453          
+    454              // Could receive control messages in the future.
+    455              default:
+    456                break;
+    457            }
+    458          }
+   \                     ??TransmitApp_MessageMSGCB_0:
+   \   000015   D083         POP     DPH
+   \   000017   D082         POP     DPL
+   \   000019   02....       LJMP    ?BRET
+    459          
+    460          /*******************************************************************************
+    461           * @fn      TransmitApp_SendTheMessage
+    462           *
+    463           * @brief   Send "the" message.
+    464           *
+    465           * @param   none
+    466           *
+    467           * @return  none
+    468           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    469          void TransmitApp_SendTheMessage( void )
+   \                     TransmitApp_SendTheMessage:
+    470          {
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 10
+   \   000005   74F6         MOV     A,#-0xa
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+    471            uint8 tmp;
+    472            uint8 dataBuf[5], dispBuf[5];
+    473            static uint8 dataNewBuf[2];
+    474            
+    475            // 温湿度采集
+    476            HalDht11_Convert(dataBuf);
+   \   00000A                ; Setup parameters for call to function HalDht11_Convert
+   \   00000A   7405         MOV     A,#0x5
+   \   00000C   12....       LCALL   ?XSTACK_DISP0_8
+   \   00000F   AA82         MOV     R2,DPL
+   \   000011   AB83         MOV     R3,DPH
+   \   000013   12....       LCALL   ??HalDht11_Convert?relay
+    477            dataNewBuf[0] = dataBuf[0];
+   \   000016   7405         MOV     A,#0x5
+   \   000018   12....       LCALL   ?XSTACK_DISP0_8
+   \   00001B   E0           MOVX    A,@DPTR
+   \   00001C   90....       MOV     DPTR,#??dataNewBuf
+   \   00001F   F0           MOVX    @DPTR,A
+    478            dataNewBuf[1] = dataBuf[2];
+   \   000020   7407         MOV     A,#0x7
+   \   000022   12....       LCALL   ?XSTACK_DISP0_8
+   \   000025   E0           MOVX    A,@DPTR
+   \   000026   90....       MOV     DPTR,#??dataNewBuf + 1
+   \   000029   F0           MOVX    @DPTR,A
+    479          
+    480            // 通过串口显示温湿度数据        
+    481          #if HAL_UART==TRUE
+    482            _ltoa(dataBuf[0], dispBuf, 10);
+   \   00002A                ; Setup parameters for call to function _ltoa
+   \   00002A   85..82       MOV     DPL,?XSP + 0
+   \   00002D   85..83       MOV     DPH,?XSP + 1
+   \   000030   8582..       MOV     ?V0 + 0,DPL
+   \   000033   8583..       MOV     ?V0 + 1,DPH
+   \   000036   78..         MOV     R0,#?V0 + 0
+   \   000038   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00003B   790A         MOV     R1,#0xa
+   \   00003D   7407         MOV     A,#0x7
+   \   00003F   12....       LCALL   ?XSTACK_DISP0_8
+   \   000042   E0           MOVX    A,@DPTR
+   \   000043   F5..         MOV     ?V0 + 0,A
+   \   000045   AA..         MOV     R2,?V0 + 0
+   \   000047   E4           CLR     A
+   \   000048   FB           MOV     R3,A
+   \   000049   FC           MOV     R4,A
+   \   00004A   FD           MOV     R5,A
+   \   00004B   12....       LCALL   ??_ltoa?relay
+   \   00004E   7402         MOV     A,#0x2
+   \   000050   12....       LCALL   ?DEALLOC_XSTACK8
+    483            HalUARTWrite(HAL_UART_PORT_0, dispBuf, strlen((char *)dispBuf));
+   \   000053                ; Setup parameters for call to function HalUARTWrite
+   \   000053                ; Setup parameters for call to function strlen
+   \   000053   85..82       MOV     DPL,?XSP + 0
+   \   000056   85..83       MOV     DPH,?XSP + 1
+   \   000059   AA82         MOV     R2,DPL
+   \   00005B   AB83         MOV     R3,DPH
+   \   00005D   12....       LCALL   ??strlen?relay
+   \   000060   EA           MOV     A,R2
+   \   000061   FC           MOV     R4,A
+   \   000062   EB           MOV     A,R3
+   \   000063   FD           MOV     R5,A
+   \   000064   85..82       MOV     DPL,?XSP + 0
+   \   000067   85..83       MOV     DPH,?XSP + 1
+   \   00006A   AA82         MOV     R2,DPL
+   \   00006C   AB83         MOV     R3,DPH
+   \   00006E   7900         MOV     R1,#0x0
+   \   000070   12....       LCALL   ??HalUARTWrite?relay
+    484            HalUARTWrite(HAL_UART_PORT_0, "%\n", strlen("%\n"));
+   \   000073                ; Setup parameters for call to function HalUARTWrite
+   \   000073   7C02         MOV     R4,#0x2
+   \   000075   7D00         MOV     R5,#0x0
+   \   000077   7A..         MOV     R2,#`?<Constant "%\\n">` & 0xff
+   \   000079   7B..         MOV     R3,#(`?<Constant "%\\n">` >> 8) & 0xff
+   \   00007B   7900         MOV     R1,#0x0
+   \   00007D   12....       LCALL   ??HalUARTWrite?relay
+    485            _ltoa(dataBuf[2], dispBuf, 10);
+   \   000080                ; Setup parameters for call to function _ltoa
+   \   000080   85..82       MOV     DPL,?XSP + 0
+   \   000083   85..83       MOV     DPH,?XSP + 1
+   \   000086   8582..       MOV     ?V0 + 0,DPL
+   \   000089   8583..       MOV     ?V0 + 1,DPH
+   \   00008C   78..         MOV     R0,#?V0 + 0
+   \   00008E   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000091   790A         MOV     R1,#0xa
+   \   000093   7409         MOV     A,#0x9
+   \   000095   12....       LCALL   ?XSTACK_DISP0_8
+   \   000098   E0           MOVX    A,@DPTR
+   \   000099   F5..         MOV     ?V0 + 0,A
+   \   00009B   AA..         MOV     R2,?V0 + 0
+   \   00009D   E4           CLR     A
+   \   00009E   FB           MOV     R3,A
+   \   00009F   FC           MOV     R4,A
+   \   0000A0   FD           MOV     R5,A
+   \   0000A1   12....       LCALL   ??_ltoa?relay
+   \   0000A4   7402         MOV     A,#0x2
+   \   0000A6   12....       LCALL   ?DEALLOC_XSTACK8
+    486            HalUARTWrite(HAL_UART_PORT_0 , dispBuf, strlen((char *)dispBuf));
+   \   0000A9                ; Setup parameters for call to function HalUARTWrite
+   \   0000A9                ; Setup parameters for call to function strlen
+   \   0000A9   85..82       MOV     DPL,?XSP + 0
+   \   0000AC   85..83       MOV     DPH,?XSP + 1
+   \   0000AF   AA82         MOV     R2,DPL
+   \   0000B1   AB83         MOV     R3,DPH
+   \   0000B3   12....       LCALL   ??strlen?relay
+   \   0000B6   EA           MOV     A,R2
+   \   0000B7   FC           MOV     R4,A
+   \   0000B8   EB           MOV     A,R3
+   \   0000B9   FD           MOV     R5,A
+   \   0000BA   85..82       MOV     DPL,?XSP + 0
+   \   0000BD   85..83       MOV     DPH,?XSP + 1
+   \   0000C0   AA82         MOV     R2,DPL
+   \   0000C2   AB83         MOV     R3,DPH
+   \   0000C4   7900         MOV     R1,#0x0
+   \   0000C6   12....       LCALL   ??HalUARTWrite?relay
+    487            HalUARTWrite(HAL_UART_PORT_0, "C\n", strlen("C\n"));
+   \   0000C9                ; Setup parameters for call to function HalUARTWrite
+   \   0000C9   7C02         MOV     R4,#0x2
+   \   0000CB   7D00         MOV     R5,#0x0
+   \   0000CD   7A..         MOV     R2,#`?<Constant "C\\n">` & 0xff
+   \   0000CF   7B..         MOV     R3,#(`?<Constant "C\\n">` >> 8) & 0xff
+   \   0000D1   7900         MOV     R1,#0x0
+   \   0000D3   12....       LCALL   ??HalUARTWrite?relay
+    488          #endif
+    489            
+    490            do {
+    491                // put the sequence number in the message
+    492                tmp = HI_UINT8( TransmitApp_TransID );
+   \                     ??TransmitApp_SendTheMessage_0:
+   \   0000D6   90....       MOV     DPTR,#TransmitApp_TransID
+   \   0000D9   E0           MOVX    A,@DPTR
+   \   0000DA   C4           SWAP    A
+   \   0000DB   540F         ANL     A,#0xf
+   \   0000DD   FE           MOV     R6,A
+    493                tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+   \   0000DE   EE           MOV     A,R6
+   \   0000DF   C3           CLR     C
+   \   0000E0   940A         SUBB    A,#0xa
+   \   0000E2   5006         JNC     ??TransmitApp_SendTheMessage_1
+   \   0000E4   7830         MOV     R0,#0x30
+   \   0000E6   7900         MOV     R1,#0x0
+   \   0000E8   8004         SJMP    ??TransmitApp_SendTheMessage_2
+   \                     ??TransmitApp_SendTheMessage_1:
+   \   0000EA   7837         MOV     R0,#0x37
+   \   0000EC   7900         MOV     R1,#0x0
+   \                     ??TransmitApp_SendTheMessage_2:
+   \   0000EE   E8           MOV     A,R0
+   \   0000EF   2E           ADD     A,R6
+   \   0000F0   FE           MOV     R6,A
+    494                TransmitApp_Msg[2] = tmp;
+   \   0000F1   90....       MOV     DPTR,#TransmitApp_Msg + 2
+   \   0000F4   F0           MOVX    @DPTR,A
+    495                tmp = LO_UINT8( TransmitApp_TransID );
+   \   0000F5   90....       MOV     DPTR,#TransmitApp_TransID
+   \   0000F8   E0           MOVX    A,@DPTR
+   \   0000F9   540F         ANL     A,#0xf
+   \   0000FB   FE           MOV     R6,A
+    496                tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+   \   0000FC   EE           MOV     A,R6
+   \   0000FD   C3           CLR     C
+   \   0000FE   940A         SUBB    A,#0xa
+   \   000100   5006         JNC     ??TransmitApp_SendTheMessage_3
+   \   000102   7830         MOV     R0,#0x30
+   \   000104   7900         MOV     R1,#0x0
+   \   000106   8004         SJMP    ??TransmitApp_SendTheMessage_4
+   \                     ??TransmitApp_SendTheMessage_3:
+   \   000108   7837         MOV     R0,#0x37
+   \   00010A   7900         MOV     R1,#0x0
+   \                     ??TransmitApp_SendTheMessage_4:
+   \   00010C   E8           MOV     A,R0
+   \   00010D   2E           ADD     A,R6
+   \   00010E   FE           MOV     R6,A
+    497                TransmitApp_Msg[3] = tmp;
+   \   00010F   90....       MOV     DPTR,#TransmitApp_Msg + 3
+   \   000112   F0           MOVX    @DPTR,A
+    498                TransmitApp_Msg[4] = dataNewBuf[0]; // 湿度
+   \   000113   90....       MOV     DPTR,#??dataNewBuf
+   \   000116   E0           MOVX    A,@DPTR
+   \   000117   90....       MOV     DPTR,#TransmitApp_Msg + 4
+   \   00011A   F0           MOVX    @DPTR,A
+    499                TransmitApp_Msg[5] = dataNewBuf[1]; // 温度
+   \   00011B   90....       MOV     DPTR,#??dataNewBuf + 1
+   \   00011E   E0           MOVX    A,@DPTR
+   \   00011F   90....       MOV     DPTR,#TransmitApp_Msg + 5
+   \   000122   F0           MOVX    @DPTR,A
+    500                
+    501                tmp = AF_DataRequest( &TransmitApp_DstAddr, 
+    502                                      &TransmitApp_epDesc,
+    503                                       TRANSMITAPP_CLUSTERID_HUMITMSG,
+    504                                       TRANSMITAPP_DHT11_DATA_LEN, 
+    505                                       TransmitApp_Msg,
+    506                                      &TransmitApp_TransID,
+    507                                       TRANSMITAPP_TX_OPTIONS,
+    508                                       AF_DEFAULT_RADIUS );
+   \   000123                ; Setup parameters for call to function AF_DataRequest
+   \   000123   75..1E       MOV     ?V0 + 0,#0x1e
+   \   000126   78..         MOV     R0,#?V0 + 0
+   \   000128   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   00012B   75....       MOV     ?V0 + 0,#TransmitApp_TransID & 0xff
+   \   00012E   75....       MOV     ?V0 + 1,#(TransmitApp_TransID >> 8) & 0xff
+   \   000131   78..         MOV     R0,#?V0 + 0
+   \   000133   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000136   75....       MOV     ?V0 + 0,#TransmitApp_Msg & 0xff
+   \   000139   75....       MOV     ?V0 + 1,#(TransmitApp_Msg >> 8) & 0xff
+   \   00013C   78..         MOV     R0,#?V0 + 0
+   \   00013E   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000141   75..08       MOV     ?V0 + 0,#0x8
+   \   000144   75..00       MOV     ?V0 + 1,#0x0
+   \   000147   78..         MOV     R0,#?V0 + 0
+   \   000149   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00014C   75..01       MOV     ?V0 + 0,#0x1
+   \   00014F   75..00       MOV     ?V0 + 1,#0x0
+   \   000152   78..         MOV     R0,#?V0 + 0
+   \   000154   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000157   7920         MOV     R1,#0x20
+   \   000159   7C..         MOV     R4,#TransmitApp_epDesc & 0xff
+   \   00015B   7D..         MOV     R5,#(TransmitApp_epDesc >> 8) & 0xff
+   \   00015D   7A..         MOV     R2,#TransmitApp_DstAddr & 0xff
+   \   00015F   7B..         MOV     R3,#(TransmitApp_DstAddr >> 8) & 0xff
+   \   000161   12....       LCALL   ??AF_DataRequest?relay
+   \   000164   7409         MOV     A,#0x9
+   \   000166   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000169   E9           MOV     A,R1
+   \   00016A   FE           MOV     R6,A
+    509            
+    510            } while (afStatus_SUCCESS == tmp);
+   \   00016B   7003         JNZ     $+5
+   \   00016D   02....       LJMP    ??TransmitApp_SendTheMessage_0 & 0xFFFF
+    511          }
+   \   000170   740A         MOV     A,#0xa
+   \   000172   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000175   7F02         MOV     R7,#0x2
+   \   000177   02....       LJMP    ?BANKED_LEAVE_XDATA
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \                     ??dataNewBuf:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+    512          
+    513          /*******************************************************************************
+    514           * @fn      TransmitApp_SetSendEvt
+    515           *
+    516           * @brief   Set the event flag
+    517           *
+    518           * @param   none
+    519           *
+    520           * @return  none
+    521           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    522          void TransmitApp_SetSendEvt( void )
+   \                     TransmitApp_SetSendEvt:
+    523          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    524          }
+   \   000000   02....       LJMP    ?BRET
+    525          
+    526          /*******************************************************************************
+    527           * @fn      TransmitApp_DisplayResults
+    528           *
+    529           * @brief   Display the results and clear the accumulators
+    530           *
+    531           * @param   none
+    532           *
+    533           * @return  none
+    534           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    535          void TransmitApp_DisplayResults( void )
+   \                     TransmitApp_DisplayResults:
+    536          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    537          }
+   \   000000   02....       LJMP    ?BRET
+    538          
+    539          /*******************************************************************************
+    540           * @fn      TransmitApp_CallBack
+    541           *
+    542           * @brief   Send data OTA.
+    543           *
+    544           * @param   port - UART port.
+    545           * @param   event - the UART port event flag.
+    546           *
+    547           * @return  none
+    548           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    549          static void TransmitApp_CallBack(uint8 port, uint8 event)
+   \                     TransmitApp_CallBack:
+    550          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    551          }
+   \   000000   02....       LJMP    ?BRET
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??TransmitApp_Init?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    TransmitApp_Init
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??TransmitApp_ProcessEvent?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    TransmitApp_ProcessEvent
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??TransmitApp_ProcessZDOMsgs?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    TransmitApp_ProcessZDOMsgs
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??TransmitApp_HandleKeys?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    TransmitApp_HandleKeys
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??TransmitApp_MessageMSGCB?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    TransmitApp_MessageMSGCB
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??TransmitApp_SendTheMessage?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    TransmitApp_SendTheMessage
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??TransmitApp_SetSendEvt?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    TransmitApp_SetSendEvt
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??TransmitApp_DisplayResults?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    TransmitApp_DisplayResults
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??TransmitApp_CallBack?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    TransmitApp_CallBack
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant "Match Success!\\n">`:
+   \   000000   4D617463     DB "Match Success!\012"
+   \            68205375
+   \            63636573
+   \            73210A00
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant "%\\n">`:
+   \   000000   250A00       DB "%\012"
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant "C\\n">`:
+   \   000000   430A00       DB "C\012"
+
+   Maximum stack usage in bytes:
+
+     Function                       ISTACK PSTACK XSTACK
+     --------                       ------ ------ ------
+     TransmitApp_CallBack               0      0      0
+     TransmitApp_DisplayResults         0      0      0
+     TransmitApp_HandleKeys             0      0     27
+     TransmitApp_Init                   0      0     38
+       -> HalUARTOpen                   0      0     76
+       -> afRegister                    0      0     76
+       -> RegisterForKeys               0      0     76
+       -> ZDO_RegisterForZDOMsg         0      0     76
+       -> ZDO_RegisterForZDOMsg         0      0     76
+       -> osal_start_reload_timer       0      0     76
+     TransmitApp_MessageMSGCB           2      0     27
+     TransmitApp_ProcessEvent           0      0     35
+       -> osal_msg_receive              0      0     54
+       -> TransmitApp_ProcessZDOMsgs
+                                        0      0     54
+       -> TransmitApp_HandleKeys        0      0     54
+       -> TransmitApp_MessageMSGCB      0      0     54
+       -> osal_msg_deallocate           0      0     54
+       -> osal_msg_receive              0      0     54
+       -> TransmitApp_SendTheMessage
+                                        0      0     54
+       -> ZDP_MatchDescReq              0      0     70
+       -> TransmitApp_SetSendEvt        0      0     54
+     TransmitApp_ProcessZDOMsgs         0      0     39
+       -> ZDO_ParseEPListRsp            0      0     24
+       -> osal_stop_timerEx             0      0     24
+       -> HalUARTWrite                  0      0     24
+       -> osal_start_reload_timer       0      0     24
+       -> osal_mem_free                 0      0     24
+     TransmitApp_SendTheMessage         0      0     56
+       -> HalDht11_Convert              0      0     40
+       -> _ltoa                         0      0     44
+       -> strlen                        0      0     40
+       -> HalUARTWrite                  0      0     40
+       -> HalUARTWrite                  0      0     40
+       -> _ltoa                         0      0     44
+       -> strlen                        0      0     40
+       -> HalUARTWrite                  0      0     40
+       -> HalUARTWrite                  0      0     40
+       -> AF_DataRequest                0      0     58
+     TransmitApp_SetSendEvt             0      0     27
+
+
+   Segment part sizes:
+
+     Function/Label                     Bytes
+     --------------                     -----
+     TransmitApp_Msg                       8
+     TransmitApp_InClusterList             2
+     TransmitApp_OutClusterList            2
+     TransmitApp_SimpleDesc               12
+     TransmitApp_epDesc                    6
+     TransmitApp_TaskID                    1
+     TransmitApp_NwkState                  1
+     TransmitApp_TransID                   1
+     TransmitApp_DstAddr                  12
+     TransmitApp_Init                    295
+     TransmitApp_ProcessEvent            372
+     TransmitApp_ProcessZDOMsgs          175
+     TransmitApp_HandleKeys                3
+     TransmitApp_MessageMSGCB             28
+     TransmitApp_SendTheMessage          378
+     dataNewBuf                            2
+     TransmitApp_SetSendEvt                3
+     TransmitApp_DisplayResults            3
+     TransmitApp_CallBack                  3
+     ??TransmitApp_Init?relay              6
+     ??TransmitApp_ProcessEvent?relay      6
+     ??TransmitApp_ProcessZDOMsgs?relay    6
+     ??TransmitApp_HandleKeys?relay        6
+     ??TransmitApp_MessageMSGCB?relay      6
+     ??TransmitApp_SendTheMessage?relay    6
+     ??TransmitApp_SetSendEvt?relay        6
+     ??TransmitApp_DisplayResults?relay    6
+     ??TransmitApp_CallBack?relay          6
+     ?<Constant "Match Success!\n">       16
+     ?<Constant "%\n">                     3
+     ?<Constant "C\n">                     3
+
+ 
+ 1 260 bytes in segment BANKED_CODE
+    54 bytes in segment BANK_RELAYS
+    38 bytes in segment XDATA_ROM_C
+    31 bytes in segment XDATA_Z
+ 
+ 1 314 bytes of CODE  memory
+    38 bytes of CONST memory
+    31 bytes of XDATA memory
+
+Errors: none
+Warnings: 2

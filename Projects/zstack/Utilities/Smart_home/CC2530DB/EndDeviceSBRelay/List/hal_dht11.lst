@@ -1,0 +1,781 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         22/Mar/2021  21:32:59 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data_rom                                           #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03       #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Components\ #
+#                          hal\target\CC2530SB\hal_dht11.c                    #
+#    Command line       =  -f "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03   #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\..\..\..\Tools\CC2530D #
+#                          B\f8wEndev.cfg" (-DCPU32MHZ -DROOT=__near_func     #
+#                          -DMAC_CFG_TX_DATA_MAX=3 -DMAC_CFG_TX_MAX=6         #
+#                          -DMAC_CFG_RX_MAX=3) -f "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷Í #
+#                          øÂç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2. #
+#                          5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\..\ #
+#                          ..\..\Tools\CC2530DB\f8wConfig.cfg" (-DZIGBEEPRO   #
+#                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR       #
+#                          -DDEFAULT_CHANLIST=0x02000000                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0x1001                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
+#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
+#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DMAC_MAX_FRAME_SIZE=116                           #
+#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
+#                          __code" -DGENERIC=__generic                        #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷Í #
+#                          øÂç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2. #
+#                          5.1a_EB\Components\hal\target\CC2530SB\hal_dht11.c #
+#                          " -D HAL_UART=TRUE -D HAL_UART_TEST -D             #
+#                          xPOWER_SAVING -lC "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×Û #
+#                          ºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_ #
+#                          EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\EndDevic #
+#                          eSBRelay\List\" -lA "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç #
+#                          ×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1 #
+#                          a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\EndDev #
+#                          iceSBRelay\List\" --diag_suppress Pe001,Pa010 -o   #
+#                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03      #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\EndDeviceSBRelay\Obj\" #
+#                           -e --no_code_motion --debug --core=plain          #
+#                          --dptr=16,1 --data_model=large                     #
+#                          --code_model=banked --calling_convention=xdata_ree #
+#                          ntrant --place_constants=data_rom                  #
+#                          --nr_virtual_regs 16 -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ #
+#                          ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2 #
+#                          .5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\"  #
+#                          -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03   #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\..\Source\" -I         #
+#                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03      #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\..\..\..\ZMain\TI2530D #
+#                          B\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\ #
+#                          03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects #
+#                          \zstack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Comp #
+#                          onents\hal\include\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ #
+#                          ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2 #
+#                          .5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\.. #
+#                          \..\..\..\..\Components\hal\target\CC2530SB\" -I   #
+#                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03      #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compone #
+#                          nts\mac\include\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂ #
+#                          ç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5. #
+#                          1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\..\.. #
+#                          \..\..\..\Components\mac\high_level\" -I           #
+#                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03      #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compone #
+#                          nts\mac\low_level\srf04\" -I                       #
+#                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03      #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compone #
+#                          nts\mac\low_level\srf04\single_chip\" -I           #
+#                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03      #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compone #
+#                          nts\mt\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ù #
+#                          Æ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Pro #
+#                          jects\zstack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\.. #
+#                          \Components\osal\include\" -I                      #
+#                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03      #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compone #
+#                          nts\services\saddr\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ #
+#                          ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2 #
+#                          .5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\.. #
+#                          \..\..\..\..\Components\services\sdata\" -I        #
+#                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03      #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compone #
+#                          nts\stack\af\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×Û #
+#                          ºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_ #
+#                          EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\..\..\.. #
+#                          \..\..\Components\stack\nwk\" -I                   #
+#                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03      #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compone #
+#                          nts\stack\sapi\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç #
+#                          ×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1 #
+#                          a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\..\..\ #
+#                          ..\..\..\Components\stack\sec\" -I                 #
+#                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03      #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compone #
+#                          nts\stack\sys\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç× #
+#                          ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a #
+#                          _EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\..\..\. #
+#                          .\..\..\Components\stack\zdo\" -I                  #
+#                          "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03      #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\..\Compone #
+#                          nts\zmac\" -I "D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ #
+#                          ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\P #
+#                          rojects\zstack\MY_BOARD\Exp4\CC2530DB\..\..\..\..\ #
+#                          ..\Components\zmac\f8w\" -Ohz                      #
+#    List file          =  D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03       #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\EndDeviceSBRelay\List\ #
+#                          hal_dht11.lst                                      #
+#    Object file        =  D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03       #
+#                          ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Projects\zs #
+#                          tack\MY_BOARD\Exp4\CC2530DB\EndDeviceSBRelay\Obj\h #
+#                          al_dht11.r51                                       #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\±ÏÉè\ÊµÑéÏä_ÎÞÏß´«¸ÐÆ÷ÍøÂç×ÛºÏÊµ¼ùÆ½Ì¨\03 ÊµÑé³ÌÐòÓëÊÖ²á\ZStack-CC2530-2.5.1a_EB\Components\hal\target\CC2530SB\hal_dht11.c
+      1          /*****************************************************************************
+      2          *
+      3          * ÎÄ ¼þ Ãû£ºhal_dht11.c
+      4          
+      5          * ×÷    Õß: ÄÏ¾©°²å·²©ÑÐµç×Ó¿Æ¼¼ÓÐÏÞ¹«Ë¾
+      6          
+      7          * ´´½¨Ê±¼ä: 2019.04.01
+      8          
+      9          * ÐÞ¸ÄÊ±¼ä: 2019.04.21
+     10          
+     11          * IAR °æ±¾: IAR for 8051 V8.10.1
+     12          
+     13          * ²âÊÔÆ½Ì¨: Sensor MotherBoard V2.3
+     14          
+     15          * Ëµ    Ã÷: 1. ÊµÏÖDHT11ÎÂÊª¶È´«¸ÐÆ÷µÄÊý¾Ý¶ÁÈ¡, Çý¶¯½«À´°áÇ¨µ½ZstackÐ­ÒéÕ».
+     16          *           2. Èç¹û²âÊÔ³öÏÖÎÊÌâ(ÈçÈ«0), Çëµ÷Õûº¯ÊýDHT11_ReadData(void)µÄÅÐ1Çø¼ä.
+     17          *           3. ¸ù¾ÝÊÖ²á, Ã¿´Î¶Á³öµÄÎÂÊª¶ÈÊýÖµÊÇÉÏÒ»´Î²âÁ¿µÄ½á¹û, Óû»ñÈ¡ÊµÊ±Êý¾Ý,
+     18          *              ÐèÁ¬Ðø¶ÁÈ¡Á½´Î, µ«²»½¨ÒéÁ¬Ðø¶à´Î¶ÁÈ¡´«¸ÐÆ÷, Ã¿´Î¶ÁÈ¡´«¸ÐÆ÷¼ä¸ô
+     19          *              ´óÓÚ5Ãë¼´¿É»ñµÃ×¼È·µÄÊý¾Ý.
+     20          *           4. Êª¶È·¶Î§: 20%~90%; ÎÂ¶È·¶Î§: 0~50C.
+     21          *           5. ´«¸ÐÆ÷²É¼¯µ½µÄÊý¾ÝÖ»ÓÐÕûÊý²¿·Ö, ÔÝÊ±Ã»ÓÐÐ¡Êý²¿·Ö(Áô×ÅÀ©Õ¹).
+     22          *           6. Êý¾ÝÒ»¹²5¸ö×Ö½Ú: µÚÒ»¸öÎªÊª¶ÈÕûÊý, µÚ¶þ¸öÎªÊª¶ÈÐ¡Êý, µÚÈý¸öÎªÎÂ¶È
+     23          *              ÕûÊý, µÚËÄ¸öÎªÎÂ¶ÈÐ¡Êý,µÚÎå¸öÐ£Ñé×Ö½Ú(Ð£ÑéÖµÎªÇ°ËÄ¸ö×Ö½ÚµÄºÍ).
+     24          *                               
+     25          *****************************************************************************/
+     26          
+     27          // Í·ÎÄ¼þ
+     28          #include <ioCC2530.h>
+
+   \                                 In  segment SFR_AN, at 0x90
+   \   union <unnamed> volatile __sfr _A_P1
+   \                     _A_P1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa8
+   \   union <unnamed> volatile __sfr _A_IEN0
+   \                     _A_IEN0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xfe
+   \   unsigned char volatile __sfr P1DIR
+   \                     P1DIR:
+   \   000000                DS 1
+     29          #include "hal_mcu.h"
+     30          
+     31          // Òý½Åºê¶¨Òå, ÊäÈë/Êä³öÊÇÕë¶ÔMCU¶øÑÔ
+     32          #define SET_DHT11_PIN_OUTPUT    (P1DIR |= 0x02)
+     33          #define SET_DHT11_PIN_HIGH      (P1_1   = 1)
+     34          #define SET_DHT11_PIN_LOW       (P1_1   = 0)
+     35          #define SET_DHT11_PIN_INPUT     (P1DIR &= ~0x02)
+     36          #define GET_DHT11_PIN_DATA      (P1_1) 
+     37          
+     38          // ²ÎÊýºê¶¨Òå
+     39          #define TIMEOUT_LIMIT 100       // Âö³åµÈ´ýÊ±ÏÞ1000ms
+     40          
+     41          /*****************************************************************************
+     42           * @fn          DHT11_Delay100us
+     43           *
+     44           * @brief       Âã»úÌõ¼þÏÂ¡¢Ê±ÖÓÆµÂÊÎª32MHzÊ±ÑÓÊ±100Î¢Ãë×óÓÒ(²»¾«È·).
+     45           *
+     46           * @param       none
+     47           *
+     48           * @return      none
+     49           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     50          void DHT11_Delay100us(void)
+   \                     DHT11_Delay100us:
+     51          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+     52              unsigned char cnt = 85;
+   \   000000   7855         MOV     R0,#0x55
+   \   000002   8003         SJMP    ??DHT11_Delay100us_0
+     53              while (cnt--)
+     54              {
+     55                  asm("NOP");  
+   \                     ??DHT11_Delay100us_1:
+   \   000004   00           NOP
+     56                  asm("NOP");
+   \   000005   00           NOP
+     57                  asm("NOP");
+   \   000006   00           NOP
+     58              }
+   \                     ??DHT11_Delay100us_0:
+   \   000007   E8           MOV     A,R0
+   \   000008   F9           MOV     R1,A
+   \   000009   74FF         MOV     A,#-0x1
+   \   00000B   29           ADD     A,R1
+   \   00000C   18           DEC     R0
+   \   00000D   04           INC     A
+   \   00000E   70F4         JNZ     ??DHT11_Delay100us_1
+     59          }
+   \   000010   02....       LJMP    ?BRET
+     60          
+     61          /*****************************************************************************
+     62           * @fn          DHT11_Delay10us
+     63           *
+     64           * @brief       Âã»úÌõ¼þÏÂ¡¢Ê±ÖÓÆµÂÊÎª32MHzÊ±ÑÓÊ±10Î¢Ãë×óÓÒ(²»¾«È·).
+     65           *
+     66           * @param       none
+     67           *
+     68           * @return      none
+     69           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     70          void DHT11_Delay10us(void)
+   \                     DHT11_Delay10us:
+     71          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+     72              unsigned char cnt = 9;
+   \   000000   7809         MOV     R0,#0x9
+   \   000002   8003         SJMP    ??DHT11_Delay10us_0
+     73              while (cnt--)
+     74              {
+     75                  asm("NOP");  
+   \                     ??DHT11_Delay10us_1:
+   \   000004   00           NOP
+     76                  asm("NOP");
+   \   000005   00           NOP
+     77                  asm("NOP");
+   \   000006   00           NOP
+     78              }
+   \                     ??DHT11_Delay10us_0:
+   \   000007   E8           MOV     A,R0
+   \   000008   F9           MOV     R1,A
+   \   000009   74FF         MOV     A,#-0x1
+   \   00000B   29           ADD     A,R1
+   \   00000C   18           DEC     R0
+   \   00000D   04           INC     A
+   \   00000E   70F4         JNZ     ??DHT11_Delay10us_1
+     79          }
+   \   000010   02....       LJMP    ?BRET
+     80          
+     81          /*****************************************************************************
+     82           * @fn          DHT11_Start
+     83           *
+     84           * @brief       Æô¶¯DHT11
+     85           *
+     86           * @param       none
+     87           *
+     88           * @return      none
+     89           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     90          void DHT11_Start(void)
+   \                     DHT11_Start:
+     91          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+     92              unsigned char timeCnt;
+     93              
+     94              SET_DHT11_PIN_OUTPUT;   // ÉèÖÃÒý½ÅÎªÊä³ö
+   \   000005   43FE02       ORL     0xfe,#0x2
+     95              SET_DHT11_PIN_LOW;      // Êä³öµÍµçÆ½, Æô¶¯×ÜÏß
+   \   000008   C291         CLR     0x90.1
+     96              // µÍµçÆ½±£³ÖÊ±¼ä²»ÄÜÐ¡ÓÚ18ms, ·ñÔòDHT11ÎÞ·¨Æô¶¯
+     97              for(timeCnt=0; timeCnt<200; timeCnt++)
+   \   00000A   7EC8         MOV     R6,#-0x38
+     98              {
+     99                  DHT11_Delay100us();
+   \                     ??DHT11_Start_0:
+   \   00000C                ; Setup parameters for call to function DHT11_Delay100us
+   \   00000C   12....       LCALL   ??DHT11_Delay100us?relay
+    100              }
+   \   00000F   1E           DEC     R6
+   \   000010   EE           MOV     A,R6
+   \   000011   70F9         JNZ     ??DHT11_Start_0
+    101              
+    102              SET_DHT11_PIN_HIGH;     // Êä³ö¸ßµçÆ½
+   \   000013   D291         SETB    0x90.1
+    103              SET_DHT11_PIN_INPUT;    // ÉèÖÃÎªÊäÈëÒý½Å(ÒòÓÐÉÏÀ­µç×è, ËùÒÔ±£³ÖÎª¸ßµçÆ½)    
+   \   000015   53FEFD       ANL     0xfe,#0xfd
+    104          
+    105              // ¸ßµçÆ½³ÖÐø20~40us
+    106              for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
+   \   000018   7E00         MOV     R6,#0x0
+    107              {
+    108                  if (!GET_DHT11_PIN_DATA)
+   \                     ??DHT11_Start_1:
+   \   00001A   A291         MOV     C,0x90.1
+   \   00001C   5005         JNC     ??DHT11_Start_2
+    109                  {
+    110                      break;  // µÍµçÆ½ÍË³öÑ­»·
+    111                  }
+    112                  DHT11_Delay10us();
+   \   00001E                ; Setup parameters for call to function DHT11_Delay10us
+   \   00001E   12....       LCALL   ?Subroutine0 & 0xFFFF
+    113              }
+   \                     ??CrossCallReturnLabel_0:
+   \   000021   40F7         JC      ??DHT11_Start_1
+    114              // ³¬Ê±·µ»Ø
+    115              if (timeCnt == TIMEOUT_LIMIT)
+   \                     ??DHT11_Start_2:
+   \   000023   7464         MOV     A,#0x64
+   \   000025   6E           XRL     A,R6
+   \   000026   601D         JZ      ??DHT11_Start_3
+    116              {
+    117                  return;
+    118              }
+    119              // DHT11Êä³ö80Î¢ÃëµÄµÍµçÆ½×÷ÎªÓ¦´ðÐÅºÅ
+    120              for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
+   \   000028   7E00         MOV     R6,#0x0
+    121              {
+    122                  if (GET_DHT11_PIN_DATA)
+   \                     ??DHT11_Start_4:
+   \   00002A   A291         MOV     C,0x90.1
+   \   00002C   4005         JC      ??DHT11_Start_5
+    123                  {
+    124                      break;  // ¸ßµçÆ½ÍË³öÑ­»·
+    125                  }
+    126                  DHT11_Delay10us();
+   \   00002E                ; Setup parameters for call to function DHT11_Delay10us
+   \   00002E   12....       LCALL   ?Subroutine0 & 0xFFFF
+    127              }
+   \                     ??CrossCallReturnLabel_1:
+   \   000031   40F7         JC      ??DHT11_Start_4
+    128              // ³¬Ê±·µ»Ø
+    129              if (timeCnt == TIMEOUT_LIMIT)
+   \                     ??DHT11_Start_5:
+   \   000033   7464         MOV     A,#0x64
+   \   000035   6E           XRL     A,R6
+   \   000036   600D         JZ      ??DHT11_Start_3
+    130              {
+    131                  return;
+    132              }
+    133              // DHT11½ô½Ó×ÅÊä³ö80Î¢ÃëµÄ¸ßµçÆ½Í¨ÖªÍâÉè×¼±¸½ÓÊÕÊý¾Ý
+    134              for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
+   \   000038   7E64         MOV     R6,#0x64
+    135              {
+    136                  if (!GET_DHT11_PIN_DATA)    // µÍµçÆ½ÍË³öÑ­»·
+   \                     ??DHT11_Start_6:
+   \   00003A   A291         MOV     C,0x90.1
+   \   00003C   5007         JNC     ??DHT11_Start_3
+    137                  {
+    138                      break;
+    139                  }
+    140                  DHT11_Delay10us();
+   \   00003E                ; Setup parameters for call to function DHT11_Delay10us
+   \   00003E   12....       LCALL   ??DHT11_Delay10us?relay
+    141              }
+   \   000041   1E           DEC     R6
+   \   000042   EE           MOV     A,R6
+   \   000043   70F5         JNZ     ??DHT11_Start_6
+   \                     ??DHT11_Start_3:
+   \   000045   7F01         MOV     R7,#0x1
+   \   000047   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   00004A                REQUIRE P1DIR
+   \   00004A                REQUIRE _A_P1
+    142              // ³¬Ê±·µ»Ø
+    143              if (timeCnt == TIMEOUT_LIMIT)
+    144              {
+    145                  return;
+    146              }
+    147          }
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine0:
+   \   000000   12....       LCALL   ??DHT11_Delay10us?relay
+   \   000003   0E           INC     R6
+   \   000004   EE           MOV     A,R6
+   \   000005   C3           CLR     C
+   \   000006   9464         SUBB    A,#0x64
+   \   000008   22           RET
+    148          
+    149          /*****************************************************************************
+    150           * @fn          DHT11_ReadData
+    151           *
+    152           * @brief       ´ÓDHT11¶ÁÈ¡Ò»¸ö×Ö½ÚÊý¾Ý
+    153           *
+    154           * @param       none
+    155           *
+    156           * @return      ¶ÁÈ¡µÄÊý¾Ý, ·µ»Ø0Ôò±íÊ¾³¬Ê±±¨´í.
+    157           *              Î»Êý¾Ý"0"µÄ¸ñÊ½Îª50Î¢ÃëµÄµÍµçÆ½ºÍ26-28Î¢ÃëµÄ¸ßµçÆ½£¬
+    158           *              Î»Êý¾Ý"1"µÄ¸ñÊ½Îª50Î¢ÃëµÄµÍµçÆ½ºÍ70Î¢ÃëµÄ¸ßµçÆ½.	
+    159           * 
+    160           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    161          unsigned char DHT11_ReadData(void)
+   \                     DHT11_ReadData:
+    162          {
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 0
+    163              unsigned char bitCnt, timeCnt;
+    164              unsigned char byteVal = 0;
+   \   000005   7F00         MOV     R7,#0x0
+    165              halIntState_t intState;
+    166              
+    167              for (bitCnt = 0; bitCnt < 8; bitCnt++)
+   \   000007   75..08       MOV     ?V0 + 0,#0x8
+    168              {
+    169                  // DHT11Êä³ö50usµÍµçÆ½, ÌáÐÑÖ÷»úÊý¾ÝÎ»ÒÑ¿ªÊ¼´«ËÍ
+    170                  for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
+   \                     ??DHT11_ReadData_0:
+   \   00000A   7E00         MOV     R6,#0x0
+    171                  {
+    172                      if (GET_DHT11_PIN_DATA)    // ¸ßµçÆ½ÍË³öÑ­»·
+   \                     ??DHT11_ReadData_1:
+   \   00000C   A291         MOV     C,0x90.1
+   \   00000E   4005         JC      ??DHT11_ReadData_2
+    173                      {
+    174                          break;
+    175                      }
+    176                      DHT11_Delay10us();
+   \   000010                ; Setup parameters for call to function DHT11_Delay10us
+   \   000010   12....       LCALL   ?Subroutine0 & 0xFFFF
+    177                  }        
+   \                     ??CrossCallReturnLabel_2:
+   \   000013   40F7         JC      ??DHT11_ReadData_1
+    178                  if (timeCnt == TIMEOUT_LIMIT)   // ³¬Ê±±¨´í, ·µ»Ø0
+   \                     ??DHT11_ReadData_2:
+   \   000015   7464         MOV     A,#0x64
+   \   000017   6E           XRL     A,R6
+   \   000018   7004         JNZ     ??DHT11_ReadData_3
+    179                  {
+    180                      return 0;
+   \                     ??DHT11_ReadData_4:
+   \   00001A   7900         MOV     R1,#0x0
+   \   00001C   8034         SJMP    ??DHT11_ReadData_5
+    181                  }
+    182                  
+    183                  HAL_ENTER_CRITICAL_SECTION(intState);
+   \                     ??DHT11_ReadData_3:
+   \   00001E   A2AF         MOV     C,0xa8.7
+   \   000020   E4           CLR     A
+   \   000021   33           RLC     A
+   \   000022   F5..         MOV     ?V0 + 1,A
+   \   000024   C2AF         CLR     0xa8.7
+    184                  // DHT11Êä³ö¸ßµçÆ½»òµÍµçÆ½                   
+    185                  for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
+   \   000026   7E00         MOV     R6,#0x0
+    186                  {
+    187                      if (!GET_DHT11_PIN_DATA)    // µÍµçÆ½ÍË³öÑ­»·
+   \                     ??DHT11_ReadData_6:
+   \   000028   A291         MOV     C,0x90.1
+   \   00002A   5005         JNC     ??DHT11_ReadData_7
+    188                      {
+    189                          break;
+    190                      }
+    191                      DHT11_Delay10us();
+   \   00002C                ; Setup parameters for call to function DHT11_Delay10us
+   \   00002C   12....       LCALL   ?Subroutine0 & 0xFFFF
+    192                  }
+   \                     ??CrossCallReturnLabel_3:
+   \   00002F   40F7         JC      ??DHT11_ReadData_6
+    193                  if (timeCnt == TIMEOUT_LIMIT)   // ³¬Ê±±¨´í, ·µ»Ø0
+   \                     ??DHT11_ReadData_7:
+   \   000031   7464         MOV     A,#0x64
+   \   000033   6E           XRL     A,R6
+   \   000034   60E4         JZ      ??DHT11_ReadData_4
+    194                  {
+    195                      return 0;
+    196                  }
+    197                  HAL_EXIT_CRITICAL_SECTION(intState);
+   \   000036   E5..         MOV     A,?V0 + 1
+   \   000038   A2E0         MOV     C,0xE0 /* A   */.0
+   \   00003A   92AF         MOV     0xa8.7,C
+    198                  
+    199                  // ´æ´¢Êý¾ÝÎ», DHT11ÊÇÏÈ·¢¸ßÎ»
+    200                  byteVal <<= 1;
+   \   00003C   EF           MOV     A,R7
+   \   00003D   C3           CLR     C
+   \   00003E   33           RLC     A
+   \   00003F   FF           MOV     R7,A
+    201                  // ¸ù¾Ý¸ßµçÆ½µÄ¿í¶ÈÅÐ¶ÏÊÇ0»¹ÊÇ1
+    202                  if (timeCnt > 4) 
+   \   000040   EE           MOV     A,R6
+   \   000041   C3           CLR     C
+   \   000042   9405         SUBB    A,#0x5
+   \   000044   4004         JC      ??DHT11_ReadData_8
+    203                  {
+    204                      byteVal |=  0x01;
+   \   000046   EF           MOV     A,R7
+   \   000047   D2E0         SETB    0xE0 /* A   */.0
+   \   000049   FF           MOV     R7,A
+    205                  }
+    206                  else 
+    207                  {
+    208                      byteVal |= 0x00;
+    209                  }
+    210              }
+   \                     ??DHT11_ReadData_8:
+   \   00004A   15..         DEC     ?V0 + 0
+   \   00004C   E5..         MOV     A,?V0 + 0
+   \   00004E   70BA         JNZ     ??DHT11_ReadData_0
+    211              return byteVal;
+   \   000050   EF           MOV     A,R7
+   \   000051   F9           MOV     R1,A
+   \                     ??DHT11_ReadData_5:
+   \   000052   7F02         MOV     R7,#0x2
+   \   000054   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000057                REQUIRE _A_P1
+   \   000057                REQUIRE _A_IEN0
+    212          }
+    213          
+    214          /*****************************************************************************
+    215           * @fn          HalDht11_Convert
+    216           *
+    217           * @brief       Æô¶¯DHT11, ²¢Íê³ÉÒ»´Î×ª»».
+    218           *
+    219           * @param       none
+    220           *
+    221           * @return      ×ª»»Öµ´æÔÚconversionValÊý×éÖÐ, Èç¹û³ö´íÔò²»¸üÐÂÊý¾Ý. 
+    222           *              ³ö´íÊ±, ¿É°´ÒÔÏÂ¼¸²½½øÐÐ¼ì²é:
+    223           *              1. ¼ì²éÑÓÊ±º¯ÊýµÄÊÇ·ñ×¼È·;
+    224           *              2. ¼ì²éDHT11ÊÇ·ñÆô¶¯;
+    225           *              3. ¼ì²éÅÐ±ð"0"Óë"1"µÄãÐÖµÊÇ·ñºÏÀí;
+    226           *              4. ¼ì²éÐ£ÑéÂëÊÇ·ñÕýÈ·.
+    227           * 
+    228           */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    229          void HalDht11_Convert(unsigned char conversionVal[4])
+   \                     HalDht11_Convert:
+    230          {
+   \   000000   74F5         MOV     A,#-0xb
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 11
+   \   000005                ; Auto size: 5
+   \   000005   74FB         MOV     A,#-0x5
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   00000A   EA           MOV     A,R2
+   \   00000B   FE           MOV     R6,A
+   \   00000C   EB           MOV     A,R3
+   \   00000D   FF           MOV     R7,A
+    231              unsigned char checkSum;
+    232              unsigned char tempData[5];
+    233              
+    234              DHT11_Start();      // Æô¶¯DHT11
+   \   00000E                ; Setup parameters for call to function DHT11_Start
+   \   00000E   12....       LCALL   ??DHT11_Start?relay
+    235              
+    236              // ¶ÁÈ¡Êý¾Ý
+    237              tempData[0] = DHT11_ReadData();
+   \   000011                ; Setup parameters for call to function DHT11_ReadData
+   \   000011   12....       LCALL   ??DHT11_ReadData?relay
+   \   000014   E9           MOV     A,R1
+   \   000015   85..82       MOV     DPL,?XSP + 0
+   \   000018   85..83       MOV     DPH,?XSP + 1
+   \   00001B   12....       LCALL   ??Subroutine3_0 & 0xFFFF
+    238              tempData[1] = DHT11_ReadData();
+   \                     ??CrossCallReturnLabel_10:
+   \   00001E   F5..         MOV     ?V0 + 0,A
+   \   000020   7401         MOV     A,#0x1
+   \   000022   12....       LCALL   ?XSTACK_DISP0_8
+   \   000025   12....       LCALL   ?Subroutine1 & 0xFFFF
+    239              tempData[2] = DHT11_ReadData();
+   \                     ??CrossCallReturnLabel_7:
+   \   000028   F5..         MOV     ?V0 + 1,A
+   \   00002A   7402         MOV     A,#0x2
+   \   00002C   12....       LCALL   ?XSTACK_DISP0_8
+   \   00002F   12....       LCALL   ?Subroutine1 & 0xFFFF
+    240              tempData[3] = DHT11_ReadData();
+   \                     ??CrossCallReturnLabel_8:
+   \   000032   F5..         MOV     ?V0 + 2,A
+   \   000034   7403         MOV     A,#0x3
+   \   000036   12....       LCALL   ?XSTACK_DISP0_8
+   \   000039   12....       LCALL   ?Subroutine1 & 0xFFFF
+    241              tempData[4] = DHT11_ReadData();
+   \                     ??CrossCallReturnLabel_9:
+   \   00003C   F8           MOV     R0,A
+   \   00003D   7404         MOV     A,#0x4
+   \   00003F   12....       LCALL   ?XSTACK_DISP0_8
+   \   000042   E8           MOV     A,R0
+   \   000043   F0           MOVX    @DPTR,A
+    242              
+    243              // ¼ÆËãÐ£ÑéÖµ
+    244              checkSum = (tempData[0] + tempData[1] + tempData[2] + tempData[3]);
+    245              
+    246              // ÑéÖ¤Ð£ÑéÖµ, ³ö´íÔò²»¸üÐÂÊý¾Ý
+    247              if (tempData[4] == checkSum)
+   \   000044   85..82       MOV     DPL,?XSP + 0
+   \   000047   85..83       MOV     DPH,?XSP + 1
+   \   00004A   E0           MOVX    A,@DPTR
+   \   00004B   25..         ADD     A,?V0 + 0
+   \   00004D   25..         ADD     A,?V0 + 1
+   \   00004F   25..         ADD     A,?V0 + 2
+   \   000051   68           XRL     A,R0
+   \   000052   7024         JNZ     ??HalDht11_Convert_0
+    248              {
+    249                  conversionVal[0] = tempData[0];
+   \   000054   E0           MOVX    A,@DPTR
+   \   000055   8E82         MOV     DPL,R6
+   \   000057   8F83         MOV     DPH,R7
+   \   000059   F0           MOVX    @DPTR,A
+    250                  conversionVal[1] = tempData[1];
+   \   00005A   7401         MOV     A,#0x1
+   \   00005C   12....       LCALL   ?XSTACK_DISP0_8
+   \   00005F   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_4:
+   \   000062   F0           MOVX    @DPTR,A
+    251                  conversionVal[2] = tempData[2];
+   \   000063   7402         MOV     A,#0x2
+   \   000065   12....       LCALL   ?XSTACK_DISP0_8
+   \   000068   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_5:
+   \   00006B   A3           INC     DPTR
+   \   00006C   F0           MOVX    @DPTR,A
+    252                  conversionVal[3] = tempData[3];
+   \   00006D   7403         MOV     A,#0x3
+   \   00006F   12....       LCALL   ?XSTACK_DISP0_8
+   \   000072   12....       LCALL   ?Subroutine2 & 0xFFFF
+    253              }
+   \                     ??CrossCallReturnLabel_6:
+   \   000075   A3           INC     DPTR
+   \   000076   A3           INC     DPTR
+   \   000077   F0           MOVX    @DPTR,A
+    254              
+    255              SET_DHT11_PIN_OUTPUT;   // ÉèÖÃDHT11µÄ¿ØÖÆÒý½ÅÎªÊä³öÒý½Å
+   \                     ??HalDht11_Convert_0:
+   \   000078   43FE02       ORL     0xfe,#0x2
+    256              SET_DHT11_PIN_HIGH;     // ÖÃ¸ßµçÆ½, Ê¹DHT11´¦ÓÚµÍ¹¦ºÄ´ý»úÄ£Ê½
+   \   00007B   D291         SETB    0x90.1
+    257          }
+   \   00007D   7405         MOV     A,#0x5
+   \   00007F   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000082   7F03         MOV     R7,#0x3
+   \   000084   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000087                REQUIRE P1DIR
+   \   000087                REQUIRE _A_P1
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine2:
+   \   000000   E0           MOVX    A,@DPTR
+   \   000001   8E82         MOV     DPL,R6
+   \   000003   8F83         MOV     DPH,R7
+   \   000005   A3           INC     DPTR
+   \   000006   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine1:
+   \   000000   E9           MOV     A,R1
+   \   000001                REQUIRE ??Subroutine3_0
+   \   000001                ; // Fall through to label ??Subroutine3_0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ??Subroutine3_0:
+   \   000000   F0           MOVX    @DPTR,A
+   \   000001                ; Setup parameters for call to function DHT11_ReadData
+   \   000001                ; Setup parameters for call to function DHT11_ReadData
+   \   000001                ; Setup parameters for call to function DHT11_ReadData
+   \   000001                ; Setup parameters for call to function DHT11_ReadData
+   \   000001   12....       LCALL   ??DHT11_ReadData?relay
+   \   000004   E9           MOV     A,R1
+   \   000005   22           RET
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??DHT11_Delay100us?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    DHT11_Delay100us
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??DHT11_Delay10us?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    DHT11_Delay10us
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??DHT11_Start?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    DHT11_Start
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??DHT11_ReadData?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    DHT11_ReadData
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     ??HalDht11_Convert?relay:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    HalDht11_Convert
+
+   Maximum stack usage in bytes:
+
+     Function              ISTACK PSTACK XSTACK
+     --------              ------ ------ ------
+     DHT11_Delay100us          0      0      9
+     DHT11_Delay10us           0      0     10
+     DHT11_ReadData            0      0     26
+       -> DHT11_Delay10us      0      0     20
+       -> DHT11_Delay10us      0      0     20
+     DHT11_Start               0      0     25
+       -> DHT11_Delay100us     0      0     18
+       -> DHT11_Delay10us      0      0     18
+       -> DHT11_Delay10us      0      0     18
+       -> DHT11_Delay10us      0      0     18
+     HalDht11_Convert          1      0     16
+       -> DHT11_Start          0      0     32
+       -> DHT11_ReadData       0      0     32
+       -> DHT11_ReadData       0      0     32
+       -> DHT11_ReadData       0      0     32
+       -> DHT11_ReadData       0      0     32
+       -> DHT11_ReadData       0      0     32
+
+
+   Segment part sizes:
+
+     Function/Label           Bytes
+     --------------           -----
+     _A_P1                       1
+     _A_IEN0                     1
+     P1DIR                       1
+     DHT11_Delay100us           19
+     DHT11_Delay10us            19
+     DHT11_Start                74
+     ?Subroutine0                9
+     DHT11_ReadData             87
+     HalDht11_Convert          135
+     ?Subroutine2                7
+     ?Subroutine1                1
+     ??Subroutine3_0             6
+     ??DHT11_Delay100us?relay    6
+     ??DHT11_Delay10us?relay     6
+     ??DHT11_Start?relay         6
+     ??DHT11_ReadData?relay      6
+     ??HalDht11_Convert?relay    6
+
+ 
+ 357 bytes in segment BANKED_CODE
+  30 bytes in segment BANK_RELAYS
+   3 bytes in segment SFR_AN
+ 
+ 387 bytes of CODE memory
+   0 bytes of DATA memory (+ 3 bytes shared)
+
+Errors: none
+Warnings: none
