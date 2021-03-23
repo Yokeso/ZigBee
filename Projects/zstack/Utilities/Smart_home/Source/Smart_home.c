@@ -43,6 +43,7 @@
   3.23
   + Warn 代码初始化后会产生直接进入key的情况,需debug
          OK键问题无法修复，放弃使用OK键，修改为Cencel组网 禁止组网
+  3.23 正式完成网关节点部分，（显示函数部分除外）
    
   经调试程序无bug，可以接收各个传感器消息。//3.22
   当我没说。。好像出了内存问题//3.22
@@ -228,14 +229,6 @@ byte Coordinator_Msg[MSG_MAX_LEN];
 //static uint8 Smart_home_MsgID;
 static uint8 RelayTransID;  // This is the unique message ID (counter)
 static uint8 MotorTransID;  // This is the unique message ID (counter)
-static afAddrType_t Smart_home_TxAddr;
-static uint8 Smart_home_TxSeq;
-static uint8 Smart_home_TxBuf[SMART_HOME_TX_MAX+1];
-static uint8 Smart_home_TxLen;
-
-static afAddrType_t Smart_home_RxAddr;
-static uint8 Smart_home_RxSeq;
-static uint8 Smart_home_RspBuf[SMART_HOME_RSP_CNT];
 
 /*********************************************************************
  * LOCAL FUNCTIONS
@@ -246,12 +239,9 @@ static void Smart_home_Key_add(uint8 Ctrlcase);
 static void Smart_home_HandleKeys( byte shift, byte keys );
 static void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt );
 static void Smart_home_Device_check(void);
-static void SerialApp_Send(void);
-static void SerialApp_Resp(void);
 static void Smart_home_Relay_Ctl(uint8 cmd);
 static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed);
 static void Smart_home_Display(uint8 page);
-static void SerialApp_CallBack(uint8 port, uint8 event);
 
 /*********************************************************************
  * @fn      Smart_home_Init
@@ -546,14 +536,14 @@ void Smart_home_HandleKeys( byte shift, byte keys )
 {
   //zAddrType_t txAddr;
   static int8 Ctrlcase = 0;    //0用来控制屏幕显示，1控制继电器，2控制电机
-  static uint8 MotorSpeed = 0;
+  static int8 MotorSpeed = 0;
   static uint8 NetWorkAllow = 0;
   /*这里这么设置似乎会出现内存问题
   static uint8 Relay1_on = 0x02;  //两个默认都是关闭
   static uint8 Relay2_on = 0x10;
   */
   /*3.21 LCD 显示*/
-  static uint8 LCD_Page  =  0;
+  static int8 LCD_Page  =  0;
   static uint8 Relay1_on = 0;  //两个默认都是关闭
   static uint8 Relay2_on = 0;
   
@@ -933,110 +923,9 @@ static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed)
  */
 static void Smart_home_Display(uint8 page)
 {
-   
+#if defined LCD_SUPPORTED
+  
+#endif // LCD_SUPPORTED  
 }
 
-/*********************************************************************
- * @fn      Smart_home_Send
- *
- * @brief   Send data OTA.
- *
- * @param   none
- *
- * @return  none
- */
-static void Smart_home_Send(void)
-{
-#if SERIAL_APP_LOOPBACK
-  if (Smart_home_TxLen < SERIAL_APP_TX_MAX)
-  {
-    Smart_home_TxLen += HalUARTRead(SERIAL_APP_PORT, Smart_home_TxBuf+Smart_home_TxLen+1,
-                                                    SERIAL_APP_TX_MAX-Smart_home_TxLen);
-  }
 
-  if (Smart_home_TxLen)
-  {
-    (void)Smart_home_TxAddr;
-    if (HalUARTWrite(SERIAL_APP_PORT, Smart_home_TxBuf+1, Smart_home_TxLen))
-    {
-      Smart_home_TxLen = 0;
-    }
-    else
-    {
-      osal_set_event(Smart_home_TaskID, Smart_home_SEND_EVT);
-    }
-  }
-#else
-  if (!Smart_home_TxLen && 
-      (Smart_home_TxLen = HalUARTRead(SMART_HOME_PORT, Smart_home_TxBuf+1, SMART_HOME_TX_MAX)))
-  {
-    // Pre-pend sequence number to the Tx message.
-    Smart_home_TxBuf[0] = ++Smart_home_TxSeq;
-  }
-
-  if (Smart_home_TxLen)
-  {
-    /*
-    if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_TxAddr,
-                                           (endPointDesc_t *)&Smart_home_epDesc,
-                                            Smart_home_CLUSTERID1,
-                                            Smart_home_TxLen+1, Smart_home_TxBuf,
-                                            &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
-    {
-      osal_set_event(Smart_home_TaskID, Smart_home_SEND_EVT);
-    }
-    */
-  }
-#endif
-}
-
-/*********************************************************************
- * @fn      Smart_home_Resp
- *
- * @brief   Send data OTA.
- *
- * @param   none
- *
- * @return  none
- */
-static void Smart_home_Resp(void)
-{
-  /*
-  if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_RxAddr,
-                                         (endPointDesc_t *)&Smart_home_epDesc,
-                                          Smart_home_CLUSTERID2,
-                                          SERIAL_APP_RSP_CNT, Smart_home_RspBuf,
-                                         &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
-  {
-    osal_set_event(Smart_home_TaskID, Smart_home_RESP_EVT);
-  }
-  */
-}
-
-/*********************************************************************
- * @fn      Smart_home_CallBack
- *
- * @brief   Send data OTA.
- *
- * @param   port - UART port.
- * @param   event - the UART port event flag.
- *
- * @return  none
- */
-static void Smart_home_CallBack(uint8 port, uint8 event)
-{
-  (void)port;
-
-  if ((event & (HAL_UART_RX_FULL | HAL_UART_RX_ABOUT_FULL | HAL_UART_RX_TIMEOUT)) &&
-#if SERIAL_APP_LOOPBACK
-      (Smart_home_TxLen < SERIAL_APP_TX_MAX))
-#else
-      !Smart_home_TxLen)
-#endif
-  {
-    Smart_home_Send();
-  }
-}
-
-/*********************************************************************
-*********************************************************************/
