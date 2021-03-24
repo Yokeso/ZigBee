@@ -46,6 +46,8 @@
   3.23 正式完成网关节点部分，（显示函数部分除外）
   3.24 
   + 修改 Smart_home_Key_add()与display函数整合
+  + bug:在每十秒一次调用的周期检查函数中会导致显示屏将近一秒时间不显示
+    已解决： 在状态0的时候作为在线即可
    
   经调试程序无bug，可以接收各个传感器消息。//3.22
   当我没说。。好像出了内存问题//3.22
@@ -79,8 +81,8 @@
  */
 /*设备链接相关设置*/
 /*判断设备是否在线的最大次数*/
-#define DEVICE_HEART_BEAT    5
-#define DEVICE_CHECK_DELAY   5000
+#define DEVICE_HEART_BEAT    3
+#define DEVICE_CHECK_DELAY   10000
 
 /*LCD相关设置*/
 /*单屏显示时常   MS*/
@@ -790,25 +792,31 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
  *
  * @return  none
  */
+/*3.24 这里的检测时常有点长 改为变量外提的方式加快处理速度*/
 static void Smart_home_Device_check(void)
 {
   static uint8 DeviceID;
+  static uint8 Device_status =  0;
+  static uint8* counttmp;
   for(DeviceID=1;DeviceID<Smart_home_MAX_INCLUSTERS;DeviceID++)
-  {
-    if(DeviceList[DeviceID].deviceStatus != DEVICE_ONLINE)    //设备离线
+  {  
+    Device_status = DeviceList[DeviceID].deviceStatus;
+    counttmp = & DeviceCnt[DeviceID];
+    if(Device_status != DEVICE_ONLINE)    //设备离线
     {
-      DeviceCnt[DeviceID]++;
+      (*counttmp)++;
     }
-    if(DeviceList[DeviceID].deviceStatus == DEVICE_ONLINE)    //设备在线
+    if(Device_status == DEVICE_ONLINE)    //设备在线
     {
-      DeviceCnt[DeviceID] = 0;
-      DeviceList[DeviceID].deviceStatus = 0;
+      *counttmp = 0;
+      Device_status = 0;
     }
-    if(DeviceCnt[DeviceID] > DEVICE_HEART_BEAT)
+    if((*counttmp) > DEVICE_HEART_BEAT)
     {
-      DeviceCnt[DeviceID] = DEVICE_HEART_BEAT;
-      DeviceList[DeviceID].deviceStatus = DEVICE_OFFLINE;
+      *counttmp = DEVICE_HEART_BEAT;
+      Device_status = DEVICE_OFFLINE;
     }
+    DeviceList[DeviceID].deviceStatus = Device_status;
   }
   /*温湿度缓存 温度光照缓存 RFID 信息缓存 气体火焰缓存 
   人体红外 电机状态 继电器状态 声音震动*/
@@ -929,7 +937,12 @@ static void Smart_home_Display(void)
       //清除屏幕显示
       HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
       HalLcdWriteString( " ", HAL_LCD_LINE_3 );
-      if(DeviceList[relay].deviceStatus == DEVICE_ONLINE)  //设备在线回显
+      //这里的deviceStatus 可能是0x00,所以会出现bug 这个0在Device检查时被设置 2.24
+      if(DeviceList[relay].deviceStatus == DEVICE_OFFLINE)
+      {
+        HalLcdWriteString( "Relay Offline", HAL_LCD_LINE_1 );      
+      }
+      else  //设备在线回显  设备在线可能是 0/1
       {
         HalLcdWriteString( "Relay Online", HAL_LCD_LINE_1 ); 
       //继电器控制界面
@@ -943,10 +956,7 @@ static void Smart_home_Display(void)
           if((cmd & 0x10) == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}      
         } 
       }
-      if(DeviceList[relay].deviceStatus != DEVICE_ONLINE)
-      {
-        HalLcdWriteString( "Relay Offline", HAL_LCD_LINE_1 );      
-      }
+
       break;
     
     case 2:
