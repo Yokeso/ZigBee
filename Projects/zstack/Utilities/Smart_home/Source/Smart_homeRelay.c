@@ -194,7 +194,7 @@ void Smart_home_Init( uint8 task_id )
   Coordinator_DstAddr.endPoint = 0;
   Coordinator_DstAddr.addr.shortAddr = 0;
   
-  //协调器初始化为全关
+  //初始化继电器为全关
   HalRelayCtl(0x11);
   
   ZDO_RegisterForZDOMsg( Smart_home_TaskID, End_Device_Bind_rsp );
