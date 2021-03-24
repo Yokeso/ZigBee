@@ -48,6 +48,7 @@
   + 修改 Smart_home_Key_add()与display函数整合
   + bug:在每十秒一次调用的周期检查函数中会导致显示屏将近一秒时间不显示
     已解决： 在状态0的时候作为在线即可
+  + 完成 显示功能设置
    
   经调试程序无bug，可以接收各个传感器消息。//3.22
   当我没说。。好像出了内存问题//3.22
@@ -88,6 +89,9 @@
 /*单屏显示时常   MS*/
 #define LCD_DISPLAY_LENGTH   10000
 #define LCD_DISPLAY_TIMER    1000  //多久更新一次 
+
+/*关于显示部分相关的宏*/
+#define LCD_PAGE_MAX         4     //目前目录页最多4页
 
 /*********************************************************************
  * CONSTANTS
@@ -570,8 +574,8 @@ void Smart_home_HandleKeys( byte shift, byte keys )
       default:    
       case 0:
       {
-        if(LCD_Page < 3)       {LCD_Page++;}
-        if(LCD_Page > 2)       {LCD_Page=0;}
+        if(LCD_Page < LCD_PAGE_MAX)       {LCD_Page++;}
+        if(LCD_Page > LCD_PAGE_MAX - 1)       {LCD_Page = 0;}
         break;
       }
       case 1:
@@ -607,7 +611,7 @@ void Smart_home_HandleKeys( byte shift, byte keys )
       case 0:
       {
         if(LCD_Page >= 0)       {LCD_Page--;}
-        if(LCD_Page < 0)        {LCD_Page=2;}
+        if(LCD_Page < 0)        {LCD_Page = LCD_PAGE_MAX;}
         break;
       }
       case 1:  
@@ -926,10 +930,120 @@ static void Smart_home_Display(void)
   {
     default:    
     case 0:
-      HalLcdWriteString( "Flip use UP/DOWN", HAL_LCD_LINE_4 ); 
+      HalLcdWriteString( "      Menu      ", HAL_LCD_LINE_1 );
+      //HalLcdWriteString( "Flip use UP/DOWN", HAL_LCD_LINE_4 ); 
       //清除屏幕显示
       HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
       HalLcdWriteString( " ", HAL_LCD_LINE_3 );
+      
+      switch(LCD_Page)
+      {
+        default:
+        case 0:
+        {
+          static uint16 humit;
+          static uint16 temper;
+          static uint16 SoundVb; 
+          
+          DeviceInfo Devhum = DeviceList[Humit];
+          DeviceInfo DevSound = DeviceList[soundVb];
+          //第一页第二行显示温度
+          //      第三行显示光照
+          humit = (uint16)Devhum.data[0];
+          temper = (uint16)Devhum.data[1];
+          SoundVb = (uint16)DevSound.data[0];
+
+          HalLcdWriteStringValueValue( "Hum:", humit, 10, "% Tem_1:", temper, 10, HAL_LCD_LINE_2 );
+          HalLcdWriteStringValue("Sound", SoundVb, 10, HAL_LCD_LINE_3 );
+          
+          //显示最下面的百分比条
+          static uint8 percent;
+          percent = (1 * 100) / LCD_PAGE_MAX;
+          HalLcdDisplayPercentBar("",percent);
+          break;
+        }
+        case 1:
+        {
+          static uint16 Light;
+          static uint8 lightmp;
+          static uint16 integer;
+          static uint16 decimals;
+          DeviceInfo Devtmp = DeviceList[TempLight];
+          //第一页第二行显示温度
+          //      第三行显示光照
+          integer = (uint16)Devtmp.data[0];
+          decimals = (uint16)Devtmp.data[1];
+          lightmp = Devtmp.data[3];
+          Light = (uint16)Devtmp.data[4];
+          memcpy(&Light,&lightmp,sizeof(lightmp));
+          HalLcdWriteStringValueValue( "Temper_2:", integer, 10, ".", decimals, 10, HAL_LCD_LINE_2 );
+          HalLcdWriteStringValue( "Light:", Light, 10, HAL_LCD_LINE_3 );
+          
+          //显示最下面的百分比条
+          static uint8 percent;
+          percent = (2 * 100) / LCD_PAGE_MAX;
+          HalLcdDisplayPercentBar("",percent);
+          break;
+        }
+        
+      case 2:
+      {
+          static uint8 kind;
+          static uint8 tmp1;
+          static uint8 tmp2;
+          static uint16 Data1;
+          static uint16 Data2;
+          //显示最下面的百分比条
+          DeviceInfo rfid = DeviceList[RfID];
+          
+          kind = rfid.data[0];
+          tmp1 = rfid.data[1];
+          Data1 = (uint16)rfid.data[2];
+          tmp2 = rfid.data[3];
+          Data2 = (uint16)rfid.data[4];
+          
+          memcpy(&Data1,&tmp1,sizeof(tmp1));
+          memcpy(&Data2,&tmp2,sizeof(tmp2));
+          
+          if(kind == 0x01) {HalLcdWriteString( "MFOne-S50", HAL_LCD_LINE_2 );}
+          else if(kind == 0x02) {HalLcdWriteString( "MFOne-S70", HAL_LCD_LINE_2 );}
+          else if(kind == 0x03) {HalLcdWriteString( "MF-UltraLight", HAL_LCD_LINE_2 );}
+          else if(kind == 0x04) {HalLcdWriteString( "MF-Pro", HAL_LCD_LINE_2 );}
+          else if(kind == 0x05) {HalLcdWriteString( "MF-DesFire", HAL_LCD_LINE_2 );}
+          else {HalLcdWriteString( "No Card", HAL_LCD_LINE_2 );}
+          
+
+          HalLcdWriteStringValueValue( "", Data1, 16, "", Data2, 16, HAL_LCD_LINE_3 );
+          
+          static uint8 percent;
+          percent = (3 * 100) / LCD_PAGE_MAX;
+          HalLcdDisplayPercentBar("",percent);
+          break;
+      }
+      
+      case 3:
+      {
+          static uint16 GasF;
+          static uint16 Infrared;         
+
+          DeviceInfo DevGas = DeviceList[GasF];
+          DeviceInfo DevInf = DeviceList[infrared]; 
+          
+          GasF = (uint16)DevGas.data[0];
+          Infrared = (uint16)DevInf.data[0];
+          
+          HalLcdWriteStringValue("GasFlame: ", GasF, 10, HAL_LCD_LINE_2 );
+          HalLcdWriteStringValue("Infrared: ", infrared, 10, HAL_LCD_LINE_3 );
+          
+          //显示最下面的百分比条
+          static uint8 percent;
+          percent = (4 * 100) / LCD_PAGE_MAX;
+          HalLcdDisplayPercentBar("",percent);
+          break;
+      }
+          
+    }
+      
       break;
     
     case 1:
@@ -945,16 +1059,13 @@ static void Smart_home_Display(void)
       else  //设备在线回显  设备在线可能是 0/1
       {
         HalLcdWriteString( "Relay Online", HAL_LCD_LINE_1 ); 
-      //继电器控制界面
-        if(Ctrlcase == 1)
-        {
-          const uint8 cmd =  DeviceList[relay].data[0];
-          //消除抖动
-          if((cmd & 0x02) == 0x02) {HalLcdWriteString( "K1:ON", HAL_LCD_LINE_2 );}
-          if((cmd & 0x01) == 0x01) {HalLcdWriteString( "K1:OFF", HAL_LCD_LINE_2 );}
-          if((cmd & 0x20) == 0x20) {HalLcdWriteString( "K2:ON", HAL_LCD_LINE_3 );}
-          if((cmd & 0x10) == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}      
-        } 
+        //继电器控制界面
+        const uint8 cmd =  DeviceList[relay].data[0];
+
+        if((cmd & 0x02) == 0x02) {HalLcdWriteString( "K1:ON", HAL_LCD_LINE_2 );}
+        if((cmd & 0x01) == 0x01) {HalLcdWriteString( "K1:OFF", HAL_LCD_LINE_2 );}
+        if((cmd & 0x20) == 0x20) {HalLcdWriteString( "K2:ON", HAL_LCD_LINE_3 );}
+        if((cmd & 0x10) == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}      
       }
 
       break;
@@ -964,15 +1075,21 @@ static void Smart_home_Display(void)
       //清除屏幕显示
       HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
       HalLcdWriteString( " ", HAL_LCD_LINE_3 );
-      if(DeviceList[motor].deviceStatus == DEVICE_ONLINE)  //设备在线回显
-      {
-        HalLcdWriteString( "Motor Online", HAL_LCD_LINE_1 );
-      }
-      if(DeviceList[motor].deviceStatus != DEVICE_ONLINE)
+      if(DeviceList[relay].deviceStatus == DEVICE_OFFLINE)
       {
         HalLcdWriteString( "Motor Offline", HAL_LCD_LINE_1 );      
-      }      
-      break;
+      }
+      else  //设备在线回显  设备在线可能是 0/1
+      {
+        HalLcdWriteString( "Motor Online", HAL_LCD_LINE_1 ); 
+        //电机控制界面
+        const uint16 speed =  (uint16) DeviceList[relay].data[0];
+        const uint16 status = (uint16) DeviceList[relay].data[1];
+        
+        HalLcdWriteStringValue( "Status:", status, 10, HAL_LCD_LINE_2 );
+        HalLcdWriteStringValue( "Speed:", speed, 10, HAL_LCD_LINE_3 );
+      
+      }
   }
   
 #endif // LCD_SUPPORTED  

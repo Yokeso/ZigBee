@@ -352,28 +352,32 @@ void HalLcdWriteStringValue( char *title, uint16 value, uint8 format, uint8 line
  *          line    - line number
  *
  * @return  None
+ * 修改为显示两个title + 2个Value
  **************************************************************************************************/
-void HalLcdWriteStringValueValue( char *title, uint16 value1, uint8 format1,
-                                  uint16 value2, uint8 format2, uint8 line )
+void HalLcdWriteStringValueValue( char *title1, uint16 value1, uint8 format1,
+                                  char *title2,uint16 value2, uint8 format2, uint8 line )
 {
 #if (HAL_LCD == TRUE)
     uint8 tmpLen;
     uint8 buf[LCD_MAX_BUF];
     uint32 err;
   
-    tmpLen = (uint8)osal_strlen( (char*)title );
+    tmpLen = (uint8)osal_strlen( (char*)title1 );
     if ( tmpLen )
     {
-        osal_memcpy( buf, title, tmpLen );
-        buf[tmpLen++] = ' ';
+        osal_memcpy( buf, title1, tmpLen );
     }
   
     err = (uint32)(value1);
     _ltoa( err, &buf[tmpLen], format1 );
     tmpLen = (uint8)osal_strlen( (char*)buf );
   
-    buf[tmpLen++] = ',';
-    buf[tmpLen++] = ' ';
+    tmpLen += (uint8)osal_strlen( (char*)title2 );
+    if ( tmpLen )
+    {
+        strcat( buf, title2);
+    }
+    
     err = (uint32)(value2);
     _ltoa( err, &buf[tmpLen], format2 );
   

@@ -49,6 +49,7 @@
 #include "hal_defs.h"
 #include "font.h"
 
+
 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
     #include "DebugTrace.h"
 #endif
@@ -353,27 +354,30 @@ void HalLcdWriteStringValue( char *title, uint16 value, uint8 format, uint8 line
  *
  * @return  None
  **************************************************************************************************/
-void HalLcdWriteStringValueValue( char *title, uint16 value1, uint8 format1,
-                                  uint16 value2, uint8 format2, uint8 line )
+void HalLcdWriteStringValueValue( char *title1, uint16 value1, uint8 format1,
+                                  char *title2,uint16 value2, uint8 format2, uint8 line )
 {
 #if (HAL_LCD == TRUE)
     uint8 tmpLen;
     uint8 buf[LCD_MAX_BUF];
     uint32 err;
   
-    tmpLen = (uint8)osal_strlen( (char*)title );
+    tmpLen = (uint8)osal_strlen( (char*)title1 );
     if ( tmpLen )
     {
-        osal_memcpy( buf, title, tmpLen );
-        buf[tmpLen++] = ' ';
+        osal_memcpy( buf, title1, tmpLen );
     }
   
     err = (uint32)(value1);
     _ltoa( err, &buf[tmpLen], format1 );
     tmpLen = (uint8)osal_strlen( (char*)buf );
   
-    buf[tmpLen++] = ',';
-    buf[tmpLen++] = ' ';
+    tmpLen += (uint8)osal_strlen( (char*)title2 );
+    if ( tmpLen )
+    {
+        strcat( buf, title2);
+    }
+    
     err = (uint32)(value2);
     _ltoa( err, &buf[tmpLen], format2 );
   
@@ -401,7 +405,7 @@ void HalLcdDisplayPercentBar( char *title, uint8 value )
     uint8 x;
   
     /* Write the title: */
-    HalLcdWriteString( title, HAL_LCD_LINE_1 );
+    //HalLcdWriteString( title, HAL_LCD_LINE_4 );
   
     if ( value > 100 )
       value = 100;
@@ -424,7 +428,7 @@ void HalLcdDisplayPercentBar( char *title, uint8 value )
     err = (uint32)value;
     _ltoa( err, (uint8*)&buf[13], 10 );
   
-    HalLcdWriteString( (char*)buf, HAL_LCD_LINE_2 );
+    HalLcdWriteString( (char*)buf, HAL_LCD_LINE_4 );
 #endif
 }                     
 
