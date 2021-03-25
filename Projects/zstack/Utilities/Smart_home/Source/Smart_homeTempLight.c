@@ -35,7 +35,8 @@
 
 #include "hal_led.h"
 #include "hal_uart.h"
-#include "hal_relay.h"
+#include "hal_ds18b20.h"
+#include "hal_bh1750.h"
 
 /*********************************************************************
  * MACROS

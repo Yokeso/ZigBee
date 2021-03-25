@@ -1,60 +1,25 @@
-/**************************************************************************************************
-  Filename:       Smart_home.c
-  Revised:        $Date: 2009-03-29 10:51:47 -0700 (Sun, 29 Mar 2009) $
-  Revision:       $Revision: 19585 $
+/*******************************************************************
+  文件名：Smart_homeGasFlame.c
+  作 者： 柳成林
+  功 能： 烟雾火焰测功能节点，实现对烟雾火焰的检测，收集温烟雾火焰信
+          息并发送给传感器
+  更新日志(2021)
+  3.24
+  + 新增 设置输入输出簇
+         Smart_home_HandleKeys()      //按键控制
+         Smart_home_ProcessMSGCmd();  //输入控制函数 
+         Smart_home_CHECK_EVT();      //设备事件检测
+  + 修改 Smart_home_ProcessEvt()      //事件处理函数
+         Smart_home_Init()            //初始化函数
+         Smart_home_Send()            //信息发送函数
 
-  Description -   Serial Transfer Application (no Profile).
 
-
-  Copyright 2004-2009 Texas Instruments Incorporated. All rights reserved.
-
-  IMPORTANT: Your use of this Software is limited to those specific rights
-  granted under the terms of a software license agreement between the user
-  who downloaded the software, his/her employer (which must be your employer)
-  and Texas Instruments Incorporated (the "License").  You may not use this
-  Software unless you agree to abide by the terms of the License. The License
-  limits your use, and you acknowledge, that the Software may not be modified,
-  copied or distributed unless embedded on a Texas Instruments microcontroller
-  or used solely and exclusively in conjunction with a Texas Instruments radio
-  frequency transceiver, which is integrated into your product.  Other than for
-  the foregoing purpose, you may not use, reproduce, copy, prepare derivative
-  works of, modify, distribute, perform, display or sell this Software and/or
-  its documentation for any purpose.
-
-  YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-  PROVIDED 揂S IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, 
-  INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, 
-  NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
-  TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
-  NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
-  LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
-  INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
-  OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
-  OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
-  (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
-
-  Should you have any questions regarding your right to use this Software,
-  contact Texas Instruments Incorporated at www.TI.com. 
-**************************************************************************************************/
-
-/*********************************************************************
-  This sample application is basically a cable replacement
-  and it should be customized for your application. A PC
-  (or other device) sends data via the serial port to this
-  application's device.  This device transmits the message
-  to another device with the same application running. The
-  other device receives the over-the-air message and sends
-  it to a PC (or other device) connected to its serial port.
-				
-  This application doesn't have a profile, so it handles everything directly.
-
-  Key control:
-    SW1:
-    SW2:  initiates end device binding
-    SW3:
-    SW4:  initiates a match description request
+使用事件 
+     SMART_HOME_SEND_MSG_EVT(发送数据)
+     SMART_HOME_MATCHRSP_EVT(描述符匹配)
+     SMART_HOME_HALCHECK_EVT(管脚检查)
+   
 *********************************************************************/
-
 /*********************************************************************
  * INCLUDES
  */
@@ -69,16 +34,20 @@
 
 #include "hal_drivers.h"
 #include "hal_key.h"
-#if defined ( LCD_SUPPORTED )
-  #include "hal_lcd.h"
-#endif
+
 #include "hal_led.h"
 #include "hal_uart.h"
+#include "hal_gasflame.h"
 
 /*********************************************************************
  * MACROS
  */
+//3.23  屏幕显示的小bug
+#define SMART_HOME_SEND_DELAY   500
+#define SMART_HOME_CHECK_DELAY  100
+#define SMART_HOME_MATCH_DELAY  1000
 
+#define ALARM_MAX_CNT           3    //几次检测到相同后报警，防止误报
 /*********************************************************************
  * CONSTANTS
  */
@@ -122,11 +91,16 @@
 
 #define SERIAL_APP_RSP_CNT  4
 
+//3.21 设置输入输出簇
 // This list should be filled with Application specific Cluster IDs.
-const cId_t Smart_home_ClusterList[Smart_home_MAX_CLUSTERS] =
+const cId_t Smart_home_ClusterList_IN[1] =
 {
-  Smart_home_CLUSTERID1,
-  Smart_home_CLUSTERID2
+  Smart_home_CLUSTERID_GASFLAMEMSG        //继电器接收的消息控制命令
+};
+
+const cId_t Smart_home_ClusterList_OUT[1] =
+{
+  Smart_home_CLUSTERID_GASFLAMEMSG         //继电器发送的状态信息
 };
 
 const SimpleDescriptionFormat_t Smart_home_SimpleDesc =
@@ -136,10 +110,10 @@ const SimpleDescriptionFormat_t Smart_home_SimpleDesc =
   Smart_home_DEVICEID,              //  uint16 AppDeviceId[2];
   Smart_home_DEVICE_VERSION,        //  int   AppDevVer:4;
   Smart_home_FLAGS,                 //  int   AppFlags:4;
-  Smart_home_MAX_CLUSTERS,          //  byte  AppNumInClusters;
-  (cId_t *)Smart_home_ClusterList,  //  byte *pAppInClusterList;
-  Smart_home_MAX_CLUSTERS,          //  byte  AppNumOutClusters;
-  (cId_t *)Smart_home_ClusterList   //  byte *pAppOutClusterList;
+  Smart_home_MAX_INCLUSTERS,          //  byte  AppNumInClusters;
+  (cId_t *)Smart_home_ClusterList_IN,  //  byte *pAppInClusterList;
+  Smart_home_MAX_OUTCLUSTERS ,          //  byte  AppNumOutClusters;
+  (cId_t *)Smart_home_ClusterList_OUT   //  byte *pAppOutClusterList;
 };
 
 const endPointDesc_t Smart_home_epDesc =
@@ -150,6 +124,12 @@ const endPointDesc_t Smart_home_epDesc =
   noLatencyReqs
 };
 
+afAddrType_t Coordinator_DstAddr;
+
+devStates_t Humit_NwkState;
+
+static uint8 gasFlameBuf[2]; //信号缓存
+
 /*********************************************************************
  * TYPEDEFS
  */
@@ -159,6 +139,7 @@ const endPointDesc_t Smart_home_epDesc =
  */
 
 uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
+byte Coordinator_Msg[GASFLAMEMSG_LEN];
 
 /*********************************************************************
  * EXTERNAL VARIABLES
@@ -172,16 +153,8 @@ uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
  * LOCAL VARIABLES
  */
 
-static uint8 Smart_home_MsgID;
+static byte Smart_home_MsgID;  // This is the unique message ID (counter)
 
-static afAddrType_t Smart_home_TxAddr;
-static uint8 Smart_home_TxSeq;
-static uint8 Smart_home_TxBuf[SERIAL_APP_TX_MAX+1];
-static uint8 Smart_home_TxLen;
-
-static afAddrType_t Smart_home_RxAddr;
-static uint8 Smart_home_RxSeq;
-static uint8 Smart_home_RspBuf[SERIAL_APP_RSP_CNT];
 
 /*********************************************************************
  * LOCAL FUNCTIONS
@@ -192,6 +165,7 @@ static void Smart_home_HandleKeys( uint8 shift, uint8 keys );
 static void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt );
 static void Smart_home_Send(void);
 static void Smart_home_Resp(void);
+static void Smart_home_CHECK_EVT(void);
 static void Smart_home_CallBack(uint8 port, uint8 event);
 
 /*********************************************************************
@@ -208,12 +182,15 @@ void Smart_home_Init( uint8 task_id )
   halUARTCfg_t uartConfig;
 
   Smart_home_TaskID = task_id;
-  Smart_home_RxSeq = 0xC3;
+  Smart_home_MsgID = 0;
 
+  // Register the endpoint/interface description with the AF
   afRegister( (endPointDesc_t *)&Smart_home_epDesc );
 
+  // Register for all key events - This app will handle all key events
   RegisterForKeys( task_id );
-
+  
+  //串口配置
   uartConfig.configured           = TRUE;              // 2x30 don't care - see uart driver.
   uartConfig.baudRate             = SERIAL_APP_BAUD;
   uartConfig.flowControl          = TRUE;
@@ -225,12 +202,25 @@ void Smart_home_Init( uint8 task_id )
   uartConfig.callBackFunc         = Smart_home_CallBack;
   HalUARTOpen (SERIAL_APP_PORT, &uartConfig);
 
-#if defined ( LCD_SUPPORTED )
-  HalLcdWriteString( "Smart_home", HAL_LCD_LINE_2 );
-#endif
+  //初始化向协调器发送的地址
+  Coordinator_DstAddr.addrMode = (afAddrMode_t)AddrNotPresent;
+  Coordinator_DstAddr.endPoint = 0;
+  Coordinator_DstAddr.addr.shortAddr = 0;
+  
   
   ZDO_RegisterForZDOMsg( Smart_home_TaskID, End_Device_Bind_rsp );
   ZDO_RegisterForZDOMsg( Smart_home_TaskID, Match_Desc_rsp );
+  
+  // 初始化设备的管脚
+  HalGasFlameInit();
+  
+  // 周期性查询两个传感器的管脚
+  osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_HALCHECK_EVT, 
+                                               SMART_HOME_CHECK_DELAY );
+  
+  // 打开定时器，描述符匹配事件
+  osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_MATCHRSP_EVT, 
+                                               SMART_HOME_SEND_DELAY );
 }
 
 /*********************************************************************
@@ -276,19 +266,45 @@ UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
 
     return ( events ^ SYS_EVENT_MSG );
   }
+  
+  // 描述匹配事件
+  if ( events & SMART_HOME_MATCHRSP_EVT )
+  {
+     zAddrType_t dstAddr;
+     dstAddr.addrMode = AddrBroadcast;
+     dstAddr.addr.shortAddr = NWK_BROADCAST_SHORTADDR;
+     
+     ZDP_MatchDescReq( &dstAddr, 
+                        NWK_BROADCAST_SHORTADDR,
+                        Smart_home_PROFID,
+                        Smart_home_MAX_OUTCLUSTERS, 
+                        (cId_t *)Smart_home_ClusterList_IN,
+                        Smart_home_MAX_INCLUSTERS, 
+                        (cId_t *)Smart_home_ClusterList_OUT,
+                        FALSE );
 
-  if ( events & Smart_home_SEND_EVT )
+    // Return unprocessed events
+    return (events ^ SMART_HOME_MATCHRSP_EVT);
+  }
+
+  if ( events & SMART_HOME_SEND_MSG_EVT )
   {
     Smart_home_Send();
-    return ( events ^ Smart_home_SEND_EVT );
+    return ( events ^ SMART_HOME_SEND_MSG_EVT );
   }
 
-  if ( events & Smart_home_RESP_EVT )
+  if ( events & SMART_HOME_BINDRSP_EVT )
   {
     Smart_home_Resp();
-    return ( events ^ Smart_home_RESP_EVT );
+    return ( events ^ SMART_HOME_BINDRSP_EVT );
   }
-
+    
+  if ( events & SMART_HOME_HALCHECK_EVT )
+  {
+    Smart_home_CHECK_EVT();
+    return ( events ^ SMART_HOME_HALCHECK_EVT );
+  }
+  
   return ( 0 );  // Discard unknown events.
 }
 
@@ -308,38 +324,42 @@ static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
     case End_Device_Bind_rsp:
       if ( ZDO_ParseBindRsp( inMsg ) == ZSuccess )
       {
-        // Light LED
-        HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
-      }
-#if defined(BLINK_LEDS)
-      else
-      {
-        // Flash LED to show failure
-        HalLedSet ( HAL_LED_4, HAL_LED_MODE_FLASH );
-      }
+#if (HAL_UART == TRUE)
+        HalUARTWrite(HAL_UART_PORT_0, "Bind Success!\n",   strlen("Bind Success!\n"));
 #endif
+      }
+      break;
+    
+    case Match_Desc_rsp:
+      ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
+      if ( pRsp )
+      {
+        if ( pRsp->status == ZSuccess && pRsp->cnt )
+        {
+          // 此处存储绑定对方的地址信息用于发送
+          Coordinator_DstAddr.addrMode = (afAddrMode_t)Addr16Bit;
+          Coordinator_DstAddr.addr.shortAddr = pRsp->nwkAddr;
+          // Take the first endpoint, Can be changed to search through endpoints
+          Coordinator_DstAddr.endPoint = pRsp->epList[0];  // ok
+          // 匹配成功，关闭描述符匹配事件定时器
+          osal_stop_timerEx( Smart_home_TaskID, SMART_HOME_MATCHRSP_EVT );
+  
+#if (HAL_UART == TRUE)
+          HalUARTWrite(HAL_UART_PORT_0, "Match Success!\n",   strlen("Match Success!\n"));
+#endif
+          // 开启定时发送数据给协调器的事件
+          osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_SEND_MSG_EVT, 
+                                   SMART_HOME_SEND_DELAY );
+        }
+    
+        osal_mem_free( pRsp );
+      }
       break;
       
-    case Match_Desc_rsp:
-      {
-        ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
-        if ( pRsp )
-        {
-          if ( pRsp->status == ZSuccess && pRsp->cnt )
-          {
-            Smart_home_TxAddr.addrMode = (afAddrMode_t)Addr16Bit;
-            Smart_home_TxAddr.addr.shortAddr = pRsp->nwkAddr;
-            // Take the first endpoint, Can be changed to search through endpoints
-            Smart_home_TxAddr.endPoint = pRsp->epList[0];
-            
-            // Light LED
-            HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
-          }
-          osal_mem_free( pRsp );
-        }
-      }
+    default:
       break;
   }
+  
 }
 
 /*********************************************************************
@@ -354,62 +374,11 @@ static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
  */
 void Smart_home_HandleKeys( uint8 shift, uint8 keys )
 {
-  zAddrType_t txAddr;
   
-  if ( shift )
+  if ( keys & HAL_KEY_SW_5 )
   {
-    if ( keys & HAL_KEY_SW_1 )
-    {
-    }
-    if ( keys & HAL_KEY_SW_2 )
-    {
-    }
-    if ( keys & HAL_KEY_SW_3 )
-    {
-    }
-    if ( keys & HAL_KEY_SW_4 )
-    {
-    }
   }
-  else
-  {
-    if ( keys & HAL_KEY_SW_1 )
-    {
-    }
 
-    if ( keys & HAL_KEY_SW_2 )
-    {
-      HalLedSet ( HAL_LED_4, HAL_LED_MODE_OFF );
-      
-      // Initiate an End Device Bind Request for the mandatory endpoint
-      txAddr.addrMode = Addr16Bit;
-      txAddr.addr.shortAddr = 0x0000; // Coordinator
-      ZDP_EndDeviceBindReq( &txAddr, NLME_GetShortAddr(), 
-                            Smart_home_epDesc.endPoint,
-                            Smart_home_PROFID,
-                            Smart_home_MAX_CLUSTERS, (cId_t *)Smart_home_ClusterList,
-                            Smart_home_MAX_CLUSTERS, (cId_t *)Smart_home_ClusterList,
-                            FALSE );
-    }
-
-    if ( keys & HAL_KEY_SW_3 )
-    {
-    }
-
-    if ( keys & HAL_KEY_SW_4 )
-    {
-      HalLedSet ( HAL_LED_4, HAL_LED_MODE_OFF );
-      
-      // Initiate a Match Description Request (Service Discovery)
-      txAddr.addrMode = AddrBroadcast;
-      txAddr.addr.shortAddr = NWK_BROADCAST_SHORTADDR;
-      ZDP_MatchDescReq( &txAddr, NWK_BROADCAST_SHORTADDR,
-                        Smart_home_PROFID,
-                        Smart_home_MAX_CLUSTERS, (cId_t *)Smart_home_ClusterList,
-                        Smart_home_MAX_CLUSTERS, (cId_t *)Smart_home_ClusterList,
-                        FALSE );
-    }
-  }
 }
 
 /*********************************************************************
@@ -426,68 +395,15 @@ void Smart_home_HandleKeys( uint8 shift, uint8 keys )
  */
 void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
 {
-  uint8 stat;
-  uint8 seqnb;
-  uint8 delay;
-
+  uint8 mode;
+  
   switch ( pkt->clusterId )
   {
-  // A message with a serial data block to be transmitted on the serial port.
-  case Smart_home_CLUSTERID1:
-    // Store the address for sending and retrying.
-    osal_memcpy(&Smart_home_RxAddr, &(pkt->srcAddr), sizeof( afAddrType_t ));
-
-    seqnb = pkt->cmd.Data[0];
-
-    // Keep message if not a repeat packet
-    if ( (seqnb > Smart_home_RxSeq) ||                    // Normal
-        ((seqnb < 0x80 ) && ( Smart_home_RxSeq > 0x80)) ) // Wrap-around
-    {
-      // Transmit the data on the serial port.
-      if ( HalUARTWrite( SERIAL_APP_PORT, pkt->cmd.Data+1, (pkt->cmd.DataLength-1) ) )
-      {
-        // Save for next incoming message
-        Smart_home_RxSeq = seqnb;
-        stat = OTA_SUCCESS;
-      }
-      else
-      {
-        stat = OTA_SER_BUSY;
-      }
-    }
-    else
-    {
-      stat = OTA_DUP_MSG;
-    }
-
-    // Select approproiate OTA flow-control delay.
-    delay = (stat == OTA_SER_BUSY) ? Smart_home_NAK_DELAY : Smart_home_ACK_DELAY;
-
-    // Build & send OTA response message.
-    Smart_home_RspBuf[0] = stat;
-    Smart_home_RspBuf[1] = seqnb;
-    Smart_home_RspBuf[2] = LO_UINT16( delay );
-    Smart_home_RspBuf[3] = HI_UINT16( delay );
-    osal_set_event( Smart_home_TaskID, Smart_home_RESP_EVT );
-    osal_stop_timerEx(Smart_home_TaskID, Smart_home_RESP_EVT);
-    break;
-
-  // A response to a received serial data block.
-  case Smart_home_CLUSTERID2:
-    if ((pkt->cmd.Data[1] == Smart_home_TxSeq) &&
-       ((pkt->cmd.Data[0] == OTA_SUCCESS) || (pkt->cmd.Data[0] == OTA_DUP_MSG)))
-    {
-      Smart_home_TxLen = 0;
-      osal_stop_timerEx(Smart_home_TaskID, Smart_home_SEND_EVT);
-    }
-    else
-    {
-      // Re-start timeout according to delay sent from other device.
-      delay = BUILD_UINT16( pkt->cmd.Data[2], pkt->cmd.Data[3] );
-      osal_start_timerEx( Smart_home_TaskID, Smart_home_SEND_EVT, delay );
-    }
-    break;
-
+    case Smart_home_CLUSTERID_GASFLAMEMSG:
+    {    
+      break;
+    } 
+    // Could receive control messages in the future.
     default:
       break;
   }
@@ -504,45 +420,33 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
  */
 static void Smart_home_Send(void)
 {
-#if SERIAL_APP_LOOPBACK
-  if (Smart_home_TxLen < SERIAL_APP_TX_MAX)
-  {
-    Smart_home_TxLen += HalUARTRead(SERIAL_APP_PORT, Smart_home_TxBuf+Smart_home_TxLen+1,
-                                                    SERIAL_APP_TX_MAX-Smart_home_TxLen);
-  }
-
-  if (Smart_home_TxLen)
-  {
-    (void)Smart_home_TxAddr;
-    if (HalUARTWrite(SERIAL_APP_PORT, Smart_home_TxBuf+1, Smart_home_TxLen))
-    {
-      Smart_home_TxLen = 0;
-    }
-    else
-    {
-      osal_set_event(Smart_home_TaskID, Smart_home_SEND_EVT);
-    }
-  }
-#else
-  if (!Smart_home_TxLen && 
-      (Smart_home_TxLen = HalUARTRead(SERIAL_APP_PORT, Smart_home_TxBuf+1, SERIAL_APP_TX_MAX)))
-  {
-    // Pre-pend sequence number to the Tx message.
-    Smart_home_TxBuf[0] = ++Smart_home_TxSeq;
-  }
-
-  if (Smart_home_TxLen)
-  {
-    if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_TxAddr,
-                                           (endPointDesc_t *)&Smart_home_epDesc,
-                                            Smart_home_CLUSTERID1,
-                                            Smart_home_TxLen+1, Smart_home_TxBuf,
-                                            &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
-    {
-      osal_set_event(Smart_home_TaskID, Smart_home_SEND_EVT);
-    }
-  }
-#endif
+  uint8 tmp; 
+  
+  do{
+    // put the sequence number in the message
+    tmp = HI_UINT8( Smart_home_MsgID );
+    tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+    Coordinator_Msg[2] = tmp;
+    tmp = LO_UINT8( Smart_home_MsgID );
+    tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+    Coordinator_Msg[3] = tmp;
+    
+    // 发送给协调器命令 
+    Coordinator_Msg[4] = gasFlameBuf[1]<<1 | gasFlameBuf[0];  //0位气体报警，1位火焰
+    
+    tmp = AF_DataRequest( &Coordinator_DstAddr,                         
+                          (endPointDesc_t *)&Smart_home_epDesc,                  
+                           Smart_home_CLUSTERID_GASFLAMEMSG,
+                           GASFLAMEMSG_LEN,                 
+                           Coordinator_Msg,                    
+                          &Smart_home_MsgID,                       
+                           AF_DISCV_ROUTE,                     
+                           AF_DEFAULT_RADIUS );
+  }while (afStatus_SUCCESS == tmp);   
+  
+  // 发送成功后清除报警信息
+  gasFlameBuf[0] = 0;
+  gasFlameBuf[1] = 0;  
 }
 
 /*********************************************************************
@@ -556,13 +460,54 @@ static void Smart_home_Send(void)
  */
 static void Smart_home_Resp(void)
 {
+  /*
   if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_RxAddr,
                                          (endPointDesc_t *)&Smart_home_epDesc,
                                           Smart_home_CLUSTERID2,
                                           SERIAL_APP_RSP_CNT, Smart_home_RspBuf,
                                          &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
   {
-    osal_set_event(Smart_home_TaskID, Smart_home_RESP_EVT);
+    osal_set_event(Smart_home_TaskID, SMART_HOME_BINDRSP_EVT);
+  }
+  */
+}
+
+
+/*********************************************************************
+ * @fn      Smart_home_CHECK_EVT()
+ *
+ * @brief   Send data OTA.
+ *
+ * @param   none
+ *
+ * @return  none
+ */
+static void Smart_home_CHECK_EVT(void)
+{
+  static uint8 gasAlertCnt, flameAlertCnt;
+  
+  // MQ2烟雾气体检测
+  if (HalGasCheck())
+  {
+    gasAlertCnt++;
+  }
+  
+  // 火焰检测
+  if (HalFlameCheck())
+  {
+    flameAlertCnt++;
+  }
+  
+  if (gasAlertCnt > ALARM_MAX_CNT)
+  {
+    gasFlameBuf[0] = 1;
+    gasAlertCnt = 0;
+  }
+  
+  if (flameAlertCnt > ALARM_MAX_CNT)
+  {
+    gasFlameBuf[1] = 1;
+    flameAlertCnt = 0;
   }
 }
 
@@ -578,17 +523,6 @@ static void Smart_home_Resp(void)
  */
 static void Smart_home_CallBack(uint8 port, uint8 event)
 {
-  (void)port;
-
-  if ((event & (HAL_UART_RX_FULL | HAL_UART_RX_ABOUT_FULL | HAL_UART_RX_TIMEOUT)) &&
-#if SERIAL_APP_LOOPBACK
-      (Smart_home_TxLen < SERIAL_APP_TX_MAX))
-#else
-      !Smart_home_TxLen)
-#endif
-  {
-    Smart_home_Send();
-  }
 }
 
 /*********************************************************************

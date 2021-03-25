@@ -35,7 +35,7 @@
 
 #include "hal_led.h"
 #include "hal_uart.h"
-#include "hal_relay.h"
+#include "hal_soundvibration.h"
 
 /*********************************************************************
  * MACROS
@@ -200,11 +200,12 @@ void Smart_home_Init( uint8 task_id )
   Coordinator_DstAddr.endPoint = 0;
   Coordinator_DstAddr.addr.shortAddr = 0;
   
-  //传感器初始化
-  HalSoundVbInit();
   
   ZDO_RegisterForZDOMsg( Smart_home_TaskID, End_Device_Bind_rsp );
   ZDO_RegisterForZDOMsg( Smart_home_TaskID, Match_Desc_rsp );
+
+  //传感器初始化
+  HalSoundVbInit();
   
   // 打开定时器，描述符匹配事件
   osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_MATCHRSP_EVT, 
@@ -381,7 +382,7 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
   
   switch ( pkt->clusterId )
   {
-    case Smart_home_CLUSTERID_TEMPLIGHTMSG:
+    case Smart_home_CLUSTERID_SOUNDVBMSG:
     {    
       break;
     } 

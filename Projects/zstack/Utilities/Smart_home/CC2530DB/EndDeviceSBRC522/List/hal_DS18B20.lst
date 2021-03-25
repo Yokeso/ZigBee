@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.40194/W32 for 8051         03/Jan/2021  22:15:18 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         25/Mar/2021  12:55:56 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -9,19 +9,16 @@
 #    Calling convention =  xdata reentrant                                    #
 #    Constant location  =  data_rom                                           #
 #    Dptr setup         =  1,16                                               #
-#    Source file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Components\hal\target\CC2530SB\hal_DS18 #
-#                          B20.c                                              #
-#    Command line       =  -f D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
-#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
-#                          DB\..\..\..\Tools\CC2530DB\f8wEndev.cfg            #
-#                          (-DCPU32MHZ -DROOT=__near_func                     #
+#    Source file        =  D:\毕设\CC2530-smart_home\Components\hal\target\CC #
+#                          2530SB\hal_DS18B20.c                               #
+#    Command line       =  -f D:\毕设\CC2530-smart_home\Projects\zstack\Utili #
+#                          ties\Smart_home\CC2530DB\..\..\..\Tools\CC2530DB\f #
+#                          8wEndev.cfg (-DCPU32MHZ -DROOT=__near_func         #
 #                          -DMAC_CFG_TX_DATA_MAX=3 -DMAC_CFG_TX_MAX=6         #
-#                          -DMAC_CFG_RX_MAX=3) -f D:\Projects_IAR\IAR_C8051\W #
-#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\ #
-#                          MY_BOARD\Exp4\CC2530DB\..\..\..\Tools\CC2530DB\f8w #
-#                          Config.cfg (-DZIGBEEPRO -DSECURE=0                 #
-#                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
+#                          -DMAC_CFG_RX_MAX=3) -f D:\毕设\CC2530-smart_home\P #
+#                          rojects\zstack\Utilities\Smart_home\CC2530DB\..\.. #
+#                          \..\Tools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO      #
+#                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR       #
 #                          -DDEFAULT_CHANLIST=0x02000000                      #
 #                          -DZDAPP_CONFIG_PAN_ID=0x1001                       #
 #                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
@@ -43,95 +40,81 @@
 #                          __code" -DGENERIC=__generic                        #
 #                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
-#                          -DREJOIN_POLL_RATE=440 D:\Projects_IAR\IAR_C8051\W #
-#                          SN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\t #
-#                          arget\CC2530SB\hal_DS18B20.c -D xHAL_UART=TRUE -D  #
-#                          xHAL_UART_TEST -D xPOWER_SAVING -lC                #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          EndDeviceSBRC522\List\ -lA                         #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          EndDeviceSBRC522\List\ --diag_suppress             #
-#                          Pe001,Pa010 -o D:\Projects_IAR\IAR_C8051\WSN-CC253 #
-#                          0\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD #
-#                          \Exp4\CC2530DB\EndDeviceSBRC522\Obj\ -e            #
+#                          -DREJOIN_POLL_RATE=440 D:\毕设\CC2530-smart_home\C #
+#                          omponents\hal\target\CC2530SB\hal_DS18B20.c -D     #
+#                          xHAL_UART=TRUE -D xHAL_UART_TEST -D xPOWER_SAVING  #
+#                          -lC D:\毕设\CC2530-smart_home\Projects\zstack\Util #
+#                          ities\Smart_home\CC2530DB\EndDeviceSBRC522\List\   #
+#                          -lA D:\毕设\CC2530-smart_home\Projects\zstack\Util #
+#                          ities\Smart_home\CC2530DB\EndDeviceSBRC522\List\   #
+#                          --diag_suppress Pe001,Pa010 -o                     #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\EndDeviceSBRC522\Obj\ -e     #
 #                          --no_code_motion --debug --core=plain --dptr=16,1  #
 #                          --data_model=large --code_model=banked             #
 #                          --calling_convention=xdata_reentrant               #
 #                          --place_constants=data_rom --nr_virtual_regs 16    #
-#                          -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2 #
-#                          530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530 #
-#                          DB\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack #
-#                          -CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC #
-#                          2530DB\..\Source\ -I D:\Projects_IAR\IAR_C8051\WSN #
-#                          -CC2530\ZStack-CC2530-2.5.1a_EB\Projects\zstack\MY #
-#                          _BOARD\Exp4\CC2530DB\..\..\..\ZMain\TI2530DB\ -I   #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\hal\include\ -I          #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\hal\target\CC2530SB\ -I  #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\mac\include\ -I          #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\mac\high_level\ -I       #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\mac\low_level\srf04\ -I  #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\mac\low_level\srf04\sing #
-#                          le_chip\ -I D:\Projects_IAR\IAR_C8051\WSN-CC2530\Z #
-#                          Stack-CC2530-2.5.1a_EB\Projects\zstack\MY_BOARD\Ex #
-#                          p4\CC2530DB\..\..\..\..\..\Components\mt\ -I       #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\osal\include\ -I         #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\services\saddr\ -I       #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\services\sdata\ -I       #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\stack\af\ -I             #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\stack\nwk\ -I            #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\stack\sapi\ -I           #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\stack\sec\ -I            #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\stack\sys\ -I            #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\stack\zdo\ -I            #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\zmac\ -I                 #
-#                          D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          ..\..\..\..\..\Components\zmac\f8w\ -Ohz           #
-#    List file          =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          EndDeviceSBRC522\List\hal_DS18B20.lst              #
-#    Object file        =  D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530 #
-#                          -2.5.1a_EB\Projects\zstack\MY_BOARD\Exp4\CC2530DB\ #
-#                          EndDeviceSBRC522\Obj\hal_DS18B20.r51               #
+#                          -I D:\毕设\CC2530-smart_home\Projects\zstack\Utili #
+#                          ties\Smart_home\CC2530DB\ -I                       #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\Source\ -I                #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\ZMain\TI2530DB\ -I  #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\ha #
+#                          l\include\ -I D:\毕设\CC2530-smart_home\Projects\z #
+#                          stack\Utilities\Smart_home\CC2530DB\..\..\..\..\.. #
+#                          \Components\hal\target\CC2530SB\ -I                #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\ma #
+#                          c\include\ -I D:\毕设\CC2530-smart_home\Projects\z #
+#                          stack\Utilities\Smart_home\CC2530DB\..\..\..\..\.. #
+#                          \Components\mac\high_level\ -I                     #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\ma #
+#                          c\low_level\srf04\ -I D:\毕设\CC2530-smart_home\Pr #
+#                          ojects\zstack\Utilities\Smart_home\CC2530DB\..\..\ #
+#                          ..\..\..\Components\mac\low_level\srf04\single_chi #
+#                          p\ -I D:\毕设\CC2530-smart_home\Projects\zstack\Ut #
+#                          ilities\Smart_home\CC2530DB\..\..\..\..\..\Compone #
+#                          nts\mt\ -I D:\毕设\CC2530-smart_home\Projects\zsta #
+#                          ck\Utilities\Smart_home\CC2530DB\..\..\..\..\..\Co #
+#                          mponents\osal\include\ -I                          #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\se #
+#                          rvices\saddr\ -I D:\毕设\CC2530-smart_home\Project #
+#                          s\zstack\Utilities\Smart_home\CC2530DB\..\..\..\.. #
+#                          \..\Components\services\sdata\ -I                  #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\st #
+#                          ack\af\ -I D:\毕设\CC2530-smart_home\Projects\zsta #
+#                          ck\Utilities\Smart_home\CC2530DB\..\..\..\..\..\Co #
+#                          mponents\stack\nwk\ -I D:\毕设\CC2530-smart_home\P #
+#                          rojects\zstack\Utilities\Smart_home\CC2530DB\..\.. #
+#                          \..\..\..\Components\stack\sapi\ -I                #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\st #
+#                          ack\sec\ -I D:\毕设\CC2530-smart_home\Projects\zst #
+#                          ack\Utilities\Smart_home\CC2530DB\..\..\..\..\..\C #
+#                          omponents\stack\sys\ -I D:\毕设\CC2530-smart_home\ #
+#                          Projects\zstack\Utilities\Smart_home\CC2530DB\..\. #
+#                          .\..\..\..\Components\stack\zdo\ -I                #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\zm #
+#                          ac\ -I D:\毕设\CC2530-smart_home\Projects\zstack\U #
+#                          tilities\Smart_home\CC2530DB\..\..\..\..\..\Compon #
+#                          ents\zmac\f8w\ -Ohz                                #
+#    List file          =  D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\EndDeviceSBRC522\List\hal_DS #
+#                          18B20.lst                                          #
+#    Object file        =  D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\EndDeviceSBRC522\Obj\hal_DS1 #
+#                          8B20.r51                                           #
 #                                                                             #
 #                                                                             #
 ###############################################################################
 
-D:\Projects_IAR\IAR_C8051\WSN-CC2530\ZStack-CC2530-2.5.1a_EB\Components\hal\target\CC2530SB\hal_DS18B20.c
+D:\毕设\CC2530-smart_home\Components\hal\target\CC2530SB\hal_DS18B20.c
       1          /*****************************************************************************
       2          *
       3          * 文 件 名：hal_ds18b20.c

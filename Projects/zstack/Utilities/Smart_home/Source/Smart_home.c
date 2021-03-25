@@ -1013,7 +1013,7 @@ static void Smart_home_Display(void)
           else {HalLcdWriteString( "No Card", HAL_LCD_LINE_2 );}
           
 
-          HalLcdWriteStringValueValue( "", Data1, 16, "", Data2, 16, HAL_LCD_LINE_3 );
+          HalLcdWriteStringValueValue( "ID: ", Data1, 16, "", Data2, 16, HAL_LCD_LINE_3 );
           
           static uint8 percent;
           percent = (3 * 100) / LCD_PAGE_MAX;
