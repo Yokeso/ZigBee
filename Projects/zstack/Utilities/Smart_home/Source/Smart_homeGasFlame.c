@@ -126,7 +126,6 @@ const endPointDesc_t Smart_home_epDesc =
 
 afAddrType_t Coordinator_DstAddr;
 
-devStates_t Humit_NwkState;
 
 static uint8 gasFlameBuf[2]; //ÐÅºÅ»º´æ
 
@@ -377,6 +376,7 @@ void Smart_home_HandleKeys( uint8 shift, uint8 keys )
   
   if ( keys & HAL_KEY_SW_5 )
   {
+    gasFlameBuf[0] = 1;
   }
 
 }

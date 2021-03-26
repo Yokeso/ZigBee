@@ -43,6 +43,8 @@
 //3.23  屏幕显示的小bug
 #define SMART_HOME_SEND_DELAY   500
 #define SMART_HOME_MATCH_DELAY  1000
+
+#define SMART_HOME_CHECK_DELAY     100
 /*********************************************************************
  * CONSTANTS
  */
@@ -159,6 +161,7 @@ static void Smart_home_HandleKeys( uint8 shift, uint8 keys );
 static void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt );
 static void Smart_home_Send(void);
 static void Smart_home_Resp(void);
+static void Smart_home_CHECK_EVT(void);
 static void Smart_home_CallBack(uint8 port, uint8 event);
 
 /*********************************************************************
@@ -206,6 +209,10 @@ void Smart_home_Init( uint8 task_id )
 
   //传感器初始化
   HalSoundVbInit();
+  
+  // 打开定时器吗，进行信号检查
+  osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_HALCHECK_EVT,
+                                               SMART_HOME_CHECK_DELAY );  
   
   // 打开定时器，描述符匹配事件
   osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_MATCHRSP_EVT, 
@@ -282,6 +289,12 @@ UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
     return ( events ^ SMART_HOME_SEND_MSG_EVT );
   }
 
+  if ( events & SMART_HOME_HALCHECK_EVT )
+  {
+    Smart_home_CHECK_EVT();
+    return ( events ^ SMART_HOME_HALCHECK_EVT );
+  }  
+  
   if ( events & SMART_HOME_BINDRSP_EVT )
   {
     Smart_home_Resp();
@@ -431,6 +444,51 @@ static void Smart_home_Send(void)
   // 清除报警信息
   soundVbBuf[0] = 0;
   soundVbBuf[1] = 0;
+}
+
+
+/*********************************************************************
+ * @fn      Smart_home_CHECK_EVT
+ *
+ * @brief   设备控制检查，为了发送消息做准备.
+ *
+ * @param   none
+ *
+ * @return  none
+ */
+static void Smart_home_CHECK_EVT(void)
+{
+  static uint8 soundAlertCnt, vibrationAlertCnt;
+  
+  if (HalSoundCheck())
+  {
+    soundAlertCnt++;      // 检测到报警信号，计数值+1
+  }
+  else 
+  {
+    soundAlertCnt = 0;    // 未检测到报警信号，计数值清零
+  }
+     
+  if (HalVibrationCheck())
+  {
+    vibrationAlertCnt++;   // 检测到报警信号，计数值+1
+  }
+  else
+  {
+    vibrationAlertCnt = 0; // 未检测到报警信号，计数值清零
+  }
+  
+  if (soundAlertCnt > 1)
+  {
+    soundVbBuf[0] = 1;
+    soundAlertCnt = 0;
+  }
+  
+  if (vibrationAlertCnt > 1)
+  {
+    soundVbBuf[1] = 1;
+    vibrationAlertCnt = 0;
+  }  
 }
 
 /*********************************************************************

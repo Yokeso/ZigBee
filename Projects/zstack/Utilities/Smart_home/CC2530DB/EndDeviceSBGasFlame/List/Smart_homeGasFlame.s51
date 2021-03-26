@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        25/Mar/2021  11:38:38 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        26/Mar/2021  10:54:28 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -529,7 +529,7 @@ Smart_home_ProcessEvent SYMBOL "Smart_home_ProcessEvent"
 
 // D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_homeGasFlame.c
 //    1 /*******************************************************************
-//    2   文件名：Smart_homeTempLight.c
+//    2   文件名：Smart_homeGasFlame.c
 //    3   作 者： 柳成林
 //    4   功 能： 烟雾火焰测功能节点，实现对烟雾火焰的检测，收集温烟雾火焰信
 //    5           息并发送给传感器
@@ -1078,17 +1078,6 @@ Smart_home_ProcessEvent:
         ARGFRAME XSTACK, 29, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL Smart_home_ProcessEvent, Smart_home_ProcessZDOMsgs
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 21, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 21, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL Smart_home_ProcessEvent, osal_msg_deallocate
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -1101,6 +1090,17 @@ Smart_home_ProcessEvent:
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL Smart_home_ProcessEvent, osal_msg_receive
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 21, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 21, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL Smart_home_ProcessEvent, Smart_home_ProcessZDOMsgs
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
         LOCFRAME XSTACK, 21, STACK
@@ -1173,7 +1173,8 @@ Smart_home_ProcessEvent:
 //  239   
 //  240   if ( events & SYS_EVENT_MSG )
         ANL     A,#0x80
-        JNZ     ??Smart_home_ProcessEvent_0
+        JZ      $+5
+        LJMP    ??Smart_home_ProcessEvent_0 & 0xFFFF
 //  241   {
 //  242     afIncomingMSGPacket_t *MSGpkt;
 //  243 
@@ -1280,13 +1281,15 @@ Smart_home_ProcessEvent:
         LJMP    ??Smart_home_ProcessEvent_4 & 0xFFFF
 //  288   }
 ??Smart_home_ProcessEvent_5:
-        MOV     DPL,R2
-        MOV     DPH,R3
+        INC     DPTR
+        INC     DPTR
+        INC     DPTR
         MOVX    A,@DPTR
-        XRL     A,#0xd3
-        JNZ     ??Smart_home_ProcessEvent_6
-        ; Setup parameters for call to function Smart_home_ProcessZDOMsgs
-        LCALL   ??Smart_home_ProcessZDOMsgs?relay
+        MOV     C,0xE0 /* A   */.2
+        JNC     ??Smart_home_ProcessEvent_6
+        MOV     DPTR,#gasFlameBuf
+        MOV     A,#0x1
+        MOVX    @DPTR,A
 ??Smart_home_ProcessEvent_6:
         ; Setup parameters for call to function osal_msg_deallocate
         MOV     R2,?V0 + 0
@@ -1302,7 +1305,18 @@ Smart_home_ProcessEvent:
         MOV     ?V0 + 1,R3
         MOV     A,R2
         ORL     A,?V0 + 1
-        JNZ     ??Smart_home_ProcessEvent_5
+        JZ      ??Smart_home_ProcessEvent_7
+        MOV     DPL,R2
+        MOV     DPH,R3
+        MOVX    A,@DPTR
+        ADD     A,#0x40
+        JZ      ??Smart_home_ProcessEvent_5
+        ADD     A,#-0x13
+        JNZ     ??Smart_home_ProcessEvent_6
+        ; Setup parameters for call to function Smart_home_ProcessZDOMsgs
+        LCALL   ??Smart_home_ProcessZDOMsgs?relay
+        SJMP    ??Smart_home_ProcessEvent_6
+??Smart_home_ProcessEvent_7:
         MOV     A,R6
         MOV     R2,A
         MOV     A,R7
@@ -1314,8 +1328,8 @@ Smart_home_ProcessEvent:
         MOV     A,R6
         MOV     C,0xE0 /* A   */.0
         JC      $+5
-        LJMP    ??Smart_home_ProcessEvent_7 & 0xFFFF
-??Smart_home_ProcessEvent_8:
+        LJMP    ??Smart_home_ProcessEvent_8 & 0xFFFF
+??Smart_home_ProcessEvent_9:
         MOV     DPTR,#Smart_home_MsgID
         MOVX    A,@DPTR
         SWAP    A
@@ -1323,12 +1337,12 @@ Smart_home_ProcessEvent:
         MOV     R2,A
         CLR     C
         SUBB    A,#0xa
-        JNC     ??Smart_home_ProcessEvent_9
+        JNC     ??Smart_home_ProcessEvent_10
         MOV     R0,#0x30
-        SJMP    ??Smart_home_ProcessEvent_10
-??Smart_home_ProcessEvent_9:
-        MOV     R0,#0x37
+        SJMP    ??Smart_home_ProcessEvent_11
 ??Smart_home_ProcessEvent_10:
+        MOV     R0,#0x37
+??Smart_home_ProcessEvent_11:
         MOV     A,R0
         ADD     A,R2
         MOV     DPTR,#Coordinator_Msg + 2
@@ -1339,12 +1353,12 @@ Smart_home_ProcessEvent:
         MOV     R2,A
         CLR     C
         SUBB    A,#0xa
-        JNC     ??Smart_home_ProcessEvent_11
+        JNC     ??Smart_home_ProcessEvent_12
         MOV     R0,#0x30
-        SJMP    ??Smart_home_ProcessEvent_12
-??Smart_home_ProcessEvent_11:
-        MOV     R0,#0x37
+        SJMP    ??Smart_home_ProcessEvent_13
 ??Smart_home_ProcessEvent_12:
+        MOV     R0,#0x37
+??Smart_home_ProcessEvent_13:
         MOV     A,R0
         ADD     A,R2
         MOV     DPTR,#Coordinator_Msg + 3
@@ -1395,7 +1409,7 @@ Smart_home_ProcessEvent:
         CFI CFA_XSP16 add(XSP16, 21)
         MOV     A,R1
         JNZ     $+5
-        LJMP    ??Smart_home_ProcessEvent_8 & 0xFFFF
+        LJMP    ??Smart_home_ProcessEvent_9 & 0xFFFF
         MOV     DPTR,#gasFlameBuf
         CLR     A
         MOVX    @DPTR,A
@@ -1410,9 +1424,9 @@ Smart_home_ProcessEvent:
 //  294   }
 //  295 
 //  296   if ( events & SMART_HOME_BINDRSP_EVT )
-??Smart_home_ProcessEvent_7:
+??Smart_home_ProcessEvent_8:
         ANL     A,#0x20
-        JZ      ??Smart_home_ProcessEvent_13
+        JZ      ??Smart_home_ProcessEvent_14
 //  297   {
 //  298     Smart_home_Resp();
 //  299     return ( events ^ SMART_HOME_BINDRSP_EVT );
@@ -1423,47 +1437,47 @@ Smart_home_ProcessEvent:
 //  300   }
 //  301     
 //  302   if ( events & SMART_HOME_HALCHECK_EVT )
-??Smart_home_ProcessEvent_13:
+??Smart_home_ProcessEvent_14:
         MOV     A,R6
         ANL     A,#0x40
-        JZ      ??Smart_home_ProcessEvent_14
+        JZ      ??Smart_home_ProcessEvent_15
 //  303   {
 //  304     Smart_home_CHECK_EVT();
         ; Setup parameters for call to function HalGasCheck
         LCALL   ??HalGasCheck?relay
         MOV     A,R1
-        JZ      ??Smart_home_ProcessEvent_15
-        MOV     DPTR,#??gasAlertCnt
-        MOVX    A,@DPTR
-        INC     A
-        MOVX    @DPTR,A
-??Smart_home_ProcessEvent_15:
-        ; Setup parameters for call to function HalFlameCheck
-        LCALL   ??HalFlameCheck?relay
-        MOV     A,R1
         JZ      ??Smart_home_ProcessEvent_16
-        MOV     DPTR,#??flameAlertCnt
+        MOV     DPTR,#??gasAlertCnt
         MOVX    A,@DPTR
         INC     A
         MOVX    @DPTR,A
 ??Smart_home_ProcessEvent_16:
+        ; Setup parameters for call to function HalFlameCheck
+        LCALL   ??HalFlameCheck?relay
+        MOV     A,R1
+        JZ      ??Smart_home_ProcessEvent_17
+        MOV     DPTR,#??flameAlertCnt
+        MOVX    A,@DPTR
+        INC     A
+        MOVX    @DPTR,A
+??Smart_home_ProcessEvent_17:
         MOV     DPTR,#??gasAlertCnt
         MOVX    A,@DPTR
         CLR     C
         SUBB    A,#0x4
-        JC      ??Smart_home_ProcessEvent_17
+        JC      ??Smart_home_ProcessEvent_18
         MOV     DPTR,#gasFlameBuf
         MOV     A,#0x1
         MOVX    @DPTR,A
         MOV     DPTR,#??gasAlertCnt
         CLR     A
         MOVX    @DPTR,A
-??Smart_home_ProcessEvent_17:
+??Smart_home_ProcessEvent_18:
         MOV     DPTR,#??flameAlertCnt
         MOVX    A,@DPTR
         CLR     C
         SUBB    A,#0x4
-        JC      ??Smart_home_ProcessEvent_18
+        JC      ??Smart_home_ProcessEvent_19
         MOV     DPTR,#gasFlameBuf + 1
         MOV     A,#0x1
         MOVX    @DPTR,A
@@ -1471,14 +1485,14 @@ Smart_home_ProcessEvent:
         CLR     A
         MOVX    @DPTR,A
 //  305     return ( events ^ SMART_HOME_HALCHECK_EVT );
-??Smart_home_ProcessEvent_18:
+??Smart_home_ProcessEvent_19:
         MOV     A,R6
         XRL     A,#0x40
         LJMP    ??Smart_home_ProcessEvent_2 & 0xFFFF
 //  306   }
 //  307   
 //  308   return ( 0 );  // Discard unknown events.
-??Smart_home_ProcessEvent_14:
+??Smart_home_ProcessEvent_15:
         MOV     R2,#0x0
         MOV     R3,#0x0
 ??Smart_home_ProcessEvent_4:
@@ -1921,117 +1935,118 @@ Smart_home_ProcessZDOMsgs:
 //  377   
 //  378   if ( keys & HAL_KEY_SW_5 )
 //  379   {
-//  380   }
-//  381 
-//  382 }
-//  383 
-//  384 /*********************************************************************
-//  385  * @fn      Smart_home_ProcessMSGCmd
-//  386  *
-//  387  * @brief   Data message processor callback. This function processes
-//  388  *          any incoming data - probably from other devices. Based
-//  389  *          on the cluster ID, perform the intended action.
-//  390  *
-//  391  * @param   pkt - pointer to the incoming message packet
-//  392  *
-//  393  * @return  TRUE if the 'pkt' parameter is being used and will be freed later,
-//  394  *          FALSE otherwise.
-//  395  */
-//  396 void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
-//  397 {
-//  398   uint8 mode;
-//  399   
-//  400   switch ( pkt->clusterId )
-//  401   {
-//  402     case Smart_home_CLUSTERID_GASFLAMEMSG:
-//  403     {    
-//  404       break;
-//  405     } 
-//  406     // Could receive control messages in the future.
-//  407     default:
-//  408       break;
-//  409   }
-//  410 }
-//  411 
-//  412 /*********************************************************************
-//  413  * @fn      Smart_home_Send
-//  414  *
-//  415  * @brief   Send data OTA.
-//  416  *
-//  417  * @param   none
-//  418  *
-//  419  * @return  none
-//  420  */
-//  421 static void Smart_home_Send(void)
-//  422 {
-//  423   uint8 tmp; 
-//  424   
-//  425   do{
-//  426     // put the sequence number in the message
-//  427     tmp = HI_UINT8( Smart_home_MsgID );
-//  428     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
-//  429     Coordinator_Msg[2] = tmp;
-//  430     tmp = LO_UINT8( Smart_home_MsgID );
-//  431     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
-//  432     Coordinator_Msg[3] = tmp;
-//  433     
-//  434     // 发送给协调器命令 
-//  435     Coordinator_Msg[4] = gasFlameBuf[1]<<1 | gasFlameBuf[0];;  //0位气体报警，1位火焰
-//  436     
-//  437     tmp = AF_DataRequest( &Coordinator_DstAddr,                         
-//  438                           (endPointDesc_t *)&Smart_home_epDesc,                  
-//  439                            Smart_home_CLUSTERID_GASFLAMEMSG,
-//  440                            GASFLAMEMSG_LEN,                 
-//  441                            Coordinator_Msg,                    
-//  442                           &Smart_home_MsgID,                       
-//  443                            AF_DISCV_ROUTE,                     
-//  444                            AF_DEFAULT_RADIUS );
-//  445   }while (afStatus_SUCCESS == tmp);   
-//  446   
-//  447   // 发送成功后清除报警信息
-//  448   gasFlameBuf[0] = 0;
-//  449   gasFlameBuf[1] = 0;  
-//  450 }
-//  451 
-//  452 /*********************************************************************
-//  453  * @fn      Smart_home_Resp
-//  454  *
-//  455  * @brief   Send data OTA.
-//  456  *
-//  457  * @param   none
-//  458  *
-//  459  * @return  none
-//  460  */
-//  461 static void Smart_home_Resp(void)
-//  462 {
-//  463   /*
-//  464   if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_RxAddr,
-//  465                                          (endPointDesc_t *)&Smart_home_epDesc,
-//  466                                           Smart_home_CLUSTERID2,
-//  467                                           SERIAL_APP_RSP_CNT, Smart_home_RspBuf,
-//  468                                          &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
-//  469   {
-//  470     osal_set_event(Smart_home_TaskID, SMART_HOME_BINDRSP_EVT);
-//  471   }
-//  472   */
-//  473 }
-//  474 
+//  380     gasFlameBuf[0] = 1;
+//  381   }
+//  382 
+//  383 }
+//  384 
+//  385 /*********************************************************************
+//  386  * @fn      Smart_home_ProcessMSGCmd
+//  387  *
+//  388  * @brief   Data message processor callback. This function processes
+//  389  *          any incoming data - probably from other devices. Based
+//  390  *          on the cluster ID, perform the intended action.
+//  391  *
+//  392  * @param   pkt - pointer to the incoming message packet
+//  393  *
+//  394  * @return  TRUE if the 'pkt' parameter is being used and will be freed later,
+//  395  *          FALSE otherwise.
+//  396  */
+//  397 void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
+//  398 {
+//  399   uint8 mode;
+//  400   
+//  401   switch ( pkt->clusterId )
+//  402   {
+//  403     case Smart_home_CLUSTERID_GASFLAMEMSG:
+//  404     {    
+//  405       break;
+//  406     } 
+//  407     // Could receive control messages in the future.
+//  408     default:
+//  409       break;
+//  410   }
+//  411 }
+//  412 
+//  413 /*********************************************************************
+//  414  * @fn      Smart_home_Send
+//  415  *
+//  416  * @brief   Send data OTA.
+//  417  *
+//  418  * @param   none
+//  419  *
+//  420  * @return  none
+//  421  */
+//  422 static void Smart_home_Send(void)
+//  423 {
+//  424   uint8 tmp; 
+//  425   
+//  426   do{
+//  427     // put the sequence number in the message
+//  428     tmp = HI_UINT8( Smart_home_MsgID );
+//  429     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+//  430     Coordinator_Msg[2] = tmp;
+//  431     tmp = LO_UINT8( Smart_home_MsgID );
+//  432     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+//  433     Coordinator_Msg[3] = tmp;
+//  434     
+//  435     // 发送给协调器命令 
+//  436     Coordinator_Msg[4] = gasFlameBuf[1]<<1 | gasFlameBuf[0];  //0位气体报警，1位火焰
+//  437     
+//  438     tmp = AF_DataRequest( &Coordinator_DstAddr,                         
+//  439                           (endPointDesc_t *)&Smart_home_epDesc,                  
+//  440                            Smart_home_CLUSTERID_GASFLAMEMSG,
+//  441                            GASFLAMEMSG_LEN,                 
+//  442                            Coordinator_Msg,                    
+//  443                           &Smart_home_MsgID,                       
+//  444                            AF_DISCV_ROUTE,                     
+//  445                            AF_DEFAULT_RADIUS );
+//  446   }while (afStatus_SUCCESS == tmp);   
+//  447   
+//  448   // 发送成功后清除报警信息
+//  449   gasFlameBuf[0] = 0;
+//  450   gasFlameBuf[1] = 0;  
+//  451 }
+//  452 
+//  453 /*********************************************************************
+//  454  * @fn      Smart_home_Resp
+//  455  *
+//  456  * @brief   Send data OTA.
+//  457  *
+//  458  * @param   none
+//  459  *
+//  460  * @return  none
+//  461  */
+//  462 static void Smart_home_Resp(void)
+//  463 {
+//  464   /*
+//  465   if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_RxAddr,
+//  466                                          (endPointDesc_t *)&Smart_home_epDesc,
+//  467                                           Smart_home_CLUSTERID2,
+//  468                                           SERIAL_APP_RSP_CNT, Smart_home_RspBuf,
+//  469                                          &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
+//  470   {
+//  471     osal_set_event(Smart_home_TaskID, SMART_HOME_BINDRSP_EVT);
+//  472   }
+//  473   */
+//  474 }
 //  475 
-//  476 /*********************************************************************
-//  477  * @fn      Smart_home_CHECK_EVT()
-//  478  *
-//  479  * @brief   Send data OTA.
-//  480  *
-//  481  * @param   none
-//  482  *
-//  483  * @return  none
-//  484  */
-//  485 static void Smart_home_CHECK_EVT(void)
-//  486 {
+//  476 
+//  477 /*********************************************************************
+//  478  * @fn      Smart_home_CHECK_EVT()
+//  479  *
+//  480  * @brief   Send data OTA.
+//  481  *
+//  482  * @param   none
+//  483  *
+//  484  * @return  none
+//  485  */
+//  486 static void Smart_home_CHECK_EVT(void)
+//  487 {
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//  487   static uint8 gasAlertCnt, flameAlertCnt;
+//  488   static uint8 gasAlertCnt, flameAlertCnt;
 ??gasAlertCnt:
         DS 1
         REQUIRE __INIT_XDATA_Z
@@ -2041,53 +2056,53 @@ Smart_home_ProcessZDOMsgs:
 ??flameAlertCnt:
         DS 1
         REQUIRE __INIT_XDATA_Z
-//  488   
-//  489   // MQ2烟雾气体检测
-//  490   if (HalGasCheck())
-//  491   {
-//  492     gasAlertCnt++;
-//  493   }
-//  494   
-//  495   // 火焰检测
-//  496   if (HalFlameCheck())
-//  497   {
-//  498     flameAlertCnt++;
-//  499   }
-//  500   
-//  501   if (gasAlertCnt > ALARM_MAX_CNT)
-//  502   {
-//  503     gasFlameBuf[0] = 1;
-//  504     gasAlertCnt = 0;
-//  505   }
-//  506   
-//  507   if (flameAlertCnt > ALARM_MAX_CNT)
-//  508   {
-//  509     gasFlameBuf[1] = 1;
-//  510     flameAlertCnt = 0;
-//  511   }
-//  512 }
-//  513 
-//  514 /*********************************************************************
-//  515  * @fn      Smart_home_CallBack
-//  516  *
-//  517  * @brief   Send data OTA.
-//  518  *
-//  519  * @param   port - UART port.
-//  520  * @param   event - the UART port event flag.
-//  521  *
-//  522  * @return  none
-//  523  */
+//  489   
+//  490   // MQ2烟雾气体检测
+//  491   if (HalGasCheck())
+//  492   {
+//  493     gasAlertCnt++;
+//  494   }
+//  495   
+//  496   // 火焰检测
+//  497   if (HalFlameCheck())
+//  498   {
+//  499     flameAlertCnt++;
+//  500   }
+//  501   
+//  502   if (gasAlertCnt > ALARM_MAX_CNT)
+//  503   {
+//  504     gasFlameBuf[0] = 1;
+//  505     gasAlertCnt = 0;
+//  506   }
+//  507   
+//  508   if (flameAlertCnt > ALARM_MAX_CNT)
+//  509   {
+//  510     gasFlameBuf[1] = 1;
+//  511     flameAlertCnt = 0;
+//  512   }
+//  513 }
+//  514 
+//  515 /*********************************************************************
+//  516  * @fn      Smart_home_CallBack
+//  517  *
+//  518  * @brief   Send data OTA.
+//  519  *
+//  520  * @param   port - UART port.
+//  521  * @param   event - the UART port event flag.
+//  522  *
+//  523  * @return  none
+//  524  */
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  524 static void Smart_home_CallBack(uint8 port, uint8 event)
+//  525 static void Smart_home_CallBack(uint8 port, uint8 event)
 Smart_home_CallBack:
         CFI Block cfiBlock8 Using cfiCommon0
         CFI Function Smart_home_CallBack
         CODE
-//  525 {
+//  526 {
         ; Saved register size: 0
         ; Auto size: 0
-//  526 }
+//  527 }
         LJMP    ?BRET
         CFI EndBlock cfiBlock8
 
@@ -2126,16 +2141,16 @@ Smart_home_CallBack:
         DB "Match Success!\012"
 
         END
-//  527 
-//  528 /*********************************************************************
-//  529 *********************************************************************/
+//  528 
+//  529 /*********************************************************************
+//  530 *********************************************************************/
 // 
-// 842 bytes in segment BANKED_CODE
+// 865 bytes in segment BANKED_CODE
 //  24 bytes in segment BANK_RELAYS
 //  53 bytes in segment XDATA_ROM_C
 //  24 bytes in segment XDATA_Z
 // 
-// 866 bytes of CODE  memory
+// 889 bytes of CODE  memory
 //  53 bytes of CONST memory
 //  24 bytes of XDATA memory
 //

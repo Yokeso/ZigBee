@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         25/Mar/2021  01:37:30 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         26/Mar/2021  11:29:34 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -531,90 +531,89 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00003A   7403         MOV     A,#0x3
    \   00003C   12....       LCALL   ?XSTACK_DISP0_8
    \   00003F   7440         MOV     A,#0x40
-   \   000041   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \   000041   12....       LCALL   ??Subroutine32_0 & 0xFFFF
     282            uartConfig.rx.maxBufSize        = SMART_HOME_RX_SZ;  // 2x30 don't care - see uart driver.
-   \                     ??CrossCallReturnLabel_25:
+   \                     ??CrossCallReturnLabel_69:
    \   000044   740A         MOV     A,#0xa
    \   000046   12....       LCALL   ?XSTACK_DISP0_8
-   \   000049   7480         MOV     A,#-0x80
-   \   00004B   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \   000049   12....       LCALL   ?Subroutine9 & 0xFFFF
     283            uartConfig.tx.maxBufSize        = SMART_HOME_TX_SZ;  // 2x30 don't care - see uart driver.
-   \                     ??CrossCallReturnLabel_26:
-   \   00004E   7412         MOV     A,#0x12
-   \   000050   12....       LCALL   ?XSTACK_DISP0_8
-   \   000053   7480         MOV     A,#-0x80
-   \   000055   12....       LCALL   ?Subroutine10 & 0xFFFF
+   \                     ??CrossCallReturnLabel_78:
+   \   00004C   7412         MOV     A,#0x12
+   \   00004E   12....       LCALL   ?XSTACK_DISP0_8
+   \   000051   12....       LCALL   ?Subroutine9 & 0xFFFF
     284            uartConfig.idleTimeout          = SMART_HOME_IDLE;   // 2x30 don't care - see uart driver.
-   \                     ??CrossCallReturnLabel_20:
-   \   000058   12....       LCALL   ?XSTACK_DISP0_8
-   \   00005B   7406         MOV     A,#0x6
-   \   00005D   F0           MOVX    @DPTR,A
+   \                     ??CrossCallReturnLabel_79:
+   \   000054   7405         MOV     A,#0x5
+   \   000056   12....       LCALL   ?XSTACK_DISP0_8
+   \   000059   7406         MOV     A,#0x6
+   \   00005B   F0           MOVX    @DPTR,A
     285            uartConfig.intEnable            = TRUE;              // 2x30 don't care - see uart driver.
-   \   00005E   7416         MOV     A,#0x16
-   \   000060   12....       LCALL   ?XSTACK_DISP0_8
-   \   000063   7401         MOV     A,#0x1
-   \   000065   F0           MOVX    @DPTR,A
+   \   00005C   7416         MOV     A,#0x16
+   \   00005E   12....       LCALL   ?XSTACK_DISP0_8
+   \   000061   7401         MOV     A,#0x1
+   \   000063   F0           MOVX    @DPTR,A
     286            //uartConfig.callBackFunc         = Smart_home_CallBack;
     287            HalUARTOpen (SMART_HOME_PORT, &uartConfig);
-   \   000066                ; Setup parameters for call to function HalUARTOpen
-   \   000066   85..82       MOV     DPL,?XSP + 0
-   \   000069   85..83       MOV     DPH,?XSP + 1
-   \   00006C   AA82         MOV     R2,DPL
-   \   00006E   AB83         MOV     R3,DPH
-   \   000070   7900         MOV     R1,#0x0
-   \   000072   12....       LCALL   ??HalUARTOpen?relay
+   \   000064                ; Setup parameters for call to function HalUARTOpen
+   \   000064   85..82       MOV     DPL,?XSP + 0
+   \   000067   85..83       MOV     DPH,?XSP + 1
+   \   00006A   AA82         MOV     R2,DPL
+   \   00006C   AB83         MOV     R3,DPH
+   \   00006E   7900         MOV     R1,#0x0
+   \   000070   12....       LCALL   ??HalUARTOpen?relay
     288          
     289          #if defined ( LCD_SUPPORTED )
     290            HalLcdWriteString( "Smart_home", HAL_LCD_LINE_2 );
-   \   000075                ; Setup parameters for call to function HalLcdWriteString
-   \   000075   7902         MOV     R1,#0x2
-   \   000077   7A..         MOV     R2,#`?<Constant "Smart_home">` & 0xff
-   \   000079   7B..         MOV     R3,#(`?<Constant "Smart_home">` >> 8) & 0xff
-   \   00007B   12....       LCALL   ??HalLcdWriteString?relay
+   \   000073                ; Setup parameters for call to function HalLcdWriteString
+   \   000073   7902         MOV     R1,#0x2
+   \   000075   7A..         MOV     R2,#`?<Constant "Smart_home">` & 0xff
+   \   000077   7B..         MOV     R3,#(`?<Constant "Smart_home">` >> 8) & 0xff
+   \   000079   12....       LCALL   ??HalLcdWriteString?relay
     291          #endif
     292            
     293            ZDO_RegisterForZDOMsg( Smart_home_TaskID, End_Device_Bind_rsp );
-   \   00007E                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
-   \   00007E   7A20         MOV     R2,#0x20
-   \   000080   7B80         MOV     R3,#-0x80
-   \   000082   90....       MOV     DPTR,#Smart_home_TaskID
-   \   000085   E0           MOVX    A,@DPTR
-   \   000086   F9           MOV     R1,A
-   \   000087   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
+   \   00007C                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
+   \   00007C   7A20         MOV     R2,#0x20
+   \   00007E   7B80         MOV     R3,#-0x80
+   \   000080   90....       MOV     DPTR,#Smart_home_TaskID
+   \   000083   E0           MOVX    A,@DPTR
+   \   000084   F9           MOV     R1,A
+   \   000085   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
     294            ZDO_RegisterForZDOMsg( Smart_home_TaskID, Match_Desc_rsp );
-   \   00008A                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
-   \   00008A   7A06         MOV     R2,#0x6
-   \   00008C   7B80         MOV     R3,#-0x80
-   \   00008E   90....       MOV     DPTR,#Smart_home_TaskID
-   \   000091   E0           MOVX    A,@DPTR
-   \   000092   F9           MOV     R1,A
-   \   000093   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
+   \   000088                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
+   \   000088   7A06         MOV     R2,#0x6
+   \   00008A   7B80         MOV     R3,#-0x80
+   \   00008C   90....       MOV     DPTR,#Smart_home_TaskID
+   \   00008F   E0           MOVX    A,@DPTR
+   \   000090   F9           MOV     R1,A
+   \   000091   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
     295            
     296            //3.22 显示延时
     297            osal_start_timerEx( Smart_home_TaskID, SMART_HOME_DISPLAY_EVT, 
     298                                SMART_HOME_DEVICE_DISPLAY_DELAY);
-   \   000096                ; Setup parameters for call to function osal_start_timerEx
-   \   000096   7C10         MOV     R4,#0x10
-   \   000098   7D27         MOV     R5,#0x27
-   \   00009A   7A10         MOV     R2,#0x10
-   \   00009C   12....       LCALL   ??Subroutine33_0 & 0xFFFF
+   \   000094                ; Setup parameters for call to function osal_start_timerEx
+   \   000094   7C10         MOV     R4,#0x10
+   \   000096   7D27         MOV     R5,#0x27
+   \   000098   7A10         MOV     R2,#0x10
+   \   00009A   12....       LCALL   ??Subroutine31_0 & 0xFFFF
     299            
     300            
     301            //3.14 打开设备在线检测，第一次开启检测延时较长时间
     302            osal_start_timerEx( Smart_home_TaskID, SMART_HOME_DEVICE_CHECK_EVT, 
     303                                SMART_HOME_DEVICE_CHECK_DELAY);
-   \                     ??CrossCallReturnLabel_82:
-   \   00009F                ; Setup parameters for call to function osal_start_timerEx
-   \   00009F   7C88         MOV     R4,#-0x78
-   \   0000A1   7D13         MOV     R5,#0x13
-   \   0000A3   12....       LCALL   ?Subroutine17 & 0xFFFF
+   \                     ??CrossCallReturnLabel_67:
+   \   00009D                ; Setup parameters for call to function osal_start_timerEx
+   \   00009D   7C88         MOV     R4,#-0x78
+   \   00009F   7D13         MOV     R5,#0x13
+   \   0000A1   12....       LCALL   ?Subroutine14 & 0xFFFF
     304           
     305            //3.13 关闭LED灯(D4)，表示协调器默认不允许组网
     306            NLME_PermitJoiningRequest(0x00);
-   \                     ??CrossCallReturnLabel_80:
-   \   0000A6                ; Setup parameters for call to function NLME_PermitJoiningRequest
-   \   0000A6   7900         MOV     R1,#0x0
-   \   0000A8   12....       LCALL   ?Subroutine23 & 0xFFFF
+   \                     ??CrossCallReturnLabel_65:
+   \   0000A4                ; Setup parameters for call to function NLME_PermitJoiningRequest
+   \   0000A4   7900         MOV     R1,#0x0
+   \   0000A6   12....       LCALL   ?Subroutine21 & 0xFFFF
     307            HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);
     308            
     309            //3.21 初始化页面为0 第一页
@@ -623,50 +622,50 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
     312            //3.13 设备离线状态检测初始化，初始化为离线
     313            //3.21 修改为DeviceList方式，初始化DeviceCnt
     314            for(DeviceNum=1;DeviceNum<Smart_home_MAX_INCLUSTERS;DeviceNum++) //只初始化终端
-   \                     ??CrossCallReturnLabel_55:
-   \   0000AB   7D01         MOV     R5,#0x1
+   \                     ??CrossCallReturnLabel_42:
+   \   0000A9   7D01         MOV     R5,#0x1
     315            {
     316              DeviceList[DeviceNum].deviceid = DeviceNum;
    \                     ??Smart_home_Init_0:
-   \   0000AD   8D82         MOV     DPL,R5
-   \   0000AF   A882         MOV     R0,DPL
-   \   0000B1   E8           MOV     A,R0
-   \   0000B2   75F007       MOV     B,#0x7
-   \   0000B5   A4           MUL     AB
-   \   0000B6   FA           MOV     R2,A
-   \   0000B7   ABF0         MOV     R3,B
-   \   0000B9   74..         MOV     A,#DeviceList & 0xff
-   \   0000BB   2A           ADD     A,R2
-   \   0000BC   F582         MOV     DPL,A
-   \   0000BE   74..         MOV     A,#(DeviceList >> 8) & 0xff
-   \   0000C0   3B           ADDC    A,R3
-   \   0000C1   F583         MOV     DPH,A
-   \   0000C3   ED           MOV     A,R5
-   \   0000C4   F0           MOVX    @DPTR,A
+   \   0000AB   8D82         MOV     DPL,R5
+   \   0000AD   A882         MOV     R0,DPL
+   \   0000AF   E8           MOV     A,R0
+   \   0000B0   75F007       MOV     B,#0x7
+   \   0000B3   A4           MUL     AB
+   \   0000B4   FA           MOV     R2,A
+   \   0000B5   ABF0         MOV     R3,B
+   \   0000B7   74..         MOV     A,#DeviceList & 0xff
+   \   0000B9   2A           ADD     A,R2
+   \   0000BA   F582         MOV     DPL,A
+   \   0000BC   74..         MOV     A,#(DeviceList >> 8) & 0xff
+   \   0000BE   3B           ADDC    A,R3
+   \   0000BF   F583         MOV     DPH,A
+   \   0000C1   ED           MOV     A,R5
+   \   0000C2   F0           MOVX    @DPTR,A
     317              DeviceList[DeviceNum].deviceStatus = DEVICE_OFFLINE;
-   \   0000C5   A3           INC     DPTR
-   \   0000C6   7402         MOV     A,#0x2
-   \   0000C8   F0           MOVX    @DPTR,A
+   \   0000C3   A3           INC     DPTR
+   \   0000C4   7402         MOV     A,#0x2
+   \   0000C6   F0           MOVX    @DPTR,A
     318              DeviceCnt[DeviceNum]=0;
-   \   0000C9   74..         MOV     A,#DeviceCnt & 0xff
-   \   0000CB   28           ADD     A,R0
-   \   0000CC   F582         MOV     DPL,A
-   \   0000CE   74..         MOV     A,#(DeviceCnt >> 8) & 0xff
-   \   0000D0   3400         ADDC    A,#0x0
-   \   0000D2   F583         MOV     DPH,A
-   \   0000D4   E4           CLR     A
-   \   0000D5   F0           MOVX    @DPTR,A
+   \   0000C7   74..         MOV     A,#DeviceCnt & 0xff
+   \   0000C9   28           ADD     A,R0
+   \   0000CA   F582         MOV     DPL,A
+   \   0000CC   74..         MOV     A,#(DeviceCnt >> 8) & 0xff
+   \   0000CE   3400         ADDC    A,#0x0
+   \   0000D0   F583         MOV     DPH,A
+   \   0000D2   E4           CLR     A
+   \   0000D3   F0           MOVX    @DPTR,A
     319            }
-   \   0000D6   0D           INC     R5
-   \   0000D7   ED           MOV     A,R5
-   \   0000D8   C3           CLR     C
-   \   0000D9   9409         SUBB    A,#0x9
-   \   0000DB   40D0         JC      ??Smart_home_Init_0
+   \   0000D4   0D           INC     R5
+   \   0000D5   ED           MOV     A,R5
+   \   0000D6   C3           CLR     C
+   \   0000D7   9409         SUBB    A,#0x9
+   \   0000D9   40D0         JC      ??Smart_home_Init_0
     320          }
-   \   0000DD   741D         MOV     A,#0x1d
-   \   0000DF   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000E2                REQUIRE ?Subroutine0
-   \   0000E2                ; // Fall through to label ?Subroutine0
+   \   0000DB   741D         MOV     A,#0x1d
+   \   0000DD   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0000E0                REQUIRE ?Subroutine0
+   \   0000E0                ; // Fall through to label ?Subroutine0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine0:
@@ -674,13 +673,13 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine17:
+   \                     ?Subroutine14:
    \   000000   7A80         MOV     R2,#-0x80
-   \   000002                REQUIRE ??Subroutine33_0
-   \   000002                ; // Fall through to label ??Subroutine33_0
+   \   000002                REQUIRE ??Subroutine31_0
+   \   000002                ; // Fall through to label ??Subroutine31_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine33_0:
+   \                     ??Subroutine31_0:
    \   000000   7B00         MOV     R3,#0x0
    \   000002   90....       MOV     DPTR,#Smart_home_TaskID
    \   000005   E0           MOVX    A,@DPTR
@@ -689,7 +688,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00000A   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine23:
+   \                     ?Subroutine21:
    \   000000   12....       LCALL   ??NLME_PermitJoiningRequest?relay
    \   000003                ; Setup parameters for call to function HalLedSet
    \   000003                ; Setup parameters for call to function HalLedSet
@@ -699,21 +698,18 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00000A   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine12:
+   \                     ?Subroutine9:
+   \   000000   7480         MOV     A,#-0x80
+   \   000002                REQUIRE ??Subroutine32_0
+   \   000002                ; // Fall through to label ??Subroutine32_0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ??Subroutine32_0:
    \   000000   F0           MOVX    @DPTR,A
    \   000001   A3           INC     DPTR
    \   000002   E4           CLR     A
    \   000003   F0           MOVX    @DPTR,A
    \   000004   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine10:
-   \   000000   F0           MOVX    @DPTR,A
-   \   000001   A3           INC     DPTR
-   \   000002   E4           CLR     A
-   \   000003   F0           MOVX    @DPTR,A
-   \   000004   7405         MOV     A,#0x5
-   \   000006   22           RET
     321          
     322          /*********************************************************************
     323           * @fn      Smart_home_ProcessEvent
@@ -911,8 +907,8 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   0000AE   EB           MOV     A,R3
    \   0000AF   3400         ADDC    A,#0x0
    \   0000B1   F583         MOV     DPH,A
-   \   0000B3   12....       LCALL   ?Subroutine18 & 0xFFFF
-   \                     ??CrossCallReturnLabel_45:
+   \   0000B3   12....       LCALL   ?Subroutine15 & 0xFFFF
+   \                     ??CrossCallReturnLabel_28:
    \   0000B6   700A         JNZ     ??Smart_home_ProcessEvent_12
    \   0000B8                ; Setup parameters for call to function HalLedSet
    \   0000B8   7A01         MOV     R2,#0x1
@@ -978,8 +974,8 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \                     ??Smart_home_ProcessEvent_17:
    \   000108   E0           MOVX    A,@DPTR
    \   000109   FA           MOV     R2,A
-   \   00010A   12....       LCALL   ?Subroutine24 & 0xFFFF
-   \                     ??CrossCallReturnLabel_57:
+   \   00010A   12....       LCALL   ?Subroutine22 & 0xFFFF
+   \                     ??CrossCallReturnLabel_44:
    \   00010D   E0           MOVX    A,@DPTR
    \   00010E   90....       MOV     DPTR,#??Device_status
    \   000111   F0           MOVX    @DPTR,A
@@ -1000,28 +996,28 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000127   6401         XRL     A,#0x1
    \   000129   90....       MOV     DPTR,#??counttmp + 1
    \   00012C   6007         JZ      ??Smart_home_ProcessEvent_18
-   \   00012E   12....       LCALL   ??Subroutine32_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_75:
+   \   00012E   12....       LCALL   ??Subroutine30_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_60:
    \   000131   E0           MOVX    A,@DPTR
    \   000132   04           INC     A
    \   000133   8008         SJMP    ??Smart_home_ProcessEvent_19
    \                     ??Smart_home_ProcessEvent_18:
-   \   000135   12....       LCALL   ??Subroutine32_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_76:
+   \   000135   12....       LCALL   ??Subroutine30_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_61:
    \   000138   E4           CLR     A
    \   000139   F0           MOVX    @DPTR,A
    \   00013A   90....       MOV     DPTR,#??Device_status
    \                     ??Smart_home_ProcessEvent_19:
    \   00013D   F0           MOVX    @DPTR,A
    \   00013E   90....       MOV     DPTR,#??counttmp
-   \   000141   12....       LCALL   ?Subroutine18 & 0xFFFF
-   \                     ??CrossCallReturnLabel_46:
+   \   000141   12....       LCALL   ?Subroutine15 & 0xFFFF
+   \                     ??CrossCallReturnLabel_29:
    \   000144   C3           CLR     C
    \   000145   9404         SUBB    A,#0x4
    \   000147   400E         JC      ??Smart_home_ProcessEvent_20
    \   000149   90....       MOV     DPTR,#??counttmp + 1
-   \   00014C   12....       LCALL   ??Subroutine32_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_77:
+   \   00014C   12....       LCALL   ??Subroutine30_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_62:
    \   00014F   7403         MOV     A,#0x3
    \   000151   F0           MOVX    @DPTR,A
    \   000152   90....       MOV     DPTR,#??Device_status
@@ -1033,8 +1029,8 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00015B   C0E0         PUSH    A
    \   00015D   90....       MOV     DPTR,#??DeviceID
    \   000160   E0           MOVX    A,@DPTR
-   \   000161   12....       LCALL   ?Subroutine24 & 0xFFFF
-   \                     ??CrossCallReturnLabel_58:
+   \   000161   12....       LCALL   ?Subroutine22 & 0xFFFF
+   \                     ??CrossCallReturnLabel_45:
    \   000164   D0E0         POP     A
    \   000166   F0           MOVX    @DPTR,A
    \   000167   90....       MOV     DPTR,#??DeviceID
@@ -1050,9 +1046,9 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000172                ; Setup parameters for call to function osal_start_timerEx
    \   000172   7C10         MOV     R4,#0x10
    \   000174   7D27         MOV     R5,#0x27
-   \   000176   12....       LCALL   ?Subroutine17 & 0xFFFF
+   \   000176   12....       LCALL   ?Subroutine14 & 0xFFFF
     411              return (events ^ SMART_HOME_DEVICE_CHECK_EVT);
-   \                     ??CrossCallReturnLabel_81:
+   \                     ??CrossCallReturnLabel_66:
    \   000179   EE           MOV     A,R6
    \   00017A   6480         XRL     A,#0x80
    \                     ??Smart_home_ProcessEvent_21:
@@ -1079,9 +1075,9 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00018D   EE           MOV     A,R6
    \   00018E   5410         ANL     A,#0x10
    \   000190   FA           MOV     R2,A
-   \   000191   12....       LCALL   ??Subroutine33_0 & 0xFFFF
+   \   000191   12....       LCALL   ??Subroutine31_0 & 0xFFFF
     420              return (events ^ SMART_HOME_DISPLAY_EVT);
-   \                     ??CrossCallReturnLabel_83:
+   \                     ??CrossCallReturnLabel_68:
    \   000194   EE           MOV     A,R6
    \   000195   6410         XRL     A,#0x10
    \   000197   80E3         SJMP    ??Smart_home_ProcessEvent_21
@@ -1097,22 +1093,22 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
     424          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine18:
-   \   000000   12....       LCALL   ?Subroutine30 & 0xFFFF
-   \                     ??CrossCallReturnLabel_79:
+   \                     ?Subroutine15:
+   \   000000   12....       LCALL   ?Subroutine28 & 0xFFFF
+   \                     ??CrossCallReturnLabel_64:
    \   000003   E0           MOVX    A,@DPTR
    \   000004   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine30:
+   \                     ?Subroutine28:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   F8           MOV     R0,A
    \   000002   A3           INC     DPTR
-   \   000003                REQUIRE ??Subroutine32_0
-   \   000003                ; // Fall through to label ??Subroutine32_0
+   \   000003                REQUIRE ??Subroutine30_0
+   \   000003                ; // Fall through to label ??Subroutine30_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine32_0:
+   \                     ??Subroutine30_0:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   F583         MOV     DPH,A
    \   000003   8882         MOV     DPL,R0
@@ -1288,16 +1284,16 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
     576                {
     577                  if(LCD_Page < LCD_PAGE_MAX)       {LCD_Page++;}
    \   000015   90....       MOV     DPTR,#LCD_Page
-   \   000018   12....       LCALL   ?Subroutine19 & 0xFFFF
-   \                     ??CrossCallReturnLabel_47:
+   \   000018   12....       LCALL   ?Subroutine16 & 0xFFFF
+   \                     ??CrossCallReturnLabel_30:
    \   00001B   5003         JNC     ??Smart_home_HandleKeys_3
    \   00001D   E0           MOVX    A,@DPTR
    \   00001E   04           INC     A
    \   00001F   F0           MOVX    @DPTR,A
     578                  if(LCD_Page > LCD_PAGE_MAX - 1)       {LCD_Page = 0;}
    \                     ??Smart_home_HandleKeys_3:
-   \   000020   12....       LCALL   ?Subroutine19 & 0xFFFF
-   \                     ??CrossCallReturnLabel_48:
+   \   000020   12....       LCALL   ?Subroutine16 & 0xFFFF
+   \                     ??CrossCallReturnLabel_31:
    \   000023   4039         JC      ??Smart_home_HandleKeys_0
    \   000025   E4           CLR     A
    \   000026   8035         SJMP    ??Smart_home_HandleKeys_4
@@ -1333,16 +1329,16 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
     592                  if(MotorSpeed < 80)     {MotorSpeed += 10;}
    \                     ??Smart_home_HandleKeys_2:
    \   00003E   90....       MOV     DPTR,#??MotorSpeed
-   \   000041   12....       LCALL   ?Subroutine20 & 0xFFFF
-   \                     ??CrossCallReturnLabel_49:
+   \   000041   12....       LCALL   ?Subroutine17 & 0xFFFF
+   \                     ??CrossCallReturnLabel_32:
    \   000044   5004         JNC     ??Smart_home_HandleKeys_7
    \   000046   E0           MOVX    A,@DPTR
    \   000047   240A         ADD     A,#0xa
    \   000049   F0           MOVX    @DPTR,A
     593                  if(MotorSpeed >= 80)     
    \                     ??Smart_home_HandleKeys_7:
-   \   00004A   12....       LCALL   ?Subroutine20 & 0xFFFF
-   \                     ??CrossCallReturnLabel_50:
+   \   00004A   12....       LCALL   ?Subroutine17 & 0xFFFF
+   \                     ??CrossCallReturnLabel_33:
    \   00004D   400F         JC      ??Smart_home_HandleKeys_0
     594                  {
     595          #if defined ( LCD_SUPPORTED )
@@ -1384,16 +1380,16 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
     612                {
     613                  if(LCD_Page >= 0)       {LCD_Page--;}
    \   00006D   90....       MOV     DPTR,#LCD_Page
-   \   000070   12....       LCALL   ?Subroutine15 & 0xFFFF
-   \                     ??CrossCallReturnLabel_35:
+   \   000070   12....       LCALL   ?Subroutine13 & 0xFFFF
+   \                     ??CrossCallReturnLabel_24:
    \   000073   4003         JC      ??Smart_home_HandleKeys_11
    \   000075   E0           MOVX    A,@DPTR
    \   000076   14           DEC     A
    \   000077   F0           MOVX    @DPTR,A
     614                  if(LCD_Page < 0)        {LCD_Page = LCD_PAGE_MAX;}
    \                     ??Smart_home_HandleKeys_11:
-   \   000078   12....       LCALL   ?Subroutine15 & 0xFFFF
-   \                     ??CrossCallReturnLabel_36:
+   \   000078   12....       LCALL   ?Subroutine13 & 0xFFFF
+   \                     ??CrossCallReturnLabel_25:
    \   00007B   5044         JNC     ??Smart_home_HandleKeys_8
    \   00007D   7404         MOV     A,#0x4
    \   00007F   803F         SJMP    ??Smart_home_HandleKeys_12
@@ -1436,16 +1432,16 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
     628                  if(MotorSpeed > -80)     {MotorSpeed -= 10;}
    \                     ??Smart_home_HandleKeys_10:
    \   0000A1   90....       MOV     DPTR,#??MotorSpeed
-   \   0000A4   12....       LCALL   ?Subroutine21 & 0xFFFF
-   \                     ??CrossCallReturnLabel_51:
+   \   0000A4   12....       LCALL   ?Subroutine18 & 0xFFFF
+   \                     ??CrossCallReturnLabel_34:
    \   0000A7   4004         JC      ??Smart_home_HandleKeys_16
    \   0000A9   E0           MOVX    A,@DPTR
    \   0000AA   24F6         ADD     A,#-0xa
    \   0000AC   F0           MOVX    @DPTR,A
     629                  if(MotorSpeed <= -80)     
    \                     ??Smart_home_HandleKeys_16:
-   \   0000AD   12....       LCALL   ?Subroutine21 & 0xFFFF
-   \                     ??CrossCallReturnLabel_52:
+   \   0000AD   12....       LCALL   ?Subroutine18 & 0xFFFF
+   \                     ??CrossCallReturnLabel_35:
    \   0000B0   500F         JNC     ??Smart_home_HandleKeys_8
     630                  {
     631          #if defined ( LCD_SUPPORTED )
@@ -1478,16 +1474,16 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
     645            {
     646               if(Ctrlcase < 3)   { Ctrlcase++;}
    \   0000C6   90....       MOV     DPTR,#Ctrlcase
-   \   0000C9   12....       LCALL   ?Subroutine22 & 0xFFFF
-   \                     ??CrossCallReturnLabel_53:
+   \   0000C9   12....       LCALL   ?Subroutine19 & 0xFFFF
+   \                     ??CrossCallReturnLabel_36:
    \   0000CC   5003         JNC     ??Smart_home_HandleKeys_18
    \   0000CE   E0           MOVX    A,@DPTR
    \   0000CF   04           INC     A
    \   0000D0   F0           MOVX    @DPTR,A
     647               if(Ctrlcase > 2)   { Ctrlcase=0;}
    \                     ??Smart_home_HandleKeys_18:
-   \   0000D1   12....       LCALL   ?Subroutine22 & 0xFFFF
-   \                     ??CrossCallReturnLabel_54:
+   \   0000D1   12....       LCALL   ?Subroutine19 & 0xFFFF
+   \                     ??CrossCallReturnLabel_37:
    \   0000D4   4002         JC      ??Smart_home_HandleKeys_17
    \   0000D6   E4           CLR     A
    \   0000D7   F0           MOVX    @DPTR,A
@@ -1502,16 +1498,16 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
     652            {
     653               if(Ctrlcase > -1)   { Ctrlcase--;}
    \   0000DD   90....       MOV     DPTR,#Ctrlcase
-   \   0000E0   12....       LCALL   ?Subroutine15 & 0xFFFF
-   \                     ??CrossCallReturnLabel_37:
+   \   0000E0   12....       LCALL   ?Subroutine13 & 0xFFFF
+   \                     ??CrossCallReturnLabel_26:
    \   0000E3   4003         JC      ??Smart_home_HandleKeys_20
    \   0000E5   E0           MOVX    A,@DPTR
    \   0000E6   14           DEC     A
    \   0000E7   F0           MOVX    @DPTR,A
     654               if(Ctrlcase < 0)    { Ctrlcase=2;}
    \                     ??Smart_home_HandleKeys_20:
-   \   0000E8   12....       LCALL   ?Subroutine15 & 0xFFFF
-   \                     ??CrossCallReturnLabel_38:
+   \   0000E8   12....       LCALL   ?Subroutine13 & 0xFFFF
+   \                     ??CrossCallReturnLabel_27:
    \   0000EB   5003         JNC     ??Smart_home_HandleKeys_19
    \   0000ED   7402         MOV     A,#0x2
    \   0000EF   F0           MOVX    @DPTR,A
@@ -1564,11 +1560,11 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
     677                 NLME_PermitJoiningRequest(0x00); // 不允许组网
    \   000114                ; Setup parameters for call to function NLME_PermitJoiningRequest
    \   000114   F9           MOV     R1,A
-   \   000115   12....       LCALL   ?Subroutine23 & 0xFFFF
+   \   000115   12....       LCALL   ?Subroutine21 & 0xFFFF
     678                 HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);  
     679          #if defined ( LCD_SUPPORTED )
     680                 HalLcdWriteString( "Ban   networking", HAL_LCD_LINE_4 );
-   \                     ??CrossCallReturnLabel_56:
+   \                     ??CrossCallReturnLabel_43:
    \   000118                ; Setup parameters for call to function HalLcdWriteString
    \   000118   7904         MOV     R1,#0x4
    \   00011A   7A..         MOV     R2,#`?<Constant "Ban   networking">` & 0xff
@@ -1583,7 +1579,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000121   02....       LJMP    ?Subroutine0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine22:
+   \                     ?Subroutine19:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   C3           CLR     C
    \   000002   9403         SUBB    A,#0x3
@@ -1593,7 +1589,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000009   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine21:
+   \                     ?Subroutine18:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   C3           CLR     C
    \   000002   94B1         SUBB    A,#-0x4f
@@ -1603,7 +1599,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000009   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine20:
+   \                     ?Subroutine17:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   C3           CLR     C
    \   000002   9450         SUBB    A,#0x50
@@ -1613,7 +1609,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000009   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine19:
+   \                     ?Subroutine16:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   C3           CLR     C
    \   000002   9404         SUBB    A,#0x4
@@ -1623,7 +1619,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000009   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine15:
+   \                     ?Subroutine13:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   C3           CLR     C
    \   000002   9400         SUBB    A,#0x0
@@ -1776,9 +1772,9 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
     741                DeviceList[RfID].data[2] = pkt->cmd.Data[6]; //
    \                     ??CrossCallReturnLabel_11:
    \   000071   90....       MOV     DPTR,#DeviceList + 25
-   \   000074   12....       LCALL   ?Subroutine27 & 0xFFFF
+   \   000074   12....       LCALL   ?Subroutine25 & 0xFFFF
     742                DeviceList[RfID].data[3] = pkt->cmd.Data[7]; //
-   \                     ??CrossCallReturnLabel_67:
+   \                     ??CrossCallReturnLabel_52:
    \   000077   A3           INC     DPTR
    \   000078   E0           MOVX    A,@DPTR
    \   000079   90....       MOV     DPTR,#DeviceList + 26
@@ -1922,45 +1918,45 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine7:
    \   000000   F0           MOVX    @DPTR,A
-   \   000001   12....       LCALL   ?Subroutine29 & 0xFFFF
-   \                     ??CrossCallReturnLabel_72:
+   \   000001   12....       LCALL   ?Subroutine27 & 0xFFFF
+   \                     ??CrossCallReturnLabel_57:
    \   000004   A3           INC     DPTR
    \   000005   E0           MOVX    A,@DPTR
    \   000006   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine6:
-   \   000000   12....       LCALL   ?Subroutine28 & 0xFFFF
-   \                     ??CrossCallReturnLabel_69:
+   \   000000   12....       LCALL   ?Subroutine26 & 0xFFFF
+   \                     ??CrossCallReturnLabel_54:
    \   000003   E0           MOVX    A,@DPTR
    \   000004   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine5:
-   \   000000   12....       LCALL   ?Subroutine27 & 0xFFFF
-   \                     ??CrossCallReturnLabel_68:
+   \   000000   12....       LCALL   ?Subroutine25 & 0xFFFF
+   \                     ??CrossCallReturnLabel_53:
    \   000003   E0           MOVX    A,@DPTR
    \   000004   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine27:
+   \                     ?Subroutine25:
    \   000000   F0           MOVX    @DPTR,A
-   \   000001   12....       LCALL   ?Subroutine31 & 0xFFFF
-   \                     ??CrossCallReturnLabel_73:
+   \   000001   12....       LCALL   ?Subroutine29 & 0xFFFF
+   \                     ??CrossCallReturnLabel_58:
    \   000004   A3           INC     DPTR
    \   000005   A3           INC     DPTR
    \   000006   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine4:
-   \   000000   12....       LCALL   ?Subroutine28 & 0xFFFF
-   \                     ??CrossCallReturnLabel_70:
+   \   000000   12....       LCALL   ?Subroutine26 & 0xFFFF
+   \                     ??CrossCallReturnLabel_55:
    \   000003   A3           INC     DPTR
    \   000004   A3           INC     DPTR
    \   000005   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine28:
+   \                     ?Subroutine26:
    \   000000   F0           MOVX    @DPTR,A
    \   000001   8882         MOV     DPL,R0
    \   000003   8983         MOV     DPH,R1
@@ -1987,8 +1983,8 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000008   EB           MOV     A,R3
    \   000009   3400         ADDC    A,#0x0
    \   00000B   F583         MOV     DPH,A
-   \   00000D   12....       LCALL   ?Subroutine30 & 0xFFFF
-   \                     ??CrossCallReturnLabel_78:
+   \   00000D   12....       LCALL   ?Subroutine28 & 0xFFFF
+   \                     ??CrossCallReturnLabel_63:
    \   000010   A3           INC     DPTR
    \   000011   A3           INC     DPTR
    \   000012   A3           INC     DPTR
@@ -2006,19 +2002,19 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000007   EB           MOV     A,R3
    \   000008   3400         ADDC    A,#0x0
    \   00000A   F9           MOV     R1,A
-   \   00000B   12....       LCALL   ?Subroutine29 & 0xFFFF
-   \                     ??CrossCallReturnLabel_71:
+   \   00000B   12....       LCALL   ?Subroutine27 & 0xFFFF
+   \                     ??CrossCallReturnLabel_56:
    \   00000E   E0           MOVX    A,@DPTR
    \   00000F   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine29:
-   \   000000   12....       LCALL   ?Subroutine31 & 0xFFFF
-   \                     ??CrossCallReturnLabel_74:
+   \                     ?Subroutine27:
+   \   000000   12....       LCALL   ?Subroutine29 & 0xFFFF
+   \                     ??CrossCallReturnLabel_59:
    \   000003   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine31:
+   \                     ?Subroutine29:
    \   000000   8882         MOV     DPL,R0
    \   000002   8983         MOV     DPH,R1
    \   000004   E0           MOVX    A,@DPTR
@@ -2268,9 +2264,9 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
     926          static void Smart_home_Display(void)
    \                     Smart_home_Display:
     927          {
-   \   000000   74F5         MOV     A,#-0xb
+   \   000000   74F6         MOV     A,#-0xa
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 11
+   \   000005                ; Saved register size: 10
    \   000005                ; Auto size: 14
    \   000005   74F2         MOV     A,#-0xe
    \   000007   12....       LCALL   ?ALLOC_XSTACK8
@@ -2292,14 +2288,14 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00001A   7901         MOV     R1,#0x1
    \   00001C   7A..         MOV     R2,#`?<Constant "      Menu      ">` & 0xff
    \   00001E   7B..         MOV     R3,#(`?<Constant "      Menu      ">` >> 8) & 0xff
-   \   000020   12....       LCALL   ?Subroutine26 & 0xFFFF
+   \   000020   12....       LCALL   ?Subroutine24 & 0xFFFF
     934                //HalLcdWriteString( "Flip use UP/DOWN", HAL_LCD_LINE_4 ); 
     935                //清除屏幕显示
     936                HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
     937                HalLcdWriteString( " ", HAL_LCD_LINE_3 );
     938                
     939                switch(LCD_Page)
-   \                     ??CrossCallReturnLabel_65:
+   \                     ??CrossCallReturnLabel_50:
    \   000023   90....       MOV     DPTR,#LCD_Page
    \   000026   E0           MOVX    A,@DPTR
    \   000027   14           DEC     A
@@ -2344,349 +2340,360 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000064   12....       LCALL   ?XSTACK_DISP0_8
    \   000067   E0           MOVX    A,@DPTR
    \   000068   90....       MOV     DPTR,#??humit
-   \   00006B   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \   00006B   12....       LCALL   ??Subroutine32_0 & 0xFFFF
     953                    temper = (uint16)Devhum.data[1];
-   \                     ??CrossCallReturnLabel_27:
+   \                     ??CrossCallReturnLabel_70:
    \   00006E   7403         MOV     A,#0x3
    \   000070   12....       LCALL   ?XSTACK_DISP0_8
    \   000073   E0           MOVX    A,@DPTR
    \   000074   90....       MOV     DPTR,#??temper
-   \   000077   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \   000077   12....       LCALL   ??Subroutine32_0 & 0xFFFF
     954                    SoundVb = (uint16)DevSound.data[0];
-   \                     ??CrossCallReturnLabel_28:
+   \                     ??CrossCallReturnLabel_71:
    \   00007A   7409         MOV     A,#0x9
    \   00007C   12....       LCALL   ?XSTACK_DISP0_8
    \   00007F   E0           MOVX    A,@DPTR
    \   000080   90....       MOV     DPTR,#??SoundVb
-   \   000083   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \   000083   12....       LCALL   ??Subroutine32_0 & 0xFFFF
     955          
     956                    HalLcdWriteStringValueValue( "Hum:", humit, 10, "% Tem_1:", temper, 10, HAL_LCD_LINE_2 );
-   \                     ??CrossCallReturnLabel_23:
-   \   000086   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000089   75..0A       MOV     ?V0 + 0,#0xa
-   \   00008C   78..         MOV     R0,#?V0 + 0
-   \   00008E   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000091   90....       MOV     DPTR,#??temper
-   \   000094   12....       LCALL   ?PUSH_XSTACK8_X_TWO
-   \   000097   75....       MOV     ?V0 + 0,#`?<Constant "% Tem_1:">` & 0xff
-   \   00009A   75....       MOV     ?V0 + 1,#(`?<Constant "% Tem_1:">` >> 8) & 0xff
-   \   00009D   78..         MOV     R0,#?V0 + 0
-   \   00009F   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0000A2   790A         MOV     R1,#0xa
-   \   0000A4   90....       MOV     DPTR,#??humit
-   \   0000A7   12....       LCALL   ?Subroutine16 & 0xFFFF
-   \                     ??CrossCallReturnLabel_39:
-   \   0000AA   7A..         MOV     R2,#`?<Constant "Hum:">` & 0xff
-   \   0000AC   7B..         MOV     R3,#(`?<Constant "Hum:">` >> 8) & 0xff
-   \   0000AE   12....       LCALL   ??HalLcdWriteStringValueValue?relay
-   \   0000B1   7406         MOV     A,#0x6
-   \   0000B3   12....       LCALL   ?DEALLOC_XSTACK8
-    957                    HalLcdWriteStringValue("Sound", SoundVb, 10, HAL_LCD_LINE_3 );
-   \   0000B6                ; Setup parameters for call to function HalLcdWriteStringValue
-   \   0000B6   75..03       MOV     ?V0 + 0,#0x3
-   \   0000B9   78..         MOV     R0,#?V0 + 0
-   \   0000BB   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0000BE   790A         MOV     R1,#0xa
-   \   0000C0   90....       MOV     DPTR,#??SoundVb
-   \   0000C3   12....       LCALL   ?Subroutine16 & 0xFFFF
-   \                     ??CrossCallReturnLabel_40:
-   \   0000C6   7A..         MOV     R2,#`?<Constant "Sound">` & 0xff
-   \   0000C8   7B..         MOV     R3,#(`?<Constant "Sound">` >> 8) & 0xff
-   \   0000CA   12....       LCALL   ?Subroutine25 & 0xFFFF
-   \                     ??CrossCallReturnLabel_59:
-   \   0000CD   12....       LCALL   ?DEALLOC_XSTACK8
-    958                    
-    959                    //显示最下面的百分比条
-    960                    static uint8 percent;
-    961                    percent = (1 * 100) / LCD_PAGE_MAX;
-   \   0000D0   90....       MOV     DPTR,#??percent
-   \   0000D3   7419         MOV     A,#0x19
+   \                     ??CrossCallReturnLabel_72:
+   \   000086                ; Setup parameters for call to function HalLcdWriteStringValueValue
+   \   000086   75..02       MOV     ?V0 + 0,#0x2
+   \   000089   78..         MOV     R0,#?V0 + 0
+   \   00008B   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   00008E   75..0A       MOV     ?V0 + 0,#0xa
+   \   000091   78..         MOV     R0,#?V0 + 0
+   \   000093   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   000096   90....       MOV     DPTR,#??temper
+   \   000099   12....       LCALL   ?PUSH_XSTACK8_X_TWO
+   \   00009C   75....       MOV     ?V0 + 0,#`?<Constant "% Tem_1:">` & 0xff
+   \   00009F   75....       MOV     ?V0 + 1,#(`?<Constant "% Tem_1:">` >> 8) & 0xff
+   \   0000A2   78..         MOV     R0,#?V0 + 0
+   \   0000A4   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   0000A7   790A         MOV     R1,#0xa
+   \   0000A9   90....       MOV     DPTR,#??humit
+   \   0000AC   12....       LCALL   ?Subroutine20 & 0xFFFF
+   \                     ??CrossCallReturnLabel_38:
+   \   0000AF   7A..         MOV     R2,#`?<Constant "Hum:">` & 0xff
+   \   0000B1   7B..         MOV     R3,#(`?<Constant "Hum:">` >> 8) & 0xff
+   \   0000B3   12....       LCALL   ??HalLcdWriteStringValueValue?relay
+   \   0000B6   7406         MOV     A,#0x6
+   \   0000B8   12....       LCALL   ?DEALLOC_XSTACK8
+    957                    
+    958                    if(SoundVb & 0x01 == 0x01) { HalLcdWriteString( "Sound: Voice", HAL_LCD_LINE_3 ); }
+   \   0000BB   90....       MOV     DPTR,#??SoundVb
+   \   0000BE   E0           MOVX    A,@DPTR
+   \   0000BF   A2E0         MOV     C,0xE0 /* A   */.0
+   \   0000C1   7903         MOV     R1,#0x3
+   \   0000C3   5006         JNC     ??Smart_home_Display_5
+   \   0000C5                ; Setup parameters for call to function HalLcdWriteString
+   \   0000C5   7A..         MOV     R2,#`?<Constant "Sound: Voice">` & 0xff
+   \   0000C7   7B..         MOV     R3,#(`?<Constant "Sound: Voice">` >> 8) & 0xff
+   \   0000C9   8004         SJMP    ??Smart_home_Display_6
+    959                    else if(SoundVb & 0x02 == 0x02) { HalLcdWriteString( "Sound: Vibration", HAL_LCD_LINE_3 ); }
+    960                    else if(SoundVb & 0x03 == 0x03) { HalLcdWriteString( "Sound: All", HAL_LCD_LINE_3 ); }
+    961                    else {HalLcdWriteString( "Sound: None", HAL_LCD_LINE_3 );}
    \                     ??Smart_home_Display_5:
-   \   0000D5   F0           MOVX    @DPTR,A
-    962                    HalLcdDisplayPercentBar("",percent);
-   \   0000D6                ; Setup parameters for call to function HalLcdDisplayPercentBar
-   \   0000D6   F9           MOV     R1,A
-   \   0000D7   7A..         MOV     R2,#`?<Constant "">` & 0xff
-   \   0000D9   7B..         MOV     R3,#(`?<Constant "">` >> 8) & 0xff
+   \   0000CB                ; Setup parameters for call to function HalLcdWriteString
+   \   0000CB   7A..         MOV     R2,#`?<Constant "Sound: None">` & 0xff
+   \   0000CD   7B..         MOV     R3,#(`?<Constant "Sound: None">` >> 8) & 0xff
    \                     ??Smart_home_Display_6:
-   \   0000DB   12....       LCALL   ??HalLcdDisplayPercentBar?relay
-    963                    break;
-   \   0000DE   02....       LJMP    ??Smart_home_Display_7 & 0xFFFF
-    964                  }
-    965                  case 1:
-    966                  {
-    967                    static uint16 Light;
-    968                    static uint8 lightmp;
-    969                    static uint16 integer;
-    970                    static uint16 decimals;
-    971                    DeviceInfo Devtmp = DeviceList[TempLight];
+   \   0000CF   12....       LCALL   ??HalLcdWriteString?relay
+    962                    
+    963                    //HalLcdWriteStringValue( "Sound:", SoundVb, 16, HAL_LCD_LINE_3 );
+    964                    
+    965                    
+    966                    //显示最下面的百分比条
+    967                    static uint8 percent;
+    968                    percent = (1 * 100) / LCD_PAGE_MAX;
+   \   0000D2   90....       MOV     DPTR,#??percent
+   \   0000D5   7419         MOV     A,#0x19
+   \                     ??Smart_home_Display_7:
+   \   0000D7   F0           MOVX    @DPTR,A
+    969                    HalLcdDisplayPercentBar("",percent);
+   \   0000D8                ; Setup parameters for call to function HalLcdDisplayPercentBar
+   \   0000D8   F9           MOV     R1,A
+   \   0000D9   7A..         MOV     R2,#`?<Constant "">` & 0xff
+   \   0000DB   7B..         MOV     R3,#(`?<Constant "">` >> 8) & 0xff
+   \   0000DD   12....       LCALL   ??HalLcdDisplayPercentBar?relay
+    970                    break;
+   \   0000E0   02....       LJMP    ??Smart_home_Display_8 & 0xFFFF
+    971                  }
+    972                  case 1:
+    973                  {
+    974                    static uint16 Light;
+    975                    static uint8 lightmp;
+    976                    static uint16 integer;
+    977                    static uint16 decimals;
+    978                    DeviceInfo Devtmp = DeviceList[TempLight];
    \                     ??Smart_home_Display_2:
-   \   0000E1   85..82       MOV     DPL,?XSP + 0
-   \   0000E4   85..83       MOV     DPH,?XSP + 1
-   \   0000E7   AC82         MOV     R4,DPL
-   \   0000E9   AD83         MOV     R5,DPH
-   \   0000EB   7583..       MOV     DPH,#((DeviceList + 14) >> 8) & 0xff
-   \   0000EE   7582..       MOV     DPL,#(DeviceList + 14) & 0xff
-   \   0000F1   7407         MOV     A,#0x7
-   \   0000F3   12....       LCALL   ?MOVE_LONG8_XDATA_XDATA
-    972                    //第一页第二行显示温度
-    973                    //      第三行显示光照
-    974                    integer = (uint16)Devtmp.data[0];
-   \   0000F6   7402         MOV     A,#0x2
-   \   0000F8   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000FB   E0           MOVX    A,@DPTR
-   \   0000FC   90....       MOV     DPTR,#??integer
-   \   0000FF   12....       LCALL   ?Subroutine12 & 0xFFFF
-    975                    decimals = (uint16)Devtmp.data[1];
-   \                     ??CrossCallReturnLabel_29:
-   \   000102   7403         MOV     A,#0x3
-   \   000104   12....       LCALL   ?XSTACK_DISP0_8
-   \   000107   E0           MOVX    A,@DPTR
-   \   000108   90....       MOV     DPTR,#??decimals
-   \   00010B   12....       LCALL   ?Subroutine10 & 0xFFFF
-    976                    lightmp = Devtmp.data[3];
-   \                     ??CrossCallReturnLabel_21:
-   \   00010E   12....       LCALL   ?XSTACK_DISP0_8
-   \   000111   E0           MOVX    A,@DPTR
-   \   000112   90....       MOV     DPTR,#??lightmp
-   \   000115   F0           MOVX    @DPTR,A
-    977                    Light = (uint16)Devtmp.data[4];
-   \   000116   7406         MOV     A,#0x6
-   \   000118   12....       LCALL   ?XSTACK_DISP0_8
-   \   00011B   E0           MOVX    A,@DPTR
-   \   00011C   90....       MOV     DPTR,#??Light
-   \   00011F   12....       LCALL   ?Subroutine9 & 0xFFFF
-    978                    memcpy(&Light,&lightmp,sizeof(lightmp));
-   \                     ??CrossCallReturnLabel_18:
-   \   000122   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000125   7C..         MOV     R4,#??lightmp & 0xff
-   \   000127   7D..         MOV     R5,#(??lightmp >> 8) & 0xff
-   \   000129   7A..         MOV     R2,#??Light & 0xff
-   \   00012B   7B..         MOV     R3,#(??Light >> 8) & 0xff
-   \   00012D   12....       LCALL   ??memcpy?relay
-   \   000130   7402         MOV     A,#0x2
-   \   000132   12....       LCALL   ?DEALLOC_XSTACK8
-    979                    HalLcdWriteStringValueValue( "Temper_2:", integer, 10, ".", decimals, 10, HAL_LCD_LINE_2 );
-   \   000135                ; Setup parameters for call to function HalLcdWriteStringValueValue
-   \   000135   75..02       MOV     ?V0 + 0,#0x2
-   \   000138   78..         MOV     R0,#?V0 + 0
-   \   00013A   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00013D   75..0A       MOV     ?V0 + 0,#0xa
-   \   000140   78..         MOV     R0,#?V0 + 0
-   \   000142   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000145   90....       MOV     DPTR,#??decimals
-   \   000148   12....       LCALL   ?PUSH_XSTACK8_X_TWO
-   \   00014B   75....       MOV     ?V0 + 0,#`?<Constant ".">` & 0xff
-   \   00014E   75....       MOV     ?V0 + 1,#(`?<Constant ".">` >> 8) & 0xff
-   \   000151   78..         MOV     R0,#?V0 + 0
-   \   000153   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000156   790A         MOV     R1,#0xa
-   \   000158   90....       MOV     DPTR,#??integer
-   \   00015B   12....       LCALL   ?Subroutine16 & 0xFFFF
-   \                     ??CrossCallReturnLabel_41:
-   \   00015E   7A..         MOV     R2,#`?<Constant "Temper_2:">` & 0xff
-   \   000160   7B..         MOV     R3,#(`?<Constant "Temper_2:">` >> 8) & 0xff
-   \   000162   12....       LCALL   ??HalLcdWriteStringValueValue?relay
-   \   000165   7406         MOV     A,#0x6
-   \   000167   12....       LCALL   ?DEALLOC_XSTACK8
-    980                    HalLcdWriteStringValue( "Light:", Light, 10, HAL_LCD_LINE_3 );
-   \   00016A                ; Setup parameters for call to function HalLcdWriteStringValue
-   \   00016A   75..03       MOV     ?V0 + 0,#0x3
-   \   00016D   78..         MOV     R0,#?V0 + 0
-   \   00016F   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000172   790A         MOV     R1,#0xa
-   \   000174   90....       MOV     DPTR,#??Light
-   \   000177   12....       LCALL   ?Subroutine16 & 0xFFFF
-   \                     ??CrossCallReturnLabel_42:
-   \   00017A   7A..         MOV     R2,#`?<Constant "Light:">` & 0xff
-   \   00017C   7B..         MOV     R3,#(`?<Constant "Light:">` >> 8) & 0xff
-   \   00017E   12....       LCALL   ?Subroutine25 & 0xFFFF
-   \                     ??CrossCallReturnLabel_60:
-   \   000181   12....       LCALL   ?DEALLOC_XSTACK8
-    981                    
-    982                    //显示最下面的百分比条
-    983                    static uint8 percent;
-    984                    percent = (2 * 100) / LCD_PAGE_MAX;
-   \   000184   90....       MOV     DPTR,#??percent_1
-   \   000187   7432         MOV     A,#0x32
-   \   000189   02....       LJMP    ??Smart_home_Display_5 & 0xFFFF
-    985                    HalLcdDisplayPercentBar("",percent);
-    986                    break;
-    987                  }
-    988                  
-    989                case 2:
-    990                {
-    991                    static uint8 kind;
-    992                    static uint8 tmp1;
-    993                    static uint8 tmp2;
-    994                    static uint16 Data1;
-    995                    static uint16 Data2;
-    996                    //显示最下面的百分比条
-    997                    DeviceInfo rfid = DeviceList[RfID];
+   \   0000E3   85..82       MOV     DPL,?XSP + 0
+   \   0000E6   85..83       MOV     DPH,?XSP + 1
+   \   0000E9   AC82         MOV     R4,DPL
+   \   0000EB   AD83         MOV     R5,DPH
+   \   0000ED   7583..       MOV     DPH,#((DeviceList + 14) >> 8) & 0xff
+   \   0000F0   7582..       MOV     DPL,#(DeviceList + 14) & 0xff
+   \   0000F3   7407         MOV     A,#0x7
+   \   0000F5   12....       LCALL   ?MOVE_LONG8_XDATA_XDATA
+    979                    //第一页第二行显示温度
+    980                    //      第三行显示光照
+    981                    integer = (uint16)Devtmp.data[0];
+   \   0000F8   7402         MOV     A,#0x2
+   \   0000FA   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000FD   E0           MOVX    A,@DPTR
+   \   0000FE   90....       MOV     DPTR,#??integer
+   \   000101   12....       LCALL   ??Subroutine32_0 & 0xFFFF
+    982                    decimals = (uint16)Devtmp.data[1];
+   \                     ??CrossCallReturnLabel_73:
+   \   000104   7403         MOV     A,#0x3
+   \   000106   12....       LCALL   ?XSTACK_DISP0_8
+   \   000109   E0           MOVX    A,@DPTR
+   \   00010A   90....       MOV     DPTR,#??decimals
+   \   00010D   12....       LCALL   ??Subroutine32_0 & 0xFFFF
+    983                    lightmp = Devtmp.data[3];
+   \                     ??CrossCallReturnLabel_74:
+   \   000110   7405         MOV     A,#0x5
+   \   000112   12....       LCALL   ?XSTACK_DISP0_8
+   \   000115   E0           MOVX    A,@DPTR
+   \   000116   90....       MOV     DPTR,#??lightmp
+   \   000119   F0           MOVX    @DPTR,A
+    984                    Light = (uint16)Devtmp.data[4];
+   \   00011A   7406         MOV     A,#0x6
+   \   00011C   12....       LCALL   ?XSTACK_DISP0_8
+   \   00011F   E0           MOVX    A,@DPTR
+   \   000120   90....       MOV     DPTR,#??Light
+   \   000123   12....       LCALL   ??Subroutine32_0 & 0xFFFF
+    985                    memcpy(&Light,&lightmp,sizeof(lightmp));
+   \                     ??CrossCallReturnLabel_75:
+   \   000126                ; Setup parameters for call to function memcpy
+   \   000126   75..01       MOV     ?V0 + 0,#0x1
+   \   000129   F5..         MOV     ?V0 + 1,A
+   \   00012B   78..         MOV     R0,#?V0 + 0
+   \   00012D   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000130   7C..         MOV     R4,#??lightmp & 0xff
+   \   000132   7D..         MOV     R5,#(??lightmp >> 8) & 0xff
+   \   000134   7A..         MOV     R2,#??Light & 0xff
+   \   000136   7B..         MOV     R3,#(??Light >> 8) & 0xff
+   \   000138   12....       LCALL   ??memcpy?relay
+   \   00013B   7402         MOV     A,#0x2
+   \   00013D   12....       LCALL   ?DEALLOC_XSTACK8
+    986                    
+    987                    HalLcdWriteStringValueValue( "Temper_2:", integer, 10, ".", decimals, 10, HAL_LCD_LINE_2 );
+   \   000140                ; Setup parameters for call to function HalLcdWriteStringValueValue
+   \   000140   75..02       MOV     ?V0 + 0,#0x2
+   \   000143   78..         MOV     R0,#?V0 + 0
+   \   000145   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   000148   75..0A       MOV     ?V0 + 0,#0xa
+   \   00014B   78..         MOV     R0,#?V0 + 0
+   \   00014D   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   000150   90....       MOV     DPTR,#??decimals
+   \   000153   12....       LCALL   ?PUSH_XSTACK8_X_TWO
+   \   000156   75....       MOV     ?V0 + 0,#`?<Constant ".">` & 0xff
+   \   000159   75....       MOV     ?V0 + 1,#(`?<Constant ".">` >> 8) & 0xff
+   \   00015C   78..         MOV     R0,#?V0 + 0
+   \   00015E   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000161   790A         MOV     R1,#0xa
+   \   000163   90....       MOV     DPTR,#??integer
+   \   000166   12....       LCALL   ?Subroutine20 & 0xFFFF
+   \                     ??CrossCallReturnLabel_39:
+   \   000169   7A..         MOV     R2,#`?<Constant "Temper_2:">` & 0xff
+   \   00016B   7B..         MOV     R3,#(`?<Constant "Temper_2:">` >> 8) & 0xff
+   \   00016D   12....       LCALL   ??HalLcdWriteStringValueValue?relay
+   \   000170   7406         MOV     A,#0x6
+   \   000172   12....       LCALL   ?DEALLOC_XSTACK8
+    988                    HalLcdWriteStringValue( "Light:", Light, 10, HAL_LCD_LINE_3 );
+   \   000175                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   000175   75..03       MOV     ?V0 + 0,#0x3
+   \   000178   78..         MOV     R0,#?V0 + 0
+   \   00017A   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   00017D   790A         MOV     R1,#0xa
+   \   00017F   90....       MOV     DPTR,#??Light
+   \   000182   12....       LCALL   ?Subroutine20 & 0xFFFF
+   \                     ??CrossCallReturnLabel_40:
+   \   000185   7A..         MOV     R2,#`?<Constant "Light:">` & 0xff
+   \   000187   7B..         MOV     R3,#(`?<Constant "Light:">` >> 8) & 0xff
+   \   000189   12....       LCALL   ?Subroutine23 & 0xFFFF
+   \                     ??CrossCallReturnLabel_46:
+   \   00018C   12....       LCALL   ?DEALLOC_XSTACK8
+    989                    
+    990                    //显示最下面的百分比条
+    991                    static uint8 percent;
+    992                    percent = (2 * 100) / LCD_PAGE_MAX;
+   \   00018F   90....       MOV     DPTR,#??percent_1
+   \   000192   7432         MOV     A,#0x32
+   \   000194   02....       LJMP    ??Smart_home_Display_7 & 0xFFFF
+    993                    HalLcdDisplayPercentBar("",percent);
+    994                    break;
+    995                  }
+    996                  
+    997                case 2:
+    998                {
+    999                    static uint8 kind;
+   1000                    static uint8 tmp1,tmp2;
+   1001                    static uint8 tmp3,tmp4;
+   1002                    static uint16 Data1;
+   1003                    static uint16 Data2;
+   1004                    //显示最下面的百分比条
+   1005                    DeviceInfo rfid = DeviceList[RfID];
    \                     ??Smart_home_Display_3:
-   \   00018C   85..82       MOV     DPL,?XSP + 0
-   \   00018F   85..83       MOV     DPH,?XSP + 1
-   \   000192   AC82         MOV     R4,DPL
-   \   000194   AD83         MOV     R5,DPH
-   \   000196   7583..       MOV     DPH,#((DeviceList + 21) >> 8) & 0xff
-   \   000199   7582..       MOV     DPL,#(DeviceList + 21) & 0xff
-   \   00019C   7407         MOV     A,#0x7
-   \   00019E   12....       LCALL   ?MOVE_LONG8_XDATA_XDATA
-    998                    
-    999                    kind = rfid.data[0];
-   \   0001A1   7402         MOV     A,#0x2
-   \   0001A3   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001A6   E0           MOVX    A,@DPTR
-   \   0001A7   90....       MOV     DPTR,#??kind
-   \   0001AA   F0           MOVX    @DPTR,A
-   1000                    tmp1 = rfid.data[1];
-   \   0001AB   7403         MOV     A,#0x3
-   \   0001AD   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001B0   E0           MOVX    A,@DPTR
-   \   0001B1   90....       MOV     DPTR,#??tmp1
-   \   0001B4   F0           MOVX    @DPTR,A
-   1001                    Data1 = (uint16)rfid.data[2];
-   \   0001B5   7404         MOV     A,#0x4
-   \   0001B7   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001BA   E0           MOVX    A,@DPTR
-   \   0001BB   90....       MOV     DPTR,#??Data1
-   \   0001BE   12....       LCALL   ?Subroutine10 & 0xFFFF
-   1002                    tmp2 = rfid.data[3];
-   \                     ??CrossCallReturnLabel_22:
-   \   0001C1   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001C4   E0           MOVX    A,@DPTR
-   \   0001C5   90....       MOV     DPTR,#??tmp2
-   \   0001C8   F0           MOVX    @DPTR,A
-   1003                    Data2 = (uint16)rfid.data[4];
-   \   0001C9   7406         MOV     A,#0x6
-   \   0001CB   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001CE   E0           MOVX    A,@DPTR
-   \   0001CF   90....       MOV     DPTR,#??Data2
-   \   0001D2   12....       LCALL   ?Subroutine9 & 0xFFFF
-   1004                    
-   1005                    memcpy(&Data1,&tmp1,sizeof(tmp1));
-   \                     ??CrossCallReturnLabel_19:
-   \   0001D5   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0001D8   7C..         MOV     R4,#??tmp1 & 0xff
-   \   0001DA   7D..         MOV     R5,#(??tmp1 >> 8) & 0xff
-   \   0001DC   7A..         MOV     R2,#??Data1 & 0xff
-   \   0001DE   7B..         MOV     R3,#(??Data1 >> 8) & 0xff
-   \   0001E0   12....       LCALL   ??memcpy?relay
-   \   0001E3   7402         MOV     A,#0x2
-   \   0001E5   12....       LCALL   ?DEALLOC_XSTACK8
-   1006                    memcpy(&Data2,&tmp2,sizeof(tmp2));
-   \   0001E8                ; Setup parameters for call to function memcpy
-   \   0001E8   78..         MOV     R0,#?V0 + 0
-   \   0001EA   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0001ED   7C..         MOV     R4,#??tmp2 & 0xff
-   \   0001EF   7D..         MOV     R5,#(??tmp2 >> 8) & 0xff
-   \   0001F1   7A..         MOV     R2,#??Data2 & 0xff
-   \   0001F3   7B..         MOV     R3,#(??Data2 >> 8) & 0xff
-   \   0001F5   12....       LCALL   ??memcpy?relay
-   \   0001F8   7402         MOV     A,#0x2
-   \   0001FA   12....       LCALL   ?DEALLOC_XSTACK8
-   1007                    
-   1008                    if(kind == 0x01) {HalLcdWriteString( "MFOne-S50", HAL_LCD_LINE_2 );}
-   \   0001FD   90....       MOV     DPTR,#??kind
-   \   000200   E0           MOVX    A,@DPTR
-   \   000201   6401         XRL     A,#0x1
-   \   000203   7008         JNZ     ??Smart_home_Display_8
-   \   000205                ; Setup parameters for call to function HalLcdWriteString
-   \   000205   7902         MOV     R1,#0x2
-   \   000207   7A..         MOV     R2,#`?<Constant "MFOne-S50">` & 0xff
-   \   000209   7B..         MOV     R3,#(`?<Constant "MFOne-S50">` >> 8) & 0xff
-   \   00020B   8038         SJMP    ??Smart_home_Display_9
-   1009                    else if(kind == 0x02) {HalLcdWriteString( "MFOne-S70", HAL_LCD_LINE_2 );}
-   \                     ??Smart_home_Display_8:
-   \   00020D   E0           MOVX    A,@DPTR
-   \   00020E   6402         XRL     A,#0x2
-   \   000210   7008         JNZ     ??Smart_home_Display_10
-   \   000212                ; Setup parameters for call to function HalLcdWriteString
-   \   000212   7902         MOV     R1,#0x2
-   \   000214   7A..         MOV     R2,#`?<Constant "MFOne-S70">` & 0xff
-   \   000216   7B..         MOV     R3,#(`?<Constant "MFOne-S70">` >> 8) & 0xff
-   \   000218   802B         SJMP    ??Smart_home_Display_9
-   1010                    else if(kind == 0x03) {HalLcdWriteString( "MF-UltraLight", HAL_LCD_LINE_2 );}
-   \                     ??Smart_home_Display_10:
-   \   00021A   E0           MOVX    A,@DPTR
-   \   00021B   6403         XRL     A,#0x3
-   \   00021D   7008         JNZ     ??Smart_home_Display_11
-   \   00021F                ; Setup parameters for call to function HalLcdWriteString
-   \   00021F   7902         MOV     R1,#0x2
-   \   000221   7A..         MOV     R2,#`?<Constant "MF-UltraLight">` & 0xff
-   \   000223   7B..         MOV     R3,#(`?<Constant "MF-UltraLight">` >> 8) & 0xff
-   \   000225   801E         SJMP    ??Smart_home_Display_9
-   1011                    else if(kind == 0x04) {HalLcdWriteString( "MF-Pro", HAL_LCD_LINE_2 );}
-   \                     ??Smart_home_Display_11:
-   \   000227   E0           MOVX    A,@DPTR
-   \   000228   6404         XRL     A,#0x4
-   \   00022A   7008         JNZ     ??Smart_home_Display_12
-   \   00022C                ; Setup parameters for call to function HalLcdWriteString
-   \   00022C   7902         MOV     R1,#0x2
-   \   00022E   7A..         MOV     R2,#`?<Constant "MF-Pro">` & 0xff
-   \   000230   7B..         MOV     R3,#(`?<Constant "MF-Pro">` >> 8) & 0xff
-   \   000232   8011         SJMP    ??Smart_home_Display_9
-   1012                    else if(kind == 0x05) {HalLcdWriteString( "MF-DesFire", HAL_LCD_LINE_2 );}
-   \                     ??Smart_home_Display_12:
-   \   000234   E0           MOVX    A,@DPTR
-   \   000235   6405         XRL     A,#0x5
-   \   000237   7902         MOV     R1,#0x2
-   \   000239   7006         JNZ     ??Smart_home_Display_13
-   \   00023B                ; Setup parameters for call to function HalLcdWriteString
-   \   00023B   7A..         MOV     R2,#`?<Constant "MF-DesFire">` & 0xff
-   \   00023D   7B..         MOV     R3,#(`?<Constant "MF-DesFire">` >> 8) & 0xff
-   \   00023F   8004         SJMP    ??Smart_home_Display_9
-   1013                    else {HalLcdWriteString( "No Card", HAL_LCD_LINE_2 );}
-   \                     ??Smart_home_Display_13:
-   \   000241                ; Setup parameters for call to function HalLcdWriteString
-   \   000241   7A..         MOV     R2,#`?<Constant "No Card">` & 0xff
-   \   000243   7B..         MOV     R3,#(`?<Constant "No Card">` >> 8) & 0xff
+   \   000197   85..82       MOV     DPL,?XSP + 0
+   \   00019A   85..83       MOV     DPH,?XSP + 1
+   \   00019D   AC82         MOV     R4,DPL
+   \   00019F   AD83         MOV     R5,DPH
+   \   0001A1   7583..       MOV     DPH,#((DeviceList + 21) >> 8) & 0xff
+   \   0001A4   7582..       MOV     DPL,#(DeviceList + 21) & 0xff
+   \   0001A7   7407         MOV     A,#0x7
+   \   0001A9   12....       LCALL   ?MOVE_LONG8_XDATA_XDATA
+   1006                    
+   1007                    kind = rfid.data[0];
+   \   0001AC   7402         MOV     A,#0x2
+   \   0001AE   12....       LCALL   ?XSTACK_DISP0_8
+   \   0001B1   E0           MOVX    A,@DPTR
+   \   0001B2   90....       MOV     DPTR,#??kind
+   \   0001B5   F0           MOVX    @DPTR,A
+   1008                    tmp1 = rfid.data[1];
+   \   0001B6   7403         MOV     A,#0x3
+   \   0001B8   12....       LCALL   ?XSTACK_DISP0_8
+   \   0001BB   E0           MOVX    A,@DPTR
+   \   0001BC   90....       MOV     DPTR,#??tmp1
+   \   0001BF   F0           MOVX    @DPTR,A
+   1009                    tmp2 = rfid.data[2];
+   \   0001C0   7404         MOV     A,#0x4
+   \   0001C2   12....       LCALL   ?XSTACK_DISP0_8
+   \   0001C5   E0           MOVX    A,@DPTR
+   \   0001C6   90....       MOV     DPTR,#??tmp2
+   \   0001C9   F0           MOVX    @DPTR,A
+   1010                    tmp3 = rfid.data[3];
+   \   0001CA   7405         MOV     A,#0x5
+   \   0001CC   12....       LCALL   ?XSTACK_DISP0_8
+   \   0001CF   E0           MOVX    A,@DPTR
+   \   0001D0   90....       MOV     DPTR,#??tmp3
+   \   0001D3   F0           MOVX    @DPTR,A
+   1011                    tmp4 = rfid.data[4];
+   \   0001D4   7406         MOV     A,#0x6
+   \   0001D6   12....       LCALL   ?XSTACK_DISP0_8
+   \   0001D9   E0           MOVX    A,@DPTR
+   \   0001DA   90....       MOV     DPTR,#??tmp4
+   \   0001DD   F0           MOVX    @DPTR,A
+   1012                    
+   1013                    Data1 = (tmp1 << 8) | tmp2;
+   \   0001DE   90....       MOV     DPTR,#??tmp1
+   \   0001E1   E0           MOVX    A,@DPTR
+   \   0001E2   F9           MOV     R1,A
+   \   0001E3   90....       MOV     DPTR,#??tmp2
+   \   0001E6   E0           MOVX    A,@DPTR
+   \   0001E7   90....       MOV     DPTR,#??Data1
+   \   0001EA   F0           MOVX    @DPTR,A
+   \   0001EB   A3           INC     DPTR
+   \   0001EC   E9           MOV     A,R1
+   \   0001ED   F0           MOVX    @DPTR,A
+   1014                    Data2 = (tmp3 << 8) | tmp4;
+   \   0001EE   90....       MOV     DPTR,#??tmp3
+   \   0001F1   E0           MOVX    A,@DPTR
+   \   0001F2   F9           MOV     R1,A
+   \   0001F3   90....       MOV     DPTR,#??tmp4
+   \   0001F6   E0           MOVX    A,@DPTR
+   \   0001F7   90....       MOV     DPTR,#??Data2
+   \   0001FA   F0           MOVX    @DPTR,A
+   \   0001FB   A3           INC     DPTR
+   \   0001FC   E9           MOV     A,R1
+   \   0001FD   F0           MOVX    @DPTR,A
+   1015                    
+   1016                    if(kind == 0x01) {HalLcdWriteString( "MFOne-S50", HAL_LCD_LINE_2 );}
+   \   0001FE   90....       MOV     DPTR,#??kind
+   \   000201   E0           MOVX    A,@DPTR
+   \   000202   6401         XRL     A,#0x1
+   \   000204   7008         JNZ     ??Smart_home_Display_9
+   \   000206                ; Setup parameters for call to function HalLcdWriteString
+   \   000206   7902         MOV     R1,#0x2
+   \   000208   7A..         MOV     R2,#`?<Constant "MFOne-S50">` & 0xff
+   \   00020A   7B..         MOV     R3,#(`?<Constant "MFOne-S50">` >> 8) & 0xff
+   \   00020C   8038         SJMP    ??Smart_home_Display_10
+   1017                    else if(kind == 0x02) {HalLcdWriteString( "MFOne-S70", HAL_LCD_LINE_2 );}
    \                     ??Smart_home_Display_9:
-   \   000245   12....       LCALL   ??HalLcdWriteString?relay
-   1014                    
-   1015          
-   1016                    HalLcdWriteStringValueValue( "", Data1, 16, "", Data2, 16, HAL_LCD_LINE_3 );
-   \   000248   75....       MOV     ?V0 + 0,#`?<Constant "">` & 0xff
-   \   00024B   75....       MOV     ?V0 + 1,#(`?<Constant "">` >> 8) & 0xff
-   \   00024E                ; Setup parameters for call to function HalLcdWriteStringValueValue
-   \   00024E   75..03       MOV     ?V0 + 2,#0x3
-   \   000251   78..         MOV     R0,#?V0 + 2
-   \   000253   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000256   75..10       MOV     ?V0 + 2,#0x10
-   \   000259   78..         MOV     R0,#?V0 + 2
-   \   00025B   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00025E   90....       MOV     DPTR,#??Data2
-   \   000261   12....       LCALL   ?PUSH_XSTACK8_X_TWO
-   \   000264   78..         MOV     R0,#?V0 + 0
-   \   000266   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000269   7910         MOV     R1,#0x10
-   \   00026B   90....       MOV     DPTR,#??Data1
-   \   00026E   12....       LCALL   ?Subroutine16 & 0xFFFF
-   \                     ??CrossCallReturnLabel_43:
-   \   000271   AA..         MOV     R2,?V0 + 0
-   \   000273   AB..         MOV     R3,?V0 + 1
-   \   000275   12....       LCALL   ??HalLcdWriteStringValueValue?relay
-   \   000278   7406         MOV     A,#0x6
-   \   00027A   12....       LCALL   ?DEALLOC_XSTACK8
-   1017                    
-   1018                    static uint8 percent;
-   1019                    percent = (3 * 100) / LCD_PAGE_MAX;
-   \   00027D   90....       MOV     DPTR,#??percent_2
-   \   000280   744B         MOV     A,#0x4b
-   \   000282   F0           MOVX    @DPTR,A
-   1020                    HalLcdDisplayPercentBar("",percent);
-   \   000283                ; Setup parameters for call to function HalLcdDisplayPercentBar
-   \   000283   F9           MOV     R1,A
-   \   000284   AA..         MOV     R2,?V0 + 0
-   \   000286   AB..         MOV     R3,?V0 + 1
-   \   000288   02....       LJMP    ??Smart_home_Display_6 & 0xFFFF
-   1021                    break;
-   1022                }
-   1023                
-   1024                case 3:
-   1025                {
-   1026                    static uint16 GasF;
-   1027                    static uint16 Infrared;         
+   \   00020E   E0           MOVX    A,@DPTR
+   \   00020F   6402         XRL     A,#0x2
+   \   000211   7008         JNZ     ??Smart_home_Display_11
+   \   000213                ; Setup parameters for call to function HalLcdWriteString
+   \   000213   7902         MOV     R1,#0x2
+   \   000215   7A..         MOV     R2,#`?<Constant "MFOne-S70">` & 0xff
+   \   000217   7B..         MOV     R3,#(`?<Constant "MFOne-S70">` >> 8) & 0xff
+   \   000219   802B         SJMP    ??Smart_home_Display_10
+   1018                    else if(kind == 0x03) {HalLcdWriteString( "MF-UltraLight", HAL_LCD_LINE_2 );}
+   \                     ??Smart_home_Display_11:
+   \   00021B   E0           MOVX    A,@DPTR
+   \   00021C   6403         XRL     A,#0x3
+   \   00021E   7008         JNZ     ??Smart_home_Display_12
+   \   000220                ; Setup parameters for call to function HalLcdWriteString
+   \   000220   7902         MOV     R1,#0x2
+   \   000222   7A..         MOV     R2,#`?<Constant "MF-UltraLight">` & 0xff
+   \   000224   7B..         MOV     R3,#(`?<Constant "MF-UltraLight">` >> 8) & 0xff
+   \   000226   801E         SJMP    ??Smart_home_Display_10
+   1019                    else if(kind == 0x04) {HalLcdWriteString( "MF-Pro", HAL_LCD_LINE_2 );}
+   \                     ??Smart_home_Display_12:
+   \   000228   E0           MOVX    A,@DPTR
+   \   000229   6404         XRL     A,#0x4
+   \   00022B   7008         JNZ     ??Smart_home_Display_13
+   \   00022D                ; Setup parameters for call to function HalLcdWriteString
+   \   00022D   7902         MOV     R1,#0x2
+   \   00022F   7A..         MOV     R2,#`?<Constant "MF-Pro">` & 0xff
+   \   000231   7B..         MOV     R3,#(`?<Constant "MF-Pro">` >> 8) & 0xff
+   \   000233   8011         SJMP    ??Smart_home_Display_10
+   1020                    else if(kind == 0x05) {HalLcdWriteString( "MF-DesFire", HAL_LCD_LINE_2 );}
+   \                     ??Smart_home_Display_13:
+   \   000235   E0           MOVX    A,@DPTR
+   \   000236   6405         XRL     A,#0x5
+   \   000238   7902         MOV     R1,#0x2
+   \   00023A   7006         JNZ     ??Smart_home_Display_14
+   \   00023C                ; Setup parameters for call to function HalLcdWriteString
+   \   00023C   7A..         MOV     R2,#`?<Constant "MF-DesFire">` & 0xff
+   \   00023E   7B..         MOV     R3,#(`?<Constant "MF-DesFire">` >> 8) & 0xff
+   \   000240   8004         SJMP    ??Smart_home_Display_10
+   1021                    else {HalLcdWriteString( "No Card", HAL_LCD_LINE_2 );}
+   \                     ??Smart_home_Display_14:
+   \   000242                ; Setup parameters for call to function HalLcdWriteString
+   \   000242   7A..         MOV     R2,#`?<Constant "No Card">` & 0xff
+   \   000244   7B..         MOV     R3,#(`?<Constant "No Card">` >> 8) & 0xff
+   \                     ??Smart_home_Display_10:
+   \   000246   12....       LCALL   ?Subroutine11 & 0xFFFF
+   1022                    
+   1023          
+   1024                    HalLcdWriteStringValueValue( "ID: ", Data1, 16, "-", Data2, 16, HAL_LCD_LINE_3 );
+   \                     ??CrossCallReturnLabel_20:
+   \   000249   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   00024C   75..10       MOV     ?V0 + 0,#0x10
+   \   00024F   78..         MOV     R0,#?V0 + 0
+   \   000251   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   000254   90....       MOV     DPTR,#??Data2
+   \   000257   12....       LCALL   ?PUSH_XSTACK8_X_TWO
+   \   00025A   75....       MOV     ?V0 + 0,#`?<Constant "-">` & 0xff
+   \   00025D   75....       MOV     ?V0 + 1,#(`?<Constant "-">` >> 8) & 0xff
+   \   000260   78..         MOV     R0,#?V0 + 0
+   \   000262   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000265   7910         MOV     R1,#0x10
+   \   000267   90....       MOV     DPTR,#??Data1
+   \   00026A   12....       LCALL   ?Subroutine20 & 0xFFFF
+   \                     ??CrossCallReturnLabel_41:
+   \   00026D   7A..         MOV     R2,#`?<Constant "ID: ">` & 0xff
+   \   00026F   7B..         MOV     R3,#(`?<Constant "ID: ">` >> 8) & 0xff
+   \   000271   12....       LCALL   ??HalLcdWriteStringValueValue?relay
+   \   000274   7406         MOV     A,#0x6
+   \   000276   12....       LCALL   ?DEALLOC_XSTACK8
+   1025                    
+   1026                    static uint8 percent;
+   1027                    percent = (3 * 100) / LCD_PAGE_MAX;
+   \   000279   90....       MOV     DPTR,#??percent_2
+   \   00027C   744B         MOV     A,#0x4b
+   \   00027E   02....       LJMP    ??Smart_home_Display_7 & 0xFFFF
+   1028                    HalLcdDisplayPercentBar("",percent);
+   1029                    break;
+   1030                }
+   1031                
+   1032                case 3:
+   1033                {
+   1034                    static uint16 GasF;
+   1035                    static uint16 Infrared;         
                                          ^
 Warning[Pe550]: variable "Infrared" was set but never used
 
@@ -2694,264 +2701,271 @@ Warning[Pe550]: variable "Infrared" was set but never used
               ^
 "D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home.c",885  Warning[Pe177]: 
           function "Smart_home_Motor_Ctl" was declared but never referenced
-   1028          
-   1029                    DeviceInfo DevGas = DeviceList[GasF];
+   1036          
+   1037                    DeviceInfo DevGas = DeviceList[GasF];
    \                     ??Smart_home_Display_4:
-   \   00028B   90....       MOV     DPTR,#??GasF
-   \   00028E   E0           MOVX    A,@DPTR
-   \   00028F   F8           MOV     R0,A
-   \   000290   A3           INC     DPTR
-   \   000291   E0           MOVX    A,@DPTR
-   \   000292   F9           MOV     R1,A
-   \   000293   E8           MOV     A,R0
-   \   000294   75F007       MOV     B,#0x7
-   \   000297   A4           MUL     AB
-   \   000298   F8           MOV     R0,A
-   \   000299   AAF0         MOV     R2,B
-   \   00029B   75F007       MOV     B,#0x7
-   \   00029E   E9           MOV     A,R1
-   \   00029F   A4           MUL     AB
-   \   0002A0   2A           ADD     A,R2
-   \   0002A1   F9           MOV     R1,A
-   \   0002A2   74..         MOV     A,#DeviceList & 0xff
-   \   0002A4   28           ADD     A,R0
-   \   0002A5   F582         MOV     DPL,A
-   \   0002A7   74..         MOV     A,#(DeviceList >> 8) & 0xff
-   \   0002A9   39           ADDC    A,R1
-   \   0002AA   C082         PUSH    DPL
-   \   0002AC   85..82       MOV     DPL,?XSP + 0
-   \   0002AF   85..83       MOV     DPH,?XSP + 1
-   \   0002B2   AC82         MOV     R4,DPL
-   \   0002B4   AD83         MOV     R5,DPH
-   \   0002B6   F583         MOV     DPH,A
-   \   0002B8   D082         POP     DPL
-   \   0002BA   7407         MOV     A,#0x7
-   \   0002BC   12....       LCALL   ?MOVE_LONG8_XDATA_XDATA
-   1030                    DeviceInfo DevInf = DeviceList[infrared]; 
-   \   0002BF   7407         MOV     A,#0x7
-   \   0002C1   12....       LCALL   ?XSTACK_DISP0_8
-   \   0002C4   AC82         MOV     R4,DPL
-   \   0002C6   AD83         MOV     R5,DPH
-   \   0002C8   7583..       MOV     DPH,#((DeviceList + 35) >> 8) & 0xff
-   \   0002CB   7582..       MOV     DPL,#(DeviceList + 35) & 0xff
-   \   0002CE   7407         MOV     A,#0x7
-   \   0002D0   12....       LCALL   ?MOVE_LONG8_XDATA_XDATA
-   1031                    
-   1032                    GasF = (uint16)DevGas.data[0];
-   \   0002D3   7402         MOV     A,#0x2
-   \   0002D5   12....       LCALL   ?XSTACK_DISP0_8
-   \   0002D8   E0           MOVX    A,@DPTR
-   \   0002D9   90....       MOV     DPTR,#??GasF
-   \   0002DC   12....       LCALL   ?Subroutine12 & 0xFFFF
-   1033                    Infrared = (uint16)DevInf.data[0];
-   \                     ??CrossCallReturnLabel_30:
-   \   0002DF   7409         MOV     A,#0x9
-   \   0002E1   12....       LCALL   ?XSTACK_DISP0_8
+   \   000281   90....       MOV     DPTR,#??GasF
+   \   000284   E0           MOVX    A,@DPTR
+   \   000285   F8           MOV     R0,A
+   \   000286   A3           INC     DPTR
+   \   000287   E0           MOVX    A,@DPTR
+   \   000288   F9           MOV     R1,A
+   \   000289   E8           MOV     A,R0
+   \   00028A   75F007       MOV     B,#0x7
+   \   00028D   A4           MUL     AB
+   \   00028E   F8           MOV     R0,A
+   \   00028F   AAF0         MOV     R2,B
+   \   000291   75F007       MOV     B,#0x7
+   \   000294   E9           MOV     A,R1
+   \   000295   A4           MUL     AB
+   \   000296   2A           ADD     A,R2
+   \   000297   F9           MOV     R1,A
+   \   000298   74..         MOV     A,#DeviceList & 0xff
+   \   00029A   28           ADD     A,R0
+   \   00029B   F582         MOV     DPL,A
+   \   00029D   74..         MOV     A,#(DeviceList >> 8) & 0xff
+   \   00029F   39           ADDC    A,R1
+   \   0002A0   C082         PUSH    DPL
+   \   0002A2   85..82       MOV     DPL,?XSP + 0
+   \   0002A5   85..83       MOV     DPH,?XSP + 1
+   \   0002A8   AC82         MOV     R4,DPL
+   \   0002AA   AD83         MOV     R5,DPH
+   \   0002AC   F583         MOV     DPH,A
+   \   0002AE   D082         POP     DPL
+   \   0002B0   7407         MOV     A,#0x7
+   \   0002B2   12....       LCALL   ?MOVE_LONG8_XDATA_XDATA
+   1038                    DeviceInfo DevInf = DeviceList[infrared]; 
+   \   0002B5   7407         MOV     A,#0x7
+   \   0002B7   12....       LCALL   ?XSTACK_DISP0_8
+   \   0002BA   AC82         MOV     R4,DPL
+   \   0002BC   AD83         MOV     R5,DPH
+   \   0002BE   7583..       MOV     DPH,#((DeviceList + 35) >> 8) & 0xff
+   \   0002C1   7582..       MOV     DPL,#(DeviceList + 35) & 0xff
+   \   0002C4   7407         MOV     A,#0x7
+   \   0002C6   12....       LCALL   ?MOVE_LONG8_XDATA_XDATA
+   1039                    
+   1040                    GasF = (uint16)DevGas.data[0];
+   \   0002C9   7402         MOV     A,#0x2
+   \   0002CB   12....       LCALL   ?XSTACK_DISP0_8
+   \   0002CE   E0           MOVX    A,@DPTR
+   \   0002CF   90....       MOV     DPTR,#??GasF
+   \   0002D2   12....       LCALL   ??Subroutine32_0 & 0xFFFF
+   1041                    Infrared = (uint16)DevInf.data[0];
+   \                     ??CrossCallReturnLabel_76:
+   \   0002D5   7409         MOV     A,#0x9
+   \   0002D7   12....       LCALL   ?XSTACK_DISP0_8
+   \   0002DA   E0           MOVX    A,@DPTR
+   \   0002DB   90....       MOV     DPTR,#??Infrared
+   \   0002DE   12....       LCALL   ??Subroutine32_0 & 0xFFFF
+   1042                    
+   1043                    if(GasF & 0x01 == 0x01) { HalLcdWriteString( "GasFlame: Flame", HAL_LCD_LINE_2 ); }         //0位是火焰
+   \                     ??CrossCallReturnLabel_77:
+   \   0002E1   90....       MOV     DPTR,#??GasF
    \   0002E4   E0           MOVX    A,@DPTR
-   \   0002E5   90....       MOV     DPTR,#??Infrared
-   \   0002E8   12....       LCALL   ?Subroutine11 & 0xFFFF
-   1034                    
-   1035                    HalLcdWriteStringValue("GasFlame: ", GasF, 10, HAL_LCD_LINE_2 );
-   \                     ??CrossCallReturnLabel_24:
-   \   0002EB   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0002EE   790A         MOV     R1,#0xa
-   \   0002F0   90....       MOV     DPTR,#??GasF
-   \   0002F3   12....       LCALL   ?Subroutine16 & 0xFFFF
-   \                     ??CrossCallReturnLabel_44:
-   \   0002F6   7A..         MOV     R2,#`?<Constant "GasFlame: ">` & 0xff
-   \   0002F8   7B..         MOV     R3,#(`?<Constant "GasFlame: ">` >> 8) & 0xff
-   \   0002FA   12....       LCALL   ?Subroutine25 & 0xFFFF
-   \                     ??CrossCallReturnLabel_61:
-   \   0002FD   12....       LCALL   ?DEALLOC_XSTACK8
-   1036                    HalLcdWriteStringValue("Infrared: ", infrared, 10, HAL_LCD_LINE_3 );
-   \   000300                ; Setup parameters for call to function HalLcdWriteStringValue
-   \   000300   75..03       MOV     ?V0 + 0,#0x3
-   \   000303   78..         MOV     R0,#?V0 + 0
-   \   000305   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000308   790A         MOV     R1,#0xa
-   \   00030A   7C05         MOV     R4,#0x5
-   \   00030C   7D00         MOV     R5,#0x0
-   \   00030E   7A..         MOV     R2,#`?<Constant "Infrared: ">` & 0xff
-   \   000310   7B..         MOV     R3,#(`?<Constant "Infrared: ">` >> 8) & 0xff
-   \   000312   12....       LCALL   ?Subroutine25 & 0xFFFF
-   \                     ??CrossCallReturnLabel_62:
-   \   000315   12....       LCALL   ?DEALLOC_XSTACK8
-   1037                    
-   1038                    //显示最下面的百分比条
-   1039                    static uint8 percent;
-   1040                    percent = (4 * 100) / LCD_PAGE_MAX;
-   \   000318   90....       MOV     DPTR,#??percent_3
-   \   00031B   7464         MOV     A,#0x64
-   \   00031D   02....       LJMP    ??Smart_home_Display_5 & 0xFFFF
-   1041                    HalLcdDisplayPercentBar("",percent);
-   1042                    break;
-   1043                }
-   1044                    
-   1045              }
-   1046                
-   1047                break;
-   1048              
-   1049              case 1:
-   1050                HalLcdWriteString( "Relay Contrling", HAL_LCD_LINE_4 ); 
-   \                     ??Smart_home_Display_0:
-   \   000320                ; Setup parameters for call to function HalLcdWriteString
-   \   000320   7904         MOV     R1,#0x4
-   \   000322   7A..         MOV     R2,#`?<Constant "Relay Contrling">` & 0xff
-   \   000324   7B..         MOV     R3,#(`?<Constant "Relay Contrling">` >> 8) & 0xff
-   \   000326   12....       LCALL   ?Subroutine13 & 0xFFFF
-   1051                //清除屏幕显示
-   1052                HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
-   1053                HalLcdWriteString( " ", HAL_LCD_LINE_3 );
-   1054                //这里的deviceStatus 可能是0x00,所以会出现bug 这个0在Device检查时被设置 2.24
-   1055                if(DeviceList[relay].deviceStatus == DEVICE_OFFLINE)
-   \                     ??CrossCallReturnLabel_31:
-   \   000329   700A         JNZ     ??Smart_home_Display_14
-   1056                {
-   1057                  HalLcdWriteString( "Relay Offline", HAL_LCD_LINE_1 );      
-   \   00032B                ; Setup parameters for call to function HalLcdWriteString
-   \   00032B   7A..         MOV     R2,#`?<Constant "Relay Offline">` & 0xff
-   \   00032D   7B..         MOV     R3,#(`?<Constant "Relay Offline">` >> 8) & 0xff
+   \   0002E5   A2E0         MOV     C,0xE0 /* A   */.0
+   \   0002E7   7902         MOV     R1,#0x2
+   \   0002E9   5006         JNC     ??Smart_home_Display_15
+   \   0002EB                ; Setup parameters for call to function HalLcdWriteString
+   \   0002EB   7A..         MOV     R2,#`?<Constant "GasFlame: Flame">` & 0xff
+   \   0002ED   7B..         MOV     R3,#(`?<Constant "GasFlame: Flame">` >> 8) & 0xff
+   \   0002EF   8004         SJMP    ??Smart_home_Display_16
+   1044                    else if(GasF & 0x02 == 0x02) { HalLcdWriteString( "GasFlame: Gas", HAL_LCD_LINE_2 ); }//1位是气体
+   1045                    else if(GasF & 0x03 == 0x03) { HalLcdWriteString( "GasFlame: All", HAL_LCD_LINE_2 ); }
+   1046                    else {HalLcdWriteString( "GasFlame: None", HAL_LCD_LINE_2 );}
    \                     ??Smart_home_Display_15:
-   \   00032F   12....       LCALL   ??HalLcdWriteString?relay
-   \   000332   02....       LJMP    ??Smart_home_Display_7 & 0xFFFF
-   1058                }
-   1059                else  //设备在线回显  设备在线可能是 0/1
-   1060                {
-   1061                  HalLcdWriteString( "Relay Online", HAL_LCD_LINE_1 ); 
-   \                     ??Smart_home_Display_14:
-   \   000335                ; Setup parameters for call to function HalLcdWriteString
-   \   000335   7A..         MOV     R2,#`?<Constant "Relay Online">` & 0xff
-   \   000337   7B..         MOV     R3,#(`?<Constant "Relay Online">` >> 8) & 0xff
-   \   000339   12....       LCALL   ?Subroutine14 & 0xFFFF
-   1062                  //继电器控制界面
-   1063                  const uint8 cmd =  DeviceList[relay].data[0];
-   1064          
-   1065                  if((cmd & 0x02) == 0x02) {HalLcdWriteString( "K1:ON", HAL_LCD_LINE_2 );}
-   \                     ??CrossCallReturnLabel_33:
-   \   00033C   A2E1         MOV     C,0xE0 /* A   */.1
-   \   00033E   5009         JNC     ??Smart_home_Display_16
-   \   000340                ; Setup parameters for call to function HalLcdWriteString
-   \   000340   7902         MOV     R1,#0x2
-   \   000342   7A..         MOV     R2,#`?<Constant "K1:ON">` & 0xff
-   \   000344   7B..         MOV     R3,#(`?<Constant "K1:ON">` >> 8) & 0xff
-   \   000346   12....       LCALL   ??HalLcdWriteString?relay
-   1066                  if((cmd & 0x01) == 0x01) {HalLcdWriteString( "K1:OFF", HAL_LCD_LINE_2 );}
+   \   0002F1                ; Setup parameters for call to function HalLcdWriteString
+   \   0002F1   7A..         MOV     R2,#`?<Constant "GasFlame: None">` & 0xff
+   \   0002F3   7B..         MOV     R3,#(`?<Constant "GasFlame: None">` >> 8) & 0xff
    \                     ??Smart_home_Display_16:
-   \   000349   EE           MOV     A,R6
-   \   00034A   A2E0         MOV     C,0xE0 /* A   */.0
-   \   00034C   5009         JNC     ??Smart_home_Display_17
-   \   00034E                ; Setup parameters for call to function HalLcdWriteString
-   \   00034E   7902         MOV     R1,#0x2
-   \   000350   7A..         MOV     R2,#`?<Constant "K1:OFF">` & 0xff
-   \   000352   7B..         MOV     R3,#(`?<Constant "K1:OFF">` >> 8) & 0xff
-   \   000354   12....       LCALL   ??HalLcdWriteString?relay
-   1067                  if((cmd & 0x20) == 0x20) {HalLcdWriteString( "K2:ON", HAL_LCD_LINE_3 );}
-   \                     ??Smart_home_Display_17:
-   \   000357   EE           MOV     A,R6
-   \   000358   A2E5         MOV     C,0xE0 /* A   */.5
-   \   00035A   5009         JNC     ??Smart_home_Display_18
-   \   00035C                ; Setup parameters for call to function HalLcdWriteString
-   \   00035C   7903         MOV     R1,#0x3
-   \   00035E   7A..         MOV     R2,#`?<Constant "K2:ON">` & 0xff
-   \   000360   7B..         MOV     R3,#(`?<Constant "K2:ON">` >> 8) & 0xff
-   \   000362   12....       LCALL   ??HalLcdWriteString?relay
-   1068                  if((cmd & 0x10) == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}      
+   \   0002F5   12....       LCALL   ?Subroutine11 & 0xFFFF
+   1047                    
+   1048                    //HalLcdWriteStringValue("GasFlame: ", GasF, 16, HAL_LCD_LINE_2 );
+   1049                    HalLcdWriteStringValue("Infrared: ", infrared, 10, HAL_LCD_LINE_3 );
+   \                     ??CrossCallReturnLabel_21:
+   \   0002F8   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   0002FB   790A         MOV     R1,#0xa
+   \   0002FD   7C05         MOV     R4,#0x5
+   \   0002FF   7D00         MOV     R5,#0x0
+   \   000301   7A..         MOV     R2,#`?<Constant "Infrared: ">` & 0xff
+   \   000303   7B..         MOV     R3,#(`?<Constant "Infrared: ">` >> 8) & 0xff
+   \   000305   12....       LCALL   ?Subroutine23 & 0xFFFF
+   \                     ??CrossCallReturnLabel_47:
+   \   000308   12....       LCALL   ?DEALLOC_XSTACK8
+   1050                    
+   1051                    //显示最下面的百分比条
+   1052                    static uint8 percent;
+   1053                    percent = (4 * 100) / LCD_PAGE_MAX;
+   \   00030B   90....       MOV     DPTR,#??percent_3
+   \   00030E   7464         MOV     A,#0x64
+   \   000310   02....       LJMP    ??Smart_home_Display_7 & 0xFFFF
+   1054                    HalLcdDisplayPercentBar("",percent);
+   1055                    break;
+   1056                }
+   1057                    
+   1058              }
+   1059                
+   1060                break;
+   1061              
+   1062              case 1:
+   1063                HalLcdWriteString( "Relay Contrling", HAL_LCD_LINE_4 ); 
+   \                     ??Smart_home_Display_0:
+   \   000313                ; Setup parameters for call to function HalLcdWriteString
+   \   000313   7904         MOV     R1,#0x4
+   \   000315   7A..         MOV     R2,#`?<Constant "Relay Contrling">` & 0xff
+   \   000317   7B..         MOV     R3,#(`?<Constant "Relay Contrling">` >> 8) & 0xff
+   \   000319   12....       LCALL   ?Subroutine10 & 0xFFFF
+   1064                //清除屏幕显示
+   1065                HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
+   1066                HalLcdWriteString( " ", HAL_LCD_LINE_3 );
+   1067                //这里的deviceStatus 可能是0x00,所以会出现bug 这个0在Device检查时被设置 2.24
+   1068                if(DeviceList[relay].deviceStatus == DEVICE_OFFLINE)
+   \                     ??CrossCallReturnLabel_18:
+   \   00031C   700A         JNZ     ??Smart_home_Display_17
+   1069                {
+   1070                  HalLcdWriteString( "Relay Offline", HAL_LCD_LINE_1 );      
+   \   00031E                ; Setup parameters for call to function HalLcdWriteString
+   \   00031E   7A..         MOV     R2,#`?<Constant "Relay Offline">` & 0xff
+   \   000320   7B..         MOV     R3,#(`?<Constant "Relay Offline">` >> 8) & 0xff
    \                     ??Smart_home_Display_18:
-   \   000365   EE           MOV     A,R6
-   \   000366   A2E4         MOV     C,0xE0 /* A   */.4
-   \   000368   5053         JNC     ??Smart_home_Display_7
-   \   00036A                ; Setup parameters for call to function HalLcdWriteString
-   \   00036A   7903         MOV     R1,#0x3
-   \   00036C   7A..         MOV     R2,#`?<Constant "K2:OFF">` & 0xff
-   \   00036E   7B..         MOV     R3,#(`?<Constant "K2:OFF">` >> 8) & 0xff
-   \   000370   80BD         SJMP    ??Smart_home_Display_15
-   1069                }
-   1070          
-   1071                break;
-   1072              
-   1073              case 2:
-   1074                HalLcdWriteString( "Motor Contrling", HAL_LCD_LINE_4 );
-   \                     ??Smart_home_Display_1:
-   \   000372                ; Setup parameters for call to function HalLcdWriteString
-   \   000372   7904         MOV     R1,#0x4
-   \   000374   7A..         MOV     R2,#`?<Constant "Motor Contrling">` & 0xff
-   \   000376   7B..         MOV     R3,#(`?<Constant "Motor Contrling">` >> 8) & 0xff
-   \   000378   12....       LCALL   ?Subroutine13 & 0xFFFF
-   1075                //清除屏幕显示
-   1076                HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
-   1077                HalLcdWriteString( " ", HAL_LCD_LINE_3 );
-   1078                if(DeviceList[relay].deviceStatus == DEVICE_OFFLINE)
-   \                     ??CrossCallReturnLabel_32:
-   \   00037B   7006         JNZ     ??Smart_home_Display_19
-   1079                {
-   1080                  HalLcdWriteString( "Motor Offline", HAL_LCD_LINE_1 );      
-   \   00037D                ; Setup parameters for call to function HalLcdWriteString
-   \   00037D   7A..         MOV     R2,#`?<Constant "Motor Offline">` & 0xff
-   \   00037F   7B..         MOV     R3,#(`?<Constant "Motor Offline">` >> 8) & 0xff
-   \   000381   80AC         SJMP    ??Smart_home_Display_15
-   1081                }
-   1082                else  //设备在线回显  设备在线可能是 0/1
-   1083                {
-   1084                  HalLcdWriteString( "Motor Online", HAL_LCD_LINE_1 ); 
+   \   000322   12....       LCALL   ??HalLcdWriteString?relay
+   \   000325   02....       LJMP    ??Smart_home_Display_8 & 0xFFFF
+   1071                }
+   1072                else  //设备在线回显  设备在线可能是 0/1
+   1073                {
+   1074                  HalLcdWriteString( "Relay Online", HAL_LCD_LINE_1 ); 
+   \                     ??Smart_home_Display_17:
+   \   000328                ; Setup parameters for call to function HalLcdWriteString
+   \   000328   7A..         MOV     R2,#`?<Constant "Relay Online">` & 0xff
+   \   00032A   7B..         MOV     R3,#(`?<Constant "Relay Online">` >> 8) & 0xff
+   \   00032C   12....       LCALL   ?Subroutine12 & 0xFFFF
+   1075                  //继电器控制界面
+   1076                  const uint8 cmd =  DeviceList[relay].data[0];
+   1077          
+   1078                  if((cmd & 0x02) == 0x02) {HalLcdWriteString( "K1:ON", HAL_LCD_LINE_2 );}
+   \                     ??CrossCallReturnLabel_22:
+   \   00032F   A2E1         MOV     C,0xE0 /* A   */.1
+   \   000331   5009         JNC     ??Smart_home_Display_19
+   \   000333                ; Setup parameters for call to function HalLcdWriteString
+   \   000333   7902         MOV     R1,#0x2
+   \   000335   7A..         MOV     R2,#`?<Constant "K1:ON">` & 0xff
+   \   000337   7B..         MOV     R3,#(`?<Constant "K1:ON">` >> 8) & 0xff
+   \   000339   12....       LCALL   ??HalLcdWriteString?relay
+   1079                  if((cmd & 0x01) == 0x01) {HalLcdWriteString( "K1:OFF", HAL_LCD_LINE_2 );}
    \                     ??Smart_home_Display_19:
-   \   000383                ; Setup parameters for call to function HalLcdWriteString
-   \   000383   7A..         MOV     R2,#`?<Constant "Motor Online">` & 0xff
-   \   000385   7B..         MOV     R3,#(`?<Constant "Motor Online">` >> 8) & 0xff
-   \   000387   12....       LCALL   ?Subroutine14 & 0xFFFF
-   1085                  //电机控制界面
-   1086                  const uint16 speed =  (uint16) DeviceList[relay].data[0];
-   1087                  const uint16 status = (uint16) DeviceList[relay].data[1];
-   1088                  
-   1089                  HalLcdWriteStringValue( "Status:", status, 10, HAL_LCD_LINE_2 );
-   \                     ??CrossCallReturnLabel_34:
-   \   00038A                ; Setup parameters for call to function HalLcdWriteStringValue
-   \   00038A   75..02       MOV     ?V0 + 0,#0x2
-   \   00038D   78..         MOV     R0,#?V0 + 0
-   \   00038F   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000392   790A         MOV     R1,#0xa
-   \   000394   90....       MOV     DPTR,#DeviceList + 52
-   \   000397   E0           MOVX    A,@DPTR
-   \   000398   FC           MOV     R4,A
-   \   000399   7D00         MOV     R5,#0x0
-   \   00039B   7A..         MOV     R2,#`?<Constant "Status:">` & 0xff
-   \   00039D   7B..         MOV     R3,#(`?<Constant "Status:">` >> 8) & 0xff
-   \   00039F   12....       LCALL   ?Subroutine25 & 0xFFFF
-   \                     ??CrossCallReturnLabel_63:
-   \   0003A2   12....       LCALL   ?DEALLOC_XSTACK8
-   1090                  HalLcdWriteStringValue( "Speed:", speed, 10, HAL_LCD_LINE_3 );
-   \   0003A5                ; Setup parameters for call to function HalLcdWriteStringValue
-   \   0003A5   75..03       MOV     ?V0 + 0,#0x3
-   \   0003A8   78..         MOV     R0,#?V0 + 0
-   \   0003AA   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0003AD   790A         MOV     R1,#0xa
-   \   0003AF   EE           MOV     A,R6
-   \   0003B0   FC           MOV     R4,A
-   \   0003B1   7D00         MOV     R5,#0x0
-   \   0003B3   7A..         MOV     R2,#`?<Constant "Speed:">` & 0xff
-   \   0003B5   7B..         MOV     R3,#(`?<Constant "Speed:">` >> 8) & 0xff
-   \   0003B7   12....       LCALL   ?Subroutine25 & 0xFFFF
-   1091                
-   1092                }
-   1093            }
-   \                     ??CrossCallReturnLabel_64:
-   \   0003BA   12....       LCALL   ?DEALLOC_XSTACK8
-   1094            
-   1095          #endif // LCD_SUPPORTED  
-   1096          }
-   \                     ??Smart_home_Display_7:
-   \   0003BD   740E         MOV     A,#0xe
-   \   0003BF   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0003C2   7F03         MOV     R7,#0x3
-   \   0003C4   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   00033C   EE           MOV     A,R6
+   \   00033D   A2E0         MOV     C,0xE0 /* A   */.0
+   \   00033F   5009         JNC     ??Smart_home_Display_20
+   \   000341                ; Setup parameters for call to function HalLcdWriteString
+   \   000341   7902         MOV     R1,#0x2
+   \   000343   7A..         MOV     R2,#`?<Constant "K1:OFF">` & 0xff
+   \   000345   7B..         MOV     R3,#(`?<Constant "K1:OFF">` >> 8) & 0xff
+   \   000347   12....       LCALL   ??HalLcdWriteString?relay
+   1080                  if((cmd & 0x20) == 0x20) {HalLcdWriteString( "K2:ON", HAL_LCD_LINE_3 );}
+   \                     ??Smart_home_Display_20:
+   \   00034A   EE           MOV     A,R6
+   \   00034B   A2E5         MOV     C,0xE0 /* A   */.5
+   \   00034D   5009         JNC     ??Smart_home_Display_21
+   \   00034F                ; Setup parameters for call to function HalLcdWriteString
+   \   00034F   7903         MOV     R1,#0x3
+   \   000351   7A..         MOV     R2,#`?<Constant "K2:ON">` & 0xff
+   \   000353   7B..         MOV     R3,#(`?<Constant "K2:ON">` >> 8) & 0xff
+   \   000355   12....       LCALL   ??HalLcdWriteString?relay
+   1081                  if((cmd & 0x10) == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}      
+   \                     ??Smart_home_Display_21:
+   \   000358   EE           MOV     A,R6
+   \   000359   A2E4         MOV     C,0xE0 /* A   */.4
+   \   00035B   5053         JNC     ??Smart_home_Display_8
+   \   00035D                ; Setup parameters for call to function HalLcdWriteString
+   \   00035D   7903         MOV     R1,#0x3
+   \   00035F   7A..         MOV     R2,#`?<Constant "K2:OFF">` & 0xff
+   \   000361   7B..         MOV     R3,#(`?<Constant "K2:OFF">` >> 8) & 0xff
+   \   000363   80BD         SJMP    ??Smart_home_Display_18
+   1082                }
+   1083          
+   1084                break;
+   1085              
+   1086              case 2:
+   1087                HalLcdWriteString( "Motor Contrling", HAL_LCD_LINE_4 );
+   \                     ??Smart_home_Display_1:
+   \   000365                ; Setup parameters for call to function HalLcdWriteString
+   \   000365   7904         MOV     R1,#0x4
+   \   000367   7A..         MOV     R2,#`?<Constant "Motor Contrling">` & 0xff
+   \   000369   7B..         MOV     R3,#(`?<Constant "Motor Contrling">` >> 8) & 0xff
+   \   00036B   12....       LCALL   ?Subroutine10 & 0xFFFF
+   1088                //清除屏幕显示
+   1089                HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
+   1090                HalLcdWriteString( " ", HAL_LCD_LINE_3 );
+   1091                if(DeviceList[relay].deviceStatus == DEVICE_OFFLINE)
+   \                     ??CrossCallReturnLabel_19:
+   \   00036E   7006         JNZ     ??Smart_home_Display_22
+   1092                {
+   1093                  HalLcdWriteString( "Motor Offline", HAL_LCD_LINE_1 );      
+   \   000370                ; Setup parameters for call to function HalLcdWriteString
+   \   000370   7A..         MOV     R2,#`?<Constant "Motor Offline">` & 0xff
+   \   000372   7B..         MOV     R3,#(`?<Constant "Motor Offline">` >> 8) & 0xff
+   \   000374   80AC         SJMP    ??Smart_home_Display_18
+   1094                }
+   1095                else  //设备在线回显  设备在线可能是 0/1
+   1096                {
+   1097                  HalLcdWriteString( "Motor Online", HAL_LCD_LINE_1 ); 
+   \                     ??Smart_home_Display_22:
+   \   000376                ; Setup parameters for call to function HalLcdWriteString
+   \   000376   7A..         MOV     R2,#`?<Constant "Motor Online">` & 0xff
+   \   000378   7B..         MOV     R3,#(`?<Constant "Motor Online">` >> 8) & 0xff
+   \   00037A   12....       LCALL   ?Subroutine12 & 0xFFFF
+   1098                  //电机控制界面
+   1099                  const uint16 speed =  (uint16) DeviceList[relay].data[0];
+   1100                  const uint16 status = (uint16) DeviceList[relay].data[1];
+   1101                  
+   1102                  HalLcdWriteStringValue( "Status:", status, 10, HAL_LCD_LINE_2 );
+   \                     ??CrossCallReturnLabel_23:
+   \   00037D                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   00037D   75..02       MOV     ?V0 + 0,#0x2
+   \   000380   78..         MOV     R0,#?V0 + 0
+   \   000382   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   000385   790A         MOV     R1,#0xa
+   \   000387   90....       MOV     DPTR,#DeviceList + 52
+   \   00038A   E0           MOVX    A,@DPTR
+   \   00038B   FC           MOV     R4,A
+   \   00038C   7D00         MOV     R5,#0x0
+   \   00038E   7A..         MOV     R2,#`?<Constant "Status:">` & 0xff
+   \   000390   7B..         MOV     R3,#(`?<Constant "Status:">` >> 8) & 0xff
+   \   000392   12....       LCALL   ?Subroutine23 & 0xFFFF
+   \                     ??CrossCallReturnLabel_48:
+   \   000395   12....       LCALL   ?DEALLOC_XSTACK8
+   1103                  HalLcdWriteStringValue( "Speed:", speed, 10, HAL_LCD_LINE_3 );
+   \   000398                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   000398   75..03       MOV     ?V0 + 0,#0x3
+   \   00039B   78..         MOV     R0,#?V0 + 0
+   \   00039D   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   0003A0   790A         MOV     R1,#0xa
+   \   0003A2   EE           MOV     A,R6
+   \   0003A3   FC           MOV     R4,A
+   \   0003A4   7D00         MOV     R5,#0x0
+   \   0003A6   7A..         MOV     R2,#`?<Constant "Speed:">` & 0xff
+   \   0003A8   7B..         MOV     R3,#(`?<Constant "Speed:">` >> 8) & 0xff
+   \   0003AA   12....       LCALL   ?Subroutine23 & 0xFFFF
+   1104                
+   1105                }
+   1106            }
+   \                     ??CrossCallReturnLabel_49:
+   \   0003AD   12....       LCALL   ?DEALLOC_XSTACK8
+   1107            
+   1108          #endif // LCD_SUPPORTED  
+   1109          }
+   \                     ??Smart_home_Display_8:
+   \   0003B0   740E         MOV     A,#0xe
+   \   0003B2   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0003B5   02....       LJMP    ?Subroutine1 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine25:
+   \                     ?Subroutine23:
    \   000000   12....       LCALL   ??HalLcdWriteStringValue?relay
    \   000003   7401         MOV     A,#0x1
    \   000005   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine16:
+   \                     ?Subroutine20:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   FC           MOV     R4,A
    \   000002   A3           INC     DPTR
@@ -2960,7 +2974,7 @@ Warning[Pe550]: variable "Infrared" was set but never used
    \   000005   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine14:
+   \                     ?Subroutine12:
    \   000000   12....       LCALL   ??HalLcdWriteString?relay
    \   000003   90....       MOV     DPTR,#DeviceList + 51
    \   000006   E0           MOVX    A,@DPTR
@@ -2968,9 +2982,18 @@ Warning[Pe550]: variable "Infrared" was set but never used
    \   000008   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine13:
-   \   000000   12....       LCALL   ?Subroutine26 & 0xFFFF
-   \                     ??CrossCallReturnLabel_66:
+   \                     ?Subroutine11:
+   \   000000   12....       LCALL   ??HalLcdWriteString?relay
+   \   000003                ; Setup parameters for call to function HalLcdWriteStringValueValue
+   \   000003                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   000003   75..03       MOV     ?V0 + 0,#0x3
+   \   000006   78..         MOV     R0,#?V0 + 0
+   \   000008   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine10:
+   \   000000   12....       LCALL   ?Subroutine24 & 0xFFFF
+   \                     ??CrossCallReturnLabel_51:
    \   000003   90....       MOV     DPTR,#DeviceList + 50
    \   000006   E0           MOVX    A,@DPTR
    \   000007   6402         XRL     A,#0x2
@@ -2978,7 +3001,7 @@ Warning[Pe550]: variable "Infrared" was set but never used
    \   00000B   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine26:
+   \                     ?Subroutine24:
    \   000000   12....       LCALL   ??HalLcdWriteString?relay
    \   000003                ; Setup parameters for call to function HalLcdWriteString
    \   000003                ; Setup parameters for call to function HalLcdWriteString
@@ -2995,31 +3018,6 @@ Warning[Pe550]: variable "Infrared" was set but never used
    \   000010   7B..         MOV     R3,#(`?<Constant " ">` >> 8) & 0xff
    \   000012   12....       LCALL   ??HalLcdWriteString?relay
    \   000015   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine11:
-   \   000000   F0           MOVX    @DPTR,A
-   \   000001   A3           INC     DPTR
-   \   000002   E4           CLR     A
-   \   000003   F0           MOVX    @DPTR,A
-   \   000004                ; Setup parameters for call to function HalLcdWriteStringValueValue
-   \   000004                ; Setup parameters for call to function HalLcdWriteStringValue
-   \   000004   75..02       MOV     ?V0 + 0,#0x2
-   \   000007   78..         MOV     R0,#?V0 + 0
-   \   000009   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine9:
-   \   000000   F0           MOVX    @DPTR,A
-   \   000001   A3           INC     DPTR
-   \   000002   E4           CLR     A
-   \   000003   F0           MOVX    @DPTR,A
-   \   000004                ; Setup parameters for call to function memcpy
-   \   000004                ; Setup parameters for call to function memcpy
-   \   000004   75..01       MOV     ?V0 + 0,#0x1
-   \   000007   F5..         MOV     ?V0 + 1,A
-   \   000009   78..         MOV     R0,#?V0 + 0
-   \   00000B   22           RET
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
    \                     ??humit:
@@ -3082,6 +3080,16 @@ Warning[Pe550]: variable "Infrared" was set but never used
    \   000001                REQUIRE __INIT_XDATA_Z
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \                     ??tmp3:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \                     ??tmp4:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
    \                     ??Data1:
    \   000000                DS 2
    \   000002                REQUIRE __INIT_XDATA_Z
@@ -3112,7 +3120,7 @@ Warning[Pe550]: variable "Infrared" was set but never used
    \   000001                REQUIRE __INIT_XDATA_Z
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine24:
+   \                     ?Subroutine22:
    \   000000   75F007       MOV     B,#0x7
    \   000003   A4           MUL     AB
    \   000004   F8           MOV     R0,A
@@ -3215,9 +3223,29 @@ Warning[Pe550]: variable "Infrared" was set but never used
    \            00      
 
    \                                 In  segment XDATA_ROM_C, align 1
-   \                     `?<Constant "Sound">`:
-   \   000000   536F756E     DB "Sound"
-   \            6400    
+   \                     `?<Constant "Sound: Voice">`:
+   \   000000   536F756E     DB "Sound: Voice"
+   \            643A2056
+   \            6F696365
+   \            00      
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \   000000   536F756E     DB "Sound: Vibration"
+   \            643A2056
+   \            69627261
+   \            74696F6E
+   \            00      
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \   000000   536F756E     DB "Sound: All"
+   \            643A2041
+   \            6C6C00  
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant "Sound: None">`:
+   \   000000   536F756E     DB "Sound: None"
+   \            643A204E
+   \            6F6E6500
 
    \                                 In  segment XDATA_ROM_C, align 1
    \                     `?<Constant "">`:
@@ -3274,10 +3302,39 @@ Warning[Pe550]: variable "Infrared" was set but never used
    \            61726400
 
    \                                 In  segment XDATA_ROM_C, align 1
-   \                     `?<Constant "GasFlame: ">`:
-   \   000000   47617346     DB "GasFlame: "
+   \                     `?<Constant "ID: ">`:
+   \   000000   49443A20     DB "ID: "
+   \            00      
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant "-">`:
+   \   000000   2D00         DB "-"
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant "GasFlame: Flame">`:
+   \   000000   47617346     DB "GasFlame: Flame"
    \            6C616D65
-   \            3A2000  
+   \            3A20466C
+   \            616D6500
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \   000000   47617346     DB "GasFlame: Gas"
+   \            6C616D65
+   \            3A204761
+   \            7300    
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \   000000   47617346     DB "GasFlame: All"
+   \            6C616D65
+   \            3A20416C
+   \            6C00    
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant "GasFlame: None">`:
+   \   000000   47617346     DB "GasFlame: None"
+   \            6C616D65
+   \            3A204E6F
+   \            6E6500  
 
    \                                 In  segment XDATA_ROM_C, align 1
    \                     `?<Constant "Infrared: ">`:
@@ -3356,56 +3413,56 @@ Warning[Pe550]: variable "Infrared" was set but never used
    \                     `?<Constant "Speed:">`:
    \   000000   53706565     DB "Speed:"
    \            643A00  
-   1097          
-   1098          
+   1110          
+   1111          
 
    Maximum stack usage in bytes:
 
      Function                       ISTACK PSTACK XSTACK
      --------                       ------ ------ ------
-     Smart_home_Display                 2      0     45
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
+     Smart_home_Display                 2      0     44
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
        -> HalLcdWriteStringValueValue
-                                        0      0     62
-       -> HalLcdWriteStringValue        0      0     52
-       -> HalLcdDisplayPercentBar       0      0     50
-       -> memcpy                        0      0     54
+                                        0      0     60
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdDisplayPercentBar       0      0     48
+       -> memcpy                        0      0     52
        -> HalLcdWriteStringValueValue
-                                        0      0     62
-       -> HalLcdWriteStringValue        0      0     52
-       -> HalLcdDisplayPercentBar       0      0     50
-       -> memcpy                        0      0     54
-       -> memcpy                        0      0     54
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
+                                        0      0     60
+       -> HalLcdWriteStringValue        0      0     50
+       -> HalLcdDisplayPercentBar       0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
        -> HalLcdWriteStringValueValue
-                                        0      0     62
-       -> HalLcdDisplayPercentBar       0      0     50
-       -> HalLcdWriteStringValue        0      0     52
-       -> HalLcdWriteStringValue        0      0     52
-       -> HalLcdDisplayPercentBar       0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteString             0      0     50
-       -> HalLcdWriteStringValue        0      0     52
-       -> HalLcdWriteStringValue        0      0     52
+                                        0      0     60
+       -> HalLcdDisplayPercentBar       0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteStringValue        0      0     50
+       -> HalLcdDisplayPercentBar       0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteString             0      0     48
+       -> HalLcdWriteStringValue        0      0     50
+       -> HalLcdWriteStringValue        0      0     50
      Smart_home_HandleKeys              0      0     23
        -> Smart_home_Relay_Ctl          0      0     18
        -> HalLcdWriteString             0      0     18
@@ -3466,23 +3523,23 @@ Warning[Pe550]: variable "Infrared" was set but never used
      Coordinator_Msg                   102
      RelayTransID                        1
      MotorTransID                        1
-     Smart_home_Init                   226
+     Smart_home_Init                   224
      ?Subroutine0                        5
-     ?Subroutine17                       2
-     ??Subroutine33_0                   11
-     ?Subroutine23                      11
-     ?Subroutine12                       5
-     ?Subroutine10                       7
+     ?Subroutine14                       2
+     ??Subroutine31_0                   11
+     ?Subroutine21                      11
+     ?Subroutine9                        2
+     ??Subroutine32_0                    5
      Smart_home_ProcessEvent           418
-     ?Subroutine18                       5
-     ?Subroutine30                       3
-     ??Subroutine32_0                    6
+     ?Subroutine15                       5
+     ?Subroutine28                       3
+     ??Subroutine30_0                    6
      Smart_home_HandleKeys             292
-     ?Subroutine22                      10
-     ?Subroutine21                      10
-     ?Subroutine20                      10
      ?Subroutine19                      10
-     ?Subroutine15                      10
+     ?Subroutine18                      10
+     ?Subroutine17                      10
+     ?Subroutine16                      10
+     ?Subroutine13                      10
      MotorSpeed                          1
      NetWorkAllow                        1
      Relay1_on                           1
@@ -3493,25 +3550,24 @@ Warning[Pe550]: variable "Infrared" was set but never used
      ?Subroutine7                        7
      ?Subroutine6                        5
      ?Subroutine5                        5
-     ?Subroutine27                       7
+     ?Subroutine25                       7
      ?Subroutine4                        6
-     ?Subroutine28                      19
+     ?Subroutine26                      19
      ?Subroutine3                       22
      ?Subroutine2                       16
-     ?Subroutine29                       4
-     ?Subroutine31                      17
+     ?Subroutine27                       4
+     ?Subroutine29                      17
      DeviceID                            1
      Device_status                       1
      counttmp                            2
      Smart_home_Relay_Ctl              137
-     Smart_home_Display                967
-     ?Subroutine25                       6
-     ?Subroutine16                       6
-     ?Subroutine14                       9
-     ?Subroutine13                      12
-     ?Subroutine26                      22
-     ?Subroutine11                      10
-     ?Subroutine9                       12
+     Smart_home_Display                952
+     ?Subroutine23                       6
+     ?Subroutine20                       6
+     ?Subroutine12                       9
+     ?Subroutine11                       9
+     ?Subroutine10                      12
+     ?Subroutine24                      22
      humit                               2
      temper                              2
      SoundVb                             2
@@ -3524,13 +3580,15 @@ Warning[Pe550]: variable "Infrared" was set but never used
      kind                                1
      tmp1                                1
      tmp2                                1
+     tmp3                                1
+     tmp4                                1
      Data1                               2
      Data2                               2
      percent                             1
      GasF                                2
      Infrared                            2
      percent                             1
-     ?Subroutine24                      18
+     ?Subroutine22                      18
      ??Smart_home_Init?relay             6
      ??Smart_home_ProcessEvent?relay     6
      ??Smart_home_HandleKeys?relay       6
@@ -3546,7 +3604,10 @@ Warning[Pe550]: variable "Infrared" was set but never used
      ?<Constant " ">                     2
      ?<Constant "Hum:">                  5
      ?<Constant "% Tem_1:">              9
-     ?<Constant "Sound">                 6
+     ?<Constant "Sound: Voice">         13
+     ?<Constant "Sound: Vibration">     17
+     ?<Constant "Sound: All">           11
+     ?<Constant "Sound: None">          12
      ?<Constant "">                      1
      ?<Constant "Temper_2:">            10
      ?<Constant ".">                     2
@@ -3557,7 +3618,12 @@ Warning[Pe550]: variable "Infrared" was set but never used
      ?<Constant "MF-Pro">                7
      ?<Constant "MF-DesFire">           11
      ?<Constant "No Card">               8
-     ?<Constant "GasFlame: ">           11
+     ?<Constant "ID: ">                  5
+     ?<Constant "-">                     2
+     ?<Constant "GasFlame: Flame">      16
+     ?<Constant "GasFlame: Gas">        14
+     ?<Constant "GasFlame: All">        14
+     ?<Constant "GasFlame: None">       15
      ?<Constant "Infrared: ">           11
      ?<Constant "Relay Contrling">      16
      ?<Constant "Relay Offline">        14
@@ -3573,14 +3639,14 @@ Warning[Pe550]: variable "Infrared" was set but never used
      ?<Constant "Speed:">                7
 
  
- 2 605 bytes in segment BANKED_CODE
+ 2 570 bytes in segment BANKED_CODE
     36 bytes in segment BANK_RELAYS
-   399 bytes in segment XDATA_ROM_C
-   239 bytes in segment XDATA_Z
+   501 bytes in segment XDATA_ROM_C
+   241 bytes in segment XDATA_Z
  
- 2 641 bytes of CODE  memory
-   399 bytes of CONST memory
-   239 bytes of XDATA memory
+ 2 606 bytes of CODE  memory
+   501 bytes of CONST memory
+   241 bytes of XDATA memory
 
 Errors: none
 Warnings: 2

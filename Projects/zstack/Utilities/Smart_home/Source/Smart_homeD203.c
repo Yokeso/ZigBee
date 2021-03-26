@@ -432,7 +432,7 @@ static void Smart_home_Send(void)
     Coordinator_Msg[3] = tmp;
     
     // 发送给协调器命令 
-    Coordinator_Msg[4] = InfraredData;  //0位气体报警，1位火焰
+    Coordinator_Msg[4] = InfraredData;  //0x01有人
     
     tmp = AF_DataRequest( &Coordinator_DstAddr,                         
                           (endPointDesc_t *)&Smart_home_epDesc,                  

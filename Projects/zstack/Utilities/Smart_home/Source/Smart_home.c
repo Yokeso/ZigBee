@@ -954,7 +954,14 @@ static void Smart_home_Display(void)
           SoundVb = (uint16)DevSound.data[0];
 
           HalLcdWriteStringValueValue( "Hum:", humit, 10, "% Tem_1:", temper, 10, HAL_LCD_LINE_2 );
-          HalLcdWriteStringValue("Sound", SoundVb, 10, HAL_LCD_LINE_3 );
+          
+          if(SoundVb & 0x01 == 0x01) { HalLcdWriteString( "Sound: Voice", HAL_LCD_LINE_3 ); }
+          else if(SoundVb & 0x02 == 0x02) { HalLcdWriteString( "Sound: Vibration", HAL_LCD_LINE_3 ); }
+          else if(SoundVb & 0x03 == 0x03) { HalLcdWriteString( "Sound: All", HAL_LCD_LINE_3 ); }
+          else {HalLcdWriteString( "Sound: None", HAL_LCD_LINE_3 );}
+          
+          //HalLcdWriteStringValue( "Sound:", SoundVb, 16, HAL_LCD_LINE_3 );
+          
           
           //显示最下面的百分比条
           static uint8 percent;
@@ -976,6 +983,7 @@ static void Smart_home_Display(void)
           lightmp = Devtmp.data[3];
           Light = (uint16)Devtmp.data[4];
           memcpy(&Light,&lightmp,sizeof(lightmp));
+          
           HalLcdWriteStringValueValue( "Temper_2:", integer, 10, ".", decimals, 10, HAL_LCD_LINE_2 );
           HalLcdWriteStringValue( "Light:", Light, 10, HAL_LCD_LINE_3 );
           
@@ -989,8 +997,8 @@ static void Smart_home_Display(void)
       case 2:
       {
           static uint8 kind;
-          static uint8 tmp1;
-          static uint8 tmp2;
+          static uint8 tmp1,tmp2;
+          static uint8 tmp3,tmp4;
           static uint16 Data1;
           static uint16 Data2;
           //显示最下面的百分比条
@@ -998,12 +1006,12 @@ static void Smart_home_Display(void)
           
           kind = rfid.data[0];
           tmp1 = rfid.data[1];
-          Data1 = (uint16)rfid.data[2];
-          tmp2 = rfid.data[3];
-          Data2 = (uint16)rfid.data[4];
+          tmp2 = rfid.data[2];
+          tmp3 = rfid.data[3];
+          tmp4 = rfid.data[4];
           
-          memcpy(&Data1,&tmp1,sizeof(tmp1));
-          memcpy(&Data2,&tmp2,sizeof(tmp2));
+          Data1 = (tmp1 << 8) | tmp2;
+          Data2 = (tmp3 << 8) | tmp4;
           
           if(kind == 0x01) {HalLcdWriteString( "MFOne-S50", HAL_LCD_LINE_2 );}
           else if(kind == 0x02) {HalLcdWriteString( "MFOne-S70", HAL_LCD_LINE_2 );}
@@ -1013,7 +1021,7 @@ static void Smart_home_Display(void)
           else {HalLcdWriteString( "No Card", HAL_LCD_LINE_2 );}
           
 
-          HalLcdWriteStringValueValue( "ID: ", Data1, 16, "", Data2, 16, HAL_LCD_LINE_3 );
+          HalLcdWriteStringValueValue( "ID: ", Data1, 16, "-", Data2, 16, HAL_LCD_LINE_3 );
           
           static uint8 percent;
           percent = (3 * 100) / LCD_PAGE_MAX;
@@ -1032,7 +1040,12 @@ static void Smart_home_Display(void)
           GasF = (uint16)DevGas.data[0];
           Infrared = (uint16)DevInf.data[0];
           
-          HalLcdWriteStringValue("GasFlame: ", GasF, 10, HAL_LCD_LINE_2 );
+          if(GasF & 0x01 == 0x01) { HalLcdWriteString( "GasFlame: Flame", HAL_LCD_LINE_2 ); }         //0位是火焰
+          else if(GasF & 0x02 == 0x02) { HalLcdWriteString( "GasFlame: Gas", HAL_LCD_LINE_2 ); }//1位是气体
+          else if(GasF & 0x03 == 0x03) { HalLcdWriteString( "GasFlame: All", HAL_LCD_LINE_2 ); }
+          else {HalLcdWriteString( "GasFlame: None", HAL_LCD_LINE_2 );}
+          
+          //HalLcdWriteStringValue("GasFlame: ", GasF, 16, HAL_LCD_LINE_2 );
           HalLcdWriteStringValue("Infrared: ", infrared, 10, HAL_LCD_LINE_3 );
           
           //显示最下面的百分比条
