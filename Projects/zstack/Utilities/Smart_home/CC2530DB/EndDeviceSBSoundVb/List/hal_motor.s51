@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        26/Mar/2021  11:26:46 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        14/Apr/2021  19:57:03 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -19,8 +19,8 @@
 //                          Projects\zstack\Utilities\Smart_home\CC2530DB\..\ /
 //                          ..\..\Tools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO   /
 //                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR      /
-//                          -DDEFAULT_CHANLIST=0x02000000                     /
-//                          -DZDAPP_CONFIG_PAN_ID=0x1001                      /
+//                          -DDEFAULT_CHANLIST=0x00000800                     /
+//                          -DZDAPP_CONFIG_PAN_ID=0x1003                      /
 //                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
 //                          ASK=0x007F -DBEACON_REQUEST_DELAY=100             /
 //                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
@@ -411,7 +411,7 @@ Timer3Init          SYMBOL "Timer3Init"
 //   10     (2) 电机顺时针转动，先过P1_3，然后通过P1_4，此时方向为正方向；
 //   11     (3) 本部分程序使用了CC2530的定时器1和定时器3，分别用来产生直流电机的PWM波，
 //   12         和1s的定时中断，1s的定时中断作为节拍来控制转速的测量和转速的调节；
-//   13     (4) 电机的转速单位：转/秒；目前支持的转速调节范围是：1~50(Max)转/秒；
+//   13     (4) 电机的转速单位：转/分钟；目前支持的转速调节范围是：0-2400转/分钟
 //   14     (5) 电机控制方法采用PID控制中的P控制，经过测试可以实现基本调速功能。
 //   15     (6) 通过修改定时器的计数值，可以调节电机测速和控制的节拍，具体看定时器
 //   16         的中断说明，这里有测试比较的结果：当测速和控制的节奏提高后，速度的

@@ -82,16 +82,23 @@
  */
 /*Éè±¸Á´½ÓÏà¹ØÉèÖÃ*/
 /*ÅÐ¶ÏÉè±¸ÊÇ·ñÔÚÏßµÄ×î´ó´ÎÊý*/
-#define DEVICE_HEART_BEAT    3
-#define DEVICE_CHECK_DELAY   10000
+#define DEVICE_HEART_BEAT    5
+#define DEVICE_CHECK_DELAY   5000
+#define DEVICE_CHECK_TIMER   3000
 
 /*LCDÏà¹ØÉèÖÃ*/
 /*µ¥ÆÁÏÔÊ¾Ê±³£   MS*/
 #define LCD_DISPLAY_LENGTH   10000
-#define LCD_DISPLAY_TIMER    1000  //¶à¾Ã¸üÐÂÒ»´Î 
+#define LCD_DISPLAY_TIMER    2000  //¶à¾Ã¸üÐÂÒ»´Î 
 
 /*¹ØÓÚÏÔÊ¾²¿·ÖÏà¹ØµÄºê*/
 #define LCD_PAGE_MAX         4     //Ä¿Ç°Ä¿Â¼Ò³×î¶à4Ò³
+
+/* Ö±Á÷µç»ú×´Ì¬(status)¶¨Òå*/
+#define  HAL_MOTOR_STOP            0x01
+#define  HAL_MOTOR_FORWARD         0x02
+#define  HAL_MOTOR_BACKWARD        0x03
+#define  MOTOR_MAX_SPEED           2400
 
 /*********************************************************************
  * CONSTANTS
@@ -226,6 +233,12 @@ DeviceInfo *soundVb = DeviceList+Smart_home_CLUSTERID_SOUNDVBMSG;      //ÉùÒôÕð¶
 
 /*3.14 ÏûÏ¢·¢ËÍ²¿·Ö*/
 /*3.17¶ÌµØÖ·´æ´¢*/
+static afAddrType_t Humit_addr;
+static afAddrType_t Light_addr;
+static afAddrType_t GasF_addr;
+static afAddrType_t Sound_addr;
+static afAddrType_t Card_addr;
+static afAddrType_t Infrared_addr;
 static afAddrType_t Relay_addr;
 static afAddrType_t Motor_addr;
 
@@ -252,6 +265,7 @@ static void Smart_home_Device_check(void);
 static void Smart_home_Relay_Ctl(uint8 cmd);
 static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed);
 static void Smart_home_Display(void);
+static void Smart_home_Motor_cmd(int8 speed);
 
 /*********************************************************************
  * @fn      Smart_home_Init
@@ -366,7 +380,7 @@ UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
                (Smart_home_epDesc.endPoint == sentEP) )
           {  
             //3.13 ÔÚÏûÏ¢·¢ËÍÈ·ÈÏ³É¹¦ºóÂÌµÆÉÁË¸Ò»ÏÂ
-            HalLedSet(HAL_LED_1, HAL_LED_MODE_BLINK);
+            //HalLedSet(HAL_LED_1, HAL_LED_MODE_BLINK);
           }
           else
           {
@@ -407,7 +421,7 @@ UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
     Smart_home_Device_check();  //µ÷ÓÃÖÕ¶ËÉè±¸¼ì²éº¯Êý
     
     osal_start_timerEx(Smart_home_TaskID,SMART_HOME_DEVICE_CHECK_EVT,
-                       DEVICE_CHECK_DELAY);
+                       DEVICE_CHECK_TIMER);
     return (events ^ SMART_HOME_DEVICE_CHECK_EVT);
   }
   
@@ -434,6 +448,7 @@ UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
  */
 static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
 {
+  /*
   switch ( inMsg->clusterID )
   {
     case End_Device_Bind_rsp:
@@ -458,12 +473,12 @@ static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
         {
           if ( pRsp->status == ZSuccess && pRsp->cnt )
           {
-            /*
+            
             Smart_home_TxAddr.addrMode = (afAddrMode_t)Addr16Bit;
             Smart_home_TxAddr.addr.shortAddr = pRsp->nwkAddr;
             // Take the first endpoint, Can be changed to search through endpoints
             Smart_home_TxAddr.endPoint = pRsp->epList[0];
-            */
+            
             
             // Light LED
             HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
@@ -473,6 +488,7 @@ static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
       }
       break;
   }
+  */
 }
 
 /*********************************************************************
@@ -532,6 +548,48 @@ static void Smart_home_Key_add(uint8 Ctrlcase)
   }
 }
 */
+/*********************************************************************
+ * @fn      Smart_home_Motor_cmd
+ * 
+ * @brief   Í¨¹ýµç»úËÙ¶ÈÅÐ¶Ïµç»ú×ªÏò
+ * 
+ * 
+ * @param   uint8 µç»ú×ªËÙ
+ * 
+ * @return  
+ *          #define  HAL_MOTOR_STOP            0x01
+ *          #define  HAL_MOTOR_FORWARD         0x02
+ *          #define  HAL_MOTOR_BACKWARD        0x03
+ */
+void Smart_home_Motor_cmd(int8 speed)
+{
+  uint8 outspeed;
+  uint8 cmd;
+  if(speed == 0)
+  {
+    outspeed = 0;
+    cmd = HAL_MOTOR_STOP;
+  }   
+  else if(speed > 0)
+  {
+    outspeed = speed;
+    cmd = HAL_MOTOR_FORWARD;
+  }
+  
+  else if(speed < 0)
+  {
+    outspeed = 0xff - speed;
+    cmd = HAL_MOTOR_BACKWARD;
+  }
+  
+  else
+  {
+    outspeed = 0;
+    cmd = HAL_MOTOR_STOP;    
+  }
+  Smart_home_Motor_Ctl(cmd,outspeed); 
+}
+
 /*********************************************************************
  * @fn      Smart_home_HandleKeys
  *
@@ -597,6 +655,8 @@ void Smart_home_HandleKeys( byte shift, byte keys )
 #endif 
            MotorSpeed = 80;
         }
+        Smart_home_Motor_cmd(MotorSpeed);
+        
         break;
       }
          
@@ -625,6 +685,10 @@ void Smart_home_HandleKeys( byte shift, byte keys )
       } 
       case 2:
       {
+        /*
+        #define  HAL_MOTOR_STOP            0x01
+        #define  HAL_MOTOR_FORWORD         0x02
+        #define  HAL_MOTOR_BACKWORD        0x03*/
         if(MotorSpeed > -80)     {MotorSpeed -= 10;}
         if(MotorSpeed <= -80)     
         {
@@ -633,6 +697,7 @@ void Smart_home_HandleKeys( byte shift, byte keys )
 #endif 
            MotorSpeed = -80;
         }
+        Smart_home_Motor_cmd(MotorSpeed);
         break; 
       }
     }
@@ -897,7 +962,7 @@ static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed)
     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
     Coordinator_Msg[3] = tmp;
     
-    // ·¢ËÍ¸ø¼ÌµçÆ÷µÄ¿ØÖÆÃüÁî 
+    // ·¢ËÍ¸øµç»úµÄ¿ØÖÆÃüÁî 
     Coordinator_Msg[4] = speed;
     Coordinator_Msg[5] = cmd;
     
@@ -941,19 +1006,24 @@ static void Smart_home_Display(void)
         default:
         case 0:
         {
-          static uint16 humit;
-          static uint16 temper;
+          static uint16 humit=0x14;
+          static uint16 temper=0x14;
           static uint16 SoundVb; 
+          
           
           DeviceInfo Devhum = DeviceList[Humit];
           DeviceInfo DevSound = DeviceList[soundVb];
           //µÚÒ»Ò³µÚ¶þÐÐÏÔÊ¾ÎÂ¶È
           //      µÚÈýÐÐÏÔÊ¾¹âÕÕ
-          humit = (uint16)Devhum.data[0];
-          temper = (uint16)Devhum.data[1];
+          if(Devhum.deviceStatus == DEVICE_ONLINE)
+          {
+              humit = (uint16)Devhum.data[0];
+              temper = (uint16)Devhum.data[1];          
+          }
+
           SoundVb = (uint16)DevSound.data[0];
 
-          HalLcdWriteStringValueValue( "Hum:", humit, 10, "% Tem_1:", temper, 10, HAL_LCD_LINE_2 );
+          HalLcdWriteStringValueValue( "Hum:", humit, 10, "% T_1:", temper, 10, HAL_LCD_LINE_2 );
           
           if(SoundVb & 0x01 == 0x01) { HalLcdWriteString( "Sound: Voice", HAL_LCD_LINE_3 ); }
           else if(SoundVb & 0x02 == 0x02) { HalLcdWriteString( "Sound: Vibration", HAL_LCD_LINE_3 ); }
@@ -1046,7 +1116,14 @@ static void Smart_home_Display(void)
           else {HalLcdWriteString( "GasFlame: None", HAL_LCD_LINE_2 );}
           
           //HalLcdWriteStringValue("GasFlame: ", GasF, 16, HAL_LCD_LINE_2 );
-          HalLcdWriteStringValue("Infrared: ", infrared, 10, HAL_LCD_LINE_3 );
+          if(Infrared == 0x01)
+          {
+            HalLcdWriteString("Infrared: Human", HAL_LCD_LINE_3 );
+          }
+          else{
+            HalLcdWriteString("Infrared: NoHuman", HAL_LCD_LINE_3 );
+          }
+          
           
           //ÏÔÊ¾×îÏÂÃæµÄ°Ù·Ö±ÈÌõ
           static uint8 percent;
@@ -1088,7 +1165,7 @@ static void Smart_home_Display(void)
       //Çå³ýÆÁÄ»ÏÔÊ¾
       HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
       HalLcdWriteString( " ", HAL_LCD_LINE_3 );
-      if(DeviceList[relay].deviceStatus == DEVICE_OFFLINE)
+      if(DeviceList[motor].deviceStatus == DEVICE_OFFLINE)
       {
         HalLcdWriteString( "Motor Offline", HAL_LCD_LINE_1 );      
       }
@@ -1096,10 +1173,22 @@ static void Smart_home_Display(void)
       {
         HalLcdWriteString( "Motor Online", HAL_LCD_LINE_1 ); 
         //µç»ú¿ØÖÆ½çÃæ
-        const uint16 speed =  (uint16) DeviceList[relay].data[0];
-        const uint16 status = (uint16) DeviceList[relay].data[1];
+        const uint16 speed =  (uint16) DeviceList[motor].data[0];
+        const uint16 status = (uint16) DeviceList[motor].data[1];
+        switch(status)
+        {
+        default:
+        case 1:
+          HalLcdWriteString( "Status: STOP", HAL_LCD_LINE_2 );
+          break;
+        case 2:
+          HalLcdWriteString( "Status: FORWARD", HAL_LCD_LINE_2 );
+          break;
+        case 3:
+          HalLcdWriteString( "Status: BACKWARD", HAL_LCD_LINE_2 );
+          break;
+        }
         
-        HalLcdWriteStringValue( "Status:", status, 10, HAL_LCD_LINE_2 );
         HalLcdWriteStringValue( "Speed:", speed, 10, HAL_LCD_LINE_3 );
       
       }

@@ -43,7 +43,7 @@
  * MACROS
  */
 //3.23  屏幕显示的小bug
-#define SMART_HOME_SEND_DELAY   500
+#define SMART_HOME_SEND_DELAY   5000
 #define SMART_HOME_MATCH_DELAY  1000
 /*********************************************************************
  * CONSTANTS
@@ -422,6 +422,8 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
     default:
       break;
   }
+  Smart_home_Send();
+  //收到之后启动懒加载模式，立刻返回值，降低延迟
 }
 
 /*********************************************************************

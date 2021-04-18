@@ -41,7 +41,7 @@
  * MACROS
  */
 //3.23  屏幕显示的小bug
-#define SMART_HOME_SEND_DELAY   500
+#define SMART_HOME_SEND_DELAY   5000
 #define SMART_HOME_MATCH_DELAY  1000
 /*********************************************************************
  * CONSTANTS
@@ -203,9 +203,11 @@ void Smart_home_Init( uint8 task_id )
   ZDO_RegisterForZDOMsg( Smart_home_TaskID, End_Device_Bind_rsp );
   ZDO_RegisterForZDOMsg( Smart_home_TaskID, Match_Desc_rsp );
   
+  //DHT11_Start();
+  
   // 打开定时器，描述符匹配事件
   osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_MATCHRSP_EVT, 
-                                               SMART_HOME_SEND_DELAY );
+                                               SMART_HOME_MATCH_DELAY );
 }
 
 /*********************************************************************

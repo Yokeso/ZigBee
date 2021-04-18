@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         26/Mar/2021  09:58:45 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         14/Apr/2021  19:08:29 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -19,8 +19,8 @@
 #                          rojects\zstack\Utilities\Smart_home\CC2530DB\..\.. #
 #                          \..\Tools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO      #
 #                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR       #
-#                          -DDEFAULT_CHANLIST=0x02000000                      #
-#                          -DZDAPP_CONFIG_PAN_ID=0x1001                       #
+#                          -DDEFAULT_CHANLIST=0x00000800                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0x1003                       #
 #                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
 #                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
 #                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
@@ -159,7 +159,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
      42           * MACROS
      43           */
      44          //3.23  屏幕显示的小bug
-     45          #define SMART_HOME_SEND_DELAY   500
+     45          #define SMART_HOME_SEND_DELAY   10000
      46          #define SMART_HOME_MATCH_DELAY  1000
      47          /*********************************************************************
      48           * CONSTANTS
@@ -469,8 +469,8 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
     206            osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_MATCHRSP_EVT, 
     207                                                         SMART_HOME_SEND_DELAY );
    \   0000A7                ; Setup parameters for call to function osal_start_reload_timer
-   \   0000A7   7CF4         MOV     R4,#-0xc
-   \   0000A9   7D01         MOV     R5,#0x1
+   \   0000A7   7C10         MOV     R4,#0x10
+   \   0000A9   7D27         MOV     R5,#0x27
    \   0000AB   7A08         MOV     R2,#0x8
    \   0000AD   7B00         MOV     R3,#0x0
    \   0000AF   90....       MOV     DPTR,#Smart_home_TaskID
@@ -860,8 +860,8 @@ Warning[Pe223]: function "strlen" declared implicitly
     329                    osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_SEND_MSG_EVT, 
     330                                             SMART_HOME_SEND_DELAY );
    \   0000AD                ; Setup parameters for call to function osal_start_reload_timer
-   \   0000AD   7CF4         MOV     R4,#-0xc
-   \   0000AF   7D01         MOV     R5,#0x1
+   \   0000AD   7C10         MOV     R4,#0x10
+   \   0000AF   7D27         MOV     R5,#0x27
    \   0000B1   7A01         MOV     R2,#0x1
    \   0000B3   7B00         MOV     R3,#0x0
    \   0000B5   90....       MOV     DPTR,#Smart_home_TaskID

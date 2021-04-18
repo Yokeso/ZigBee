@@ -36,7 +36,7 @@
 #define GET_DHT11_PIN_DATA      (P1_1) 
 
 // 参数宏定义
-#define TIMEOUT_LIMIT 100       // 脉冲等待时限1000ms
+#define TIMEOUT_LIMIT 1000       // 脉冲等待时限1000ms
 
 /*****************************************************************************
  * @fn          DHT11_Delay100us

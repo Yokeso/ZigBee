@@ -43,7 +43,7 @@
  * MACROS
  */
 //3.23  ÆÁÄ»ÏÔÊ¾µÄÐ¡bug
-#define SMART_HOME_SEND_DELAY   500
+#define SMART_HOME_SEND_DELAY   1000
 #define SMART_HOME_CHECK_DELAY  100
 #define SMART_HOME_MATCH_DELAY  1000
 
@@ -126,7 +126,7 @@ const endPointDesc_t Smart_home_epDesc =
 
 afAddrType_t Coordinator_DstAddr;
 
-devStates_t Humit_NwkState;
+devStates_t Infrared_NwkState;
 
 static uint8 InfraredData;
 

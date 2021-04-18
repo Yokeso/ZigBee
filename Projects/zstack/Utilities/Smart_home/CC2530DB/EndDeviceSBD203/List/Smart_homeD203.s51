@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        25/Mar/2021  12:45:36 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        14/Apr/2021  22:18:31 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -19,8 +19,8 @@
 //                          Projects\zstack\Utilities\Smart_home\CC2530DB\..\ /
 //                          ..\..\Tools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO   /
 //                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR      /
-//                          -DDEFAULT_CHANLIST=0x02000000                     /
-//                          -DZDAPP_CONFIG_PAN_ID=0x1001                      /
+//                          -DDEFAULT_CHANLIST=0x00000800                     /
+//                          -DZDAPP_CONFIG_PAN_ID=0x1003                      /
 //                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
 //                          ASK=0x007F -DBEACON_REQUEST_DELAY=100             /
 //                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
@@ -156,7 +156,7 @@
         FUNCTION ??Smart_home_ProcessZDOMsgs?relay,0203H
         PUBLIC Coordinator_DstAddr
         PUBLIC Coordinator_Msg
-        PUBLIC Humit_NwkState
+        PUBLIC Infrared_NwkState
         FUNCTION Smart_home_CallBack,0603H
         ARGFRAME XSTACK, 0, STACK
         PUBLIC Smart_home_ClusterList_IN
@@ -561,7 +561,7 @@ Smart_home_ProcessEvent SYMBOL "Smart_home_ProcessEvent"
 //   43  * MACROS
 //   44  */
 //   45 //3.23  屏幕显示的小bug
-//   46 #define SMART_HOME_SEND_DELAY   500
+//   46 #define SMART_HOME_SEND_DELAY   1000
 //   47 #define SMART_HOME_CHECK_DELAY  100
 //   48 #define SMART_HOME_MATCH_DELAY  1000
 //   49 
@@ -646,7 +646,7 @@ Smart_home_SimpleDesc:
         DATA16
         DW Smart_home_ClusterList_IN
         DATA8
-        DB 3
+        DB 2
         DATA16
         DW Smart_home_ClusterList_OUT
 //  107 {
@@ -690,8 +690,8 @@ Coordinator_DstAddr:
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//  129 devStates_t Humit_NwkState;
-Humit_NwkState:
+//  129 devStates_t Infrared_NwkState;
+Infrared_NwkState:
         DS 1
         REQUIRE __INIT_XDATA_Z
 //  130 
@@ -1024,8 +1024,8 @@ Smart_home_Init:
 //  223                                                SMART_HOME_SEND_DELAY );
 ??CrossCallReturnLabel_0:
         ; Setup parameters for call to function osal_start_reload_timer
-        MOV     R4,#-0xc
-        MOV     R5,#0x1
+        MOV     R4,#-0x18
+        MOV     R5,#0x3
         MOV     R2,#0x8
         LCALL   ?Subroutine1 & 0xFFFF
 //  224 }
@@ -1233,7 +1233,7 @@ Smart_home_ProcessEvent:
         MOV     R0,#?V0 + 0
         LCALL   ?PUSH_XSTACK_I_TWO
         CFI CFA_XSP16 add(XSP16, 29)
-        MOV     R1,#0x3
+        MOV     R1,#0x2
         MOV     R4,#-0x1
         MOV     R5,#-0x1
         MOV     A,#0x8
@@ -1766,8 +1766,8 @@ Smart_home_ProcessZDOMsgs:
 //  351           osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_SEND_MSG_EVT, 
 //  352                                    SMART_HOME_SEND_DELAY );
         ; Setup parameters for call to function osal_start_reload_timer
-        MOV     R4,#-0xc
-        MOV     R5,#0x1
+        MOV     R4,#-0x18
+        MOV     R5,#0x3
         MOV     R2,#0x1
         LCALL   ?Subroutine1 & 0xFFFF
 //  353         }
@@ -1921,7 +1921,7 @@ Smart_home_ProcessZDOMsgs:
 //  432     Coordinator_Msg[3] = tmp;
 //  433     
 //  434     // 发送给协调器命令 
-//  435     Coordinator_Msg[4] = InfraredData;  //0位气体报警，1位火焰
+//  435     Coordinator_Msg[4] = InfraredData;  //0x01有人
 //  436     
 //  437     tmp = AF_DataRequest( &Coordinator_DstAddr,                         
 //  438                           (endPointDesc_t *)&Smart_home_epDesc,                  

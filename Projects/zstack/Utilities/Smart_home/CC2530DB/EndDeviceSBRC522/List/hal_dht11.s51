@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        25/Mar/2021  12:55:57 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        14/Apr/2021  19:29:25 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -19,8 +19,8 @@
 //                          Projects\zstack\Utilities\Smart_home\CC2530DB\..\ /
 //                          ..\..\Tools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO   /
 //                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR      /
-//                          -DDEFAULT_CHANLIST=0x02000000                     /
-//                          -DZDAPP_CONFIG_PAN_ID=0x1001                      /
+//                          -DDEFAULT_CHANLIST=0x00000800                     /
+//                          -DZDAPP_CONFIG_PAN_ID=0x1003                      /
 //                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
 //                          ASK=0x007F -DBEACON_REQUEST_DELAY=100             /
 //                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
@@ -160,7 +160,7 @@
         ARGFRAME DOVERLAY, 0, STATIC
         PUBLIC DHT11_Delay10us
         FUNCTION DHT11_Delay10us,080203H
-        ARGFRAME XSTACK, 10, STACK
+        ARGFRAME XSTACK, 12, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         PUBLIC DHT11_ReadData
@@ -168,7 +168,7 @@
         ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        LOCFRAME XSTACK, 10, STACK
+        LOCFRAME XSTACK, 12, STACK
         PUBLIC DHT11_Start
         FUNCTION DHT11_Start,021203H
         ARGFRAME XSTACK, 16, STACK
@@ -407,7 +407,7 @@ P1DIR:
 //   36 #define GET_DHT11_PIN_DATA      (P1_1) 
 //   37 
 //   38 // 参数宏定义
-//   39 #define TIMEOUT_LIMIT 100       // 脉冲等待时限1000ms
+//   39 #define TIMEOUT_LIMIT 1000       // 脉冲等待时限1000ms
 //   40 
 //   41 /*****************************************************************************
 //   42  * @fn          DHT11_Delay100us
@@ -599,7 +599,8 @@ DHT11_Start:
 //  104 
 //  105     // 高电平持续20~40us
 //  106     for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
-        MOV     R6,#0x0
+        MOV     R6,#-0x18
+        MOV     R7,#0x3
 //  107     {
 //  108         if (!GET_DHT11_PIN_DATA)
 ??DHT11_Start_1:
@@ -613,24 +614,22 @@ DHT11_Start:
         LCALL   ?Subroutine0 & 0xFFFF
 //  113     }
 ??CrossCallReturnLabel_0:
-        JC      ??DHT11_Start_1
+        JNZ     ??DHT11_Start_1
 //  114     // 超时返回
 //  115     if (timeCnt == TIMEOUT_LIMIT)
-??DHT11_Start_2:
-        MOV     A,#0x64
-        XRL     A,R6
-        JZ      ??DHT11_Start_3
 //  116     {
 //  117         return;
 //  118     }
 //  119     // DHT11输出80微秒的低电平作为应答信号
 //  120     for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
-        MOV     R6,#0x0
+??DHT11_Start_2:
+        MOV     R6,#-0x18
+        MOV     R7,#0x3
 //  121     {
 //  122         if (GET_DHT11_PIN_DATA)
-??DHT11_Start_4:
+??DHT11_Start_3:
         MOV     C,0x90.1
-        JC      ??DHT11_Start_5
+        JC      ??DHT11_Start_4
 //  123         {
 //  124             break;  // 高电平退出循环
 //  125         }
@@ -639,35 +638,32 @@ DHT11_Start:
         LCALL   ?Subroutine0 & 0xFFFF
 //  127     }
 ??CrossCallReturnLabel_1:
-        JC      ??DHT11_Start_4
+        JNZ     ??DHT11_Start_3
 //  128     // 超时返回
 //  129     if (timeCnt == TIMEOUT_LIMIT)
-??DHT11_Start_5:
-        MOV     A,#0x64
-        XRL     A,R6
-        JZ      ??DHT11_Start_3
 //  130     {
 //  131         return;
 //  132     }
 //  133     // DHT11紧接着输出80微秒的高电平通知外设准备接收数据
 //  134     for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
-        MOV     R6,#0x64
+??DHT11_Start_4:
+        MOV     R6,#-0x18
+        MOV     R7,#0x3
 //  135     {
 //  136         if (!GET_DHT11_PIN_DATA)    // 低电平退出循环
-??DHT11_Start_6:
+??DHT11_Start_5:
         MOV     C,0x90.1
-        JNC     ??DHT11_Start_3
+        JNC     ??DHT11_Start_6
 //  137         {
 //  138             break;
 //  139         }
 //  140         DHT11_Delay10us();
         ; Setup parameters for call to function DHT11_Delay10us
-        LCALL   ??DHT11_Delay10us?relay
+        LCALL   ?Subroutine0 & 0xFFFF
 //  141     }
-        DEC     R6
-        MOV     A,R6
-        JNZ     ??DHT11_Start_6
-??DHT11_Start_3:
+??CrossCallReturnLabel_2:
+        JNZ     ??DHT11_Start_5
+??DHT11_Start_6:
         MOV     R7,#0x1
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock2
@@ -703,26 +699,26 @@ DHT11_ReadData:
         FUNCALL DHT11_ReadData, DHT11_Delay10us
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 10, STACK
+        LOCFRAME XSTACK, 12, STACK
         LOCFRAME IOVERLAY, 0, STATIC
         LOCFRAME DOVERLAY, 0, STATIC
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 10, STACK
+        ARGFRAME XSTACK, 12, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL DHT11_ReadData, DHT11_Delay10us
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 10, STACK
+        LOCFRAME XSTACK, 12, STACK
         LOCFRAME IOVERLAY, 0, STATIC
         LOCFRAME DOVERLAY, 0, STATIC
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 10, STACK
+        ARGFRAME XSTACK, 12, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0xa
+        MOV     A,#-0xc
         LCALL   ?BANKED_ENTER_XDATA
         CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
         CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
@@ -730,26 +726,29 @@ DHT11_ReadData:
         CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
         CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
         CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-12)))
         CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 10)
-        ; Saved register size: 10
+        CFI CFA_XSP16 add(XSP16, 12)
+        ; Saved register size: 12
         ; Auto size: 0
 //  163     unsigned char bitCnt, timeCnt;
 //  164     unsigned char byteVal = 0;
-        MOV     R7,#0x0
+        MOV     ?V0 + 2,#0x0
 //  165     halIntState_t intState;
 //  166     
 //  167     for (bitCnt = 0; bitCnt < 8; bitCnt++)
-        MOV     ?V0 + 0,#0x8
+        MOV     ?V0 + 3,#0x8
 //  168     {
 //  169         // DHT11输出50us低电平, 提醒主机数据位已开始传送
 //  170         for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
 ??DHT11_ReadData_0:
-        MOV     R6,#0x0
+        MOV     R6,#-0x18
+        MOV     R7,#0x3
 //  171         {
 //  172             if (GET_DHT11_PIN_DATA)    // 高电平退出循环
 ??DHT11_ReadData_1:
@@ -762,89 +761,85 @@ DHT11_ReadData:
         ; Setup parameters for call to function DHT11_Delay10us
         LCALL   ?Subroutine0 & 0xFFFF
 //  177         }        
-??CrossCallReturnLabel_2:
-        JC      ??DHT11_ReadData_1
+??CrossCallReturnLabel_3:
+        JNZ     ??DHT11_ReadData_1
 //  178         if (timeCnt == TIMEOUT_LIMIT)   // 超时报错, 返回0
-??DHT11_ReadData_2:
-        MOV     A,#0x64
-        XRL     A,R6
-        JNZ     ??DHT11_ReadData_3
 //  179         {
 //  180             return 0;
-??DHT11_ReadData_4:
-        MOV     R1,#0x0
-        SJMP    ??DHT11_ReadData_5
 //  181         }
 //  182         
 //  183         HAL_ENTER_CRITICAL_SECTION(intState);
-??DHT11_ReadData_3:
+??DHT11_ReadData_2:
         MOV     C,0xa8.7
         CLR     A
         RLC     A
-        MOV     ?V0 + 1,A
+        MOV     R7,A
         CLR     0xa8.7
 //  184         // DHT11输出高电平或低电平                   
 //  185         for (timeCnt = 0; timeCnt < TIMEOUT_LIMIT; timeCnt++)
         MOV     R6,#0x0
 //  186         {
 //  187             if (!GET_DHT11_PIN_DATA)    // 低电平退出循环
-??DHT11_ReadData_6:
+??DHT11_ReadData_3:
         MOV     C,0x90.1
-        JNC     ??DHT11_ReadData_7
+        JNC     ??DHT11_ReadData_4
 //  188             {
 //  189                 break;
 //  190             }
 //  191             DHT11_Delay10us();
         ; Setup parameters for call to function DHT11_Delay10us
-        LCALL   ?Subroutine0 & 0xFFFF
+        LCALL   ??DHT11_Delay10us?relay
 //  192         }
-??CrossCallReturnLabel_3:
-        JC      ??DHT11_ReadData_6
+        INC     R6
+        CLR     C
+        MOV     A,R6
+        SUBB    A,#-0x18
+        CLR     A
+        SUBB    A,#0x3
+        CLR     C
+        XRL     A,PSW
+        RLC     A
+        JC      ??DHT11_ReadData_3
 //  193         if (timeCnt == TIMEOUT_LIMIT)   // 超时报错, 返回0
-??DHT11_ReadData_7:
-        MOV     A,#0x64
-        XRL     A,R6
-        JZ      ??DHT11_ReadData_4
 //  194         {
 //  195             return 0;
 //  196         }
 //  197         HAL_EXIT_CRITICAL_SECTION(intState);
-        MOV     A,?V0 + 1
+??DHT11_ReadData_4:
+        MOV     A,R7
         MOV     C,0xE0 /* A   */.0
         MOV     0xa8.7,C
 //  198         
 //  199         // 存储数据位, DHT11是先发高位
 //  200         byteVal <<= 1;
-        MOV     A,R7
+        MOV     A,?V0 + 2
         CLR     C
         RLC     A
-        MOV     R7,A
+        MOV     ?V0 + 2,A
 //  201         // 根据高电平的宽度判断是0还是1
 //  202         if (timeCnt > 4) 
         MOV     A,R6
         CLR     C
         SUBB    A,#0x5
-        JC      ??DHT11_ReadData_8
+        JC      ??DHT11_ReadData_5
 //  203         {
 //  204             byteVal |=  0x01;
-        MOV     A,R7
+        MOV     A,?V0 + 2
         SETB    0xE0 /* A   */.0
-        MOV     R7,A
+        MOV     ?V0 + 2,A
 //  205         }
 //  206         else 
 //  207         {
 //  208             byteVal |= 0x00;
 //  209         }
 //  210     }
-??DHT11_ReadData_8:
-        DEC     ?V0 + 0
-        MOV     A,?V0 + 0
+??DHT11_ReadData_5:
+        DEC     ?V0 + 3
+        MOV     A,?V0 + 3
         JNZ     ??DHT11_ReadData_0
 //  211     return byteVal;
-        MOV     A,R7
-        MOV     R1,A
-??DHT11_ReadData_5:
-        MOV     R7,#0x2
+        MOV     R1,?V0 + 2
+        MOV     R7,#0x4
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock3
         REQUIRE _A_P1
@@ -884,10 +879,9 @@ DHT11_ReadData:
         CFI Block cfiCond6 Using cfiCommon0
         CFI (cfiCond6) NoFunction
         CFI (cfiCond6) Conditional ??CrossCallReturnLabel_2
-        CFI (cfiCond6) R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI (cfiCond6) VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI (cfiCond6) V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI (cfiCond6) V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI (cfiCond6) R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI (cfiCond6) VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI (cfiCond6) V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
         CFI (cfiCond6) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
         CFI (cfiCond6) ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
         CFI (cfiCond6) ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
@@ -895,14 +889,16 @@ DHT11_ReadData:
         CFI (cfiCond6) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
         CFI (cfiCond6) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
         CFI (cfiCond6) CFA_SP SP+0
-        CFI (cfiCond6) CFA_XSP16 add(XSP16, 10)
+        CFI (cfiCond6) CFA_XSP16 add(XSP16, 9)
         CFI Block cfiCond7 Using cfiCommon0
         CFI (cfiCond7) NoFunction
         CFI (cfiCond7) Conditional ??CrossCallReturnLabel_3
-        CFI (cfiCond7) R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI (cfiCond7) VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI (cfiCond7) V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI (cfiCond7) V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+        CFI (cfiCond7) R6 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+        CFI (cfiCond7) VB load(1, XDATA, add(CFA_XSP16, literal(-11)))
+        CFI (cfiCond7) V0 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+        CFI (cfiCond7) V1 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+        CFI (cfiCond7) V2 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+        CFI (cfiCond7) V3 load(1, XDATA, add(CFA_XSP16, literal(-7)))
         CFI (cfiCond7) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
         CFI (cfiCond7) ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
         CFI (cfiCond7) ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
@@ -910,15 +906,19 @@ DHT11_ReadData:
         CFI (cfiCond7) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
         CFI (cfiCond7) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
         CFI (cfiCond7) CFA_SP SP+0
-        CFI (cfiCond7) CFA_XSP16 add(XSP16, 10)
+        CFI (cfiCond7) CFA_XSP16 add(XSP16, 12)
         CFI Block cfiPicker8 Using cfiCommon1
         CFI (cfiPicker8) NoFunction
         CFI (cfiPicker8) Picker
         LCALL   ??DHT11_Delay10us?relay
-        INC     R6
         MOV     A,R6
-        CLR     C
-        SUBB    A,#0x64
+        ADD     A,#-0x1
+        DEC     R6
+        MOV     A,R7
+        ADDC    A,#-0x1
+        MOV     R7,A
+        MOV     A,R6
+        ORL     A,R7
         RET
         CFI EndBlock cfiCond4
         CFI EndBlock cfiCond5
@@ -1376,12 +1376,12 @@ HalDht11_Convert:
 
         END
 // 
-// 357 bytes in segment BANKED_CODE
+// 359 bytes in segment BANKED_CODE
 //  30 bytes in segment BANK_RELAYS
 //   3 bytes in segment SFR_AN
 // 
-// 387 bytes of CODE memory
+// 389 bytes of CODE memory
 //   0 bytes of DATA memory (+ 3 bytes shared)
 //
 //Errors: none
-//Warnings: none
+//Warnings: 10
