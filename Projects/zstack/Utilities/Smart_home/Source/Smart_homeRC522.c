@@ -42,7 +42,7 @@
  * MACROS
  */
 //3.23  ÆÁÄ»ÏÔÊ¾µÄÐ¡bug
-#define SMART_HOME_SEND_DELAY   500
+#define SMART_HOME_SEND_DELAY   1000
 #define SMART_HOME_CHECK_DELAY  100
 #define SMART_HOME_MATCH_DELAY  1000
 

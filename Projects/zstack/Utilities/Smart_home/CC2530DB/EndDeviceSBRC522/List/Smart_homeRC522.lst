@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         14/Apr/2021  19:29:24 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         18/Apr/2021  21:19:58 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -19,7 +19,7 @@
 #                          rojects\zstack\Utilities\Smart_home\CC2530DB\..\.. #
 #                          \..\Tools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO      #
 #                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR       #
-#                          -DDEFAULT_CHANLIST=0x00000800                      #
+#                          -DDEFAULT_CHANLIST=0x02000000                      #
 #                          -DZDAPP_CONFIG_PAN_ID=0x1003                       #
 #                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
 #                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
@@ -159,7 +159,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
      42           * MACROS
      43           */
      44          //3.23  屏幕显示的小bug
-     45          #define SMART_HOME_SEND_DELAY   500
+     45          #define SMART_HOME_SEND_DELAY   1000
      46          #define SMART_HOME_CHECK_DELAY  100
      47          #define SMART_HOME_MATCH_DELAY  1000
      48          
@@ -237,7 +237,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000005   00           DB 0
    \   000006   09           DB 9
    \   000007   ....         DW Smart_home_ClusterList_IN
-   \   000009   03           DB 3
+   \   000009   02           DB 2
    \   00000A   ....         DW Smart_home_ClusterList_OUT
     106          {
     107            Smart_home_ENDPOINT,              //  int   Endpoint;
@@ -507,8 +507,8 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
     223                                                         SMART_HOME_SEND_DELAY );
    \                     ??CrossCallReturnLabel_4:
    \   0000B9                ; Setup parameters for call to function osal_start_reload_timer
-   \   0000B9   7CF4         MOV     R4,#-0xc
-   \   0000BB   7D01         MOV     R5,#0x1
+   \   0000B9   7CE8         MOV     R4,#-0x18
+   \   0000BB   7D03         MOV     R5,#0x3
    \   0000BD   7A08         MOV     R2,#0x8
    \   0000BF   12....       LCALL   ?Subroutine1 & 0xFFFF
     224          }
@@ -635,7 +635,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000059   75..0F       MOV     ?V0 + 1,#0xf
    \   00005C   78..         MOV     R0,#?V0 + 0
    \   00005E   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000061   7903         MOV     R1,#0x3
+   \   000061   7902         MOV     R1,#0x2
    \   000063   7CFF         MOV     R4,#-0x1
    \   000065   7DFF         MOV     R5,#-0x1
    \   000067   7408         MOV     A,#0x8
@@ -727,8 +727,8 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   0000E5   F9           MOV     R1,A
    \   0000E6   12....       LCALL   ??osal_stop_timerEx?relay
    \   0000E9                ; Setup parameters for call to function osal_start_reload_timer
-   \   0000E9   7CF4         MOV     R4,#-0xc
-   \   0000EB   7D01         MOV     R5,#0x1
+   \   0000E9   7CE8         MOV     R4,#-0x18
+   \   0000EB   7D03         MOV     R5,#0x3
    \   0000ED   7A01         MOV     R2,#0x1
    \   0000EF   12....       LCALL   ?Subroutine1 & 0xFFFF
    \                     ??CrossCallReturnLabel_6:

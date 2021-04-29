@@ -42,7 +42,7 @@
  * MACROS
  */
 //3.23  屏幕显示的小bug
-#define SMART_HOME_SEND_DELAY   10000
+#define SMART_HOME_SEND_DELAY   3000
 #define SMART_HOME_MATCH_DELAY  1000
 /*********************************************************************
  * CONSTANTS
@@ -91,7 +91,7 @@
 // This list should be filled with Application specific Cluster IDs.
 const cId_t Smart_home_ClusterList_IN[1] =
 {
-  Smart_home_CLUSTERID_TEMPLIGHTMSG         //继电器接收的消息控制命令
+  Smart_home_CLUSTERID_TEXT         //继电器接收的消息控制命令
 };
 
 const cId_t Smart_home_ClusterList_OUT[1] =
@@ -204,7 +204,7 @@ void Smart_home_Init( uint8 task_id )
   
   // 打开定时器，描述符匹配事件
   osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_MATCHRSP_EVT, 
-                                               SMART_HOME_SEND_DELAY );
+                                               SMART_HOME_MATCH_DELAY );
 }
 
 /*********************************************************************

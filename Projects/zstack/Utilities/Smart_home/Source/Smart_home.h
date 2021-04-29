@@ -59,7 +59,8 @@ extern "C"
 #define Smart_home_CLUSTERID_RELAYSTATUSMSG      8  // 继电器状态信息
 
 //输出部分
-#define Smart_home_MAX_OUTCLUSTERS               2  
+#define Smart_home_MAX_OUTCLUSTERS               3  
+#define Smart_home_CLUSTERID_TEXT                12  //测试用
 #define Smart_home_CLUSTERID_MOTORCTRL           11  // 直流电机控制信息
 #define Smart_home_CLUSTERID_RELAYCTRL           10  // 继电器控制信息  
  

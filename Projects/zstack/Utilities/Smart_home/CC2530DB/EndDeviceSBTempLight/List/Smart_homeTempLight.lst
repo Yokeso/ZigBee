@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         14/Apr/2021  19:08:29 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         29/Apr/2021  18:01:10 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -19,7 +19,7 @@
 #                          rojects\zstack\Utilities\Smart_home\CC2530DB\..\.. #
 #                          \..\Tools\CC2530DB\f8wConfig.cfg (-DZIGBEEPRO      #
 #                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR       #
-#                          -DDEFAULT_CHANLIST=0x00000800                      #
+#                          -DDEFAULT_CHANLIST=0x02000000                      #
 #                          -DZDAPP_CONFIG_PAN_ID=0x1003                       #
 #                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
 #                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
@@ -159,7 +159,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
      42           * MACROS
      43           */
      44          //3.23  屏幕显示的小bug
-     45          #define SMART_HOME_SEND_DELAY   10000
+     45          #define SMART_HOME_SEND_DELAY   3000
      46          #define SMART_HOME_MATCH_DELAY  1000
      47          /*********************************************************************
      48           * CONSTANTS
@@ -210,9 +210,9 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \                                 In  segment XDATA_ROM_C, align 1
      92          const cId_t Smart_home_ClusterList_IN[1] =
    \                     Smart_home_ClusterList_IN:
-   \   000000   0200         DW 2
+   \   000000   0C00         DW 12
      93          {
-     94            Smart_home_CLUSTERID_TEMPLIGHTMSG         //继电器接收的消息控制命令
+     94            Smart_home_CLUSTERID_TEXT         //继电器接收的消息控制命令
      95          };
      96          
 
@@ -467,10 +467,10 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
     204            
     205            // 打开定时器，描述符匹配事件
     206            osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_MATCHRSP_EVT, 
-    207                                                         SMART_HOME_SEND_DELAY );
+    207                                                         SMART_HOME_MATCH_DELAY );
    \   0000A7                ; Setup parameters for call to function osal_start_reload_timer
-   \   0000A7   7C10         MOV     R4,#0x10
-   \   0000A9   7D27         MOV     R5,#0x27
+   \   0000A7   7CE8         MOV     R4,#-0x18
+   \   0000A9   7D03         MOV     R5,#0x3
    \   0000AB   7A08         MOV     R2,#0x8
    \   0000AD   7B00         MOV     R3,#0x0
    \   0000AF   90....       MOV     DPTR,#Smart_home_TaskID
@@ -860,8 +860,8 @@ Warning[Pe223]: function "strlen" declared implicitly
     329                    osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_SEND_MSG_EVT, 
     330                                             SMART_HOME_SEND_DELAY );
    \   0000AD                ; Setup parameters for call to function osal_start_reload_timer
-   \   0000AD   7C10         MOV     R4,#0x10
-   \   0000AF   7D27         MOV     R5,#0x27
+   \   0000AD   7CB8         MOV     R4,#-0x48
+   \   0000AF   7D0B         MOV     R5,#0xb
    \   0000B1   7A01         MOV     R2,#0x1
    \   0000B3   7B00         MOV     R3,#0x0
    \   0000B5   90....       MOV     DPTR,#Smart_home_TaskID

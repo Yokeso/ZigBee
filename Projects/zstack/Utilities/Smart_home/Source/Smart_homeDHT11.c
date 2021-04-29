@@ -41,7 +41,7 @@
  * MACROS
  */
 //3.23  屏幕显示的小bug
-#define SMART_HOME_SEND_DELAY   5000
+#define SMART_HOME_SEND_DELAY   1000
 #define SMART_HOME_MATCH_DELAY  1000
 /*********************************************************************
  * CONSTANTS
@@ -408,8 +408,8 @@ static void Smart_home_Send(void)
   
   HalDht11_Convert(HumitData);
   
-  Sendbuf[0] = HumitData[0];  // 温度的整数部分
-  Sendbuf[1] = HumitData[2];       // 温度的小数部分
+  Sendbuf[0] = HumitData[0];  // 湿度的整数部分
+  Sendbuf[1] = HumitData[2];       // 温度的整数部分
 
 #if HAL_UART==TRUE
   //串口发送原数据，解析工作交给上位机处理

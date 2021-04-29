@@ -84,7 +84,7 @@
 /*判断设备是否在线的最大次数*/
 #define DEVICE_HEART_BEAT    5
 #define DEVICE_CHECK_DELAY   5000
-#define DEVICE_CHECK_TIMER   3000
+#define DEVICE_CHECK_TIMER   2000
 
 /*LCD相关设置*/
 /*单屏显示时常   MS*/
@@ -104,32 +104,18 @@
  * CONSTANTS
  */
 
-#if !defined( SMART_HOME_PORT )
-#define SMART_HOME_PORT  0
-#endif
+#define SMART_HOME_PORT  0x00
 
-#if !defined( SMART_HOME_BAUD )
-#define SMART_HOME_BAUD  HAL_UART_BR_38400
-//#define SMART_HOME_BAUD  HAL_UART_BR_115200
-#endif
+//#define SMART_HOME_BAUD  HAL_UART_BR_38400
+#define SMART_HOME_BAUD  HAL_UART_BR_115200
 
 // When the Rx buf space is less than this threshold, invoke the Rx callback.
-#if !defined( SMART_HOME_THRESH )
 #define SMART_HOME_THRESH  64
-#endif
-
-#if !defined( SMART_HOME_RX_SZ )
 #define SMART_HOME_RX_SZ  128
-#endif
-
-#if !defined( SMART_HOME_TX_SZ )
 #define SMART_HOME_TX_SZ  128
-#endif
 
 // Millisecs of idle time after a byte is received before invoking Rx callback.
-#if !defined( SMART_HOME_IDLE )
-#define SMART_HOME_IDLE  6
-#endif
+#define SMART_HOME_IDLE  8
 
 // Loopback Rx bytes to Tx for throughput testing.
 #if !defined( SMART_HOME_LOOPBACK )
@@ -140,8 +126,6 @@
 #if !defined( SMART_HOME_TX_MAX )
 #define SMART_HOME_TX_MAX  80
 #endif
-
-#define SMART_HOME_RSP_CNT  4
 
 //3.14 This list should be filled with Application specific Cluster IDs.
 const cId_t Smart_home_ClusterList_IN[Smart_home_MAX_INCLUSTERS ] =
@@ -158,6 +142,7 @@ const cId_t Smart_home_ClusterList_IN[Smart_home_MAX_INCLUSTERS ] =
 
 const cId_t Smart_home_ClusterList_OUT[Smart_home_MAX_INCLUSTERS ] =
 {
+  Smart_home_CLUSTERID_TEXT,
   Smart_home_CLUSTERID_MOTORCTRL,             //直流电机控制
   Smart_home_CLUSTERID_RELAYCTRL              //继电器控制
 };
@@ -244,7 +229,7 @@ static afAddrType_t Motor_addr;
 
 /*消息发送数组*/
 byte Coordinator_Msg[MSG_MAX_LEN];
-
+uint16 Smart_home_MaxDataLength;
 
 /*3.19 协议栈中有但暂时不知道要他们干嘛的东西*/
 /*3.21 现在我会了！！！*/
@@ -266,6 +251,7 @@ static void Smart_home_Relay_Ctl(uint8 cmd);
 static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed);
 static void Smart_home_Display(void);
 static void Smart_home_Motor_cmd(int8 speed);
+void Smart_home_CallBack(uint8 port, uint8 event);
 
 /*********************************************************************
  * @fn      Smart_home_Init
@@ -280,29 +266,50 @@ void Smart_home_Init( uint8 task_id )
 {
   halUARTCfg_t uartConfig;
   uint8 DeviceNum;                                    //DeviceList初始化用变量
-
+  uint8 i;
+  afRegister( (endPointDesc_t *)&Smart_home_epDesc );
   Smart_home_TaskID = task_id;
   MotorTransID = 0;
   RelayTransID = 0;
-
-  afRegister( (endPointDesc_t *)&Smart_home_epDesc );
 
   RegisterForKeys( task_id );
 
   uartConfig.configured           = TRUE;              // 2x30 don't care - see uart driver.
   uartConfig.baudRate             = SMART_HOME_BAUD;
-  uartConfig.flowControl          = TRUE;
+  uartConfig.flowControl          = FALSE;
   uartConfig.flowControlThreshold = SMART_HOME_THRESH; // 2x30 don't care - see uart driver.
   uartConfig.rx.maxBufSize        = SMART_HOME_RX_SZ;  // 2x30 don't care - see uart driver.
   uartConfig.tx.maxBufSize        = SMART_HOME_TX_SZ;  // 2x30 don't care - see uart driver.
   uartConfig.idleTimeout          = SMART_HOME_IDLE;   // 2x30 don't care - see uart driver.
-  uartConfig.intEnable            = TRUE;              // 2x30 don't care - see uart driver.
-  //uartConfig.callBackFunc         = Smart_home_CallBack;
+  uartConfig.intEnable            = FALSE;              // 2x30 don't care - see uart driver.
+  uartConfig.callBackFunc         = Smart_home_CallBack;
   HalUARTOpen (SMART_HOME_PORT, &uartConfig);
 
+#if !defined ( TRANSMITAPP_FRAGMENTED )
+  afDataReqMTU_t mtu;
+#endif  
+  
 #if defined ( LCD_SUPPORTED )
   HalLcdWriteString( "Smart_home", HAL_LCD_LINE_2 );
 #endif
+  
+#if (HAL_UART == TRUE)
+  HalUARTWrite(HAL_UART_PORT_0, "Init Success!\n",   strlen("Init Success!\n"));
+#endif
+  
+  // Set the data length
+#if defined ( Smart_Home_FRAGMENTED )
+  Smart_home_MaxDataLength = MSG_MAX_LEN;
+#else
+  mtu.kvp        = FALSE;
+  mtu.aps.secure = FALSE;
+  Smart_home_MaxDataLength = afDataReqMTU( &mtu );
+#endif
+  
+  for(i=0;i<Smart_home_MaxDataLength;i++)
+  {
+    Coordinator_Msg[i] = 0;
+  }
   
   ZDO_RegisterForZDOMsg( Smart_home_TaskID, End_Device_Bind_rsp );
   ZDO_RegisterForZDOMsg( Smart_home_TaskID, Match_Desc_rsp );
@@ -345,6 +352,7 @@ void Smart_home_Init( uint8 task_id )
  */
 UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
 {
+  afIncomingMSGPacket_t *MSGpkt;
   (void)task_id;  // Intentionally unreferenced parameter
   afDataConfirm_t *afDataConfirm;
   
@@ -354,7 +362,6 @@ UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
   
   if ( events & SYS_EVENT_MSG )   //3.13 系统消息事件
   {
-    afIncomingMSGPacket_t *MSGpkt;
 
     while ( (MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( Smart_home_TaskID )) )
     {
@@ -647,13 +654,13 @@ void Smart_home_HandleKeys( byte shift, byte keys )
       } 
       case 2:
       {
-        if(MotorSpeed < 80)     {MotorSpeed += 10;}
-        if(MotorSpeed >= 80)     
+        if(MotorSpeed < 50)     {MotorSpeed += 10;}
+        if(MotorSpeed >= 50)     
         {
 #if defined ( LCD_SUPPORTED )
            HalLcdWriteString( "Motor max Speed", HAL_LCD_LINE_4 );
 #endif 
-           MotorSpeed = 80;
+           MotorSpeed = 50;
         }
         Smart_home_Motor_cmd(MotorSpeed);
         
@@ -689,8 +696,8 @@ void Smart_home_HandleKeys( byte shift, byte keys )
         #define  HAL_MOTOR_STOP            0x01
         #define  HAL_MOTOR_FORWORD         0x02
         #define  HAL_MOTOR_BACKWORD        0x03*/
-        if(MotorSpeed > -80)     {MotorSpeed -= 10;}
-        if(MotorSpeed <= -80)     
+        if(MotorSpeed > -50)     {MotorSpeed -= 10;}
+        if(MotorSpeed <= -50)     
         {
 #if defined ( LCD_SUPPORTED )
            HalLcdWriteString( "Motor min Speed", HAL_LCD_LINE_4 );
@@ -762,6 +769,7 @@ void Smart_home_HandleKeys( byte shift, byte keys )
  */
 void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
 {
+  //HalUARTWrite(HAL_UART_PORT_0, "9",   1);
   switch ( pkt->clusterId )
   {
   /***********************************************************************
@@ -786,44 +794,108 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
     //3.14 消息处理模块，共8个，行为类似 
     //3.21 修改为指针方法（DeviceList相关）
     case Smart_home_CLUSTERID_HUMITMSG:         // 温湿度
+      uint8 sendbufHumit[4] = {0};
+      sendbufHumit[0] = '1';
+      
       DeviceList[Humit].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线
-      DeviceList[Humit].data[0] = pkt->cmd.Data[4]; // 湿度 
-      DeviceList[Humit].data[1] = pkt->cmd.Data[5]; // 温度
+      sendbufHumit[1] = DeviceList[Humit].data[0] = pkt->cmd.Data[4]; // 湿度 
+      sendbufHumit[2] = DeviceList[Humit].data[1] = pkt->cmd.Data[5]; // 温度
+
+      sendbufHumit[3] = '\n';
+      
+#if (HAL_UART == TRUE)
+      HalUARTWrite(HAL_UART_PORT_0, sendbufHumit,   strlen(sendbufHumit));
+#endif
       break;
       
     case Smart_home_CLUSTERID_TEMPLIGHTMSG:     // 温度光照
+      uint8 sendbufTempLight[6] = {0};
+      sendbufTempLight[0] = '2';
+      
       DeviceList[TempLight].deviceStatus = DEVICE_ONLINE;   //收到消息设置为在线
-      DeviceList[TempLight].data[0] = pkt->cmd.Data[4]; // 温度整数
-      DeviceList[TempLight].data[1] = pkt->cmd.Data[5]; // 温度小数
-      DeviceList[TempLight].data[2] = pkt->cmd.Data[6]; // 光照
-      DeviceList[TempLight].data[3] = pkt->cmd.Data[7]; // 光照
+      
+      sendbufTempLight[1] = DeviceList[TempLight].data[0] = pkt->cmd.Data[4]; // 温度整数
+      sendbufTempLight[2] = DeviceList[TempLight].data[1] = pkt->cmd.Data[5]; // 温度小数
+      sendbufTempLight[3] = DeviceList[TempLight].data[2] = pkt->cmd.Data[6]; // 光照
+      sendbufTempLight[4] = DeviceList[TempLight].data[3] = pkt->cmd.Data[7]; // 光照
+      /*
+      sendbufTempLight[1] = '1'; // 温度整数
+      sendbufTempLight[2] = '2'; // 温度小数
+      sendbufTempLight[3] = '3'; // 光照
+      sendbufTempLight[4] = '4'; // 光照
+      */
+      sendbufTempLight[5] = '\n';
+      
+#if (HAL_UART == TRUE)
+      HalUARTWrite(HAL_UART_PORT_0, sendbufTempLight,   6);
+#endif
       break;
       
     case Smart_home_CLUSTERID_RFIDMSG:          // 射频卡
+      uint8 sendbufRfID[7] = {0};
+      sendbufRfID[0] = '3';
+      
       DeviceList[RfID].deviceStatus = DEVICE_ONLINE;        //收到消息设置为在线
-      DeviceList[RfID].data[0] = pkt->cmd.Data[4]; // 射频卡类型
-      DeviceList[RfID].data[1] = pkt->cmd.Data[5]; // 4个字节的ID号
-      DeviceList[RfID].data[2] = pkt->cmd.Data[6]; //
-      DeviceList[RfID].data[3] = pkt->cmd.Data[7]; //
-      DeviceList[RfID].data[4] = pkt->cmd.Data[8]; //  
+      sendbufRfID[1] = DeviceList[RfID].data[0] = pkt->cmd.Data[4]; // 射频卡类型
+      sendbufRfID[2] = DeviceList[RfID].data[1] = pkt->cmd.Data[5]; // 4个字节的ID号
+      sendbufRfID[3] = DeviceList[RfID].data[2] = pkt->cmd.Data[6]; //
+      sendbufRfID[4] = DeviceList[RfID].data[3] = pkt->cmd.Data[7]; //
+      sendbufRfID[5] = DeviceList[RfID].data[4] = pkt->cmd.Data[8]; //  
+      
+      sendbufRfID[6] = '\n';
+      
+#if (HAL_UART == TRUE)
+      HalUARTWrite(HAL_UART_PORT_0, sendbufRfID,   strlen(sendbufRfID));
+#endif
       break;
       
     case Smart_home_CLUSTERID_GASFLAMEMSG:      // 烟雾火焰
+      uint8 sendbufgasFlame[3] = {0};
+      sendbufgasFlame[0] = '4';
+      
       DeviceList[gasFlame].deviceStatus = DEVICE_ONLINE;    //收到消息设置为在线
-      DeviceList[gasFlame].data[0] = pkt->cmd.Data[4]; // 烟雾与火焰报警信息
+      sendbufgasFlame[1] = DeviceList[gasFlame].data[0] = pkt->cmd.Data[4]; // 烟雾与火焰报警信息
+
+      sendbufgasFlame[2] = '\n';
+      
+#if (HAL_UART == TRUE)
+      HalUARTWrite(HAL_UART_PORT_0, sendbufgasFlame,   3);
+#endif
       break;
       
     case Smart_home_CLUSTERID_INFRAREDMSG:      // 人体红外
+      uint8 sendbufinfrared[3] = {0};
+      sendbufinfrared[0] = '5';
+      
       DeviceList[infrared].deviceStatus = DEVICE_ONLINE;    //收到消息设置为在线
-      DeviceList[infrared].data[0] = pkt->cmd.Data[4]; // 人体红外 
+      sendbufinfrared[1] = DeviceList[infrared].data[0] = pkt->cmd.Data[4]; // 人体红外
+
+      sendbufinfrared[2] = '\n';
+      
+#if (HAL_UART == TRUE)
+      HalUARTWrite(HAL_UART_PORT_0, sendbufinfrared,   strlen(sendbufinfrared));
+#endif
       break;
 
     case Smart_home_CLUSTERID_SOUNDVBMSG:       // 声音振动
+      uint8 sendbufsoundVb[4] = {0};
+      sendbufsoundVb[0] = '6';
+      
       DeviceList[soundVb].deviceStatus = DEVICE_ONLINE;     //收到消息设置为在线
-      DeviceList[soundVb].data[0] = pkt->cmd.Data[4]; // 声音震动信息
+      sendbufsoundVb[1] = DeviceList[soundVb].data[0] = pkt->cmd.Data[4]; // 声音震动信息
+      
+      
+      sendbufsoundVb[2] = '\n';
+      
+#if (HAL_UART == TRUE)
+      HalUARTWrite(HAL_UART_PORT_0, sendbufsoundVb,   strlen(sendbufsoundVb));
+#endif
       break;
       
     case Smart_home_CLUSTERID_MOTORSTATUSMSG:   // 直流电机状态信息
+      uint8 sendbufmotor[4] = {0};
+      sendbufmotor[0] = '7';
+      
       DeviceList[motor].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线
       // 储存电机设备的网络地址，用于发送控制命令
       Motor_addr.addrMode = (afAddrMode_t)Addr16Bit;
@@ -832,18 +904,33 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
       Motor_addr.endPoint = 1;  // 目的节点的端口号
       //TransmitApp_DstMotorAddr->endPoint = TRANSMITAPP_ENDPOINT;
      
-      DeviceList[motor].data[0] = pkt->cmd.Data[4]; // 电机转速
-      DeviceList[motor].data[1] = pkt->cmd.Data[5]; // 电机状态
+      sendbufmotor[1] = DeviceList[motor].data[0] = pkt->cmd.Data[4]; // 电机转速
+      sendbufmotor[2] = DeviceList[motor].data[1] = pkt->cmd.Data[5]; // 电机状态
+
+      sendbufmotor[3] = '\n';
+      
+#if (HAL_UART == TRUE)
+      HalUARTWrite(HAL_UART_PORT_0, sendbufmotor,   strlen(sendbufmotor));
+#endif
       break;
       
     case Smart_home_CLUSTERID_RELAYSTATUSMSG:   // 继电器状态信息
+      uint8 sendbufrelay[4] = {0};
+      sendbufrelay[0] = '8';
+      
       DeviceList[relay].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线    
       
       // 储存继电器设备的网络地址，用于发送控制命令
       Relay_addr.addrMode = (afAddrMode_t)Addr16Bit;
       Relay_addr.addr.shortAddr = pkt->srcAddr.addr.shortAddr;    
       Relay_addr.endPoint = 1; // 目的节点的端口号
-      DeviceList[relay].data[0] = pkt->cmd.Data[4]; 
+      sendbufrelay[1] = DeviceList[relay].data[0] = pkt->cmd.Data[4]; 
+
+      sendbufrelay[3] = '\n';
+      
+#if (HAL_UART == TRUE)
+      HalUARTWrite(HAL_UART_PORT_0, sendbufrelay,   strlen(sendbufrelay));
+#endif
       break;
       
     default:
@@ -958,7 +1045,7 @@ static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed)
     tmp = HI_UINT8( MotorTransID );
     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
     Coordinator_Msg[2] = tmp;
-    tmp = LO_UINT8( RelayTransID );
+    tmp = LO_UINT8( MotorTransID );
     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
     Coordinator_Msg[3] = tmp;
     
@@ -1198,3 +1285,19 @@ static void Smart_home_Display(void)
 }
 
 
+/*******************************************************************************
+ * @fn      Smart_home_CallBack
+ *
+ * @brief   Send data OTA.
+ *
+ * @param   port - UART port.
+ * @param   event - the UART port event flag.
+ *
+ * @return  none
+ */
+void Smart_home_CallBack(uint8 port, uint8 event)
+{ 
+}
+
+/*******************************************************************************
+*******************************************************************************/
