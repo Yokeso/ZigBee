@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        29/Apr/2021  18:01:10 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        06/May/2021  15:28:26 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -618,7 +618,7 @@ Smart_home_ProcessEvent SYMBOL "Smart_home_ProcessEvent"
         DATA16
 //   92 const cId_t Smart_home_ClusterList_IN[1] =
 Smart_home_ClusterList_IN:
-        DW 12
+        DW 9
 //   93 {
 //   94   Smart_home_CLUSTERID_TEXT         //继电器接收的消息控制命令
 //   95 };
@@ -1655,37 +1655,36 @@ Smart_home_ProcessZDOMsgs:
 //  373  */
 //  374 void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
 //  375 {
-//  376   uint8 mode;
-//  377   
-//  378   switch ( pkt->clusterId )
-//  379   {
-//  380     case Smart_home_CLUSTERID_TEMPLIGHTMSG:
-//  381     {    
-//  382       break;
-//  383     } 
-//  384     // Could receive control messages in the future.
-//  385     default:
-//  386       break;
-//  387   }
-//  388 }
-//  389 
-//  390 /*********************************************************************
-//  391  * @fn      Smart_home_Send
-//  392  *
-//  393  * @brief   Send data OTA.
-//  394  *
-//  395  * @param   none
-//  396  *
-//  397  * @return  none
-//  398  */
+//  376   
+//  377   switch ( pkt->clusterId )
+//  378   {
+//  379     case Smart_home_CLUSTERID_TEMPLIGHTMSG:
+//  380     {    
+//  381       break;
+//  382     } 
+//  383     // Could receive control messages in the future.
+//  384     default:
+//  385       break;
+//  386   }
+//  387 }
+//  388 
+//  389 /*********************************************************************
+//  390  * @fn      Smart_home_Send
+//  391  *
+//  392  * @brief   Send data OTA.
+//  393  *
+//  394  * @param   none
+//  395  *
+//  396  * @return  none
+//  397  */
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  399 static void Smart_home_Send(void)
+//  398 static void Smart_home_Send(void)
 Smart_home_Send:
         CFI Block cfiBlock4 Using cfiCommon0
         CFI Function Smart_home_Send
         CODE
-//  400 {
+//  399 {
         FUNCALL Smart_home_Send, BH1750_ConvertLight
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -1757,25 +1756,25 @@ Smart_home_Send:
         CFI CFA_XSP16 add(XSP16, 10)
         ; Saved register size: 10
         ; Auto size: 0
-//  401   uint8 tmp;
-//  402   uint16 Light,Temper;
-//  403   static uint8 Sendbuf[4];
+//  400   uint8 tmp;
+//  401   uint16 Light,Temper;
+//  402   static uint8 Sendbuf[4];
+//  403   
 //  404   
-//  405   
-//  406   Light = BH1750_ConvertLight();
+//  405   Light = BH1750_ConvertLight();
         ; Setup parameters for call to function BH1750_ConvertLight
         LCALL   ??BH1750_ConvertLight?relay
         MOV     ?V0 + 0,R2
         MOV     ?V0 + 1,R3
         MOV     R6,?V0 + 0
         MOV     R7,?V0 + 1
-//  407   Temper = DS18B20_ConvertTemp();
+//  406   Temper = DS18B20_ConvertTemp();
         ; Setup parameters for call to function DS18B20_ConvertTemp
         LCALL   ??DS18B20_ConvertTemp?relay
         MOV     ?V0 + 0,R2
         MOV     ?V0 + 1,R3
-//  408   
-//  409   Sendbuf[0] = (uint8)((Temper>>4) & 0x007F);  // 温度的整数部分
+//  407   
+//  408   Sendbuf[0] = (uint8)((Temper>>4) & 0x007F);  // 温度的整数部分
         MOV     A,#0x4
         MOV     R0,#?V0 + 0
         LCALL   ?US_SHR
@@ -1783,23 +1782,23 @@ Smart_home_Send:
         ANL     A,#0x7f
         MOV     DPTR,#??Sendbuf
         MOVX    @DPTR,A
-//  410   Sendbuf[1] = (uint8)(Temper & 0x000F);       // 温度的小数部分
+//  409   Sendbuf[1] = (uint8)(Temper & 0x000F);       // 温度的小数部分
         MOV     A,R2
         ANL     A,#0xf
         INC     DPTR
         MOVX    @DPTR,A
-//  411   Sendbuf[2] = (uint8)(Light >> 8);            // 光照度的高8位
+//  410   Sendbuf[2] = (uint8)(Light >> 8);            // 光照度的高8位
         MOV     A,R7
         INC     DPTR
         MOVX    @DPTR,A
-//  412   Sendbuf[3] = (uint8)(Light & 0xFF);          // 光照度的低8位
+//  411   Sendbuf[3] = (uint8)(Light & 0xFF);          // 光照度的低8位
         MOV     A,R6
         INC     DPTR
         MOVX    @DPTR,A
-//  413 
-//  414 #if HAL_UART==TRUE
-//  415   //串口发送原数据，解析工作交给上位机处理
-//  416   HalUARTWrite(HAL_UART_PORT_0, Sendbuf, strlen(Sendbuf));
+//  412 
+//  413 #if HAL_UART==TRUE
+//  414   //串口发送原数据，解析工作交给上位机处理
+//  415   HalUARTWrite(HAL_UART_PORT_0, Sendbuf, strlen(Sendbuf));
         ; Setup parameters for call to function HalUARTWrite
         ; Setup parameters for call to function strlen
         MOV     R2,#??Sendbuf & 0xff
@@ -1810,18 +1809,18 @@ Smart_home_Send:
         MOV     R3,#(??Sendbuf >> 8) & 0xff
         MOV     R1,#0x0
         LCALL   ??HalUARTWrite?relay
-//  417 #endif   
-//  418   
-//  419   do{
-//  420     // put the sequence number in the message
-//  421     tmp = HI_UINT8( Smart_home_MsgID );
+//  416 #endif   
+//  417   
+//  418   do{
+//  419     // put the sequence number in the message
+//  420     tmp = HI_UINT8( Smart_home_MsgID );
 ??Smart_home_Send_0:
         MOV     DPTR,#Smart_home_MsgID
         MOVX    A,@DPTR
         SWAP    A
         ANL     A,#0xf
         MOV     R2,A
-//  422     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+//  421     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
         CLR     C
         SUBB    A,#0xa
         JNC     ??Smart_home_Send_1
@@ -1829,18 +1828,18 @@ Smart_home_Send:
         SJMP    ??Smart_home_Send_2
 ??Smart_home_Send_1:
         MOV     R0,#0x37
-//  423     Coordinator_Msg[2] = tmp;
+//  422     Coordinator_Msg[2] = tmp;
 ??Smart_home_Send_2:
         MOV     A,R0
         ADD     A,R2
         MOV     DPTR,#Coordinator_Msg + 2
         MOVX    @DPTR,A
-//  424     tmp = LO_UINT8( Smart_home_MsgID );
+//  423     tmp = LO_UINT8( Smart_home_MsgID );
         MOV     DPTR,#Smart_home_MsgID
         MOVX    A,@DPTR
         ANL     A,#0xf
         MOV     R2,A
-//  425     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+//  424     tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
         CLR     C
         SUBB    A,#0xa
         JNC     ??Smart_home_Send_3
@@ -1848,44 +1847,44 @@ Smart_home_Send:
         SJMP    ??Smart_home_Send_4
 ??Smart_home_Send_3:
         MOV     R0,#0x37
-//  426     Coordinator_Msg[3] = tmp;
+//  425     Coordinator_Msg[3] = tmp;
 ??Smart_home_Send_4:
         MOV     A,R0
         ADD     A,R2
         MOV     DPTR,#Coordinator_Msg + 3
         MOVX    @DPTR,A
-//  427     
-//  428     // 发送给协调器命令 
-//  429     Coordinator_Msg[4] = Sendbuf[0];
+//  426     
+//  427     // 发送给协调器命令 
+//  428     Coordinator_Msg[4] = Sendbuf[0];
         MOV     DPTR,#??Sendbuf
         MOVX    A,@DPTR
         MOV     DPTR,#Coordinator_Msg + 4
         MOVX    @DPTR,A
-//  430     Coordinator_Msg[5] = Sendbuf[1];
+//  429     Coordinator_Msg[5] = Sendbuf[1];
         MOV     DPTR,#??Sendbuf + 1
         MOVX    A,@DPTR
         MOV     DPTR,#Coordinator_Msg + 5
         MOVX    @DPTR,A
-//  431     Coordinator_Msg[6] = Sendbuf[2];
+//  430     Coordinator_Msg[6] = Sendbuf[2];
         MOV     DPTR,#??Sendbuf + 2
         MOVX    A,@DPTR
         MOV     DPTR,#Coordinator_Msg + 6
         MOVX    @DPTR,A
-//  432     Coordinator_Msg[7] = Sendbuf[3];
+//  431     Coordinator_Msg[7] = Sendbuf[3];
         MOV     DPTR,#??Sendbuf + 3
         MOVX    A,@DPTR
         MOV     DPTR,#Coordinator_Msg + 7
         MOVX    @DPTR,A
-//  433     
-//  434     tmp = AF_DataRequest( &Coordinator_DstAddr,                         
-//  435                           (endPointDesc_t *)&Smart_home_epDesc,                  
-//  436                            Smart_home_CLUSTERID_TEMPLIGHTMSG,
-//  437                            TEMPLIGHTMSG_LEN,                 
-//  438                            Coordinator_Msg,                    
-//  439                           &Smart_home_MsgID,                       
-//  440                            AF_DISCV_ROUTE,                     
-//  441                            AF_DEFAULT_RADIUS );
-//  442   }while (afStatus_SUCCESS == tmp);   
+//  432     
+//  433     tmp = AF_DataRequest( &Coordinator_DstAddr,                         
+//  434                           (endPointDesc_t *)&Smart_home_epDesc,                  
+//  435                            Smart_home_CLUSTERID_TEMPLIGHTMSG,
+//  436                            TEMPLIGHTMSG_LEN,                 
+//  437                            Coordinator_Msg,                    
+//  438                           &Smart_home_MsgID,                       
+//  439                            AF_DISCV_ROUTE,                     
+//  440                            AF_DEFAULT_RADIUS );
+//  441   }while (afStatus_SUCCESS == tmp);   
         ; Setup parameters for call to function AF_DataRequest
         MOV     ?V0 + 0,#0x1e
         MOV     R0,#?V0 + 0
@@ -1922,7 +1921,7 @@ Smart_home_Send:
         MOV     A,R1
         JNZ     $+5
         LJMP    ??Smart_home_Send_0 & 0xFFFF
-//  443 }
+//  442 }
         MOV     R7,#0x2
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock4
@@ -1997,51 +1996,51 @@ Smart_home_Send:
 ??Sendbuf:
         DS 4
         REQUIRE __INIT_XDATA_Z
-//  444 
-//  445 /*********************************************************************
-//  446  * @fn      Smart_home_Resp
-//  447  *
-//  448  * @brief   Send data OTA.
-//  449  *
-//  450  * @param   none
-//  451  *
-//  452  * @return  none
-//  453  */
-//  454 static void Smart_home_Resp(void)
-//  455 {
-//  456   /*
-//  457   if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_RxAddr,
-//  458                                          (endPointDesc_t *)&Smart_home_epDesc,
-//  459                                           Smart_home_CLUSTERID2,
-//  460                                           SERIAL_APP_RSP_CNT, Smart_home_RspBuf,
-//  461                                          &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
-//  462   {
-//  463     osal_set_event(Smart_home_TaskID, SMART_HOME_BINDRSP_EVT);
-//  464   }
-//  465   */
-//  466 }
-//  467 
-//  468 /*********************************************************************
-//  469  * @fn      Smart_home_CallBack
-//  470  *
-//  471  * @brief   Send data OTA.
-//  472  *
-//  473  * @param   port - UART port.
-//  474  * @param   event - the UART port event flag.
-//  475  *
-//  476  * @return  none
-//  477  */
+//  443 
+//  444 /*********************************************************************
+//  445  * @fn      Smart_home_Resp
+//  446  *
+//  447  * @brief   Send data OTA.
+//  448  *
+//  449  * @param   none
+//  450  *
+//  451  * @return  none
+//  452  */
+//  453 static void Smart_home_Resp(void)
+//  454 {
+//  455   /*
+//  456   if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_RxAddr,
+//  457                                          (endPointDesc_t *)&Smart_home_epDesc,
+//  458                                           Smart_home_CLUSTERID2,
+//  459                                           SERIAL_APP_RSP_CNT, Smart_home_RspBuf,
+//  460                                          &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
+//  461   {
+//  462     osal_set_event(Smart_home_TaskID, SMART_HOME_BINDRSP_EVT);
+//  463   }
+//  464   */
+//  465 }
+//  466 
+//  467 /*********************************************************************
+//  468  * @fn      Smart_home_CallBack
+//  469  *
+//  470  * @brief   Send data OTA.
+//  471  *
+//  472  * @param   port - UART port.
+//  473  * @param   event - the UART port event flag.
+//  474  *
+//  475  * @return  none
+//  476  */
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  478 static void Smart_home_CallBack(uint8 port, uint8 event)
+//  477 static void Smart_home_CallBack(uint8 port, uint8 event)
 Smart_home_CallBack:
         CFI Block cfiBlock9 Using cfiCommon0
         CFI Function Smart_home_CallBack
         CODE
-//  479 {
+//  478 {
         ; Saved register size: 0
         ; Auto size: 0
-//  480 }
+//  479 }
         LJMP    ?BRET
         CFI EndBlock cfiBlock9
 
@@ -2086,9 +2085,9 @@ Smart_home_CallBack:
         DB "Match Success!\012"
 
         END
-//  481 
-//  482 /*********************************************************************
-//  483 *********************************************************************/
+//  480 
+//  481 /*********************************************************************
+//  482 *********************************************************************/
 // 
 // 835 bytes in segment BANKED_CODE
 //  30 bytes in segment BANK_RELAYS
@@ -2100,4 +2099,4 @@ Smart_home_CallBack:
 //  26 bytes of XDATA memory
 //
 //Errors: none
-//Warnings: 6
+//Warnings: 5

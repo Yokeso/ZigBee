@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        29/Apr/2021  21:42:05 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        06/May/2021  17:24:09 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -44,7 +44,7 @@
 //                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
 //                          -DREJOIN_POLL_RATE=440 D:\±œ…Ë\CC2530-smart_home\ /
 //                          Projects\zstack\ZMain\TI2530DB\ZMain.c -D         /
-//                          LCD_SUPPORTED -D ZDO_COORDINATOR -D NV_RESTORE    /
+//                          LCD_SUPPORTED -D ZDO_COORDINATOR -D xNV_RESTORE   /
 //                          -D HAL_UART=TRUE -D xNV_INIT -D xREFLECTOR -D     /
 //                          xHAL_UART_TEST -lC D:\±œ…Ë\CC2530-smart_home\Proj /
 //                          ects\zstack\Utilities\Smart_home\CC2530DB\Coordin /
@@ -346,9 +346,9 @@ osal_nv_read        SYMBOL "osal_nv_read"
 osal_memcmp         SYMBOL "osal_memcmp"
 HalFlashRead        SYMBOL "HalFlashRead"
 osal_memcpy         SYMBOL "osal_memcpy"
-osal_rand           SYMBOL "osal_rand"
 osal_nv_write       SYMBOL "osal_nv_write"
 ZMacSetReq          SYMBOL "ZMacSetReq"
+osal_rand           SYMBOL "osal_rand"
 HalLcdWriteString   SYMBOL "HalLcdWriteString"
 ??HalAdcCheckVdd?relay SYMBOL "?relay", HalAdcCheckVdd
 ??HalDriverInit?relay SYMBOL "?relay", HalDriverInit
@@ -477,13 +477,6 @@ main                SYMBOL "main"
         ARGFRAME XSTACK, 22, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN osal_rand
-        FUNCTION osal_rand,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 19, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         EXTERN osal_nv_write
         FUNCTION osal_nv_write,0202H
         ARGFRAME ISTACK, 0, STACK
@@ -493,6 +486,13 @@ main                SYMBOL "main"
         ARGFRAME DOVERLAY, 0, STATIC
         EXTERN ZMacSetReq
         FUNCTION ZMacSetReq,0202H
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 19, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        EXTERN osal_rand
+        FUNCTION osal_rand,0202H
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
         ARGFRAME XSTACK, 19, STACK
@@ -854,7 +854,7 @@ main:
         MOV     DPTR,#0x6270
         MOV     A,#0x8
         MOVX    @DPTR,A
-        ORL     0xfe,#0x1
+        ORL     0xfe,#0x3
         ORL     0xfd,#0x80
         ORL     0x8f,#0x4
 //   87 
@@ -1080,17 +1080,6 @@ zmain_ext_addr:
         ARGFRAME XSTACK, 22, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL zmain_ext_addr, osal_rand
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 19, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 19, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL zmain_ext_addr, osal_nv_write
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -1103,6 +1092,17 @@ zmain_ext_addr:
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL zmain_ext_addr, ZMacSetReq
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 19, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 19, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL zmain_ext_addr, osal_rand
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
         LOCFRAME XSTACK, 19, STACK
@@ -1286,7 +1286,6 @@ zmain_ext_addr:
         MOV     A,#0x3
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 19)
-        SJMP    ??zmain_ext_addr_2
 //  197       }
 //  198       else  // No valid extended address was found.
 //  199       {
@@ -1301,39 +1300,14 @@ zmain_ext_addr:
 //  208          *       must never be used for a commercial product.
 //  209          */
 //  210         for (idx = 0; idx < (Z_EXTADDR_LEN - 2);)
-??zmain_ext_addr_3:
-        MOV     R6,#0x0
 //  211         {
 //  212           uint16 randy = osal_rand();
-??zmain_ext_addr_4:
-        ; Setup parameters for call to function osal_rand
-        LCALL   ??osal_rand?relay
-        MOV     ?V0 + 0,R2
-        MOV     R0,?V0 + 0
 //  213           aExtendedAddress[idx++] = LO_UINT16(randy);
-        LCALL   ?Subroutine0 & 0xFFFF
-??CrossCallReturnLabel_0:
-        MOV     A,R0
-        MOVX    @DPTR,A
-        INC     R6
 //  214           aExtendedAddress[idx++] = HI_UINT16(randy);
-        LCALL   ?Subroutine0 & 0xFFFF
 //  215         }
-??CrossCallReturnLabel_1:
-        MOV     A,R3
-        MOVX    @DPTR,A
-        INC     R6
-        MOV     A,R6
-        CLR     C
-        SUBB    A,#0x6
-        JC      ??zmain_ext_addr_4
 //  216         // Next-to-MSB identifies ZigBee devicetype.
 //  217 #if ZG_BUILD_COORDINATOR_TYPE && !ZG_BUILD_JOINING_TYPE
 //  218         aExtendedAddress[idx++] = 0x10;
-        LCALL   ?Subroutine0 & 0xFFFF
-??CrossCallReturnLabel_2:
-        MOV     A,#0x10
-        MOVX    @DPTR,A
 //  219 #elif ZG_BUILD_RTRONLY_TYPE
 //  220         aExtendedAddress[idx++] = 0x20;
 //  221 #else
@@ -1341,17 +1315,6 @@ zmain_ext_addr:
 //  223 #endif
 //  224         // MSB has historical signficance.
 //  225         aExtendedAddress[idx] = 0xF8;
-        MOV     A,#0x1
-        ADD     A,R6
-        MOV     R0,A
-        MOV     A,#aExtendedAddress & 0xff
-        ADD     A,R0
-        MOV     DPL,A
-        MOV     A,#(aExtendedAddress >> 8) & 0xff
-        ADDC    A,#0x0
-        MOV     DPH,A
-        MOV     A,#-0x8
-        MOVX    @DPTR,A
 //  226       }
 //  227     }
 //  228 
@@ -1395,6 +1358,44 @@ zmain_ext_addr:
         CFI CFA_XSP16 add(XSP16, 11)
         MOV     R7,#0x3
         LJMP    ?BANKED_LEAVE_XDATA
+        CFI CFA_XSP16 add(XSP16, 19)
+??zmain_ext_addr_3:
+        MOV     R6,#0x0
+??zmain_ext_addr_4:
+        ; Setup parameters for call to function osal_rand
+        LCALL   ??osal_rand?relay
+        MOV     ?V0 + 0,R2
+        MOV     R0,?V0 + 0
+        LCALL   ?Subroutine0 & 0xFFFF
+??CrossCallReturnLabel_0:
+        MOV     A,R0
+        MOVX    @DPTR,A
+        INC     R6
+        LCALL   ?Subroutine0 & 0xFFFF
+??CrossCallReturnLabel_1:
+        MOV     A,R3
+        MOVX    @DPTR,A
+        INC     R6
+        MOV     A,R6
+        CLR     C
+        SUBB    A,#0x6
+        JC      ??zmain_ext_addr_4
+        LCALL   ?Subroutine0 & 0xFFFF
+??CrossCallReturnLabel_2:
+        MOV     A,#0x10
+        MOVX    @DPTR,A
+        MOV     A,#0x1
+        ADD     A,R6
+        MOV     R0,A
+        MOV     A,#aExtendedAddress & 0xff
+        ADD     A,R0
+        MOV     DPL,A
+        MOV     A,#(aExtendedAddress >> 8) & 0xff
+        ADDC    A,#0x0
+        MOV     DPH,A
+        MOV     A,#-0x8
+        MOVX    @DPTR,A
+        SJMP    ??zmain_ext_addr_1
         CFI EndBlock cfiBlock1
 
         RSEG BANKED_CODE:CODE:NOROOT(0)

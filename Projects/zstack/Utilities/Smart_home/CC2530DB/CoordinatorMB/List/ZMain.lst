@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         29/Apr/2021  21:42:05 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         06/May/2021  17:24:09 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -44,8 +44,8 @@
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 D:\毕设\CC2530-smart_home\P #
 #                          rojects\zstack\ZMain\TI2530DB\ZMain.c -D           #
-#                          LCD_SUPPORTED -D ZDO_COORDINATOR -D NV_RESTORE -D  #
-#                          HAL_UART=TRUE -D xNV_INIT -D xREFLECTOR -D         #
+#                          LCD_SUPPORTED -D ZDO_COORDINATOR -D xNV_RESTORE    #
+#                          -D HAL_UART=TRUE -D xNV_INIT -D xREFLECTOR -D      #
 #                          xHAL_UART_TEST -lC D:\毕设\CC2530-smart_home\Proje #
 #                          cts\zstack\Utilities\Smart_home\CC2530DB\Coordinat #
 #                          orMB\List\ -lA D:\毕设\CC2530-smart_home\Projects\ #
@@ -271,7 +271,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\ZMain\TI2530DB\ZMain.c
    \   00002A   906270       MOV     DPTR,#0x6270
    \   00002D   7408         MOV     A,#0x8
    \   00002F   F0           MOVX    @DPTR,A
-   \   000030   43FE01       ORL     0xfe,#0x1
+   \   000030   43FE03       ORL     0xfe,#0x3
    \   000033   43FD80       ORL     0xfd,#0x80
    \   000036   438F04       ORL     0x8f,#0x4
      87          
@@ -529,7 +529,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\ZMain\TI2530DB\ZMain.c
    \   0000D2   7403         MOV     A,#0x3
    \   0000D4   12....       LCALL   ?DEALLOC_XSTACK8
    \   0000D7   E9           MOV     A,R1
-   \   0000D8   606A         JZ      ??zmain_ext_addr_2
+   \   0000D8   6035         JZ      ??zmain_ext_addr_2
     192              {
     193                // Attempt to read the extended address from the designated location in the Info Page.
     194                if (!osal_memcmp((uint8 *)(P_INFOPAGE+HAL_INFOP_IEEE_OSET), nullAddr, Z_EXTADDR_LEN))
@@ -545,7 +545,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\ZMain\TI2530DB\ZMain.c
    \   0000EC   7403         MOV     A,#0x3
    \   0000EE   12....       LCALL   ?DEALLOC_XSTACK8
    \   0000F1   E9           MOV     A,R1
-   \   0000F2   701D         JNZ     ??zmain_ext_addr_3
+   \   0000F2   7054         JNZ     ??zmain_ext_addr_3
     195                {
     196                  osal_memcpy(aExtendedAddress, (uint8 *)(P_INFOPAGE+HAL_INFOP_IEEE_OSET), Z_EXTADDR_LEN);
    \   0000F4                ; Setup parameters for call to function osal_memcpy
@@ -560,7 +560,6 @@ D:\毕设\CC2530-smart_home\Projects\zstack\ZMain\TI2530DB\ZMain.c
    \   000107   12....       LCALL   ??osal_memcpy?relay
    \   00010A   7403         MOV     A,#0x3
    \   00010C   12....       LCALL   ?DEALLOC_XSTACK8
-   \   00010F   8033         SJMP    ??zmain_ext_addr_2
     197                }
     198                else  // No valid extended address was found.
     199                {
@@ -575,39 +574,14 @@ D:\毕设\CC2530-smart_home\Projects\zstack\ZMain\TI2530DB\ZMain.c
     208                   *       must never be used for a commercial product.
     209                   */
     210                  for (idx = 0; idx < (Z_EXTADDR_LEN - 2);)
-   \                     ??zmain_ext_addr_3:
-   \   000111   7E00         MOV     R6,#0x0
     211                  {
     212                    uint16 randy = osal_rand();
-   \                     ??zmain_ext_addr_4:
-   \   000113                ; Setup parameters for call to function osal_rand
-   \   000113   12....       LCALL   ??osal_rand?relay
-   \   000116   8A..         MOV     ?V0 + 0,R2
-   \   000118   A8..         MOV     R0,?V0 + 0
     213                    aExtendedAddress[idx++] = LO_UINT16(randy);
-   \   00011A   12....       LCALL   ?Subroutine0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_0:
-   \   00011D   E8           MOV     A,R0
-   \   00011E   F0           MOVX    @DPTR,A
-   \   00011F   0E           INC     R6
     214                    aExtendedAddress[idx++] = HI_UINT16(randy);
-   \   000120   12....       LCALL   ?Subroutine0 & 0xFFFF
     215                  }
-   \                     ??CrossCallReturnLabel_1:
-   \   000123   EB           MOV     A,R3
-   \   000124   F0           MOVX    @DPTR,A
-   \   000125   0E           INC     R6
-   \   000126   EE           MOV     A,R6
-   \   000127   C3           CLR     C
-   \   000128   9406         SUBB    A,#0x6
-   \   00012A   40E7         JC      ??zmain_ext_addr_4
     216                  // Next-to-MSB identifies ZigBee devicetype.
     217          #if ZG_BUILD_COORDINATOR_TYPE && !ZG_BUILD_JOINING_TYPE
     218                  aExtendedAddress[idx++] = 0x10;
-   \   00012C   12....       LCALL   ?Subroutine0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_2:
-   \   00012F   7410         MOV     A,#0x10
-   \   000131   F0           MOVX    @DPTR,A
     219          #elif ZG_BUILD_RTRONLY_TYPE
     220                  aExtendedAddress[idx++] = 0x20;
     221          #else
@@ -615,17 +589,6 @@ D:\毕设\CC2530-smart_home\Projects\zstack\ZMain\TI2530DB\ZMain.c
     223          #endif
     224                  // MSB has historical signficance.
     225                  aExtendedAddress[idx] = 0xF8;
-   \   000132   7401         MOV     A,#0x1
-   \   000134   2E           ADD     A,R6
-   \   000135   F8           MOV     R0,A
-   \   000136   74..         MOV     A,#aExtendedAddress & 0xff
-   \   000138   28           ADD     A,R0
-   \   000139   F582         MOV     DPL,A
-   \   00013B   74..         MOV     A,#(aExtendedAddress >> 8) & 0xff
-   \   00013D   3400         ADDC    A,#0x0
-   \   00013F   F583         MOV     DPH,A
-   \   000141   74F8         MOV     A,#-0x8
-   \   000143   F0           MOVX    @DPTR,A
     226                }
     227              }
     228          
@@ -633,38 +596,75 @@ D:\毕设\CC2530-smart_home\Projects\zstack\ZMain\TI2530DB\ZMain.c
     230              {
     231                (void)osal_nv_write(ZCD_NV_EXTADDR, 0, Z_EXTADDR_LEN, aExtendedAddress);
    \                     ??zmain_ext_addr_2:
-   \   000144                ; Setup parameters for call to function osal_nv_write
-   \   000144   75....       MOV     ?V0 + 0,#aExtendedAddress & 0xff
-   \   000147   75....       MOV     ?V0 + 1,#(aExtendedAddress >> 8) & 0xff
-   \   00014A   78..         MOV     R0,#?V0 + 0
-   \   00014C   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00014F   75..08       MOV     ?V0 + 0,#0x8
-   \   000152   75..00       MOV     ?V0 + 1,#0x0
-   \   000155   78..         MOV     R0,#?V0 + 0
-   \   000157   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   00015A   7C00         MOV     R4,#0x0
-   \   00015C   7D00         MOV     R5,#0x0
-   \   00015E   7A01         MOV     R2,#0x1
-   \   000160   7B00         MOV     R3,#0x0
-   \   000162   12....       LCALL   ??osal_nv_write?relay
-   \   000165   7404         MOV     A,#0x4
-   \   000167   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00010F                ; Setup parameters for call to function osal_nv_write
+   \   00010F   75....       MOV     ?V0 + 0,#aExtendedAddress & 0xff
+   \   000112   75....       MOV     ?V0 + 1,#(aExtendedAddress >> 8) & 0xff
+   \   000115   78..         MOV     R0,#?V0 + 0
+   \   000117   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00011A   75..08       MOV     ?V0 + 0,#0x8
+   \   00011D   75..00       MOV     ?V0 + 1,#0x0
+   \   000120   78..         MOV     R0,#?V0 + 0
+   \   000122   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000125   7C00         MOV     R4,#0x0
+   \   000127   7D00         MOV     R5,#0x0
+   \   000129   7A01         MOV     R2,#0x1
+   \   00012B   7B00         MOV     R3,#0x0
+   \   00012D   12....       LCALL   ??osal_nv_write?relay
+   \   000130   7404         MOV     A,#0x4
+   \   000132   12....       LCALL   ?DEALLOC_XSTACK8
     232              }
     233            }
     234          
     235            // Set the MAC PIB extended address according to results from above.
     236            (void)ZMacSetReq(MAC_EXTENDED_ADDRESS, aExtendedAddress);
    \                     ??zmain_ext_addr_1:
-   \   00016A                ; Setup parameters for call to function ZMacSetReq
-   \   00016A   7A..         MOV     R2,#aExtendedAddress & 0xff
-   \   00016C   7B..         MOV     R3,#(aExtendedAddress >> 8) & 0xff
-   \   00016E   79E2         MOV     R1,#-0x1e
-   \   000170   12....       LCALL   ??ZMacSetReq?relay
+   \   000135                ; Setup parameters for call to function ZMacSetReq
+   \   000135   7A..         MOV     R2,#aExtendedAddress & 0xff
+   \   000137   7B..         MOV     R3,#(aExtendedAddress >> 8) & 0xff
+   \   000139   79E2         MOV     R1,#-0x1e
+   \   00013B   12....       LCALL   ??ZMacSetReq?relay
     237          }
-   \   000173   7408         MOV     A,#0x8
-   \   000175   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000178   7F03         MOV     R7,#0x3
-   \   00017A   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   00013E   7408         MOV     A,#0x8
+   \   000140   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000143   7F03         MOV     R7,#0x3
+   \   000145   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \                     ??zmain_ext_addr_3:
+   \   000148   7E00         MOV     R6,#0x0
+   \                     ??zmain_ext_addr_4:
+   \   00014A                ; Setup parameters for call to function osal_rand
+   \   00014A   12....       LCALL   ??osal_rand?relay
+   \   00014D   8A..         MOV     ?V0 + 0,R2
+   \   00014F   A8..         MOV     R0,?V0 + 0
+   \   000151   12....       LCALL   ?Subroutine0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_0:
+   \   000154   E8           MOV     A,R0
+   \   000155   F0           MOVX    @DPTR,A
+   \   000156   0E           INC     R6
+   \   000157   12....       LCALL   ?Subroutine0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_1:
+   \   00015A   EB           MOV     A,R3
+   \   00015B   F0           MOVX    @DPTR,A
+   \   00015C   0E           INC     R6
+   \   00015D   EE           MOV     A,R6
+   \   00015E   C3           CLR     C
+   \   00015F   9406         SUBB    A,#0x6
+   \   000161   40E7         JC      ??zmain_ext_addr_4
+   \   000163   12....       LCALL   ?Subroutine0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_2:
+   \   000166   7410         MOV     A,#0x10
+   \   000168   F0           MOVX    @DPTR,A
+   \   000169   7401         MOV     A,#0x1
+   \   00016B   2E           ADD     A,R6
+   \   00016C   F8           MOV     R0,A
+   \   00016D   74..         MOV     A,#aExtendedAddress & 0xff
+   \   00016F   28           ADD     A,R0
+   \   000170   F582         MOV     DPL,A
+   \   000172   74..         MOV     A,#(aExtendedAddress >> 8) & 0xff
+   \   000174   3400         ADDC    A,#0x0
+   \   000176   F583         MOV     DPH,A
+   \   000178   74F8         MOV     A,#-0x8
+   \   00017A   F0           MOVX    @DPTR,A
+   \   00017B   80B8         SJMP    ??zmain_ext_addr_1
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine0:
@@ -982,9 +982,9 @@ D:\毕设\CC2530-smart_home\Projects\zstack\ZMain\TI2530DB\ZMain.c
        -> osal_memcmp           0      0     44
        -> osal_memcmp           0      0     44
        -> osal_memcpy           0      0     44
-       -> osal_rand             0      0     38
        -> osal_nv_write         0      0     46
        -> ZMacSetReq            0      0     38
+       -> osal_rand             0      0     38
 
 
    Segment part sizes:

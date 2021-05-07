@@ -60,13 +60,12 @@ extern "C"
 
 //输出部分
 #define Smart_home_MAX_OUTCLUSTERS               3  
-#define Smart_home_CLUSTERID_TEXT                12  //测试用
+#define Smart_home_CLUSTERID_TEXT                9  //测试用
 #define Smart_home_CLUSTERID_MOTORCTRL           11  // 直流电机控制信息
 #define Smart_home_CLUSTERID_RELAYCTRL           10  // 继电器控制信息  
  
 /*数据发送长度*/
 /*尚未完全确定*/
-#define MSG_MAX_LEN                   102 //最大数据长度
 #define HUMITMSG_LEN                  8  // 温湿度
 #define TEMPLIGHTMSG_LEN              8  // 温度光照
 #define RFIDMSG_LEN                   9  // 射频卡
@@ -88,13 +87,17 @@ extern "C"
 #define SMART_HOME_DEVICE_CHECK_EVT    0x0080  // 设备在线检测事件(协调器)
 
 // OTA Flow Control Delays
+/*
 #define Smart_home_ACK_DELAY          1
 #define Smart_home_NAK_DELAY          16
+*/
 
 // OTA Flow Control Status
+/*
 #define OTA_SUCCESS                  ZSuccess
 #define OTA_DUP_MSG                 (ZSuccess+1)
 #define OTA_SER_BUSY                (ZSuccess+2)
+*/
   
 /*********************************************************************
  * MACROS
@@ -102,7 +105,6 @@ extern "C"
 /*3.14 设备描述*/
 typedef struct DeviceInfo
 {
-  uint8 deviceid;
   uint8 deviceStatus;
   uint8 data[5];
 } DeviceInfo;  
@@ -112,13 +114,12 @@ typedef struct DeviceInfo
 #define DEVICE_OFFLINE                2  //设备不在线
 
 /*每次检查设备的延时*/
-#define SMART_HOME_DEVICE_CHECK_DELAY         5000
-#define SMART_HOME_DEVICE_DISPLAY_DELAY       10000
+#define ZB_BINDING_ADDR               INVALID_NODE_ADDR
+#define ZB_BROADCAST_ADDR             0xFFFF
 
 /*********************************************************************
  * GLOBAL VARIABLES
  */
-extern byte Smart_home_TaskID;
 /*********************************************************************
  * FUNCTIONS
  */

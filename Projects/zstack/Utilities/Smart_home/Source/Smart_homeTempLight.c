@@ -373,7 +373,6 @@ void Smart_home_HandleKeys( uint8 shift, uint8 keys )
  */
 void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
 {
-  uint8 mode;
   
   switch ( pkt->clusterId )
   {

@@ -41,7 +41,7 @@
  * MACROS
  */
 //3.23  屏幕显示的小bug
-#define SMART_HOME_SEND_DELAY   1000
+#define SMART_HOME_SEND_DELAY   5000
 #define SMART_HOME_MATCH_DELAY  1000
 /*********************************************************************
  * CONSTANTS
@@ -303,6 +303,7 @@ static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
   switch ( inMsg->clusterID )
   {
     case End_Device_Bind_rsp:
+    {
       if ( ZDO_ParseBindRsp( inMsg ) == ZSuccess )
       {
 #if (HAL_UART == TRUE)
@@ -310,8 +311,10 @@ static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
 #endif
       }
       break;
+    }
     
     case Match_Desc_rsp:
+    {
       ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
       if ( pRsp )
       {
@@ -336,6 +339,7 @@ static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
         osal_mem_free( pRsp );
       }
       break;
+    }
       
     default:
       break;
@@ -376,7 +380,6 @@ void Smart_home_HandleKeys( uint8 shift, uint8 keys )
  */
 void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
 {
-  uint8 mode;
   
   switch ( pkt->clusterId )
   {
@@ -413,7 +416,7 @@ static void Smart_home_Send(void)
 
 #if HAL_UART==TRUE
   //串口发送原数据，解析工作交给上位机处理
-  HalUARTWrite(HAL_UART_PORT_0, Sendbuf, strlen(Sendbuf));
+  HalUARTWrite(HAL_UART_PORT_0, Sendbuf, 2);
 #endif   
   
   do{

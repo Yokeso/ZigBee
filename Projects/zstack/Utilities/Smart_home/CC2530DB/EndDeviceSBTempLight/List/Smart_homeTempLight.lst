@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         29/Apr/2021  18:01:10 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         06/May/2021  15:28:26 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -210,7 +210,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \                                 In  segment XDATA_ROM_C, align 1
      92          const cId_t Smart_home_ClusterList_IN[1] =
    \                     Smart_home_ClusterList_IN:
-   \   000000   0C00         DW 12
+   \   000000   0900         DW 9
      93          {
      94            Smart_home_CLUSTERID_TEXT         //继电器接收的消息控制命令
      95          };
@@ -929,59 +929,56 @@ Warning[Pe223]: function "strlen" declared implicitly
     373           */
     374          void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
     375          {
-    376            uint8 mode;
-                         ^
-Warning[Pe177]: variable "mode" was declared but never referenced
-    377            
-    378            switch ( pkt->clusterId )
-    379            {
-    380              case Smart_home_CLUSTERID_TEMPLIGHTMSG:
-    381              {    
-    382                break;
-    383              } 
-    384              // Could receive control messages in the future.
-    385              default:
-    386                break;
-    387            }
-    388          }
-    389          
-    390          /*********************************************************************
-    391           * @fn      Smart_home_Send
-    392           *
-    393           * @brief   Send data OTA.
-    394           *
-    395           * @param   none
-    396           *
-    397           * @return  none
-    398           */
+    376            
+    377            switch ( pkt->clusterId )
+    378            {
+    379              case Smart_home_CLUSTERID_TEMPLIGHTMSG:
+    380              {    
+    381                break;
+    382              } 
+    383              // Could receive control messages in the future.
+    384              default:
+    385                break;
+    386            }
+    387          }
+    388          
+    389          /*********************************************************************
+    390           * @fn      Smart_home_Send
+    391           *
+    392           * @brief   Send data OTA.
+    393           *
+    394           * @param   none
+    395           *
+    396           * @return  none
+    397           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    399          static void Smart_home_Send(void)
+    398          static void Smart_home_Send(void)
    \                     Smart_home_Send:
-    400          {
+    399          {
    \   000000   74F6         MOV     A,#-0xa
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 10
    \   000005                ; Auto size: 0
-    401            uint8 tmp;
-    402            uint16 Light,Temper;
-    403            static uint8 Sendbuf[4];
+    400            uint8 tmp;
+    401            uint16 Light,Temper;
+    402            static uint8 Sendbuf[4];
+    403            
     404            
-    405            
-    406            Light = BH1750_ConvertLight();
+    405            Light = BH1750_ConvertLight();
    \   000005                ; Setup parameters for call to function BH1750_ConvertLight
    \   000005   12....       LCALL   ??BH1750_ConvertLight?relay
    \   000008   8A..         MOV     ?V0 + 0,R2
    \   00000A   8B..         MOV     ?V0 + 1,R3
    \   00000C   AE..         MOV     R6,?V0 + 0
    \   00000E   AF..         MOV     R7,?V0 + 1
-    407            Temper = DS18B20_ConvertTemp();
+    406            Temper = DS18B20_ConvertTemp();
    \   000010                ; Setup parameters for call to function DS18B20_ConvertTemp
    \   000010   12....       LCALL   ??DS18B20_ConvertTemp?relay
    \   000013   8A..         MOV     ?V0 + 0,R2
    \   000015   8B..         MOV     ?V0 + 1,R3
-    408            
-    409            Sendbuf[0] = (uint8)((Temper>>4) & 0x007F);  // 温度的整数部分
+    407            
+    408            Sendbuf[0] = (uint8)((Temper>>4) & 0x007F);  // 温度的整数部分
    \   000017   7404         MOV     A,#0x4
    \   000019   78..         MOV     R0,#?V0 + 0
    \   00001B   12....       LCALL   ?US_SHR
@@ -989,23 +986,23 @@ Warning[Pe177]: variable "mode" was declared but never referenced
    \   000020   547F         ANL     A,#0x7f
    \   000022   90....       MOV     DPTR,#??Sendbuf
    \   000025   F0           MOVX    @DPTR,A
-    410            Sendbuf[1] = (uint8)(Temper & 0x000F);       // 温度的小数部分
+    409            Sendbuf[1] = (uint8)(Temper & 0x000F);       // 温度的小数部分
    \   000026   EA           MOV     A,R2
    \   000027   540F         ANL     A,#0xf
    \   000029   A3           INC     DPTR
    \   00002A   F0           MOVX    @DPTR,A
-    411            Sendbuf[2] = (uint8)(Light >> 8);            // 光照度的高8位
+    410            Sendbuf[2] = (uint8)(Light >> 8);            // 光照度的高8位
    \   00002B   EF           MOV     A,R7
    \   00002C   A3           INC     DPTR
    \   00002D   F0           MOVX    @DPTR,A
-    412            Sendbuf[3] = (uint8)(Light & 0xFF);          // 光照度的低8位
+    411            Sendbuf[3] = (uint8)(Light & 0xFF);          // 光照度的低8位
    \   00002E   EE           MOV     A,R6
    \   00002F   A3           INC     DPTR
    \   000030   F0           MOVX    @DPTR,A
-    413          
-    414          #if HAL_UART==TRUE
-    415            //串口发送原数据，解析工作交给上位机处理
-    416            HalUARTWrite(HAL_UART_PORT_0, Sendbuf, strlen(Sendbuf));
+    412          
+    413          #if HAL_UART==TRUE
+    414            //串口发送原数据，解析工作交给上位机处理
+    415            HalUARTWrite(HAL_UART_PORT_0, Sendbuf, strlen(Sendbuf));
                                                           ^
 Warning[Pe223]: function "strlen" declared implicitly
    \   000031                ; Setup parameters for call to function HalUARTWrite
@@ -1018,18 +1015,18 @@ Warning[Pe223]: function "strlen" declared implicitly
    \   00003A   7B..         MOV     R3,#(??Sendbuf >> 8) & 0xff
    \   00003C   7900         MOV     R1,#0x0
    \   00003E   12....       LCALL   ??HalUARTWrite?relay
-    417          #endif   
-    418            
-    419            do{
-    420              // put the sequence number in the message
-    421              tmp = HI_UINT8( Smart_home_MsgID );
+    416          #endif   
+    417            
+    418            do{
+    419              // put the sequence number in the message
+    420              tmp = HI_UINT8( Smart_home_MsgID );
    \                     ??Smart_home_Send_0:
    \   000041   90....       MOV     DPTR,#Smart_home_MsgID
    \   000044   E0           MOVX    A,@DPTR
    \   000045   C4           SWAP    A
    \   000046   540F         ANL     A,#0xf
    \   000048   FA           MOV     R2,A
-    422              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+    421              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
    \   000049   C3           CLR     C
    \   00004A   940A         SUBB    A,#0xa
    \   00004C   5004         JNC     ??Smart_home_Send_1
@@ -1037,18 +1034,18 @@ Warning[Pe223]: function "strlen" declared implicitly
    \   000050   8002         SJMP    ??Smart_home_Send_2
    \                     ??Smart_home_Send_1:
    \   000052   7837         MOV     R0,#0x37
-    423              Coordinator_Msg[2] = tmp;
+    422              Coordinator_Msg[2] = tmp;
    \                     ??Smart_home_Send_2:
    \   000054   E8           MOV     A,R0
    \   000055   2A           ADD     A,R2
    \   000056   90....       MOV     DPTR,#Coordinator_Msg + 2
    \   000059   F0           MOVX    @DPTR,A
-    424              tmp = LO_UINT8( Smart_home_MsgID );
+    423              tmp = LO_UINT8( Smart_home_MsgID );
    \   00005A   90....       MOV     DPTR,#Smart_home_MsgID
    \   00005D   E0           MOVX    A,@DPTR
    \   00005E   540F         ANL     A,#0xf
    \   000060   FA           MOV     R2,A
-    425              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+    424              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
    \   000061   C3           CLR     C
    \   000062   940A         SUBB    A,#0xa
    \   000064   5004         JNC     ??Smart_home_Send_3
@@ -1056,44 +1053,44 @@ Warning[Pe223]: function "strlen" declared implicitly
    \   000068   8002         SJMP    ??Smart_home_Send_4
    \                     ??Smart_home_Send_3:
    \   00006A   7837         MOV     R0,#0x37
-    426              Coordinator_Msg[3] = tmp;
+    425              Coordinator_Msg[3] = tmp;
    \                     ??Smart_home_Send_4:
    \   00006C   E8           MOV     A,R0
    \   00006D   2A           ADD     A,R2
    \   00006E   90....       MOV     DPTR,#Coordinator_Msg + 3
    \   000071   F0           MOVX    @DPTR,A
-    427              
-    428              // 发送给协调器命令 
-    429              Coordinator_Msg[4] = Sendbuf[0];
+    426              
+    427              // 发送给协调器命令 
+    428              Coordinator_Msg[4] = Sendbuf[0];
    \   000072   90....       MOV     DPTR,#??Sendbuf
    \   000075   E0           MOVX    A,@DPTR
    \   000076   90....       MOV     DPTR,#Coordinator_Msg + 4
    \   000079   F0           MOVX    @DPTR,A
-    430              Coordinator_Msg[5] = Sendbuf[1];
+    429              Coordinator_Msg[5] = Sendbuf[1];
    \   00007A   90....       MOV     DPTR,#??Sendbuf + 1
    \   00007D   E0           MOVX    A,@DPTR
    \   00007E   90....       MOV     DPTR,#Coordinator_Msg + 5
    \   000081   F0           MOVX    @DPTR,A
-    431              Coordinator_Msg[6] = Sendbuf[2];
+    430              Coordinator_Msg[6] = Sendbuf[2];
    \   000082   90....       MOV     DPTR,#??Sendbuf + 2
    \   000085   E0           MOVX    A,@DPTR
    \   000086   90....       MOV     DPTR,#Coordinator_Msg + 6
    \   000089   F0           MOVX    @DPTR,A
-    432              Coordinator_Msg[7] = Sendbuf[3];
+    431              Coordinator_Msg[7] = Sendbuf[3];
    \   00008A   90....       MOV     DPTR,#??Sendbuf + 3
    \   00008D   E0           MOVX    A,@DPTR
    \   00008E   90....       MOV     DPTR,#Coordinator_Msg + 7
    \   000091   F0           MOVX    @DPTR,A
-    433              
-    434              tmp = AF_DataRequest( &Coordinator_DstAddr,                         
-    435                                    (endPointDesc_t *)&Smart_home_epDesc,                  
-    436                                     Smart_home_CLUSTERID_TEMPLIGHTMSG,
-    437                                     TEMPLIGHTMSG_LEN,                 
-    438                                     Coordinator_Msg,                    
-    439                                    &Smart_home_MsgID,                       
-    440                                     AF_DISCV_ROUTE,                     
-    441                                     AF_DEFAULT_RADIUS );
-    442            }while (afStatus_SUCCESS == tmp);   
+    432              
+    433              tmp = AF_DataRequest( &Coordinator_DstAddr,                         
+    434                                    (endPointDesc_t *)&Smart_home_epDesc,                  
+    435                                     Smart_home_CLUSTERID_TEMPLIGHTMSG,
+    436                                     TEMPLIGHTMSG_LEN,                 
+    437                                     Coordinator_Msg,                    
+    438                                    &Smart_home_MsgID,                       
+    439                                     AF_DISCV_ROUTE,                     
+    440                                     AF_DEFAULT_RADIUS );
+    441            }while (afStatus_SUCCESS == tmp);   
    \   000092                ; Setup parameters for call to function AF_DataRequest
    \   000092   75..1E       MOV     ?V0 + 0,#0x1e
    \   000095   78..         MOV     R0,#?V0 + 0
@@ -1124,7 +1121,7 @@ Warning[Pe223]: function "strlen" declared implicitly
    \   0000D5   E9           MOV     A,R1
    \   0000D6   7003         JNZ     $+5
    \   0000D8   02....       LJMP    ??Smart_home_Send_0 & 0xFFFF
-    443          }
+    442          }
    \   0000DB   7F02         MOV     R7,#0x2
    \   0000DD   02....       LJMP    ?BANKED_LEAVE_XDATA
 
@@ -1132,48 +1129,48 @@ Warning[Pe223]: function "strlen" declared implicitly
    \                     ??Sendbuf:
    \   000000                DS 4
    \   000004                REQUIRE __INIT_XDATA_Z
-    444          
-    445          /*********************************************************************
-    446           * @fn      Smart_home_Resp
-    447           *
-    448           * @brief   Send data OTA.
-    449           *
-    450           * @param   none
-    451           *
-    452           * @return  none
-    453           */
-    454          static void Smart_home_Resp(void)
-    455          {
-    456            /*
-    457            if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_RxAddr,
-    458                                                   (endPointDesc_t *)&Smart_home_epDesc,
-    459                                                    Smart_home_CLUSTERID2,
-    460                                                    SERIAL_APP_RSP_CNT, Smart_home_RspBuf,
-    461                                                   &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
-    462            {
-    463              osal_set_event(Smart_home_TaskID, SMART_HOME_BINDRSP_EVT);
-    464            }
-    465            */
-    466          }
-    467          
-    468          /*********************************************************************
-    469           * @fn      Smart_home_CallBack
-    470           *
-    471           * @brief   Send data OTA.
-    472           *
-    473           * @param   port - UART port.
-    474           * @param   event - the UART port event flag.
-    475           *
-    476           * @return  none
-    477           */
+    443          
+    444          /*********************************************************************
+    445           * @fn      Smart_home_Resp
+    446           *
+    447           * @brief   Send data OTA.
+    448           *
+    449           * @param   none
+    450           *
+    451           * @return  none
+    452           */
+    453          static void Smart_home_Resp(void)
+    454          {
+    455            /*
+    456            if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_RxAddr,
+    457                                                   (endPointDesc_t *)&Smart_home_epDesc,
+    458                                                    Smart_home_CLUSTERID2,
+    459                                                    SERIAL_APP_RSP_CNT, Smart_home_RspBuf,
+    460                                                   &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
+    461            {
+    462              osal_set_event(Smart_home_TaskID, SMART_HOME_BINDRSP_EVT);
+    463            }
+    464            */
+    465          }
+    466          
+    467          /*********************************************************************
+    468           * @fn      Smart_home_CallBack
+    469           *
+    470           * @brief   Send data OTA.
+    471           *
+    472           * @param   port - UART port.
+    473           * @param   event - the UART port event flag.
+    474           *
+    475           * @return  none
+    476           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    478          static void Smart_home_CallBack(uint8 port, uint8 event)
+    477          static void Smart_home_CallBack(uint8 port, uint8 event)
    \                     Smart_home_CallBack:
-    479          {
+    478          {
    \   000000                ; Saved register size: 0
    \   000000                ; Auto size: 0
-    480          }
+    479          }
    \   000000   02....       LJMP    ?BRET
 
    \                                 In  segment BANK_RELAYS, align 1
@@ -1214,9 +1211,9 @@ Warning[Pe223]: function "strlen" declared implicitly
    \            68205375
    \            63636573
    \            73210A00
-    481          
-    482          /*********************************************************************
-    483          *********************************************************************/
+    480          
+    481          /*********************************************************************
+    482          *********************************************************************/
 
    Maximum stack usage in bytes:
 
@@ -1292,4 +1289,4 @@ Warning[Pe223]: function "strlen" declared implicitly
   26 bytes of XDATA memory
 
 Errors: none
-Warnings: 6
+Warnings: 5

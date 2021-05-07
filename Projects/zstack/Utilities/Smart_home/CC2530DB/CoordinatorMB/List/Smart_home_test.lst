@@ -1,0 +1,1541 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         06/May/2021  15:26:08 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  banked                                             #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data_rom                                           #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\Source\Smart_home_test.c              #
+#    Command line       =  -f D:\毕设\CC2530-smart_home\Projects\zstack\Utili #
+#                          ties\Smart_home\CC2530DB\..\..\..\Tools\CC2530DB\f #
+#                          8wCoord.cfg (-DCPU32MHZ -DROOT=__near_func         #
+#                          -DMAC_CFG_APP_PENDING_QUEUE=TRUE                   #
+#                          -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8         #
+#                          -DMAC_CFG_RX_MAX=5 -DZDO_COORDINATOR -DRTR_NWK)    #
+#                          -f D:\毕设\CC2530-smart_home\Projects\zstack\Utili #
+#                          ties\Smart_home\CC2530DB\..\..\..\Tools\CC2530DB\f #
+#                          8wConfig.cfg (-DZIGBEEPRO -DSECURE=0               #
+#                          -DZG_SECURE_DYNAMIC=0 -DREFLECTOR                  #
+#                          -DDEFAULT_CHANLIST=0x02000000                      #
+#                          -DZDAPP_CONFIG_PAN_ID=0x1003                       #
+#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
+#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
+#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
+#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
+#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
+#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
+#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
+#                          -DNWK_MAX_DATA_RETRIES=2                           #
+#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
+#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
+#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
+#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
+#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
+#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
+#                          -DMAC_MAX_FRAME_SIZE=116                           #
+#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
+#                          __code" -DGENERIC=__generic                        #
+#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
+#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
+#                          -DREJOIN_POLL_RATE=440 D:\毕设\CC2530-smart_home\P #
+#                          rojects\zstack\Utilities\Smart_home\Source\Smart_h #
+#                          ome_test.c -D LCD_SUPPORTED -D ZDO_COORDINATOR -D  #
+#                          xNV_RESTORE -D HAL_UART=TRUE -D xNV_INIT -D        #
+#                          xREFLECTOR -D xHAL_UART_TEST -lC                   #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\CoordinatorMB\List\ -lA      #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\CoordinatorMB\List\          #
+#                          --diag_suppress Pe001,Pa010 -o                     #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\CoordinatorMB\Obj\ -e        #
+#                          --no_code_motion --debug --core=plain --dptr=16,1  #
+#                          --data_model=large --code_model=banked             #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data_rom --nr_virtual_regs 16    #
+#                          -I D:\毕设\CC2530-smart_home\Projects\zstack\Utili #
+#                          ties\Smart_home\CC2530DB\ -I                       #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\Source\ -I                #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\ZMain\TI2530DB\ -I  #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\ha #
+#                          l\include\ -I D:\毕设\CC2530-smart_home\Projects\z #
+#                          stack\Utilities\Smart_home\CC2530DB\..\..\..\..\.. #
+#                          \Components\hal\target\CC2530MB\ -I                #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\ma #
+#                          c\include\ -I D:\毕设\CC2530-smart_home\Projects\z #
+#                          stack\Utilities\Smart_home\CC2530DB\..\..\..\..\.. #
+#                          \Components\mac\high_level\ -I                     #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\ma #
+#                          c\low_level\srf04\ -I D:\毕设\CC2530-smart_home\Pr #
+#                          ojects\zstack\Utilities\Smart_home\CC2530DB\..\..\ #
+#                          ..\..\..\Components\mac\low_level\srf04\single_chi #
+#                          p\ -I D:\毕设\CC2530-smart_home\Projects\zstack\Ut #
+#                          ilities\Smart_home\CC2530DB\..\..\..\..\..\Compone #
+#                          nts\mt\ -I D:\毕设\CC2530-smart_home\Projects\zsta #
+#                          ck\Utilities\Smart_home\CC2530DB\..\..\..\..\..\Co #
+#                          mponents\osal\include\ -I                          #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\se #
+#                          rvices\saddr\ -I D:\毕设\CC2530-smart_home\Project #
+#                          s\zstack\Utilities\Smart_home\CC2530DB\..\..\..\.. #
+#                          \..\Components\services\sdata\ -I                  #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\st #
+#                          ack\af\ -I D:\毕设\CC2530-smart_home\Projects\zsta #
+#                          ck\Utilities\Smart_home\CC2530DB\..\..\..\..\..\Co #
+#                          mponents\stack\nwk\ -I D:\毕设\CC2530-smart_home\P #
+#                          rojects\zstack\Utilities\Smart_home\CC2530DB\..\.. #
+#                          \..\..\..\Components\stack\sapi\ -I                #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\st #
+#                          ack\sec\ -I D:\毕设\CC2530-smart_home\Projects\zst #
+#                          ack\Utilities\Smart_home\CC2530DB\..\..\..\..\..\C #
+#                          omponents\stack\sys\ -I D:\毕设\CC2530-smart_home\ #
+#                          Projects\zstack\Utilities\Smart_home\CC2530DB\..\. #
+#                          .\..\..\..\Components\stack\zdo\ -I                #
+#                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\..\..\..\..\..\Components\zm #
+#                          ac\ -I D:\毕设\CC2530-smart_home\Projects\zstack\U #
+#                          tilities\Smart_home\CC2530DB\..\..\..\..\..\Compon #
+#                          ents\zmac\f8w\ -Ohz                                #
+#    List file          =  D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\CoordinatorMB\List\Smart_hom #
+#                          e_test.lst                                         #
+#    Object file        =  D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
+#                          s\Smart_home\CC2530DB\CoordinatorMB\Obj\Smart_home #
+#                          _test.r51                                          #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home_test.c
+      1          /**************************************************************************************************
+      2            文件名：Smart_home.c
+      3            作 者： 柳成林
+      4            功 能： 作为网关节点，实现传感器信息的采集，并可以通过其控制一些节点
+      5                    终端设备主要分为8个，分别为
+      6               1、温度与光照度传感器；2、烟雾与火焰传感器；3、继电器；4、温湿度传感器；
+      7               5、声音与震动传感器；  6、人体红外检测传感器；7、电机；8、RFID检测器。
+      8            更新日志(2021)
+      9            3.13
+     10            + 新增 8种传感器的Project并设置好编译情况
+     11            + 修改 Smart_home_ProcessEvent() （增加各种处理器的事件）
+     12                   Smart_home_Init()         （初始化内容修改，添加设备默认离线）
+     13            3.14
+     14            + 修改 Smart_home_ProcessMSGCmd()（添加终端节点类型判断，具体处理留空）
+     15            + 新增 Hal层各种传感器驱动(头文件)
+     16                   ClusterList (添加8个终端，分开出与入)
+     17            3.17
+     18            + 修改 Smart_home_ProcessMSGCmd() （完成接收后对于各终端处理）
+     19            + 添加 Smart_home_HandleKeys()     (修改原来函数增添概念，未补全)
+     20            + 删除 static void Smart_home_Send(void);
+     21                   static void Smart_home_Resp(void);
+     22                   两个函数
+     23            3.19
+     24            + 检查 出现的warning并做标识
+     25            + 修改 Smart_home_HandleKeys() （补全设计函数）
+     26            + 新增 Smart_home_Device_check() (设备是否在线检查)
+     27          
+     28            3.21
+     29            + 新增 DeviceList以方便初始化和设备在线检查（本地变量部分）
+     30                   Smart_home_Display()    （屏幕显示，未补全）
+     31                   Smart_home_Key_add()     (控制按键，附加项)
+     32            + 修改 Smart_home_Device_check()
+     33                   Smart_home_Init()
+     34                   Smart_home_ProcessMSGCmd()
+     35                   调整有关DeviceList（设备列表）部分的修改
+     36                   直接使用数组位置号作为设备编号
+     37                   按键控制方式，用按键情况控制
+     38            3.22
+     39            + 修改 Smart_home_Display()    （屏幕显示，补全）
+     40                   Smart_home_Key_add()     (屏幕显示中的电机与继电器部分加入这里)
+     41                   重写别名方式减少内存损耗
+     42                   出现无法初始化的问题，需要项目重构
+     43            3.23
+     44            + Warn 代码初始化后会产生直接进入key的情况,需debug
+     45                   OK键问题无法修复，放弃使用OK键，修改为Cencel组网 禁止组网
+     46            3.23 正式完成网关节点部分，（显示函数部分除外）
+     47            3.24 
+     48            + 修改 Smart_home_Key_add()与display函数整合
+     49            + bug:在每十秒一次调用的周期检查函数中会导致显示屏将近一秒时间不显示
+     50              已解决： 在状态0的时候作为在线即可
+     51            + 完成 显示功能设置
+     52             
+     53            经调试程序无bug，可以接收各个传感器消息。//3.22
+     54            当我没说。。好像出了内存问题//3.22
+     55            项目重构啦！，现在又只有一个小问题了/3.23
+     56          *********************************************************************/
+     57          
+     58          /*********************************************************************
+     59           * INCLUDES
+     60           */
+     61          
+     62          #include "OSAL.h"
+     63          #include "AF.h"
+     64          #include "ZDObject.h"
+     65          #include "ZDProfile.h"
+     66          #include "nwk_util.h"
+     67          
+     68          #include "Smart_home.h"
+     69          #include "OnBoard.h"
+     70          
+     71          #include "DebugTrace.h"
+     72          #include "string.h"
+     73          
+     74          /* HAL */
+     75          #include "hal_lcd.h"
+     76          #include "hal_led.h"
+     77          #include "hal_key.h"
+     78          #include "hal_uart.h"
+     79          
+     80          /*********************************************************************
+     81           * MACROS
+     82           */
+     83          /*设备链接相关设置*/
+     84          /*判断设备是否在线的最大次数*/
+     85          #define DEVICE_HEART_BEAT    3
+     86          #define DEVICE_CHECK_DELAY   5000
+     87          #define DEVICE_CHECK_TIMER   2000
+     88          
+     89          /*LCD相关设置*/
+     90          /*单屏显示时常   MS*/
+     91          #define LCD_DISPLAY_LENGTH   10000
+     92          #define LCD_DISPLAY_TIMER    2000  //多久更新一次 
+     93          
+     94          /*关于显示部分相关的宏*/
+     95          #define LCD_PAGE_MAX         4     //目前目录页最多4页
+     96          
+     97          /* 直流电机状态(status)定义*/
+     98          #define  HAL_MOTOR_STOP            0x01
+     99          #define  HAL_MOTOR_FORWARD         0x02
+    100          #define  HAL_MOTOR_BACKWARD        0x03
+    101          #define  MOTOR_MAX_SPEED           2400
+    102          
+    103          /*********************************************************************
+    104           * CONSTANTS
+    105           */
+    106          
+    107          #define SMART_HOME_PORT  0x00
+    108          
+    109          //#define SMART_HOME_BAUD  HAL_UART_BR_38400
+    110          #define SMART_HOME_BAUD  HAL_UART_BR_115200
+    111          
+    112          // When the Rx buf space is less than this threshold, invoke the Rx callback.
+    113          #define SMART_HOME_THRESH  64
+    114          #define SMART_HOME_RX_SZ  128
+    115          #define SMART_HOME_TX_SZ  128
+    116          
+    117          // Millisecs of idle time after a byte is received before invoking Rx callback.
+    118          #define SMART_HOME_IDLE  6
+    119          
+    120          // Loopback Rx bytes to Tx for throughput testing.
+    121          #define SMART_HOME_LOOPBACK  FALSE
+    122          
+    123          // This is the max byte count per OTA message.
+    124          #if !defined( SMART_HOME_TX_MAX )
+    125          #define SMART_HOME_TX_MAX  80
+    126          #endif
+    127          
+    128          //3.14 This list should be filled with Application specific Cluster IDs.
+    129          const cId_t Smart_home_ClusterList_IN[Smart_home_MAX_INCLUSTERS ] =
+    130          {
+    131            Smart_home_CLUSTERID_HUMITMSG,              // 温湿度
+    132            Smart_home_CLUSTERID_TEMPLIGHTMSG,          // 温度光照
+    133            Smart_home_CLUSTERID_RFIDMSG,               // 射频卡
+    134            Smart_home_CLUSTERID_GASFLAMEMSG,           // 烟雾火焰
+    135            Smart_home_CLUSTERID_INFRAREDMSG,           // 人体红外
+    136            Smart_home_CLUSTERID_SOUNDVBMSG,            // 声音振动
+    137            Smart_home_CLUSTERID_MOTORSTATUSMSG,        // 直流电机状态信息
+    138            Smart_home_CLUSTERID_RELAYSTATUSMSG         // 继电器
+    139          };
+    140          
+    141          const cId_t Smart_home_ClusterList_OUT[Smart_home_MAX_INCLUSTERS ] =
+    142          {
+    143            Smart_home_CLUSTERID_TEXT,
+    144            Smart_home_CLUSTERID_MOTORCTRL,             //直流电机控制
+    145            Smart_home_CLUSTERID_RELAYCTRL              //继电器控制
+    146          };
+    147          
+    148          const SimpleDescriptionFormat_t Smart_home_SimpleDesc =
+    149          {
+    150            Smart_home_ENDPOINT,              //  int   Endpoint;
+    151            Smart_home_PROFID,                //  uint16 AppProfId[2];
+    152            Smart_home_DEVICEID,              //  uint16 AppDeviceId[2];
+    153            Smart_home_DEVICE_VERSION,        //  int   AppDevVer:4;
+    154            Smart_home_FLAGS,                 //  int   AppFlags:4;
+    155            Smart_home_MAX_INCLUSTERS,          //  byte  AppNumInClusters;
+    156            (cId_t *)Smart_home_ClusterList_IN,  //  byte *pAppInClusterList;
+    157            Smart_home_MAX_OUTCLUSTERS,          //  byte  AppNumOutClusters;
+    158            (cId_t *)Smart_home_ClusterList_OUT   //  byte *pAppOutClusterList;
+    159          };
+    160          
+    161          const endPointDesc_t Smart_home_epDesc =
+    162          {
+    163            Smart_home_ENDPOINT,
+    164            &Smart_home_TaskID,
+    165            (SimpleDescriptionFormat_t *)&Smart_home_SimpleDesc,
+    166            noLatencyReqs
+    167          };
+    168          
+    169          /*********************************************************************
+    170           * TYPEDEFS
+    171           */
+    172          
+    173          /*********************************************************************
+    174           * GLOBAL VARIABLES
+    175           */
+    176          
+    177          uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
+    178          
+    179          /*********************************************************************
+    180           * EXTERNAL VARIABLES
+    181           */
+    182          
+    183          /*********************************************************************
+    184           * EXTERNAL FUNCTIONS
+    185           */
+    186          
+    187          /*********************************************************************
+    188           * LOCAL VARIABLES
+    189           */
+    190          
+    191          /*3.18 终端节点的设备详细信息缓存*/
+    192          /*5.6 尝试利用离散变量的方式*/
+    193          //DeviceInfo   DeviceList[Smart_home_MAX_INCLUSTERS];                      //设备列表  
+    194          
+    195          DeviceInfo Humit     1     //温湿度缓存
+                                      ^
+Error[Pe065]: expected a ";"
+    196          DeviceInfo TempLight 2     // 温度光照缓存
+    197          DeviceInfo RfID      3     // RFID 信息缓存
+    198          DeviceInfo gasFlame  4     //气体火焰缓存
+    199          DeviceInfo infrared  5     //人体红外
+    200          DeviceInfo soundVb   6     //电机状态
+    201          DeviceInfo motor     7     //继电器状态
+    202          DeviceInfo relay     8     //声音震动
+    203          
+    204          
+    205          static uint8 DeviceCnt[Smart_home_MAX_INCLUSTERS];
+                                                                  ^
+Warning[Pe012]: parsing restarts here after previous syntax error
+    206          static int8 Ctrlcase = 0;    //0用来控制屏幕显示，1控制继电器，2控制电机
+    207          static int8 LCD_Page  =  0;  //终端状态显示
+    208          
+    209          /*********************************************************************************
+    210          //这些似乎会引起内存问题  3.22
+    211          DeviceInfo *Humit = DeviceList+Smart_home_CLUSTERID_HUMITMSG;          //温湿度缓存
+    212          DeviceInfo *TempLight = DeviceList+Smart_home_CLUSTERID_TEMPLIGHTMSG;  // 温度光照缓存
+    213          DeviceInfo *RfID = DeviceList+Smart_home_CLUSTERID_RFIDMSG;            // RFID 信息缓存
+    214          DeviceInfo *gasFlame = DeviceList+Smart_home_CLUSTERID_GASFLAMEMSG;    //气体火焰缓存
+    215          DeviceInfo *infrared = DeviceList+Smart_home_CLUSTERID_INFRAREDMSG;    //人体红外
+    216          DeviceInfo *motor = DeviceList+Smart_home_CLUSTERID_MOTORSTATUSMSG;     //电机状态
+    217          DeviceInfo *relay = DeviceList+Smart_home_CLUSTERID_RELAYSTATUSMSG;    //继电器状态
+    218          DeviceInfo *soundVb = DeviceList+Smart_home_CLUSTERID_SOUNDVBMSG;      //声音震动
+    219          修改如下
+    220          ***********************************************************************************/
+    221          #define Humit     1     //温湿度缓存
+    222          #define TempLight 2     // 温度光照缓存
+    223          #define RfID      3     // RFID 信息缓存
+    224          #define gasFlame  4     //气体火焰缓存
+    225          #define infrared  5     //人体红外
+    226          #define soundVb   6     //电机状态
+    227          #define motor     7     //继电器状态
+    228          #define relay     8     //声音震动
+    229          
+    230          /*3.14 消息发送部分*/
+    231          /*3.17短地址存储*/
+    232          /*
+    233          static afAddrType_t Humit_addr;
+    234          static afAddrType_t Light_addr;
+    235          static afAddrType_t GasF_addr;
+    236          static afAddrType_t Sound_addr;
+    237          static afAddrType_t Card_addr;
+    238          static afAddrType_t Infrared_addr;
+    239          */
+    240          static afAddrType_t Relay_addr;
+    241          static afAddrType_t Motor_addr;
+    242          
+    243          /*消息发送数组*/
+    244          byte Coordinator_Msg[MSG_MAX_LEN];
+    245          uint16 Smart_home_MaxDataLength;
+    246          
+    247          /*3.19 协议栈中有但暂时不知道要他们干嘛的东西*/
+    248          /*3.21 现在我会了！！！*/
+    249          /*3.22 那些没用！删掉了！*/
+    250          //static uint8 Smart_home_MsgID;
+    251          static uint8 RelayTransID;  // This is the unique message ID (counter)
+    252          static uint8 MotorTransID;  // This is the unique message ID (counter)
+    253          
+    254          /*********************************************************************
+    255           * LOCAL FUNCTIONS
+    256           */
+    257          
+    258          void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
+    259          //static void Smart_home_Key_add(uint8 Ctrlcase);
+    260          void Smart_home_HandleKeys( byte shift, byte keys );
+    261          void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt );
+    262          void Smart_home_Device_check(void);
+    263          void Smart_home_Relay_Ctl(uint8 cmd);
+    264          void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed);
+    265          void Smart_home_Display(void);
+    266          void Smart_home_Motor_cmd(int8 speed);
+    267          void Smart_home_CallBack(uint8 port, uint8 event);
+    268          
+    269          /*********************************************************************
+    270           * @fn      Smart_home_Init
+    271           *
+    272           * @brief   This is called during OSAL tasks' initialization.
+    273           *
+    274           * @param   task_id - the Task ID assigned by OSAL.
+    275           *
+    276           * @return  none
+    277           */
+    278          void Smart_home_Init( uint8 task_id )
+    279          {
+    280            halUARTCfg_t uartConfig;
+    281            uint8 DeviceNum;                                    //DeviceList初始化用变量
+    282            uint8 i;
+    283            afRegister( (endPointDesc_t *)&Smart_home_epDesc );
+    284            Smart_home_TaskID = task_id;
+    285            MotorTransID = 0;
+    286            RelayTransID = 0;
+    287          
+    288            RegisterForKeys( task_id );
+    289          
+    290            uartConfig.configured           = TRUE;              // 2x30 don't care - see uart driver.
+    291            uartConfig.baudRate             = SMART_HOME_BAUD;
+    292            uartConfig.flowControl          = FALSE;
+    293            uartConfig.flowControlThreshold = SMART_HOME_THRESH; // 2x30 don't care - see uart driver.
+    294            uartConfig.rx.maxBufSize        = SMART_HOME_RX_SZ;  // 2x30 don't care - see uart driver.
+    295            uartConfig.tx.maxBufSize        = SMART_HOME_TX_SZ;  // 2x30 don't care - see uart driver.
+    296            uartConfig.idleTimeout          = SMART_HOME_IDLE;   // 2x30 don't care - see uart driver.
+    297            uartConfig.intEnable            = FALSE;              // 2x30 don't care - see uart driver.
+    298            uartConfig.callBackFunc         = Smart_home_CallBack;
+    299            HalUARTOpen (SMART_HOME_PORT, &uartConfig);
+    300          
+    301          #if !defined ( TRANSMITAPP_FRAGMENTED )
+    302            afDataReqMTU_t mtu;
+    303          #endif  
+    304            
+    305          #if defined ( LCD_SUPPORTED )
+    306            HalLcdWriteString( "Smart_home", HAL_LCD_LINE_2 );
+    307          #endif
+    308            
+    309          #if (HAL_UART == TRUE)
+    310            HalUARTWrite(HAL_UART_PORT_0, "Init Success!\n",   strlen("Init Success!\n"));
+    311          #endif
+    312            
+    313            // Set the data length
+    314          #if defined ( Smart_Home_FRAGMENTED )
+    315            Smart_home_MaxDataLength = MSG_MAX_LEN;
+    316          #else
+    317            mtu.kvp        = FALSE;
+    318            mtu.aps.secure = FALSE;
+    319            Smart_home_MaxDataLength = afDataReqMTU( &mtu );
+    320          #endif
+    321            
+    322            for(i=0;i<Smart_home_MaxDataLength;i++)
+    323            {
+    324              Coordinator_Msg[i] = 0;
+    325            }
+    326            
+    327            ZDO_RegisterForZDOMsg( Smart_home_TaskID, End_Device_Bind_rsp );
+    328            ZDO_RegisterForZDOMsg( Smart_home_TaskID, Match_Desc_rsp );
+    329            
+    330            //3.22 显示延时
+    331            osal_start_timerEx( Smart_home_TaskID, SMART_HOME_DISPLAY_EVT, 
+    332                                LCD_DISPLAY_LENGTH);
+    333            
+    334            
+    335            //3.14 打开设备在线检测，第一次开启检测延时较长时间
+    336            osal_start_timerEx( Smart_home_TaskID, SMART_HOME_DEVICE_CHECK_EVT, 
+    337                                DEVICE_CHECK_DELAY);
+    338           
+    339            //3.13 关闭LED灯(D4)，表示协调器默认不允许组网
+    340            NLME_PermitJoiningRequest(0x00);
+    341            HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);
+    342            HalLedSet(HAL_LED_2, HAL_LED_MODE_OFF);
+    343            
+    344            //3.21 初始化页面为0 第一页
+    345            //LCD_Page=0;
+    346            
+    347            //3.13 设备离线状态检测初始化，初始化为离线
+    348            //3.21 修改为DeviceList方式，初始化DeviceCnt
+    349            for(DeviceNum=0;DeviceNum<Smart_home_MAX_INCLUSTERS;DeviceNum++) //只初始化终端
+    350            {
+    351              DeviceList[DeviceNum].deviceid = DeviceNum;
+                     ^
+Error[Pe020]: identifier "DeviceList" is undefined
+    352              DeviceList[DeviceNum].deviceStatus = DEVICE_OFFLINE;
+    353              DeviceCnt[DeviceNum]=0;
+                     ^
+Error[Pe020]: identifier "DeviceCnt" is undefined
+    354              //printf("%d \n",&DeviceNum);
+    355            }
+    356          }
+    357          
+    358          /*********************************************************************
+    359           * @fn      Smart_home_ProcessEvent
+    360           *
+    361           * @brief   Generic Application Task event processor.
+    362           *
+    363           * @param   task_id  - The OSAL assigned task ID.
+    364           * @param   events   - Bit map of events to process.
+    365           *
+    366           * @return  Event flags of all unprocessed events.
+    367           */
+    368          UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
+    369          {
+    370            afIncomingMSGPacket_t *MSGpkt;
+    371            (void)task_id;  // Intentionally unreferenced parameter
+    372            afDataConfirm_t *afDataConfirm;
+    373            
+    374            //3.13 数据确认消息字段
+    375            ZStatus_t sentStatus;
+    376            byte sentEP;
+    377            
+    378            if ( events & SYS_EVENT_MSG )   //3.13 系统消息事件
+    379            {
+    380              
+    381              HalLedSet(HAL_LED_2, HAL_LED_MODE_BLINK);
+    382              while ( (MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( Smart_home_TaskID )) )
+    383              {
+    384                switch ( MSGpkt->hdr.event )
+    385                {
+    386                  case ZDO_CB_MSG:           //3.13 ZDO传入消息回调
+    387                    Smart_home_ProcessZDOMsgs( (zdoIncomingMsg_t *)MSGpkt );
+    388                    break;
+    389                    
+    390                  case KEY_CHANGE:           //3.13 按键事件
+    391                    Smart_home_HandleKeys( ((keyChange_t *)MSGpkt)->state, ((keyChange_t *)MSGpkt)->keys );
+    392                    break;
+    393                   
+    394                  case AF_DATA_CONFIRM_CMD:
+    395                  //3.13 接收到此消息，作为对发送的数据包的确认。
+    396                  //状态为ZStatus_t类型[在ZComDef.h中定义]
+    397                  //消息字段在AF.h中定义
+    398                    afDataConfirm = (afDataConfirm_t *)MSGpkt;
+    399                    sentEP = afDataConfirm->endpoint;
+    400                    sentStatus = afDataConfirm->hdr.status;
+    401           
+    402                    if ( (ZSuccess == sentStatus) &&
+    403                         (Smart_home_epDesc.endPoint == sentEP) )
+    404                    {  
+    405                      //3.13 在消息发送确认成功后绿灯闪烁一下
+    406                      //HalLedSet(HAL_LED_1, HAL_LED_MODE_BLINK);
+    407                    }
+    408                    else
+    409                    {
+    410                      //3.13 红灯闪烁一下  硬件还没实现
+    411                      //HalLedSet(HAL_LED_2, HAL_LED_MODE_BLINK);
+    412                    }
+    413                    break;
+    414                    
+    415                  case AF_INCOMING_MSG_CMD:   //3.13 消息传入处理
+    416                    //3.13 在消息接收确认成功后绿灯闪烁一下
+    417                    Smart_home_ProcessMSGCmd( MSGpkt );
+    418                    //HalLedSet(HAL_LED_2, HAL_LED_MODE_BLINK);
+    419                    break;
+    420                  default:
+    421                    break;
+    422                }
+    423          
+    424                osal_msg_deallocate( (uint8 *)MSGpkt );
+    425                
+    426                // Next
+    427                MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( Smart_home_TaskID );
+    428              }
+    429              
+    430              // Squash compiler warnings until values are used.
+    431              (void)sentStatus;
+    432              (void)sentEP;
+    433              
+    434              return ( events ^ SYS_EVENT_MSG );
+    435            }
+    436          
+    437            if ( events & SMART_HOME_SEND_MSG_EVT )
+    438            {
+    439              //Smart_home_Send();
+    440              return ( events ^ SMART_HOME_SEND_MSG_EVT );
+    441            }
+    442            
+    443            if ( events & SMART_HOME_DEVICE_CHECK_EVT )  //终端设备检查事件
+    444            {
+    445              Smart_home_Device_check();  //调用终端设备检查函数
+    446              
+    447              osal_start_timerEx(Smart_home_TaskID,SMART_HOME_DEVICE_CHECK_EVT,
+    448                                 DEVICE_CHECK_TIMER);
+    449              return (events ^ SMART_HOME_DEVICE_CHECK_EVT);
+    450            }
+    451            
+    452            
+    453            if( events & SMART_HOME_DISPLAY_EVT )
+    454            {
+    455              Smart_home_Display();
+    456              //周期性刷新
+    457              osal_start_timerEx( Smart_home_TaskID,events & SMART_HOME_DISPLAY_EVT,LCD_DISPLAY_TIMER);
+    458              return (events ^ SMART_HOME_DISPLAY_EVT);
+    459            }
+    460          
+    461            return ( 0 );  // Discard unknown events.
+    462          }
+    463          
+    464          /*********************************************************************
+    465           * @fn      Smart_home_ProcessZDOMsgs()
+    466           *
+    467           * @brief   Process response messages
+    468           *
+    469           * @param   none
+    470           *
+    471           * @return  none
+    472           */
+    473          static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
+    474          {
+    475            /*
+    476            switch ( inMsg->clusterID )
+    477            {
+    478              case End_Device_Bind_rsp:
+    479                if ( ZDO_ParseBindRsp( inMsg ) == ZSuccess )
+    480                {
+    481                  // Light LED
+    482                  HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
+    483                }
+    484          #if defined(BLINK_LEDS)
+    485                else
+    486                {
+    487                  // Flash LED to show failure
+    488                  HalLedSet ( HAL_LED_4, HAL_LED_MODE_FLASH );
+    489                }
+    490          #endif
+    491                break;
+    492                
+    493              case Match_Desc_rsp:
+    494                {
+    495                  ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
+    496                  if ( pRsp )
+    497                  {
+    498                    if ( pRsp->status == ZSuccess && pRsp->cnt )
+    499                    {
+    500                      
+    501                      Smart_home_TxAddr.addrMode = (afAddrMode_t)Addr16Bit;
+    502                      Smart_home_TxAddr.addr.shortAddr = pRsp->nwkAddr;
+    503                      // Take the first endpoint, Can be changed to search through endpoints
+    504                      Smart_home_TxAddr.endPoint = pRsp->epList[0];
+    505                      
+    506                      
+    507                      // Light LED
+    508                      HalLedSet( HAL_LED_4, HAL_LED_MODE_ON );
+    509                    }
+    510                    osal_mem_free( pRsp );
+    511                  }
+    512                }
+    513                break;
+    514            }
+    515            */
+    516          }
+    517          
+    518          /*********************************************************************
+    519           * @fn      Smart_home_Key_add
+    520           *
+    521           * @brief   3.21新增，用来标识目前处于的控制状态，是附加项
+    522           *          0 控制屏幕 1 控制继电器 2 控制电机
+    523           *            
+    524           *
+    525           * @param   Ctrlcase 目前的控制号
+    526           *
+    527           * @return  屏幕回显
+    528           *
+    529          static void Smart_home_Key_add(uint8 Ctrlcase)
+    530          {
+    531          #if defined ( LCD_SUPPORTED )
+    532            switch(Ctrlcase)
+    533            {
+    534              default:    
+    535              case 0:
+    536                HalLcdWriteString( "Flip use UP/DOWN", HAL_LCD_LINE_4 ); 
+    537                //清除屏幕显示
+    538                HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
+    539                HalLcdWriteString( " ", HAL_LCD_LINE_3 );
+    540                break;
+    541              
+    542              case 1:
+    543                HalLcdWriteString( "Relay Contrling", HAL_LCD_LINE_4 ); 
+    544                //清除屏幕显示
+    545                HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
+    546                HalLcdWriteString( " ", HAL_LCD_LINE_3 );
+    547                if(DeviceList[relay].deviceStatus == DEVICE_ONLINE)  //设备在线回显
+    548                {
+    549                  HalLcdWriteString( "Relay Online", HAL_LCD_LINE_1 ); 
+    550                }
+    551                if(DeviceList[relay].deviceStatus != DEVICE_ONLINE)
+    552                {
+    553                  HalLcdWriteString( "Relay Offline", HAL_LCD_LINE_1 );      
+    554                }
+    555                break;
+    556              
+    557              case 2:
+    558                HalLcdWriteString( "Motor Contrling", HAL_LCD_LINE_4 );
+    559                //清除屏幕显示
+    560                HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
+    561                HalLcdWriteString( " ", HAL_LCD_LINE_3 );
+    562                if(DeviceList[motor].deviceStatus == DEVICE_ONLINE)  //设备在线回显
+    563                {
+    564                  HalLcdWriteString( "Motor Online", HAL_LCD_LINE_1 );
+    565                }
+    566                if(DeviceList[motor].deviceStatus != DEVICE_ONLINE)
+    567                {
+    568                  HalLcdWriteString( "Motor Offline", HAL_LCD_LINE_1 );      
+    569                }      
+    570                break;
+    571          #endif     
+    572            }
+    573          }
+    574          */
+    575          /*********************************************************************
+    576           * @fn      Smart_home_Motor_cmd
+    577           * 
+    578           * @brief   通过电机速度判断电机转向
+    579           * 
+    580           * 
+    581           * @param   uint8 电机转速
+    582           * 
+    583           * @return  
+    584           *          #define  HAL_MOTOR_STOP            0x01
+    585           *          #define  HAL_MOTOR_FORWARD         0x02
+    586           *          #define  HAL_MOTOR_BACKWARD        0x03
+    587           */
+    588          void Smart_home_Motor_cmd(int8 speed)
+    589          {
+    590            uint8 outspeed;
+    591            uint8 cmd;
+    592            if(speed == 0)
+    593            {
+    594              outspeed = 0;
+    595              cmd = HAL_MOTOR_STOP;
+    596            }   
+    597            else if(speed > 0)
+    598            {
+    599              outspeed = speed;
+    600              cmd = HAL_MOTOR_FORWARD;
+    601            }
+    602            
+    603            else if(speed < 0)
+    604            {
+    605              outspeed = 0xff - speed;
+    606              cmd = HAL_MOTOR_BACKWARD;
+    607            }
+    608            
+    609            else
+    610            {
+    611              outspeed = 0;
+    612              cmd = HAL_MOTOR_STOP;    
+    613            }
+    614            Smart_home_Motor_Ctl(cmd,outspeed); 
+    615          }
+    616          
+    617          /*********************************************************************
+    618           * @fn      Smart_home_HandleKeys
+    619           *
+    620           * @brief   设置按键事件
+    621           *          目前事件设置    3.19
+    622           *
+    623           *          HAL_KEY_SW_1--UP     (上翻一页)
+    624           *          HAL_KEY_SW_2--RIGHT  (选项向右)
+    625           *          HAL_KEY_SW_3--DOWN   (下翻一页)
+    626           *          HAL_KEY_SW_4--LEFT   (选项向左)
+    627           *          HAL_KEY_SW_5--OK     (组网开)
+    628           *          HAL_KEY_SW_7--CANCEL (组网关) 
+    629           * + 3.21 新增  选项总共有3种，控制屏幕显示，控制继电器和控制电机
+    630           *              控制继电器时 UP控制1，DOWN控制2
+    631           *              控制电机时   UP加速， DOWN减速
+    632           *
+    633           * @param   shift - true if in shift/alt.
+    634           * @param   keys  - bit field for key events.
+    635           *
+    636           * @return  none
+    637           */
+    638          void Smart_home_HandleKeys( byte shift, byte keys )
+    639          {
+    640            //zAddrType_t txAddr;
+    641            static int8 MotorSpeed = 0;
+    642            static uint8 NetWorkAllow = 0;
+    643            /*这里这么设置似乎会出现内存问题
+    644            static uint8 Relay1_on = 0x02;  //两个默认都是关闭
+    645            static uint8 Relay2_on = 0x10;
+    646            */
+    647            /*3.21 LCD 显示*/
+    648            static uint8 Relay1_on = 0;  //两个默认都是关闭
+    649            static uint8 Relay2_on = 0;
+    650            
+    651            
+    652            if ( keys & HAL_KEY_SW_1 )  //UP
+    653            {
+    654              switch(Ctrlcase)
+    655              {
+    656                default:    
+    657                case 0:
+    658                {
+    659                  if(LCD_Page < LCD_PAGE_MAX)       {LCD_Page++;}
+    660                  if(LCD_Page > LCD_PAGE_MAX - 1)       {LCD_Page = 0;}
+    661                  break;
+    662                }
+    663                case 1:
+    664                {  
+    665                  uint8 switch1;
+    666                  if(Relay1_on == 0)  {Relay1_on = 1 ; switch1 = 0x02;}
+    667                  else if(Relay1_on == 1)  {Relay1_on = 0; switch1 = 0x01;}
+    668                  else  {Relay1_on = 0; switch1 = 0x01;}       
+    669                  Smart_home_Relay_Ctl(switch1);  
+    670                  break;
+    671                } 
+    672                case 2:
+    673                {
+    674                  if(MotorSpeed < 50)     {MotorSpeed += 10;}
+    675                  if(MotorSpeed >= 50)     
+    676                  {
+    677          #if defined ( LCD_SUPPORTED )
+    678                     HalLcdWriteString( "Motor max Speed", HAL_LCD_LINE_4 );
+    679          #endif 
+    680                     MotorSpeed = 50;
+    681                  }
+    682                  Smart_home_Motor_cmd(MotorSpeed);
+    683                  
+    684                  break;
+    685                }
+    686                   
+    687              }    
+    688            }
+    689            
+    690            if ( keys & HAL_KEY_SW_3 )  //DOWN
+    691            {
+    692              switch(Ctrlcase)
+    693              {
+    694                default:    
+    695                case 0:
+    696                {
+    697                  if(LCD_Page >= 0)       {LCD_Page--;}
+    698                  if(LCD_Page < 0)        {LCD_Page = LCD_PAGE_MAX;}
+    699                  break;
+    700                }
+    701                case 1:  
+    702                {
+    703                  uint8 switch2;
+    704                  if(Relay2_on == 0)  {Relay2_on = 1 ; switch2 = 0x20;}
+    705                  else if(Relay2_on == 1)  {Relay2_on = 0; switch2 = 0x10;}
+    706                  else  {Relay2_on = 0; switch2 = 0x01;}       
+    707                  Smart_home_Relay_Ctl(switch2);       
+    708                  break;
+    709                } 
+    710                case 2:
+    711                {
+    712                  /*
+    713                  #define  HAL_MOTOR_STOP            0x01
+    714                  #define  HAL_MOTOR_FORWORD         0x02
+    715                  #define  HAL_MOTOR_BACKWORD        0x03*/
+    716                  if(MotorSpeed > -50)     {MotorSpeed -= 10;}
+    717                  if(MotorSpeed <= -50)     
+    718                  {
+    719          #if defined ( LCD_SUPPORTED )
+    720                     HalLcdWriteString( "Motor min Speed", HAL_LCD_LINE_4 );
+    721          #endif 
+    722                     MotorSpeed = -80;
+    723                  }
+    724                  Smart_home_Motor_cmd(MotorSpeed);
+    725                  break; 
+    726                }
+    727              }
+    728            }
+    729            
+    730            if ( keys & HAL_KEY_SW_2 )  //RIGHT  
+    731            /*3.22 这里在调试时出现问题，具体问题为 点击up时会出现屏幕变为禁止组网
+    732              控制方面变为控制电机，问题在于汇编中的key值会出现  keys & HAL_KEY_SW_2 = 2
+    733              的情况，暂时禁止，需要等待研究  还有key_7*/
+    734            {
+    735               if(Ctrlcase < 3)   { Ctrlcase++;}
+    736               if(Ctrlcase > 2)   { Ctrlcase=0;}
+    737               //Smart_home_Key_add(Ctrlcase);
+    738            }
+    739            
+    740            if ( keys & HAL_KEY_SW_4 )  //LEFT
+    741            {
+    742               if(Ctrlcase > -1)   { Ctrlcase--;}
+    743               if(Ctrlcase < 0)    { Ctrlcase=2;}
+    744               //Smart_home_Key_add(Ctrlcase);    
+    745            }
+    746            
+    747            if ( keys & HAL_KEY_SW_5 )  //OK
+    748            {
+    749          
+    750            }
+    751            
+    752            if ( keys & HAL_KEY_SW_7 )  //CENCEL
+    753            {
+    754               if(NetWorkAllow == 0)
+    755               {
+    756                 NetWorkAllow = 1;
+    757                 NLME_PermitJoiningRequest(0xFF); // 组网，允许随时加入
+    758                 //HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
+    759                 //HalLedSet(HAL_LED_2, HAL_LED_MODE_ON);
+    760          #if defined ( LCD_SUPPORTED )
+    761                 HalLcdWriteString( "Allow networking", HAL_LCD_LINE_4 );
+    762          #endif
+    763               }
+    764               else
+    765               {
+    766                 NetWorkAllow = 0;
+    767                 NLME_PermitJoiningRequest(0x00); // 不允许组网
+    768                 //HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);  
+    769                 //HalLedSet(HAL_LED_2, HAL_LED_MODE_OFF); 
+    770          #if defined ( LCD_SUPPORTED )
+    771                 HalLcdWriteString( "Ban   networking", HAL_LCD_LINE_4 );
+    772          #endif        
+    773               }
+    774            }
+    775          }
+    776          
+    777          /*********************************************************************
+    778           * @fn      Smart_home_ProcessMSGCmd
+    779           *
+    780           * @brief   Data message processor callback. This function processes
+    781           *          any incoming data - probably from other devices. Based
+    782           *          on the cluster ID, perform the intended action.
+    783           *
+    784           * @param   pkt - pointer to the incoming message packet
+    785           *
+    786           * @return  TRUE if the 'pkt' parameter is being used and will be freed later,
+    787           *          FALSE otherwise.
+    788           */
+    789          void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
+    790          {
+    791            //HalUARTWrite(HAL_UART_PORT_0, "9",   1);
+    792            switch ( pkt->clusterId )
+    793            {
+    794            /***********************************************************************
+    795              目前总共8种case
+    796             #define Smart_home_CLUSTERID_HUMITMSG            1  // 温湿度
+    797             #define Smart_home_CLUSTERID_TEMPLIGHTMSG        2  // 温度光照
+    798             #define Smart_home_CLUSTERID_RFIDMSG             3  // 射频卡
+    799             #define Smart_home_CLUSTERID_GASFLAMEMSG         4  // 烟雾火焰
+    800             #define Smart_home_CLUSTERID_INFRAREDMSG         5  // 人体红外
+    801             #define Smart_home_CLUSTERID_SOUNDVBMSG          6  // 声音振动
+    802             #define Smart_home_CLUSTERID_MOTORSTATUSMSG      7  // 直流电机状态信息
+    803             #define Smart_home_CLUSTERID_RELAYSTATUSMSG      8  // 继电器状态信息
+    804              
+    805             设备描述
+    806             typedef struct DeviceInfo
+    807             {
+    808               uint8 deviceID;
+    809               uint8 deviceStatus;
+    810               uint8 data[5];
+    811             } DeviceInfo; 
+    812             ************************************************************************/ 
+    813              //3.14 消息处理模块，共8个，行为类似 
+    814              //3.21 修改为指针方法（DeviceList相关）
+    815              case Smart_home_CLUSTERID_HUMITMSG:         // 温湿度
+    816              {
+    817                uint8 sendbufHumit[4] = {0};
+    818                sendbufHumit[0] = '1';
+    819                
+    820                DeviceList[Humit].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线
+                       ^
+Error[Pe020]: identifier "DeviceList" is undefined
+    821                sendbufHumit[1] = DeviceList[Humit].data[0] = pkt->cmd.Data[4]; // 湿度 
+    822                sendbufHumit[2] = DeviceList[Humit].data[1] = pkt->cmd.Data[5]; // 温度
+    823          
+    824                sendbufHumit[3] = '\n';
+    825                
+    826          #if (HAL_UART == TRUE)
+    827                HalUARTWrite(HAL_UART_PORT_0, sendbufHumit,   4);
+    828          #endif
+    829                osal_msg_deallocate(sendbufHumit);
+    830                break;
+    831              }
+    832                
+    833              case Smart_home_CLUSTERID_TEMPLIGHTMSG:     // 温度光照
+    834              {    
+    835                uint8 sendbufTempLight[6] = {0};
+    836                sendbufTempLight[0] = '2';
+    837                
+    838                DeviceList[TempLight].deviceStatus = DEVICE_ONLINE;   //收到消息设置为在线
+                       ^
+Error[Pe020]: identifier "DeviceList" is undefined
+    839                
+    840                sendbufTempLight[1] = DeviceList[TempLight].data[0] = pkt->cmd.Data[4]; // 温度整数
+    841                sendbufTempLight[2] = DeviceList[TempLight].data[1] = pkt->cmd.Data[5]; // 温度小数
+    842                sendbufTempLight[3] = DeviceList[TempLight].data[2] = pkt->cmd.Data[6]; // 光照
+    843                sendbufTempLight[4] = DeviceList[TempLight].data[3] = pkt->cmd.Data[7]; // 光照
+    844                /*
+    845                sendbufTempLight[1] = '1'; // 温度整数
+    846                sendbufTempLight[2] = '2'; // 温度小数
+    847                sendbufTempLight[3] = '3'; // 光照
+    848                sendbufTempLight[4] = '4'; // 光照
+    849                */
+    850                sendbufTempLight[5] = '\n';
+    851                
+    852          #if (HAL_UART == TRUE)
+    853                HalUARTWrite(HAL_UART_PORT_0, sendbufTempLight,   6);
+    854          #endif
+    855                osal_msg_deallocate(sendbufTempLight);
+    856                break;
+    857              }
+    858                
+    859              case Smart_home_CLUSTERID_RFIDMSG:          // 射频卡
+    860              {
+    861                uint8 sendbufRfID[7] = {0};
+    862                sendbufRfID[0] = '3';
+    863                
+    864                DeviceList[RfID].deviceStatus = DEVICE_ONLINE;        //收到消息设置为在线
+                       ^
+Error[Pe020]: identifier "DeviceList" is undefined
+    865                sendbufRfID[1] = DeviceList[RfID].data[0] = pkt->cmd.Data[4]; // 射频卡类型
+    866                sendbufRfID[2] = DeviceList[RfID].data[1] = pkt->cmd.Data[5]; // 4个字节的ID号
+    867                sendbufRfID[3] = DeviceList[RfID].data[2] = pkt->cmd.Data[6]; //
+    868                sendbufRfID[4] = DeviceList[RfID].data[3] = pkt->cmd.Data[7]; //
+    869                sendbufRfID[5] = DeviceList[RfID].data[4] = pkt->cmd.Data[8]; //  
+    870                
+    871                sendbufRfID[6] = '\n';
+    872                
+    873          #if (HAL_UART == TRUE)
+    874                HalUARTWrite(HAL_UART_PORT_0, sendbufRfID,   7);
+    875          #endif
+    876                osal_msg_deallocate(sendbufRfID);
+    877                break;
+    878              }
+    879                
+    880              case Smart_home_CLUSTERID_GASFLAMEMSG:      // 烟雾火焰
+    881              {
+    882                uint8 sendbufgasFlame[3] = {0};
+    883                sendbufgasFlame[0] = '4';
+    884                
+    885                DeviceList[gasFlame].deviceStatus = DEVICE_ONLINE;    //收到消息设置为在线
+                       ^
+Error[Pe020]: identifier "DeviceList" is undefined
+    886                sendbufgasFlame[1] = DeviceList[gasFlame].data[0] = pkt->cmd.Data[4]; // 烟雾与火焰报警信息
+    887          
+    888                sendbufgasFlame[2] = '\n';
+    889                
+    890          #if (HAL_UART == TRUE)
+    891                HalUARTWrite(HAL_UART_PORT_0, sendbufgasFlame,   3);
+    892          #endif
+    893                osal_msg_deallocate(sendbufgasFlame);
+    894                break;
+    895              }
+    896                
+    897              case Smart_home_CLUSTERID_INFRAREDMSG:      // 人体红外
+    898              {
+    899                uint8 sendbufinfrared[3] = {0};
+    900                sendbufinfrared[0] = '5';
+    901                
+    902                DeviceList[infrared].deviceStatus = DEVICE_ONLINE;    //收到消息设置为在线
+                       ^
+Error[Pe020]: identifier "DeviceList" is undefined
+    903                sendbufinfrared[1] = DeviceList[infrared].data[0] = pkt->cmd.Data[4]; // 人体红外
+    904          
+    905                sendbufinfrared[2] = '\n';
+    906                
+    907          #if (HAL_UART == TRUE)
+    908                HalUARTWrite(HAL_UART_PORT_0, sendbufinfrared,   3);
+    909          #endif
+    910                osal_msg_deallocate(sendbufinfrared);
+    911                break;
+    912              }
+    913          
+    914              case Smart_home_CLUSTERID_SOUNDVBMSG:       // 声音振动
+    915              {
+    916                uint8 sendbufsoundVb[4] = {0};
+    917                sendbufsoundVb[0] = '6';
+    918                
+    919                DeviceList[soundVb].deviceStatus = DEVICE_ONLINE;     //收到消息设置为在线
+                       ^
+Error[Pe020]: identifier "DeviceList" is undefined
+    920                sendbufsoundVb[1] = DeviceList[soundVb].data[0] = pkt->cmd.Data[4]; // 声音震动信息
+    921                
+    922                
+    923                sendbufsoundVb[2] = '\n';
+    924                
+    925          #if (HAL_UART == TRUE)
+    926                HalUARTWrite(HAL_UART_PORT_0, sendbufsoundVb,   3);
+    927          #endif
+    928                osal_msg_deallocate(sendbufsoundVb);
+    929                break;
+    930              }
+    931                
+    932              case Smart_home_CLUSTERID_MOTORSTATUSMSG:   // 直流电机状态信息
+    933              {  
+    934                uint8 sendbufmotor[4] = {0};
+    935                sendbufmotor[0] = '7';
+    936                
+    937                DeviceList[motor].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线
+                       ^
+Error[Pe020]: identifier "DeviceList" is undefined
+    938                // 储存电机设备的网络地址，用于发送控制命令
+    939                Motor_addr.addrMode = (afAddrMode_t)Addr16Bit;
+    940                Motor_addr.addr.shortAddr = pkt->srcAddr.addr.shortAddr;
+    941                
+    942                Motor_addr.endPoint = 1;  // 目的节点的端口号
+    943                //TransmitApp_DstMotorAddr->endPoint = TRANSMITAPP_ENDPOINT;
+    944               
+    945                sendbufmotor[1] = DeviceList[motor].data[0] = pkt->cmd.Data[4]; // 电机转速
+    946                sendbufmotor[2] = DeviceList[motor].data[1] = pkt->cmd.Data[5]; // 电机状态
+    947          
+    948                sendbufmotor[3] = '\n';
+    949                
+    950          #if (HAL_UART == TRUE)
+    951                HalUARTWrite(HAL_UART_PORT_0, sendbufmotor,   4);
+    952          #endif
+    953                osal_msg_deallocate(sendbufmotor);
+    954                break;
+    955              }
+    956                
+    957              case Smart_home_CLUSTERID_RELAYSTATUSMSG:   // 继电器状态信息
+    958              {
+    959                uint8 sendbufrelay[4] = {0};
+    960                sendbufrelay[0] = '8';
+    961                
+    962                DeviceList[relay].deviceStatus = DEVICE_ONLINE;       //收到消息设置为在线    
+                       ^
+Error[Pe020]: identifier "DeviceList" is undefined
+    963                
+    964                // 储存继电器设备的网络地址，用于发送控制命令
+    965                Relay_addr.addrMode = (afAddrMode_t)Addr16Bit;
+    966                Relay_addr.addr.shortAddr = pkt->srcAddr.addr.shortAddr;    
+    967                Relay_addr.endPoint = 1; // 目的节点的端口号
+    968                sendbufrelay[1] = DeviceList[relay].data[0] = pkt->cmd.Data[4]; 
+    969          
+    970                sendbufrelay[2] = '\n';
+    971                
+    972          #if (HAL_UART == TRUE)
+    973                HalUARTWrite(HAL_UART_PORT_0, sendbufrelay,   3);
+    974          #endif
+    975                osal_msg_deallocate(sendbufrelay);
+    976                break;
+    977              }
+    978                
+    979              default:
+    980                break;
+    981            }
+    982          }
+    983          
+    984          /*********************************************************************
+    985           * @fn     Smart_home_Device_check
+    986           *
+    987           * @brief   设备计数器，用来检查设备在开始组网后多久在线.
+    988           *          目前搜索为4次HeartBeat  (DEVICE_HEART_BEAT 3)
+    989           *          3.21
+    990           * @param   none
+    991           *
+    992           * @return  none
+    993           */
+    994          /*3.24 这里的检测时常有点长 改为变量外提的方式加快处理速度*/
+    995          void Smart_home_Device_check(void)
+    996          {
+    997            static uint8 DeviceID;
+    998            static uint8* counttmp;
+    999            for(DeviceID=1;DeviceID<Smart_home_MAX_INCLUSTERS;DeviceID++)
+   1000            {  
+   1001              counttmp = & DeviceCnt[DeviceID];
+                                  ^
+Error[Pe020]: identifier "DeviceCnt" is undefined
+   1002              if(DeviceList[DeviceID].deviceStatus != DEVICE_ONLINE)    //设备离线
+                        ^
+Error[Pe020]: identifier "DeviceList" is undefined
+   1003              {
+   1004                (*counttmp)++;
+   1005              }
+   1006              if(DeviceList[DeviceID].deviceStatus == DEVICE_ONLINE)    //设备在线
+                        ^
+Error[Pe020]: identifier "DeviceList" is undefined
+   1007              {
+   1008                *counttmp = 0;
+   1009                DeviceList[DeviceID].deviceStatus = 0;
+   1010              }
+   1011              if((*counttmp) > DEVICE_HEART_BEAT)
+   1012              {
+   1013                *counttmp = DEVICE_HEART_BEAT;
+   1014                DeviceList[DeviceID].deviceStatus = DEVICE_OFFLINE;
+                       ^
+Error[Pe020]: identifier "DeviceList" is undefined
+   1015              }
+   1016            }
+   1017            /*温湿度缓存 温度光照缓存 RFID 信息缓存 气体火焰缓存 
+   1018            人体红外 电机状态 继电器状态 声音震动*/
+   1019          }
+   1020          
+   1021          
+   1022          /*********************************************************************
+   1023           * @fn      Smart_home_Relay_Ctl
+   1024           *
+   1025           * @brief   发送继电器控制消息
+   1026           *
+   1027           * @param   none
+   1028           *
+   1029           * @return  none
+   1030           */
+   1031          static void Smart_home_Relay_Ctl(uint8 cmd)
+   1032          {
+   1033            uint8 tmp;
+   1034            
+   1035            // 只有设备在线时, 方发送控制命令
+   1036            if (DeviceList[relay].deviceStatus != DEVICE_OFFLINE)
+                       ^
+Error[Pe020]: identifier "DeviceList" is undefined
+   1037            {
+   1038              // put the sequence number in the message
+   1039              tmp = HI_UINT8( RelayTransID );
+   1040              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+   1041              Coordinator_Msg[2] = tmp;
+   1042              tmp = LO_UINT8( RelayTransID );
+   1043              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+   1044              Coordinator_Msg[3] = tmp;
+   1045              
+   1046              // 发送给继电器的控制命令 
+   1047              Coordinator_Msg[4] = cmd;
+   1048              /********************************************
+   1049              *   屏幕显示部分*
+   1050          #if defined ( LCD_SUPPORTED )
+   1051              if(cmd == 0x02) {HalLcdWriteString( "K1:ON", HAL_LCD_LINE_2 );}
+   1052              if(cmd == 0x01) {HalLcdWriteString( "K1:OFF", HAL_LCD_LINE_2 );}
+   1053              if(cmd == 0x20) {HalLcdWriteString( "K2:ON", HAL_LCD_LINE_3 );}
+   1054              if(cmd == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}
+   1055          #endif     
+   1056              ********************************************/
+   1057              tmp = AF_DataRequest( &Relay_addr,                         
+   1058                                    (endPointDesc_t *)&Smart_home_epDesc,                  
+   1059                                     Smart_home_CLUSTERID_RELAYCTRL,
+   1060                                     RELAYSTATUSMSG_LEN,                 
+   1061                                     Coordinator_Msg,                    
+   1062                                    &RelayTransID,                       
+   1063                                     AF_DISCV_ROUTE,                     
+   1064                                     AF_DEFAULT_RADIUS );
+   1065            } 
+   1066          }
+   1067          
+   1068          /*********************************************************************
+   1069           * @fn      Smart_home_Motor_Ctl
+   1070           *
+   1071           * @brief   发送电机控制消息
+   1072           *
+   1073           * @param   none
+   1074           *
+   1075           * @return  none
+   1076           */
+   1077          static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed)
+   1078          {
+   1079            uint8 tmp;
+   1080            
+   1081            // 只有设备在线时, 方发送控制命令
+   1082            if (DeviceList[motor].deviceStatus != DEVICE_OFFLINE)
+                       ^
+Error[Pe020]: identifier "DeviceList" is undefined
+   1083            {
+   1084              // put the sequence number in the message
+   1085              tmp = HI_UINT8( MotorTransID );
+   1086              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+   1087              Coordinator_Msg[2] = tmp;
+   1088              tmp = LO_UINT8( MotorTransID );
+   1089              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+   1090              Coordinator_Msg[3] = tmp;
+   1091              
+   1092              // 发送给电机的控制命令 
+   1093              Coordinator_Msg[4] = speed;
+   1094              Coordinator_Msg[5] = cmd;
+   1095              
+   1096              tmp = AF_DataRequest( &Motor_addr,                         
+   1097                                    (endPointDesc_t *)&Smart_home_epDesc,                  
+   1098                                     Smart_home_CLUSTERID_MOTORCTRL,
+   1099                                     MOTORSTATUSMSG_LEN,                 
+   1100                                     Coordinator_Msg,                    
+   1101                                    &MotorTransID,                       
+   1102                                     AF_DISCV_ROUTE,                     
+   1103                                     AF_DEFAULT_RADIUS );
+   1104            }   
+   1105          }
+   1106          
+   1107          
+   1108          /*********************************************************************
+   1109           * @fn      Smart_home_Display
+   1110           *
+   1111           * @brief   屏幕回显函数，定义了内容如何显示.
+   1112           *
+   1113           * @param   port - UART port.
+   1114           * @param   event - the UART port event flag.
+   1115           *
+   1116           * @return  none
+   1117           */
+   1118          static void Smart_home_Display(void)
+   1119          {
+   1120          #if defined LCD_SUPPORTED
+   1121            static uint8 percent;
+   1122            switch(Ctrlcase)
+   1123            {
+   1124              default:    
+   1125              case 0:
+   1126                HalLcdWriteString( "      Menu      ", HAL_LCD_LINE_1 );
+   1127                //HalLcdWriteString( "Flip use UP/DOWN", HAL_LCD_LINE_4 ); 
+   1128                //清除屏幕显示
+   1129                HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
+   1130                HalLcdWriteString( " ", HAL_LCD_LINE_3 );
+   1131                
+   1132                switch(LCD_Page)
+   1133                {
+   1134                  default:
+   1135                  case 0:
+   1136                  { 
+   1137                    DeviceInfo* Devhum = &DeviceList[Humit];
+                                                 ^
+Error[Pe020]: identifier "DeviceList" is undefined
+   1138                    DeviceInfo* DevSound = &DeviceList[soundVb];
+   1139                    //第一页第二行显示温度
+   1140                    //      第三行显示光照
+   1141                    if(Devhum->deviceStatus != DEVICE_OFFLINE)
+   1142                    {    
+   1143                        HalLcdWriteStringValueValue( "Hum:", Devhum->data[0], 10, "% T_1:", Devhum->data[1], 10, HAL_LCD_LINE_2 );
+   1144                    }
+   1145                    else
+   1146                    {
+   1147                        HalLcdWriteString( "Hum:OFF T_1:OFF", HAL_LCD_LINE_2 ); 
+   1148                    }
+   1149                    
+   1150                    
+   1151                    if(DevSound->deviceStatus != DEVICE_OFFLINE)
+   1152                    {    
+   1153                        if(DevSound->data[0] & 0x01 == 0x01) { HalLcdWriteString( "Sound: Voice", HAL_LCD_LINE_3 ); }
+   1154                        else if(DevSound->data[0] & 0x02 == 0x02) { HalLcdWriteString( "Sound: Vibration", HAL_LCD_LINE_3 ); }
+   1155                        else if(DevSound->data[0] & 0x03 == 0x03) { HalLcdWriteString( "Sound: All", HAL_LCD_LINE_3 ); }
+   1156                        else {HalLcdWriteString( "Sound: None", HAL_LCD_LINE_3 );}
+   1157                    }
+   1158                    else
+   1159                    {
+   1160                        HalLcdWriteString( "Sound:OFFLINE", HAL_LCD_LINE_3 ); 
+   1161                    }
+   1162                 
+   1163                    //HalLcdWriteStringValue( "Sound:", SoundVb, 16, HAL_LCD_LINE_3 );
+   1164                    
+   1165                    
+   1166                    //显示最下面的百分比条
+   1167                    percent = (1 * 100) / LCD_PAGE_MAX;
+   1168                    HalLcdDisplayPercentBar("",percent);
+   1169                    break;
+   1170                  }
+   1171                  case 1:
+   1172                  {
+   1173                    //第二页只有光照
+   1174                    //第一页第二行显示温度
+   1175                    //      第三行显示光照
+   1176                    DeviceInfo* Devtmp = &DeviceList[TempLight];
+                                                 ^
+Error[Pe020]: identifier "DeviceList" is undefined
+   1177                    if(Devtmp->deviceStatus != DEVICE_OFFLINE)
+   1178                    {    
+   1179                        static uint16 Light;
+   1180                        static uint8 lightmp;
+   1181                    
+   1182          
+   1183                        lightmp = Devtmp->data[3];
+   1184                        Light = (uint16)Devtmp->data[4];
+   1185                        memcpy(&Light,&lightmp,sizeof(lightmp));
+   1186                    
+   1187                        HalLcdWriteStringValueValue( "Temper_2:", Devtmp->data[0], 10, ".", Devtmp->data[1], 10, HAL_LCD_LINE_2 );
+   1188                        HalLcdWriteStringValue( "Light:", Light, 10, HAL_LCD_LINE_3 );
+   1189                        
+   1190                        osal_msg_deallocate((uint8*)Light);
+   1191                    }
+   1192                    else
+   1193                    {
+   1194                        HalLcdWriteString( "Temper_2:OFF", HAL_LCD_LINE_2 ); 
+   1195                        HalLcdWriteString( "Light:OFF", HAL_LCD_LINE_3 ); 
+   1196                    }
+   1197                    
+   1198                    //显示最下面的百分比条
+   1199                    percent = (2 * 100) / LCD_PAGE_MAX;
+   1200                    HalLcdDisplayPercentBar("",percent);
+   1201                    break;
+   1202                    
+   1203                    
+   1204                  }
+   1205                  
+   1206                case 2:
+   1207                {
+   1208                    static uint16 Data1;
+   1209                    static uint16 Data2;
+   1210                    //显示最下面的百分比条
+   1211                    DeviceInfo* rfid = &DeviceList[RfID];
+                                               ^
+Error[Pe020]: identifier "DeviceList" is undefined
+   1212                    
+   1213                    Data1 = ( rfid->data[1] << 8) | rfid->data[2];
+   1214                    Data2 = ( rfid->data[3] << 8) | rfid->data[4];
+   1215                    
+   1216                    switch(rfid->data[0])
+   1217                    {
+   1218                    case 0x01:
+   1219                      HalLcdWriteString( "MFOne-S50", HAL_LCD_LINE_2 );
+   1220                      break;
+   1221                    case 0x02:
+   1222                      HalLcdWriteString( "MFOne-S70", HAL_LCD_LINE_2 );
+   1223                      break;
+   1224                    case 0x03:
+   1225                      HalLcdWriteString( "MF-UltraLight", HAL_LCD_LINE_2 );
+   1226                      break;
+   1227                    case 0x04:
+   1228                      HalLcdWriteString( "MF-Pro", HAL_LCD_LINE_2 );
+   1229                      break;
+   1230                    case 0x05:
+   1231                      HalLcdWriteString( "MF-DesFire", HAL_LCD_LINE_2 );
+   1232                      break;
+   1233                      
+   1234                    default:
+   1235                      HalLcdWriteString( "No Card", HAL_LCD_LINE_2 );
+   1236                      break;
+   1237                    }
+   1238                    
+   1239                    HalLcdWriteStringValueValue( "ID: ", Data1, 16, "-", Data2, 16, HAL_LCD_LINE_3 );
+   1240                    
+   1241                    percent = (3 * 100) / LCD_PAGE_MAX;
+   1242                    HalLcdDisplayPercentBar("",percent);
+   1243                    
+   1244                    osal_msg_deallocate((uint8*)Data1);
+   1245                    osal_msg_deallocate((uint8*)Data2);
+   1246                    
+   1247                    break;
+   1248                }
+   1249                
+   1250                case 3:
+   1251                {        
+   1252                    DeviceInfo* DevGas = &DeviceList[gasFlame];
+                                                 ^
+Error[Pe020]: identifier "DeviceList" is undefined
+   1253                    DeviceInfo* DevInf = &DeviceList[infrared];         
+   1254                    
+   1255                    if(DevGas->deviceStatus != DEVICE_OFFLINE)
+   1256                    {    
+   1257                        if(DevGas->data[0] & 0x01 == 0x01) { HalLcdWriteString( "GasFlame: Flame", HAL_LCD_LINE_2 ); }         //0位是火焰
+   1258                        else if(DevGas->data[0] & 0x02 == 0x02) { HalLcdWriteString( "GasFlame: Gas", HAL_LCD_LINE_2 ); }//1位是气体
+   1259                        else if(DevGas->data[0] & 0x03 == 0x03) { HalLcdWriteString( "GasFlame: All", HAL_LCD_LINE_2 ); }
+   1260                        else {HalLcdWriteString( "GasFlame: None", HAL_LCD_LINE_2 );}
+   1261                    }
+   1262                    else
+   1263                    {
+   1264                        HalLcdWriteString( "GasFlame: OFF", HAL_LCD_LINE_2 ); 
+   1265                    }
+   1266                    
+   1267                    
+   1268                    if(DevInf->deviceStatus != DEVICE_OFFLINE)
+   1269                    {    
+   1270                        if(DevInf->data[0] == 0x01)
+   1271                        {
+   1272                          HalLcdWriteString("Infrared: Human", HAL_LCD_LINE_3 );
+   1273                        }
+   1274                        else{
+   1275                          HalLcdWriteString("Infrared: NoHuman", HAL_LCD_LINE_3 );
+   1276                        }
+   1277                    }
+   1278                    else
+   1279                    {
+   1280                        HalLcdWriteString( "Infrared: OFF", HAL_LCD_LINE_3 ); 
+   1281                    }         
+   1282          
+   1283                    
+   1284                    
+   1285                    //显示最下面的百分比条
+   1286                    percent = (4 * 100) / LCD_PAGE_MAX;
+   1287                    HalLcdDisplayPercentBar("",percent);
+   1288                    break;
+   1289                }
+   1290                    
+   1291              }
+   1292                
+   1293                break;
+   1294              
+   1295              case 1:
+   1296                HalLcdWriteString( "Relay Contrling", HAL_LCD_LINE_4 ); 
+   1297                //清除屏幕显示
+   1298                HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
+   1299                HalLcdWriteString( " ", HAL_LCD_LINE_3 );
+   1300                //这里的deviceStatus 可能是0x00,所以会出现bug 这个0在Device检查时被设置 2.24
+   1301                if(DeviceList[relay].deviceStatus == DEVICE_OFFLINE)
+                          ^
+Error[Pe020]: identifier "DeviceList" is undefined
+   1302                {
+   1303                  HalLcdWriteString( "Relay Offline", HAL_LCD_LINE_1 );      
+   1304                }
+   1305                else  //设备在线回显  设备在线可能是 0/1
+   1306                {
+   1307                  HalLcdWriteString( "Relay Online", HAL_LCD_LINE_1 ); 
+   1308                  //继电器控制界面
+   1309          
+   1310                  if((DeviceList[relay].data[0]& 0x02) == 0x02) {HalLcdWriteString( "K1:ON", HAL_LCD_LINE_2 );}
+   1311                  if((DeviceList[relay].data[0] & 0x01) == 0x01) {HalLcdWriteString( "K1:OFF", HAL_LCD_LINE_2 );}
+   1312                  if((DeviceList[relay].data[0] & 0x20) == 0x20) {HalLcdWriteString( "K2:ON", HAL_LCD_LINE_3 );}
+   1313                  if((DeviceList[relay].data[0] & 0x10) == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}      
+   1314                }
+   1315          
+   1316                break;
+   1317              
+   1318              case 2:
+   1319                HalLcdWriteString( "Motor Contrling", HAL_LCD_LINE_4 );
+   1320                //清除屏幕显示
+   1321                HalLcdWriteString( " ", HAL_LCD_LINE_2 ); 
+   1322                HalLcdWriteString( " ", HAL_LCD_LINE_3 );
+   1323                if(DeviceList[motor].deviceStatus == DEVICE_OFFLINE)
+                          ^
+Error[Pe020]: identifier "DeviceList" is undefined
+   1324                {
+   1325                  HalLcdWriteString( "Motor Offline", HAL_LCD_LINE_1 );      
+   1326                }
+   1327                else  //设备在线回显  设备在线可能是 0/1
+   1328                {
+   1329                  HalLcdWriteString( "Motor Online", HAL_LCD_LINE_1 ); 
+   1330                  //电机控制界面
+   1331                  switch(DeviceList[motor].data[1])
+   1332                  {
+   1333                  default:
+   1334                  case 1:
+   1335                    HalLcdWriteString( "Status: STOP", HAL_LCD_LINE_2 );
+   1336                    break;
+   1337                  case 2:
+   1338                    HalLcdWriteString( "Status: FORWARD", HAL_LCD_LINE_2 );
+   1339                    break;
+   1340                  case 3:
+   1341                    HalLcdWriteString( "Status: BACKWARD", HAL_LCD_LINE_2 );
+   1342                    break;
+   1343                  }
+   1344                  
+   1345                  HalLcdWriteStringValue( "Speed:", DeviceList[motor].data[0], 10, HAL_LCD_LINE_3 );
+   1346                
+   1347                }
+   1348            }
+   1349            
+   1350          #endif // LCD_SUPPORTED  
+   1351          }
+   1352          
+   1353          
+   1354          /*******************************************************************************
+   1355           * @fn      Smart_home_CallBack
+   1356           *
+   1357           * @brief   Send data OTA.
+   1358           *
+   1359           * @param   port - UART port.
+   1360           * @param   event - the UART port event flag.
+   1361           *
+   1362           * @return  none
+   1363           */
+   1364          void Smart_home_CallBack(uint8 port, uint8 event)
+   1365          { 
+   1366          }
+   1367          
+   1368          /*******************************************************************************
+   1369          *******************************************************************************/
+
+Errors: 23
+Warnings: 1

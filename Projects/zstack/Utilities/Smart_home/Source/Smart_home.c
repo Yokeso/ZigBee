@@ -82,7 +82,7 @@
  */
 /*Éè±¸Á´½ÓÏà¹ØÉèÖÃ*/
 /*ÅÐ¶ÏÉè±¸ÊÇ·ñÔÚÏßµÄ×î´ó´ÎÊý*/
-#define DEVICE_HEART_BEAT    5
+#define DEVICE_HEART_BEAT    3
 #define DEVICE_CHECK_DELAY   5000
 #define DEVICE_CHECK_TIMER   2000
 
@@ -115,12 +115,10 @@
 #define SMART_HOME_TX_SZ  128
 
 // Millisecs of idle time after a byte is received before invoking Rx callback.
-#define SMART_HOME_IDLE  8
+#define SMART_HOME_IDLE  6
 
 // Loopback Rx bytes to Tx for throughput testing.
-#if !defined( SMART_HOME_LOOPBACK )
 #define SMART_HOME_LOOPBACK  FALSE
-#endif
 
 // This is the max byte count per OTA message.
 #if !defined( SMART_HOME_TX_MAX )
@@ -191,10 +189,13 @@ uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
  */
 
 /*3.18 ÖÕ¶Ë½ÚµãµÄÉè±¸ÏêÏ¸ÐÅÏ¢»º´æ*/
+/*5.6 ³¢ÊÔÀûÓÃÀëÉ¢±äÁ¿µÄ·½Ê½*/
+DeviceInfo   DeviceList[Smart_home_MAX_INCLUSTERS];                      //Éè±¸ÁÐ±í  
+
 static uint8 DeviceCnt[Smart_home_MAX_INCLUSTERS];
 static int8 Ctrlcase = 0;    //0ÓÃÀ´¿ØÖÆÆÁÄ»ÏÔÊ¾£¬1¿ØÖÆ¼ÌµçÆ÷£¬2¿ØÖÆµç»ú
 static int8 LCD_Page  =  0;  //ÖÕ¶Ë×´Ì¬ÏÔÊ¾
-DeviceInfo DeviceList[Smart_home_MAX_INCLUSTERS];                      //Éè±¸ÁÐ±í  
+
 /*********************************************************************************
 //ÕâÐ©ËÆºõ»áÒýÆðÄÚ´æÎÊÌâ  3.22
 DeviceInfo *Humit = DeviceList+Smart_home_CLUSTERID_HUMITMSG;          //ÎÂÊª¶È»º´æ
@@ -212,18 +213,20 @@ DeviceInfo *soundVb = DeviceList+Smart_home_CLUSTERID_SOUNDVBMSG;      //ÉùÒôÕð¶
 #define RfID      3     // RFID ÐÅÏ¢»º´æ
 #define gasFlame  4     //ÆøÌå»ðÑæ»º´æ
 #define infrared  5     //ÈËÌåºìÍâ
-#define motor     6     //µç»ú×´Ì¬
-#define relay     7     //¼ÌµçÆ÷×´Ì¬
-#define soundVb   8     //ÉùÒôÕð¶¯
+#define soundVb   6     //µç»ú×´Ì¬
+#define motor     7     //¼ÌµçÆ÷×´Ì¬
+#define relay     8     //ÉùÒôÕð¶¯
 
 /*3.14 ÏûÏ¢·¢ËÍ²¿·Ö*/
 /*3.17¶ÌµØÖ·´æ´¢*/
+/*
 static afAddrType_t Humit_addr;
 static afAddrType_t Light_addr;
 static afAddrType_t GasF_addr;
 static afAddrType_t Sound_addr;
 static afAddrType_t Card_addr;
 static afAddrType_t Infrared_addr;
+*/
 static afAddrType_t Relay_addr;
 static afAddrType_t Motor_addr;
 
@@ -242,15 +245,15 @@ static uint8 MotorTransID;  // This is the unique message ID (counter)
  * LOCAL FUNCTIONS
  */
 
-static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
+void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
 //static void Smart_home_Key_add(uint8 Ctrlcase);
-static void Smart_home_HandleKeys( byte shift, byte keys );
-static void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt );
-static void Smart_home_Device_check(void);
-static void Smart_home_Relay_Ctl(uint8 cmd);
-static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed);
-static void Smart_home_Display(void);
-static void Smart_home_Motor_cmd(int8 speed);
+void Smart_home_HandleKeys( byte shift, byte keys );
+void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt );
+void Smart_home_Device_check(void);
+void Smart_home_Relay_Ctl(uint8 cmd);
+void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed);
+void Smart_home_Display(void);
+void Smart_home_Motor_cmd(int8 speed);
 void Smart_home_CallBack(uint8 port, uint8 event);
 
 /*********************************************************************
@@ -316,27 +319,29 @@ void Smart_home_Init( uint8 task_id )
   
   //3.22 ÏÔÊ¾ÑÓÊ±
   osal_start_timerEx( Smart_home_TaskID, SMART_HOME_DISPLAY_EVT, 
-                      SMART_HOME_DEVICE_DISPLAY_DELAY);
+                      LCD_DISPLAY_LENGTH);
   
   
   //3.14 ´ò¿ªÉè±¸ÔÚÏß¼ì²â£¬µÚÒ»´Î¿ªÆô¼ì²âÑÓÊ±½Ï³¤Ê±¼ä
   osal_start_timerEx( Smart_home_TaskID, SMART_HOME_DEVICE_CHECK_EVT, 
-                      SMART_HOME_DEVICE_CHECK_DELAY);
+                      DEVICE_CHECK_DELAY);
  
   //3.13 ¹Ø±ÕLEDµÆ(D4)£¬±íÊ¾Ð­µ÷Æ÷Ä¬ÈÏ²»ÔÊÐí×éÍø
   NLME_PermitJoiningRequest(0x00);
   HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);
+  HalLedSet(HAL_LED_2, HAL_LED_MODE_OFF);
   
   //3.21 ³õÊ¼»¯Ò³ÃæÎª0 µÚÒ»Ò³
   //LCD_Page=0;
   
   //3.13 Éè±¸ÀëÏß×´Ì¬¼ì²â³õÊ¼»¯£¬³õÊ¼»¯ÎªÀëÏß
   //3.21 ÐÞ¸ÄÎªDeviceList·½Ê½£¬³õÊ¼»¯DeviceCnt
-  for(DeviceNum=1;DeviceNum<Smart_home_MAX_INCLUSTERS;DeviceNum++) //Ö»³õÊ¼»¯ÖÕ¶Ë
+  for(DeviceNum=0;DeviceNum<Smart_home_MAX_INCLUSTERS;DeviceNum++) //Ö»³õÊ¼»¯ÖÕ¶Ë
   {
     DeviceList[DeviceNum].deviceid = DeviceNum;
     DeviceList[DeviceNum].deviceStatus = DEVICE_OFFLINE;
     DeviceCnt[DeviceNum]=0;
+    //printf("%d \n",&DeviceNum);
   }
 }
 
@@ -362,7 +367,9 @@ UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
   
   if ( events & SYS_EVENT_MSG )   //3.13 ÏµÍ³ÏûÏ¢ÊÂ¼þ
   {
-
+    
+    
+    
     while ( (MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( Smart_home_TaskID )) )
     {
       switch ( MSGpkt->hdr.event )
@@ -389,17 +396,18 @@ UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
             //3.13 ÔÚÏûÏ¢·¢ËÍÈ·ÈÏ³É¹¦ºóÂÌµÆÉÁË¸Ò»ÏÂ
             //HalLedSet(HAL_LED_1, HAL_LED_MODE_BLINK);
           }
-          else
-          {
-            //3.13 ºìµÆÉÁË¸Ò»ÏÂ  Ó²¼þ»¹Ã»ÊµÏÖ
-            //HalLedSet(HAL_LED_2, HAL_LED_MODE_BLINK);
-          }
           break;
           
         case AF_INCOMING_MSG_CMD:   //3.13 ÏûÏ¢´«Èë´¦Àí
           //3.13 ÔÚÏûÏ¢½ÓÊÕÈ·ÈÏ³É¹¦ºóÂÌµÆÉÁË¸Ò»ÏÂ
+          
           Smart_home_ProcessMSGCmd( MSGpkt );
+          //HalLedSet(HAL_LED_1, HAL_LED_MODE_BLINK);
           break;
+          
+        case ZDO_STATE_CHANGE:
+          break;
+          
         default:
           break;
       }
@@ -413,7 +421,7 @@ UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
     // Squash compiler warnings until values are used.
     (void)sentStatus;
     (void)sentEP;
-    
+
     return ( events ^ SYS_EVENT_MSG );
   }
 
@@ -738,7 +746,8 @@ void Smart_home_HandleKeys( byte shift, byte keys )
      {
        NetWorkAllow = 1;
        NLME_PermitJoiningRequest(0xFF); // ×éÍø£¬ÔÊÐíËæÊ±¼ÓÈë
-       HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
+       //HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
+       //HalLedSet(HAL_LED_2, HAL_LED_MODE_ON);
 #if defined ( LCD_SUPPORTED )
        HalLcdWriteString( "Allow networking", HAL_LCD_LINE_4 );
 #endif
@@ -747,7 +756,8 @@ void Smart_home_HandleKeys( byte shift, byte keys )
      {
        NetWorkAllow = 0;
        NLME_PermitJoiningRequest(0x00); // ²»ÔÊÐí×éÍø
-       HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);  
+       //HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);  
+       //HalLedSet(HAL_LED_2, HAL_LED_MODE_OFF); 
 #if defined ( LCD_SUPPORTED )
        HalLcdWriteString( "Ban   networking", HAL_LCD_LINE_4 );
 #endif        
@@ -767,21 +777,16 @@ void Smart_home_HandleKeys( byte shift, byte keys )
  * @return  TRUE if the 'pkt' parameter is being used and will be freed later,
  *          FALSE otherwise.
  */
-void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
-{
-  //HalUARTWrite(HAL_UART_PORT_0, "9",   1);
-  switch ( pkt->clusterId )
-  {
-  /***********************************************************************
-    Ä¿Ç°×Ü¹²8ÖÖcase
-   #define Smart_home_CLUSTERID_HUMITMSG            1  // ÎÂÊª¶È
-   #define Smart_home_CLUSTERID_TEMPLIGHTMSG        2  // ÎÂ¶È¹âÕÕ
-   #define Smart_home_CLUSTERID_RFIDMSG             3  // ÉäÆµ¿¨
-   #define Smart_home_CLUSTERID_GASFLAMEMSG         4  // ÑÌÎí»ðÑæ
-   #define Smart_home_CLUSTERID_INFRAREDMSG         5  // ÈËÌåºìÍâ
-   #define Smart_home_CLUSTERID_SOUNDVBMSG          6  // ÉùÒôÕñ¶¯
-   #define Smart_home_CLUSTERID_MOTORSTATUSMSG      7  // Ö±Á÷µç»ú×´Ì¬ÐÅÏ¢
-   #define Smart_home_CLUSTERID_RELAYSTATUSMSG      8  // ¼ÌµçÆ÷×´Ì¬ÐÅÏ¢
+ /***********************************************************************
+   Ä¿Ç°×Ü¹²8ÖÖcase
+#define Smart_home_CLUSTERID_HUMITMSG            1  // ÎÂÊª¶È
+#define Smart_home_CLUSTERID_TEMPLIGHTMSG        2  // ÎÂ¶È¹âÕÕ
+#define Smart_home_CLUSTERID_RFIDMSG             3  // ÉäÆµ¿¨
+#define Smart_home_CLUSTERID_GASFLAMEMSG         4  // ÑÌÎí»ðÑæ
+#define Smart_home_CLUSTERID_INFRAREDMSG         5  // ÈËÌåºìÍâ
+#define Smart_home_CLUSTERID_SOUNDVBMSG          6  // ÉùÒôÕñ¶¯
+#define Smart_home_CLUSTERID_MOTORSTATUSMSG      7  // Ö±Á÷µç»ú×´Ì¬ÐÅÏ¢
+#define Smart_home_CLUSTERID_RELAYSTATUSMSG      8  // ¼ÌµçÆ÷×´Ì¬ÐÅÏ¢
     
    Éè±¸ÃèÊö
    typedef struct DeviceInfo
@@ -791,9 +796,17 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
      uint8 data[5];
    } DeviceInfo; 
    ************************************************************************/ 
+
+void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
+{
+  
+  switch ( pkt->clusterId )
+  {
+
     //3.14 ÏûÏ¢´¦ÀíÄ£¿é£¬¹²8¸ö£¬ÐÐÎªÀàËÆ 
     //3.21 ÐÞ¸ÄÎªÖ¸Õë·½·¨£¨DeviceListÏà¹Ø£©
     case Smart_home_CLUSTERID_HUMITMSG:         // ÎÂÊª¶È
+    {
       uint8 sendbufHumit[4] = {0};
       sendbufHumit[0] = '1';
       
@@ -804,11 +817,14 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
       sendbufHumit[3] = '\n';
       
 #if (HAL_UART == TRUE)
-      HalUARTWrite(HAL_UART_PORT_0, sendbufHumit,   strlen(sendbufHumit));
+      HalUARTWrite(HAL_UART_PORT_0, sendbufHumit,   4);
 #endif
+      osal_msg_deallocate(sendbufHumit);
       break;
+    }
       
     case Smart_home_CLUSTERID_TEMPLIGHTMSG:     // ÎÂ¶È¹âÕÕ
+    {    
       uint8 sendbufTempLight[6] = {0};
       sendbufTempLight[0] = '2';
       
@@ -829,9 +845,12 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
 #if (HAL_UART == TRUE)
       HalUARTWrite(HAL_UART_PORT_0, sendbufTempLight,   6);
 #endif
+      osal_msg_deallocate(sendbufTempLight);
       break;
+    }
       
     case Smart_home_CLUSTERID_RFIDMSG:          // ÉäÆµ¿¨
+    {
       uint8 sendbufRfID[7] = {0};
       sendbufRfID[0] = '3';
       
@@ -845,11 +864,14 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
       sendbufRfID[6] = '\n';
       
 #if (HAL_UART == TRUE)
-      HalUARTWrite(HAL_UART_PORT_0, sendbufRfID,   strlen(sendbufRfID));
+      HalUARTWrite(HAL_UART_PORT_0, sendbufRfID,   7);
 #endif
+      osal_msg_deallocate(sendbufRfID);
       break;
+    }
       
     case Smart_home_CLUSTERID_GASFLAMEMSG:      // ÑÌÎí»ðÑæ
+    {
       uint8 sendbufgasFlame[3] = {0};
       sendbufgasFlame[0] = '4';
       
@@ -861,9 +883,12 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
 #if (HAL_UART == TRUE)
       HalUARTWrite(HAL_UART_PORT_0, sendbufgasFlame,   3);
 #endif
+      osal_msg_deallocate(sendbufgasFlame);
       break;
+    }
       
     case Smart_home_CLUSTERID_INFRAREDMSG:      // ÈËÌåºìÍâ
+    {
       uint8 sendbufinfrared[3] = {0};
       sendbufinfrared[0] = '5';
       
@@ -873,11 +898,14 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
       sendbufinfrared[2] = '\n';
       
 #if (HAL_UART == TRUE)
-      HalUARTWrite(HAL_UART_PORT_0, sendbufinfrared,   strlen(sendbufinfrared));
+      HalUARTWrite(HAL_UART_PORT_0, sendbufinfrared,   3);
 #endif
+      osal_msg_deallocate(sendbufinfrared);
       break;
+    }
 
     case Smart_home_CLUSTERID_SOUNDVBMSG:       // ÉùÒôÕñ¶¯
+    {
       uint8 sendbufsoundVb[4] = {0};
       sendbufsoundVb[0] = '6';
       
@@ -888,11 +916,14 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
       sendbufsoundVb[2] = '\n';
       
 #if (HAL_UART == TRUE)
-      HalUARTWrite(HAL_UART_PORT_0, sendbufsoundVb,   strlen(sendbufsoundVb));
+      HalUARTWrite(HAL_UART_PORT_0, sendbufsoundVb,   3);
 #endif
+      osal_msg_deallocate(sendbufsoundVb);
       break;
+    }
       
     case Smart_home_CLUSTERID_MOTORSTATUSMSG:   // Ö±Á÷µç»ú×´Ì¬ÐÅÏ¢
+    {  
       uint8 sendbufmotor[4] = {0};
       sendbufmotor[0] = '7';
       
@@ -910,11 +941,14 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
       sendbufmotor[3] = '\n';
       
 #if (HAL_UART == TRUE)
-      HalUARTWrite(HAL_UART_PORT_0, sendbufmotor,   strlen(sendbufmotor));
+      HalUARTWrite(HAL_UART_PORT_0, sendbufmotor,   4);
 #endif
+      osal_msg_deallocate(sendbufmotor);
       break;
+    }
       
     case Smart_home_CLUSTERID_RELAYSTATUSMSG:   // ¼ÌµçÆ÷×´Ì¬ÐÅÏ¢
+    {
       uint8 sendbufrelay[4] = {0};
       sendbufrelay[0] = '8';
       
@@ -926,12 +960,14 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
       Relay_addr.endPoint = 1; // Ä¿µÄ½ÚµãµÄ¶Ë¿ÚºÅ
       sendbufrelay[1] = DeviceList[relay].data[0] = pkt->cmd.Data[4]; 
 
-      sendbufrelay[3] = '\n';
+      sendbufrelay[2] = '\n';
       
 #if (HAL_UART == TRUE)
-      HalUARTWrite(HAL_UART_PORT_0, sendbufrelay,   strlen(sendbufrelay));
+      HalUARTWrite(HAL_UART_PORT_0, sendbufrelay,   3);
 #endif
+      osal_msg_deallocate(sendbufrelay);
       break;
+    }
       
     default:
       break;
@@ -949,30 +985,27 @@ void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
  * @return  none
  */
 /*3.24 ÕâÀïµÄ¼ì²âÊ±³£ÓÐµã³¤ ¸ÄÎª±äÁ¿ÍâÌáµÄ·½Ê½¼Ó¿ì´¦ÀíËÙ¶È*/
-static void Smart_home_Device_check(void)
+void Smart_home_Device_check(void)
 {
   static uint8 DeviceID;
-  static uint8 Device_status =  0;
   static uint8* counttmp;
   for(DeviceID=1;DeviceID<Smart_home_MAX_INCLUSTERS;DeviceID++)
   {  
-    Device_status = DeviceList[DeviceID].deviceStatus;
     counttmp = & DeviceCnt[DeviceID];
-    if(Device_status != DEVICE_ONLINE)    //Éè±¸ÀëÏß
+    if(DeviceList[DeviceID].deviceStatus != DEVICE_ONLINE)    //Éè±¸ÀëÏß
     {
       (*counttmp)++;
     }
-    if(Device_status == DEVICE_ONLINE)    //Éè±¸ÔÚÏß
+    if(DeviceList[DeviceID].deviceStatus == DEVICE_ONLINE)    //Éè±¸ÔÚÏß
     {
       *counttmp = 0;
-      Device_status = 0;
+      DeviceList[DeviceID].deviceStatus = 0;
     }
     if((*counttmp) > DEVICE_HEART_BEAT)
     {
       *counttmp = DEVICE_HEART_BEAT;
-      Device_status = DEVICE_OFFLINE;
+      DeviceList[DeviceID].deviceStatus = DEVICE_OFFLINE;
     }
-    DeviceList[DeviceID].deviceStatus = Device_status;
   }
   /*ÎÂÊª¶È»º´æ ÎÂ¶È¹âÕÕ»º´æ RFID ÐÅÏ¢»º´æ ÆøÌå»ðÑæ»º´æ 
   ÈËÌåºìÍâ µç»ú×´Ì¬ ¼ÌµçÆ÷×´Ì¬ ÉùÒôÕð¶¯*/
@@ -1078,6 +1111,7 @@ static void Smart_home_Motor_Ctl(uint8 cmd,uint8 speed)
 static void Smart_home_Display(void)
 {
 #if defined LCD_SUPPORTED
+  static uint8 percent;
   switch(Ctrlcase)
   {
     default:    
@@ -1092,128 +1126,156 @@ static void Smart_home_Display(void)
       {
         default:
         case 0:
-        {
-          static uint16 humit=0x14;
-          static uint16 temper=0x14;
-          static uint16 SoundVb; 
-          
-          
-          DeviceInfo Devhum = DeviceList[Humit];
-          DeviceInfo DevSound = DeviceList[soundVb];
+        { 
+          DeviceInfo* Devhum = &DeviceList[Humit];
+          DeviceInfo* DevSound = &DeviceList[soundVb];
           //µÚÒ»Ò³µÚ¶þÐÐÏÔÊ¾ÎÂ¶È
           //      µÚÈýÐÐÏÔÊ¾¹âÕÕ
-          if(Devhum.deviceStatus == DEVICE_ONLINE)
-          {
-              humit = (uint16)Devhum.data[0];
-              temper = (uint16)Devhum.data[1];          
+          if(Devhum->deviceStatus != DEVICE_OFFLINE)
+          {    
+              HalLcdWriteStringValueValue( "Hum:", Devhum->data[0], 10, "% T_1:", Devhum->data[1], 10, HAL_LCD_LINE_2 );
           }
-
-          SoundVb = (uint16)DevSound.data[0];
-
-          HalLcdWriteStringValueValue( "Hum:", humit, 10, "% T_1:", temper, 10, HAL_LCD_LINE_2 );
+          else
+          {
+              HalLcdWriteString( "Hum:OFF T_1:OFF", HAL_LCD_LINE_2 ); 
+          }
           
-          if(SoundVb & 0x01 == 0x01) { HalLcdWriteString( "Sound: Voice", HAL_LCD_LINE_3 ); }
-          else if(SoundVb & 0x02 == 0x02) { HalLcdWriteString( "Sound: Vibration", HAL_LCD_LINE_3 ); }
-          else if(SoundVb & 0x03 == 0x03) { HalLcdWriteString( "Sound: All", HAL_LCD_LINE_3 ); }
-          else {HalLcdWriteString( "Sound: None", HAL_LCD_LINE_3 );}
           
+          if(DevSound->deviceStatus != DEVICE_OFFLINE)
+          {    
+              if(DevSound->data[0] & 0x01 == 0x01) { HalLcdWriteString( "Sound: Voice", HAL_LCD_LINE_3 ); }
+              else if(DevSound->data[0] & 0x02 == 0x02) { HalLcdWriteString( "Sound: Vibration", HAL_LCD_LINE_3 ); }
+              else if(DevSound->data[0] & 0x03 == 0x03) { HalLcdWriteString( "Sound: All", HAL_LCD_LINE_3 ); }
+              else {HalLcdWriteString( "Sound: None", HAL_LCD_LINE_3 );}
+          }
+          else
+          {
+              HalLcdWriteString( "Sound:OFFLINE", HAL_LCD_LINE_3 ); 
+          }
+       
           //HalLcdWriteStringValue( "Sound:", SoundVb, 16, HAL_LCD_LINE_3 );
           
           
           //ÏÔÊ¾×îÏÂÃæµÄ°Ù·Ö±ÈÌõ
-          static uint8 percent;
           percent = (1 * 100) / LCD_PAGE_MAX;
           HalLcdDisplayPercentBar("",percent);
           break;
         }
         case 1:
         {
-          static uint16 Light;
-          static uint8 lightmp;
-          static uint16 integer;
-          static uint16 decimals;
-          DeviceInfo Devtmp = DeviceList[TempLight];
+          //µÚ¶þÒ³Ö»ÓÐ¹âÕÕ
           //µÚÒ»Ò³µÚ¶þÐÐÏÔÊ¾ÎÂ¶È
           //      µÚÈýÐÐÏÔÊ¾¹âÕÕ
-          integer = (uint16)Devtmp.data[0];
-          decimals = (uint16)Devtmp.data[1];
-          lightmp = Devtmp.data[3];
-          Light = (uint16)Devtmp.data[4];
-          memcpy(&Light,&lightmp,sizeof(lightmp));
+          DeviceInfo* Devtmp = &DeviceList[TempLight];
+          if(Devtmp->deviceStatus != DEVICE_OFFLINE)
+          {    
+              static uint16 Light;
+              static uint8 lightmp;
           
-          HalLcdWriteStringValueValue( "Temper_2:", integer, 10, ".", decimals, 10, HAL_LCD_LINE_2 );
-          HalLcdWriteStringValue( "Light:", Light, 10, HAL_LCD_LINE_3 );
+
+              lightmp = Devtmp->data[3];
+              Light = (uint16)Devtmp->data[4];
+              memcpy(&Light,&lightmp,sizeof(lightmp));
+          
+              HalLcdWriteStringValueValue( "Temper_2:", Devtmp->data[0], 10, ".", Devtmp->data[1], 10, HAL_LCD_LINE_2 );
+              HalLcdWriteStringValue( "Light:", Light, 10, HAL_LCD_LINE_3 );
+              
+              osal_msg_deallocate((uint8*)Light);
+          }
+          else
+          {
+              HalLcdWriteString( "Temper_2:OFF", HAL_LCD_LINE_2 ); 
+              HalLcdWriteString( "Light:OFF", HAL_LCD_LINE_3 ); 
+          }
           
           //ÏÔÊ¾×îÏÂÃæµÄ°Ù·Ö±ÈÌõ
-          static uint8 percent;
           percent = (2 * 100) / LCD_PAGE_MAX;
           HalLcdDisplayPercentBar("",percent);
           break;
+          
+          
         }
         
       case 2:
       {
-          static uint8 kind;
-          static uint8 tmp1,tmp2;
-          static uint8 tmp3,tmp4;
           static uint16 Data1;
           static uint16 Data2;
           //ÏÔÊ¾×îÏÂÃæµÄ°Ù·Ö±ÈÌõ
-          DeviceInfo rfid = DeviceList[RfID];
+          DeviceInfo* rfid = &DeviceList[RfID];
           
-          kind = rfid.data[0];
-          tmp1 = rfid.data[1];
-          tmp2 = rfid.data[2];
-          tmp3 = rfid.data[3];
-          tmp4 = rfid.data[4];
+          Data1 = ( rfid->data[1] << 8) | rfid->data[2];
+          Data2 = ( rfid->data[3] << 8) | rfid->data[4];
           
-          Data1 = (tmp1 << 8) | tmp2;
-          Data2 = (tmp3 << 8) | tmp4;
+          switch(rfid->data[0])
+          {
+          case 0x01:
+            HalLcdWriteString( "MFOne-S50", HAL_LCD_LINE_2 );
+            break;
+          case 0x02:
+            HalLcdWriteString( "MFOne-S70", HAL_LCD_LINE_2 );
+            break;
+          case 0x03:
+            HalLcdWriteString( "MF-UltraLight", HAL_LCD_LINE_2 );
+            break;
+          case 0x04:
+            HalLcdWriteString( "MF-Pro", HAL_LCD_LINE_2 );
+            break;
+          case 0x05:
+            HalLcdWriteString( "MF-DesFire", HAL_LCD_LINE_2 );
+            break;
+            
+          default:
+            HalLcdWriteString( "No Card", HAL_LCD_LINE_2 );
+            break;
+          }
           
-          if(kind == 0x01) {HalLcdWriteString( "MFOne-S50", HAL_LCD_LINE_2 );}
-          else if(kind == 0x02) {HalLcdWriteString( "MFOne-S70", HAL_LCD_LINE_2 );}
-          else if(kind == 0x03) {HalLcdWriteString( "MF-UltraLight", HAL_LCD_LINE_2 );}
-          else if(kind == 0x04) {HalLcdWriteString( "MF-Pro", HAL_LCD_LINE_2 );}
-          else if(kind == 0x05) {HalLcdWriteString( "MF-DesFire", HAL_LCD_LINE_2 );}
-          else {HalLcdWriteString( "No Card", HAL_LCD_LINE_2 );}
-          
-
           HalLcdWriteStringValueValue( "ID: ", Data1, 16, "-", Data2, 16, HAL_LCD_LINE_3 );
           
-          static uint8 percent;
           percent = (3 * 100) / LCD_PAGE_MAX;
           HalLcdDisplayPercentBar("",percent);
+          
+          osal_msg_deallocate((uint8*)Data1);
+          osal_msg_deallocate((uint8*)Data2);
+          
           break;
       }
       
       case 3:
-      {
-          static uint16 GasF;
-          static uint16 Infrared;         
-
-          DeviceInfo DevGas = DeviceList[GasF];
-          DeviceInfo DevInf = DeviceList[infrared]; 
+      {        
+          DeviceInfo* DevGas = &DeviceList[gasFlame];
+          DeviceInfo* DevInf = &DeviceList[infrared];         
           
-          GasF = (uint16)DevGas.data[0];
-          Infrared = (uint16)DevInf.data[0];
-          
-          if(GasF & 0x01 == 0x01) { HalLcdWriteString( "GasFlame: Flame", HAL_LCD_LINE_2 ); }         //0Î»ÊÇ»ðÑæ
-          else if(GasF & 0x02 == 0x02) { HalLcdWriteString( "GasFlame: Gas", HAL_LCD_LINE_2 ); }//1Î»ÊÇÆøÌå
-          else if(GasF & 0x03 == 0x03) { HalLcdWriteString( "GasFlame: All", HAL_LCD_LINE_2 ); }
-          else {HalLcdWriteString( "GasFlame: None", HAL_LCD_LINE_2 );}
-          
-          //HalLcdWriteStringValue("GasFlame: ", GasF, 16, HAL_LCD_LINE_2 );
-          if(Infrared == 0x01)
+          if(DevGas->deviceStatus != DEVICE_OFFLINE)
+          {    
+              if(DevGas->data[0] & 0x01 == 0x01) { HalLcdWriteString( "GasFlame: Flame", HAL_LCD_LINE_2 ); }         //0Î»ÊÇ»ðÑæ
+              else if(DevGas->data[0] & 0x02 == 0x02) { HalLcdWriteString( "GasFlame: Gas", HAL_LCD_LINE_2 ); }//1Î»ÊÇÆøÌå
+              else if(DevGas->data[0] & 0x03 == 0x03) { HalLcdWriteString( "GasFlame: All", HAL_LCD_LINE_2 ); }
+              else {HalLcdWriteString( "GasFlame: None", HAL_LCD_LINE_2 );}
+          }
+          else
           {
-            HalLcdWriteString("Infrared: Human", HAL_LCD_LINE_3 );
+              HalLcdWriteString( "GasFlame: OFF", HAL_LCD_LINE_2 ); 
           }
-          else{
-            HalLcdWriteString("Infrared: NoHuman", HAL_LCD_LINE_3 );
+          
+          
+          if(DevInf->deviceStatus != DEVICE_OFFLINE)
+          {    
+              if(DevInf->data[0] == 0x01)
+              {
+                HalLcdWriteString("Infrared: Human", HAL_LCD_LINE_3 );
+              }
+              else{
+                HalLcdWriteString("Infrared: NoHuman", HAL_LCD_LINE_3 );
+              }
           }
+          else
+          {
+              HalLcdWriteString( "Infrared: OFF", HAL_LCD_LINE_3 ); 
+          }         
+
           
           
           //ÏÔÊ¾×îÏÂÃæµÄ°Ù·Ö±ÈÌõ
-          static uint8 percent;
           percent = (4 * 100) / LCD_PAGE_MAX;
           HalLcdDisplayPercentBar("",percent);
           break;
@@ -1237,12 +1299,11 @@ static void Smart_home_Display(void)
       {
         HalLcdWriteString( "Relay Online", HAL_LCD_LINE_1 ); 
         //¼ÌµçÆ÷¿ØÖÆ½çÃæ
-        const uint8 cmd =  DeviceList[relay].data[0];
 
-        if((cmd & 0x02) == 0x02) {HalLcdWriteString( "K1:ON", HAL_LCD_LINE_2 );}
-        if((cmd & 0x01) == 0x01) {HalLcdWriteString( "K1:OFF", HAL_LCD_LINE_2 );}
-        if((cmd & 0x20) == 0x20) {HalLcdWriteString( "K2:ON", HAL_LCD_LINE_3 );}
-        if((cmd & 0x10) == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}      
+        if((DeviceList[relay].data[0]& 0x02) == 0x02) {HalLcdWriteString( "K1:ON", HAL_LCD_LINE_2 );}
+        if((DeviceList[relay].data[0] & 0x01) == 0x01) {HalLcdWriteString( "K1:OFF", HAL_LCD_LINE_2 );}
+        if((DeviceList[relay].data[0] & 0x20) == 0x20) {HalLcdWriteString( "K2:ON", HAL_LCD_LINE_3 );}
+        if((DeviceList[relay].data[0] & 0x10) == 0x10) {HalLcdWriteString( "K2:OFF", HAL_LCD_LINE_3 );}      
       }
 
       break;
@@ -1260,9 +1321,7 @@ static void Smart_home_Display(void)
       {
         HalLcdWriteString( "Motor Online", HAL_LCD_LINE_1 ); 
         //µç»ú¿ØÖÆ½çÃæ
-        const uint16 speed =  (uint16) DeviceList[motor].data[0];
-        const uint16 status = (uint16) DeviceList[motor].data[1];
-        switch(status)
+        switch(DeviceList[motor].data[1])
         {
         default:
         case 1:
@@ -1276,7 +1335,7 @@ static void Smart_home_Display(void)
           break;
         }
         
-        HalLcdWriteStringValue( "Speed:", speed, 10, HAL_LCD_LINE_3 );
+        HalLcdWriteStringValue( "Speed:", DeviceList[motor].data[0], 10, HAL_LCD_LINE_3 );
       
       }
   }

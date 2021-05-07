@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        29/Apr/2021  21:42:07 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        06/May/2021  17:24:15 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -44,7 +44,7 @@
 //                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
 //                          -DREJOIN_POLL_RATE=440 D:\毕设\CC2530-smart_home\ /
 //                          Components\hal\target\CC2530MB\hal_lcd.c -D       /
-//                          LCD_SUPPORTED -D ZDO_COORDINATOR -D NV_RESTORE    /
+//                          LCD_SUPPORTED -D ZDO_COORDINATOR -D xNV_RESTORE   /
 //                          -D HAL_UART=TRUE -D xNV_INIT -D xREFLECTOR -D     /
 //                          xHAL_UART_TEST -lC D:\毕设\CC2530-smart_home\Proj /
 //                          ects\zstack\Utilities\Smart_home\CC2530DB\Coordin /
@@ -522,7 +522,7 @@ HalLcd_HW_WriteLine SYMBOL "HalLcd_HW_WriteLine"
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         EXTERN strcat
-        FUNCTION strcat,0200H
+        FUNCTION strcat,010202H
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
         ARGFRAME XSTACK, 47, STACK
@@ -2153,153 +2153,154 @@ ascii_table_8x16:
         DB 0
         DB 0
         DB 0
-//   51 
+//   51 #include "string.h"
 //   52 
-//   53 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
-//   54     #include "DebugTrace.h"
-//   55 #endif
-//   56 
-//   57 /**************************************************************************************************
-//   58  *                                          CONSTANTS
-//   59  **************************************************************************************************/
-//   60 /*
-//   61     LCD pins
-//   62     // control
-//   63     P1.1 - LCD_BACKLIGHT
-//   64     P2.0 - LCD_RESET
-//   65     
-//   66     // spi
-//   67     P1.7 - LCD_CS
-//   68     P1.5 - RS
-//   69     P1.4 - SCLK
-//   70     P1.6 - SDA
-//   71 */
-//   72 
-//   73 /* LCD Control lines */
-//   74 // control
-//   75 #define HAL_LCD_BACKLIGHT_PORT 1
-//   76 #define HAL_LCD_BACKLIGHT_PIN  1
-//   77 
-//   78 #define HAL_LCD_RESET_PORT 2
-//   79 #define HAL_LCD_RESET_PIN  0
-//   80 
-//   81 // spi
-//   82 #define HAL_LCD_CS_PORT 1
-//   83 #define HAL_LCD_CS_PIN  7
-//   84 
-//   85 #define HAL_LCD_RS_PORT 1
-//   86 #define HAL_LCD_RS_PIN  5
-//   87 
-//   88 #define HAL_LCD_SCLK_PORT 1
-//   89 #define HAL_LCD_SCLK_PIN  4
-//   90 
-//   91 #define HAL_LCD_SDA_PORT 1
-//   92 #define HAL_LCD_SDA_PIN  6
-//   93 
-//   94 /* LCD Parameters */
-//   95 #define LCD_MAX_LINE_COUNT              4
-//   96 #define LCD_MAX_LINE_LENGTH             16
-//   97 #define LCD_MAX_BUF                     25
-//   98 
-//   99 /* Defines for HW LCD */
-//  100 
-//  101 /* Bias control */
-//  102 #define BIAS_1_7                        0x01
-//  103 #define BIAS_1_9                        0x00
-//  104 #define SET_BIAS_CTRL(bias)             HalLcd_HW_Control(0xA2 | (bias))
-//  105 
-//  106 /* Power control */
-//  107 #define LCD_POWER_CONTROL_1             0x04
-//  108 #define LCD_POWER_CONTROL_2             0x06
-//  109 #define LCD_POWER_CONTROL_3             0x07
-//  110 #define LCD_POWER_CONTROL(options)      HalLcd_HW_Control(0x28 + options)
-//  111 
-//  112 /* LCD commands */
-//  113 #define LCD_SOFT_RESET                  0xE2
-//  114 #define LCD_CMD_SET_CONTRAST            0x20
-//  115 
+//   53 
+//   54 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//   55     #include "DebugTrace.h"
+//   56 #endif
+//   57 
+//   58 /**************************************************************************************************
+//   59  *                                          CONSTANTS
+//   60  **************************************************************************************************/
+//   61 /*
+//   62     LCD pins
+//   63     // control
+//   64     P1.1 - LCD_BACKLIGHT
+//   65     P2.0 - LCD_RESET
+//   66     
+//   67     // spi
+//   68     P1.7 - LCD_CS
+//   69     P1.5 - RS
+//   70     P1.4 - SCLK
+//   71     P1.6 - SDA
+//   72 */
+//   73 
+//   74 /* LCD Control lines */
+//   75 // control
+//   76 #define HAL_LCD_BACKLIGHT_PORT 1
+//   77 #define HAL_LCD_BACKLIGHT_PIN  1
+//   78 
+//   79 #define HAL_LCD_RESET_PORT 2
+//   80 #define HAL_LCD_RESET_PIN  0
+//   81 
+//   82 // spi
+//   83 #define HAL_LCD_CS_PORT 1
+//   84 #define HAL_LCD_CS_PIN  7
+//   85 
+//   86 #define HAL_LCD_RS_PORT 1
+//   87 #define HAL_LCD_RS_PIN  5
+//   88 
+//   89 #define HAL_LCD_SCLK_PORT 1
+//   90 #define HAL_LCD_SCLK_PIN  4
+//   91 
+//   92 #define HAL_LCD_SDA_PORT 1
+//   93 #define HAL_LCD_SDA_PIN  6
+//   94 
+//   95 /* LCD Parameters */
+//   96 #define LCD_MAX_LINE_COUNT              4
+//   97 #define LCD_MAX_LINE_LENGTH             16
+//   98 #define LCD_MAX_BUF                     25
+//   99 
+//  100 /* Defines for HW LCD */
+//  101 
+//  102 /* Bias control */
+//  103 #define BIAS_1_7                        0x01
+//  104 #define BIAS_1_9                        0x00
+//  105 #define SET_BIAS_CTRL(bias)             HalLcd_HW_Control(0xA2 | (bias))
+//  106 
+//  107 /* Power control */
+//  108 #define LCD_POWER_CONTROL_1             0x04
+//  109 #define LCD_POWER_CONTROL_2             0x06
+//  110 #define LCD_POWER_CONTROL_3             0x07
+//  111 #define LCD_POWER_CONTROL(options)      HalLcd_HW_Control(0x28 + options)
+//  112 
+//  113 /* LCD commands */
+//  114 #define LCD_SOFT_RESET                  0xE2
+//  115 #define LCD_CMD_SET_CONTRAST            0x20
 //  116 
-//  117 /**************************************************************************************************
-//  118  *                                           MACROS
-//  119  **************************************************************************************************/
-//  120 
-//  121 #define HAL_IO_SET(port, pin, val)                HAL_IO_SET_PREP(port, pin, val)
-//  122 #define HAL_IO_SET_PREP(port, pin, val)           st( P##port##_##pin = val; )
-//  123 
-//  124 #define HAL_CONFIG_IO_OUTPUT(port, pin, val)      HAL_CONFIG_IO_OUTPUT_PREP(port, pin, val)
-//  125 #define HAL_CONFIG_IO_OUTPUT_PREP(port, pin, val) st( P##port##SEL &= ~BV(pin); \ 
-//  126                                                       P##port##_##pin = val; \ 
-//  127                                                       P##port##DIR |= BV(pin); )
-//  128 
-//  129 #define HAL_CONFIG_IO_PERIPHERAL(port, pin)       HAL_CONFIG_IO_PERIPHERAL_PREP(port, pin)
-//  130 #define HAL_CONFIG_IO_PERIPHERAL_PREP(port, pin)  st( P##port##SEL |= BV(pin); )
-//  131 
+//  117 
+//  118 /**************************************************************************************************
+//  119  *                                           MACROS
+//  120  **************************************************************************************************/
+//  121 
+//  122 #define HAL_IO_SET(port, pin, val)                HAL_IO_SET_PREP(port, pin, val)
+//  123 #define HAL_IO_SET_PREP(port, pin, val)           st( P##port##_##pin = val; )
+//  124 
+//  125 #define HAL_CONFIG_IO_OUTPUT(port, pin, val)      HAL_CONFIG_IO_OUTPUT_PREP(port, pin, val)
+//  126 #define HAL_CONFIG_IO_OUTPUT_PREP(port, pin, val) st( P##port##SEL &= ~BV(pin); \ 
+//  127                                                       P##port##_##pin = val; \ 
+//  128                                                       P##port##DIR |= BV(pin); )
+//  129 
+//  130 #define HAL_CONFIG_IO_PERIPHERAL(port, pin)       HAL_CONFIG_IO_PERIPHERAL_PREP(port, pin)
+//  131 #define HAL_CONFIG_IO_PERIPHERAL_PREP(port, pin)  st( P##port##SEL |= BV(pin); )
 //  132 
-//  133 /* Control macros */
-//  134 #define LCD_BACKLIGHT_OFF()     HAL_IO_SET(HAL_LCD_BACKLIGHT_PORT, HAL_LCD_BACKLIGHT_PIN, 1);
-//  135 #define LCD_BACKLIGHT_ON()      HAL_IO_SET(HAL_LCD_BACKLIGHT_PORT, HAL_LCD_BACKLIGHT_PIN, 0);
-//  136 
-//  137 #define LCD_SCLK_H              HAL_IO_SET(HAL_LCD_SCLK_PORT, HAL_LCD_SCLK_PIN, 1);
-//  138 #define LCD_SCLK_L              HAL_IO_SET(HAL_LCD_SCLK_PORT, HAL_LCD_SCLK_PIN, 0);
-//  139 
-//  140 #define LCD_SDA_H               HAL_IO_SET(HAL_LCD_SDA_PORT, HAL_LCD_SDA_PIN, 1);
-//  141 #define LCD_SDA_L               HAL_IO_SET(HAL_LCD_SDA_PORT, HAL_LCD_SDA_PIN, 0);
-//  142 
-//  143 #define LCD_ACTIVATE_CS()       HAL_IO_SET(HAL_LCD_CS_PORT, HAL_LCD_CS_PIN, 0);
-//  144 #define LCD_RELEASE_CS()        HAL_IO_SET(HAL_LCD_CS_PORT, HAL_LCD_CS_PIN, 1);
-//  145 
-//  146 #define LCD_RS_CMD()            HAL_IO_SET(HAL_LCD_RS_PORT, HAL_LCD_RS_PIN, 0);
-//  147 #define LCD_RS_DATA()           HAL_IO_SET(HAL_LCD_RS_PORT, HAL_LCD_RS_PIN, 1);
-//  148 
-//  149 #define LCD_ACTIVATE_RESET()    HAL_IO_SET(HAL_LCD_RESET_PORT, HAL_LCD_RESET_PIN, 0);//低电平复位
-//  150 #define LCD_RELEASE_RESET()     HAL_IO_SET(HAL_LCD_RESET_PORT, HAL_LCD_RESET_PIN, 1);
-//  151 
-//  152 #if (HAL_LCD == TRUE)
-//  153 /**************************************************************************************************
-//  154  *                                       LOCAL VARIABLES
-//  155  **************************************************************************************************/
-//  156 
+//  133 
+//  134 /* Control macros */
+//  135 #define LCD_BACKLIGHT_OFF()     HAL_IO_SET(HAL_LCD_BACKLIGHT_PORT, HAL_LCD_BACKLIGHT_PIN, 1);
+//  136 #define LCD_BACKLIGHT_ON()      HAL_IO_SET(HAL_LCD_BACKLIGHT_PORT, HAL_LCD_BACKLIGHT_PIN, 0);
+//  137 
+//  138 #define LCD_SCLK_H              HAL_IO_SET(HAL_LCD_SCLK_PORT, HAL_LCD_SCLK_PIN, 1);
+//  139 #define LCD_SCLK_L              HAL_IO_SET(HAL_LCD_SCLK_PORT, HAL_LCD_SCLK_PIN, 0);
+//  140 
+//  141 #define LCD_SDA_H               HAL_IO_SET(HAL_LCD_SDA_PORT, HAL_LCD_SDA_PIN, 1);
+//  142 #define LCD_SDA_L               HAL_IO_SET(HAL_LCD_SDA_PORT, HAL_LCD_SDA_PIN, 0);
+//  143 
+//  144 #define LCD_ACTIVATE_CS()       HAL_IO_SET(HAL_LCD_CS_PORT, HAL_LCD_CS_PIN, 0);
+//  145 #define LCD_RELEASE_CS()        HAL_IO_SET(HAL_LCD_CS_PORT, HAL_LCD_CS_PIN, 1);
+//  146 
+//  147 #define LCD_RS_CMD()            HAL_IO_SET(HAL_LCD_RS_PORT, HAL_LCD_RS_PIN, 0);
+//  148 #define LCD_RS_DATA()           HAL_IO_SET(HAL_LCD_RS_PORT, HAL_LCD_RS_PIN, 1);
+//  149 
+//  150 #define LCD_ACTIVATE_RESET()    HAL_IO_SET(HAL_LCD_RESET_PORT, HAL_LCD_RESET_PIN, 0);//低电平复位
+//  151 #define LCD_RELEASE_RESET()     HAL_IO_SET(HAL_LCD_RESET_PORT, HAL_LCD_RESET_PIN, 1);
+//  152 
+//  153 #if (HAL_LCD == TRUE)
+//  154 /**************************************************************************************************
+//  155  *                                       LOCAL VARIABLES
+//  156  **************************************************************************************************/
+//  157 
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA16
-//  157 static uint8 *Lcd_Line1;
+//  158 static uint8 *Lcd_Line1;
 Lcd_Line1:
         DS 2
         REQUIRE __INIT_XDATA_Z
-//  158 
-//  159 /**************************************************************************************************
-//  160  *                                       FUNCTIONS - API
-//  161  **************************************************************************************************/
-//  162 
-//  163 void HalLcd_HW_Init(void);
-//  164 void HalLcd_HW_WaitUs(uint16 i);
-//  165 void HalLcd_HW_SET_DDRAM_ADDR(uint8 page, uint8 column);
-//  166 void HalLcd_HW_Clear(void);
-//  167 void HalLcd_HW_Control(uint8 cmd);
-//  168 void HalLcd_HW_Write(uint8 data);
-//  169 void HalLcd_HW_SetContrast(uint8 value);
-//  170 void HalLcd_HW_SetVoltage(uint8 value);
-//  171 void HalLcd_HW_WriteChar(uint8 line, uint8 col, char text);
-//  172 void HalLcd_HW_WriteLine(uint8 line, const char *pText);
-//  173 #endif //LCD
-//  174 
-//  175 /**************************************************************************************************
-//  176  * @fn      HalLcdInit
-//  177  *
-//  178  * @brief   Initilize LCD Service
-//  179  *
-//  180  * @param   init - pointer to void that contains the initialized value
-//  181  *
-//  182  * @return  None
-//  183  **************************************************************************************************/
+//  159 
+//  160 /**************************************************************************************************
+//  161  *                                       FUNCTIONS - API
+//  162  **************************************************************************************************/
+//  163 
+//  164 void HalLcd_HW_Init(void);
+//  165 void HalLcd_HW_WaitUs(uint16 i);
+//  166 void HalLcd_HW_SET_DDRAM_ADDR(uint8 page, uint8 column);
+//  167 void HalLcd_HW_Clear(void);
+//  168 void HalLcd_HW_Control(uint8 cmd);
+//  169 void HalLcd_HW_Write(uint8 data);
+//  170 void HalLcd_HW_SetContrast(uint8 value);
+//  171 void HalLcd_HW_SetVoltage(uint8 value);
+//  172 void HalLcd_HW_WriteChar(uint8 line, uint8 col, char text);
+//  173 void HalLcd_HW_WriteLine(uint8 line, const char *pText);
+//  174 #endif //LCD
+//  175 
+//  176 /**************************************************************************************************
+//  177  * @fn      HalLcdInit
+//  178  *
+//  179  * @brief   Initilize LCD Service
+//  180  *
+//  181  * @param   init - pointer to void that contains the initialized value
+//  182  *
+//  183  * @return  None
+//  184  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  184 void HalLcdInit(void)
+//  185 void HalLcdInit(void)
 HalLcdInit:
         CFI Block cfiBlock0 Using cfiCommon0
         CFI Function HalLcdInit
         CODE
-//  185 {
+//  186 {
         FUNCALL HalLcdInit, HalLcd_HW_Init
         LOCFRAME ISTACK, 2, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -2319,19 +2320,19 @@ HalLcdInit:
         CFI CFA_SP SP+-5
         ; Saved register size: 2
         ; Auto size: 0
-//  186 #if (HAL_LCD == TRUE)
-//  187     Lcd_Line1 = NULL;
+//  187 #if (HAL_LCD == TRUE)
+//  188     Lcd_Line1 = NULL;
         MOV     DPTR,#Lcd_Line1
         CLR     A
         MOVX    @DPTR,A
         INC     DPTR
         MOVX    @DPTR,A
-//  188     HalLcd_HW_Init();
+//  189     HalLcd_HW_Init();
         ; Setup parameters for call to function HalLcd_HW_Init
         LCALL   ??HalLcd_HW_Init?relay
         CFI EndBlock cfiBlock0
-//  189 #endif
-//  190 }
+//  190 #endif
+//  191 }
         REQUIRE ?Subroutine0
         ; // Fall through to label ?Subroutine0
 
@@ -2350,42 +2351,42 @@ HalLcdInit:
         CFI DPL0 SameValue
         LJMP    ?BRET
         CFI EndBlock cfiBlock1
-//  191 
-//  192 /*************************************************************************************************
-//  193  *                    LCD EMULATION FUNCTIONS
-//  194  *
-//  195  * Some evaluation boards are equipped with Liquid Crystal Displays
-//  196  * (LCD) which may be used to display diagnostic information. These
-//  197  * functions provide LCD emulation, sending the diagnostic strings
-//  198  * to Z-Tool via the RS232 serial port. These functions are enabled
-//  199  * when the "LCD_SUPPORTED" compiler flag is placed in the makefile.
-//  200  *
-//  201  * Most applications update both lines (1 and 2) of the LCD whenever
-//  202  * text is posted to the device. This emulator assumes that line 1 is
-//  203  * updated first (saved locally) and the formatting and send operation
-//  204  * is triggered by receipt of line 2. Nothing will be transmitted if
-//  205  * only line 1 is updated.
-//  206  *
-//  207  *************************************************************************************************/
-//  208 
-//  209 /**************************************************************************************************
-//  210  * @fn      HalLcdWriteString
-//  211  *
-//  212  * @brief   Write a string to the LCD
-//  213  *
-//  214  * @param   str    - pointer to the string that will be displayed
-//  215  *          option - display options
-//  216  *
-//  217  * @return  None
-//  218  **************************************************************************************************/
+//  192 
+//  193 /*************************************************************************************************
+//  194  *                    LCD EMULATION FUNCTIONS
+//  195  *
+//  196  * Some evaluation boards are equipped with Liquid Crystal Displays
+//  197  * (LCD) which may be used to display diagnostic information. These
+//  198  * functions provide LCD emulation, sending the diagnostic strings
+//  199  * to Z-Tool via the RS232 serial port. These functions are enabled
+//  200  * when the "LCD_SUPPORTED" compiler flag is placed in the makefile.
+//  201  *
+//  202  * Most applications update both lines (1 and 2) of the LCD whenever
+//  203  * text is posted to the device. This emulator assumes that line 1 is
+//  204  * updated first (saved locally) and the formatting and send operation
+//  205  * is triggered by receipt of line 2. Nothing will be transmitted if
+//  206  * only line 1 is updated.
+//  207  *
+//  208  *************************************************************************************************/
+//  209 
+//  210 /**************************************************************************************************
+//  211  * @fn      HalLcdWriteString
+//  212  *
+//  213  * @brief   Write a string to the LCD
+//  214  *
+//  215  * @param   str    - pointer to the string that will be displayed
+//  216  *          option - display options
+//  217  *
+//  218  * @return  None
+//  219  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  219 void HalLcdWriteString ( char *str, uint8 option)
+//  220 void HalLcdWriteString ( char *str, uint8 option)
 HalLcdWriteString:
         CFI Block cfiBlock2 Using cfiCommon0
         CFI Function HalLcdWriteString
         CODE
-//  220 {
+//  221 {
         FUNCALL HalLcdWriteString, osal_mem_alloc
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -2524,13 +2525,13 @@ HalLcdWriteString:
         MOV     A,R3
         MOV     R7,A
         MOV     ?V0 + 8,R1
-//  221 #if (HAL_LCD == TRUE)
-//  222     uint8 strLen = 0;
-//  223     uint8 totalLen = 0;
-//  224     uint8 *buf;
-//  225     uint8 tmpLen;
-//  226   
-//  227     if ( Lcd_Line1 == NULL )
+//  222 #if (HAL_LCD == TRUE)
+//  223     uint8 strLen = 0;
+//  224     uint8 totalLen = 0;
+//  225     uint8 *buf;
+//  226     uint8 tmpLen;
+//  227   
+//  228     if ( Lcd_Line1 == NULL )
         MOV     DPTR,#Lcd_Line1
         MOVX    A,@DPTR
         MOV     R0,A
@@ -2540,8 +2541,8 @@ HalLcdWriteString:
         MOV     A,R0
         ORL     A,R1
         JNZ     ??HalLcdWriteString_0
-//  228     {
-//  229         Lcd_Line1 = osal_mem_alloc( HAL_LCD_MAX_CHARS+1 );
+//  229     {
+//  230         Lcd_Line1 = osal_mem_alloc( HAL_LCD_MAX_CHARS+1 );
         ; Setup parameters for call to function osal_mem_alloc
         MOV     R2,#0x11
         MOV     R3,#0x0
@@ -2552,15 +2553,15 @@ HalLcdWriteString:
         INC     DPTR
         MOV     A,R3
         MOVX    @DPTR,A
-//  230         HalLcdWriteString( "TexasInstruments", 1 );
+//  231         HalLcdWriteString( "TexasInstruments", 1 );
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,#0x1
         MOV     R2,#`?<Constant "TexasInstruments">` & 0xff
         MOV     R3,#(`?<Constant "TexasInstruments">` >> 8) & 0xff
         LCALL   ??HalLcdWriteString?relay
-//  231     }
-//  232   
-//  233     strLen = (uint8)osal_strlen( (char*)str );
+//  232     }
+//  233   
+//  234     strLen = (uint8)osal_strlen( (char*)str );
 ??HalLcdWriteString_0:
         ; Setup parameters for call to function osal_strlen
         MOV     A,R6
@@ -2570,23 +2571,23 @@ HalLcdWriteString:
         LCALL   ??osal_strlen?relay
         MOV     A,R2
         MOV     ?V0 + 7,A
-//  234   
-//  235     /* Check boundries */
-//  236     if ( strLen > HAL_LCD_MAX_CHARS )
+//  235   
+//  236     /* Check boundries */
+//  237     if ( strLen > HAL_LCD_MAX_CHARS )
         CLR     C
         SUBB    A,#0x11
         JC      ??HalLcdWriteString_1
-//  237         strLen = HAL_LCD_MAX_CHARS;
+//  238         strLen = HAL_LCD_MAX_CHARS;
         MOV     ?V0 + 7,#0x10
-//  238   
-//  239     if ( option == HAL_LCD_LINE_1 )
+//  239   
+//  240     if ( option == HAL_LCD_LINE_1 )
 ??HalLcdWriteString_1:
         MOV     A,#0x1
         XRL     A,?V0 + 8
         JNZ     ??HalLcdWriteString_2
-//  240     {
-//  241         /* Line 1 gets saved for later */
-//  242         osal_memcpy( Lcd_Line1, str, strLen );
+//  241     {
+//  242         /* Line 1 gets saved for later */
+//  243         osal_memcpy( Lcd_Line1, str, strLen );
         ; Setup parameters for call to function osal_memcpy
         MOV     ?V0 + 0,R6
         MOV     ?V0 + 1,R7
@@ -2607,7 +2608,7 @@ HalLcdWriteString:
 ??CrossCallReturnLabel_17:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 17)
-//  243         Lcd_Line1[strLen] = '\0';
+//  244         Lcd_Line1[strLen] = '\0';
         MOV     R0,?V0 + 7
         MOV     DPTR,#Lcd_Line1
         MOVX    A,@DPTR
@@ -2621,11 +2622,11 @@ HalLcdWriteString:
         CLR     A
         MOVX    @DPTR,A
         LJMP    ??HalLcdWriteString_3 & 0xFFFF
-//  244     }
-//  245     else
-//  246     {
-//  247         /* Line 2 triggers action */
-//  248         tmpLen = (uint8)osal_strlen( (char*)Lcd_Line1 );
+//  245     }
+//  246     else
+//  247     {
+//  248         /* Line 2 triggers action */
+//  249         tmpLen = (uint8)osal_strlen( (char*)Lcd_Line1 );
 ??HalLcdWriteString_2:
         ; Setup parameters for call to function osal_strlen
         MOV     DPTR,#Lcd_Line1
@@ -2635,8 +2636,8 @@ HalLcdWriteString:
         MOVX    A,@DPTR
         MOV     R3,A
         LCALL   ?Subroutine6 & 0xFFFF
-//  249         totalLen =  tmpLen + 1 + strLen + 1;
-//  250         buf = osal_mem_alloc( totalLen );
+//  250         totalLen =  tmpLen + 1 + strLen + 1;
+//  251         buf = osal_mem_alloc( totalLen );
 ??CrossCallReturnLabel_4:
         ; Setup parameters for call to function osal_mem_alloc
         ADD     A,?V0 + 7
@@ -2646,13 +2647,13 @@ HalLcdWriteString:
         LCALL   ??osal_mem_alloc?relay
         MOV     ?V0 + 0,R2
         MOV     ?V0 + 1,R3
-//  251         if ( buf != NULL )
+//  252         if ( buf != NULL )
         MOV     A,R2
         ORL     A,?V0 + 1
         JZ      ??HalLcdWriteString_3
-//  252         {
-//  253             /* Concatenate strings */
-//  254             osal_memcpy( buf, Lcd_Line1, tmpLen );
+//  253         {
+//  254             /* Concatenate strings */
+//  255             osal_memcpy( buf, Lcd_Line1, tmpLen );
         ; Setup parameters for call to function osal_memcpy
         MOV     DPTR,#Lcd_Line1
         MOVX    A,@DPTR
@@ -2671,7 +2672,7 @@ HalLcdWriteString:
 ??CrossCallReturnLabel_18:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 17)
-//  255             buf[tmpLen++] = ' ';
+//  256             buf[tmpLen++] = ' ';
         MOV     A,?V0 + 0
         ADD     A,?V0 + 4
         MOV     DPL,A
@@ -2681,7 +2682,7 @@ HalLcdWriteString:
         MOV     A,#0x20
         MOVX    @DPTR,A
         INC     ?V0 + 2
-//  256             osal_memcpy( &buf[tmpLen], str, strLen );
+//  257             osal_memcpy( &buf[tmpLen], str, strLen );
         ; Setup parameters for call to function osal_memcpy
         MOV     ?V0 + 4,R6
         MOV     ?V0 + 5,R7
@@ -2701,7 +2702,7 @@ HalLcdWriteString:
 ??CrossCallReturnLabel_19:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 17)
-//  257             buf[tmpLen+strLen] = '\0';
+//  258             buf[tmpLen+strLen] = '\0';
         MOV     A,?V0 + 2
         ADD     A,?V0 + 4
         MOV     R0,A
@@ -2716,24 +2717,24 @@ HalLcdWriteString:
         MOV     DPH,A
         CLR     A
         MOVX    @DPTR,A
-//  258   
-//  259             /* Send it out */
-//  260 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
-//  261 #if defined(SERIAL_DEBUG_SUPPORTED)
-//  262             debug_str( (uint8*)buf );
-//  263 #endif //LCD_SUPPORTED
-//  264 #endif //ZTOOL_P1
-//  265             /* Free mem */
-//  266             osal_mem_free( buf );
+//  259   
+//  260             /* Send it out */
+//  261 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
+//  262 #if defined(SERIAL_DEBUG_SUPPORTED)
+//  263             debug_str( (uint8*)buf );
+//  264 #endif //LCD_SUPPORTED
+//  265 #endif //ZTOOL_P1
+//  266             /* Free mem */
+//  267             osal_mem_free( buf );
         ; Setup parameters for call to function osal_mem_free
         MOV     R2,?V0 + 0
         MOV     R3,?V0 + 1
         LCALL   ??osal_mem_free?relay
-//  267         }
-//  268     }
-//  269   
-//  270     /* Display the string */
-//  271     HalLcd_HW_WriteLine (option, str);
+//  268         }
+//  269     }
+//  270   
+//  271     /* Display the string */
+//  272     HalLcd_HW_WriteLine (option, str);
 ??HalLcdWriteString_3:
         ; Setup parameters for call to function HalLcd_HW_WriteLine
         MOV     A,R6
@@ -2742,31 +2743,31 @@ HalLcdWriteString:
         MOV     R3,A
         MOV     R1,?V0 + 8
         LCALL   ??HalLcd_HW_WriteLine?relay
-//  272 #endif //HAL_LCD
-//  273 }
+//  273 #endif //HAL_LCD
+//  274 }
         MOV     R7,#0x9
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock2
-//  274 
-//  275 /**************************************************************************************************
-//  276  * @fn      HalLcdWriteValue
-//  277  *
-//  278  * @brief   Write a value to the LCD
-//  279  *
-//  280  * @param   value  - value that will be displayed
-//  281  *          radix  - 8, 10, 16(进制)
-//  282  *          option - display options
-//  283  *
-//  284  * @return  None
-//  285  **************************************************************************************************/
+//  275 
+//  276 /**************************************************************************************************
+//  277  * @fn      HalLcdWriteValue
+//  278  *
+//  279  * @brief   Write a value to the LCD
+//  280  *
+//  281  * @param   value  - value that will be displayed
+//  282  *          radix  - 8, 10, 16(进制)
+//  283  *          option - display options
+//  284  *
+//  285  * @return  None
+//  286  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  286 void HalLcdWriteValue ( uint32 value, const uint8 radix, uint8 option)
+//  287 void HalLcdWriteValue ( uint32 value, const uint8 radix, uint8 option)
 HalLcdWriteValue:
         CFI Block cfiBlock3 Using cfiCommon0
         CFI Function HalLcdWriteValue
         CODE
-//  287 {
+//  288 {
         FUNCALL HalLcdWriteValue, _ltoa
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -2818,11 +2819,11 @@ HalLcdWriteValue:
         LCALL   ?XSTACK_DISP0_8
         MOVX    A,@DPTR
         MOV     R6,A
-//  288 #if (HAL_LCD == TRUE)
-//  289     uint8 buf[LCD_MAX_BUF];
-//  290 
-//  291     // 将value按照radix的进制转换存到buf中
-//  292     _ltoa( value, &buf[0], radix ); 
+//  289 #if (HAL_LCD == TRUE)
+//  290     uint8 buf[LCD_MAX_BUF];
+//  291 
+//  292     // 将value按照radix的进制转换存到buf中
+//  293     _ltoa( value, &buf[0], radix ); 
         ; Setup parameters for call to function _ltoa
         MOV     DPL,?XSP + 0
         MOV     DPH,?XSP + 1
@@ -2835,7 +2836,7 @@ HalLcdWriteValue:
 ??CrossCallReturnLabel_13:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 41)
-//  293     HalLcdWriteString( (char*)buf, option );
+//  294     HalLcdWriteString( (char*)buf, option );
         ; Setup parameters for call to function HalLcdWriteString
         MOV     A,R6
         MOV     R1,A
@@ -2844,8 +2845,8 @@ HalLcdWriteValue:
         MOV     R2,DPL
         MOV     R3,DPH
         LCALL   ??HalLcdWriteString?relay
-//  294 #endif
-//  295 }
+//  295 #endif
+//  296 }
         MOV     A,#0x19
         LCALL   ?DEALLOC_XSTACK8
         CFI EndBlock cfiBlock3
@@ -2877,25 +2878,25 @@ HalLcdWriteValue:
         MOV     R7,#0x8
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock4
-//  296 
-//  297 /**************************************************************************************************
-//  298  * @fn      HalLcdWriteScreen
-//  299  *
-//  300  * @brief   Write a value to the LCD
-//  301  *
-//  302  * @param   line1  - string that will be displayed on line 1
-//  303  *          line2  - string that will be displayed on line 2
-//  304  *
-//  305  * @return  None
-//  306  **************************************************************************************************/
+//  297 
+//  298 /**************************************************************************************************
+//  299  * @fn      HalLcdWriteScreen
+//  300  *
+//  301  * @brief   Write a value to the LCD
+//  302  *
+//  303  * @param   line1  - string that will be displayed on line 1
+//  304  *          line2  - string that will be displayed on line 2
+//  305  *
+//  306  * @return  None
+//  307  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  307 void HalLcdWriteScreen( char *line1, char *line2 )
+//  308 void HalLcdWriteScreen( char *line1, char *line2 )
 HalLcdWriteScreen:
         CFI Block cfiBlock5 Using cfiCommon0
         CFI Function HalLcdWriteScreen
         CODE
-//  308 {
+//  309 {
         FUNCALL HalLcdWriteScreen, HalLcdWriteString
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -2937,12 +2938,12 @@ HalLcdWriteScreen:
         MOV     R6,A
         MOV     A,R5
         MOV     R7,A
-//  309 #if (HAL_LCD == TRUE)
-//  310     HalLcdWriteString( line1, 1 );
+//  310 #if (HAL_LCD == TRUE)
+//  311     HalLcdWriteString( line1, 1 );
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,#0x1
         LCALL   ??HalLcdWriteString?relay
-//  311     HalLcdWriteString( line2, 2 );
+//  312     HalLcdWriteString( line2, 2 );
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,#0x2
         MOV     A,R6
@@ -2950,31 +2951,31 @@ HalLcdWriteScreen:
         MOV     A,R7
         MOV     R3,A
         LCALL   ??HalLcdWriteString?relay
-//  312 #endif
-//  313 }
+//  313 #endif
+//  314 }
         LJMP    ??Subroutine11_0 & 0xFFFF
         CFI EndBlock cfiBlock5
-//  314 
-//  315 /**************************************************************************************************
-//  316  * @fn      HalLcdWriteStringValue
-//  317  *
-//  318  * @brief   Write a string followed by a value to the LCD
-//  319  *
-//  320  * @param   title  - Title that will be displayed before the value
-//  321  *          value  - value
-//  322  *          format - redix
-//  323  *          line   - line number
-//  324  *
-//  325  * @return  None
-//  326  **************************************************************************************************/
+//  315 
+//  316 /**************************************************************************************************
+//  317  * @fn      HalLcdWriteStringValue
+//  318  *
+//  319  * @brief   Write a string followed by a value to the LCD
+//  320  *
+//  321  * @param   title  - Title that will be displayed before the value
+//  322  *          value  - value
+//  323  *          format - redix
+//  324  *          line   - line number
+//  325  *
+//  326  * @return  None
+//  327  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  327 void HalLcdWriteStringValue( char *title, uint16 value, uint8 format, uint8 line )
+//  328 void HalLcdWriteStringValue( char *title, uint16 value, uint8 format, uint8 line )
 HalLcdWriteStringValue:
         CFI Block cfiBlock6 Using cfiCommon0
         CFI Function HalLcdWriteStringValue
         CODE
-//  328 {
+//  329 {
         FUNCALL HalLcdWriteStringValue, osal_strlen
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -3057,15 +3058,15 @@ HalLcdWriteStringValue:
         LCALL   ?XSTACK_DISP0_8
         MOVX    A,@DPTR
         MOV     ?V0 + 1,A
-//  329 #if (HAL_LCD == TRUE)
-//  330     uint8 tmpLen;
-//  331     uint8 buf[LCD_MAX_BUF];
-//  332     uint32 err;
-//  333   
-//  334     tmpLen = (uint8)osal_strlen( (char*)title );
+//  330 #if (HAL_LCD == TRUE)
+//  331     uint8 tmpLen;
+//  332     uint8 buf[LCD_MAX_BUF];
+//  333     uint32 err;
+//  334   
+//  335     tmpLen = (uint8)osal_strlen( (char*)title );
         ; Setup parameters for call to function osal_strlen
         LCALL   ?Subroutine6 & 0xFFFF
-//  335     osal_memcpy( buf, title, tmpLen );
+//  336     osal_memcpy( buf, title, tmpLen );
 ??CrossCallReturnLabel_5:
         ; Setup parameters for call to function osal_memcpy
         MOV     ?V0 + 4,R6
@@ -3083,7 +3084,7 @@ HalLcdWriteStringValue:
 ??CrossCallReturnLabel_14:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 43)
-//  336     buf[tmpLen] = ' ';
+//  337     buf[tmpLen] = ' ';
         MOV     DPL,?XSP + 0
         MOV     DPH,?XSP + 1
         MOV     A,DPL
@@ -3094,8 +3095,8 @@ HalLcdWriteStringValue:
         MOV     DPH,A
         MOV     A,#0x20
         MOVX    @DPTR,A
-//  337     err = (uint32)(value);
-//  338     _ltoa( err, &buf[tmpLen+1], format );
+//  338     err = (uint32)(value);
+//  339     _ltoa( err, &buf[tmpLen+1], format );
         ; Setup parameters for call to function _ltoa
         INC     DPTR
         MOV     ?V0 + 2,DPL
@@ -3110,7 +3111,7 @@ HalLcdWriteStringValue:
 ??CrossCallReturnLabel_9:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 43)
-//  339     HalLcdWriteString( (char*)buf, line );		
+//  340     HalLcdWriteString( (char*)buf, line );		
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,?V0 + 1
         MOV     DPL,?XSP + 0
@@ -3118,8 +3119,8 @@ HalLcdWriteStringValue:
         MOV     R2,DPL
         MOV     R3,DPH
         LCALL   ??HalLcdWriteString?relay
-//  340 #endif
-//  341 }
+//  341 #endif
+//  342 }
         MOV     A,#0x19
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 18)
@@ -3530,30 +3531,30 @@ HalLcdWriteStringValue:
         CFI EndBlock cfiCond23
         CFI EndBlock cfiCond24
         CFI EndBlock cfiPicker25
-//  342 
-//  343 /**************************************************************************************************
-//  344  * @fn      HalLcdWriteStringValueValue
-//  345  *
-//  346  * @brief   Write a string followed by a value to the LCD
-//  347  *
-//  348  * @param   title   - Title that will be displayed before the value
-//  349  *          value1  - value #1
-//  350  *          format1 - redix of value #1
-//  351  *          value2  - value #2
-//  352  *          format2 - redix of value #2
-//  353  *          line    - line number
-//  354  *
-//  355  * @return  None
-//  356  **************************************************************************************************/
+//  343 
+//  344 /**************************************************************************************************
+//  345  * @fn      HalLcdWriteStringValueValue
+//  346  *
+//  347  * @brief   Write a string followed by a value to the LCD
+//  348  *
+//  349  * @param   title   - Title that will be displayed before the value
+//  350  *          value1  - value #1
+//  351  *          format1 - redix of value #1
+//  352  *          value2  - value #2
+//  353  *          format2 - redix of value #2
+//  354  *          line    - line number
+//  355  *
+//  356  * @return  None
+//  357  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  357 void HalLcdWriteStringValueValue( char *title1, uint16 value1, uint8 format1,
+//  358 void HalLcdWriteStringValueValue( char *title1, uint16 value1, uint8 format1,
 HalLcdWriteStringValueValue:
         CFI Block cfiBlock26 Using cfiCommon0
         CFI Function HalLcdWriteStringValueValue
         CODE
-//  358                                   char *title2,uint16 value2, uint8 format2, uint8 line )
-//  359 {
+//  359                                   char *title2,uint16 value2, uint8 format2, uint8 line )
+//  360 {
         FUNCALL HalLcdWriteStringValueValue, osal_strlen
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -3702,20 +3703,20 @@ HalLcdWriteStringValueValue:
         LCALL   ?XSTACK_DISP0_8
         MOVX    A,@DPTR
         MOV     ?V0 + 7,A
-//  360 #if (HAL_LCD == TRUE)
-//  361     uint8 tmpLen;
-//  362     uint8 buf[LCD_MAX_BUF];
-//  363     uint32 err;
-//  364   
-//  365     tmpLen = (uint8)osal_strlen( (char*)title1 );
+//  361 #if (HAL_LCD == TRUE)
+//  362     uint8 tmpLen;
+//  363     uint8 buf[LCD_MAX_BUF];
+//  364     uint32 err;
+//  365   
+//  366     tmpLen = (uint8)osal_strlen( (char*)title1 );
         ; Setup parameters for call to function osal_strlen
         LCALL   ??osal_strlen?relay
         MOV     A,R2
         MOV     ?V0 + 4,A
-//  366     if ( tmpLen )
+//  367     if ( tmpLen )
         JZ      ??HalLcdWriteStringValueValue_0
-//  367     {
-//  368         osal_memcpy( buf, title1, tmpLen );
+//  368     {
+//  369         osal_memcpy( buf, title1, tmpLen );
         ; Setup parameters for call to function osal_memcpy
         MOV     ?V0 + 8,R6
         MOV     ?V0 + 9,R7
@@ -3729,13 +3730,13 @@ HalLcdWriteStringValueValue:
         MOV     A,#0x3
         LCALL   ?XSTACK_DISP0_8
         LCALL   ?Subroutine4 & 0xFFFF
-//  369     }
+//  370     }
 ??CrossCallReturnLabel_15:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 47)
-//  370   
-//  371     err = (uint32)(value1);
-//  372     _ltoa( err, &buf[tmpLen], format1 );
+//  371   
+//  372     err = (uint32)(value1);
+//  373     _ltoa( err, &buf[tmpLen], format1 );
 ??HalLcdWriteStringValueValue_0:
         ; Setup parameters for call to function _ltoa
         MOV     ?V0 + 8,?V0 + 4
@@ -3757,7 +3758,7 @@ HalLcdWriteStringValueValue:
 ??CrossCallReturnLabel_10:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 47)
-//  373     tmpLen = (uint8)osal_strlen( (char*)buf );
+//  374     tmpLen = (uint8)osal_strlen( (char*)buf );
         ; Setup parameters for call to function osal_strlen
         MOV     DPL,?XSP + 0
         MOV     DPH,?XSP + 1
@@ -3765,8 +3766,8 @@ HalLcdWriteStringValueValue:
         MOV     R3,DPH
         LCALL   ??osal_strlen?relay
         MOV     ?V0 + 2,R2
-//  374   
-//  375     tmpLen += (uint8)osal_strlen( (char*)title2 );
+//  375   
+//  376     tmpLen += (uint8)osal_strlen( (char*)title2 );
         ; Setup parameters for call to function osal_strlen
         MOV     R2,?V0 + 12
         MOV     R3,?V0 + 13
@@ -3774,10 +3775,10 @@ HalLcdWriteStringValueValue:
         MOV     A,?V0 + 2
         ADD     A,R2
         MOV     ?V0 + 4,A
-//  376     if ( tmpLen )
+//  377     if ( tmpLen )
         JZ      ??HalLcdWriteStringValueValue_1
-//  377     {
-//  378         strcat( buf, title2);
+//  378     {
+//  379         strcat( buf, title2);
         ; Setup parameters for call to function strcat
         MOV     R4,?V0 + 12
         MOV     R5,?V0 + 13
@@ -3786,10 +3787,10 @@ HalLcdWriteStringValueValue:
         MOV     R2,DPL
         MOV     R3,DPH
         LCALL   ??strcat?relay
-//  379     }
-//  380     
-//  381     err = (uint32)(value2);
-//  382     _ltoa( err, &buf[tmpLen], format2 );
+//  380     }
+//  381     
+//  382     err = (uint32)(value2);
+//  383     _ltoa( err, &buf[tmpLen], format2 );
 ??HalLcdWriteStringValueValue_1:
         ; Setup parameters for call to function _ltoa
         MOV     ?V0 + 2,?V0 + 4
@@ -3811,8 +3812,8 @@ HalLcdWriteStringValueValue:
 ??CrossCallReturnLabel_11:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 47)
-//  383   
-//  384     HalLcdWriteString( (char *)buf, line );		
+//  384   
+//  385     HalLcdWriteString( (char *)buf, line );		
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,?V0 + 7
         MOV     DPL,?XSP + 0
@@ -3820,8 +3821,8 @@ HalLcdWriteStringValueValue:
         MOV     R2,DPL
         MOV     R3,DPH
         LCALL   ??HalLcdWriteString?relay
-//  385 #endif
-//  386 }
+//  386 #endif
+//  387 }
         MOV     A,#0x19
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 22)
@@ -4058,25 +4059,25 @@ HalLcdWriteStringValueValue:
         CFI EndBlock cfiCond35
         CFI EndBlock cfiCond36
         CFI EndBlock cfiPicker37
-//  387 
-//  388 /**************************************************************************************************
-//  389  * @fn      HalLcdDisplayPercentBar
-//  390  *
-//  391  * @brief   Display percentage bar on the LCD
-//  392  *
-//  393  * @param   title   -
-//  394  *          value   -
-//  395  *
-//  396  * @return  None
-//  397  **************************************************************************************************/
+//  388 
+//  389 /**************************************************************************************************
+//  390  * @fn      HalLcdDisplayPercentBar
+//  391  *
+//  392  * @brief   Display percentage bar on the LCD
+//  393  *
+//  394  * @param   title   -
+//  395  *          value   -
+//  396  *
+//  397  * @return  None
+//  398  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  398 void HalLcdDisplayPercentBar( char *title, uint8 value )
+//  399 void HalLcdDisplayPercentBar( char *title, uint8 value )
 HalLcdDisplayPercentBar:
         CFI Block cfiBlock38 Using cfiCommon0
         CFI Function HalLcdDisplayPercentBar
         CODE
-//  399 {
+//  400 {
         FUNCALL HalLcdDisplayPercentBar, osal_memcpy
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -4133,38 +4134,38 @@ HalLcdDisplayPercentBar:
         CFI CFA_XSP16 add(XSP16, 29)
         MOV     A,R1
         MOV     R6,A
-//  400 #if (HAL_LCD == TRUE)
-//  401     uint8 percent;
-//  402     uint8 leftOver;
-//  403     uint8 buf[17];
-//  404     uint32 err;
-//  405     uint8 x;
-//  406   
-//  407     /* Write the title: */
-//  408     //HalLcdWriteString( title, HAL_LCD_LINE_4 );
-//  409   
-//  410     if ( value > 100 )
+//  401 #if (HAL_LCD == TRUE)
+//  402     uint8 percent;
+//  403     uint8 leftOver;
+//  404     uint8 buf[17];
+//  405     uint32 err;
+//  406     uint8 x;
+//  407   
+//  408     /* Write the title: */
+//  409     //HalLcdWriteString( title, HAL_LCD_LINE_4 );
+//  410   
+//  411     if ( value > 100 )
         CLR     C
         SUBB    A,#0x65
         JC      ??HalLcdDisplayPercentBar_0
-//  411       value = 100;
+//  412       value = 100;
         MOV     R6,#0x64
-//  412   
-//  413     /* convert to blocks */
-//  414     percent = (uint8)(value / 10);
+//  413   
+//  414     /* convert to blocks */
+//  415     percent = (uint8)(value / 10);
 ??HalLcdDisplayPercentBar_0:
         MOV     B,#0xa
         MOV     A,R6
         DIV     AB
         MOV     ?V0 + 3,A
-//  415     leftOver = (uint8)(value % 10);
+//  416     leftOver = (uint8)(value % 10);
         MOV     A,R6
         MOV     B,#0xa
         DIV     AB
         MOV     R7,B
-//  416   
-//  417     /* Make window */
-//  418     osal_memcpy( buf, "[          ]  ", 15 );
+//  417   
+//  418     /* Make window */
+//  419     osal_memcpy( buf, "[          ]  ", 15 );
         ; Setup parameters for call to function osal_memcpy
         MOV     ?V0 + 0,#`?<Constant "[          ]  ">` & 0xff
         MOV     ?V0 + 1,#(`?<Constant "[          ]  ">` >> 8) & 0xff
@@ -4180,12 +4181,12 @@ HalLcdDisplayPercentBar:
 ??CrossCallReturnLabel_16:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 29)
-//  419   
-//  420     for ( x = 0; x < percent; x ++ )
+//  420   
+//  421     for ( x = 0; x < percent; x ++ )
         MOV     A,?V0 + 3
         JZ      ??HalLcdDisplayPercentBar_1
-//  421     {
-//  422         buf[1+x] = '>';
+//  422     {
+//  423         buf[1+x] = '>';
         MOV     R0,A
         MOV     R1,#0x0
         MOV     R2,#0x3e
@@ -4203,16 +4204,16 @@ HalLcdDisplayPercentBar:
         MOV     R1,A
         ORL     A,R0
         JNZ     ??HalLcdDisplayPercentBar_2
-//  423     }
+//  424     }
         MOV     ?V0 + 2,?V0 + 3
-//  424   
-//  425     if ( leftOver >= 5 )
+//  425   
+//  426     if ( leftOver >= 5 )
 ??HalLcdDisplayPercentBar_1:
         MOV     A,R7
         CLR     C
         SUBB    A,#0x5
         JC      ??HalLcdDisplayPercentBar_3
-//  426       buf[1+x] = '+';
+//  427       buf[1+x] = '+';
         MOV     ?V0 + 0,?V0 + 2
         MOV     DPL,?XSP + 0
         MOV     DPH,?XSP + 1
@@ -4225,9 +4226,9 @@ HalLcdDisplayPercentBar:
         INC     DPTR
         MOV     A,#0x2b
         MOVX    @DPTR,A
-//  427   
-//  428     err = (uint32)value;
-//  429     _ltoa( err, (uint8*)&buf[13], 10 );
+//  428   
+//  429     err = (uint32)value;
+//  430     _ltoa( err, (uint8*)&buf[13], 10 );
 ??HalLcdDisplayPercentBar_3:
         ; Setup parameters for call to function _ltoa
         MOV     A,#0xd
@@ -4246,8 +4247,8 @@ HalLcdDisplayPercentBar:
 ??CrossCallReturnLabel_12:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 29)
-//  430   
-//  431     HalLcdWriteString( (char*)buf, HAL_LCD_LINE_4 );
+//  431   
+//  432     HalLcdWriteString( (char*)buf, HAL_LCD_LINE_4 );
         ; Setup parameters for call to function HalLcdWriteString
         MOV     R1,#0x4
         MOV     DPL,?XSP + 0
@@ -4255,66 +4256,66 @@ HalLcdDisplayPercentBar:
         MOV     R2,DPL
         MOV     R3,DPH
         LCALL   ??HalLcdWriteString?relay
-//  432 #endif
-//  433 }                     
+//  433 #endif
+//  434 }                     
         MOV     A,#0x11
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 12)
         MOV     R7,#0x4
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock38
-//  434 
 //  435 
-//  436 #if (HAL_LCD == TRUE)
-//  437 /**************************************************************************************************
-//  438  *                                    HARDWARE LCD
-//  439  **************************************************************************************************/
-//  440 
-//  441 /**************************************************************************************************
-//  442  * @fn      halLcd_ConfigIO
-//  443  *
-//  444  * @brief   Configure IO lines needed for LCD control.
-//  445  *
-//  446  * @param   None
-//  447  *
-//  448  * @return  None
-//  449  **************************************************************************************************/
+//  436 
+//  437 #if (HAL_LCD == TRUE)
+//  438 /**************************************************************************************************
+//  439  *                                    HARDWARE LCD
+//  440  **************************************************************************************************/
+//  441 
+//  442 /**************************************************************************************************
+//  443  * @fn      halLcd_ConfigIO
+//  444  *
+//  445  * @brief   Configure IO lines needed for LCD control.
+//  446  *
+//  447  * @param   None
+//  448  *
+//  449  * @return  None
+//  450  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  450 static void halLcd_ConfigIO(void)
+//  451 static void halLcd_ConfigIO(void)
 halLcd_ConfigIO:
         CFI Block cfiBlock39 Using cfiCommon0
         CFI Function halLcd_ConfigIO
         CODE
-//  451 {
+//  452 {
         ; Saved register size: 0
         ; Auto size: 0
-//  452     /* GPIO configuration */
-//  453     HAL_CONFIG_IO_OUTPUT(HAL_LCD_BACKLIGHT_PORT, HAL_LCD_BACKLIGHT_PIN, 1);
+//  453     /* GPIO configuration */
+//  454     HAL_CONFIG_IO_OUTPUT(HAL_LCD_BACKLIGHT_PORT, HAL_LCD_BACKLIGHT_PIN, 1);
         ANL     0xf4,#0xfd
         SETB    0x90.1
         ORL     0xfe,#0x2
-//  454     HAL_CONFIG_IO_OUTPUT(HAL_LCD_RESET_PORT,     HAL_LCD_RESET_PIN,     1);
+//  455     HAL_CONFIG_IO_OUTPUT(HAL_LCD_RESET_PORT,     HAL_LCD_RESET_PIN,     1);
         ANL     0xf5,#0xfe
         SETB    0xa0.0
         ORL     0xff,#0x1
-//  455     HAL_CONFIG_IO_OUTPUT(HAL_LCD_CS_PORT,        HAL_LCD_CS_PIN,        1);
+//  456     HAL_CONFIG_IO_OUTPUT(HAL_LCD_CS_PORT,        HAL_LCD_CS_PIN,        1);
         ANL     0xf4,#0x7f
         SETB    0x90.7
         ORL     0xfe,#0x80
-//  456     HAL_CONFIG_IO_OUTPUT(HAL_LCD_SCLK_PORT,      HAL_LCD_SCLK_PIN,      1);
+//  457     HAL_CONFIG_IO_OUTPUT(HAL_LCD_SCLK_PORT,      HAL_LCD_SCLK_PIN,      1);
         ANL     0xf4,#0xef
         SETB    0x90.4
         ORL     0xfe,#0x10
-//  457     HAL_CONFIG_IO_OUTPUT(HAL_LCD_RS_PORT,        HAL_LCD_RS_PIN,        1);
+//  458     HAL_CONFIG_IO_OUTPUT(HAL_LCD_RS_PORT,        HAL_LCD_RS_PIN,        1);
         ANL     0xf4,#0xdf
         SETB    0x90.5
         ORL     0xfe,#0x20
-//  458     HAL_CONFIG_IO_OUTPUT(HAL_LCD_SDA_PORT,       HAL_LCD_SDA_PIN,       1);
+//  459     HAL_CONFIG_IO_OUTPUT(HAL_LCD_SDA_PORT,       HAL_LCD_SDA_PIN,       1);
         ANL     0xf4,#0xbf
         SETB    0x90.6
         ORL     0xfe,#0x40
-//  459 }
+//  460 }
         LJMP    ?BRET
         CFI EndBlock cfiBlock39
         REQUIRE P1SEL
@@ -4323,24 +4324,24 @@ halLcd_ConfigIO:
         REQUIRE P2SEL
         REQUIRE _A_P2
         REQUIRE P2DIR
-//  460 
-//  461 /**************************************************************************************************
-//  462  * @fn      HalLcd_HW_SET_DDRAM_ADDR
-//  463  *
-//  464  * @brief   Set DDRAM address, 一共128列，8页(每页8行)
-//  465  *
-//  466  * @param   uint8 page, uint8 column
-//  467  *
-//  468  * @return  None
-//  469  **************************************************************************************************/
+//  461 
+//  462 /**************************************************************************************************
+//  463  * @fn      HalLcd_HW_SET_DDRAM_ADDR
+//  464  *
+//  465  * @brief   Set DDRAM address, 一共128列，8页(每页8行)
+//  466  *
+//  467  * @param   uint8 page, uint8 column
+//  468  *
+//  469  * @return  None
+//  470  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  470 void HalLcd_HW_SET_DDRAM_ADDR(uint8 page, uint8 column)
+//  471 void HalLcd_HW_SET_DDRAM_ADDR(uint8 page, uint8 column)
 HalLcd_HW_SET_DDRAM_ADDR:
         CFI Block cfiBlock40 Using cfiCommon0
         CFI Function HalLcd_HW_SET_DDRAM_ADDR
         CODE
-//  471 {
+//  472 {
         FUNCALL HalLcd_HW_SET_DDRAM_ADDR, HalLcd_HW_Control
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -4393,18 +4394,18 @@ HalLcd_HW_SET_DDRAM_ADDR:
         MOV     R7,A
         MOV     A,R2
         MOV     R6,A
-//  472     LCD_ACTIVATE_CS();
+//  473     LCD_ACTIVATE_CS();
         CLR     0x90.7
-//  473     page   -= 1; 
-//  474     column -= 1;
+//  474     page   -= 1; 
+//  475     column -= 1;
         DEC     R6
-//  475     HalLcd_HW_Control(0xb0 + page);
+//  476     HalLcd_HW_Control(0xb0 + page);
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     A,#-0x51
         ADD     A,R7
         MOV     R1,A
         LCALL   ??HalLcd_HW_Control?relay
-//  476     HalLcd_HW_Control(((column >> 4) & 0x0F) + 0x10);
+//  477     HalLcd_HW_Control(((column >> 4) & 0x0F) + 0x10);
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     A,R6
         SWAP    A
@@ -4412,7 +4413,7 @@ HalLcd_HW_SET_DDRAM_ADDR:
         ADD     A,#0x10
         MOV     R1,A
         LCALL   ??HalLcd_HW_Control?relay
-//  477     HalLcd_HW_Control(column & 0x0F);
+//  478     HalLcd_HW_Control(column & 0x0F);
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     A,#0xf
         ANL     A,R6
@@ -4420,156 +4421,156 @@ HalLcd_HW_SET_DDRAM_ADDR:
         SJMP    ?Subroutine2
         CFI EndBlock cfiBlock40
         REQUIRE _A_P1
-//  478     // LCD_RELEASE_CS();
-//  479 }
-//  480 
-//  481 /**************************************************************************************************
-//  482  * @fn      HalLcd_HW_Control
-//  483  *
-//  484  * @brief   Write 1 command to the LCD
-//  485  *
-//  486  * @param   uint8 cmd - command to be written to the LCD
-//  487  *
-//  488  * @return  None
-//  489  **************************************************************************************************/
+//  479     // LCD_RELEASE_CS();
+//  480 }
+//  481 
+//  482 /**************************************************************************************************
+//  483  * @fn      HalLcd_HW_Control
+//  484  *
+//  485  * @brief   Write 1 command to the LCD
+//  486  *
+//  487  * @param   uint8 cmd - command to be written to the LCD
+//  488  *
+//  489  * @return  None
+//  490  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  490 void HalLcd_HW_Control(uint8 cmd)
+//  491 void HalLcd_HW_Control(uint8 cmd)
 HalLcd_HW_Control:
         CFI Block cfiBlock41 Using cfiCommon0
         CFI Function HalLcd_HW_Control
         CODE
-//  491 {
+//  492 {
         ; Saved register size: 0
         ; Auto size: 0
-//  492     uint8 i;
-//  493     
-//  494     LCD_ACTIVATE_CS();
+//  493     uint8 i;
+//  494     
+//  495     LCD_ACTIVATE_CS();
         CLR     0x90.7
-//  495     LCD_RS_CMD();
+//  496     LCD_RS_CMD();
         CLR     0x90.5
-//  496     
-//  497     for (i = 0; i < 8; i++) 
+//  497     
+//  498     for (i = 0; i < 8; i++) 
         MOV     R0,#0x8
-//  498     { 
-//  499         LCD_SCLK_L; 
+//  499     { 
+//  500         LCD_SCLK_L; 
 ??HalLcd_HW_Control_0:
         CLR     0x90.4
-//  500         if (cmd & 0x80) 
+//  501         if (cmd & 0x80) 
         MOV     A,R1
         MOV     C,0xE0 /* A   */.7
         JNC     ??HalLcd_HW_Control_1
-//  501         {
-//  502             LCD_SDA_H;
+//  502         {
+//  503             LCD_SDA_H;
         SETB    0x90.6
         SJMP    ??HalLcd_HW_Control_2
-//  503         }
-//  504         else 
-//  505         {
-//  506             LCD_SDA_L;
+//  504         }
+//  505         else 
+//  506         {
+//  507             LCD_SDA_L;
 ??HalLcd_HW_Control_1:
         CLR     0x90.6
-//  507         }
-//  508         
-//  509         LCD_SCLK_H; 
+//  508         }
+//  509         
+//  510         LCD_SCLK_H; 
 ??HalLcd_HW_Control_2:
         SETB    0x90.4
-//  510         cmd <<= 1; 
+//  511         cmd <<= 1; 
         CLR     C
         RLC     A
         MOV     R1,A
-//  511     }
+//  512     }
         DEC     R0
         MOV     A,R0
         JNZ     ??HalLcd_HW_Control_0
-//  512     // LCD_RELEASE_CS();
-//  513 }
+//  513     // LCD_RELEASE_CS();
+//  514 }
         LJMP    ?BRET
         CFI EndBlock cfiBlock41
         REQUIRE _A_P1
-//  514 
-//  515 /**************************************************************************************************
-//  516  * @fn      HalLcd_HW_Write
-//  517  *
-//  518  * @brief   Write 1 byte to the LCD
-//  519  *
-//  520  * @param   uint8 data - data to be written to the LCD
-//  521  *
-//  522  * @return  None
-//  523  **************************************************************************************************/
+//  515 
+//  516 /**************************************************************************************************
+//  517  * @fn      HalLcd_HW_Write
+//  518  *
+//  519  * @brief   Write 1 byte to the LCD
+//  520  *
+//  521  * @param   uint8 data - data to be written to the LCD
+//  522  *
+//  523  * @return  None
+//  524  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  524 void HalLcd_HW_Write(uint8 data)
+//  525 void HalLcd_HW_Write(uint8 data)
 HalLcd_HW_Write:
         CFI Block cfiBlock42 Using cfiCommon0
         CFI Function HalLcd_HW_Write
         CODE
-//  525 {
+//  526 {
         ; Saved register size: 0
         ; Auto size: 0
-//  526     uint8 i; 
-//  527     
-//  528     LCD_ACTIVATE_CS();
+//  527     uint8 i; 
+//  528     
+//  529     LCD_ACTIVATE_CS();
         CLR     0x90.7
-//  529     LCD_RS_DATA(); 
+//  530     LCD_RS_DATA(); 
         SETB    0x90.5
-//  530     
-//  531     for (i = 0; i < 8; i++) 
+//  531     
+//  532     for (i = 0; i < 8; i++) 
         MOV     R0,#0x8
-//  532     { 
-//  533         LCD_SCLK_L; 
+//  533     { 
+//  534         LCD_SCLK_L; 
 ??HalLcd_HW_Write_0:
         CLR     0x90.4
-//  534         if (data & 0x80) 
+//  535         if (data & 0x80) 
         MOV     A,R1
         MOV     C,0xE0 /* A   */.7
         JNC     ??HalLcd_HW_Write_1
-//  535         {
-//  536             LCD_SDA_H;
+//  536         {
+//  537             LCD_SDA_H;
         SETB    0x90.6
         SJMP    ??HalLcd_HW_Write_2
-//  537         }
-//  538         else 
-//  539         {
-//  540             LCD_SDA_L;
+//  538         }
+//  539         else 
+//  540         {
+//  541             LCD_SDA_L;
 ??HalLcd_HW_Write_1:
         CLR     0x90.6
-//  541         }
-//  542         
-//  543         LCD_SCLK_H; 
+//  542         }
+//  543         
+//  544         LCD_SCLK_H; 
 ??HalLcd_HW_Write_2:
         SETB    0x90.4
-//  544         data <<= 1; 
+//  545         data <<= 1; 
         CLR     C
         RLC     A
         MOV     R1,A
-//  545     }
+//  546     }
         DEC     R0
         MOV     A,R0
         JNZ     ??HalLcd_HW_Write_0
-//  546     // LCD_RELEASE_CS();
-//  547 }
+//  547     // LCD_RELEASE_CS();
+//  548 }
         LJMP    ?BRET
         CFI EndBlock cfiBlock42
         REQUIRE _A_P1
-//  548 
-//  549 /**************************************************************************************************
-//  550  * @fn          HalLcd_HW_SetContrast
-//  551  *
-//  552  * @brief       Set display contrast
-//  553  *
-//  554  * @param       uint8 value - contrast value: 0~7;
-//  555  *
-//  556  * @return      none
-//  557  **************************************************************************************************/
+//  549 
+//  550 /**************************************************************************************************
+//  551  * @fn          HalLcd_HW_SetContrast
+//  552  *
+//  553  * @brief       Set display contrast
+//  554  *
+//  555  * @param       uint8 value - contrast value: 0~7;
+//  556  *
+//  557  * @return      none
+//  558  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  558 void HalLcd_HW_SetContrast(uint8 value)
+//  559 void HalLcd_HW_SetContrast(uint8 value)
 HalLcd_HW_SetContrast:
         CFI Block cfiBlock43 Using cfiCommon0
         CFI Function HalLcd_HW_SetContrast
         CODE
-//  559 {
+//  560 {
         FUNCALL HalLcd_HW_SetContrast, HalLcd_HW_Control
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -4609,49 +4610,49 @@ HalLcd_HW_SetContrast:
         ; Auto size: 0
         MOV     A,R1
         MOV     R6,A
-//  560     if (value <= 7)
+//  561     if (value <= 7)
         CLR     C
         SUBB    A,#0x8
         JNC     ??HalLcd_HW_SetContrast_0
-//  561     {
-//  562         // 粗调对比度，可设置范围 0x20～0x27
-//  563         HalLcd_HW_Control(LCD_CMD_SET_CONTRAST + value);  
+//  562     {
+//  563         // 粗调对比度，可设置范围 0x20～0x27
+//  564         HalLcd_HW_Control(LCD_CMD_SET_CONTRAST + value);  
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     A,#0x20
         ADD     A,R6
         MOV     R1,A
         SJMP    ??HalLcd_HW_SetContrast_1
-//  564     }
-//  565     else 
-//  566     {
-//  567         // 输入数值溢出，默认3  
-//  568         HalLcd_HW_Control(LCD_CMD_SET_CONTRAST + 3); 
+//  565     }
+//  566     else 
+//  567     {
+//  568         // 输入数值溢出，默认3  
+//  569         HalLcd_HW_Control(LCD_CMD_SET_CONTRAST + 3); 
 ??HalLcd_HW_SetContrast_0:
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     R1,#0x23
-//  569     }
+//  570     }
 ??HalLcd_HW_SetContrast_1:
         SJMP    ?Subroutine2
         CFI EndBlock cfiBlock43
-//  570 }
-//  571 
-//  572 /**************************************************************************************************
-//  573  * @fn          HalLcd_HW_SetVoltage
-//  574  *
-//  575  * @brief       Set LCD Voltage
-//  576  *
-//  577  * @param       uint8 value - voltage value: 0x00~0x3F;
-//  578  *
-//  579  * @return      none
-//  580  **************************************************************************************************/
+//  571 }
+//  572 
+//  573 /**************************************************************************************************
+//  574  * @fn          HalLcd_HW_SetVoltage
+//  575  *
+//  576  * @brief       Set LCD Voltage
+//  577  *
+//  578  * @param       uint8 value - voltage value: 0x00~0x3F;
+//  579  *
+//  580  * @return      none
+//  581  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  581 void HalLcd_HW_SetVoltage(uint8 value)
+//  582 void HalLcd_HW_SetVoltage(uint8 value)
 HalLcd_HW_SetVoltage:
         CFI Block cfiBlock44 Using cfiCommon0
         CFI Function HalLcd_HW_SetVoltage
         CODE
-//  582 {
+//  583 {
         FUNCALL HalLcd_HW_SetVoltage, HalLcd_HW_Control
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -4702,36 +4703,36 @@ HalLcd_HW_SetVoltage:
         ; Auto size: 0
         MOV     A,R1
         MOV     R6,A
-//  583     HalLcd_HW_Control(0x81); 
+//  584     HalLcd_HW_Control(0x81); 
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     R1,#-0x7f
         LCALL   ??HalLcd_HW_Control?relay
-//  584     if (value <= 0x3F)
+//  585     if (value <= 0x3F)
         MOV     A,R6
         CLR     C
         SUBB    A,#0x40
         JNC     ??HalLcd_HW_SetVoltage_0
-//  585     {
-//  586         // 0x1a,微调对比度的值，可设置范围 0x00～0x3f   
-//  587         HalLcd_HW_Control(value);  
+//  586     {
+//  587         // 0x1a,微调对比度的值，可设置范围 0x00～0x3f   
+//  588         HalLcd_HW_Control(value);  
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     A,R6
         MOV     R1,A
         SJMP    ??HalLcd_HW_SetVoltage_1
-//  588     }
-//  589     else
-//  590     {
-//  591         // 数据溢出，默认0x28;  
-//  592         HalLcd_HW_Control(0x28);   
+//  589     }
+//  590     else
+//  591     {
+//  592         // 数据溢出，默认0x28;  
+//  593         HalLcd_HW_Control(0x28);   
 ??HalLcd_HW_SetVoltage_0:
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     R1,#0x28
         CFI EndBlock cfiBlock44
-//  593     }
+//  594     }
 ??HalLcd_HW_SetVoltage_1:
         REQUIRE ?Subroutine2
         ; // Fall through to label ?Subroutine2
-//  594 }
+//  595 }
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
 ?Subroutine2:
@@ -4771,24 +4772,24 @@ HalLcd_HW_SetVoltage:
         MOV     R7,#0x1
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock46
-//  595 
-//  596 /**************************************************************************************************
-//  597  * @fn      HalLcd_HW_Clear
-//  598  *
-//  599  * @brief   Clear the HW LCD
-//  600  *
-//  601  * @param   None
-//  602  *
-//  603  * @return  None
-//  604  **************************************************************************************************/
+//  596 
+//  597 /**************************************************************************************************
+//  598  * @fn      HalLcd_HW_Clear
+//  599  *
+//  600  * @brief   Clear the HW LCD
+//  601  *
+//  602  * @param   None
+//  603  *
+//  604  * @return  None
+//  605  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  605 void HalLcd_HW_Clear(void)
+//  606 void HalLcd_HW_Clear(void)
 HalLcd_HW_Clear:
         CFI Block cfiBlock47 Using cfiCommon0
         CFI Function HalLcd_HW_Clear
         CODE
-//  606 {
+//  607 {
         FUNCALL HalLcd_HW_Clear, HalLcd_HW_SET_DDRAM_ADDR
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -4826,14 +4827,14 @@ HalLcd_HW_Clear:
         CFI CFA_XSP16 add(XSP16, 9)
         ; Saved register size: 9
         ; Auto size: 0
-//  607     LCD_ACTIVATE_CS();
+//  608     LCD_ACTIVATE_CS();
         CLR     0x90.7
-//  608     uint8 i,j;
-//  609     
-//  610     for (i = 0; i < 9; i++) 
+//  609     uint8 i,j;
+//  610     
+//  611     for (i = 0; i < 9; i++) 
         MOV     R7,#0x0
-//  611     { 
-//  612         HalLcd_HW_SET_DDRAM_ADDR((i + 1), 1); // 第一页，第一列
+//  612     { 
+//  613         HalLcd_HW_SET_DDRAM_ADDR((i + 1), 1); // 第一页，第一列
 ??HalLcd_HW_Clear_0:
         ; Setup parameters for call to function HalLcd_HW_SET_DDRAM_ADDR
         MOV     R2,#0x1
@@ -4841,47 +4842,47 @@ HalLcd_HW_Clear:
         ADD     A,R7
         MOV     R1,A
         LCALL   ??HalLcd_HW_SET_DDRAM_ADDR?relay
-//  613         for( j = 0; j < 132; j++) 
+//  614         for( j = 0; j < 132; j++) 
         MOV     R6,#-0x7c
-//  614         { 
-//  615             HalLcd_HW_Write(0x00); 
+//  615         { 
+//  616             HalLcd_HW_Write(0x00); 
 ??HalLcd_HW_Clear_1:
         ; Setup parameters for call to function HalLcd_HW_Write
         MOV     R1,#0x0
         LCALL   ??HalLcd_HW_Write?relay
-//  616         } 
+//  617         } 
         DEC     R6
         MOV     A,R6
         JNZ     ??HalLcd_HW_Clear_1
-//  617     }
+//  618     }
         INC     R7
         MOV     A,R7
         CLR     C
         SUBB    A,#0x9
         JC      ??HalLcd_HW_Clear_0
-//  618     // LCD_RELEASE_CS();
-//  619 }
+//  619     // LCD_RELEASE_CS();
+//  620 }
         SJMP    ??Subroutine11_0
         CFI EndBlock cfiBlock47
         REQUIRE _A_P1
-//  620 
-//  621 /**************************************************************************************************
-//  622  * @fn      HalLcd_HW_Init
-//  623  *
-//  624  * @brief   Initilize HW LCD Driver.
-//  625  *
-//  626  * @param   None
-//  627  *
-//  628  * @return  None
-//  629  **************************************************************************************************/
+//  621 
+//  622 /**************************************************************************************************
+//  623  * @fn      HalLcd_HW_Init
+//  624  *
+//  625  * @brief   Initilize HW LCD Driver.
+//  626  *
+//  627  * @param   None
+//  628  *
+//  629  * @return  None
+//  630  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  630 void HalLcd_HW_Init(void)
+//  631 void HalLcd_HW_Init(void)
 HalLcd_HW_Init:
         CFI Block cfiBlock48 Using cfiCommon0
         CFI Function HalLcd_HW_Init
         CODE
-//  631 {
+//  632 {
         FUNCALL HalLcd_HW_Init, halLcd_ConfigIO
         LOCFRAME ISTACK, 2, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -5110,108 +5111,108 @@ HalLcd_HW_Init:
         CFI CFA_SP SP+-5
         ; Saved register size: 2
         ; Auto size: 0
-//  632     /* Initialize LCD IO lines */
-//  633     halLcd_ConfigIO();
+//  633     /* Initialize LCD IO lines */
+//  634     halLcd_ConfigIO();
         ; Setup parameters for call to function halLcd_ConfigIO
         LCALL   ??halLcd_ConfigIO?relay
-//  634     
-//  635     LCD_ACTIVATE_CS();
+//  635     
+//  636     LCD_ACTIVATE_CS();
         CLR     0x90.7
-//  636     
-//  637     LCD_BACKLIGHT_ON(); // 打开LCD背光灯
+//  637     
+//  638     LCD_BACKLIGHT_ON(); // 打开LCD背光灯
         CLR     0x90.1
-//  638   
-//  639     /* Perform reset */
-//  640     LCD_ACTIVATE_RESET();
+//  639   
+//  640     /* Perform reset */
+//  641     LCD_ACTIVATE_RESET();
         CLR     0xa0.0
-//  641     HalLcd_HW_WaitUs(1500); // >1ms
+//  642     HalLcd_HW_WaitUs(1500); // >1ms
         ; Setup parameters for call to function HalLcd_HW_WaitUs
         MOV     R2,#-0x24
         MOV     R3,#0x5
         LCALL   ??HalLcd_HW_WaitUs?relay
-//  642     LCD_RELEASE_RESET();
+//  643     LCD_RELEASE_RESET();
         SETB    0xa0.0
-//  643     HalLcd_HW_WaitUs(5000); // >5ms
+//  644     HalLcd_HW_WaitUs(5000); // >5ms
         ; Setup parameters for call to function HalLcd_HW_WaitUs
         MOV     R2,#-0x78
         MOV     R3,#0x13
         LCALL   ??HalLcd_HW_WaitUs?relay
-//  644   
-//  645     HalLcd_HW_Control(LCD_SOFT_RESET);
+//  645   
+//  646     HalLcd_HW_Control(LCD_SOFT_RESET);
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     R1,#-0x1e
         LCALL   ?Subroutine3 & 0xFFFF
-//  646     HalLcd_HW_WaitUs(500);  
-//  647 
-//  648     /* Perform the Power initialization sequence */
-//  649     LCD_POWER_CONTROL(LCD_POWER_CONTROL_1);
+//  647     HalLcd_HW_WaitUs(500);  
+//  648 
+//  649     /* Perform the Power initialization sequence */
+//  650     LCD_POWER_CONTROL(LCD_POWER_CONTROL_1);
 ??CrossCallReturnLabel_0:
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     R1,#0x2c
         LCALL   ?Subroutine3 & 0xFFFF
-//  650     HalLcd_HW_WaitUs(500);   
-//  651     LCD_POWER_CONTROL(LCD_POWER_CONTROL_2);
+//  651     HalLcd_HW_WaitUs(500);   
+//  652     LCD_POWER_CONTROL(LCD_POWER_CONTROL_2);
 ??CrossCallReturnLabel_1:
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     R1,#0x2e
         LCALL   ?Subroutine3 & 0xFFFF
-//  652     HalLcd_HW_WaitUs(500); 
-//  653     LCD_POWER_CONTROL(LCD_POWER_CONTROL_3);  
+//  653     HalLcd_HW_WaitUs(500); 
+//  654     LCD_POWER_CONTROL(LCD_POWER_CONTROL_3);  
 ??CrossCallReturnLabel_2:
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     R1,#0x2f
         LCALL   ?Subroutine3 & 0xFFFF
-//  654     HalLcd_HW_WaitUs(500); 
-//  655    
-//  656     /* Set contrast 对比度*/
-//  657     HalLcd_HW_SetContrast(3);
+//  655     HalLcd_HW_WaitUs(500); 
+//  656    
+//  657     /* Set contrast 对比度*/
+//  658     HalLcd_HW_SetContrast(3);
 ??CrossCallReturnLabel_3:
         ; Setup parameters for call to function HalLcd_HW_SetContrast
         MOV     R1,#0x3
         LCALL   ??HalLcd_HW_SetContrast?relay
-//  658 
-//  659     /* Set power */
-//  660     //内部电阻微调
-//  661     HalLcd_HW_SetVoltage(0x28);
+//  659 
+//  660     /* Set power */
+//  661     //内部电阻微调
+//  662     HalLcd_HW_SetVoltage(0x28);
         ; Setup parameters for call to function HalLcd_HW_SetVoltage
         MOV     R1,#0x28
         LCALL   ??HalLcd_HW_SetVoltage?relay
-//  662     
-//  663     SET_BIAS_CTRL(BIAS_1_9);
+//  663     
+//  664     SET_BIAS_CTRL(BIAS_1_9);
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     R1,#-0x5e
         LCALL   ??HalLcd_HW_Control?relay
-//  664     HalLcd_HW_WaitUs(1000);  // 1 ms
+//  665     HalLcd_HW_WaitUs(1000);  // 1 ms
         ; Setup parameters for call to function HalLcd_HW_WaitUs
         MOV     R2,#-0x18
         MOV     R3,#0x3
         LCALL   ??HalLcd_HW_WaitUs?relay
-//  665     
-//  666     HalLcd_HW_Control(0xc8); // 行扫描顺序：从上到下 
+//  666     
+//  667     HalLcd_HW_Control(0xc8); // 行扫描顺序：从上到下 
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     R1,#-0x38
         LCALL   ??HalLcd_HW_Control?relay
-//  667     HalLcd_HW_Control(0xa0); // 列扫描顺序：从左到右 
+//  668     HalLcd_HW_Control(0xa0); // 列扫描顺序：从左到右 
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     R1,#-0x60
         LCALL   ??HalLcd_HW_Control?relay
-//  668     HalLcd_HW_Control(0x40); // 起始行：第一行开始
+//  669     HalLcd_HW_Control(0x40); // 起始行：第一行开始
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     R1,#0x40
         LCALL   ??HalLcd_HW_Control?relay
-//  669     HalLcd_HW_Control(0xaf); // 打开显示 
+//  670     HalLcd_HW_Control(0xaf); // 打开显示 
         ; Setup parameters for call to function HalLcd_HW_Control
         MOV     R1,#-0x51
         LCALL   ??HalLcd_HW_Control?relay
-//  670 
-//  671     /* Clear the display */
-//  672     HalLcd_HW_Clear();
+//  671 
+//  672     /* Clear the display */
+//  673     HalLcd_HW_Clear();
         ; Setup parameters for call to function HalLcd_HW_Clear
         LCALL   ??HalLcd_HW_Clear?relay
-//  673 
-//  674     LCD_RELEASE_CS();
+//  674 
+//  675     LCD_RELEASE_CS();
         SETB    0x90.7
-//  675 }
+//  676 }
         LJMP    ?Subroutine0 & 0xFFFF
         CFI EndBlock cfiBlock48
         REQUIRE _A_P1
@@ -5260,25 +5261,25 @@ HalLcd_HW_Init:
         CFI EndBlock cfiCond51
         CFI EndBlock cfiCond52
         CFI EndBlock cfiPicker53
-//  676 
-//  677 /**************************************************************************************************
-//  678  * @fn      HalLcd_HW_WriteChar
-//  679  *
-//  680  * @brief   Write one char to the display
-//  681  *
-//  682  * @param   uint8 line - line number that the char will be displayed
-//  683  *          uint8 col - colum where the char will be displayed
-//  684  *
-//  685  * @return  None
-//  686  **************************************************************************************************/
+//  677 
+//  678 /**************************************************************************************************
+//  679  * @fn      HalLcd_HW_WriteChar
+//  680  *
+//  681  * @brief   Write one char to the display
+//  682  *
+//  683  * @param   uint8 line - line number that the char will be displayed
+//  684  *          uint8 col - colum where the char will be displayed
+//  685  *
+//  686  * @return  None
+//  687  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  687 void HalLcd_HW_WriteChar(uint8 line, uint8 col, char text)
+//  688 void HalLcd_HW_WriteChar(uint8 line, uint8 col, char text)
 HalLcd_HW_WriteChar:
         CFI Block cfiBlock54 Using cfiCommon0
         CFI Function HalLcd_HW_WriteChar
         CODE
-//  688 {
+//  689 {
         FUNCALL HalLcd_HW_WriteChar, HalLcd_HW_SET_DDRAM_ADDR
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -5326,30 +5327,30 @@ HalLcd_HW_WriteChar:
         MOV     ?V0 + 4,R1
         MOV     ?V0 + 5,R2
         MOV     ?V0 + 6,R3
-//  689     uint8 j, k, n;
-//  690     
-//  691     if (col <= LCD_MAX_LINE_LENGTH)
+//  690     uint8 j, k, n;
+//  691     
+//  692     if (col <= LCD_MAX_LINE_LENGTH)
         MOV     A,R2
         CLR     C
         SUBB    A,#0x11
         JNC     ??HalLcd_HW_WriteChar_0
-//  692     {   
-//  693         //字符大小：16(行)x8(列)
-//  694         if ((text >= 0x20) && (text <= 0x7e)) 
+//  693     {   
+//  694         //字符大小：16(行)x8(列)
+//  695         if ((text >= 0x20) && (text <= 0x7e)) 
         MOV     A,#-0x20
         ADD     A,?V0 + 6
         CLR     C
         SUBB    A,#0x5f
         JNC     ??HalLcd_HW_WriteChar_0
-//  695         { 
-//  696             j = text - 0x20; 
+//  696         { 
+//  697             j = text - 0x20; 
         MOV     A,#-0x20
         ADD     A,?V0 + 6
         MOV     ?V0 + 7,A
-//  697             for (n = 0; n < 2; n++) // 两页
+//  698             for (n = 0; n < 2; n++) // 两页
         MOV     R6,#0x0
-//  698             {    
-//  699                 HalLcd_HW_SET_DDRAM_ADDR((line * 2 - 1 + n), ((col - 1) * 8 + 1)); // 页和列 
+//  699             {    
+//  700                 HalLcd_HW_SET_DDRAM_ADDR((line * 2 - 1 + n), ((col - 1) * 8 + 1)); // 页和列 
 ??HalLcd_HW_WriteChar_1:
         ; Setup parameters for call to function HalLcd_HW_SET_DDRAM_ADDR
         MOV     A,?V0 + 5
@@ -5366,12 +5367,12 @@ HalLcd_HW_WriteChar:
         DEC     A
         MOV     R1,A
         LCALL   ??HalLcd_HW_SET_DDRAM_ADDR?relay
-//  700                 for (k = 0; k < 8; k++) 
+//  701                 for (k = 0; k < 8; k++) 
         MOV     R7,#0x0
-//  701                 { 
-//  702                     // j为字符对应的，
-//  703                     // 写数据到 LCD, 每写一次(即写一个 8 位的数据)后列地址自动加 1
-//  704                     HalLcd_HW_Write(ascii_table_8x16[j][k + 8 * n]);
+//  702                 { 
+//  703                     // j为字符对应的，
+//  704                     // 写数据到 LCD, 每写一次(即写一个 8 位的数据)后列地址自动加 1
+//  705                     HalLcd_HW_Write(ascii_table_8x16[j][k + 8 * n]);
 ??HalLcd_HW_WriteChar_2:
         ; Setup parameters for call to function HalLcd_HW_Write
         MOV     ?V0 + 2,R7
@@ -5406,47 +5407,47 @@ HalLcd_HW_WriteChar:
         MOVX    A,@DPTR
         MOV     R1,A
         LCALL   ??HalLcd_HW_Write?relay
-//  705                 } 
+//  706                 } 
         INC     R7
         MOV     A,R7
         CLR     C
         SUBB    A,#0x8
         JC      ??HalLcd_HW_WriteChar_2
-//  706             }  
+//  707             }  
         INC     R6
         MOV     A,R6
         CLR     C
         SUBB    A,#0x2
         JC      ??HalLcd_HW_WriteChar_1
-//  707         } 
-//  708     }
+//  708         } 
+//  709     }
 ??HalLcd_HW_WriteChar_0:
         LJMP    ?Subroutine1 & 0xFFFF
         CFI EndBlock cfiBlock54
-//  709     else
-//  710     {
-//  711         return;
-//  712     }
-//  713 }
-//  714 
-//  715 /**************************************************************************************************
-//  716  * @fn          halLcdWriteLine
-//  717  *
-//  718  * @brief       Write one line on display
-//  719  *
-//  720  * @param       uint8 line - display line
-//  721  *              char *pText - text buffer to write
-//  722  *
-//  723  * @return      none
-//  724  **************************************************************************************************/
+//  710     else
+//  711     {
+//  712         return;
+//  713     }
+//  714 }
+//  715 
+//  716 /**************************************************************************************************
+//  717  * @fn          halLcdWriteLine
+//  718  *
+//  719  * @brief       Write one line on display
+//  720  *
+//  721  * @param       uint8 line - display line
+//  722  *              char *pText - text buffer to write
+//  723  *
+//  724  * @return      none
+//  725  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  725 void HalLcd_HW_WriteLine(uint8 line, const char *pText)
+//  726 void HalLcd_HW_WriteLine(uint8 line, const char *pText)
 HalLcd_HW_WriteLine:
         CFI Block cfiBlock55 Using cfiCommon0
         CFI Function HalLcd_HW_WriteLine
         CODE
-//  726 {
+//  727 {
         FUNCALL HalLcd_HW_WriteLine, osal_strlen
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -5502,18 +5503,18 @@ HalLcd_HW_WriteLine:
         MOV     R6,A
         MOV     A,R3
         MOV     R7,A
-//  727     uint8 count;
-//  728     uint8 totalLength = (uint8)osal_strlen( (char *)pText );
+//  728     uint8 count;
+//  729     uint8 totalLength = (uint8)osal_strlen( (char *)pText );
         ; Setup parameters for call to function osal_strlen
         LCALL   ?Subroutine6 & 0xFFFF
-//  729   
-//  730     /* Write the content first */
-//  731     for (count = 0; count < totalLength; count++)
+//  730   
+//  731     /* Write the content first */
+//  732     for (count = 0; count < totalLength; count++)
 ??CrossCallReturnLabel_6:
         MOV     ?V0 + 1,#0x0
         SJMP    ??HalLcd_HW_WriteLine_0
-//  732     {
-//  733         HalLcd_HW_WriteChar(line, (count + 1), (*(pText++)));
+//  733     {
+//  734         HalLcd_HW_WriteChar(line, (count + 1), (*(pText++)));
 ??HalLcd_HW_WriteLine_1:
         ; Setup parameters for call to function HalLcd_HW_WriteChar
         MOV     DPL,R6
@@ -5521,7 +5522,7 @@ HalLcd_HW_WriteLine:
         MOVX    A,@DPTR
         MOV     R3,A
         LCALL   ?Subroutine7 & 0xFFFF
-//  734     }
+//  735     }
 ??CrossCallReturnLabel_7:
         MOV     DPL,R6
         MOV     DPH,R7
@@ -5534,18 +5535,18 @@ HalLcd_HW_WriteLine:
         CLR     C
         SUBB    A,?V0 + 2
         JC      ??HalLcd_HW_WriteLine_1
-//  735   
-//  736     /* Write blank spaces to rest of the line */
-//  737     for (count = totalLength; count < LCD_MAX_LINE_LENGTH; count++)
+//  736   
+//  737     /* Write blank spaces to rest of the line */
+//  738     for (count = totalLength; count < LCD_MAX_LINE_LENGTH; count++)
         MOV     ?V0 + 1,?V0 + 2
         SJMP    ??HalLcd_HW_WriteLine_2
-//  738     {
-//  739        HalLcd_HW_WriteChar(line, (count + 1), ' ');
+//  739     {
+//  740        HalLcd_HW_WriteChar(line, (count + 1), ' ');
 ??HalLcd_HW_WriteLine_3:
         ; Setup parameters for call to function HalLcd_HW_WriteChar
         MOV     R3,#0x20
         LCALL   ?Subroutine7 & 0xFFFF
-//  740     }
+//  741     }
 ??CrossCallReturnLabel_8:
         INC     ?V0 + 1
 ??HalLcd_HW_WriteLine_2:
@@ -5553,7 +5554,7 @@ HalLcd_HW_WriteLine:
         CLR     C
         SUBB    A,#0x10
         JC      ??HalLcd_HW_WriteLine_3
-//  741 }
+//  742 }
         MOV     R7,#0x3
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock55
@@ -5604,38 +5605,32 @@ HalLcd_HW_WriteLine:
         CFI EndBlock cfiCond56
         CFI EndBlock cfiCond57
         CFI EndBlock cfiPicker58
-//  742 
-//  743 /**************************************************************************************************
-//  744  * @fn      HalLcd_HW_WaitUs
-//  745  *
-//  746  * @brief   wait for x us. @ 32MHz MCU clock it takes 32 "nop"s for 1 us delay.
-//  747  *
-//  748  * @param   x us. range[0-65536]
-//  749  *
-//  750  * @return  None
-//  751  **************************************************************************************************/
+//  743 
+//  744 /**************************************************************************************************
+//  745  * @fn      HalLcd_HW_WaitUs
+//  746  *
+//  747  * @brief   wait for x us. @ 32MHz MCU clock it takes 32 "nop"s for 1 us delay.
+//  748  *
+//  749  * @param   x us. range[0-65536]
+//  750  *
+//  751  * @return  None
+//  752  **************************************************************************************************/
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  752 void HalLcd_HW_WaitUs(uint16 microSecs)
+//  753 void HalLcd_HW_WaitUs(uint16 microSecs)
 HalLcd_HW_WaitUs:
         CFI Block cfiBlock59 Using cfiCommon0
         CFI Function HalLcd_HW_WaitUs
         CODE
-//  753 {
+//  754 {
         ; Saved register size: 0
         ; Auto size: 0
         SJMP    ??HalLcd_HW_WaitUs_0
-//  754     while(microSecs--)
-//  755     {
-//  756         // 32 NOPs == 1 usecs
-//  757         asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
-??HalLcd_HW_WaitUs_1:
-        nop
-        nop
-        nop
-        nop
-        nop
+//  755     while(microSecs--)
+//  756     {
+//  757         // 32 NOPs == 1 usecs
 //  758         asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+??HalLcd_HW_WaitUs_1:
         nop
         nop
         nop
@@ -5665,10 +5660,16 @@ HalLcd_HW_WaitUs:
         nop
         nop
         nop
-//  763         asm("nop"); asm("nop");
+//  763         asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
         nop
         nop
-//  764     }
+        nop
+        nop
+        nop
+//  764         asm("nop"); asm("nop");
+        nop
+        nop
+//  765     }
 ??HalLcd_HW_WaitUs_0:
         MOV     A,R2
         MOV     R0,A
@@ -5683,7 +5684,7 @@ HalLcd_HW_WaitUs:
         MOV     A,R0
         ORL     A,R1
         JNZ     ??HalLcd_HW_WaitUs_1
-//  765 }
+//  766 }
         LJMP    ?BRET
         CFI EndBlock cfiBlock59
 
@@ -5806,7 +5807,7 @@ HalLcd_HW_WaitUs:
         DB "[          ]  "
 
         END
-//  766 #endif
+//  767 #endif
 // 
 // 1 581 bytes in segment BANKED_CODE
 //   108 bytes in segment BANK_RELAYS

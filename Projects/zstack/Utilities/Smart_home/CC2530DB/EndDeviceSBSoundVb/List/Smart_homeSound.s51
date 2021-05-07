@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        18/Apr/2021  21:18:04 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        06/May/2021  15:32:08 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -654,7 +654,7 @@ Smart_home_SimpleDesc:
         DATA16
         DW Smart_home_ClusterList_IN
         DATA8
-        DB 2
+        DB 3
         DATA16
         DW Smart_home_ClusterList_OUT
 //  104 {
@@ -1245,7 +1245,7 @@ Smart_home_ProcessEvent:
         MOV     R0,#?V0 + 0
         LCALL   ?PUSH_XSTACK_I_TWO
         CFI CFA_XSP16 add(XSP16, 29)
-        MOV     R1,#0x2
+        MOV     R1,#0x3
         MOV     R4,#-0x1
         MOV     R5,#-0x1
         MOV     A,#0x8

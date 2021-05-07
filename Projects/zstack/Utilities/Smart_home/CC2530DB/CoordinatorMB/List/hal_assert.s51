@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        29/Apr/2021  21:41:48 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        06/May/2021  17:24:23 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -44,7 +44,7 @@
 //                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
 //                          -DREJOIN_POLL_RATE=440 D:\±œ…Ë\CC2530-smart_home\ /
 //                          Components\hal\common\hal_assert.c -D             /
-//                          LCD_SUPPORTED -D ZDO_COORDINATOR -D NV_RESTORE    /
+//                          LCD_SUPPORTED -D ZDO_COORDINATOR -D xNV_RESTORE   /
 //                          -D HAL_UART=TRUE -D xNV_INIT -D xREFLECTOR -D     /
 //                          xHAL_UART_TEST -lC D:\±œ…Ë\CC2530-smart_home\Proj /
 //                          ects\zstack\Utilities\Smart_home\CC2530DB\Coordin /
@@ -615,7 +615,7 @@ halAssertHazardLights:
         MOV     DPTR,#0x6270
         MOV     A,#0x8
         MOVX    @DPTR,A
-        ORL     0xfe,#0x1
+        ORL     0xfe,#0x3
         ORL     0xfd,#0x80
         ORL     0x8f,#0x4
 //  127 
@@ -842,9 +842,23 @@ halAssertHazardLights:
 ??halAssertHazardLights_11:
         SETB    0x90.0
 ??halAssertHazardLights_12:
+        MOV     C,0x90.0
+        JNC     ??halAssertHazardLights_13
+        CLR     0x90.0
+        SJMP    ??halAssertHazardLights_14
+??halAssertHazardLights_13:
+        SETB    0x90.0
+??halAssertHazardLights_14:
+        MOV     C,0x90.0
+        JNC     ??halAssertHazardLights_15
+        CLR     0x90.0
+        SJMP    ??halAssertHazardLights_16
+??halAssertHazardLights_15:
+        SETB    0x90.0
+??halAssertHazardLights_16:
         MOV     DPTR,#??escape
         MOVX    A,@DPTR
-        JZ      ??halAssertHazardLights_13
+        JZ      ??halAssertHazardLights_17
         CLR     A
         MOVX    @DPTR,A
         MOV     A,#0xa
@@ -853,7 +867,7 @@ halAssertHazardLights:
         MOV     R7,#0x4
         LJMP    ?BANKED_LEAVE_XDATA
         CFI CFA_XSP16 add(XSP16, 22)
-??halAssertHazardLights_13:
+??halAssertHazardLights_17:
         MOV     C,0x90.3
         JC      ??halAssertHazardLights_7
         INC     R1
@@ -866,15 +880,15 @@ halAssertHazardLights:
         CLR     0x90.0
         MOV     R0,#0x0
         MOV     R1,#0x0
-??halAssertHazardLights_14:
+??halAssertHazardLights_18:
         MOV     C,0x90.3
-        JC      ??halAssertHazardLights_15
+        JC      ??halAssertHazardLights_19
         MOV     R0,#0x0
         MOV     R1,#0x0
-??halAssertHazardLights_15:
+??halAssertHazardLights_19:
         LCALL   ?Subroutine0 & 0xFFFF
 ??CrossCallReturnLabel_0:
-        JC      ??halAssertHazardLights_14
+        JC      ??halAssertHazardLights_18
         MOV     DPTR,#0x61a3
         MOVX    A,@DPTR
         PUSH    A
@@ -920,23 +934,23 @@ halAssertHazardLights:
         SETB    0x90.0
         SETB    0x90.0
         MOV     A,R3
-        JNZ     ??halAssertHazardLights_16
+        JNZ     ??halAssertHazardLights_20
         SETB    0x90.0
-        SJMP    ??halAssertHazardLights_17
-??halAssertHazardLights_16:
+        SJMP    ??halAssertHazardLights_21
+??halAssertHazardLights_20:
         CLR     0x90.0
-??halAssertHazardLights_17:
+??halAssertHazardLights_21:
         MOV     R0,#0x0
         MOV     R1,#0x0
-??halAssertHazardLights_18:
+??halAssertHazardLights_22:
         MOV     C,0x90.3
-        JC      ??halAssertHazardLights_19
+        JC      ??halAssertHazardLights_23
         MOV     R0,#0x0
         MOV     R1,#0x0
-??halAssertHazardLights_19:
+??halAssertHazardLights_23:
         LCALL   ?Subroutine0 & 0xFFFF
 ??CrossCallReturnLabel_1:
-        JC      ??halAssertHazardLights_18
+        JC      ??halAssertHazardLights_22
         CLR     0x90.0
         CLR     0x90.0
         CLR     0x90.0
@@ -1087,13 +1101,13 @@ __Constant_5800:
 //  307 /**************************************************************************************************
 //  308 */
 // 
-// 411 bytes in segment BANKED_CODE
+// 431 bytes in segment BANKED_CODE
 //  12 bytes in segment BANK_RELAYS
 //   9 bytes in segment SFR_AN
 //  12 bytes in segment XDATA_ROM_C
 //   1 byte  in segment XDATA_Z
 // 
-// 423 bytes of CODE  memory
+// 443 bytes of CODE  memory
 //   0 bytes of CONST memory (+ 12 bytes shared)
 //   0 bytes of DATA  memory (+  9 bytes shared)
 //   1 byte  of XDATA memory

@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         29/Apr/2021  21:41:44 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         06/May/2021  17:24:17 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -44,8 +44,8 @@
 #                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
 #                          -DREJOIN_POLL_RATE=440 D:\毕设\CC2530-smart_home\C #
 #                          omponents\stack\zdo\ZDApp.c -D LCD_SUPPORTED -D    #
-#                          ZDO_COORDINATOR -D NV_RESTORE -D HAL_UART=TRUE -D  #
-#                          xNV_INIT -D xREFLECTOR -D xHAL_UART_TEST -lC       #
+#                          ZDO_COORDINATOR -D xNV_RESTORE -D HAL_UART=TRUE    #
+#                          -D xNV_INIT -D xREFLECTOR -D xHAL_UART_TEST -lC    #
 #                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
 #                          s\Smart_home\CC2530DB\CoordinatorMB\List\ -lA      #
 #                          D:\毕设\CC2530-smart_home\Projects\zstack\Utilitie #
@@ -586,10 +586,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00004F                ; Setup parameters for call to function ZDApp_RegisterCBs
    \   00004F   12....       LCALL   ??ZDApp_RegisterCBs?relay
     300          } /* ZDApp_Init() */
-   \   000052   02....       LJMP    ??Subroutine46_0 & 0xFFFF
+   \   000052   02....       LJMP    ??Subroutine42_0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine46_0:
+   \                     ??Subroutine42_0:
    \   000000   7F01         MOV     R7,#0x1
    \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
     301          
@@ -651,7 +651,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     348              }
     349            }
     350          }
-   \   000008   02....       LJMP    ??Subroutine46_0 & 0xFFFF
+   \   000008   02....       LJMP    ??Subroutine42_0 & 0xFFFF
     351          
     352          /*********************************************************************
     353           * @fn      ZDApp_event_loop()
@@ -704,12 +704,12 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     384              devState = DEV_INIT;
    \   000012   90....       MOV     DPTR,#devState
    \   000015   7401         MOV     A,#0x1
-   \   000017   12....       LCALL   ??Subroutine42_0 & 0xFFFF
+   \   000017   12....       LCALL   ??Subroutine38_0 & 0xFFFF
     385              osal_set_event( ZDAppTaskID, ZDO_STATE_CHANGE_EVT );
     386          
     387              ZDO_StartDevice( (uint8)ZDO_Config_Node_Descriptor.LogicalType, devStartMode,
     388                               DEFAULT_BEACON_ORDER, DEFAULT_SUPERFRAME_ORDER );
-   \                     ??CrossCallReturnLabel_69:
+   \                     ??CrossCallReturnLabel_63:
    \   00001A                ; Setup parameters for call to function ZDO_StartDevice
    \   00001A   7C0F         MOV     R4,#0xf
    \   00001C   7B0F         MOV     R3,#0xf
@@ -810,11 +810,11 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     417                osal_set_event( ZDAppTaskID, ZDO_STATE_CHANGE_EVT );
    \                     ??ZDApp_event_loop_9:
    \   000080                ; Setup parameters for call to function osal_set_event
-   \   000080   12....       LCALL   ?Subroutine13 & 0xFFFF
+   \   000080   12....       LCALL   ?Subroutine14 & 0xFFFF
     418          
     419                // Return unprocessed events
     420                return (events ^ ZDO_ROUTER_START);
-   \                     ??CrossCallReturnLabel_55:
+   \                     ??CrossCallReturnLabel_53:
    \   000083   EE           MOV     A,R6
    \   000084   6420         XRL     A,#0x20
    \   000086   80A8         SJMP    ??ZDApp_event_loop_2
@@ -839,7 +839,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000095   90....       MOV     DPTR,#zgConcentratorEnable
    \   000098   E0           MOVX    A,@DPTR
    \   000099   6401         XRL     A,#0x1
-   \   00009B   700E         JNZ     ??CrossCallReturnLabel_66
+   \   00009B   700E         JNZ     ??CrossCallReturnLabel_78
     430              {
     431                // Start next event
     432                osal_start_timerEx( NWK_TaskID, NWK_MTO_RTG_REQ_EVT, 100 );
@@ -849,12 +849,12 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   0000A1   7A00         MOV     R2,#0x0
    \   0000A3   7B08         MOV     R3,#0x8
    \   0000A5   90....       MOV     DPTR,#NWK_TaskID
-   \   0000A8   12....       LCALL   ??Subroutine39_0 & 0xFFFF
+   \   0000A8   12....       LCALL   ??Subroutine41_0 & 0xFFFF
     433              }
     434          
     435              // Return unprocessed events
     436              return (events ^ ZDO_STATE_CHANGE_EVT);
-   \                     ??CrossCallReturnLabel_66:
+   \                     ??CrossCallReturnLabel_78:
    \   0000AB   EE           MOV     A,R6
    \   0000AC   6410         XRL     A,#0x10
    \   0000AE   8080         SJMP    ??ZDApp_event_loop_2
@@ -873,33 +873,29 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   0000B5   EE           MOV     A,R6
    \   0000B6   6408         XRL     A,#0x8
    \   0000B8   FA           MOV     R2,A
-   \   0000B9   8023         SJMP    ??ZDApp_event_loop_4
+   \   0000B9   801E         SJMP    ??ZDApp_event_loop_4
     445            }
     446          
     447            if ( events & ZDO_NWK_UPDATE_NV )
    \                     ??ZDApp_event_loop_12:
    \   0000BB   EF           MOV     A,R7
    \   0000BC   5402         ANL     A,#0x2
-   \   0000BE   600B         JZ      ??ZDApp_event_loop_13
+   \   0000BE   6006         JZ      ??ZDApp_event_loop_13
     448            {
     449              ZDApp_SaveNetworkStateEvt();
-   \   0000C0                ; Setup parameters for call to function ZDApp_SaveNetworkStateEvt
-   \   0000C0   12....       LCALL   ??ZDApp_SaveNetworkStateEvt?relay
     450          
     451              // Return unprocessed events
     452              return (events ^ ZDO_NWK_UPDATE_NV);
-   \   0000C3   EE           MOV     A,R6
-   \   0000C4   FA           MOV     R2,A
-   \   0000C5   EF           MOV     A,R7
-   \   0000C6   6402         XRL     A,#0x2
-   \   0000C8   02....       LJMP    ??ZDApp_event_loop_3 & 0xFFFF
+   \   0000C0   EF           MOV     A,R7
+   \   0000C1   6402         XRL     A,#0x2
+   \   0000C3   02....       LJMP    ??ZDApp_event_loop_3 & 0xFFFF
     453            }
     454          
     455            if ( events & ZDO_DEVICE_RESET )
    \                     ??ZDApp_event_loop_13:
-   \   0000CB   EE           MOV     A,R6
-   \   0000CC   5404         ANL     A,#0x4
-   \   0000CE   600A         JZ      ??ZDApp_event_loop_14
+   \   0000C6   EE           MOV     A,R6
+   \   0000C7   5404         ANL     A,#0x4
+   \   0000C9   600A         JZ      ??ZDApp_event_loop_14
     456            {
     457          #ifdef ZBA_FALLBACK_NWKKEY
     458              if ( devState == DEV_END_DEVICE_UNAUTH )
@@ -911,16 +907,16 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     464              {
     465                // Set the NV startup option to force a "new" join.
     466                zgWriteStartupOptions( ZG_STARTUP_SET, ZCD_STARTOPT_DEFAULT_NETWORK_STATE );
-   \   0000D0                ; Setup parameters for call to function zgWriteStartupOptions
-   \   0000D0   7A02         MOV     R2,#0x2
-   \   0000D2   79FF         MOV     R1,#-0x1
-   \   0000D4   12....       LCALL   ??zgWriteStartupOptions?relay
+   \   0000CB                ; Setup parameters for call to function zgWriteStartupOptions
+   \   0000CB   7A02         MOV     R2,#0x2
+   \   0000CD   79FF         MOV     R1,#-0x1
+   \   0000CF   12....       LCALL   ??zgWriteStartupOptions?relay
     467          
     468                // The device has been in the UNAUTH state, so reset
     469                // Note: there will be no return from this call
     470                SystemResetSoft();
-   \   0000D7                ; Setup parameters for call to function Onboard_soft_reset
-   \   0000D7   12....       LCALL   Onboard_soft_reset & 0xFFFF
+   \   0000D2                ; Setup parameters for call to function Onboard_soft_reset
+   \   0000D2   12....       LCALL   Onboard_soft_reset & 0xFFFF
     471              }
     472            }
     473          
@@ -933,15 +929,15 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     480              // Discard or make more handlers
     481              return 0;
    \                     ??ZDApp_event_loop_14:
-   \   0000DA   7A00         MOV     R2,#0x0
-   \   0000DC   7B00         MOV     R3,#0x0
+   \   0000D5   7A00         MOV     R2,#0x0
+   \   0000D7   7B00         MOV     R3,#0x0
     482            }
    \                     ??ZDApp_event_loop_4:
-   \   0000DE   02....       LJMP    ??Subroutine52_0 & 0xFFFF
+   \   0000D9   02....       LJMP    ??Subroutine45_0 & 0xFFFF
     483          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine13:
+   \                     ?Subroutine14:
    \   000000   7A10         MOV     R2,#0x10
    \   000002                REQUIRE ??Subroutine37_0
    \   000002                ; // Fall through to label ??Subroutine37_0
@@ -956,14 +952,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00000A   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine39_0:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   F9           MOV     R1,A
-   \   000002   12....       LCALL   ??osal_start_timerEx?relay
-   \   000005   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine42_0:
+   \                     ??Subroutine38_0:
    \   000000   F0           MOVX    @DPTR,A
    \   000001                ; Setup parameters for call to function osal_set_event
    \   000001                ; Setup parameters for call to function osal_set_event
@@ -977,7 +966,14 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00000D   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine52_0:
+   \                     ??Subroutine41_0:
+   \   000000   E0           MOVX    A,@DPTR
+   \   000001   F9           MOV     R1,A
+   \   000002   12....       LCALL   ??osal_start_timerEx?relay
+   \   000005   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ??Subroutine45_0:
    \   000000   7F02         MOV     R7,#0x2
    \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
     484          
@@ -1019,19 +1015,19 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00000E   12....       LCALL   ??ZDSecMgrNewDeviceEvent?relay
    \   000011   E9           MOV     A,R1
    \   000012   6401         XRL     A,#0x1
-   \   000014   7009         JNZ     ??CrossCallReturnLabel_63
+   \   000014   7009         JNZ     ??CrossCallReturnLabel_75
     505                {
     506                  osal_start_timerEx( ZDAppTaskID, ZDO_NEW_DEVICE, 1000 );
    \   000016                ; Setup parameters for call to function osal_start_timerEx
    \   000016   7CE8         MOV     R4,#-0x18
    \   000018   7D03         MOV     R5,#0x3
    \   00001A   7A40         MOV     R2,#0x40
-   \   00001C   12....       LCALL   ?Subroutine21 & 0xFFFF
+   \   00001C   12....       LCALL   ?Subroutine22 & 0xFFFF
     507                }
     508          
     509                // Return unprocessed events
     510                return (events ^ ZDO_NEW_DEVICE);
-   \                     ??CrossCallReturnLabel_63:
+   \                     ??CrossCallReturnLabel_75:
    \   00001F   EE           MOV     A,R6
    \   000020   6440         XRL     A,#0x40
    \                     ??ZDApp_ProcessSecEvent_1:
@@ -1039,7 +1035,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000023   EF           MOV     A,R7
    \                     ??ZDApp_ProcessSecEvent_2:
    \   000024   FB           MOV     R3,A
-   \   000025   805C         SJMP    ??ZDApp_ProcessSecEvent_3
+   \   000025   8057         SJMP    ??ZDApp_ProcessSecEvent_3
     511              }
     512            }
     513          
@@ -1083,8 +1079,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     538            {
     539              if ( nwkFrameCounterChanges++ > MAX_NWK_FRAMECOUNTER_CHANGES )
    \   000039   90....       MOV     DPTR,#nwkFrameCounterChanges
-   \   00003C   12....       LCALL   ??Subroutine47_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_81:
+   \   00003C   12....       LCALL   ??Subroutine46_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_79:
    \   00003F   E8           MOV     A,R0
    \   000040   2401         ADD     A,#0x1
    \   000042   FA           MOV     R2,A
@@ -1092,8 +1088,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000044   3400         ADDC    A,#0x0
    \   000046   FB           MOV     R3,A
    \   000047   90....       MOV     DPTR,#nwkFrameCounterChanges
-   \   00004A   12....       LCALL   ??Subroutine57_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_125:
+   \   00004A   12....       LCALL   ??Subroutine54_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_123:
    \   00004D   C3           CLR     C
    \   00004E   E8           MOV     A,R0
    \   00004F   94E9         SUBB    A,#-0x17
@@ -1115,72 +1111,63 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00005C   6404         XRL     A,#0x4
    \                     ??ZDApp_ProcessSecEvent_7:
    \   00005E   FB           MOV     R3,A
-   \   00005F   8022         SJMP    ??ZDApp_ProcessSecEvent_3
+   \   00005F   801D         SJMP    ??ZDApp_ProcessSecEvent_3
     546            }
     547          
     548            if ( events & ZDO_APS_FRAMECOUNTER_CHANGE )
    \                     ??ZDApp_ProcessSecEvent_5:
    \   000061   EF           MOV     A,R7
    \   000062   5410         ANL     A,#0x10
-   \   000064   600A         JZ      ??ZDApp_ProcessSecEvent_8
+   \   000064   6005         JZ      ??ZDApp_ProcessSecEvent_8
     549            {
     550          #if defined (NV_RESTORE)
     551              ZDSecMgrSaveApsLinkKey();
-   \   000066                ; Setup parameters for call to function ZDSecMgrSaveApsLinkKey
-   \   000066   12....       LCALL   ??ZDSecMgrSaveApsLinkKey?relay
     552          #endif // (NV_RESTORE)
     553          
     554              // Return unprocessed events
     555              return (events ^ ZDO_APS_FRAMECOUNTER_CHANGE);
-   \   000069   EE           MOV     A,R6
-   \   00006A   FA           MOV     R2,A
-   \   00006B   EF           MOV     A,R7
-   \   00006C   6410         XRL     A,#0x10
-   \   00006E   80B4         SJMP    ??ZDApp_ProcessSecEvent_2
+   \   000066   EF           MOV     A,R7
+   \   000067   6410         XRL     A,#0x10
+   \   000069   80B9         SJMP    ??ZDApp_ProcessSecEvent_2
     556            }
     557          
     558            if ( events & ZDO_TCLK_FRAMECOUNTER_CHANGE )
    \                     ??ZDApp_ProcessSecEvent_8:
-   \   000070   EF           MOV     A,R7
-   \   000071   5408         ANL     A,#0x8
-   \   000073   600A         JZ      ??ZDApp_ProcessSecEvent_9
+   \   00006B   EF           MOV     A,R7
+   \   00006C   5408         ANL     A,#0x8
+   \   00006E   600A         JZ      ??ZDApp_ProcessSecEvent_9
     559            {
     560              ZDSecMgrSaveTCLinkKey();
-   \   000075                ; Setup parameters for call to function ZDSecMgrSaveTCLinkKey
-   \   000075   12....       LCALL   ??ZDSecMgrSaveTCLinkKey?relay
+   \   000070                ; Setup parameters for call to function ZDSecMgrSaveTCLinkKey
+   \   000070   12....       LCALL   ??ZDSecMgrSaveTCLinkKey?relay
     561          
     562              // Return unprocessed events
     563              return (events ^ ZDO_TCLK_FRAMECOUNTER_CHANGE);
-   \   000078   EE           MOV     A,R6
-   \   000079   FA           MOV     R2,A
-   \   00007A   EF           MOV     A,R7
-   \   00007B   6408         XRL     A,#0x8
-   \   00007D   80DF         SJMP    ??ZDApp_ProcessSecEvent_7
+   \   000073   EE           MOV     A,R6
+   \   000074   FA           MOV     R2,A
+   \   000075   EF           MOV     A,R7
+   \   000076   6408         XRL     A,#0x8
+   \   000078   80E4         SJMP    ??ZDApp_ProcessSecEvent_7
     564            }
     565          
     566            // Discard or make more handlers
     567            return 0;
    \                     ??ZDApp_ProcessSecEvent_9:
-   \   00007F   7A00         MOV     R2,#0x0
-   \   000081   7B00         MOV     R3,#0x0
+   \   00007A   7A00         MOV     R2,#0x0
+   \   00007C   7B00         MOV     R3,#0x0
    \                     ??ZDApp_ProcessSecEvent_3:
-   \   000083   02....       LJMP    ??Subroutine46_0 & 0xFFFF
+   \   00007E   02....       LJMP    ??Subroutine42_0 & 0xFFFF
     568          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine21:
+   \                     ?Subroutine22:
    \   000000   7B00         MOV     R3,#0x0
-   \   000002                REQUIRE ??Subroutine38_0
-   \   000002                ; // Fall through to label ??Subroutine38_0
+   \   000002   90....       MOV     DPTR,#ZDAppTaskID
+   \   000005                REQUIRE ??Subroutine41_0
+   \   000005                ; // Fall through to label ??Subroutine41_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine38_0:
-   \   000000   90....       MOV     DPTR,#ZDAppTaskID
-   \   000003                REQUIRE ??Subroutine39_0
-   \   000003                ; // Fall through to label ??Subroutine39_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine47_0:
+   \                     ??Subroutine46_0:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   F8           MOV     R0,A
    \   000002   A3           INC     DPTR
@@ -1189,7 +1176,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000005   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine57_0:
+   \                     ??Subroutine54_0:
    \   000000   EA           MOV     A,R2
    \   000001   F0           MOVX    @DPTR,A
    \   000002   A3           INC     DPTR
@@ -1239,54 +1226,46 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     607          uint8 ZDOInitDevice( uint16 startDelay )
    \                     ZDOInitDevice:
     608          {
-   \   000000   74F4         MOV     A,#-0xc
+   \   000000   74F6         MOV     A,#-0xa
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 12
+   \   000005                ; Saved register size: 10
    \   000005                ; Auto size: 2
    \   000005   74FE         MOV     A,#-0x2
    \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   12....       LCALL   ?Subroutine10 & 0xFFFF
+   \   00000A   12....       LCALL   ?Subroutine11 & 0xFFFF
     609            uint8 networkStateNV = ZDO_INITDEV_NEW_NETWORK_STATE;
     610            uint16 extendedDelay = 0;
-   \                     ??CrossCallReturnLabel_129:
-   \   00000D   7E00         MOV     R6,#0x0
-   \   00000F   7F00         MOV     R7,#0x0
     611          
     612            if ( devState == DEV_HOLD )
-   \   000011   90....       MOV     DPTR,#devState
-   \   000014   E0           MOVX    A,@DPTR
-   \   000015   7005         JNZ     ??ZDOInitDevice_0
+   \                     ??CrossCallReturnLabel_127:
+   \   00000D   90....       MOV     DPTR,#devState
+   \   000010   E0           MOVX    A,@DPTR
+   \   000011   7005         JNZ     ??ZDOInitDevice_0
     613            {
     614              // Initialize the RAM items table, in case an NV item has been updated.
     615              zgInitItems( FALSE );
-   \   000017                ; Setup parameters for call to function zgInitItems
-   \   000017   7900         MOV     R1,#0x0
-   \   000019   12....       LCALL   ??zgInitItems?relay
+   \   000013                ; Setup parameters for call to function zgInitItems
+   \   000013   7900         MOV     R1,#0x0
+   \   000015   12....       LCALL   ??zgInitItems?relay
     616            }
     617          
     618            ZDConfig_InitDescriptors();
    \                     ??ZDOInitDevice_0:
-   \   00001C                ; Setup parameters for call to function ZDConfig_InitDescriptors
-   \   00001C   12....       LCALL   ??ZDConfig_InitDescriptors?relay
+   \   000018                ; Setup parameters for call to function ZDConfig_InitDescriptors
+   \   000018   12....       LCALL   ??ZDConfig_InitDescriptors?relay
     619            //devtag.071807.todo - fix this temporary solution
     620            _NIB.CapabilityFlags = ZDO_Config_Node_Descriptor.CapabilityFlags;
-   \   00001F   90....       MOV     DPTR,#ZDO_Config_Node_Descriptor + 2
-   \   000022   E0           MOVX    A,@DPTR
-   \   000023   90....       MOV     DPTR,#_NIB + 14
-   \   000026   F0           MOVX    @DPTR,A
+   \   00001B   90....       MOV     DPTR,#ZDO_Config_Node_Descriptor + 2
+   \   00001E   E0           MOVX    A,@DPTR
+   \   00001F   90....       MOV     DPTR,#_NIB + 14
+   \   000022   F0           MOVX    @DPTR,A
     621          
     622          #if defined ( NV_RESTORE )
     623            // Get Keypad directly to see if a reset nv is needed.
     624            // Hold down the SW_BYPASS_NV key (defined in OnBoard.h)
     625            // while booting to skip past NV Restore.
     626            if ( HalKeyRead() == SW_BYPASS_NV )
-   \   000027                ; Setup parameters for call to function HalKeyRead
-   \   000027   12....       LCALL   ??HalKeyRead?relay
-   \   00002A   E9           MOV     A,R1
-   \   00002B   6404         XRL     A,#0x4
-   \   00002D   7074         JNZ     ??ZDOInitDevice_1
     627              networkStateNV = ZDO_INITDEV_NEW_NETWORK_STATE;
-   \   00002F   75..01       MOV     ?V0 + 0,#0x1
     628            else
     629            {
     630              // Determine if NV should be restored
@@ -1301,173 +1280,149 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     639            {
     640              // Wipe out the network state in NV
     641              NLME_InitNV();
-   \                     ??ZDOInitDevice_2:
-   \   000032                ; Setup parameters for call to function NLME_InitNV
-   \   000032   12....       LCALL   ??NLME_InitNV?relay
     642              NLME_SetDefaultNV();
-   \   000035                ; Setup parameters for call to function NLME_SetDefaultNV
-   \   000035   12....       LCALL   ??NLME_SetDefaultNV?relay
     643              // clear NWK key values
     644              ZDSecMgrClearNVKeyValues();
-   \   000038                ; Setup parameters for call to function ZDSecMgrClearNVKeyValues
-   \   000038   12....       LCALL   ??ZDSecMgrClearNVKeyValues?relay
     645            }
     646          #endif
     647          
     648            if ( networkStateNV == ZDO_INITDEV_NEW_NETWORK_STATE )
-   \                     ??ZDOInitDevice_3:
-   \   00003B   7401         MOV     A,#0x1
-   \   00003D   65..         XRL     A,?V0 + 0
-   \   00003F   7020         JNZ     ??ZDOInitDevice_4
     649            {
     650              ZDAppDetermineDeviceType();
-   \   000041                ; Setup parameters for call to function ZDAppDetermineDeviceType
-   \   000041   12....       LCALL   ??ZDAppDetermineDeviceType?relay
+   \   000023                ; Setup parameters for call to function ZDAppDetermineDeviceType
+   \   000023   12....       LCALL   ??ZDAppDetermineDeviceType?relay
     651          
     652              // Only delay if joining network - not restoring network state
     653              extendedDelay = (uint16)((NWK_START_DELAY + startDelay)
     654                        + (osal_rand() & EXTENDED_JOINING_RANDOM_MASK));
-   \   000044                ; Setup parameters for call to function osal_rand
-   \   000044   12....       LCALL   ??osal_rand?relay
-   \   000047   85..82       MOV     DPL,?XSP + 0
-   \   00004A   85..83       MOV     DPH,?XSP + 1
-   \   00004D   EA           MOV     A,R2
-   \   00004E   547F         ANL     A,#0x7f
-   \   000050   F8           MOV     R0,A
-   \   000051   E0           MOVX    A,@DPTR
-   \   000052   28           ADD     A,R0
-   \   000053   F8           MOV     R0,A
-   \   000054   A3           INC     DPTR
-   \   000055   E0           MOVX    A,@DPTR
-   \   000056   3400         ADDC    A,#0x0
-   \   000058   F9           MOV     R1,A
-   \   000059   E8           MOV     A,R0
-   \   00005A   2464         ADD     A,#0x64
-   \   00005C   FE           MOV     R6,A
-   \   00005D   E9           MOV     A,R1
-   \   00005E   3400         ADDC    A,#0x0
-   \   000060   FF           MOV     R7,A
+   \   000026                ; Setup parameters for call to function osal_rand
+   \   000026   12....       LCALL   ??osal_rand?relay
+   \   000029   85..82       MOV     DPL,?XSP + 0
+   \   00002C   85..83       MOV     DPH,?XSP + 1
+   \   00002F   EA           MOV     A,R2
+   \   000030   547F         ANL     A,#0x7f
+   \   000032   F8           MOV     R0,A
+   \   000033   E0           MOVX    A,@DPTR
+   \   000034   28           ADD     A,R0
+   \   000035   F8           MOV     R0,A
+   \   000036   A3           INC     DPTR
+   \   000037   E0           MOVX    A,@DPTR
+   \   000038   3400         ADDC    A,#0x0
+   \   00003A   F9           MOV     R1,A
+   \   00003B   E8           MOV     A,R0
+   \   00003C   2464         ADD     A,#0x64
+   \   00003E   FE           MOV     R6,A
+   \   00003F   E9           MOV     A,R1
+   \   000040   3400         ADDC    A,#0x0
+   \   000042   FF           MOV     R7,A
     655            }
     656          
     657            // Initialize the security for type of device
     658            ZDApp_SecInit( networkStateNV );
-   \                     ??ZDOInitDevice_4:
-   \   000061                ; Setup parameters for call to function ZDSecMgrInit
-   \   000061   A9..         MOV     R1,?V0 + 0
-   \   000063   12....       LCALL   ??ZDSecMgrInit?relay
+   \   000043                ; Setup parameters for call to function ZDSecMgrInit
+   \   000043   7901         MOV     R1,#0x1
+   \   000045   12....       LCALL   ??ZDSecMgrInit?relay
     659          
     660            if( ZDO_INIT_HOLD_NWK_START != startDelay )
-   \   000066   85..82       MOV     DPL,?XSP + 0
-   \   000069   85..83       MOV     DPH,?XSP + 1
-   \   00006C   E0           MOVX    A,@DPTR
-   \   00006D   F4           CPL     A
-   \   00006E   7003         JNZ     ??ZDOInitDevice_5
-   \   000070   A3           INC     DPTR
-   \   000071   E0           MOVX    A,@DPTR
-   \   000072   F4           CPL     A
-   \                     ??ZDOInitDevice_5:
-   \   000073   6045         JZ      ??ZDOInitDevice_6
+   \   000048   85..82       MOV     DPL,?XSP + 0
+   \   00004B   85..83       MOV     DPH,?XSP + 1
+   \   00004E   E0           MOVX    A,@DPTR
+   \   00004F   F4           CPL     A
+   \   000050   7003         JNZ     ??ZDOInitDevice_1
+   \   000052   A3           INC     DPTR
+   \   000053   E0           MOVX    A,@DPTR
+   \   000054   F4           CPL     A
+   \                     ??ZDOInitDevice_1:
+   \   000055   6035         JZ      ??ZDOInitDevice_2
     661            {
     662              devState = DEV_INIT;    // Remove the Hold state
-   \   000075   90....       MOV     DPTR,#devState
-   \   000078   7401         MOV     A,#0x1
-   \   00007A   F0           MOVX    @DPTR,A
+   \   000057   90....       MOV     DPTR,#devState
+   \   00005A   7401         MOV     A,#0x1
+   \   00005C   F0           MOVX    @DPTR,A
     663          
     664              // Initialize leave control logic
     665              ZDApp_LeaveCtrlInit();
-   \   00007B                ; Setup parameters for call to function ZDApp_LeaveCtrlInit
-   \   00007B   12....       LCALL   ??ZDApp_LeaveCtrlInit?relay
+   \   00005D                ; Setup parameters for call to function ZDApp_LeaveCtrlInit
+   \   00005D   12....       LCALL   ??ZDApp_LeaveCtrlInit?relay
     666          
     667              // Check leave control reset settings
     668              ZDApp_LeaveCtrlStartup( &devState, &startDelay );
-   \   00007E                ; Setup parameters for call to function ZDApp_LeaveCtrlStartup
-   \   00007E   85..82       MOV     DPL,?XSP + 0
-   \   000081   85..83       MOV     DPH,?XSP + 1
-   \   000084   AC82         MOV     R4,DPL
-   \   000086   AD83         MOV     R5,DPH
-   \   000088   7A..         MOV     R2,#devState & 0xff
-   \   00008A   7B..         MOV     R3,#(devState >> 8) & 0xff
-   \   00008C   12....       LCALL   ??ZDApp_LeaveCtrlStartup?relay
+   \   000060                ; Setup parameters for call to function ZDApp_LeaveCtrlStartup
+   \   000060   85..82       MOV     DPL,?XSP + 0
+   \   000063   85..83       MOV     DPH,?XSP + 1
+   \   000066   AC82         MOV     R4,DPL
+   \   000068   AD83         MOV     R5,DPH
+   \   00006A   7A..         MOV     R2,#devState & 0xff
+   \   00006C   7B..         MOV     R3,#(devState >> 8) & 0xff
+   \   00006E   12....       LCALL   ??ZDApp_LeaveCtrlStartup?relay
     669          
     670              // Leave may make the hold state come back
     671              if ( devState == DEV_HOLD )
-   \   00008F   90....       MOV     DPTR,#devState
-   \   000092   E0           MOVX    A,@DPTR
-   \   000093   701E         JNZ     ??ZDOInitDevice_7
+   \   000071   90....       MOV     DPTR,#devState
+   \   000074   E0           MOVX    A,@DPTR
+   \   000075   700E         JNZ     ??ZDOInitDevice_3
     672              {
     673                // Set the NV startup option to force a "new" join.
     674                zgWriteStartupOptions( ZG_STARTUP_SET, ZCD_STARTOPT_DEFAULT_NETWORK_STATE );
-   \   000095                ; Setup parameters for call to function zgWriteStartupOptions
-   \   000095   7A02         MOV     R2,#0x2
-   \   000097   79FF         MOV     R1,#-0x1
-   \   000099   12....       LCALL   ??zgWriteStartupOptions?relay
+   \   000077                ; Setup parameters for call to function zgWriteStartupOptions
+   \   000077   7A02         MOV     R2,#0x2
+   \   000079   79FF         MOV     R1,#-0x1
+   \   00007B   12....       LCALL   ??zgWriteStartupOptions?relay
     675          
     676                // Notify the applications
     677                osal_set_event( ZDAppTaskID, ZDO_STATE_CHANGE_EVT );
-   \   00009C                ; Setup parameters for call to function osal_set_event
-   \   00009C   12....       LCALL   ?Subroutine13 & 0xFFFF
+   \   00007E                ; Setup parameters for call to function osal_set_event
+   \   00007E   12....       LCALL   ?Subroutine14 & 0xFFFF
     678          
     679                return ( ZDO_INITDEV_LEAVE_NOT_STARTED );   // Don't join - (one time).
-   \                     ??CrossCallReturnLabel_56:
-   \   00009F   7902         MOV     R1,#0x2
-   \   0000A1   8021         SJMP    ??ZDOInitDevice_8
+   \                     ??CrossCallReturnLabel_54:
+   \   000081   7902         MOV     R1,#0x2
+   \   000083   8011         SJMP    ??ZDOInitDevice_4
     680              }
-   \                     ??ZDOInitDevice_1:
-   \   0000A3                ; Setup parameters for call to function ZDApp_ReadNetworkRestoreState
-   \   0000A3   12....       LCALL   ??ZDApp_ReadNetworkRestoreState?relay
-   \   0000A6   E9           MOV     A,R1
-   \   0000A7   F5..         MOV     ?V0 + 0,A
-   \   0000A9   7087         JNZ     ??ZDOInitDevice_2
-   \   0000AB                ; Setup parameters for call to function ZDApp_RestoreNetworkState
-   \   0000AB   12....       LCALL   ??ZDApp_RestoreNetworkState?relay
-   \   0000AE   E9           MOV     A,R1
-   \   0000AF   F5..         MOV     ?V0 + 0,A
-   \   0000B1   8088         SJMP    ??ZDOInitDevice_3
     681          
     682              // Trigger the network start
     683              ZDApp_NetworkInit( extendedDelay );
-   \                     ??ZDOInitDevice_7:
-   \   0000B3                ; Setup parameters for call to function ZDApp_NetworkInit
-   \   0000B3   EE           MOV     A,R6
-   \   0000B4   FA           MOV     R2,A
-   \   0000B5   EF           MOV     A,R7
-   \   0000B6   FB           MOV     R3,A
-   \   0000B7   12....       LCALL   ??ZDApp_NetworkInit?relay
+   \                     ??ZDOInitDevice_3:
+   \   000085                ; Setup parameters for call to function ZDApp_NetworkInit
+   \   000085   EE           MOV     A,R6
+   \   000086   FA           MOV     R2,A
+   \   000087   EF           MOV     A,R7
+   \   000088   FB           MOV     R3,A
+   \   000089   12....       LCALL   ??ZDApp_NetworkInit?relay
     684            }
     685          
     686            // set broadcast address mask to support broadcast filtering
     687            NLME_SetBroadcastFilter( ZDO_Config_Node_Descriptor.CapabilityFlags );
-   \                     ??ZDOInitDevice_6:
-   \   0000BA                ; Setup parameters for call to function NLME_SetBroadcastFilter
-   \   0000BA   90....       MOV     DPTR,#ZDO_Config_Node_Descriptor + 2
-   \   0000BD   E0           MOVX    A,@DPTR
-   \   0000BE   F9           MOV     R1,A
-   \   0000BF   12....       LCALL   ??NLME_SetBroadcastFilter?relay
+   \                     ??ZDOInitDevice_2:
+   \   00008C                ; Setup parameters for call to function NLME_SetBroadcastFilter
+   \   00008C   90....       MOV     DPTR,#ZDO_Config_Node_Descriptor + 2
+   \   00008F   E0           MOVX    A,@DPTR
+   \   000090   F9           MOV     R1,A
+   \   000091   12....       LCALL   ??NLME_SetBroadcastFilter?relay
     688          
     689            return ( networkStateNV );
-   \   0000C2   A9..         MOV     R1,?V0 + 0
-   \                     ??ZDOInitDevice_8:
-   \   0000C4   7402         MOV     A,#0x2
-   \   0000C6   80..         SJMP    ??Subroutine40_0
+   \   000094   7901         MOV     R1,#0x1
+   \                     ??ZDOInitDevice_4:
+   \   000096   02....       LJMP    ?Subroutine7 & 0xFFFF
     690          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine40_0:
+   \                     ?Subroutine7:
+   \   000000   7402         MOV     A,#0x2
+   \   000002   80..         SJMP    ??Subroutine44_0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ??Subroutine44_0:
    \   000000   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000003                REQUIRE ??Subroutine41_0
-   \   000003                ; // Fall through to label ??Subroutine41_0
+   \   000003                REQUIRE ??Subroutine45_0
+   \   000003                ; // Fall through to label ??Subroutine45_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine41_0:
-   \   000000   7F04         MOV     R7,#0x4
-   \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine10:
+   \                     ?Subroutine11:
    \   000000   85..82       MOV     DPL,?XSP + 0
    \   000003   85..83       MOV     DPH,?XSP + 1
-   \   000006                REQUIRE ??Subroutine57_0
-   \   000006                ; // Fall through to label ??Subroutine57_0
+   \   000006                REQUIRE ??Subroutine54_0
+   \   000006                ; // Fall through to label ??Subroutine54_0
     691          
     692          /*********************************************************************
     693           * @fn      ZDApp_ReadNetworkRestoreState
@@ -1512,7 +1467,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \                     ??ZDApp_ReadNetworkRestoreState_0:
    \   000010   EE           MOV     A,R6
    \   000011   F9           MOV     R1,A
-   \   000012   02....       LJMP    ??Subroutine46_0 & 0xFFFF
+   \   000012   02....       LJMP    ??Subroutine42_0 & 0xFFFF
     718          }
     719          
     720          /*********************************************************************
@@ -1605,10 +1560,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     758              }
     759            }
     760          }
-   \   000047   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \   000047   02....       LJMP    ?Subroutine2 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine45_0:
+   \                     ?Subroutine2:
    \   000000   D083         POP     DPH
    \   000002   D082         POP     DPL
    \   000004   02....       LJMP    ?BRET
@@ -1709,8 +1664,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \                     ??ZDApp_NetworkStartEvt_4:
    \   000049   12....       LCALL   ??Subroutine37_0 & 0xFFFF
     799          }
-   \                     ??CrossCallReturnLabel_60:
-   \   00004C   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_58:
+   \   00004C   02....       LJMP    ?Subroutine2 & 0xFFFF
     800          
     801          /*********************************************************************
     802           * @fn      ZDApp_DeviceAuthEvt()
@@ -1735,7 +1690,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000004   90....       MOV     DPTR,#devState
    \   000007   E0           MOVX    A,@DPTR
    \   000008   6405         XRL     A,#0x5
-   \   00000A   7030         JNZ     ??ZDApp_DeviceAuthEvt_0
+   \   00000A   702B         JNZ     ??ZDApp_DeviceAuthEvt_0
     814            {
     815              // Stop the reset timer so it doesn't reset
     816              ZDApp_ResetTimerCancel();
@@ -1743,7 +1698,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00000C   12....       LCALL   ??ZDApp_ResetTimerCancel?relay
     817          
     818              devState = DEV_END_DEVICE;
-   \   00000F   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \   00000F   12....       LCALL   ?Subroutine8 & 0xFFFF
     819              osal_set_event( ZDAppTaskID, ZDO_STATE_CHANGE_EVT );
     820          
     821              // Set the Power Manager Device
@@ -1754,8 +1709,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     826              if ( ZSTACK_ROUTER_BUILD )
     827              {
     828                if ( ZDO_Config_Node_Descriptor.LogicalType != NODETYPE_DEVICE )
-   \                     ??CrossCallReturnLabel_67:
-   \   000012   12....       LCALL   ?Subroutine19 & 0xFFFF
+   \                     ??CrossCallReturnLabel_61:
+   \   000012   12....       LCALL   ?Subroutine20 & 0xFFFF
    \                     ??CrossCallReturnLabel_20:
    \   000015   6009         JZ      ??ZDApp_DeviceAuthEvt_1
     829                {
@@ -1771,54 +1726,48 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     834          
     835              // Notify to save info into NV
     836              ZDApp_NVUpdate();
-   \                     ??ZDApp_DeviceAuthEvt_1:
-   \   000020                ; Setup parameters for call to function ZDApp_NVUpdate
-   \   000020   12....       LCALL   ??ZDApp_NVUpdate?relay
     837          
     838              // Save off the security
     839              ZDApp_SaveNwkKey();
-   \   000023                ; Setup parameters for call to function ZDApp_SaveNwkKey
-   \   000023   12....       LCALL   ??ZDApp_SaveNwkKey?relay
+   \                     ??ZDApp_DeviceAuthEvt_1:
+   \   000020                ; Setup parameters for call to function ZDApp_SaveNwkKey
+   \   000020   12....       LCALL   ??ZDApp_SaveNwkKey?relay
     840          
     841              ZDApp_AnnounceNewAddress();
-   \   000026                ; Setup parameters for call to function ZDApp_AnnounceNewAddress
-   \   000026   12....       LCALL   ??ZDApp_AnnounceNewAddress?relay
+   \   000023                ; Setup parameters for call to function ZDApp_AnnounceNewAddress
+   \   000023   12....       LCALL   ??ZDApp_AnnounceNewAddress?relay
     842          
     843              if ( (ZDO_Config_Node_Descriptor.CapabilityFlags & CAPINFO_RCVR_ON_IDLE) == 0 )
-   \   000029   90....       MOV     DPTR,#ZDO_Config_Node_Descriptor + 2
-   \   00002C   E0           MOVX    A,@DPTR
-   \   00002D   A2E3         MOV     C,0xE0 /* A   */.3
-   \   00002F   400E         JC      ??ZDApp_DeviceAuthEvt_2
+   \   000026   90....       MOV     DPTR,#ZDO_Config_Node_Descriptor + 2
+   \   000029   E0           MOVX    A,@DPTR
+   \   00002A   A2E3         MOV     C,0xE0 /* A   */.3
+   \   00002C   4009         JC      ??ZDApp_DeviceAuthEvt_0
     844              {
     845                NLME_SetPollRate( ZDApp_SavedPollRate );
-   \   000031                ; Setup parameters for call to function NLME_SetPollRate
-   \   000031   90....       MOV     DPTR,#ZDApp_SavedPollRate
-   \   000034   12....       LCALL   ??Subroutine43_0 & 0xFFFF
+   \   00002E                ; Setup parameters for call to function NLME_SetPollRate
+   \   00002E   90....       MOV     DPTR,#ZDApp_SavedPollRate
+   \   000031   12....       LCALL   ??Subroutine39_0 & 0xFFFF
     846              }
     847            }
-   \                     ??CrossCallReturnLabel_70:
-   \   000037   12....       LCALL   ??NLME_SetPollRate?relay
-   \   00003A   8003         SJMP    ??ZDApp_DeviceAuthEvt_2
+   \                     ??CrossCallReturnLabel_64:
+   \   000034   12....       LCALL   ??NLME_SetPollRate?relay
     848            else
     849            {
     850              ZDApp_NVUpdate();
-   \                     ??ZDApp_DeviceAuthEvt_0:
-   \   00003C                ; Setup parameters for call to function ZDApp_NVUpdate
-   \   00003C   12....       LCALL   ??ZDApp_NVUpdate?relay
     851            }
     852          }
-   \                     ??ZDApp_DeviceAuthEvt_2:
-   \   00003F   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \                     ??ZDApp_DeviceAuthEvt_0:
+   \   000037   02....       LJMP    ?Subroutine2 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine7:
+   \                     ?Subroutine8:
    \   000000   90....       MOV     DPTR,#devState
    \   000003   7406         MOV     A,#0x6
-   \   000005                REQUIRE ??Subroutine42_0
-   \   000005                ; // Fall through to label ??Subroutine42_0
+   \   000005                REQUIRE ??Subroutine38_0
+   \   000005                ; // Fall through to label ??Subroutine38_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine43_0:
+   \                     ??Subroutine39_0:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   FA           MOV     R2,A
    \   000002   A3           INC     DPTR
@@ -1827,7 +1776,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000005   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine19:
+   \                     ?Subroutine20:
    \   000000   90....       MOV     DPTR,#ZDO_Config_Node_Descriptor
    \   000003   E0           MOVX    A,@DPTR
    \   000004   5407         ANL     A,#0x7
@@ -1848,10 +1797,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     863          void ZDApp_SaveNetworkStateEvt( void )
    \                     ZDApp_SaveNetworkStateEvt:
     864          {
-   \   000000   C082         PUSH    DPL
-   \   000002   C083         PUSH    DPH
-   \   000004                ; Saved register size: 2
-   \   000004                ; Auto size: 0
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
     865          #if defined ( NV_RESTORE )
     866           #if defined ( NV_TURN_OFF_RADIO )
     867            // Turn off the radio's receiver during an NV update
@@ -1866,24 +1813,17 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     876                           NWK_NV_DEVICELIST_ENABLE |
     877                           NWK_NV_BINDING_ENABLE    |
     878                           NWK_NV_ADDRMGR_ENABLE );
-   \   000004                ; Setup parameters for call to function NLME_UpdateNV
-   \   000004   790F         MOV     R1,#0xf
-   \   000006   12....       LCALL   ??NLME_UpdateNV?relay
     879          
     880            // Reset the NV startup option to resume from NV by
     881            // clearing the "New" join option.
     882            zgWriteStartupOptions( FALSE, ZCD_STARTOPT_DEFAULT_NETWORK_STATE );
-   \   000009                ; Setup parameters for call to function zgWriteStartupOptions
-   \   000009   7A02         MOV     R2,#0x2
-   \   00000B   7900         MOV     R1,#0x0
-   \   00000D   12....       LCALL   ??zgWriteStartupOptions?relay
     883          
     884           #if defined ( NV_TURN_OFF_RADIO )
     885            ZMacSetReq( ZMacRxOnIdle, &RxOnIdle );
     886           #endif
     887          #endif  // NV_RESTORE
     888          }
-   \   000010   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \   000000   02....       LJMP    ?BRET
     889          
     890          /*********************************************************************
     891           * @fn      ZDApp_RestoreNetworkState()
@@ -1935,11 +1875,11 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000015                ; Setup parameters for call to function NLME_GetShortAddr
    \   000015   12....       LCALL   ??NLME_GetShortAddr?relay
    \   000018   90....       MOV     DPTR,#ZDAppNwkAddr
-   \   00001B   12....       LCALL   ??Subroutine57_0 & 0xFFFF
+   \   00001B   12....       LCALL   ??Subroutine54_0 & 0xFFFF
     919                if ( ZDAppNwkAddr.addr.shortAddr == 0 )
-   \                     ??CrossCallReturnLabel_126:
+   \                     ??CrossCallReturnLabel_124:
    \   00001E   90....       MOV     DPTR,#ZDAppNwkAddr
-   \   000021   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \   000021   12....       LCALL   ?Subroutine12 & 0xFFFF
    \                     ??CrossCallReturnLabel_4:
    \   000024   7007         JNZ     ??ZDApp_RestoreNetworkState_1
     920                  ZDO_Config_Node_Descriptor.LogicalType = NODETYPE_COORDINATOR;
@@ -1989,11 +1929,11 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \                     ??ZDApp_RestoreNetworkState_0:
    \   000045   7901         MOV     R1,#0x1
    \                     ??ZDApp_RestoreNetworkState_2:
-   \   000047   02....       LJMP    ??Subroutine46_0 & 0xFFFF
+   \   000047   02....       LJMP    ??Subroutine42_0 & 0xFFFF
     946          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine11:
+   \                     ?Subroutine12:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   F8           MOV     R0,A
    \   000002   A3           INC     DPTR
@@ -2033,10 +1973,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     966            osal_memset( &ZDO_DefaultUserDescriptor, 0, sizeof( UserDescriptorFormat_t ) );
    \   00000A                ; Setup parameters for call to function osal_memset
    \   00000A   7C11         MOV     R4,#0x11
-   \   00000C   12....       LCALL   ?Subroutine30 & 0xFFFF
+   \   00000C   12....       LCALL   ?Subroutine26 & 0xFFFF
     967            if ( ZSUCCESS == osal_nv_item_init( ZCD_NV_USERDESC,
     968                   sizeof(UserDescriptorFormat_t), (void*)&ZDO_DefaultUserDescriptor ) )
-   \                     ??CrossCallReturnLabel_37:
+   \                     ??CrossCallReturnLabel_31:
    \   00000F   12....       LCALL   ?PUSH_XSTACK_I_TWO
    \   000012   7C11         MOV     R4,#0x11
    \   000014   7D00         MOV     R5,#0x0
@@ -2061,7 +2001,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000037   7D00         MOV     R5,#0x0
    \   000039   7A81         MOV     R2,#-0x7f
    \   00003B   12....       LCALL   ?Subroutine31 & 0xFFFF
-   \                     ??CrossCallReturnLabel_39:
+   \                     ??CrossCallReturnLabel_37:
    \   00003E   12....       LCALL   ?DEALLOC_XSTACK8
    \   000041   E9           MOV     A,R1
    \   000042   7010         JNZ     ??ZDApp_InitUserDesc_0
@@ -2083,10 +2023,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
     979          }
    \                     ??ZDApp_InitUserDesc_0:
    \   000054   7411         MOV     A,#0x11
-   \   000056   02....       LJMP    ??Subroutine51_0 & 0xFFFF
+   \   000056   02....       LJMP    ??Subroutine44_0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine30:
+   \                     ?Subroutine26:
    \   000000   7D00         MOV     R5,#0x0
    \   000002   7900         MOV     R1,#0x0
    \   000004   85..82       MOV     DPL,?XSP + 0
@@ -2109,12 +2049,6 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000002   12....       LCALL   ??osal_nv_read?relay
    \   000005   7404         MOV     A,#0x4
    \   000007   22           RET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine51_0:
-   \   000000   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000003                REQUIRE ??Subroutine52_0
-   \   000003                ; // Fall through to label ??Subroutine52_0
     980          
     981          /*********************************************************************
     982           * @fn      ZDAppCheckForHoldKey()
@@ -2154,7 +2088,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1001          #endif // HAL_KEY
    1002          }
    \                     ??ZDAppCheckForHoldKey_0:
-   \   000011   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \   000011   02....       LJMP    ?Subroutine2 & 0xFFFF
    1003          
    1004          /*********************************************************************
    1005           * @fn      ZDApp_ProcessOSALMsg()
@@ -2222,12 +2156,12 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1042                if ( pZDNwkMgr_ProcessDataConfirm )
    \                     ??ZDApp_ProcessOSALMsg_2:
    \   000021   90....       MOV     DPTR,#pZDNwkMgr_ProcessDataConfirm
-   \   000024   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \   000024   12....       LCALL   ?Subroutine12 & 0xFFFF
    \                     ??CrossCallReturnLabel_5:
    \   000027   6006         JZ      ??ZDApp_ProcessOSALMsg_3
    1043                  pZDNwkMgr_ProcessDataConfirm( afDataConfirm );
    \   000029                ; Setup parameters for indirect call
-   \   000029   12....       LCALL   ??Subroutine50_0 & 0xFFFF
+   \   000029   12....       LCALL   ??Subroutine49_0 & 0xFFFF
    1044          #endif
    1045                (void)sentEP;
    1046                (void)sentStatus;
@@ -2348,15 +2282,15 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1161                  ZDApp_ProcessSecMsg( msgPtr );
    1162                break;
    1163            }
-   \                     ??CrossCallReturnLabel_96:
+   \                     ??CrossCallReturnLabel_94:
    \   00002C   12....       LCALL   ?CALL_IND
    1164          
    1165          }
    \                     ??ZDApp_ProcessOSALMsg_3:
-   \   00002F   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \   00002F   02....       LJMP    ?Subroutine2 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine50_0:
+   \                     ??Subroutine49_0:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   F583         MOV     DPH,A
    \   000003   8882         MOV     DPL,R0
@@ -2387,7 +2321,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00000C   EB           MOV     A,R3
    \   00000D   FF           MOV     R7,A
    1178            switch ( inMsg->clusterID )
-   \   00000E   12....       LCALL   ?Subroutine27 & 0xFFFF
+   \   00000E   12....       LCALL   ?Subroutine28 & 0xFFFF
    \                     ??CrossCallReturnLabel_35:
    \   000011   F5..         MOV     ?V0 + 1,A
    \   000013   78..         MOV     R0,#?V0 + 0
@@ -2443,7 +2377,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000054   FD           MOV     R5,A
    \   000055   12....       LCALL   ?Subroutine25 & 0xFFFF
    1191                    }
-   \                     ??CrossCallReturnLabel_72:
+   \                     ??CrossCallReturnLabel_66:
    \   000058   12....       LCALL   ??ZDO_UpdateAddrManager?relay
    1192                    osal_mem_free( pAddrRsp );
    \                     ??ZDApp_ProcessMsgCBs_5:
@@ -2492,7 +2426,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1212                if (ZG_DEVICE_COORDINATOR_TYPE && matchED)
    \                     ??ZDApp_ProcessMsgCBs_2:
    \   00007F   90....       MOV     DPTR,#matchED
-   \   000082   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \   000082   12....       LCALL   ?Subroutine12 & 0xFFFF
    \                     ??CrossCallReturnLabel_6:
    \   000085   606B         JZ      ??ZDApp_ProcessMsgCBs_4
    1213                {
@@ -2501,9 +2435,9 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1216                       ZDO_ParseBindRsp(inMsg), inMsg->TransSeq );
    \   000087   EE           MOV     A,R6
    \   000088   240C         ADD     A,#0xc
-   \   00008A   12....       LCALL   ??Subroutine55_0 & 0xFFFF
+   \   00008A   12....       LCALL   ??Subroutine52_0 & 0xFFFF
    1217                }
-   \                     ??CrossCallReturnLabel_116:
+   \                     ??CrossCallReturnLabel_114:
    \   00008D   6421         XRL     A,#0x21
    \   00008F   7004         JNZ     ??ZDApp_ProcessMsgCBs_7
    \   000091   A3           INC     DPTR
@@ -2519,13 +2453,13 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00009D                ; Setup parameters for call to function ZDMatchSendState
    \   00009D   EE           MOV     A,R6
    \   00009E   240F         ADD     A,#0xf
-   \   0000A0   12....       LCALL   ??Subroutine55_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_117:
+   \   0000A0   12....       LCALL   ??Subroutine52_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_115:
    \   0000A3   FB           MOV     R3,A
-   \   0000A4   12....       LCALL   ?Subroutine29 & 0xFFFF
-   \                     ??CrossCallReturnLabel_111:
-   \   0000A7   12....       LCALL   ??Subroutine49_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_93:
+   \   0000A4   12....       LCALL   ?Subroutine30 & 0xFFFF
+   \                     ??CrossCallReturnLabel_109:
+   \   0000A7   12....       LCALL   ??Subroutine48_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_91:
    \   0000AA   FA           MOV     R2,A
    \   0000AB   12....       LCALL   ??ZDMatchSendState?relay
    \   0000AE   8042         SJMP    ??ZDApp_ProcessMsgCBs_4
@@ -2561,8 +2495,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   0000D2                ; Setup parameters for call to function osal_mem_free
    \   0000D2   7412         MOV     A,#0x12
    \   0000D4   12....       LCALL   ?XSTACK_DISP0_8
-   \   0000D7   12....       LCALL   ??Subroutine43_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_71:
+   \   0000D7   12....       LCALL   ??Subroutine39_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_65:
    \   0000DA   12....       LCALL   ??osal_mem_free?relay
    1230                  if ( bindReq.numOutClusters )
    \                     ??ZDApp_ProcessMsgCBs_10:
@@ -2588,16 +2522,16 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1236          }
    \                     ??ZDApp_ProcessMsgCBs_4:
    \   0000F2   742C         MOV     A,#0x2c
-   \   0000F4   02....       LJMP    ??Subroutine51_0 & 0xFFFF
+   \   0000F4   02....       LJMP    ??Subroutine44_0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine25:
    \   000000   A3           INC     DPTR
-   \   000001                REQUIRE ??Subroutine43_0
-   \   000001                ; // Fall through to label ??Subroutine43_0
+   \   000001                REQUIRE ??Subroutine39_0
+   \   000001                ; // Fall through to label ??Subroutine39_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine49_0:
+   \                     ??Subroutine48_0:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   F8           MOV     R0,A
    \   000002   A3           INC     DPTR
@@ -2608,41 +2542,41 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000009   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine29:
+   \                     ?Subroutine30:
    \   000000   EE           MOV     A,R6
    \   000001   2413         ADD     A,#0x13
-   \   000003                REQUIRE ??Subroutine53_0
-   \   000003                ; // Fall through to label ??Subroutine53_0
+   \   000003                REQUIRE ??Subroutine50_0
+   \   000003                ; // Fall through to label ??Subroutine50_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine53_0:
+   \                     ??Subroutine50_0:
    \   000000   F582         MOV     DPL,A
    \   000002   EF           MOV     A,R7
-   \   000003                REQUIRE ??Subroutine54_0
-   \   000003                ; // Fall through to label ??Subroutine54_0
+   \   000003                REQUIRE ??Subroutine51_0
+   \   000003                ; // Fall through to label ??Subroutine51_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine54_0:
+   \                     ??Subroutine51_0:
    \   000000   3400         ADDC    A,#0x0
    \   000002   F583         MOV     DPH,A
    \   000004   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine55_0:
+   \                     ??Subroutine52_0:
    \   000000   F582         MOV     DPL,A
    \   000002   EF           MOV     A,R7
-   \   000003                REQUIRE ??Subroutine56_0
-   \   000003                ; // Fall through to label ??Subroutine56_0
+   \   000003                REQUIRE ??Subroutine53_0
+   \   000003                ; // Fall through to label ??Subroutine53_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine56_0:
+   \                     ??Subroutine53_0:
    \   000000   3400         ADDC    A,#0x0
    \   000002   F583         MOV     DPH,A
    \   000004   E0           MOVX    A,@DPTR
    \   000005   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine27:
+   \                     ?Subroutine28:
    \   000000   EE           MOV     A,R6
    \   000001   240C         ADD     A,#0xc
    \   000003   F582         MOV     DPL,A
@@ -2677,59 +2611,59 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1250            ZDO_RegisterForZDOMsg( ZDAppTaskID, IEEE_addr_rsp );
    \   000004                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
    \   000004   7A01         MOV     R2,#0x1
-   \   000006   12....       LCALL   ?Subroutine14 & 0xFFFF
+   \   000006   12....       LCALL   ?Subroutine15 & 0xFFFF
    1251          #endif
    1252          #if defined ( ZDO_NWKADDR_REQUEST ) || defined ( REFLECTOR )
    1253            ZDO_RegisterForZDOMsg( ZDAppTaskID, NWK_addr_rsp );
-   \                     ??CrossCallReturnLabel_74:
+   \                     ??CrossCallReturnLabel_68:
    \   000009                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
    \   000009   7A00         MOV     R2,#0x0
-   \   00000B   12....       LCALL   ?Subroutine14 & 0xFFFF
+   \   00000B   12....       LCALL   ?Subroutine15 & 0xFFFF
    1254          #endif
    1255          #if ZG_BUILD_COORDINATOR_TYPE
    1256            ZDO_RegisterForZDOMsg( ZDAppTaskID, Bind_rsp );
-   \                     ??CrossCallReturnLabel_75:
+   \                     ??CrossCallReturnLabel_69:
    \   00000E                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
    \   00000E   7A21         MOV     R2,#0x21
-   \   000010   12....       LCALL   ?Subroutine14 & 0xFFFF
+   \   000010   12....       LCALL   ?Subroutine15 & 0xFFFF
    1257            ZDO_RegisterForZDOMsg( ZDAppTaskID, Unbind_rsp );
-   \                     ??CrossCallReturnLabel_76:
+   \                     ??CrossCallReturnLabel_70:
    \   000013                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
    \   000013   7A22         MOV     R2,#0x22
-   \   000015   12....       LCALL   ?Subroutine14 & 0xFFFF
+   \   000015   12....       LCALL   ?Subroutine15 & 0xFFFF
    1258            ZDO_RegisterForZDOMsg( ZDAppTaskID, End_Device_Bind_req );
-   \                     ??CrossCallReturnLabel_77:
+   \                     ??CrossCallReturnLabel_71:
    \   000018                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
    \   000018   7A20         MOV     R2,#0x20
    \   00001A   7B00         MOV     R3,#0x0
-   \   00001C   12....       LCALL   ??Subroutine44_0 & 0xFFFF
+   \   00001C   12....       LCALL   ??Subroutine40_0 & 0xFFFF
    1259          #endif
    1260          #if defined ( REFLECTOR )
    1261            ZDO_RegisterForZDOMsg( ZDAppTaskID, Bind_req );
-   \                     ??CrossCallReturnLabel_78:
+   \                     ??CrossCallReturnLabel_72:
    \   00001F                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
    \   00001F   7A21         MOV     R2,#0x21
    \   000021   7B00         MOV     R3,#0x0
-   \   000023   12....       LCALL   ??Subroutine44_0 & 0xFFFF
+   \   000023   12....       LCALL   ??Subroutine40_0 & 0xFFFF
    1262            ZDO_RegisterForZDOMsg( ZDAppTaskID, Unbind_req );
-   \                     ??CrossCallReturnLabel_79:
+   \                     ??CrossCallReturnLabel_73:
    \   000026                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
    \   000026   7A22         MOV     R2,#0x22
    \   000028   7B00         MOV     R3,#0x0
-   \   00002A   12....       LCALL   ??Subroutine44_0 & 0xFFFF
+   \   00002A   12....       LCALL   ??Subroutine40_0 & 0xFFFF
    1263          #endif
    1264          }
-   \                     ??CrossCallReturnLabel_80:
-   \   00002D   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_74:
+   \   00002D   02....       LJMP    ?Subroutine2 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine14:
+   \                     ?Subroutine15:
    \   000000   7B80         MOV     R3,#-0x80
-   \   000002                REQUIRE ??Subroutine44_0
-   \   000002                ; // Fall through to label ??Subroutine44_0
+   \   000002                REQUIRE ??Subroutine40_0
+   \   000002                ; // Fall through to label ??Subroutine40_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine44_0:
+   \                     ??Subroutine40_0:
    \   000000   90....       MOV     DPTR,#ZDAppTaskID
    \   000003   E0           MOVX    A,@DPTR
    \   000004   F9           MOV     R1,A
@@ -2839,7 +2773,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1352            }
    1353          }
    \                     ??ZDApp_ProcessSecMsg_0:
-   \   000010   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \   000010   02....       LJMP    ?Subroutine2 & 0xFFFF
    1354          
    1355          /*********************************************************************
    1356           * @fn      ZDApp_ProcessNetworkJoin()
@@ -2890,7 +2824,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1374              {
    1375                osal_set_event( ZDAppTaskID, ZDO_STATE_CHANGE_EVT );
    \   00002D                ; Setup parameters for call to function osal_set_event
-   \   00002D   12....       LCALL   ?Subroutine13 & 0xFFFF
+   \   00002D   12....       LCALL   ?Subroutine14 & 0xFFFF
    1376          
    1377          #if defined ( POWER_SAVING )
    1378                osal_pwrmgr_device( PWRMGR_BATTERY );
@@ -2910,12 +2844,12 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1392                  {
    1393                    if ( devState == DEV_NWK_ORPHAN
    1394                      && ZDO_Config_Node_Descriptor.LogicalType != NODETYPE_DEVICE )
-   \                     ??CrossCallReturnLabel_57:
+   \                     ??CrossCallReturnLabel_55:
    \   000030   90....       MOV     DPTR,#devState
    \   000033   E0           MOVX    A,@DPTR
    \   000034   640A         XRL     A,#0xa
    \   000036   700D         JNZ     ??ZDApp_ProcessNetworkJoin_4
-   \   000038   12....       LCALL   ?Subroutine19 & 0xFFFF
+   \   000038   12....       LCALL   ?Subroutine20 & 0xFFFF
    \                     ??CrossCallReturnLabel_21:
    \   00003B   6010         JZ      ??ZDApp_ProcessNetworkJoin_5
    1395                    {
@@ -2948,10 +2882,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1408                  {
    1409                    // NOTE: first two parameters are not used, see NLMEDE.h for details
    1410                    if ( ZDO_Config_Node_Descriptor.LogicalType != NODETYPE_DEVICE )
-   \   000053   12....       LCALL   ?Subroutine19 & 0xFFFF
+   \   000053   12....       LCALL   ?Subroutine20 & 0xFFFF
    \                     ??CrossCallReturnLabel_22:
    \   000056   7003         JNZ     $+5
-   \   000058   02....       LJMP    ??CrossCallReturnLabel_58 & 0xFFFF
+   \   000058   02....       LJMP    ??CrossCallReturnLabel_56 & 0xFFFF
    1411                    {
    1412                      NLME_StartRouterRequest( 0, 0, false );
    \   00005B                ; Setup parameters for call to function NLME_StartRouterRequest
@@ -2959,7 +2893,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00005D   7A00         MOV     R2,#0x0
    \   00005F   7900         MOV     R1,#0x0
    \   000061   12....       LCALL   ??NLME_StartRouterRequest?relay
-   \   000064   02....       LJMP    ??CrossCallReturnLabel_58 & 0xFFFF
+   \   000064   02....       LJMP    ??CrossCallReturnLabel_56 & 0xFFFF
    1413                    }
    1414                  }
    1415                }
@@ -3059,7 +2993,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   0000D5   F0           MOVX    @DPTR,A
    \   0000D6   A3           INC     DPTR
    \   0000D7   04           INC     A
-   \   0000D8   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \   0000D8   12....       LCALL   ?Subroutine9 & 0xFFFF
    1436                  ZMacSetReq( ZMacShortAddress, (uint8 *)&addr );
    1437                }
    \                     ??CrossCallReturnLabel_0:
@@ -3095,7 +3029,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   0000F4   FA           MOV     R2,A
    \   0000F5   7B00         MOV     R3,#0x0
    \   0000F7   12....       LCALL   ??ZDApp_NetworkInit?relay
-   \   0000FA   02....       LJMP    ??CrossCallReturnLabel_58 & 0xFFFF
+   \   0000FA   02....       LJMP    ??CrossCallReturnLabel_56 & 0xFFFF
    1450              }
    1451            }
    1452            else if ( devState == DEV_NWK_ORPHAN || devState == DEV_NWK_REJOIN )
@@ -3118,7 +3052,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1460                }
    1461          
    1462                devState = DEV_END_DEVICE;
-   \   00010B   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \   00010B   12....       LCALL   ?Subroutine8 & 0xFFFF
    1463                osal_set_event( ZDAppTaskID, ZDO_STATE_CHANGE_EVT );
    1464                // setup Power Manager Device
    1465          #if defined ( POWER_SAVING )
@@ -3126,7 +3060,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1467          #endif
    1468          
    1469                if ( ZDO_Config_Node_Descriptor.CapabilityFlags & CAPINFO_RCVR_ON_IDLE )
-   \                     ??CrossCallReturnLabel_68:
+   \                     ??CrossCallReturnLabel_62:
    \   00010E   90....       MOV     DPTR,#ZDO_Config_Node_Descriptor + 2
    \   000111   E0           MOVX    A,@DPTR
    \   000112   A2E3         MOV     C,0xE0 /* A   */.3
@@ -3155,7 +3089,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1479                  // NOTE: first two parameters are not used, see NLMEDE.h for details
    1480                  if ( ZDO_Config_Node_Descriptor.LogicalType != NODETYPE_DEVICE )
    \                     ??ZDApp_ProcessNetworkJoin_19:
-   \   00012B   12....       LCALL   ?Subroutine19 & 0xFFFF
+   \   00012B   12....       LCALL   ?Subroutine20 & 0xFFFF
    \                     ??CrossCallReturnLabel_23:
    \   00012E   6009         JZ      ??ZDApp_ProcessNetworkJoin_20
    1481                  {
@@ -3172,7 +3106,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \                     ??ZDApp_ProcessNetworkJoin_20:
    \   000139                ; Setup parameters for call to function ZDApp_AnnounceNewAddress
    \   000139   12....       LCALL   ??ZDApp_AnnounceNewAddress?relay
-   \   00013C   805F         SJMP    ??CrossCallReturnLabel_58
+   \   00013C   805F         SJMP    ??CrossCallReturnLabel_56
    1487              }
    1488              else
    1489              {
@@ -3269,7 +3203,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00018F   90....       MOV     DPTR,#_NIB + 96
    \   000192   E0           MOVX    A,@DPTR
    \   000193   6402         XRL     A,#0x2
-   \   000195   7006         JNZ     ??CrossCallReturnLabel_58
+   \   000195   7006         JNZ     ??CrossCallReturnLabel_56
    1523              {
    1524                // Notify the network
    1525                ZDApp_AnnounceNewAddress();
@@ -3279,22 +3213,16 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1527                // Notify apps
    1528                osal_set_event( ZDAppTaskID, ZDO_STATE_CHANGE_EVT );
    \   00019A                ; Setup parameters for call to function osal_set_event
-   \   00019A   12....       LCALL   ?Subroutine13 & 0xFFFF
+   \   00019A   12....       LCALL   ?Subroutine14 & 0xFFFF
    1529              }
    1530            }
    1531          #endif
    1532          }
-   \                     ??CrossCallReturnLabel_58:
-   \   00019D                REQUIRE ?Subroutine6
-   \   00019D                ; // Fall through to label ?Subroutine6
+   \                     ??CrossCallReturnLabel_56:
+   \   00019D   02....       LJMP    ?Subroutine7 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine6:
-   \   000000   7402         MOV     A,#0x2
-   \   000002   02....       LJMP    ??Subroutine51_0 & 0xFFFF
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine8:
+   \                     ?Subroutine9:
    \   000000   F0           MOVX    @DPTR,A
    \   000001                ; Setup parameters for call to function ZMacSetReq
    \   000001                ; Setup parameters for indirect call
@@ -3313,12 +3241,6 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1540           *
    1541           * @return  none
    1542           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine2:
-   \   000000   7415         MOV     A,#0x15
-   \   000002                REQUIRE ??Subroutine40_0
-   \   000002                ; // Fall through to label ??Subroutine40_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    1543          void ZDApp_SaveNwkKey( void )
@@ -3389,7 +3311,19 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00006A   12....       LCALL   ??osal_memset?relay
    1557          
    1558          }
-   \   00006D   02....       LJMP    ?Subroutine2 & 0xFFFF
+   \   00006D   02....       LJMP    ?Subroutine4 & 0xFFFF
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine4:
+   \   000000   7415         MOV     A,#0x15
+   \   000002   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000005                REQUIRE ??Subroutine43_0
+   \   000005                ; // Fall through to label ??Subroutine43_0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ??Subroutine43_0:
+   \   000000   7F04         MOV     R7,#0x4
+   \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
    1559          
    1560          /*********************************************************************
    1561           * @fn      ZDApp_ResetNwkKey()
@@ -3416,10 +3350,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1573            osal_memset( &keyItems, 0, sizeof( nwkActiveKeyItems ) );
    \   00000A                ; Setup parameters for call to function osal_memset
    \   00000A   7C15         MOV     R4,#0x15
-   \   00000C   12....       LCALL   ?Subroutine30 & 0xFFFF
+   \   00000C   12....       LCALL   ?Subroutine26 & 0xFFFF
    1574            osal_nv_write( ZCD_NV_NWKKEY, 0, sizeof( nwkActiveKeyItems ),
    1575                          (void *)&keyItems );
-   \                     ??CrossCallReturnLabel_38:
+   \                     ??CrossCallReturnLabel_32:
    \   00000F   12....       LCALL   ?PUSH_XSTACK_I_TWO
    \   000012   75..15       MOV     ?V0 + 0,#0x15
    \   000015   75..00       MOV     ?V0 + 1,#0x0
@@ -3434,7 +3368,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00002A   12....       LCALL   ?DEALLOC_XSTACK8
    1576          }
    \   00002D   7415         MOV     A,#0x15
-   \   00002F   02....       LJMP    ??Subroutine51_0 & 0xFFFF
+   \   00002F   02....       LJMP    ??Subroutine44_0 & 0xFFFF
    1577          
    1578          /*********************************************************************
    1579           * @fn      ZDApp_RestoreNwkKey()
@@ -3479,7 +3413,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000029   7D00         MOV     R5,#0x0
    \   00002B   7A82         MOV     R2,#-0x7e
    \   00002D   12....       LCALL   ?Subroutine31 & 0xFFFF
-   \                     ??CrossCallReturnLabel_40:
+   \                     ??CrossCallReturnLabel_38:
    \   000030   12....       LCALL   ?DEALLOC_XSTACK8
    \   000033   E9           MOV     A,R1
    \   000034   703F         JNZ     ??ZDApp_RestoreNwkKey_0
@@ -3540,7 +3474,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1611            return ( ret );
    \   000088   EE           MOV     A,R6
    \   000089   F9           MOV     R1,A
-   \   00008A   02....       LJMP    ?Subroutine2 & 0xFFFF
+   \   00008A   02....       LJMP    ?Subroutine4 & 0xFFFF
    1612          }
    1613          
    1614          /*********************************************************************
@@ -3569,16 +3503,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000006   EB           MOV     A,R3
    \   000007   FD           MOV     R5,A
    \   000008   7A04         MOV     R2,#0x4
-   \   00000A   7B00         MOV     R3,#0x0
-   \   00000C   02....       LJMP    ?Subroutine3 & 0xFFFF
+   \   00000A   12....       LCALL   ?Subroutine22 & 0xFFFF
    1627          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine3:
-   \   000000   12....       LCALL   ??Subroutine38_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_65:
-   \   000003                REQUIRE ??Subroutine45_0
-   \   000003                ; // Fall through to label ??Subroutine45_0
+   \                     ??CrossCallReturnLabel_76:
+   \   00000D   02....       LJMP    ?Subroutine2 & 0xFFFF
    1628          
    1629          /*********************************************************************
    1630           * @fn      ZDApp_ResetTimerCancel
@@ -3608,7 +3536,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00000C   F9           MOV     R1,A
    \   00000D   12....       LCALL   ??osal_stop_timerEx?relay
    1642          }
-   \   000010   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \   000010   02....       LJMP    ?Subroutine2 & 0xFFFF
    1643          
    1644          /*********************************************************************
    1645           * @fn      ZDApp_LeaveCtrlInit
@@ -3674,11 +3602,11 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00003C   7A85         MOV     R2,#-0x7b
    \   00003E   12....       LCALL   ?Subroutine31 & 0xFFFF
    1672            }
-   \                     ??CrossCallReturnLabel_41:
+   \                     ??CrossCallReturnLabel_39:
    \   000041   12....       LCALL   ?DEALLOC_XSTACK8
    1673          }
    \                     ??ZDApp_LeaveCtrlInit_0:
-   \   000044   02....       LJMP    ??Subroutine52_0 & 0xFFFF
+   \   000044   02....       LJMP    ??Subroutine45_0 & 0xFFFF
    1674          
    1675          /*********************************************************************
    1676           * @fn      ZDApp_LeaveCtrlSet
@@ -3740,8 +3668,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00001C   7B00         MOV     R3,#0x0
    \   00001E   12....       LCALL   ??osal_nv_write?relay
    \   000021   7404         MOV     A,#0x4
-   \   000023                REQUIRE ??Subroutine51_0
-   \   000023                ; // Fall through to label ??Subroutine51_0
+   \   000023                REQUIRE ??Subroutine44_0
+   \   000023                ; // Fall through to label ??Subroutine44_0
    1699          
    1700          /*********************************************************************
    1701           * @fn      ZDApp_LeaveCtrlReset
@@ -3812,7 +3740,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00000A   E4           CLR     A
    \   00000B   33           RLC     A
    \   00000C   F9           MOV     R1,A
-   \   00000D   80..         SJMP    ??Subroutine45_0
+   \   00000D   80..         SJMP    ?Subroutine2
    1744          }
    1745          
    1746          /*********************************************************************
@@ -3879,7 +3807,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1773            }
    1774          }
    \                     ??ZDApp_LeaveCtrlStartup_0:
-   \   00002D   80..         SJMP    ??Subroutine45_0
+   \   00002D                REQUIRE ?Subroutine2
+   \   00002D                ; // Fall through to label ?Subroutine2
    1775          
    1776          /*********************************************************************
    1777           * @fn      ZDApp_LeaveReset
@@ -3909,7 +3838,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00000A   7B13         MOV     R3,#0x13
    \   00000C   12....       LCALL   ??ZDApp_ResetTimerStart?relay
    1790          }
-   \   00000F   80..         SJMP    ??Subroutine46_0
+   \   00000F   80..         SJMP    ??Subroutine42_0
    1791          
    1792          /*********************************************************************
    1793           * @fn      ZDApp_LeaveUpdate
@@ -3961,7 +3890,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1811          
    1812            if ( pbindRemoveDev )
    \   000022   90....       MOV     DPTR,#pbindRemoveDev
-   \   000025   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \   000025   12....       LCALL   ?Subroutine12 & 0xFFFF
    \                     ??CrossCallReturnLabel_7:
    \   000028   603C         JZ      ??ZDApp_LeaveUpdate_0
    1813            {
@@ -3997,9 +3926,9 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000059   AA82         MOV     R2,DPL
    \   00005B   AB83         MOV     R3,DPH
    \   00005D   90....       MOV     DPTR,#pbindRemoveDev
-   \   000060   12....       LCALL   ?Subroutine17 & 0xFFFF
+   \   000060   12....       LCALL   ?Subroutine18 & 0xFFFF
    1821            }
-   \                     ??CrossCallReturnLabel_103:
+   \                     ??CrossCallReturnLabel_101:
    \   000063   12....       LCALL   ?CALL_IND
    1822          
    1823            // Remove if child
@@ -4039,21 +3968,19 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1834          
    1835            // Schedule to save data to NV
    1836            ZDApp_NwkWriteNVRequest();
-   \   000087                ; Setup parameters for call to function AddrMgrWriteNVRequest
-   \   000087   12....       LCALL   ??AddrMgrWriteNVRequest?relay
    1837          }
-   \   00008A   7409         MOV     A,#0x9
-   \   00008C   12....       LCALL   ?DEALLOC_XSTACK8
-   \   00008F   7F07         MOV     R7,#0x7
-   \   000091   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000087   7409         MOV     A,#0x9
+   \   000089   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00008C   7F07         MOV     R7,#0x7
+   \   00008E   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine17:
+   \                     ?Subroutine18:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   F8           MOV     R0,A
    \   000002   A3           INC     DPTR
-   \   000003                REQUIRE ??Subroutine50_0
-   \   000003                ; // Fall through to label ??Subroutine50_0
+   \   000003                REQUIRE ??Subroutine49_0
+   \   000003                ; // Fall through to label ??Subroutine49_0
    1838          
    1839          /*********************************************************************
    1840           * @fn      ZDApp_NetworkDiscoveryReq
@@ -4080,7 +4007,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1854            return NLME_NetworkDiscoveryRequest(scanChannels, scanDuration);
    \   000005                ; Setup parameters for call to function NLME_NetworkDiscoveryRequest
    \   000005   12....       LCALL   ??NLME_NetworkDiscoveryRequest?relay
-   \   000008   02....       LJMP    ??Subroutine41_0 & 0xFFFF
+   \   000008   80..         SJMP    ??Subroutine43_0
    1855          }
    1856          
    1857          /*********************************************************************
@@ -4155,13 +4082,13 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00004C   12....       LCALL   ??NLME_JoinRequest?relay
    \   00004F   7404         MOV     A,#0x4
    \   000051   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000054                REQUIRE ?Subroutine4
-   \   000054                ; // Fall through to label ?Subroutine4
+   \   000054                REQUIRE ?Subroutine5
+   \   000054                ; // Fall through to label ?Subroutine5
    1878          
    1879          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine4:
+   \                     ?Subroutine5:
    \   000000   7F06         MOV     R7,#0x6
    \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
    1880          
@@ -4212,7 +4139,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000034   7D00         MOV     R5,#0x0
    \   000036   7A21         MOV     R2,#0x21
    \   000038   12....       LCALL   ?Subroutine31 & 0xFFFF
-   \                     ??CrossCallReturnLabel_42:
+   \                     ??CrossCallReturnLabel_40:
    \   00003B   12....       LCALL   ?DEALLOC_XSTACK8
    1897          
    1898            // Does the NIB have anything more than default?
@@ -4232,7 +4159,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \                     ??ZDApp_DeviceConfigured_1:
    \   000052   7901         MOV     R1,#0x1
    \                     ??ZDApp_DeviceConfigured_2:
-   \   000054   02....       LJMP    ?Subroutine6 & 0xFFFF
+   \   000054                REQUIRE ?Subroutine7
+   \   000054                ; // Fall through to label ?Subroutine7
    1900          }
    1901          
    1902          /*********************************************************************
@@ -4270,13 +4198,13 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000008   FB           MOV     R3,A
    \   000009   EE           MOV     A,R6
    \   00000A   FA           MOV     R2,A
-   \   00000B   12....       LCALL   ?Subroutine22 & 0xFFFF
+   \   00000B   12....       LCALL   ?Subroutine23 & 0xFFFF
    1923          }
    \                     ??CrossCallReturnLabel_25:
-   \   00000E   02....       LJMP    ??Subroutine46_0 & 0xFFFF
+   \   00000E   02....       LJMP    ??Subroutine42_0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine22:
+   \                     ?Subroutine23:
    \   000000   90....       MOV     DPTR,#ZDAppTaskID
    \   000003   E0           MOVX    A,@DPTR
    \   000004   F9           MOV     R1,A
@@ -4410,7 +4338,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    1982              // Otherwise, pass the confirm to ZDApp.
    1983              if (zdoCBFunc[ZDO_NWK_DISCOVERY_CNF_CBID] != NULL )
    \   000011   90....       MOV     DPTR,#zdoCBFunc + 4
-   \   000014   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \   000014   12....       LCALL   ?Subroutine12 & 0xFFFF
    \                     ??CrossCallReturnLabel_8:
    \   000017   6015         JZ      ??ZDO_NetworkDiscoveryConfirmCB_0
    1984              {
@@ -4421,9 +4349,9 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00001F   AA82         MOV     R2,DPL
    \   000021   AB83         MOV     R3,DPH
    \   000023   90....       MOV     DPTR,#zdoCBFunc + 5
-   \   000026   12....       LCALL   ??Subroutine50_0 & 0xFFFF
+   \   000026   12....       LCALL   ??Subroutine49_0 & 0xFFFF
    1986              }
-   \                     ??CrossCallReturnLabel_97:
+   \                     ??CrossCallReturnLabel_95:
    \   000029   12....       LCALL   ?CALL_IND
    \   00002C   8016         SJMP    ??CrossCallReturnLabel_26
    1987              else
@@ -4443,7 +4371,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00003B   AD83         MOV     R5,DPH
    \   00003D   7B02         MOV     R3,#0x2
    \   00003F   7A01         MOV     R2,#0x1
-   \   000041   12....       LCALL   ?Subroutine22 & 0xFFFF
+   \   000041   12....       LCALL   ?Subroutine23 & 0xFFFF
    1992              }
    1993            }
    1994            return (ZSuccess);
@@ -4451,7 +4379,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000044   7900         MOV     R1,#0x0
    \   000046   7403         MOV     A,#0x3
    \   000048   12....       LCALL   ?DEALLOC_XSTACK8
-   \   00004B   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \   00004B   02....       LJMP    ?Subroutine2 & 0xFFFF
    1995          }  // ZDO_NetworkDiscoveryConfirmCB
    1996          
    1997          /*********************************************************************
@@ -4489,16 +4417,16 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00000D   8B..         MOV     ?V0 + 3,R3
    \   00000F   AE..         MOV     R6,?V0 + 2
    \   000011   AF..         MOV     R7,?V0 + 3
-   \   000013   8005         SJMP    ??CrossCallReturnLabel_90
+   \   000013   8005         SJMP    ??CrossCallReturnLabel_88
    2018            while (pNwkDesc)
    2019            {
    2020              ResultCount++;
    \                     ??ZDApp_NwkDescListProcessing_0:
    \   000015   05..         INC     ?V0 + 0
    2021              pNwkDesc = pNwkDesc->nextDesc;
-   \   000017   12....       LCALL   ?Subroutine20 & 0xFFFF
+   \   000017   12....       LCALL   ?Subroutine21 & 0xFFFF
    2022            }
-   \                     ??CrossCallReturnLabel_90:
+   \                     ??CrossCallReturnLabel_88:
    \   00001A   EE           MOV     A,R6
    \   00001B   4F           ORL     A,R7
    \   00001C   70F7         JNZ     ??ZDApp_NwkDescListProcessing_0
@@ -4522,7 +4450,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00002D   AF..         MOV     R7,?V0 + 5
    2032              for ( i = 0; i < ResultCount; i++, pNwkDesc = pNwkDesc->nextDesc )
    \   00002F   75..00       MOV     ?V0 + 2,#0x0
-   \   000032   8023         SJMP    ??CrossCallReturnLabel_91
+   \   000032   8023         SJMP    ??CrossCallReturnLabel_89
    2033              {
    2034                if ( zgConfigPANID != 0xFFFF )
    2035                {
@@ -4603,8 +4531,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00004F   02....       LJMP    ??ZDApp_NwkDescListProcessing_5 & 0xFFFF
    \                     ??ZDApp_NwkDescListProcessing_6:
    \   000052   05..         INC     ?V0 + 2
-   \   000054   12....       LCALL   ?Subroutine20 & 0xFFFF
-   \                     ??CrossCallReturnLabel_91:
+   \   000054   12....       LCALL   ?Subroutine21 & 0xFFFF
+   \                     ??CrossCallReturnLabel_89:
    \   000057   E5..         MOV     A,?V0 + 2
    \   000059   C3           CLR     C
    \   00005A   95..         SUBB    A,?V0 + 0
@@ -4619,8 +4547,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00006A   F4           CPL     A
    \                     ??ZDApp_NwkDescListProcessing_8:
    \   00006B   600F         JZ      ??ZDApp_NwkDescListProcessing_9
-   \   00006D   12....       LCALL   ?Subroutine15 & 0xFFFF
-   \                     ??CrossCallReturnLabel_85:
+   \   00006D   12....       LCALL   ?Subroutine16 & 0xFFFF
+   \                     ??CrossCallReturnLabel_83:
    \   000070   90....       MOV     DPTR,#zgConfigPANID
    \   000073   E0           MOVX    A,@DPTR
    \   000074   68           XRL     A,R0
@@ -4761,29 +4689,29 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00010F   FB           MOV     R3,A
    2118            }
    \                     ??ZDApp_NwkDescListProcessing_15:
-   \   000110   02....       LJMP    ?Subroutine4 & 0xFFFF
+   \   000110   02....       LJMP    ?Subroutine5 & 0xFFFF
    2119          }// ZDApp_NwkDescListProcessing()
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine15:
+   \                     ?Subroutine16:
    \   000000   8E82         MOV     DPL,R6
    \   000002   8F83         MOV     DPH,R7
-   \   000004                REQUIRE ??Subroutine47_0
-   \   000004                ; // Fall through to label ??Subroutine47_0
+   \   000004                REQUIRE ??Subroutine46_0
+   \   000004                ; // Fall through to label ??Subroutine46_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine20:
+   \                     ?Subroutine21:
    \   000000   EE           MOV     A,R6
    \   000001   2414         ADD     A,#0x14
    \   000003   F582         MOV     DPL,A
    \   000005   EF           MOV     A,R7
    \   000006   3400         ADDC    A,#0x0
    \   000008   F583         MOV     DPH,A
-   \   00000A                REQUIRE ??Subroutine48_0
-   \   00000A                ; // Fall through to label ??Subroutine48_0
+   \   00000A                REQUIRE ??Subroutine47_0
+   \   00000A                ; // Fall through to label ??Subroutine47_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine48_0:
+   \                     ??Subroutine47_0:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   FE           MOV     R6,A
    \   000002   A3           INC     DPTR
@@ -4805,9 +4733,9 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine0:
    \   000000   12....       LCALL   ??Subroutine37_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_61:
-   \   000003                REQUIRE ??Subroutine46_0
-   \   000003                ; // Fall through to label ??Subroutine46_0
+   \                     ??CrossCallReturnLabel_59:
+   \   000003                REQUIRE ??Subroutine42_0
+   \   000003                ; // Fall through to label ??Subroutine42_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    2131          void ZDO_NetworkFormationConfirmCB( ZStatus_t Status )
@@ -4828,7 +4756,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2137              // LED on shows Coordinator started
    2138              HalLedSet ( HAL_LED_3, HAL_LED_MODE_ON );
    \   00000C                ; Setup parameters for call to function HalLedSet
-   \   00000C   12....       LCALL   ?Subroutine32 & 0xFFFF
+   \   00000C   12....       LCALL   ?Subroutine33 & 0xFFFF
    2139          
    2140              // LED off forgets HOLD_AUTO_START
    2141              HalLedSet (HAL_LED_4, HAL_LED_MODE_OFF);
@@ -4838,7 +4766,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2145          #endif
    2146          
    2147              if ( devState == DEV_HOLD )
-   \                     ??CrossCallReturnLabel_43:
+   \                     ??CrossCallReturnLabel_44:
    \   00000F   700C         JNZ     ??ZDO_NetworkFormationConfirmCB_1
    2148              {
    2149                // Began with HOLD_AUTO_START
@@ -4868,7 +4796,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2161          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine32:
+   \                     ?Subroutine33:
    \   000000   7A01         MOV     R2,#0x1
    \   000002   7904         MOV     R1,#0x4
    \   000004   12....       LCALL   ??HalLedSet?relay
@@ -4914,15 +4842,15 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2183            // Otherwise, process the beacon notification here.
    2184            if (zdoCBFunc[ZDO_BEACON_NOTIFY_IND_CBID] != NULL )
    \   000009   90....       MOV     DPTR,#zdoCBFunc + 6
-   \   00000C   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \   00000C   12....       LCALL   ?Subroutine12 & 0xFFFF
    \                     ??CrossCallReturnLabel_9:
    \   00000F   6009         JZ      ??ZDO_beaconNotifyIndCB_0
    2185            {
    2186              zdoCBFunc[ZDO_BEACON_NOTIFY_IND_CBID]( (void*)pBeacon );
    \   000011                ; Setup parameters for indirect call
-   \   000011   12....       LCALL   ??Subroutine50_0 & 0xFFFF
+   \   000011   12....       LCALL   ??Subroutine49_0 & 0xFFFF
    2187            }
-   \                     ??CrossCallReturnLabel_98:
+   \                     ??CrossCallReturnLabel_96:
    \   000014   12....       LCALL   ?CALL_IND
    \   000017   02....       LJMP    ??ZDO_beaconNotifyIndCB_1 & 0xFFFF
    2188            else
@@ -4935,23 +4863,23 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2195              pNwkDesc = NwkDescList;
    \                     ??ZDO_beaconNotifyIndCB_0:
    \   00001A   90....       MOV     DPTR,#NwkDescList
-   \   00001D   12....       LCALL   ??Subroutine48_0 & 0xFFFF
+   \   00001D   12....       LCALL   ??Subroutine47_0 & 0xFFFF
    2196              pLastNwkDesc = NwkDescList;
-   \                     ??CrossCallReturnLabel_88:
+   \                     ??CrossCallReturnLabel_86:
    \   000020   90....       MOV     DPTR,#NwkDescList
    \   000023   E0           MOVX    A,@DPTR
    \   000024   F5..         MOV     ?V0 + 2,A
    \   000026   A3           INC     DPTR
    \   000027   E0           MOVX    A,@DPTR
    \   000028   F5..         MOV     ?V0 + 3,A
-   \   00002A   802D         SJMP    ??CrossCallReturnLabel_92
+   \   00002A   802D         SJMP    ??CrossCallReturnLabel_90
    2197              while (pNwkDesc)
    2198              {
    2199                if ((pNwkDesc->panId == pBeacon->panID) &&
    2200                    (pNwkDesc->logicalChannel == pBeacon->logicalChannel))
    \                     ??ZDO_beaconNotifyIndCB_2:
-   \   00002C   12....       LCALL   ?Subroutine15 & 0xFFFF
-   \                     ??CrossCallReturnLabel_86:
+   \   00002C   12....       LCALL   ?Subroutine16 & 0xFFFF
+   \                     ??CrossCallReturnLabel_84:
    \   00002F   8A82         MOV     DPL,R2
    \   000031   8B83         MOV     DPH,R3
    \   000033   A3           INC     DPTR
@@ -4988,9 +4916,9 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000052   8E..         MOV     ?V0 + 2,R6
    \   000054   8F..         MOV     ?V0 + 3,R7
    2206                pNwkDesc = pNwkDesc->nextDesc;
-   \   000056   12....       LCALL   ?Subroutine20 & 0xFFFF
+   \   000056   12....       LCALL   ?Subroutine21 & 0xFFFF
    2207              }
-   \                     ??CrossCallReturnLabel_92:
+   \                     ??CrossCallReturnLabel_90:
    \   000059   EE           MOV     A,R6
    \   00005A   4F           ORL     A,R7
    \   00005B   70CF         JNZ     ??ZDO_beaconNotifyIndCB_2
@@ -5059,13 +4987,13 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2226                // Save new entry into the descriptor list
    2227                if ( !NwkDescList )
    \   00009C   90....       MOV     DPTR,#NwkDescList
-   \   00009F   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \   00009F   12....       LCALL   ?Subroutine12 & 0xFFFF
    \                     ??CrossCallReturnLabel_10:
    \   0000A2   7005         JNZ     ??ZDO_beaconNotifyIndCB_6
    2228                {
    2229                  NwkDescList = pNwkDesc;
    \   0000A4   90....       MOV     DPTR,#NwkDescList
-   \   0000A7   800B         SJMP    ??CrossCallReturnLabel_106
+   \   0000A7   800B         SJMP    ??CrossCallReturnLabel_104
    2230                }
    2231                else
    2232                {
@@ -5075,10 +5003,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   0000AB   2414         ADD     A,#0x14
    \   0000AD   F582         MOV     DPL,A
    \   0000AF   E5..         MOV     A,?V0 + 3
-   \   0000B1   12....       LCALL   ??Subroutine54_0 & 0xFFFF
+   \   0000B1   12....       LCALL   ??Subroutine51_0 & 0xFFFF
    2234                }
    2235              }
-   \                     ??CrossCallReturnLabel_106:
+   \                     ??CrossCallReturnLabel_104:
    \   0000B4   EE           MOV     A,R6
    \   0000B5   F0           MOVX    @DPTR,A
    \   0000B6   A3           INC     DPTR
@@ -5100,7 +5028,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   0000C6   A3           INC     DPTR
    \   0000C7   A3           INC     DPTR
    \   0000C8   12....       LCALL   ?Subroutine24 & 0xFFFF
-   \                     ??CrossCallReturnLabel_31:
+   \                     ??CrossCallReturnLabel_29:
    \   0000CB   A3           INC     DPTR
    \   0000CC   F0           MOVX    @DPTR,A
    2239              pNwkDesc->version        = pBeacon->protocolVersion;
@@ -5113,8 +5041,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   0000D7   8882         MOV     DPL,R0
    \   0000D9   8983         MOV     DPH,R1
    \   0000DB   12....       LCALL   ?Subroutine24 & 0xFFFF
-   \                     ??CrossCallReturnLabel_32:
-   \   0000DE   12....       LCALL   ?Subroutine9 & 0xFFFF
+   \                     ??CrossCallReturnLabel_30:
+   \   0000DE   12....       LCALL   ?Subroutine10 & 0xFFFF
    2240              pNwkDesc->logicalChannel = pBeacon->logicalChannel;
    \                     ??CrossCallReturnLabel_2:
    \   0000E1   E0           MOVX    A,@DPTR
@@ -5124,23 +5052,23 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   0000E7   A3           INC     DPTR
    \   0000E8   12....       LCALL   ?Subroutine34 & 0xFFFF
    2241              pNwkDesc->panId          = pBeacon->panID;
-   \                     ??CrossCallReturnLabel_49:
+   \                     ??CrossCallReturnLabel_47:
    \   0000EB   12....       LCALL   ?Subroutine25 & 0xFFFF
-   \                     ??CrossCallReturnLabel_73:
+   \                     ??CrossCallReturnLabel_67:
    \   0000EE   8E82         MOV     DPL,R6
    \   0000F0   8F83         MOV     DPH,R7
-   \   0000F2   12....       LCALL   ??Subroutine57_0 & 0xFFFF
+   \   0000F2   12....       LCALL   ??Subroutine54_0 & 0xFFFF
    2242              pNwkDesc->updateId       = pBeacon->updateID;
-   \                     ??CrossCallReturnLabel_127:
+   \                     ??CrossCallReturnLabel_125:
    \   0000F5   E5..         MOV     A,?V0 + 0
    \   0000F7   240C         ADD     A,#0xc
    \   0000F9   F582         MOV     DPL,A
    \   0000FB   E5..         MOV     A,?V0 + 1
-   \   0000FD   12....       LCALL   ??Subroutine56_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_113:
+   \   0000FD   12....       LCALL   ??Subroutine53_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_111:
    \   000100   C0E0         PUSH    A
-   \   000102   12....       LCALL   ?Subroutine29 & 0xFFFF
-   \                     ??CrossCallReturnLabel_112:
+   \   000102   12....       LCALL   ?Subroutine30 & 0xFFFF
+   \                     ??CrossCallReturnLabel_110:
    \   000105   D0E0         POP     A
    \   000107   F0           MOVX    @DPTR,A
    2243          
@@ -5256,10 +5184,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000187   C3           CLR     C
    \   000188   98           SUBB    A,R0
    \   000189   500D         JNC     ??ZDO_beaconNotifyIndCB_11
-   \   00018B   12....       LCALL   ?Subroutine33 & 0xFFFF
-   \                     ??CrossCallReturnLabel_46:
-   \   00018E   12....       LCALL   ??Subroutine56_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_114:
+   \   00018B   12....       LCALL   ?Subroutine32 & 0xFFFF
+   \                     ??CrossCallReturnLabel_41:
+   \   00018E   12....       LCALL   ??Subroutine53_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_112:
    \   000191   C3           CLR     C
    \   000192   9414         SUBB    A,#0x14
    \   000194   402D         JC      ??ZDO_beaconNotifyIndCB_12
@@ -5294,10 +5222,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   0001B6   A3           INC     DPTR
    \   0001B7   E0           MOVX    A,@DPTR
    \   0001B8   F8           MOV     R0,A
-   \   0001B9   12....       LCALL   ?Subroutine33 & 0xFFFF
-   \                     ??CrossCallReturnLabel_47:
-   \   0001BC   12....       LCALL   ??Subroutine56_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_115:
+   \   0001B9   12....       LCALL   ?Subroutine32 & 0xFFFF
+   \                     ??CrossCallReturnLabel_42:
+   \   0001BC   12....       LCALL   ??Subroutine53_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_113:
    \   0001BF   C3           CLR     C
    \   0001C0   98           SUBB    A,R0
    \   0001C1   5001         JNC     ??ZDO_beaconNotifyIndCB_13
@@ -5344,8 +5272,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2292                  pNwkDesc->chosenRouter            = pBeacon->sourceAddr;
    \   0001D8   85..82       MOV     DPL,?V0 + 0
    \   0001DB   85..83       MOV     DPH,?V0 + 1
-   \   0001DE   12....       LCALL   ??Subroutine47_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_82:
+   \   0001DE   12....       LCALL   ??Subroutine46_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_80:
    \   0001E1   8E82         MOV     DPL,R6
    \   0001E3   8F83         MOV     DPH,R7
    \   0001E5   A3           INC     DPTR
@@ -5359,7 +5287,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   0001ED   F0           MOVX    @DPTR,A
    \   0001EE   A3           INC     DPTR
    \   0001EF   E9           MOV     A,R1
-   \   0001F0   12....       LCALL   ?Subroutine9 & 0xFFFF
+   \   0001F0   12....       LCALL   ?Subroutine10 & 0xFFFF
    2293                  pNwkDesc->chosenRouterLinkQuality = pBeacon->LQI;
    \                     ??CrossCallReturnLabel_3:
    \   0001F3   A3           INC     DPTR
@@ -5368,16 +5296,16 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   0001F6   A3           INC     DPTR
    \   0001F7   A3           INC     DPTR
    \   0001F8   A3           INC     DPTR
-   \   0001F9   12....       LCALL   ?Subroutine18 & 0xFFFF
+   \   0001F9   12....       LCALL   ?Subroutine19 & 0xFFFF
    \                     ??CrossCallReturnLabel_18:
    \   0001FC   F0           MOVX    @DPTR,A
    2294                  pNwkDesc->chosenRouterDepth       = pBeacon->depth;
-   \   0001FD   12....       LCALL   ?Subroutine33 & 0xFFFF
+   \   0001FD   12....       LCALL   ?Subroutine32 & 0xFFFF
    2295                }
-   \                     ??CrossCallReturnLabel_48:
-   \   000200   12....       LCALL   ??Subroutine54_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_107:
-   \   000203   12....       LCALL   ?Subroutine18 & 0xFFFF
+   \                     ??CrossCallReturnLabel_43:
+   \   000200   12....       LCALL   ??Subroutine51_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_105:
+   \   000203   12....       LCALL   ?Subroutine19 & 0xFFFF
    \                     ??CrossCallReturnLabel_19:
    \   000206   A3           INC     DPTR
    \   000207   F0           MOVX    @DPTR,A
@@ -5428,11 +5356,11 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2302              }
    2303            }
    \                     ??ZDO_beaconNotifyIndCB_1:
-   \   00023C   02....       LJMP    ?Subroutine4 & 0xFFFF
+   \   00023C   02....       LJMP    ?Subroutine5 & 0xFFFF
    2304          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine33:
+   \                     ?Subroutine32:
    \   000000   E5..         MOV     A,?V0 + 0
    \   000002   240B         ADD     A,#0xb
    \   000004   F582         MOV     DPL,A
@@ -5442,7 +5370,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine24:
    \   000000   12....       LCALL   ?Subroutine35 & 0xFFFF
-   \                     ??CrossCallReturnLabel_52:
+   \                     ??CrossCallReturnLabel_50:
    \   000003   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
@@ -5458,9 +5386,9 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00000A   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine18:
+   \                     ?Subroutine19:
    \   000000   12....       LCALL   ?Subroutine35 & 0xFFFF
-   \                     ??CrossCallReturnLabel_51:
+   \                     ??CrossCallReturnLabel_49:
    \   000003   A3           INC     DPTR
    \   000004   A3           INC     DPTR
    \   000005   A3           INC     DPTR
@@ -5468,9 +5396,9 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000007   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine9:
+   \                     ?Subroutine10:
    \   000000   12....       LCALL   ?Subroutine34 & 0xFFFF
-   \                     ??CrossCallReturnLabel_50:
+   \                     ??CrossCallReturnLabel_48:
    \   000003   A3           INC     DPTR
    \   000004   A3           INC     DPTR
    \   000005   A3           INC     DPTR
@@ -5514,11 +5442,11 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2322              // LED on shows Router started
    2323              HalLedSet ( HAL_LED_3, HAL_LED_MODE_ON );
    \   00000C                ; Setup parameters for call to function HalLedSet
-   \   00000C   12....       LCALL   ?Subroutine32 & 0xFFFF
+   \   00000C   12....       LCALL   ?Subroutine33 & 0xFFFF
    2324              // LED off forgets HOLD_AUTO_START
    2325              HalLedSet ( HAL_LED_4, HAL_LED_MODE_OFF);
    2326              if ( devState == DEV_HOLD )
-   \                     ??CrossCallReturnLabel_44:
+   \                     ??CrossCallReturnLabel_45:
    \   00000F   700C         JNZ     ??ZDO_StartRouterConfirmCB_1
    2327              {
    2328                // Began with HOLD_AUTO_START
@@ -5578,32 +5506,29 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00000F   F0           MOVX    @DPTR,A
    2358          
    2359            if ( Status == ZSUCCESS )
-   \   000010   700D         JNZ     ??ZDO_JoinConfirmCB_0
+   \   000010   700A         JNZ     ??ZDO_JoinConfirmCB_0
    2360            {
    2361              // LED on shows device joined
    2362              HalLedSet ( HAL_LED_3, HAL_LED_MODE_ON );
    \   000012                ; Setup parameters for call to function HalLedSet
-   \   000012   12....       LCALL   ?Subroutine32 & 0xFFFF
+   \   000012   12....       LCALL   ?Subroutine33 & 0xFFFF
    2363              // LED off forgets HOLD_AUTO_START
    2364              HalLedSet ( HAL_LED_4, HAL_LED_MODE_OFF);
    2365              if ( (devState == DEV_HOLD) )
-   \                     ??CrossCallReturnLabel_45:
-   \   000015   7003         JNZ     ??ZDO_JoinConfirmCB_1
+   \                     ??CrossCallReturnLabel_46:
+   \   000015   700C         JNZ     ??ZDO_JoinConfirmCB_1
    2366              {
    2367                // Began with HOLD_AUTO_START
    2368                devState = DEV_NWK_JOINING;
    \   000017   7403         MOV     A,#0x3
    \   000019   F0           MOVX    @DPTR,A
+   \   00001A   8007         SJMP    ??ZDO_JoinConfirmCB_1
    2369              }
    2370          
    2371              if ( !ZG_SECURE_ENABLED )
    2372              {
    2373                // Notify to save info into NV
    2374                ZDApp_NVUpdate();
-   \                     ??ZDO_JoinConfirmCB_1:
-   \   00001A                ; Setup parameters for call to function ZDApp_NVUpdate
-   \   00001A   12....       LCALL   ??ZDApp_NVUpdate?relay
-   \   00001D   8007         SJMP    ??ZDO_JoinConfirmCB_2
    2375              }
    2376            }
    2377            else
@@ -5611,79 +5536,79 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2379          #if defined(BLINK_LEDS)
    2380              HalLedSet ( HAL_LED_3, HAL_LED_MODE_FLASH );  // Flash LED to show failure
    \                     ??ZDO_JoinConfirmCB_0:
-   \   00001F                ; Setup parameters for call to function HalLedSet
-   \   00001F   7A04         MOV     R2,#0x4
-   \   000021   7904         MOV     R1,#0x4
-   \   000023   12....       LCALL   ??HalLedSet?relay
+   \   00001C                ; Setup parameters for call to function HalLedSet
+   \   00001C   7A04         MOV     R2,#0x4
+   \   00001E   7904         MOV     R1,#0x4
+   \   000020   12....       LCALL   ??HalLedSet?relay
    2381          #endif
    2382            }
    2383          
    2384            // Pass the join confirm to higher layer if callback registered
    2385            if (zdoCBFunc[ZDO_JOIN_CNF_CBID] != NULL )
-   \                     ??ZDO_JoinConfirmCB_2:
-   \   000026   90....       MOV     DPTR,#zdoCBFunc + 8
-   \   000029   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \                     ??ZDO_JoinConfirmCB_1:
+   \   000023   90....       MOV     DPTR,#zdoCBFunc + 8
+   \   000026   12....       LCALL   ?Subroutine12 & 0xFFFF
    \                     ??CrossCallReturnLabel_11:
-   \   00002C   6033         JZ      ??ZDO_JoinConfirmCB_3
+   \   000029   6033         JZ      ??ZDO_JoinConfirmCB_2
    2386            {
    2387              zdoJoinCnf_t joinCnf;
    2388          
    2389              joinCnf.status = Status;
-   \   00002E   EE           MOV     A,R6
-   \   00002F   85..82       MOV     DPL,?XSP + 0
-   \   000032   85..83       MOV     DPH,?XSP + 1
-   \   000035   F0           MOVX    @DPTR,A
+   \   00002B   EE           MOV     A,R6
+   \   00002C   85..82       MOV     DPL,?XSP + 0
+   \   00002F   85..83       MOV     DPH,?XSP + 1
+   \   000032   F0           MOVX    @DPTR,A
    2390              joinCnf.deviceAddr = _NIB.nwkDevAddress;
-   \   000036   90....       MOV     DPTR,#_NIB + 20
-   \   000039   12....       LCALL   ??Subroutine47_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_83:
-   \   00003C   7401         MOV     A,#0x1
-   \   00003E   12....       LCALL   ?XSTACK_DISP0_8
-   \   000041   E8           MOV     A,R0
+   \   000033   90....       MOV     DPTR,#_NIB + 20
+   \   000036   12....       LCALL   ??Subroutine46_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_81:
+   \   000039   7401         MOV     A,#0x1
+   \   00003B   12....       LCALL   ?XSTACK_DISP0_8
+   \   00003E   E8           MOV     A,R0
+   \   00003F   F0           MOVX    @DPTR,A
+   \   000040   A3           INC     DPTR
+   \   000041   E9           MOV     A,R1
    \   000042   F0           MOVX    @DPTR,A
-   \   000043   A3           INC     DPTR
-   \   000044   E9           MOV     A,R1
-   \   000045   F0           MOVX    @DPTR,A
    2391              joinCnf.parentAddr = _NIB.nwkCoordAddress;
-   \   000046   90....       MOV     DPTR,#_NIB + 23
-   \   000049   12....       LCALL   ??Subroutine47_0 & 0xFFFF
+   \   000043   90....       MOV     DPTR,#_NIB + 23
+   \   000046   12....       LCALL   ??Subroutine46_0 & 0xFFFF
    2392          
    2393              zdoCBFunc[ZDO_JOIN_CNF_CBID]( (void*)&joinCnf );
    2394            }
-   \                     ??CrossCallReturnLabel_84:
-   \   00004C   7403         MOV     A,#0x3
-   \   00004E   12....       LCALL   ?XSTACK_DISP0_8
-   \   000051   E8           MOV     A,R0
-   \   000052   F0           MOVX    @DPTR,A
-   \   000053   A3           INC     DPTR
-   \   000054   E9           MOV     A,R1
-   \   000055   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_82:
+   \   000049   7403         MOV     A,#0x3
+   \   00004B   12....       LCALL   ?XSTACK_DISP0_8
+   \   00004E   E8           MOV     A,R0
+   \   00004F   F0           MOVX    @DPTR,A
+   \   000050   A3           INC     DPTR
+   \   000051   E9           MOV     A,R1
+   \   000052   12....       LCALL   ?Subroutine9 & 0xFFFF
    \                     ??CrossCallReturnLabel_1:
-   \   000058   90....       MOV     DPTR,#zdoCBFunc + 8
-   \   00005B   12....       LCALL   ?Subroutine17 & 0xFFFF
-   \                     ??CrossCallReturnLabel_104:
-   \   00005E   12....       LCALL   ?CALL_IND
+   \   000055   90....       MOV     DPTR,#zdoCBFunc + 8
+   \   000058   12....       LCALL   ?Subroutine18 & 0xFFFF
+   \                     ??CrossCallReturnLabel_102:
+   \   00005B   12....       LCALL   ?CALL_IND
    2395          
    2396            // Notify ZDApp
    2397            ZDApp_SendMsg( ZDAppTaskID, ZDO_NWK_JOIN_IND, sizeof(osal_event_hdr_t), (byte*)NULL );
-   \                     ??ZDO_JoinConfirmCB_3:
-   \   000061                ; Setup parameters for call to function ZDApp_SendMsg
-   \   000061   7C00         MOV     R4,#0x0
-   \   000063   7D00         MOV     R5,#0x0
-   \   000065   7B02         MOV     R3,#0x2
-   \   000067   7A02         MOV     R2,#0x2
-   \   000069   12....       LCALL   ?Subroutine22 & 0xFFFF
+   \                     ??ZDO_JoinConfirmCB_2:
+   \   00005E                ; Setup parameters for call to function ZDApp_SendMsg
+   \   00005E   7C00         MOV     R4,#0x0
+   \   000060   7D00         MOV     R5,#0x0
+   \   000062   7B02         MOV     R3,#0x2
+   \   000064   7A02         MOV     R2,#0x2
+   \   000066   12....       LCALL   ?Subroutine23 & 0xFFFF
    2398          
    2399          }
    \                     ??CrossCallReturnLabel_27:
-   \   00006C                REQUIRE ?Subroutine5
-   \   00006C                ; // Fall through to label ?Subroutine5
+   \   000069                REQUIRE ?Subroutine6
+   \   000069                ; // Fall through to label ?Subroutine6
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine5:
+   \                     ?Subroutine6:
    \   000000   7405         MOV     A,#0x5
    \   000002   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000005   02....       LJMP    ??Subroutine46_0 & 0xFFFF
+   \   000005   02....       LJMP    ??Subroutine42_0 & 0xFFFF
    2400          
    2401          /*********************************************************************
    2402           * @fn          ZDO_AddrChangeIndicationCB
@@ -5710,95 +5635,93 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2414            ZDO_AddrChangeInd_t *pZDOAddrChangeMsg;
    2415            epList_t *pItem = epList;
    \   000009   90....       MOV     DPTR,#epList
-   \   00000C   12....       LCALL   ??Subroutine48_0 & 0xFFFF
+   \   00000C   12....       LCALL   ??Subroutine47_0 & 0xFFFF
    2416          
    2417            // Notify to save info into NV
    2418            ZDApp_NVUpdate();
-   \                     ??CrossCallReturnLabel_89:
-   \   00000F                ; Setup parameters for call to function ZDApp_NVUpdate
-   \   00000F   12....       LCALL   ??ZDApp_NVUpdate?relay
    2419          
    2420            // Notify the applications
    2421            osal_set_event( ZDAppTaskID, ZDO_STATE_CHANGE_EVT );
-   \   000012                ; Setup parameters for call to function osal_set_event
-   \   000012   12....       LCALL   ?Subroutine13 & 0xFFFF
-   \                     ??CrossCallReturnLabel_59:
-   \   000015   803C         SJMP    ??ZDO_AddrChangeIndicationCB_0
+   \                     ??CrossCallReturnLabel_87:
+   \   00000F                ; Setup parameters for call to function osal_set_event
+   \   00000F   12....       LCALL   ?Subroutine14 & 0xFFFF
+   \                     ??CrossCallReturnLabel_57:
+   \   000012   803C         SJMP    ??ZDO_AddrChangeIndicationCB_0
    2422          
    2423            while (pItem != NULL)
    2424            {
    2425              if (pItem->epDesc->endPoint != ZDO_EP)
    \                     ??ZDO_AddrChangeIndicationCB_1:
-   \   000017   8E82         MOV     DPL,R6
-   \   000019   8F83         MOV     DPH,R7
-   \   00001B   A3           INC     DPTR
-   \   00001C   12....       LCALL   ?Subroutine16 & 0xFFFF
-   \                     ??CrossCallReturnLabel_94:
-   \   00001F   602B         JZ      ??ZDO_AddrChangeIndicationCB_2
+   \   000014   8E82         MOV     DPL,R6
+   \   000016   8F83         MOV     DPH,R7
+   \   000018   A3           INC     DPTR
+   \   000019   12....       LCALL   ?Subroutine17 & 0xFFFF
+   \                     ??CrossCallReturnLabel_92:
+   \   00001C   602B         JZ      ??ZDO_AddrChangeIndicationCB_2
    2426              {
    2427                pZDOAddrChangeMsg = (ZDO_AddrChangeInd_t *)osal_msg_allocate( sizeof( ZDO_AddrChangeInd_t ) );
-   \   000021                ; Setup parameters for call to function osal_msg_allocate
-   \   000021   7A04         MOV     R2,#0x4
-   \   000023   7B00         MOV     R3,#0x0
-   \   000025   12....       LCALL   ??osal_msg_allocate?relay
+   \   00001E                ; Setup parameters for call to function osal_msg_allocate
+   \   00001E   7A04         MOV     R2,#0x4
+   \   000020   7B00         MOV     R3,#0x0
+   \   000022   12....       LCALL   ??osal_msg_allocate?relay
    2428                if (pZDOAddrChangeMsg != NULL)
-   \   000028   EA           MOV     A,R2
-   \   000029   4B           ORL     A,R3
-   \   00002A   6020         JZ      ??ZDO_AddrChangeIndicationCB_2
+   \   000025   EA           MOV     A,R2
+   \   000026   4B           ORL     A,R3
+   \   000027   6020         JZ      ??ZDO_AddrChangeIndicationCB_2
    2429                {
    2430                  pZDOAddrChangeMsg->hdr.event = ZDO_ADDR_CHANGE_IND;
-   \   00002C   8A82         MOV     DPL,R2
-   \   00002E   8B83         MOV     DPH,R3
-   \   000030   74D6         MOV     A,#-0x2a
-   \   000032   F0           MOVX    @DPTR,A
+   \   000029   8A82         MOV     DPL,R2
+   \   00002B   8B83         MOV     DPH,R3
+   \   00002D   74D6         MOV     A,#-0x2a
+   \   00002F   F0           MOVX    @DPTR,A
    2431                  pZDOAddrChangeMsg->shortAddr = newAddr;
-   \   000033   A3           INC     DPTR
-   \   000034   A3           INC     DPTR
-   \   000035   E5..         MOV     A,?V0 + 0
-   \   000037   F0           MOVX    @DPTR,A
-   \   000038   A3           INC     DPTR
-   \   000039   E5..         MOV     A,?V0 + 1
-   \   00003B   F0           MOVX    @DPTR,A
+   \   000030   A3           INC     DPTR
+   \   000031   A3           INC     DPTR
+   \   000032   E5..         MOV     A,?V0 + 0
+   \   000034   F0           MOVX    @DPTR,A
+   \   000035   A3           INC     DPTR
+   \   000036   E5..         MOV     A,?V0 + 1
+   \   000038   F0           MOVX    @DPTR,A
    2432                  osal_msg_send( *(pItem->epDesc->task_id), (uint8 *)pZDOAddrChangeMsg );
-   \   00003C                ; Setup parameters for call to function osal_msg_send
-   \   00003C   8E82         MOV     DPL,R6
-   \   00003E   8F83         MOV     DPH,R7
-   \   000040   A3           INC     DPTR
-   \   000041   A3           INC     DPTR
-   \   000042   12....       LCALL   ?Subroutine17 & 0xFFFF
+   \   000039                ; Setup parameters for call to function osal_msg_send
+   \   000039   8E82         MOV     DPL,R6
+   \   00003B   8F83         MOV     DPH,R7
+   \   00003D   A3           INC     DPTR
+   \   00003E   A3           INC     DPTR
+   \   00003F   12....       LCALL   ?Subroutine18 & 0xFFFF
    2433                }
    2434              }
-   \                     ??CrossCallReturnLabel_105:
-   \   000045   12....       LCALL   ?Subroutine16 & 0xFFFF
-   \                     ??CrossCallReturnLabel_95:
-   \   000048   F9           MOV     R1,A
-   \   000049   12....       LCALL   ??osal_msg_send?relay
+   \                     ??CrossCallReturnLabel_103:
+   \   000042   12....       LCALL   ?Subroutine17 & 0xFFFF
+   \                     ??CrossCallReturnLabel_93:
+   \   000045   F9           MOV     R1,A
+   \   000046   12....       LCALL   ??osal_msg_send?relay
    2435              pItem = pItem->nextDesc;
    \                     ??ZDO_AddrChangeIndicationCB_2:
-   \   00004C   12....       LCALL   ?Subroutine15 & 0xFFFF
+   \   000049   12....       LCALL   ?Subroutine16 & 0xFFFF
    2436            }
-   \                     ??CrossCallReturnLabel_87:
-   \   00004F   E8           MOV     A,R0
-   \   000050   FE           MOV     R6,A
-   \   000051   E9           MOV     A,R1
-   \   000052   FF           MOV     R7,A
+   \                     ??CrossCallReturnLabel_85:
+   \   00004C   E8           MOV     A,R0
+   \   00004D   FE           MOV     R6,A
+   \   00004E   E9           MOV     A,R1
+   \   00004F   FF           MOV     R7,A
    \                     ??ZDO_AddrChangeIndicationCB_0:
-   \   000053   EE           MOV     A,R6
-   \   000054   4F           ORL     A,R7
-   \   000055   70C0         JNZ     ??ZDO_AddrChangeIndicationCB_1
+   \   000050   EE           MOV     A,R6
+   \   000051   4F           ORL     A,R7
+   \   000052   70C0         JNZ     ??ZDO_AddrChangeIndicationCB_1
    2437          
    2438            // Send out a device announce
    2439            ZDApp_AnnounceNewAddress();
-   \   000057                ; Setup parameters for call to function ZDApp_AnnounceNewAddress
-   \   000057   12....       LCALL   ??ZDApp_AnnounceNewAddress?relay
+   \   000054                ; Setup parameters for call to function ZDApp_AnnounceNewAddress
+   \   000054   12....       LCALL   ??ZDApp_AnnounceNewAddress?relay
    2440          }
-   \   00005A   02....       LJMP    ??Subroutine41_0 & 0xFFFF
+   \   000057   02....       LJMP    ??Subroutine43_0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine16:
+   \                     ?Subroutine17:
    \   000000   A3           INC     DPTR
-   \   000001                REQUIRE ??Subroutine49_0
-   \   000001                ; // Fall through to label ??Subroutine49_0
+   \   000001                REQUIRE ??Subroutine48_0
+   \   000001                ; // Fall through to label ??Subroutine48_0
    2441          
    2442          /*********************************************************************
    2443           * @fn          ZDO_JoinIndicationCB
@@ -5822,10 +5745,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \                     ZDO_JoinIndicationCB:
    2459                                          uint8 CapabilityFlags, uint8 type)
    2460          {
-   \   000000   C082         PUSH    DPL
-   \   000002   C083         PUSH    DPH
-   \   000004                ; Saved register size: 2
-   \   000004                ; Auto size: 0
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
    2461            (void)ShortAddress;
    2462            (void)ExtendedAddress;
    2463          #if ZDO_NV_SAVE_RFDs
@@ -5836,8 +5757,6 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2468          #endif
    2469            {
    2470              ZDApp_NVUpdate();  // Notify to save info into NV.
-   \   000004                ; Setup parameters for call to function ZDApp_NVUpdate
-   \   000004   12....       LCALL   ??ZDApp_NVUpdate?relay
    2471            }
    2472          
    2473            if (ZG_SECURE_ENABLED)  // Send notification to TC of new device.
@@ -5849,8 +5768,13 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2479            }
    2480          
    2481            return ZSuccess;
-   \   000007   7900         MOV     R1,#0x0
-   \   000009   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \   000000                REQUIRE ?Subroutine3
+   \   000000                ; // Fall through to label ?Subroutine3
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine3:
+   \   000000   7900         MOV     R1,#0x0
+   \   000002   02....       LJMP    ?BRET
    2482          }
    2483          
    2484          /*********************************************************************
@@ -5880,9 +5804,9 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2499            zdoConcentratorInd_t conInd;
    2500          
    2501            conInd.nwkAddr = nwkAddr;
-   \   00000A   12....       LCALL   ?Subroutine10 & 0xFFFF
+   \   00000A   12....       LCALL   ?Subroutine11 & 0xFFFF
    2502            conInd.extAddr = extAddr;
-   \                     ??CrossCallReturnLabel_130:
+   \                     ??CrossCallReturnLabel_128:
    \   00000D   7402         MOV     A,#0x2
    \   00000F   12....       LCALL   ?XSTACK_DISP0_8
    \   000012   EC           MOV     A,R4
@@ -5898,7 +5822,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2504          
    2505            if( zdoCBFunc[ZDO_CONCENTRATOR_IND_CBID] != NULL )
    \   00001E   90....       MOV     DPTR,#zdoCBFunc + 2
-   \   000021   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \   000021   12....       LCALL   ?Subroutine12 & 0xFFFF
    \                     ??CrossCallReturnLabel_12:
    \   000024   6013         JZ      ??ZDO_ConcentratorIndicationCB_0
    2506            {
@@ -5909,13 +5833,13 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00002C   AA82         MOV     R2,DPL
    \   00002E   AB83         MOV     R3,DPH
    \   000030   90....       MOV     DPTR,#zdoCBFunc + 3
-   \   000033   12....       LCALL   ??Subroutine50_0 & 0xFFFF
+   \   000033   12....       LCALL   ??Subroutine49_0 & 0xFFFF
    2508            }
-   \                     ??CrossCallReturnLabel_99:
+   \                     ??CrossCallReturnLabel_97:
    \   000036   12....       LCALL   ?CALL_IND
    2509          }
    \                     ??ZDO_ConcentratorIndicationCB_0:
-   \   000039   02....       LJMP    ?Subroutine5 & 0xFFFF
+   \   000039   02....       LJMP    ?Subroutine6 & 0xFFFF
    2510          
    2511          /*********************************************************************
    2512           * @fn          ZDO_LeaveCnf
@@ -5966,7 +5890,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2529              if ( ( zdoCBFunc[ZDO_LEAVE_CNF_CBID] == NULL ) ||
    2530                   ( (*zdoCBFunc[ZDO_LEAVE_CNF_CBID])( cnf ) == NULL ) )
    \   000020   90....       MOV     DPTR,#zdoCBFunc + 10
-   \   000023   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \   000023   12....       LCALL   ?Subroutine12 & 0xFFFF
    \                     ??CrossCallReturnLabel_13:
    \   000026   6011         JZ      ??ZDO_LeaveCnf_1
    \   000028                ; Setup parameters for indirect call
@@ -5974,8 +5898,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000029   FA           MOV     R2,A
    \   00002A   EF           MOV     A,R7
    \   00002B   FB           MOV     R3,A
-   \   00002C   12....       LCALL   ??Subroutine50_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_100:
+   \   00002C   12....       LCALL   ??Subroutine49_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_98:
    \   00002F   12....       LCALL   ?CALL_IND
    \   000032   8B..         MOV     ?V0 + 1,R3
    \   000034   EA           MOV     A,R2
@@ -5986,10 +5910,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2533                ZDApp_LeaveReset( cnf->rejoin );
    \                     ??ZDO_LeaveCnf_1:
    \   000039                ; Setup parameters for call to function ZDApp_LeaveReset
-   \   000039   12....       LCALL   ?Subroutine28 & 0xFFFF
+   \   000039   12....       LCALL   ?Subroutine29 & 0xFFFF
    2534              }
    2535            }
-   \                     ??CrossCallReturnLabel_121:
+   \                     ??CrossCallReturnLabel_119:
    \   00003C   F9           MOV     R1,A
    \   00003D   12....       LCALL   ??ZDApp_LeaveReset?relay
    \   000040   8011         SJMP    ??CrossCallReturnLabel_16
@@ -6013,14 +5937,14 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00004D   A3           INC     DPTR
    \   00004E   A3           INC     DPTR
    \   00004F   A3           INC     DPTR
-   \   000050   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \   000050   12....       LCALL   ?Subroutine13 & 0xFFFF
    2542            }
    2543          }
    \                     ??CrossCallReturnLabel_16:
-   \   000053   02....       LJMP    ??Subroutine52_0 & 0xFFFF
+   \   000053   02....       LJMP    ??Subroutine45_0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine12:
+   \                     ?Subroutine13:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   F9           MOV     R1,A
    \   000002   EE           MOV     A,R6
@@ -6040,11 +5964,11 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000016   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine28:
+   \                     ?Subroutine29:
    \   000000   EE           MOV     A,R6
    \   000001   240B         ADD     A,#0xb
-   \   000003                REQUIRE ??Subroutine55_0
-   \   000003                ; // Fall through to label ??Subroutine55_0
+   \   000003                REQUIRE ??Subroutine52_0
+   \   000003                ; // Fall through to label ??Subroutine52_0
    2544          
    2545          /*********************************************************************
    2546           * @fn          ZDO_LeaveInd
@@ -6116,8 +6040,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000039   D0E0         POP     A
    \   00003B   F0           MOVX    @DPTR,A
    2570                rsp.removeChildren = ind->removeChildren;
-   \   00003C   12....       LCALL   ?Subroutine28 & 0xFFFF
-   \                     ??CrossCallReturnLabel_122:
+   \   00003C   12....       LCALL   ?Subroutine29 & 0xFFFF
+   \                     ??CrossCallReturnLabel_120:
    \   00003F   85..82       MOV     DPL,?XSP + 0
    \   000042   85..83       MOV     DPH,?XSP + 1
    \   000045   F0           MOVX    @DPTR,A
@@ -6166,11 +6090,11 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2584                if ( ( ind->removeChildren == TRUE               ) ||
    2585                     ( ZDO_Config_Node_Descriptor.LogicalType ==
    2586                       NODETYPE_DEVICE                           )    )
-   \   000072   12....       LCALL   ?Subroutine28 & 0xFFFF
-   \                     ??CrossCallReturnLabel_123:
+   \   000072   12....       LCALL   ?Subroutine29 & 0xFFFF
+   \                     ??CrossCallReturnLabel_121:
    \   000075   6401         XRL     A,#0x1
    \   000077   6005         JZ      ??ZDO_LeaveInd_4
-   \   000079   12....       LCALL   ?Subroutine19 & 0xFFFF
+   \   000079   12....       LCALL   ?Subroutine20 & 0xFFFF
    \                     ??CrossCallReturnLabel_24:
    \   00007C   7008         JNZ     ??ZDO_LeaveInd_3
    2587                {
@@ -6191,9 +6115,9 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00007E                ; Setup parameters for call to function ZDApp_LeaveReset
    \   00007E   EE           MOV     A,R6
    \   00007F   240C         ADD     A,#0xc
-   \   000081   12....       LCALL   ??Subroutine53_0 & 0xFFFF
+   \   000081   12....       LCALL   ??Subroutine50_0 & 0xFFFF
    2601              }
-   \                     ??CrossCallReturnLabel_108:
+   \                     ??CrossCallReturnLabel_106:
    \   000084   80CD         SJMP    ??ZDO_LeaveInd_1
    2602              else
    2603              {
@@ -6205,17 +6129,17 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000086                ; Setup parameters for call to function ZDApp_LeaveUpdate
    \   000086   EE           MOV     A,R6
    \   000087   240B         ADD     A,#0xb
-   \   000089   12....       LCALL   ??Subroutine53_0 & 0xFFFF
+   \   000089   12....       LCALL   ??Subroutine50_0 & 0xFFFF
    2608              }
    2609            }
-   \                     ??CrossCallReturnLabel_109:
-   \   00008C   12....       LCALL   ?Subroutine12 & 0xFFFF
+   \                     ??CrossCallReturnLabel_107:
+   \   00008C   12....       LCALL   ?Subroutine13 & 0xFFFF
    2610          
    2611            // Pass the leave indication to higher layer if callback registered.
    2612            if (zdoCBFunc[ZDO_LEAVE_IND_CBID] != NULL)
    \                     ??CrossCallReturnLabel_17:
    \   00008F   90....       MOV     DPTR,#zdoCBFunc + 12
-   \   000092   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \   000092   12....       LCALL   ?Subroutine12 & 0xFFFF
    \                     ??CrossCallReturnLabel_14:
    \   000095   600A         JZ      ??ZDO_LeaveInd_5
    2613            {
@@ -6225,13 +6149,13 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000098   FA           MOV     R2,A
    \   000099   EF           MOV     A,R7
    \   00009A   FB           MOV     R3,A
-   \   00009B   12....       LCALL   ??Subroutine50_0 & 0xFFFF
+   \   00009B   12....       LCALL   ??Subroutine49_0 & 0xFFFF
    2615            }
-   \                     ??CrossCallReturnLabel_101:
+   \                     ??CrossCallReturnLabel_99:
    \   00009E   12....       LCALL   ?CALL_IND
    2616          }
    \                     ??ZDO_LeaveInd_5:
-   \   0000A1   02....       LJMP    ?Subroutine6 & 0xFFFF
+   \   0000A1   02....       LJMP    ?Subroutine7 & 0xFFFF
    2617          
    2618          /*********************************************************************
    2619           * @fn          ZDO_SyncIndicationCB
@@ -6282,12 +6206,12 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000019   7D00         MOV     R5,#0x0
    \   00001B   7B02         MOV     R3,#0x2
    \   00001D   7A03         MOV     R2,#0x3
-   \   00001F   12....       LCALL   ?Subroutine22 & 0xFFFF
+   \   00001F   12....       LCALL   ?Subroutine23 & 0xFFFF
    2644              }
    2645            }
    2646          }
    \                     ??CrossCallReturnLabel_28:
-   \   000022   02....       LJMP    ??Subroutine46_0 & 0xFFFF
+   \   000022   02....       LJMP    ??Subroutine42_0 & 0xFFFF
    2647          
    2648          /*********************************************************************
    2649           * @fn          ZDO_ManytoOneFailureIndicationCB
@@ -6319,7 +6243,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000004                ; Setup parameters for call to function RTG_MTORouteReq
    \   000004   12....       LCALL   ??RTG_MTORouteReq?relay
    2668          }
-   \   000007   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \   000007   02....       LJMP    ?Subroutine2 & 0xFFFF
    2669          
    2670          /*********************************************************************
    2671           * @fn          ZDO_PollConfirmCB
@@ -6358,39 +6282,17 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2696          void ZDApp_NwkWriteNVRequest( void )
    \                     AddrMgrWriteNVRequest:
    2697          {
-   \   000000   74F6         MOV     A,#-0xa
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 10
-   \   000005                ; Auto size: 0
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
    2698          #if defined ( NV_RESTORE )
    2699            if ( !osal_get_timeoutEx( ZDAppTaskID, ZDO_NWK_UPDATE_NV ) )
-   \   000005                ; Setup parameters for call to function osal_get_timeoutEx
-   \   000005   12....       LCALL   ?Subroutine23 & 0xFFFF
-   \                     ??CrossCallReturnLabel_29:
-   \   000008   7003         JNZ     ??AddrMgrWriteNVRequest_0
    2700            {
    2701              // Trigger to save info into NV
    2702              ZDApp_NVUpdate();
-   \   00000A                ; Setup parameters for call to function ZDApp_NVUpdate
-   \   00000A   12....       LCALL   ??ZDApp_NVUpdate?relay
    2703            }
    2704          #endif
    2705          }
-   \                     ??AddrMgrWriteNVRequest_0:
-   \   00000D   80..         SJMP    ??Subroutine52_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine23:
-   \   000000   7A00         MOV     R2,#0x0
-   \   000002   7B02         MOV     R3,#0x2
-   \   000004   90....       MOV     DPTR,#ZDAppTaskID
-   \   000007   E0           MOVX    A,@DPTR
-   \   000008   F9           MOV     R1,A
-   \   000009   12....       LCALL   ??osal_get_timeoutEx?relay
-   \   00000C   8B..         MOV     ?V0 + 1,R3
-   \   00000E   EA           MOV     A,R2
-   \   00000F   45..         ORL     A,?V0 + 1
-   \   000011   22           RET
+   \   000000   02....       LJMP    ?BRET
    2706          
    2707          /*********************************************************************
    2708           * Call Back Functions from Security  - API
@@ -6423,8 +6325,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2730            (void)status;
    2731          
    2732            return ZSuccess;
-   \   000000   7900         MOV     R1,#0x0
-   \   000002   02....       LJMP    ?BRET
+   \   000000   02....       LJMP    ?Subroutine3 & 0xFFFF
    2733          }
    2734          
    2735          /*********************************************************************
@@ -6452,8 +6353,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2746            if ( inMsg->clusterID & ZDO_RESPONSE_BIT )
    \   000009   EE           MOV     A,R6
    \   00000A   240C         ADD     A,#0xc
-   \   00000C   12....       LCALL   ??Subroutine53_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_110:
+   \   00000C   12....       LCALL   ??Subroutine50_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_108:
    \   00000F   A3           INC     DPTR
    \   000010   E0           MOVX    A,@DPTR
    \   000011   5480         ANL     A,#0x80
@@ -6466,13 +6367,13 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2752              // Handle the request message by sending a generic "not supported".
    2753              // Device Announce doesn't have a response.
    2754              if ( !(inMsg->wasBroadcast) && inMsg->clusterID != Device_annce )
-   \   000015   12....       LCALL   ?Subroutine28 & 0xFFFF
-   \                     ??CrossCallReturnLabel_124:
+   \   000015   12....       LCALL   ?Subroutine29 & 0xFFFF
+   \                     ??CrossCallReturnLabel_122:
    \   000018   7045         JNZ     ??ZDApp_InMsgCB_0
    \   00001A   EE           MOV     A,R6
    \   00001B   240C         ADD     A,#0xc
-   \   00001D   12....       LCALL   ??Subroutine55_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_118:
+   \   00001D   12....       LCALL   ??Subroutine52_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_116:
    \   000020   6413         XRL     A,#0x13
    \   000022   7002         JNZ     ??ZDApp_InMsgCB_1
    \   000024   A3           INC     DPTR
@@ -6483,7 +6384,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2756                ZDP_GenericRsp( inMsg->TransSeq, &(inMsg->srcAddr), ZDP_NOT_SUPPORTED, 0,
    2757                                (uint16)(inMsg->clusterID | ZDO_RESPONSE_BIT), inMsg->SecurityUse );
    \   000028                ; Setup parameters for call to function ZDP_GenericRsp
-   \   000028   12....       LCALL   ?Subroutine27 & 0xFFFF
+   \   000028   12....       LCALL   ?Subroutine28 & 0xFFFF
    2758              }
    2759            }
    \                     ??CrossCallReturnLabel_36:
@@ -6498,8 +6399,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00003B   12....       LCALL   ?PUSH_XSTACK_I_TWO
    \   00003E   EE           MOV     A,R6
    \   00003F   240E         ADD     A,#0xe
-   \   000041   12....       LCALL   ??Subroutine55_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_119:
+   \   000041   12....       LCALL   ??Subroutine52_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_117:
    \   000044   FD           MOV     R5,A
    \   000045   7C84         MOV     R4,#-0x7c
    \   000047   EE           MOV     A,R6
@@ -6511,15 +6412,15 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00004F   FB           MOV     R3,A
    \   000050   EE           MOV     A,R6
    \   000051   240F         ADD     A,#0xf
-   \   000053   12....       LCALL   ??Subroutine55_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_120:
+   \   000053   12....       LCALL   ??Subroutine52_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_118:
    \   000056   F9           MOV     R1,A
    \   000057   12....       LCALL   ??ZDP_GenericRsp?relay
    \   00005A   7404         MOV     A,#0x4
    \   00005C   12....       LCALL   ?DEALLOC_XSTACK8
    2760          }
    \                     ??ZDApp_InMsgCB_0:
-   \   00005F   02....       LJMP    ??Subroutine52_0 & 0xFFFF
+   \   00005F   02....       LJMP    ??Subroutine45_0 & 0xFFFF
    2761          
    2762          
    2763          /*********************************************************************
@@ -6546,7 +6447,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000005                ; Setup parameters for call to function afSetMatch
    \   000005   12....       LCALL   ??afSetMatch?relay
    2777          }
-   \   000008   02....       LJMP    ??Subroutine46_0 & 0xFFFF
+   \   000008   02....       LJMP    ??Subroutine42_0 & 0xFFFF
    2778          
    2779          /*********************************************************************
    2780           * @fn      ZDApp_NetworkInit()
@@ -6579,10 +6480,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00000A   EB           MOV     A,R3
    \   00000B   FD           MOV     R5,A
    \   00000C   7A01         MOV     R2,#0x1
-   \   00000E   12....       LCALL   ?Subroutine21 & 0xFFFF
+   \   00000E   12....       LCALL   ?Subroutine22 & 0xFFFF
    2794            }
-   \                     ??CrossCallReturnLabel_64:
-   \   000011   8005         SJMP    ??CrossCallReturnLabel_62
+   \                     ??CrossCallReturnLabel_77:
+   \   000011   8005         SJMP    ??CrossCallReturnLabel_60
    2795            else
    2796            {
    2797              osal_set_event( ZDAppTaskID, ZDO_NETWORK_INIT );
@@ -6592,8 +6493,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000015   12....       LCALL   ??Subroutine37_0 & 0xFFFF
    2798            }
    2799          }
-   \                     ??CrossCallReturnLabel_62:
-   \   000018   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_60:
+   \   000018   02....       LJMP    ?Subroutine2 & 0xFFFF
    2800          
    2801          /*********************************************************************
    2802           * @fn      ZDApp_NwkStateUpdateCB()
@@ -6610,25 +6511,25 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2811          void ZDApp_NwkStateUpdateCB( void )
    \                     ZDApp_NwkStateUpdateCB:
    2812          {
-   \   000000   74F6         MOV     A,#-0xa
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 10
-   \   000005                ; Auto size: 0
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
    2813            // Notify to save info into NV
    2814            if ( !osal_get_timeoutEx( ZDAppTaskID, ZDO_NWK_UPDATE_NV ) )
-   \   000005                ; Setup parameters for call to function osal_get_timeoutEx
-   \   000005   12....       LCALL   ?Subroutine23 & 0xFFFF
-   \                     ??CrossCallReturnLabel_30:
-   \   000008   7003         JNZ     ??ZDApp_NwkStateUpdateCB_0
+   \   000004                ; Setup parameters for call to function osal_get_timeoutEx
+   \   000004   7A00         MOV     R2,#0x0
+   \   000006   7B02         MOV     R3,#0x2
+   \   000008   90....       MOV     DPTR,#ZDAppTaskID
+   \   00000B   E0           MOVX    A,@DPTR
+   \   00000C   F9           MOV     R1,A
+   \   00000D   12....       LCALL   ??osal_get_timeoutEx?relay
    2815            {
    2816              // Trigger to save info into NV
    2817              ZDApp_NVUpdate();
-   \   00000A                ; Setup parameters for call to function ZDApp_NVUpdate
-   \   00000A   12....       LCALL   ??ZDApp_NVUpdate?relay
    2818            }
    2819          }
-   \                     ??ZDApp_NwkStateUpdateCB_0:
-   \   00000D   02....       LJMP    ??Subroutine52_0 & 0xFFFF
+   \   000010   02....       LJMP    ?Subroutine2 & 0xFFFF
    2820          
    2821          /*********************************************************************
    2822           * @fn      ZDApp_NodeProfileSync()
@@ -6680,7 +6581,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2840            }
    2841          }
    \                     ??ZDApp_NodeProfileSync_0:
-   \   000029   02....       LJMP    ??Subroutine46_0 & 0xFFFF
+   \   000029   02....       LJMP    ??Subroutine42_0 & 0xFFFF
    2842          
    2843          /*********************************************************************
    2844           * @fn      ZDApp_StartJoiningCycle()
@@ -6730,7 +6631,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \                     ??ZDApp_StartJoiningCycle_1:
    \   000022   7900         MOV     R1,#0x0
    \                     ??ZDApp_StartJoiningCycle_2:
-   \   000024   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \   000024   02....       LJMP    ?Subroutine2 & 0xFFFF
    2864          }
    2865          
    2866          /*********************************************************************
@@ -6774,7 +6675,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \                     ??ZDApp_StopJoiningCycle_1:
    \   00001A   7900         MOV     R1,#0x0
    \                     ??ZDApp_StopJoiningCycle_2:
-   \   00001C   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \   00001C   02....       LJMP    ?Subroutine2 & 0xFFFF
    2884          }
    2885          
    2886          /*********************************************************************
@@ -6837,7 +6738,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000035   12....       LCALL   ??APSME_HoldDataRequests?relay
    2909          #endif
    2910          }
-   \   000038   02....       LJMP    ??Subroutine52_0 & 0xFFFF
+   \   000038   02....       LJMP    ??Subroutine45_0 & 0xFFFF
    2911          
    2912          /*********************************************************************
    2913           * @fn          ZDApp_NVUpdate
@@ -6853,20 +6754,13 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2921          void ZDApp_NVUpdate( void )
    \                     ZDApp_NVUpdate:
    2922          {
-   \   000000   C082         PUSH    DPL
-   \   000002   C083         PUSH    DPH
-   \   000004                ; Saved register size: 2
-   \   000004                ; Auto size: 0
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
    2923          #if defined ( NV_RESTORE )
    2924            osal_start_timerEx( ZDAppTaskID, ZDO_NWK_UPDATE_NV, ZDAPP_UPDATE_NWK_NV_TIME );
-   \   000004                ; Setup parameters for call to function osal_start_timerEx
-   \   000004   7CBC         MOV     R4,#-0x44
-   \   000006   7D02         MOV     R5,#0x2
-   \   000008   7A00         MOV     R2,#0x0
-   \   00000A   7B02         MOV     R3,#0x2
-   \   00000C   02....       LJMP    ?Subroutine3 & 0xFFFF
    2925          #endif
    2926          }
+   \   000000   02....       LJMP    ?BRET
    2927          
    2928          /*********************************************************************
    2929           * @fn      ZDApp_CoordStartPANIDConflictCB()
@@ -6921,9 +6815,9 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2957            zdoSrcRtg_t srcRtg;
    2958          
    2959            srcRtg.srcAddr = srcAddr;
-   \   00000A   12....       LCALL   ?Subroutine10 & 0xFFFF
+   \   00000A   12....       LCALL   ?Subroutine11 & 0xFFFF
    2960            srcRtg.relayCnt = relayCnt;
-   \                     ??CrossCallReturnLabel_131:
+   \                     ??CrossCallReturnLabel_129:
    \   00000D   7402         MOV     A,#0x2
    \   00000F   12....       LCALL   ?XSTACK_DISP0_8
    \   000012   E9           MOV     A,R1
@@ -6939,7 +6833,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2962          
    2963            if( zdoCBFunc[ZDO_SRC_RTG_IND_CBID] != NULL )
    \   00001E   90....       MOV     DPTR,#zdoCBFunc
-   \   000021   12....       LCALL   ?Subroutine11 & 0xFFFF
+   \   000021   12....       LCALL   ?Subroutine12 & 0xFFFF
    \                     ??CrossCallReturnLabel_15:
    \   000024   6013         JZ      ??ZDO_SrcRtgIndCB_0
    2964            {
@@ -6950,13 +6844,13 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00002C   AA82         MOV     R2,DPL
    \   00002E   AB83         MOV     R3,DPH
    \   000030   90....       MOV     DPTR,#zdoCBFunc + 1
-   \   000033   12....       LCALL   ??Subroutine50_0 & 0xFFFF
+   \   000033   12....       LCALL   ??Subroutine49_0 & 0xFFFF
    2966            }
-   \                     ??CrossCallReturnLabel_102:
+   \                     ??CrossCallReturnLabel_100:
    \   000036   12....       LCALL   ?CALL_IND
    2967          }
    \                     ??ZDO_SrcRtgIndCB_0:
-   \   000039   02....       LJMP    ?Subroutine5 & 0xFFFF
+   \   000039   02....       LJMP    ?Subroutine6 & 0xFFFF
    2968          
    2969          /*********************************************************************
    2970           * @fn          ZDApp_InitZdoCBFunc
@@ -6983,7 +6877,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    2983            {
    2984              zdoCBFunc[i] = NULL;
    \                     ??ZDApp_InitZdoCBFunc_0:
-   \   000006   12....       LCALL   ?Subroutine26 & 0xFFFF
+   \   000006   12....       LCALL   ?Subroutine27 & 0xFFFF
    2985            }
    \                     ??CrossCallReturnLabel_33:
    \   000009   0A           INC     R2
@@ -6992,13 +6886,13 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   00000C   9407         SUBB    A,#0x7
    \   00000E   40F6         JC      ??ZDApp_InitZdoCBFunc_0
    2986          }
-   \   000010   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \   000010   02....       LJMP    ?Subroutine2 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine26:
+   \                     ?Subroutine27:
    \   000000   EA           MOV     A,R2
    \   000001   12....       LCALL   ?Subroutine36 & 0xFFFF
-   \                     ??CrossCallReturnLabel_54:
+   \                     ??CrossCallReturnLabel_52:
    \   000004   E4           CLR     A
    \   000005   F0           MOVX    @DPTR,A
    \   000006   A3           INC     DPTR
@@ -7055,10 +6949,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    3007              zdoCBFunc[indID] = pFn;
    \   00000B   EC           MOV     A,R4
    \   00000C   12....       LCALL   ?Subroutine36 & 0xFFFF
-   \                     ??CrossCallReturnLabel_53:
-   \   00000F   12....       LCALL   ??Subroutine57_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_51:
+   \   00000F   12....       LCALL   ??Subroutine54_0 & 0xFFFF
    3008              return ZSuccess;
-   \                     ??CrossCallReturnLabel_128:
+   \                     ??CrossCallReturnLabel_126:
    \   000012   7900         MOV     R1,#0x0
    \   000014   8002         SJMP    ??ZDO_RegisterForZdoCB_1
    3009            }
@@ -7067,7 +6961,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \                     ??ZDO_RegisterForZdoCB_0:
    \   000016   7902         MOV     R1,#0x2
    \                     ??ZDO_RegisterForZdoCB_1:
-   \   000018   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \   000018   02....       LJMP    ?Subroutine2 & 0xFFFF
    3012          }
    3013          
    3014          /*********************************************************************
@@ -7101,7 +6995,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \   000009   5006         JNC     ??ZDO_DeregisterForZdoCB_0
    3031            {
    3032              zdoCBFunc[indID] = NULL;
-   \   00000B   12....       LCALL   ?Subroutine26 & 0xFFFF
+   \   00000B   12....       LCALL   ?Subroutine27 & 0xFFFF
    3033              return ZSuccess;
    \                     ??CrossCallReturnLabel_34:
    \   00000E   F9           MOV     R1,A
@@ -7112,7 +7006,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
    \                     ??ZDO_DeregisterForZdoCB_0:
    \   000011   7902         MOV     R1,#0x2
    \                     ??ZDO_DeregisterForZdoCB_1:
-   \   000013   02....       LJMP    ??Subroutine45_0 & 0xFFFF
+   \   000013   02....       LJMP    ?Subroutine2 & 0xFFFF
    3037          }
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
@@ -7482,12 +7376,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
 
      Function                       ISTACK PSTACK XSTACK
      --------                       ------ ------ ------
-     AddrMgrWriteNVRequest              0      0     34
-       -> osal_get_timeoutEx            0      0     20
-       -> ZDApp_NVUpdate                0      0     20
+     AddrMgrWriteNVRequest              0      0      0
      ZDAppCheckForHoldKey               2      0      9
        -> HalKeyRead                    4      0      0
-     ZDAppDetermineDeviceType           2      0     14
+     ZDAppDetermineDeviceType           2      0     12
        -> nwk_ExtPANIDValid             4      0      0
      ZDApp_AnnounceNewAddress           0      0     23
        -> APSME_HoldDataRequests        0      0     20
@@ -7504,11 +7396,9 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
        -> ZDApp_ResetTimerCancel        4      0      0
        -> osal_set_event                4      0      0
        -> NLME_StartRouterRequest       4      0      0
-       -> ZDApp_NVUpdate                4      0      0
        -> ZDApp_SaveNwkKey              4      0      0
        -> ZDApp_AnnounceNewAddress      4      0      0
        -> NLME_SetPollRate              4      0      0
-       -> ZDApp_NVUpdate                4      0      0
      ZDApp_DeviceConfigured             0      0     16
        -> osal_nv_read                  0      0     32
      ZDApp_InMsgCB                      0      0     14
@@ -7532,14 +7422,14 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
        -> ZDApp_NodeProfileSync         0      0     28
        -> NLME_JoinRequest              0      0     36
      ZDApp_LeaveCtrlBypass              2      0      0
-     ZDApp_LeaveCtrlInit                0      0     28
+     ZDApp_LeaveCtrlInit                0      0     26
        -> osal_nv_item_init             0      0     24
        -> osal_nv_read                  0      0     28
      ZDApp_LeaveCtrlReset               0      0     14
        -> osal_nv_write                 0      0     28
      ZDApp_LeaveCtrlSet                 0      0     23
        -> osal_nv_write                 0      0     28
-     ZDApp_LeaveCtrlStartup             2      0     14
+     ZDApp_LeaveCtrlStartup             2      0     12
        -> ZDApp_LeaveCtrlReset          4      0      0
      ZDApp_LeaveReset                   0      0     21
        -> ZDApp_LeaveCtrlSet            0      0     18
@@ -7552,13 +7442,11 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
        -> NLME_RemoveChild              0      0     48
        -> RTG_RemoveRtgEntry            0      0     48
        -> nwkNeighborRemove             0      0     48
-       -> AddrMgrWriteNVRequest         0      0     48
-     ZDApp_NVUpdate                     2      0     14
-       -> osal_start_timerEx            4      0      0
+     ZDApp_NVUpdate                     0      0      0
      ZDApp_NetworkDiscoveryReq          0      0     12
        -> NLME_NetworkDiscoveryRequest
                                         0      0     24
-     ZDApp_NetworkInit                  2      0     14
+     ZDApp_NetworkInit                  2      0     12
        -> osal_start_timerEx            4      0      0
        -> osal_set_event                4      0      0
      ZDApp_NetworkStartEvt              2      0     10
@@ -7576,9 +7464,8 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
        -> nwk_getNwkDescList            0      0     28
        -> nwk_ExtPANIDValid             0      0     28
        -> sAddrExtCmp                   0      0     28
-     ZDApp_NwkStateUpdateCB             0      0     10
-       -> osal_get_timeoutEx            0      0     20
-       -> ZDApp_NVUpdate                0      0     20
+     ZDApp_NwkStateUpdateCB             2      0      0
+       -> osal_get_timeoutEx            4      0      0
      ZDApp_ProcessMsgCBs                0      0     54
        -> ZDO_ParseAddrRsp              0      0    108
        -> ZDO_UpdateAddrManager         0      0    108
@@ -7620,11 +7507,10 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
        -> osal_start_timerEx            0      0     18
        -> ZDApp_DeviceAuthEvt           0      0     18
        -> ZDApp_SaveNwkKey              0      0     18
-       -> ZDSecMgrSaveApsLinkKey        0      0     18
        -> ZDSecMgrSaveTCLinkKey         0      0     18
      ZDApp_ProcessSecMsg                2      0      0
        -> ZDSecMgrUpdateDeviceInd       4      0      0
-     ZDApp_ReadNetworkRestoreState      0      0     23
+     ZDApp_ReadNetworkRestoreState      0      0      9
        -> zgReadStartupOptions          0      0     18
      ZDApp_RegisterCBs                  2      0      9
        -> ZDO_RegisterForZDOMsg         4      0      0
@@ -7641,7 +7527,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
        -> osal_stop_timerEx             4      0      0
      ZDApp_ResetTimerStart              2      0      9
        -> osal_start_timerEx            4      0      0
-     ZDApp_RestoreNetworkState          0      0     23
+     ZDApp_RestoreNetworkState          0      0      9
        -> NLME_InitNV                   0      0     18
        -> NLME_RestoreFromNV            0      0     18
        -> NLME_GetShortAddr             0      0     18
@@ -7649,9 +7535,7 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
      ZDApp_RestoreNwkKey                0      0     37
        -> osal_nv_read                  0      0     74
        -> osal_memset                   0      0     66
-     ZDApp_SaveNetworkStateEvt          2      0     10
-       -> NLME_UpdateNV                 4      0      0
-       -> zgWriteStartupOptions         4      0      0
+     ZDApp_SaveNetworkStateEvt          0      0      0
      ZDApp_SaveNwkKey                   0      0     46
        -> SSP_ReadNwkActiveKey          0      0     66
        -> osal_nv_write                 0      0     74
@@ -7678,30 +7562,21 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
        -> osal_set_event                0      0     20
        -> ZDO_UpdateNwkStatus           0      0     20
        -> osal_start_timerEx            0      0     20
-       -> ZDApp_SaveNetworkStateEvt     0      0     20
        -> zgWriteStartupOptions         0      0     20
        -> Onboard_soft_reset            0      0     20
-     ZDOInitDevice                      0      0     23
-       -> zgInitItems                   0      0     28
-       -> ZDConfig_InitDescriptors      0      0     28
-       -> HalKeyRead                    0      0     28
-       -> NLME_InitNV                   0      0     28
-       -> NLME_SetDefaultNV             0      0     28
-       -> ZDSecMgrClearNVKeyValues      0      0     28
-       -> ZDAppDetermineDeviceType      0      0     28
-       -> osal_rand                     0      0     28
-       -> ZDSecMgrInit                  0      0     28
-       -> ZDApp_LeaveCtrlInit           0      0     28
-       -> ZDApp_LeaveCtrlStartup        0      0     28
-       -> zgWriteStartupOptions         0      0     28
-       -> osal_set_event                0      0     28
-       -> ZDApp_ReadNetworkRestoreState
-                                        0      0     28
-       -> ZDApp_RestoreNetworkState     0      0     28
-       -> ZDApp_NetworkInit             0      0     28
-       -> NLME_SetBroadcastFilter       0      0     28
+     ZDOInitDevice                      0      0     21
+       -> zgInitItems                   0      0     24
+       -> ZDConfig_InitDescriptors      0      0     24
+       -> ZDAppDetermineDeviceType      0      0     24
+       -> osal_rand                     0      0     24
+       -> ZDSecMgrInit                  0      0     24
+       -> ZDApp_LeaveCtrlInit           0      0     24
+       -> ZDApp_LeaveCtrlStartup        0      0     24
+       -> zgWriteStartupOptions         0      0     24
+       -> osal_set_event                0      0     24
+       -> ZDApp_NetworkInit             0      0     24
+       -> NLME_SetBroadcastFilter       0      0     24
      ZDO_AddrChangeIndicationCB         0      0     12
-       -> ZDApp_NVUpdate                0      0     24
        -> osal_set_event                0      0     24
        -> osal_msg_allocate             0      0     24
        -> osal_msg_send                 0      0     24
@@ -7711,11 +7586,9 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
      ZDO_JoinConfirmCB                  1      0     14
        -> HalLedSet                     0      0     28
        -> HalLedSet                     0      0     28
-       -> ZDApp_NVUpdate                0      0     28
        -> HalLedSet                     0      0     28
        -> ZDApp_SendMsg                 0      0     28
-     ZDO_JoinIndicationCB               2      0      1
-       -> ZDApp_NVUpdate                4      0      0
+     ZDO_JoinIndicationCB               0      0      1
      ZDO_LeaveCnf                       0      0     10
        -> NLME_GetExtAddr               0      0     20
        -> sAddrExtCmp                   0      0     20
@@ -7783,128 +7656,125 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
      ZDApp_epDesc                                   6
      ZDApp_SavedPollRate                            2
      ZDApp_Init                                    85
-     ??Subroutine46_0                               5
+     ??Subroutine42_0                               5
      ZDApp_SecInit                                 11
-     ZDApp_event_loop                             225
-     ?Subroutine13                                  2
+     ZDApp_event_loop                             220
+     ?Subroutine14                                  2
      ??Subroutine37_0                              11
-     ??Subroutine39_0                               6
-     ??Subroutine42_0                              14
-     ??Subroutine52_0                               5
-     ZDApp_ProcessSecEvent                        134
-     ?Subroutine21                                  2
-     ??Subroutine38_0                               3
-     ??Subroutine47_0                               6
-     ??Subroutine57_0                               6
-     ZDOInitDevice                                200
-     ??Subroutine40_0                               3
-     ??Subroutine41_0                               5
-     ?Subroutine10                                  6
+     ??Subroutine38_0                              14
+     ??Subroutine41_0                               6
+     ??Subroutine45_0                               5
+     ZDApp_ProcessSecEvent                        129
+     ?Subroutine22                                  5
+     ??Subroutine46_0                               6
+     ??Subroutine54_0                               6
+     ZDOInitDevice                                153
+     ?Subroutine7                                   4
+     ??Subroutine44_0                               3
+     ?Subroutine11                                  6
      ZDApp_ReadNetworkRestoreState                 21
      ZDAppDetermineDeviceType                      74
-     ??Subroutine45_0                               7
+     ?Subroutine2                                   7
      ZDApp_NetworkStartEvt                         79
-     ZDApp_DeviceAuthEvt                           66
-     ?Subroutine7                                   5
-     ??Subroutine43_0                               6
-     ?Subroutine19                                  9
-     ZDApp_SaveNetworkStateEvt                     19
+     ZDApp_DeviceAuthEvt                           58
+     ?Subroutine8                                   5
+     ??Subroutine39_0                               6
+     ?Subroutine20                                  9
+     ZDApp_SaveNetworkStateEvt                      3
      ZDApp_RestoreNetworkState                     74
-     ?Subroutine11                                  8
+     ?Subroutine12                                  8
      ZDApp_InitUserDesc                            89
-     ?Subroutine30                                 32
+     ?Subroutine26                                 32
      ?Subroutine31                                  8
-     ??Subroutine51_0                               3
      ZDAppCheckForHoldKey                          20
      ZDApp_ProcessOSALMsg                          50
-     ??Subroutine50_0                               6
+     ??Subroutine49_0                               6
      ZDApp_ProcessMsgCBs                          247
      ?Subroutine25                                  1
-     ??Subroutine49_0                              10
-     ?Subroutine29                                  3
-     ??Subroutine53_0                               3
-     ??Subroutine54_0                               5
-     ??Subroutine55_0                               3
-     ??Subroutine56_0                               6
-     ?Subroutine27                                 16
+     ??Subroutine48_0                              10
+     ?Subroutine30                                  3
+     ??Subroutine50_0                               3
+     ??Subroutine51_0                               5
+     ??Subroutine52_0                               3
+     ??Subroutine53_0                               6
+     ?Subroutine28                                 16
      ZDApp_RegisterCBs                             48
-     ?Subroutine14                                  2
-     ??Subroutine44_0                               9
+     ?Subroutine15                                  2
+     ??Subroutine40_0                               9
      ZDApp_ProcessSecMsg                           19
-     ZDApp_ProcessNetworkJoin                     413
-     ?Subroutine6                                   5
-     ?Subroutine8                                  12
-     ?Subroutine2                                   2
+     ZDApp_ProcessNetworkJoin                     416
+     ?Subroutine9                                  12
      ZDApp_SaveNwkKey                             112
+     ?Subroutine4                                   5
+     ??Subroutine43_0                               5
      ZDApp_ResetNwkKey                             50
      ZDApp_RestoreNwkKey                          141
-     ZDApp_ResetTimerStart                         15
-     ?Subroutine3                                   3
+     ZDApp_ResetTimerStart                         16
      ZDApp_ResetTimerCancel                        19
      ZDApp_LeaveCtrlInit                           71
      ZDApp_LeaveCtrlSet                            22
      ?Subroutine1                                  35
      ZDApp_LeaveCtrlReset                          13
      ZDApp_LeaveCtrlBypass                         15
-     ZDApp_LeaveCtrlStartup                        47
+     ZDApp_LeaveCtrlStartup                        45
      ZDApp_LeaveReset                              17
-     ZDApp_LeaveUpdate                            148
-     ?Subroutine17                                  3
-     ZDApp_NetworkDiscoveryReq                     11
+     ZDApp_LeaveUpdate                            145
+     ?Subroutine18                                  3
+     ZDApp_NetworkDiscoveryReq                     10
      ZDApp_JoinReq                                 84
-     ?Subroutine4                                   5
-     ZDApp_DeviceConfigured                        87
+     ?Subroutine5                                   5
+     ZDApp_DeviceConfigured                        84
      ZDApp_SendEventMsg                            17
-     ?Subroutine22                                  9
+     ?Subroutine23                                  9
      ZDApp_SendMsg                                 90
      ZDO_NetworkDiscoveryConfirmCB                 78
      ZDApp_NwkDescListProcessing                  275
-     ?Subroutine15                                  4
-     ?Subroutine20                                 10
-     ??Subroutine48_0                               6
+     ?Subroutine16                                  4
+     ?Subroutine21                                 10
+     ??Subroutine47_0                               6
      ?Subroutine0                                   3
      ZDO_NetworkFormationConfirmCB                 34
-     ?Subroutine32                                 19
+     ?Subroutine33                                 19
      ZDO_beaconNotifyIndCB                        575
-     ?Subroutine33                                  9
+     ?Subroutine32                                  9
      ?Subroutine24                                  4
      ?Subroutine35                                 11
-     ?Subroutine18                                  8
-     ?Subroutine9                                   7
+     ?Subroutine19                                  8
+     ?Subroutine10                                  7
      ?Subroutine34                                  9
      ZDO_StartRouterConfirmCB                      34
-     ZDO_JoinConfirmCB                            108
-     ?Subroutine5                                   8
-     ZDO_AddrChangeIndicationCB                    93
-     ?Subroutine16                                  1
-     ZDO_JoinIndicationCB                          12
+     ZDO_JoinConfirmCB                            105
+     ?Subroutine6                                   8
+     ZDO_AddrChangeIndicationCB                    90
+     ?Subroutine17                                  1
+     ZDO_JoinIndicationCB                           0
+     ?Subroutine3                                   5
      ZDO_ConcentratorIndicationCB                  60
      ZDO_LeaveCnf                                  86
-     ?Subroutine12                                 23
-     ?Subroutine28                                  3
+     ?Subroutine13                                 23
+     ?Subroutine29                                  3
      ZDO_LeaveInd                                 164
      ZDO_SyncIndicationCB                          37
      ZDO_ManytoOneFailureIndicationCB
                                                    10
      ZDO_PollConfirmCB                              3
-     AddrMgrWriteNVRequest                         15
-     ?Subroutine23                                 18
-     ZDO_UpdateDeviceIndication                     5
+     AddrMgrWriteNVRequest                          3
+     ZDO_UpdateDeviceIndication                     3
      ZDApp_InMsgCB                                 98
      ZDApp_ChangeMatchDescRespPermission
                                                    11
      ZDApp_NetworkInit                             27
-     ZDApp_NwkStateUpdateCB                        16
+     ZDApp_NwkStateUpdateCB                        19
      ZDApp_NodeProfileSync                         44
      ZDApp_StartJoiningCycle                       39
      ZDApp_StopJoiningCycle                        31
      ZDApp_AnnounceNewAddress                      59
-     ZDApp_NVUpdate                                15
+     ZDApp_NVUpdate                                 3
      ZDApp_CoordStartPANIDConflictCB
                                                    11
      ZDO_SrcRtgIndCB                               60
      ZDApp_InitZdoCBFunc                           19
-     ?Subroutine26                                  9
+     ?Subroutine27                                  9
      ?Subroutine36                                 17
      ZDO_RegisterForZdoCB                          27
      ZDO_DeregisterForZdoCB                        22
@@ -7983,14 +7853,14 @@ D:\毕设\CC2530-smart_home\Components\stack\zdo\ZDApp.c
      ??ZDO_DeregisterForZdoCB?relay                 6
 
  
- 5 360 bytes in segment BANKED_CODE
+ 5 216 bytes in segment BANKED_CODE
    390 bytes in segment BANK_RELAYS
     12 bytes in segment XDATA_I
     12 bytes in segment XDATA_ID
      8 bytes in segment XDATA_ROM_C
     54 bytes in segment XDATA_Z
  
- 5 762 bytes of CODE  memory
+ 5 618 bytes of CODE  memory
      0 bytes of CONST memory (+ 8 bytes shared)
     66 bytes of XDATA memory
 

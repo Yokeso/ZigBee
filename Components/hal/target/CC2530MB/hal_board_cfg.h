@@ -22,7 +22,7 @@
   its documentation for any purpose.
 
   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-  PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+  PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
   INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
@@ -107,7 +107,7 @@
 #elif defined (HAL_BOARD_CC2530EB_REV13) || defined (HAL_PA_LNA) ||  \
       defined (HAL_PA_LNA_CC2590)  || defined (HAL_PA_LNA_CC2592) || \
       defined (HAL_PA_LNA_SE2431L)
-    #define HAL_NUM_LEDS            1
+    #define HAL_NUM_LEDS            3
 #else
     #error Unknown Board Indentifier
 #endif
@@ -120,12 +120,21 @@
 #define LED1_DDR          P1DIR
 #define LED1_POLARITY     ACTIVE_HIGH
 
+/* 2 - Red */
+#define LED2_BV           BV(1)
+#define LED2_SBIT         P1_1
+#define LED2_DDR          P1DIR
+#define LED2_POLARITY     ACTIVE_HIGH
+
+
 #if defined (HAL_BOARD_CC2530EB_REV17)
-    /* 2 - Red */
+/*
+     2 - Red 
     #define LED2_BV           BV(1)
     #define LED2_SBIT         P1_1
     #define LED2_DDR          P1DIR
     #define LED2_POLARITY     ACTIVE_HIGH
+*/
     /* 3 - Yellow */
     #define LED3_BV           BV(4)
     #define LED3_SBIT         P1_4
@@ -295,7 +304,7 @@ extern void MAC_RfFrontendSetup(void);
   PREFETCH_ENABLE();                                             \
                                                                  \
   /* set direction for GPIO outputs  */                          \
-  LED1_DDR |= LED1_BV;                                           \
+  LED1_DDR |= 0x03;                                              \
                                                                  \
   /* Set PA/LNA HGM control P0_7 */                              \
   P0DIR |= BV(7);                                                \

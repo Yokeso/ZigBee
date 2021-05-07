@@ -48,6 +48,7 @@
 #include "hal_assert.h"
 #include "hal_defs.h"
 #include "font.h"
+#include "string.h"
 
 
 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
