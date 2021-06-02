@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        06/May/2021  15:29:47 /
+// IAR C/C++ Compiler V8.10.1.10194/W32 for 8051        03/Jun/2021  00:02:12 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -626,33 +626,40 @@ Smart_home_ProcessEvent SYMBOL "Smart_home_ProcessEvent"
 //   87 #endif
 //   88 
 //   89 #define SERIAL_APP_RSP_CNT  4
-//   90 
-//   91 //3.21 设置输入输出簇
-//   92 // This list should be filled with Application specific Cluster IDs.
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA8
+//   90 uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
+Smart_home_TaskID:
+        DS 1
+        REQUIRE __INIT_XDATA_Z
+//   91 
+//   92 //3.21 设置输入输出簇
+//   93 // This list should be filled with Application specific Cluster IDs.
 
         RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
         DATA16
-//   93 const cId_t Smart_home_ClusterList_IN[1] =
+//   94 const cId_t Smart_home_ClusterList_IN[1] =
 Smart_home_ClusterList_IN:
         DW 11
-//   94 {
-//   95   Smart_home_CLUSTERID_MOTORCTRL         //继电器接收的消息控制命令
-//   96 };
-//   97 
+//   95 {
+//   96   Smart_home_CLUSTERID_MOTORCTRL         //继电器接收的消息控制命令
+//   97 };
+//   98 
 
         RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
         DATA16
-//   98 const cId_t Smart_home_ClusterList_OUT[1] =
+//   99 const cId_t Smart_home_ClusterList_OUT[1] =
 Smart_home_ClusterList_OUT:
         DW 7
-//   99 {
-//  100   Smart_home_CLUSTERID_MOTORSTATUSMSG         //继电器发送的状态信息
-//  101 };
-//  102 
+//  100 {
+//  101   Smart_home_CLUSTERID_MOTORSTATUSMSG         //继电器发送的状态信息
+//  102 };
+//  103 
 
         RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
         DATA8
-//  103 const SimpleDescriptionFormat_t Smart_home_SimpleDesc =
+//  104 const SimpleDescriptionFormat_t Smart_home_SimpleDesc =
 Smart_home_SimpleDesc:
         DB 1
         DATA16
@@ -667,22 +674,22 @@ Smart_home_SimpleDesc:
         DB 3
         DATA16
         DW Smart_home_ClusterList_OUT
-//  104 {
-//  105   Smart_home_ENDPOINT,              //  int   Endpoint;
-//  106   Smart_home_PROFID,                //  uint16 AppProfId[2];
-//  107   Smart_home_DEVICEID,              //  uint16 AppDeviceId[2];
-//  108   Smart_home_DEVICE_VERSION,        //  int   AppDevVer:4;
-//  109   Smart_home_FLAGS,                 //  int   AppFlags:4;
-//  110   Smart_home_MAX_INCLUSTERS,          //  byte  AppNumInClusters;
-//  111   (cId_t *)Smart_home_ClusterList_IN,  //  byte *pAppInClusterList;
-//  112   Smart_home_MAX_OUTCLUSTERS ,          //  byte  AppNumOutClusters;
-//  113   (cId_t *)Smart_home_ClusterList_OUT   //  byte *pAppOutClusterList;
-//  114 };
-//  115 
+//  105 {
+//  106   Smart_home_ENDPOINT,              //  int   Endpoint;
+//  107   Smart_home_PROFID,                //  uint16 AppProfId[2];
+//  108   Smart_home_DEVICEID,              //  uint16 AppDeviceId[2];
+//  109   Smart_home_DEVICE_VERSION,        //  int   AppDevVer:4;
+//  110   Smart_home_FLAGS,                 //  int   AppFlags:4;
+//  111   Smart_home_MAX_INCLUSTERS,          //  byte  AppNumInClusters;
+//  112   (cId_t *)Smart_home_ClusterList_IN,  //  byte *pAppInClusterList;
+//  113   Smart_home_MAX_OUTCLUSTERS ,          //  byte  AppNumOutClusters;
+//  114   (cId_t *)Smart_home_ClusterList_OUT   //  byte *pAppOutClusterList;
+//  115 };
+//  116 
 
         RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
         DATA8
-//  116 const endPointDesc_t Smart_home_epDesc =
+//  117 const endPointDesc_t Smart_home_epDesc =
 Smart_home_epDesc:
         DB 1
         DATA16
@@ -690,36 +697,29 @@ Smart_home_epDesc:
         DW Smart_home_SimpleDesc
         DATA8
         DB 0
-//  117 {
-//  118   Smart_home_ENDPOINT,
-//  119  &Smart_home_TaskID,
-//  120   (SimpleDescriptionFormat_t *)&Smart_home_SimpleDesc,
-//  121   noLatencyReqs
-//  122 };
-//  123 
+//  118 {
+//  119   Smart_home_ENDPOINT,
+//  120  &Smart_home_TaskID,
+//  121   (SimpleDescriptionFormat_t *)&Smart_home_SimpleDesc,
+//  122   noLatencyReqs
+//  123 };
+//  124 
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//  124 afAddrType_t Coordinator_DstAddr;
+//  125 afAddrType_t Coordinator_DstAddr;
 Coordinator_DstAddr:
         DS 12
         REQUIRE __INIT_XDATA_Z
-//  125 
-//  126 /*********************************************************************
-//  127  * TYPEDEFS
-//  128  */
-//  129 
-//  130 /*********************************************************************
-//  131  * GLOBAL VARIABLES
-//  132  */
-//  133 
-
-        RSEG XDATA_Z:XDATA:NOROOT(0)
-        DATA8
-//  134 uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
-Smart_home_TaskID:
-        DS 1
-        REQUIRE __INIT_XDATA_Z
+//  126 
+//  127 /*********************************************************************
+//  128  * TYPEDEFS
+//  129  */
+//  130 
+//  131 /*********************************************************************
+//  132  * GLOBAL VARIABLES
+//  133  */
+//  134 
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8

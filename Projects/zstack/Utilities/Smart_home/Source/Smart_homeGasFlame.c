@@ -4,7 +4,7 @@
   功 能： 烟雾火焰测功能节点，实现对烟雾火焰的检测，收集温烟雾火焰信
           息并发送给传感器
   更新日志(2021)
-  3.24
+  3.26
   + 新增 设置输入输出簇
          Smart_home_HandleKeys()      //按键控制
          Smart_home_ProcessMSGCmd();  //输入控制函数 
@@ -91,6 +91,8 @@
 
 #define SERIAL_APP_RSP_CNT  4
 
+uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
+
 //3.21 设置输入输出簇
 // This list should be filled with Application specific Cluster IDs.
 const cId_t Smart_home_ClusterList_IN[1] =
@@ -137,7 +139,7 @@ static uint8 gasFlameBuf[2]; //信号缓存
  * GLOBAL VARIABLES
  */
 
-uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
+
 byte Coordinator_Msg[GASFLAMEMSG_LEN];
 
 /*********************************************************************

@@ -64,6 +64,9 @@
   5.6
   + 不能应用NV操作，因为NV操作仅能烧写20000次，并需要固定位置读取。
   + 调试了N天，感觉是内存问题，开始对程序进行负优化，以时间换空间  （内存仅128字节）
+  5.8
+  + 串口传输原来的想法是边发边传，但是这样会导致系统崩溃，换用事件轮询定时发送的方式传输
+  + 上位机联动效果开始构想
    
   经调试程序无bug，可以接收各个传感器消息。//3.22
   当我没说。。好像出了内存问题//3.22
@@ -172,7 +175,7 @@ endPointDesc_t Smart_home_epDesc;    // 定义节点
  */
 #define TRANSMIT_APP_PORT  0
 // zstack default: 38400
-#define TRANSMIT_APP_BAUD  HAL_UART_BR_38400
+#define TRANSMIT_APP_BAUD  HAL_UART_BR_115200
 // When the Rx buf space is less than this threshold, invoke the Rx callback.
 #define TRANSMIT_APP_THRESH  64
 #define TRANSMIT_APP_RX_SZ  128
@@ -343,6 +346,7 @@ void Smart_home_Init( byte task_id )
   // 关闭LED灯(D4)，表示协调器默认不允许组网
   NLME_PermitJoiningRequest(0x00);
   HalLedSet(HAL_LED_1, HAL_LED_MODE_OFF);
+  HalUARTWrite(HAL_UART_PORT_0, "init success!\n",   14);
   
   // 设备离线状态检测初始化，初始化为离线
   Humit.deviceStatus     = DEVICE_OFFLINE;
@@ -384,7 +388,7 @@ UINT16 Smart_home_ProcessEvent( byte task_id, UINT16 events )
     while ( MSGpkt )
     {
       switch ( MSGpkt->hdr.event )
-      {
+      { 
         case ZDO_CB_MSG:
           Smart_home_ProcessZDOMsgs( (zdoIncomingMsg_t *)MSGpkt );
           break;
@@ -433,7 +437,7 @@ UINT16 Smart_home_ProcessEvent( byte task_id, UINT16 events )
     return (events ^ SYS_EVENT_MSG);
   }
 
-  // Send a message out, 本实验协调器没有周期发送数任务
+  // Send a message out, 周期性串口回调
   if ( events & SMART_HOME_SEND_MSG_EVT )
   {      
     // Return unprocessed events
@@ -761,6 +765,8 @@ void Smart_home_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       Humit.deviceStatus = DEVICE_ONLINE;
       Humit.data[0] = pkt->cmd.Data[4]; // 湿度 
       Humit.data[1] = pkt->cmd.Data[5]; // 温度
+      HalUARTWrite(HAL_UART_PORT_0, "1",   1);
+      HalUARTWrite(HAL_UART_PORT_0, Humit.data,   5);      
       break;
     
     // 温度与光照度传感器信息  
@@ -770,6 +776,8 @@ void Smart_home_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       TempLight.data[1] = pkt->cmd.Data[5]; // 温度小数
       TempLight.data[2] = pkt->cmd.Data[6]; // 光照
       TempLight.data[3] = pkt->cmd.Data[7]; // 光照
+      HalUARTWrite(HAL_UART_PORT_0, "2",   1);
+      HalUARTWrite(HAL_UART_PORT_0, TempLight.data,   5);
       break;
     
     // RFID射频卡信息 
@@ -779,19 +787,25 @@ void Smart_home_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       RfID.data[1] = pkt->cmd.Data[5]; // 4个字节的ID号
       RfID.data[2] = pkt->cmd.Data[6]; //
       RfID.data[3] = pkt->cmd.Data[7]; //
-      RfID.data[4] = pkt->cmd.Data[8]; //           
+      RfID.data[4] = pkt->cmd.Data[8]; //  
+      HalUARTWrite(HAL_UART_PORT_0, "3",   1);
+      HalUARTWrite(HAL_UART_PORT_0, RfID.data,   5);
       break;
     
     // 烟雾与火焰报警信息  
     case Smart_home_CLUSTERID_GASFLAMEMSG:
       gasFlame.deviceStatus = DEVICE_ONLINE;
       gasFlame.data[0] = pkt->cmd.Data[4]; // 烟雾与火焰报警信息
+      HalUARTWrite(HAL_UART_PORT_0, "4",   1);
+      HalUARTWrite(HAL_UART_PORT_0, gasFlame.data,   5);
       break;
     
     // 人体红外检测信息  
     case Smart_home_CLUSTERID_INFRAREDMSG:
       infrared.deviceStatus = DEVICE_ONLINE;
       infrared.data[0] = pkt->cmd.Data[4]; // 人体红外 
+      //HalUARTWrite(HAL_UART_PORT_0, "2",   1);
+      //HalUARTWrite(HAL_UART_PORT_0, TempLight.data,   5);
       break;
     
     // 声音与振动传感器信息  
@@ -813,6 +827,9 @@ void Smart_home_MessageMSGCB( afIncomingMSGPacket_t *pkt )
      
       motor.data[0] = pkt->cmd.Data[4]; // 电机转速
       motor.data[1] = pkt->cmd.Data[5]; // 电机状态
+      
+      HalUARTWrite(HAL_UART_PORT_0, "7",   1);
+      HalUARTWrite(HAL_UART_PORT_0, motor.data,   5);
       break;
     
     // 继电器状态信息   
@@ -827,6 +844,8 @@ void Smart_home_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       //Smart_home_DstRelayAddr.endPoint = Smart_home_ENDPOINT;  
       
       relay.data[0] = pkt->cmd.Data[4]; 
+      HalUARTWrite(HAL_UART_PORT_0, "8",   1);
+      HalUARTWrite(HAL_UART_PORT_0, relay.data,   5);
       break;
       
     // 同上面一样，可以在将来添加更多的控制信息

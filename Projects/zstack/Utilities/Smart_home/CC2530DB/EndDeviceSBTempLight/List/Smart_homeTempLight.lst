@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         06/May/2021  15:28:26 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         03/Jun/2021  00:00:21 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -161,72 +161,89 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
      44          //3.23  屏幕显示的小bug
      45          #define SMART_HOME_SEND_DELAY   3000
      46          #define SMART_HOME_MATCH_DELAY  1000
-     47          /*********************************************************************
-     48           * CONSTANTS
-     49           */
-     50          
-     51          #if !defined( SERIAL_APP_PORT )
-     52          #define SERIAL_APP_PORT  0
-     53          #endif
-     54          
-     55          #if !defined( SERIAL_APP_BAUD )
-     56          #define SERIAL_APP_BAUD  HAL_UART_BR_38400
-     57          //#define SERIAL_APP_BAUD  HAL_UART_BR_115200
-     58          #endif
-     59          
-     60          // When the Rx buf space is less than this threshold, invoke the Rx callback.
-     61          #if !defined( SERIAL_APP_THRESH )
-     62          #define SERIAL_APP_THRESH  64
-     63          #endif
-     64          
-     65          #if !defined( SERIAL_APP_RX_SZ )
-     66          #define SERIAL_APP_RX_SZ  128
-     67          #endif
-     68          
-     69          #if !defined( SERIAL_APP_TX_SZ )
-     70          #define SERIAL_APP_TX_SZ  128
-     71          #endif
-     72          
-     73          // Millisecs of idle time after a byte is received before invoking Rx callback.
-     74          #if !defined( SERIAL_APP_IDLE )
-     75          #define SERIAL_APP_IDLE  6
-     76          #endif
-     77          
-     78          // Loopback Rx bytes to Tx for throughput testing.
-     79          #if !defined( SERIAL_APP_LOOPBACK )
-     80          #define SERIAL_APP_LOOPBACK  FALSE
-     81          #endif
-     82          
-     83          // This is the max byte count per OTA message.
-     84          #if !defined( SERIAL_APP_TX_MAX )
-     85          #define SERIAL_APP_TX_MAX  80
-     86          #endif
-     87          
-     88          #define SERIAL_APP_RSP_CNT  4
+     47          
+     48          /*********************************************************************
+     49           * GLOBAL VARIABLES
+     50           */
+     51          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     52          uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
+   \                     Smart_home_TaskID:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     53          byte Coordinator_Msg[TEMPLIGHTMSG_LEN];
+   \                     Coordinator_Msg:
+   \   000000                DS 8
+   \   000008                REQUIRE __INIT_XDATA_Z
+     54          /*********************************************************************
+     55           * CONSTANTS
+     56           */
+     57          
+     58          #if !defined( SERIAL_APP_PORT )
+     59          #define SERIAL_APP_PORT  0
+     60          #endif
+     61          
+     62          #if !defined( SERIAL_APP_BAUD )
+     63          #define SERIAL_APP_BAUD  HAL_UART_BR_38400
+     64          //#define SERIAL_APP_BAUD  HAL_UART_BR_115200
+     65          #endif
+     66          
+     67          // When the Rx buf space is less than this threshold, invoke the Rx callback.
+     68          #if !defined( SERIAL_APP_THRESH )
+     69          #define SERIAL_APP_THRESH  64
+     70          #endif
+     71          
+     72          #if !defined( SERIAL_APP_RX_SZ )
+     73          #define SERIAL_APP_RX_SZ  128
+     74          #endif
+     75          
+     76          #if !defined( SERIAL_APP_TX_SZ )
+     77          #define SERIAL_APP_TX_SZ  128
+     78          #endif
+     79          
+     80          // Millisecs of idle time after a byte is received before invoking Rx callback.
+     81          #if !defined( SERIAL_APP_IDLE )
+     82          #define SERIAL_APP_IDLE  6
+     83          #endif
+     84          
+     85          // Loopback Rx bytes to Tx for throughput testing.
+     86          #if !defined( SERIAL_APP_LOOPBACK )
+     87          #define SERIAL_APP_LOOPBACK  FALSE
+     88          #endif
      89          
-     90          //3.21 设置输入输出簇
-     91          // This list should be filled with Application specific Cluster IDs.
+     90          // This is the max byte count per OTA message.
+     91          #if !defined( SERIAL_APP_TX_MAX )
+     92          #define SERIAL_APP_TX_MAX  80
+     93          #endif
+     94          
+     95          #define SERIAL_APP_RSP_CNT  4
+     96          
+     97          //3.21 设置输入输出簇
+     98          // This list should be filled with Application specific Cluster IDs.
 
    \                                 In  segment XDATA_ROM_C, align 1
-     92          const cId_t Smart_home_ClusterList_IN[1] =
+     99          const cId_t Smart_home_ClusterList_IN[1] =
    \                     Smart_home_ClusterList_IN:
    \   000000   0900         DW 9
-     93          {
-     94            Smart_home_CLUSTERID_TEXT         //继电器接收的消息控制命令
-     95          };
-     96          
+    100          {
+    101            Smart_home_CLUSTERID_TEXT         //继电器接收的消息控制命令
+    102          };
+    103          
 
    \                                 In  segment XDATA_ROM_C, align 1
-     97          const cId_t Smart_home_ClusterList_OUT[1] =
+    104          const cId_t Smart_home_ClusterList_OUT[1] =
    \                     Smart_home_ClusterList_OUT:
    \   000000   0200         DW 2
-     98          {
-     99            Smart_home_CLUSTERID_TEMPLIGHTMSG         //继电器发送的状态信息
-    100          };
-    101          
+    105          {
+    106            Smart_home_CLUSTERID_TEMPLIGHTMSG         //继电器发送的状态信息
+    107          };
+    108          
 
    \                                 In  segment XDATA_ROM_C, align 1
-    102          const SimpleDescriptionFormat_t Smart_home_SimpleDesc =
+    109          const SimpleDescriptionFormat_t Smart_home_SimpleDesc =
    \                     Smart_home_SimpleDesc:
    \   000000   01           DB 1
    \   000001   050F         DW 3845
@@ -236,106 +253,91 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000007   ....         DW Smart_home_ClusterList_IN
    \   000009   03           DB 3
    \   00000A   ....         DW Smart_home_ClusterList_OUT
-    103          {
-    104            Smart_home_ENDPOINT,              //  int   Endpoint;
-    105            Smart_home_PROFID,                //  uint16 AppProfId[2];
-    106            Smart_home_DEVICEID,              //  uint16 AppDeviceId[2];
-    107            Smart_home_DEVICE_VERSION,        //  int   AppDevVer:4;
-    108            Smart_home_FLAGS,                 //  int   AppFlags:4;
-    109            Smart_home_MAX_INCLUSTERS,          //  byte  AppNumInClusters;
-    110            (cId_t *)Smart_home_ClusterList_IN,  //  byte *pAppInClusterList;
-    111            Smart_home_MAX_OUTCLUSTERS ,          //  byte  AppNumOutClusters;
-    112            (cId_t *)Smart_home_ClusterList_OUT   //  byte *pAppOutClusterList;
-    113          };
-    114          
+    110          {
+    111            Smart_home_ENDPOINT,              //  int   Endpoint;
+    112            Smart_home_PROFID,                //  uint16 AppProfId[2];
+    113            Smart_home_DEVICEID,              //  uint16 AppDeviceId[2];
+    114            Smart_home_DEVICE_VERSION,        //  int   AppDevVer:4;
+    115            Smart_home_FLAGS,                 //  int   AppFlags:4;
+    116            Smart_home_MAX_INCLUSTERS,          //  byte  AppNumInClusters;
+    117            (cId_t *)Smart_home_ClusterList_IN,  //  byte *pAppInClusterList;
+    118            Smart_home_MAX_OUTCLUSTERS ,          //  byte  AppNumOutClusters;
+    119            (cId_t *)Smart_home_ClusterList_OUT   //  byte *pAppOutClusterList;
+    120          };
+    121          
 
    \                                 In  segment XDATA_ROM_C, align 1
-    115          const endPointDesc_t Smart_home_epDesc =
+    122          const endPointDesc_t Smart_home_epDesc =
    \                     Smart_home_epDesc:
    \   000000   01           DB 1
    \   000001   ....         DW Smart_home_TaskID
    \   000003   ....         DW Smart_home_SimpleDesc
    \   000005   00           DB 0
-    116          {
-    117            Smart_home_ENDPOINT,
-    118           &Smart_home_TaskID,
-    119            (SimpleDescriptionFormat_t *)&Smart_home_SimpleDesc,
-    120            noLatencyReqs
-    121          };
-    122          
+    123          {
+    124            Smart_home_ENDPOINT,
+    125           &Smart_home_TaskID,
+    126            (SimpleDescriptionFormat_t *)&Smart_home_SimpleDesc,
+    127            noLatencyReqs
+    128          };
+    129          
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    123          afAddrType_t Coordinator_DstAddr;
+    130          afAddrType_t Coordinator_DstAddr;
    \                     Coordinator_DstAddr:
    \   000000                DS 12
    \   00000C                REQUIRE __INIT_XDATA_Z
-    124          
-    125          /*********************************************************************
-    126           * TYPEDEFS
-    127           */
-    128          
-    129          /*********************************************************************
-    130           * GLOBAL VARIABLES
-    131           */
-    132          
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
-    133          uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
-   \                     Smart_home_TaskID:
-   \   000000                DS 1
-   \   000001                REQUIRE __INIT_XDATA_Z
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
-    134          byte Coordinator_Msg[TEMPLIGHTMSG_LEN];
-   \                     Coordinator_Msg:
-   \   000000                DS 8
-   \   000008                REQUIRE __INIT_XDATA_Z
+    131          
+    132          /*********************************************************************
+    133           * TYPEDEFS
+    134           */
     135          
-    136          /*********************************************************************
-    137           * EXTERNAL VARIABLES
-    138           */
-    139          
-    140          /*********************************************************************
-    141           * EXTERNAL FUNCTIONS
-    142           */
-    143          
-    144          /*********************************************************************
-    145           * LOCAL VARIABLES
-    146           */
-    147          
+    136          
+    137          
+    138          /*********************************************************************
+    139           * EXTERNAL VARIABLES
+    140           */
+    141          
+    142          /*********************************************************************
+    143           * EXTERNAL FUNCTIONS
+    144           */
+    145          
+    146          /*********************************************************************
+    147           * LOCAL VARIABLES
+    148           */
+    149          
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-    148          static byte Smart_home_MsgID;  // This is the unique message ID (counter)
+    150          static byte Smart_home_MsgID;  // This is the unique message ID (counter)
    \                     Smart_home_MsgID:
    \   000000                DS 1
    \   000001                REQUIRE __INIT_XDATA_Z
-    149          
-    150          
-    151          /*********************************************************************
-    152           * LOCAL FUNCTIONS
-    153           */
-    154          
-    155          static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
-    156          static void Smart_home_HandleKeys( uint8 shift, uint8 keys );
-    157          static void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt );
-    158          static void Smart_home_Send(void);
-    159          static void Smart_home_Resp(void);
-    160          static void Smart_home_CallBack(uint8 port, uint8 event);
-    161          
-    162          /*********************************************************************
-    163           * @fn      Smart_home_Init
-    164           *
-    165           * @brief   This is called during OSAL tasks' initialization.
+    151          
+    152          
+    153          /*********************************************************************
+    154           * LOCAL FUNCTIONS
+    155           */
+    156          
+    157          static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
+    158          static void Smart_home_HandleKeys( uint8 shift, uint8 keys );
+    159          static void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt );
+    160          static void Smart_home_Send(void);
+    161          static void Smart_home_Resp(void);
+    162          static void Smart_home_CallBack(uint8 port, uint8 event);
+    163          
+    164          /*********************************************************************
+    165           * @fn      Smart_home_Init
     166           *
-    167           * @param   task_id - the Task ID assigned by OSAL.
+    167           * @brief   This is called during OSAL tasks' initialization.
     168           *
-    169           * @return  none
-    170           */
+    169           * @param   task_id - the Task ID assigned by OSAL.
+    170           *
+    171           * @return  none
+    172           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    171          void Smart_home_Init( uint8 task_id )
+    173          void Smart_home_Init( uint8 task_id )
    \                     Smart_home_Init:
-    172          {
+    174          {
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
@@ -344,160 +346,172 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000007   12....       LCALL   ?ALLOC_XSTACK8
    \   00000A   E9           MOV     A,R1
    \   00000B   FE           MOV     R6,A
-    173            halUARTCfg_t uartConfig;
-    174          
-    175            Smart_home_TaskID = task_id;
+    175            halUARTCfg_t uartConfig;
+    176          
+    177            Smart_home_TaskID = task_id;
    \   00000C   90....       MOV     DPTR,#Smart_home_TaskID
    \   00000F   F0           MOVX    @DPTR,A
-    176            Smart_home_MsgID = 0;
+    178            Smart_home_MsgID = 0x02;
    \   000010   90....       MOV     DPTR,#Smart_home_MsgID
-   \   000013   E4           CLR     A
-   \   000014   F0           MOVX    @DPTR,A
-    177          
-    178            // Register the endpoint/interface description with the AF
-    179            afRegister( (endPointDesc_t *)&Smart_home_epDesc );
-   \   000015                ; Setup parameters for call to function afRegister
-   \   000015   7A..         MOV     R2,#Smart_home_epDesc & 0xff
-   \   000017   7B..         MOV     R3,#(Smart_home_epDesc >> 8) & 0xff
-   \   000019   12....       LCALL   ??afRegister?relay
+   \   000013   7402         MOV     A,#0x2
+   \   000015   F0           MOVX    @DPTR,A
+    179            uint8 i;
     180          
-    181            // Register for all key events - This app will handle all key events
-    182            RegisterForKeys( task_id );
-   \   00001C                ; Setup parameters for call to function RegisterForKeys
-   \   00001C   EE           MOV     A,R6
-   \   00001D   F9           MOV     R1,A
-   \   00001E   12....       LCALL   ??RegisterForKeys?relay
-    183            
-    184            //串口配置
-    185            uartConfig.configured           = TRUE;              // 2x30 don't care - see uart driver.
-   \   000021   85..82       MOV     DPL,?XSP + 0
-   \   000024   85..83       MOV     DPH,?XSP + 1
-   \   000027   7401         MOV     A,#0x1
-   \   000029   F0           MOVX    @DPTR,A
-    186            uartConfig.baudRate             = SERIAL_APP_BAUD;
-   \   00002A   12....       LCALL   ?XSTACK_DISP0_8
-   \   00002D   7402         MOV     A,#0x2
-   \   00002F   F0           MOVX    @DPTR,A
-    187            uartConfig.flowControl          = TRUE;
-   \   000030   12....       LCALL   ?XSTACK_DISP0_8
-   \   000033   7401         MOV     A,#0x1
-   \   000035   F0           MOVX    @DPTR,A
-    188            uartConfig.flowControlThreshold = SERIAL_APP_THRESH; // 2x30 don't care - see uart driver.
-   \   000036   7403         MOV     A,#0x3
-   \   000038   12....       LCALL   ?XSTACK_DISP0_8
-   \   00003B   7440         MOV     A,#0x40
-   \   00003D   F0           MOVX    @DPTR,A
-   \   00003E   A3           INC     DPTR
-   \   00003F   E4           CLR     A
-   \   000040   F0           MOVX    @DPTR,A
-    189            uartConfig.rx.maxBufSize        = SERIAL_APP_RX_SZ;  // 2x30 don't care - see uart driver.
-   \   000041   740A         MOV     A,#0xa
-   \   000043   12....       LCALL   ?XSTACK_DISP0_8
-   \   000046   7480         MOV     A,#-0x80
-   \   000048   F0           MOVX    @DPTR,A
-   \   000049   A3           INC     DPTR
-   \   00004A   E4           CLR     A
-   \   00004B   F0           MOVX    @DPTR,A
-    190            uartConfig.tx.maxBufSize        = SERIAL_APP_TX_SZ;  // 2x30 don't care - see uart driver.
-   \   00004C   7412         MOV     A,#0x12
-   \   00004E   12....       LCALL   ?XSTACK_DISP0_8
-   \   000051   7480         MOV     A,#-0x80
-   \   000053   F0           MOVX    @DPTR,A
-   \   000054   A3           INC     DPTR
-   \   000055   E4           CLR     A
-   \   000056   F0           MOVX    @DPTR,A
-    191            uartConfig.idleTimeout          = SERIAL_APP_IDLE;   // 2x30 don't care - see uart driver.
-   \   000057   7405         MOV     A,#0x5
-   \   000059   12....       LCALL   ?XSTACK_DISP0_8
-   \   00005C   7406         MOV     A,#0x6
-   \   00005E   F0           MOVX    @DPTR,A
-    192            uartConfig.intEnable            = TRUE;              // 2x30 don't care - see uart driver.
-   \   00005F   7416         MOV     A,#0x16
-   \   000061   12....       LCALL   ?XSTACK_DISP0_8
-   \   000064   7401         MOV     A,#0x1
-   \   000066   F0           MOVX    @DPTR,A
-    193            uartConfig.callBackFunc         = Smart_home_CallBack;
-   \   000067   741B         MOV     A,#0x1b
-   \   000069   12....       LCALL   ?XSTACK_DISP0_8
-   \   00006C   74..         MOV     A,#??Smart_home_CallBack?relay & 0xff
-   \   00006E   F0           MOVX    @DPTR,A
-   \   00006F   A3           INC     DPTR
-   \   000070   74..         MOV     A,#(??Smart_home_CallBack?relay >> 8) & 0xff
-   \   000072   F0           MOVX    @DPTR,A
-    194            HalUARTOpen (SERIAL_APP_PORT, &uartConfig);
-   \   000073                ; Setup parameters for call to function HalUARTOpen
-   \   000073   85..82       MOV     DPL,?XSP + 0
-   \   000076   85..83       MOV     DPH,?XSP + 1
-   \   000079   AA82         MOV     R2,DPL
-   \   00007B   AB83         MOV     R3,DPH
-   \   00007D   7900         MOV     R1,#0x0
-   \   00007F   12....       LCALL   ??HalUARTOpen?relay
-    195          
-    196            //初始化向协调器发送的地址
-    197            Coordinator_DstAddr.addrMode = (afAddrMode_t)AddrNotPresent;
-   \   000082   90....       MOV     DPTR,#Coordinator_DstAddr + 8
-   \   000085   E4           CLR     A
-   \   000086   F0           MOVX    @DPTR,A
-    198            Coordinator_DstAddr.endPoint = 0;
-   \   000087   A3           INC     DPTR
-   \   000088   F0           MOVX    @DPTR,A
-    199            Coordinator_DstAddr.addr.shortAddr = 0;
-   \   000089   90....       MOV     DPTR,#Coordinator_DstAddr
-   \   00008C   F0           MOVX    @DPTR,A
-   \   00008D   A3           INC     DPTR
-   \   00008E   F0           MOVX    @DPTR,A
-    200            
-    201            
-    202            ZDO_RegisterForZDOMsg( Smart_home_TaskID, End_Device_Bind_rsp );
-   \   00008F                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
-   \   00008F   7A20         MOV     R2,#0x20
-   \   000091   7B80         MOV     R3,#-0x80
-   \   000093   90....       MOV     DPTR,#Smart_home_TaskID
-   \   000096   E0           MOVX    A,@DPTR
-   \   000097   F9           MOV     R1,A
-   \   000098   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
-    203            ZDO_RegisterForZDOMsg( Smart_home_TaskID, Match_Desc_rsp );
-   \   00009B                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
-   \   00009B   7A06         MOV     R2,#0x6
-   \   00009D   7B80         MOV     R3,#-0x80
-   \   00009F   90....       MOV     DPTR,#Smart_home_TaskID
-   \   0000A2   E0           MOVX    A,@DPTR
-   \   0000A3   F9           MOV     R1,A
-   \   0000A4   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
-    204            
-    205            // 打开定时器，描述符匹配事件
-    206            osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_MATCHRSP_EVT, 
-    207                                                         SMART_HOME_MATCH_DELAY );
-   \   0000A7                ; Setup parameters for call to function osal_start_reload_timer
-   \   0000A7   7CE8         MOV     R4,#-0x18
-   \   0000A9   7D03         MOV     R5,#0x3
-   \   0000AB   7A08         MOV     R2,#0x8
-   \   0000AD   7B00         MOV     R3,#0x0
-   \   0000AF   90....       MOV     DPTR,#Smart_home_TaskID
-   \   0000B2   E0           MOVX    A,@DPTR
-   \   0000B3   F9           MOV     R1,A
-   \   0000B4   12....       LCALL   ??osal_start_reload_timer?relay
-    208          }
-   \   0000B7   741D         MOV     A,#0x1d
-   \   0000B9   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000BC   7F01         MOV     R7,#0x1
-   \   0000BE   02....       LJMP    ?BANKED_LEAVE_XDATA
-    209          
-    210          /*********************************************************************
-    211           * @fn      Smart_home_ProcessEvent
-    212           *
-    213           * @brief   Generic Application Task event processor.
-    214           *
-    215           * @param   task_id  - The OSAL assigned task ID.
-    216           * @param   events   - Bit map of events to process.
-    217           *
-    218           * @return  Event flags of all unprocessed events.
-    219           */
+    181            // Register the endpoint/interface description with the AF
+    182            afRegister( (endPointDesc_t *)&Smart_home_epDesc );
+   \   000016                ; Setup parameters for call to function afRegister
+   \   000016   7A..         MOV     R2,#Smart_home_epDesc & 0xff
+   \   000018   7B..         MOV     R3,#(Smart_home_epDesc >> 8) & 0xff
+   \   00001A   12....       LCALL   ??afRegister?relay
+    183          
+    184            // Register for all key events - This app will handle all key events
+    185            RegisterForKeys( task_id );
+   \   00001D                ; Setup parameters for call to function RegisterForKeys
+   \   00001D   EE           MOV     A,R6
+   \   00001E   F9           MOV     R1,A
+   \   00001F   12....       LCALL   ??RegisterForKeys?relay
+    186            
+    187            //串口配置
+    188            uartConfig.configured           = TRUE;              // 2x30 don't care - see uart driver.
+   \   000022   85..82       MOV     DPL,?XSP + 0
+   \   000025   85..83       MOV     DPH,?XSP + 1
+   \   000028   7401         MOV     A,#0x1
+   \   00002A   F0           MOVX    @DPTR,A
+    189            uartConfig.baudRate             = SERIAL_APP_BAUD;
+   \   00002B   12....       LCALL   ?XSTACK_DISP0_8
+   \   00002E   7402         MOV     A,#0x2
+   \   000030   F0           MOVX    @DPTR,A
+    190            uartConfig.flowControl          = TRUE;
+   \   000031   12....       LCALL   ?XSTACK_DISP0_8
+   \   000034   7401         MOV     A,#0x1
+   \   000036   F0           MOVX    @DPTR,A
+    191            uartConfig.flowControlThreshold = SERIAL_APP_THRESH; // 2x30 don't care - see uart driver.
+   \   000037   7403         MOV     A,#0x3
+   \   000039   12....       LCALL   ?XSTACK_DISP0_8
+   \   00003C   7440         MOV     A,#0x40
+   \   00003E   F0           MOVX    @DPTR,A
+   \   00003F   A3           INC     DPTR
+   \   000040   E4           CLR     A
+   \   000041   F0           MOVX    @DPTR,A
+    192            uartConfig.rx.maxBufSize        = SERIAL_APP_RX_SZ;  // 2x30 don't care - see uart driver.
+   \   000042   740A         MOV     A,#0xa
+   \   000044   12....       LCALL   ?XSTACK_DISP0_8
+   \   000047   7480         MOV     A,#-0x80
+   \   000049   F0           MOVX    @DPTR,A
+   \   00004A   A3           INC     DPTR
+   \   00004B   E4           CLR     A
+   \   00004C   F0           MOVX    @DPTR,A
+    193            uartConfig.tx.maxBufSize        = SERIAL_APP_TX_SZ;  // 2x30 don't care - see uart driver.
+   \   00004D   7412         MOV     A,#0x12
+   \   00004F   12....       LCALL   ?XSTACK_DISP0_8
+   \   000052   7480         MOV     A,#-0x80
+   \   000054   F0           MOVX    @DPTR,A
+   \   000055   A3           INC     DPTR
+   \   000056   E4           CLR     A
+   \   000057   F0           MOVX    @DPTR,A
+    194            uartConfig.idleTimeout          = SERIAL_APP_IDLE;   // 2x30 don't care - see uart driver.
+   \   000058   7405         MOV     A,#0x5
+   \   00005A   12....       LCALL   ?XSTACK_DISP0_8
+   \   00005D   7406         MOV     A,#0x6
+   \   00005F   F0           MOVX    @DPTR,A
+    195            uartConfig.intEnable            = TRUE;              // 2x30 don't care - see uart driver.
+   \   000060   7416         MOV     A,#0x16
+   \   000062   12....       LCALL   ?XSTACK_DISP0_8
+   \   000065   7401         MOV     A,#0x1
+   \   000067   F0           MOVX    @DPTR,A
+    196            uartConfig.callBackFunc         = Smart_home_CallBack;
+   \   000068   741B         MOV     A,#0x1b
+   \   00006A   12....       LCALL   ?XSTACK_DISP0_8
+   \   00006D   74..         MOV     A,#??Smart_home_CallBack?relay & 0xff
+   \   00006F   F0           MOVX    @DPTR,A
+   \   000070   A3           INC     DPTR
+   \   000071   74..         MOV     A,#(??Smart_home_CallBack?relay >> 8) & 0xff
+   \   000073   F0           MOVX    @DPTR,A
+    197            HalUARTOpen (SERIAL_APP_PORT, &uartConfig);
+   \   000074                ; Setup parameters for call to function HalUARTOpen
+   \   000074   85..82       MOV     DPL,?XSP + 0
+   \   000077   85..83       MOV     DPH,?XSP + 1
+   \   00007A   AA82         MOV     R2,DPL
+   \   00007C   AB83         MOV     R3,DPH
+   \   00007E   7900         MOV     R1,#0x0
+   \   000080   12....       LCALL   ??HalUARTOpen?relay
+    198          
+    199            //初始化向协调器发送的地址
+    200            Coordinator_DstAddr.addrMode = (afAddrMode_t)AddrNotPresent;
+   \   000083   90....       MOV     DPTR,#Coordinator_DstAddr + 8
+   \   000086   E4           CLR     A
+   \   000087   F0           MOVX    @DPTR,A
+    201            Coordinator_DstAddr.endPoint = 0;
+   \   000088   A3           INC     DPTR
+   \   000089   F0           MOVX    @DPTR,A
+    202            Coordinator_DstAddr.addr.shortAddr = 0;
+   \   00008A   90....       MOV     DPTR,#Coordinator_DstAddr
+   \   00008D   F0           MOVX    @DPTR,A
+   \   00008E   A3           INC     DPTR
+   \   00008F   F0           MOVX    @DPTR,A
+    203            
+    204            for(i=0;i<TEMPLIGHTMSG_LEN;i++)
+    205            {
+    206              Coordinator_Msg[i] = 0;
+   \   000090   90....       MOV     DPTR,#Coordinator_Msg
+   \   000093   7808         MOV     R0,#0x8
+   \                     ??Smart_home_Init_0:
+   \   000095   F0           MOVX    @DPTR,A
+   \   000096   A3           INC     DPTR
+   \   000097   D8FC         DJNZ    R0,??Smart_home_Init_0
+    207            }
+    208            
+    209            
+    210            ZDO_RegisterForZDOMsg( Smart_home_TaskID, End_Device_Bind_rsp );
+   \   000099                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
+   \   000099   7A20         MOV     R2,#0x20
+   \   00009B   7B80         MOV     R3,#-0x80
+   \   00009D   90....       MOV     DPTR,#Smart_home_TaskID
+   \   0000A0   E0           MOVX    A,@DPTR
+   \   0000A1   F9           MOV     R1,A
+   \   0000A2   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
+    211            ZDO_RegisterForZDOMsg( Smart_home_TaskID, Match_Desc_rsp );
+   \   0000A5                ; Setup parameters for call to function ZDO_RegisterForZDOMsg
+   \   0000A5   7A06         MOV     R2,#0x6
+   \   0000A7   7B80         MOV     R3,#-0x80
+   \   0000A9   90....       MOV     DPTR,#Smart_home_TaskID
+   \   0000AC   E0           MOVX    A,@DPTR
+   \   0000AD   F9           MOV     R1,A
+   \   0000AE   12....       LCALL   ??ZDO_RegisterForZDOMsg?relay
+    212            
+    213            // 打开定时器，描述符匹配事件
+    214            osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_MATCHRSP_EVT, 
+    215                                                         SMART_HOME_MATCH_DELAY );
+   \   0000B1                ; Setup parameters for call to function osal_start_reload_timer
+   \   0000B1   7CE8         MOV     R4,#-0x18
+   \   0000B3   7D03         MOV     R5,#0x3
+   \   0000B5   7A08         MOV     R2,#0x8
+   \   0000B7   7B00         MOV     R3,#0x0
+   \   0000B9   90....       MOV     DPTR,#Smart_home_TaskID
+   \   0000BC   E0           MOVX    A,@DPTR
+   \   0000BD   F9           MOV     R1,A
+   \   0000BE   12....       LCALL   ??osal_start_reload_timer?relay
+    216          }
+   \   0000C1   741D         MOV     A,#0x1d
+   \   0000C3   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0000C6   7F01         MOV     R7,#0x1
+   \   0000C8   02....       LJMP    ?BANKED_LEAVE_XDATA
+    217          
+    218          /*********************************************************************
+    219           * @fn      Smart_home_ProcessEvent
+    220           *
+    221           * @brief   Generic Application Task event processor.
+    222           *
+    223           * @param   task_id  - The OSAL assigned task ID.
+    224           * @param   events   - Bit map of events to process.
+    225           *
+    226           * @return  Event flags of all unprocessed events.
+    227           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    220          UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
+    228          UINT16 Smart_home_ProcessEvent( uint8 task_id, UINT16 events )
    \                     Smart_home_ProcessEvent:
-    221          {
+    229          {
    \   000000   74F4         MOV     A,#-0xc
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 12
@@ -508,69 +522,69 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00000B   FE           MOV     R6,A
    \   00000C   EB           MOV     A,R3
    \   00000D   FF           MOV     R7,A
-    222            (void)task_id;  // Intentionally unreferenced parameter
-    223            
-    224            if ( events & SYS_EVENT_MSG )
+    230            (void)task_id;  // Intentionally unreferenced parameter
+    231            
+    232            if ( events & SYS_EVENT_MSG )
    \   00000E   5480         ANL     A,#0x80
    \   000010   707E         JNZ     ??Smart_home_ProcessEvent_0
-    225            {
-    226              afIncomingMSGPacket_t *MSGpkt;
-    227          
-    228              while ( (MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( Smart_home_TaskID )) )
-    229              {
-    230                switch ( MSGpkt->hdr.event )
-    231                {
-    232                case ZDO_CB_MSG:
-    233                  Smart_home_ProcessZDOMsgs( (zdoIncomingMsg_t *)MSGpkt );
-    234                  break;
-    235                    
-    236                case KEY_CHANGE:
-    237                  Smart_home_HandleKeys( ((keyChange_t *)MSGpkt)->state, ((keyChange_t *)MSGpkt)->keys );
-    238                  break;
-    239          
-    240                case AF_INCOMING_MSG_CMD:
-    241                  Smart_home_ProcessMSGCmd( MSGpkt );
+    233            {
+    234              afIncomingMSGPacket_t *MSGpkt;
+    235          
+    236              while ( (MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( Smart_home_TaskID )) )
+    237              {
+    238                switch ( MSGpkt->hdr.event )
+    239                {
+    240                case ZDO_CB_MSG:
+    241                  Smart_home_ProcessZDOMsgs( (zdoIncomingMsg_t *)MSGpkt );
     242                  break;
-    243          
-    244                default:
-    245                  break;
-    246                }
+    243                    
+    244                case KEY_CHANGE:
+    245                  Smart_home_HandleKeys( ((keyChange_t *)MSGpkt)->state, ((keyChange_t *)MSGpkt)->keys );
+    246                  break;
     247          
-    248                osal_msg_deallocate( (uint8 *)MSGpkt );
-    249              }
-    250          
-    251              return ( events ^ SYS_EVENT_MSG );
-    252            }
-    253            
-    254            // 描述匹配事件
-    255            if ( events & SMART_HOME_MATCHRSP_EVT )
+    248                case AF_INCOMING_MSG_CMD:
+    249                  Smart_home_ProcessMSGCmd( MSGpkt );
+    250                  break;
+    251          
+    252                default:
+    253                  break;
+    254                }
+    255          
+    256                osal_msg_deallocate( (uint8 *)MSGpkt );
+    257              }
+    258          
+    259              return ( events ^ SYS_EVENT_MSG );
+    260            }
+    261            
+    262            // 描述匹配事件
+    263            if ( events & SMART_HOME_MATCHRSP_EVT )
    \   000012   EE           MOV     A,R6
    \   000013   5408         ANL     A,#0x8
    \   000015   7003         JNZ     $+5
    \   000017   02....       LJMP    ??Smart_home_ProcessEvent_1 & 0xFFFF
-    256            {
-    257               zAddrType_t dstAddr;
-    258               dstAddr.addrMode = AddrBroadcast;
+    264            {
+    265               zAddrType_t dstAddr;
+    266               dstAddr.addrMode = AddrBroadcast;
    \   00001A   7408         MOV     A,#0x8
    \   00001C   12....       LCALL   ?XSTACK_DISP0_8
    \   00001F   740F         MOV     A,#0xf
    \   000021   F0           MOVX    @DPTR,A
-    259               dstAddr.addr.shortAddr = NWK_BROADCAST_SHORTADDR;
+    267               dstAddr.addr.shortAddr = NWK_BROADCAST_SHORTADDR;
    \   000022   85..82       MOV     DPL,?XSP + 0
    \   000025   85..83       MOV     DPH,?XSP + 1
    \   000028   74FF         MOV     A,#-0x1
    \   00002A   F0           MOVX    @DPTR,A
    \   00002B   A3           INC     DPTR
    \   00002C   F0           MOVX    @DPTR,A
-    260               
-    261               ZDP_MatchDescReq( &dstAddr, 
-    262                                  NWK_BROADCAST_SHORTADDR,
-    263                                  Smart_home_PROFID,
-    264                                  Smart_home_MAX_OUTCLUSTERS, 
-    265                                  (cId_t *)Smart_home_ClusterList_IN,
-    266                                  Smart_home_MAX_INCLUSTERS, 
-    267                                  (cId_t *)Smart_home_ClusterList_OUT,
-    268                                  FALSE );
+    268               
+    269               ZDP_MatchDescReq( &dstAddr, 
+    270                                  NWK_BROADCAST_SHORTADDR,
+    271                                  Smart_home_PROFID,
+    272                                  Smart_home_MAX_OUTCLUSTERS, 
+    273                                  (cId_t *)Smart_home_ClusterList_IN,
+    274                                  Smart_home_MAX_INCLUSTERS, 
+    275                                  (cId_t *)Smart_home_ClusterList_OUT,
+    276                                  FALSE );
    \   00002D                ; Setup parameters for call to function ZDP_MatchDescReq
    \   00002D   75..00       MOV     ?V0 + 0,#0x0
    \   000030   78..         MOV     R0,#?V0 + 0
@@ -600,9 +614,9 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00006D   12....       LCALL   ??ZDP_MatchDescReq?relay
    \   000070   7408         MOV     A,#0x8
    \   000072   12....       LCALL   ?DEALLOC_XSTACK8
-    269          
-    270              // Return unprocessed events
-    271              return (events ^ SMART_HOME_MATCHRSP_EVT);
+    277          
+    278              // Return unprocessed events
+    279              return (events ^ SMART_HOME_MATCHRSP_EVT);
    \   000075   EE           MOV     A,R6
    \   000076   6408         XRL     A,#0x8
    \   000078   FA           MOV     R2,A
@@ -610,7 +624,7 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \                     ??Smart_home_ProcessEvent_2:
    \   00007A   FB           MOV     R3,A
    \   00007B   8049         SJMP    ??Smart_home_ProcessEvent_3
-    272            }
+    280            }
    \                     ??Smart_home_ProcessEvent_4:
    \   00007D   8A82         MOV     DPL,R2
    \   00007F   8B83         MOV     DPH,R3
@@ -640,73 +654,68 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   0000A3   EF           MOV     A,R7
    \   0000A4   6480         XRL     A,#0x80
    \   0000A6   80D2         SJMP    ??Smart_home_ProcessEvent_2
-    273          
-    274            if ( events & SMART_HOME_SEND_MSG_EVT )
+    281          
+    282            if ( events & SMART_HOME_SEND_MSG_EVT )
    \                     ??Smart_home_ProcessEvent_1:
    \   0000A8   EE           MOV     A,R6
    \   0000A9   A2E0         MOV     C,0xE0 /* A   */.0
    \   0000AB   500B         JNC     ??Smart_home_ProcessEvent_6
-    275            {
-    276              Smart_home_Send();
+    283            {
+    284              Smart_home_Send();
    \   0000AD                ; Setup parameters for call to function Smart_home_Send
    \   0000AD   12....       LCALL   ??Smart_home_Send?relay
-    277              return ( events ^ SMART_HOME_SEND_MSG_EVT );
+    285              return ( events ^ SMART_HOME_SEND_MSG_EVT );
    \   0000B0   EE           MOV     A,R6
    \   0000B1   6401         XRL     A,#0x1
    \   0000B3   FA           MOV     R2,A
    \   0000B4   EF           MOV     A,R7
    \   0000B5   FB           MOV     R3,A
    \   0000B6   800E         SJMP    ??Smart_home_ProcessEvent_3
-    278            }
-    279          
-    280            if ( events & SMART_HOME_BINDRSP_EVT )
+    286            }
+    287          
+    288            if ( events & SMART_HOME_BINDRSP_EVT )
    \                     ??Smart_home_ProcessEvent_6:
    \   0000B8   5420         ANL     A,#0x20
    \   0000BA   6006         JZ      ??Smart_home_ProcessEvent_7
-    281            {
-    282              Smart_home_Resp();
-    283              return ( events ^ SMART_HOME_BINDRSP_EVT );
+    289            {
+    290              Smart_home_Resp();
+    291              return ( events ^ SMART_HOME_BINDRSP_EVT );
    \   0000BC   EE           MOV     A,R6
    \   0000BD   6420         XRL     A,#0x20
    \   0000BF   FA           MOV     R2,A
    \   0000C0   8004         SJMP    ??Smart_home_ProcessEvent_3
-    284            }
-    285            
-    286            return ( 0 );  // Discard unknown events.
+    292            }
+    293            
+    294            return ( 0 );  // Discard unknown events.
    \                     ??Smart_home_ProcessEvent_7:
    \   0000C2   7A00         MOV     R2,#0x0
    \   0000C4   7B00         MOV     R3,#0x0
    \                     ??Smart_home_ProcessEvent_3:
    \   0000C6   7409         MOV     A,#0x9
    \   0000C8   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000CB                REQUIRE ?Subroutine0
-   \   0000CB                ; // Fall through to label ?Subroutine0
-    287          }
+   \   0000CB   7F04         MOV     R7,#0x4
+   \   0000CD   02....       LJMP    ?BANKED_LEAVE_XDATA
+    295          }
+    296          
+    297          /*********************************************************************
+    298           * @fn      Smart_home_ProcessZDOMsgs()
+    299           *
+    300           * @brief   Process response messages
+    301           *
+    302           * @param   none
+    303           *
+    304           * @return  none
+    305           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine0:
-   \   000000   7F04         MOV     R7,#0x4
-   \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
-    288          
-    289          /*********************************************************************
-    290           * @fn      Smart_home_ProcessZDOMsgs()
-    291           *
-    292           * @brief   Process response messages
-    293           *
-    294           * @param   none
-    295           *
-    296           * @return  none
-    297           */
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    298          static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
+    306          static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
    \                     Smart_home_ProcessZDOMsgs:
-    299          {
-   \   000000   74F4         MOV     A,#-0xc
+    307          {
+   \   000000   74F6         MOV     A,#-0xa
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 12
+   \   000005                ; Saved register size: 10
    \   000005                ; Auto size: 0
-    300            switch ( inMsg->clusterID )
+    308            switch ( inMsg->clusterID )
    \   000005   EA           MOV     A,R2
    \   000006   240C         ADD     A,#0xc
    \   000008   F582         MOV     DPL,A
@@ -728,9 +737,9 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   000023   2080         DW        32800
    \   000025   ....         DW        ??Smart_home_ProcessZDOMsgs_1
    \   000027   ....         DW        ??Smart_home_ProcessZDOMsgs_2
-    301            {
-    302              case End_Device_Bind_rsp:
-    303                if ( ZDO_ParseBindRsp( inMsg ) == ZSuccess )
+    309            {
+    310              case End_Device_Bind_rsp:
+    311                if ( ZDO_ParseBindRsp( inMsg ) == ZSuccess )
    \                     ??Smart_home_ProcessZDOMsgs_1:
    \   000029   EA           MOV     A,R2
    \   00002A   2413         ADD     A,#0x13
@@ -747,238 +756,244 @@ D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_home
    \   00003B   E0           MOVX    A,@DPTR
    \   00003C   6003         JZ      $+5
    \   00003E   02....       LJMP    ??Smart_home_ProcessZDOMsgs_2 & 0xFFFF
-    304                {
-    305          #if (HAL_UART == TRUE)
-    306                  HalUARTWrite(HAL_UART_PORT_0, "Bind Success!\n",   strlen("Bind Success!\n"));
-                                                                            ^
-Warning[Pe223]: function "strlen" declared implicitly
+    312                {
+    313          #if (HAL_UART == TRUE)
+    314                  HalUARTWrite(HAL_UART_PORT_0, "Bind Success!\n",   osal_strlen("Bind Success!\n"));
    \   000041                ; Setup parameters for call to function HalUARTWrite
-   \   000041                ; Setup parameters for call to function strlen
+   \   000041                ; Setup parameters for call to function osal_strlen
    \   000041   7A..         MOV     R2,#`?<Constant "Bind Success!\\n">` & 0xff
    \   000043   7B..         MOV     R3,#(`?<Constant "Bind Success!\\n">` >> 8) & 0xff
    \   000045   12....       LCALL   ?Subroutine1 & 0xFFFF
-    307          #endif
-    308                }
+    315          #endif
+    316                }
    \                     ??CrossCallReturnLabel_0:
    \   000048   7A..         MOV     R2,#`?<Constant "Bind Success!\\n">` & 0xff
    \   00004A   7B..         MOV     R3,#(`?<Constant "Bind Success!\\n">` >> 8) & 0xff
    \   00004C   7900         MOV     R1,#0x0
    \   00004E   12....       LCALL   ??HalUARTWrite?relay
-   \   000051   8071         SJMP    ??Smart_home_ProcessZDOMsgs_2
-    309                break;
-    310              
-    311              case Match_Desc_rsp:
-    312                ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
+   \   000051   8074         SJMP    ??Smart_home_ProcessZDOMsgs_2
+    317                break;
+    318              
+    319              case Match_Desc_rsp:
+    320                ZDO_ActiveEndpointRsp_t *pRsp = ZDO_ParseEPListRsp( inMsg );
                        ^
 Warning[Pe1072]: a declaration cannot have a label
+
+    switch ( inMsg->clusterID )
+    ^
+"D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_homeTempLight.c",308  Warning[Pe546]: 
+          transfer of control bypasses initialization of:
+            variable "pRsp" (declared at line 320 of
+                      "D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smar
+                      t_home\Source\Smart_homeTempLight.c")
    \                     ??Smart_home_ProcessZDOMsgs_0:
    \   000053                ; Setup parameters for call to function ZDO_ParseEPListRsp
    \   000053   12....       LCALL   ??ZDO_ParseEPListRsp?relay
    \   000056   8A..         MOV     ?V0 + 0,R2
    \   000058   8B..         MOV     ?V0 + 1,R3
-    313                if ( pRsp )
-   \   00005A   EA           MOV     A,R2
-   \   00005B   45..         ORL     A,?V0 + 1
-   \   00005D   6065         JZ      ??Smart_home_ProcessZDOMsgs_2
-    314                {
-    315                  if ( pRsp->status == ZSuccess && pRsp->cnt )
-   \   00005F   8A82         MOV     DPL,R2
-   \   000061   8B83         MOV     DPH,R3
-   \   000063   E0           MOVX    A,@DPTR
-   \   000064   7057         JNZ     ??Smart_home_ProcessZDOMsgs_3
-   \   000066   A3           INC     DPTR
-   \   000067   A3           INC     DPTR
-   \   000068   A3           INC     DPTR
-   \   000069   E0           MOVX    A,@DPTR
-   \   00006A   6051         JZ      ??Smart_home_ProcessZDOMsgs_3
-    316                  {
-    317                    // 此处存储绑定对方的地址信息用于发送
-    318                    Coordinator_DstAddr.addrMode = (afAddrMode_t)Addr16Bit;
-   \   00006C   90....       MOV     DPTR,#Coordinator_DstAddr + 8
-   \   00006F   7402         MOV     A,#0x2
-   \   000071   F0           MOVX    @DPTR,A
-    319                    Coordinator_DstAddr.addr.shortAddr = pRsp->nwkAddr;
-   \   000072   8A82         MOV     DPL,R2
-   \   000074   8B83         MOV     DPH,R3
-   \   000076   A3           INC     DPTR
-   \   000077   E0           MOVX    A,@DPTR
-   \   000078   F8           MOV     R0,A
+   \   00005A   AE..         MOV     R6,?V0 + 0
+   \   00005C   AF..         MOV     R7,?V0 + 1
+    321                if ( pRsp )
+   \   00005E   EE           MOV     A,R6
+   \   00005F   4F           ORL     A,R7
+   \   000060   6065         JZ      ??Smart_home_ProcessZDOMsgs_2
+    322                {
+    323                  if ( pRsp->status == ZSuccess && pRsp->cnt )
+   \   000062   8E82         MOV     DPL,R6
+   \   000064   8F83         MOV     DPH,R7
+   \   000066   E0           MOVX    A,@DPTR
+   \   000067   7057         JNZ     ??Smart_home_ProcessZDOMsgs_3
+   \   000069   A3           INC     DPTR
+   \   00006A   A3           INC     DPTR
+   \   00006B   A3           INC     DPTR
+   \   00006C   E0           MOVX    A,@DPTR
+   \   00006D   6051         JZ      ??Smart_home_ProcessZDOMsgs_3
+    324                  {
+    325                    // 此处存储绑定对方的地址信息用于发送
+    326                    Coordinator_DstAddr.addrMode = (afAddrMode_t)Addr16Bit;
+   \   00006F   90....       MOV     DPTR,#Coordinator_DstAddr + 8
+   \   000072   7402         MOV     A,#0x2
+   \   000074   F0           MOVX    @DPTR,A
+    327                    Coordinator_DstAddr.addr.shortAddr = pRsp->nwkAddr;
+   \   000075   8E82         MOV     DPL,R6
+   \   000077   8F83         MOV     DPH,R7
    \   000079   A3           INC     DPTR
    \   00007A   E0           MOVX    A,@DPTR
-   \   00007B   F9           MOV     R1,A
-   \   00007C   90....       MOV     DPTR,#Coordinator_DstAddr
-   \   00007F   E8           MOV     A,R0
-   \   000080   F0           MOVX    @DPTR,A
-   \   000081   A3           INC     DPTR
-   \   000082   E9           MOV     A,R1
+   \   00007B   F8           MOV     R0,A
+   \   00007C   A3           INC     DPTR
+   \   00007D   E0           MOVX    A,@DPTR
+   \   00007E   F9           MOV     R1,A
+   \   00007F   90....       MOV     DPTR,#Coordinator_DstAddr
+   \   000082   E8           MOV     A,R0
    \   000083   F0           MOVX    @DPTR,A
-    320                    // Take the first endpoint, Can be changed to search through endpoints
-    321                    Coordinator_DstAddr.endPoint = pRsp->epList[0];  // ok
-   \   000084   8A82         MOV     DPL,R2
-   \   000086   8B83         MOV     DPH,R3
-   \   000088   A3           INC     DPTR
-   \   000089   A3           INC     DPTR
-   \   00008A   A3           INC     DPTR
+   \   000084   A3           INC     DPTR
+   \   000085   E9           MOV     A,R1
+   \   000086   F0           MOVX    @DPTR,A
+    328                    // Take the first endpoint, Can be changed to search through endpoints
+    329                    Coordinator_DstAddr.endPoint = pRsp->epList[0];  // ok
+   \   000087   8E82         MOV     DPL,R6
+   \   000089   8F83         MOV     DPH,R7
    \   00008B   A3           INC     DPTR
-   \   00008C   E0           MOVX    A,@DPTR
-   \   00008D   90....       MOV     DPTR,#Coordinator_DstAddr + 9
-   \   000090   F0           MOVX    @DPTR,A
-    322                    // 匹配成功，关闭描述符匹配事件定时器
-    323                    osal_stop_timerEx( Smart_home_TaskID, SMART_HOME_MATCHRSP_EVT );
-   \   000091                ; Setup parameters for call to function osal_stop_timerEx
-   \   000091   7A08         MOV     R2,#0x8
-   \   000093   7B00         MOV     R3,#0x0
-   \   000095   90....       MOV     DPTR,#Smart_home_TaskID
-   \   000098   E0           MOVX    A,@DPTR
-   \   000099   F9           MOV     R1,A
-   \   00009A   12....       LCALL   ??osal_stop_timerEx?relay
-    324            
-    325          #if (HAL_UART == TRUE)
-    326                    HalUARTWrite(HAL_UART_PORT_0, "Match Success!\n",   strlen("Match Success!\n"));
-                                                                               ^
-Warning[Pe223]: function "strlen" declared implicitly
-
-    switch ( inMsg->clusterID )
-    ^
-"D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smart_home\Source\Smart_homeTempLight.c",300  Warning[Pe546]: 
-          transfer of control bypasses initialization of:
-            variable "pRsp" (declared at line 312 of
-                      "D:\毕设\CC2530-smart_home\Projects\zstack\Utilities\Smar
-                      t_home\Source\Smart_homeTempLight.c")
-   \   00009D                ; Setup parameters for call to function HalUARTWrite
-   \   00009D                ; Setup parameters for call to function strlen
-   \   00009D   7A..         MOV     R2,#`?<Constant "Match Success!\\n">` & 0xff
-   \   00009F   7B..         MOV     R3,#(`?<Constant "Match Success!\\n">` >> 8) & 0xff
-   \   0000A1   12....       LCALL   ?Subroutine1 & 0xFFFF
+   \   00008C   A3           INC     DPTR
+   \   00008D   A3           INC     DPTR
+   \   00008E   A3           INC     DPTR
+   \   00008F   E0           MOVX    A,@DPTR
+   \   000090   90....       MOV     DPTR,#Coordinator_DstAddr + 9
+   \   000093   F0           MOVX    @DPTR,A
+    330                    // 匹配成功，关闭描述符匹配事件定时器
+    331                    osal_stop_timerEx( Smart_home_TaskID, SMART_HOME_MATCHRSP_EVT );
+   \   000094                ; Setup parameters for call to function osal_stop_timerEx
+   \   000094   7A08         MOV     R2,#0x8
+   \   000096   7B00         MOV     R3,#0x0
+   \   000098   90....       MOV     DPTR,#Smart_home_TaskID
+   \   00009B   E0           MOVX    A,@DPTR
+   \   00009C   F9           MOV     R1,A
+   \   00009D   12....       LCALL   ??osal_stop_timerEx?relay
+    332            
+    333          #if (HAL_UART == TRUE)
+    334                    HalUARTWrite(HAL_UART_PORT_0, "Match Success!\n",   osal_strlen("Match Success!\n"));
+   \   0000A0                ; Setup parameters for call to function HalUARTWrite
+   \   0000A0                ; Setup parameters for call to function osal_strlen
+   \   0000A0   7A..         MOV     R2,#`?<Constant "Match Success!\\n">` & 0xff
+   \   0000A2   7B..         MOV     R3,#(`?<Constant "Match Success!\\n">` >> 8) & 0xff
+   \   0000A4   12....       LCALL   ?Subroutine1 & 0xFFFF
    \                     ??CrossCallReturnLabel_1:
-   \   0000A4   7A..         MOV     R2,#`?<Constant "Match Success!\\n">` & 0xff
-   \   0000A6   7B..         MOV     R3,#(`?<Constant "Match Success!\\n">` >> 8) & 0xff
-   \   0000A8   7900         MOV     R1,#0x0
-   \   0000AA   12....       LCALL   ??HalUARTWrite?relay
-    327          #endif
-    328                    // 开启定时发送数据给协调器的事件
-    329                    osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_SEND_MSG_EVT, 
-    330                                             SMART_HOME_SEND_DELAY );
-   \   0000AD                ; Setup parameters for call to function osal_start_reload_timer
-   \   0000AD   7CB8         MOV     R4,#-0x48
-   \   0000AF   7D0B         MOV     R5,#0xb
-   \   0000B1   7A01         MOV     R2,#0x1
-   \   0000B3   7B00         MOV     R3,#0x0
-   \   0000B5   90....       MOV     DPTR,#Smart_home_TaskID
-   \   0000B8   E0           MOVX    A,@DPTR
-   \   0000B9   F9           MOV     R1,A
-   \   0000BA   12....       LCALL   ??osal_start_reload_timer?relay
-    331                  }
-    332              
-    333                  osal_mem_free( pRsp );
+   \   0000A7   7A..         MOV     R2,#`?<Constant "Match Success!\\n">` & 0xff
+   \   0000A9   7B..         MOV     R3,#(`?<Constant "Match Success!\\n">` >> 8) & 0xff
+   \   0000AB   7900         MOV     R1,#0x0
+   \   0000AD   12....       LCALL   ??HalUARTWrite?relay
+    335          #endif
+    336                    // 开启定时发送数据给协调器的事件
+    337                    osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_SEND_MSG_EVT, 
+    338                                             SMART_HOME_SEND_DELAY );
+   \   0000B0                ; Setup parameters for call to function osal_start_reload_timer
+   \   0000B0   7CB8         MOV     R4,#-0x48
+   \   0000B2   7D0B         MOV     R5,#0xb
+   \   0000B4   7A01         MOV     R2,#0x1
+   \   0000B6   7B00         MOV     R3,#0x0
+   \   0000B8   90....       MOV     DPTR,#Smart_home_TaskID
+   \   0000BB   E0           MOVX    A,@DPTR
+   \   0000BC   F9           MOV     R1,A
+   \   0000BD   12....       LCALL   ??osal_start_reload_timer?relay
+    339                  }
+    340              
+    341                  osal_mem_free( pRsp );
    \                     ??Smart_home_ProcessZDOMsgs_3:
-   \   0000BD                ; Setup parameters for call to function osal_mem_free
-   \   0000BD   AA..         MOV     R2,?V0 + 0
-   \   0000BF   AB..         MOV     R3,?V0 + 1
-   \   0000C1   12....       LCALL   ??osal_mem_free?relay
-    334                }
-    335                break;
-    336                
-    337              default:
-    338                break;
-    339            }
-    340            
-    341          }
+   \   0000C0                ; Setup parameters for call to function osal_mem_free
+   \   0000C0   EE           MOV     A,R6
+   \   0000C1   FA           MOV     R2,A
+   \   0000C2   EF           MOV     A,R7
+   \   0000C3   FB           MOV     R3,A
+   \   0000C4   12....       LCALL   ??osal_mem_free?relay
+    342                }
+    343                break;
+    344                
+    345              default:
+    346                break;
+    347            }
+    348            
+    349          }
    \                     ??Smart_home_ProcessZDOMsgs_2:
-   \   0000C4   02....       LJMP    ?Subroutine0 & 0xFFFF
+   \   0000C7                REQUIRE ?Subroutine0
+   \   0000C7                ; // Fall through to label ?Subroutine0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine0:
+   \   000000   7F02         MOV     R7,#0x2
+   \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine1:
-   \   000000   12....       LCALL   ??strlen?relay
+   \   000000   12....       LCALL   ??osal_strlen?relay
    \   000003   EA           MOV     A,R2
    \   000004   FC           MOV     R4,A
    \   000005   EB           MOV     A,R3
    \   000006   FD           MOV     R5,A
    \   000007   22           RET
-    342          
-    343          /*********************************************************************
-    344           * @fn      Smart_home_HandleKeys
-    345           *
-    346           * @brief   Handles all key events for this device.
-    347           *
-    348           * @param   shift - true if in shift/alt.
-    349           * @param   keys  - bit field for key events.
-    350           *
-    351           * @return  none
-    352           */
-    353          void Smart_home_HandleKeys( uint8 shift, uint8 keys )
-    354          {
-    355            
-    356            if ( keys & HAL_KEY_SW_5 )
-    357            {
-    358            }
-    359          
-    360          }
-    361          
-    362          /*********************************************************************
-    363           * @fn      Smart_home_ProcessMSGCmd
-    364           *
-    365           * @brief   Data message processor callback. This function processes
-    366           *          any incoming data - probably from other devices. Based
-    367           *          on the cluster ID, perform the intended action.
-    368           *
-    369           * @param   pkt - pointer to the incoming message packet
-    370           *
-    371           * @return  TRUE if the 'pkt' parameter is being used and will be freed later,
-    372           *          FALSE otherwise.
-    373           */
-    374          void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
-    375          {
-    376            
-    377            switch ( pkt->clusterId )
-    378            {
-    379              case Smart_home_CLUSTERID_TEMPLIGHTMSG:
-    380              {    
-    381                break;
-    382              } 
-    383              // Could receive control messages in the future.
-    384              default:
-    385                break;
-    386            }
-    387          }
-    388          
-    389          /*********************************************************************
-    390           * @fn      Smart_home_Send
-    391           *
-    392           * @brief   Send data OTA.
-    393           *
-    394           * @param   none
-    395           *
-    396           * @return  none
-    397           */
+    350          
+    351          /*********************************************************************
+    352           * @fn      Smart_home_HandleKeys
+    353           *
+    354           * @brief   Handles all key events for this device.
+    355           *
+    356           * @param   shift - true if in shift/alt.
+    357           * @param   keys  - bit field for key events.
+    358           *
+    359           * @return  none
+    360           */
+    361          void Smart_home_HandleKeys( uint8 shift, uint8 keys )
+    362          {
+    363            
+    364            if ( keys & HAL_KEY_SW_5 )
+    365            {
+    366            }
+    367          
+    368          }
+    369          
+    370          /*********************************************************************
+    371           * @fn      Smart_home_ProcessMSGCmd
+    372           *
+    373           * @brief   Data message processor callback. This function processes
+    374           *          any incoming data - probably from other devices. Based
+    375           *          on the cluster ID, perform the intended action.
+    376           *
+    377           * @param   pkt - pointer to the incoming message packet
+    378           *
+    379           * @return  TRUE if the 'pkt' parameter is being used and will be freed later,
+    380           *          FALSE otherwise.
+    381           */
+    382          void Smart_home_ProcessMSGCmd( afIncomingMSGPacket_t *pkt )
+    383          {
+    384            
+    385            switch ( pkt->clusterId )
+    386            {
+    387              case Smart_home_CLUSTERID_TEMPLIGHTMSG:
+    388              {    
+    389                break;
+    390              } 
+    391              // Could receive control messages in the future.
+    392              default:
+    393                break;
+    394            }
+    395          }
+    396          
+    397          /*********************************************************************
+    398           * @fn      Smart_home_Send
+    399           *
+    400           * @brief   Send data OTA.
+    401           *
+    402           * @param   none
+    403           *
+    404           * @return  none
+    405           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    398          static void Smart_home_Send(void)
+    406          static void Smart_home_Send(void)
    \                     Smart_home_Send:
-    399          {
+    407          {
    \   000000   74F6         MOV     A,#-0xa
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 10
    \   000005                ; Auto size: 0
-    400            uint8 tmp;
-    401            uint16 Light,Temper;
-    402            static uint8 Sendbuf[4];
-    403            
-    404            
-    405            Light = BH1750_ConvertLight();
+    408            uint8 tmp;
+    409            uint16 Light,Temper;
+    410            static uint8 Sendbuf[4];
+    411            
+    412            
+    413            Light = BH1750_ConvertLight();
    \   000005                ; Setup parameters for call to function BH1750_ConvertLight
    \   000005   12....       LCALL   ??BH1750_ConvertLight?relay
    \   000008   8A..         MOV     ?V0 + 0,R2
    \   00000A   8B..         MOV     ?V0 + 1,R3
    \   00000C   AE..         MOV     R6,?V0 + 0
    \   00000E   AF..         MOV     R7,?V0 + 1
-    406            Temper = DS18B20_ConvertTemp();
+    414            Temper = DS18B20_ConvertTemp();
    \   000010                ; Setup parameters for call to function DS18B20_ConvertTemp
    \   000010   12....       LCALL   ??DS18B20_ConvertTemp?relay
    \   000013   8A..         MOV     ?V0 + 0,R2
    \   000015   8B..         MOV     ?V0 + 1,R3
-    407            
-    408            Sendbuf[0] = (uint8)((Temper>>4) & 0x007F);  // 温度的整数部分
+    415            
+    416            Sendbuf[0] = (uint8)((Temper>>4) & 0x007F);  // 温度的整数部分
    \   000017   7404         MOV     A,#0x4
    \   000019   78..         MOV     R0,#?V0 + 0
    \   00001B   12....       LCALL   ?US_SHR
@@ -986,27 +1001,28 @@ Warning[Pe223]: function "strlen" declared implicitly
    \   000020   547F         ANL     A,#0x7f
    \   000022   90....       MOV     DPTR,#??Sendbuf
    \   000025   F0           MOVX    @DPTR,A
-    409            Sendbuf[1] = (uint8)(Temper & 0x000F);       // 温度的小数部分
+    417            Sendbuf[1] = (uint8)(Temper & 0x000F);       // 温度的小数部分
    \   000026   EA           MOV     A,R2
    \   000027   540F         ANL     A,#0xf
    \   000029   A3           INC     DPTR
    \   00002A   F0           MOVX    @DPTR,A
-    410            Sendbuf[2] = (uint8)(Light >> 8);            // 光照度的高8位
+    418            Sendbuf[2] = (uint8)(Light >> 8);            // 光照度的高8位
    \   00002B   EF           MOV     A,R7
    \   00002C   A3           INC     DPTR
    \   00002D   F0           MOVX    @DPTR,A
-    411            Sendbuf[3] = (uint8)(Light & 0xFF);          // 光照度的低8位
+    419            Sendbuf[3] = (uint8)(Light & 0xFF);          // 光照度的低8位
    \   00002E   EE           MOV     A,R6
    \   00002F   A3           INC     DPTR
    \   000030   F0           MOVX    @DPTR,A
-    412          
-    413          #if HAL_UART==TRUE
-    414            //串口发送原数据，解析工作交给上位机处理
-    415            HalUARTWrite(HAL_UART_PORT_0, Sendbuf, strlen(Sendbuf));
-                                                          ^
-Warning[Pe223]: function "strlen" declared implicitly
+    420          
+    421          #if HAL_UART==TRUE
+    422            //串口发送原数据，解析工作交给上位机处理
+    423            HalUARTWrite(HAL_UART_PORT_0, Sendbuf, osal_strlen(Sendbuf));
+                                                                      ^
+Warning[Pe167]: argument of type "unsigned char *" is incompatible with
+          parameter of type "char *"
    \   000031                ; Setup parameters for call to function HalUARTWrite
-   \   000031                ; Setup parameters for call to function strlen
+   \   000031                ; Setup parameters for call to function osal_strlen
    \   000031   7A..         MOV     R2,#??Sendbuf & 0xff
    \   000033   7B..         MOV     R3,#(??Sendbuf >> 8) & 0xff
    \   000035   12....       LCALL   ?Subroutine1 & 0xFFFF
@@ -1015,162 +1031,127 @@ Warning[Pe223]: function "strlen" declared implicitly
    \   00003A   7B..         MOV     R3,#(??Sendbuf >> 8) & 0xff
    \   00003C   7900         MOV     R1,#0x0
    \   00003E   12....       LCALL   ??HalUARTWrite?relay
-    416          #endif   
-    417            
-    418            do{
-    419              // put the sequence number in the message
-    420              tmp = HI_UINT8( Smart_home_MsgID );
+    424          #endif   
+    425            
+    426            do{
+    427              tmp = Smart_home_MsgID;
+    428              //tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+    429              Coordinator_Msg[3] = tmp;
    \                     ??Smart_home_Send_0:
    \   000041   90....       MOV     DPTR,#Smart_home_MsgID
    \   000044   E0           MOVX    A,@DPTR
-   \   000045   C4           SWAP    A
-   \   000046   540F         ANL     A,#0xf
-   \   000048   FA           MOV     R2,A
-    421              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
-   \   000049   C3           CLR     C
-   \   00004A   940A         SUBB    A,#0xa
-   \   00004C   5004         JNC     ??Smart_home_Send_1
-   \   00004E   7830         MOV     R0,#0x30
-   \   000050   8002         SJMP    ??Smart_home_Send_2
-   \                     ??Smart_home_Send_1:
-   \   000052   7837         MOV     R0,#0x37
-    422              Coordinator_Msg[2] = tmp;
-   \                     ??Smart_home_Send_2:
-   \   000054   E8           MOV     A,R0
-   \   000055   2A           ADD     A,R2
-   \   000056   90....       MOV     DPTR,#Coordinator_Msg + 2
-   \   000059   F0           MOVX    @DPTR,A
-    423              tmp = LO_UINT8( Smart_home_MsgID );
-   \   00005A   90....       MOV     DPTR,#Smart_home_MsgID
-   \   00005D   E0           MOVX    A,@DPTR
-   \   00005E   540F         ANL     A,#0xf
-   \   000060   FA           MOV     R2,A
-    424              tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
-   \   000061   C3           CLR     C
-   \   000062   940A         SUBB    A,#0xa
-   \   000064   5004         JNC     ??Smart_home_Send_3
-   \   000066   7830         MOV     R0,#0x30
-   \   000068   8002         SJMP    ??Smart_home_Send_4
-   \                     ??Smart_home_Send_3:
-   \   00006A   7837         MOV     R0,#0x37
-    425              Coordinator_Msg[3] = tmp;
-   \                     ??Smart_home_Send_4:
-   \   00006C   E8           MOV     A,R0
-   \   00006D   2A           ADD     A,R2
-   \   00006E   90....       MOV     DPTR,#Coordinator_Msg + 3
-   \   000071   F0           MOVX    @DPTR,A
-    426              
-    427              // 发送给协调器命令 
-    428              Coordinator_Msg[4] = Sendbuf[0];
-   \   000072   90....       MOV     DPTR,#??Sendbuf
-   \   000075   E0           MOVX    A,@DPTR
-   \   000076   90....       MOV     DPTR,#Coordinator_Msg + 4
-   \   000079   F0           MOVX    @DPTR,A
-    429              Coordinator_Msg[5] = Sendbuf[1];
-   \   00007A   90....       MOV     DPTR,#??Sendbuf + 1
-   \   00007D   E0           MOVX    A,@DPTR
-   \   00007E   90....       MOV     DPTR,#Coordinator_Msg + 5
-   \   000081   F0           MOVX    @DPTR,A
-    430              Coordinator_Msg[6] = Sendbuf[2];
-   \   000082   90....       MOV     DPTR,#??Sendbuf + 2
-   \   000085   E0           MOVX    A,@DPTR
-   \   000086   90....       MOV     DPTR,#Coordinator_Msg + 6
-   \   000089   F0           MOVX    @DPTR,A
-    431              Coordinator_Msg[7] = Sendbuf[3];
-   \   00008A   90....       MOV     DPTR,#??Sendbuf + 3
-   \   00008D   E0           MOVX    A,@DPTR
-   \   00008E   90....       MOV     DPTR,#Coordinator_Msg + 7
-   \   000091   F0           MOVX    @DPTR,A
-    432              
-    433              tmp = AF_DataRequest( &Coordinator_DstAddr,                         
-    434                                    (endPointDesc_t *)&Smart_home_epDesc,                  
-    435                                     Smart_home_CLUSTERID_TEMPLIGHTMSG,
-    436                                     TEMPLIGHTMSG_LEN,                 
-    437                                     Coordinator_Msg,                    
-    438                                    &Smart_home_MsgID,                       
-    439                                     AF_DISCV_ROUTE,                     
-    440                                     AF_DEFAULT_RADIUS );
-    441            }while (afStatus_SUCCESS == tmp);   
-   \   000092                ; Setup parameters for call to function AF_DataRequest
-   \   000092   75..1E       MOV     ?V0 + 0,#0x1e
+   \   000045   90....       MOV     DPTR,#Coordinator_Msg + 3
+   \   000048   F0           MOVX    @DPTR,A
+    430              
+    431              // 发送给协调器命令 
+    432              Coordinator_Msg[4] = Sendbuf[0];
+   \   000049   90....       MOV     DPTR,#??Sendbuf
+   \   00004C   E0           MOVX    A,@DPTR
+   \   00004D   90....       MOV     DPTR,#Coordinator_Msg + 4
+   \   000050   F0           MOVX    @DPTR,A
+    433              Coordinator_Msg[5] = Sendbuf[1];
+   \   000051   90....       MOV     DPTR,#??Sendbuf + 1
+   \   000054   E0           MOVX    A,@DPTR
+   \   000055   90....       MOV     DPTR,#Coordinator_Msg + 5
+   \   000058   F0           MOVX    @DPTR,A
+    434              Coordinator_Msg[6] = Sendbuf[2];
+   \   000059   90....       MOV     DPTR,#??Sendbuf + 2
+   \   00005C   E0           MOVX    A,@DPTR
+   \   00005D   90....       MOV     DPTR,#Coordinator_Msg + 6
+   \   000060   F0           MOVX    @DPTR,A
+    435              Coordinator_Msg[7] = Sendbuf[3];
+   \   000061   90....       MOV     DPTR,#??Sendbuf + 3
+   \   000064   E0           MOVX    A,@DPTR
+   \   000065   90....       MOV     DPTR,#Coordinator_Msg + 7
+   \   000068   F0           MOVX    @DPTR,A
+    436              
+    437              tmp = AF_DataRequest( &Coordinator_DstAddr,                         
+    438                                    (endPointDesc_t *)&Smart_home_epDesc,                  
+    439                                     Smart_home_CLUSTERID_TEMPLIGHTMSG,
+    440                                     TEMPLIGHTMSG_LEN,                 
+    441                                     Coordinator_Msg,                    
+    442                                    &Smart_home_MsgID,                       
+    443                                     AF_DISCV_ROUTE,                     
+    444                                     AF_DEFAULT_RADIUS );
+    445            }while (afStatus_SUCCESS == tmp);   
+   \   000069                ; Setup parameters for call to function AF_DataRequest
+   \   000069   75..1E       MOV     ?V0 + 0,#0x1e
+   \   00006C   78..         MOV     R0,#?V0 + 0
+   \   00006E   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   000071   75....       MOV     ?V0 + 0,#Smart_home_MsgID & 0xff
+   \   000074   75....       MOV     ?V0 + 1,#(Smart_home_MsgID >> 8) & 0xff
+   \   000077   78..         MOV     R0,#?V0 + 0
+   \   000079   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00007C   75....       MOV     ?V0 + 0,#Coordinator_Msg & 0xff
+   \   00007F   75....       MOV     ?V0 + 1,#(Coordinator_Msg >> 8) & 0xff
+   \   000082   78..         MOV     R0,#?V0 + 0
+   \   000084   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000087   75..08       MOV     ?V0 + 0,#0x8
+   \   00008A   75..00       MOV     ?V0 + 1,#0x0
+   \   00008D   78..         MOV     R0,#?V0 + 0
+   \   00008F   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000092   75..02       MOV     ?V0 + 0,#0x2
    \   000095   78..         MOV     R0,#?V0 + 0
-   \   000097   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00009A   75....       MOV     ?V0 + 0,#Smart_home_MsgID & 0xff
-   \   00009D   75....       MOV     ?V0 + 1,#(Smart_home_MsgID >> 8) & 0xff
-   \   0000A0   78..         MOV     R0,#?V0 + 0
-   \   0000A2   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0000A5   75....       MOV     ?V0 + 0,#Coordinator_Msg & 0xff
-   \   0000A8   75....       MOV     ?V0 + 1,#(Coordinator_Msg >> 8) & 0xff
-   \   0000AB   78..         MOV     R0,#?V0 + 0
-   \   0000AD   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0000B0   75..08       MOV     ?V0 + 0,#0x8
-   \   0000B3   75..00       MOV     ?V0 + 1,#0x0
-   \   0000B6   78..         MOV     R0,#?V0 + 0
-   \   0000B8   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0000BB   75..02       MOV     ?V0 + 0,#0x2
-   \   0000BE   78..         MOV     R0,#?V0 + 0
-   \   0000C0   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0000C3   7920         MOV     R1,#0x20
-   \   0000C5   7C..         MOV     R4,#Smart_home_epDesc & 0xff
-   \   0000C7   7D..         MOV     R5,#(Smart_home_epDesc >> 8) & 0xff
-   \   0000C9   7A..         MOV     R2,#Coordinator_DstAddr & 0xff
-   \   0000CB   7B..         MOV     R3,#(Coordinator_DstAddr >> 8) & 0xff
-   \   0000CD   12....       LCALL   ??AF_DataRequest?relay
-   \   0000D0   7409         MOV     A,#0x9
-   \   0000D2   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000D5   E9           MOV     A,R1
-   \   0000D6   7003         JNZ     $+5
-   \   0000D8   02....       LJMP    ??Smart_home_Send_0 & 0xFFFF
-    442          }
-   \   0000DB   7F02         MOV     R7,#0x2
-   \   0000DD   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000097   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00009A   7920         MOV     R1,#0x20
+   \   00009C   7C..         MOV     R4,#Smart_home_epDesc & 0xff
+   \   00009E   7D..         MOV     R5,#(Smart_home_epDesc >> 8) & 0xff
+   \   0000A0   7A..         MOV     R2,#Coordinator_DstAddr & 0xff
+   \   0000A2   7B..         MOV     R3,#(Coordinator_DstAddr >> 8) & 0xff
+   \   0000A4   12....       LCALL   ??AF_DataRequest?relay
+   \   0000A7   7409         MOV     A,#0x9
+   \   0000A9   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0000AC   E9           MOV     A,R1
+   \   0000AD   6092         JZ      ??Smart_home_Send_0
+    446          }
+   \   0000AF   02....       LJMP    ?Subroutine0 & 0xFFFF
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
    \                     ??Sendbuf:
    \   000000                DS 4
    \   000004                REQUIRE __INIT_XDATA_Z
-    443          
-    444          /*********************************************************************
-    445           * @fn      Smart_home_Resp
-    446           *
-    447           * @brief   Send data OTA.
-    448           *
-    449           * @param   none
+    447          
+    448          /*********************************************************************
+    449           * @fn      Smart_home_Resp
     450           *
-    451           * @return  none
-    452           */
-    453          static void Smart_home_Resp(void)
-    454          {
-    455            /*
-    456            if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_RxAddr,
-    457                                                   (endPointDesc_t *)&Smart_home_epDesc,
-    458                                                    Smart_home_CLUSTERID2,
-    459                                                    SERIAL_APP_RSP_CNT, Smart_home_RspBuf,
-    460                                                   &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
-    461            {
-    462              osal_set_event(Smart_home_TaskID, SMART_HOME_BINDRSP_EVT);
-    463            }
-    464            */
-    465          }
-    466          
-    467          /*********************************************************************
-    468           * @fn      Smart_home_CallBack
-    469           *
-    470           * @brief   Send data OTA.
-    471           *
-    472           * @param   port - UART port.
-    473           * @param   event - the UART port event flag.
-    474           *
-    475           * @return  none
-    476           */
+    451           * @brief   Send data OTA.
+    452           *
+    453           * @param   none
+    454           *
+    455           * @return  none
+    456           */
+    457          static void Smart_home_Resp(void)
+    458          {
+    459            /*
+    460            if (afStatus_SUCCESS != AF_DataRequest(&Smart_home_RxAddr,
+    461                                                   (endPointDesc_t *)&Smart_home_epDesc,
+    462                                                    Smart_home_CLUSTERID2,
+    463                                                    SERIAL_APP_RSP_CNT, Smart_home_RspBuf,
+    464                                                   &Smart_home_MsgID, 0, AF_DEFAULT_RADIUS))
+    465            {
+    466              osal_set_event(Smart_home_TaskID, SMART_HOME_BINDRSP_EVT);
+    467            }
+    468            */
+    469          }
+    470          
+    471          /*********************************************************************
+    472           * @fn      Smart_home_CallBack
+    473           *
+    474           * @brief   Send data OTA.
+    475           *
+    476           * @param   port - UART port.
+    477           * @param   event - the UART port event flag.
+    478           *
+    479           * @return  none
+    480           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    477          static void Smart_home_CallBack(uint8 port, uint8 event)
+    481          static void Smart_home_CallBack(uint8 port, uint8 event)
    \                     Smart_home_CallBack:
-    478          {
+    482          {
    \   000000                ; Saved register size: 0
    \   000000                ; Auto size: 0
-    479          }
+    483          }
    \   000000   02....       LJMP    ?BRET
 
    \                                 In  segment BANK_RELAYS, align 1
@@ -1211,9 +1192,9 @@ Warning[Pe223]: function "strlen" declared implicitly
    \            68205375
    \            63636573
    \            73210A00
-    480          
-    481          /*********************************************************************
-    482          *********************************************************************/
+    484          
+    485          /*********************************************************************
+    486          *********************************************************************/
 
    Maximum stack usage in bytes:
 
@@ -1233,19 +1214,19 @@ Warning[Pe223]: function "strlen" declared implicitly
        -> osal_msg_deallocate           0      0     42
        -> osal_msg_receive              0      0     42
        -> Smart_home_Send               0      0     42
-     Smart_home_ProcessZDOMsgs          0      0     33
-       -> strlen                        0      0     24
-       -> HalUARTWrite                  0      0     24
-       -> ZDO_ParseEPListRsp            0      0     24
-       -> osal_stop_timerEx             0      0     24
-       -> strlen                        0      0     24
-       -> HalUARTWrite                  0      0     24
-       -> osal_start_reload_timer       0      0     24
-       -> osal_mem_free                 0      0     24
+     Smart_home_ProcessZDOMsgs          0      0     31
+       -> osal_strlen                   0      0     20
+       -> HalUARTWrite                  0      0     20
+       -> ZDO_ParseEPListRsp            0      0     20
+       -> osal_stop_timerEx             0      0     20
+       -> osal_strlen                   0      0     20
+       -> HalUARTWrite                  0      0     20
+       -> osal_start_reload_timer       0      0     20
+       -> osal_mem_free                 0      0     20
      Smart_home_Send                    0      0     40
        -> BH1750_ConvertLight           0      0     20
        -> DS18B20_ConvertTemp           0      0     20
-       -> strlen                        0      0     20
+       -> osal_strlen                   0      0     20
        -> HalUARTWrite                  0      0     20
        -> AF_DataRequest                0      0     38
 
@@ -1254,20 +1235,20 @@ Warning[Pe223]: function "strlen" declared implicitly
 
      Function/Label                    Bytes
      --------------                    -----
+     Smart_home_TaskID                    1
+     Coordinator_Msg                      8
      Smart_home_ClusterList_IN            2
      Smart_home_ClusterList_OUT           2
      Smart_home_SimpleDesc               12
      Smart_home_epDesc                    6
      Coordinator_DstAddr                 12
-     Smart_home_TaskID                    1
-     Coordinator_Msg                      8
      Smart_home_MsgID                     1
-     Smart_home_Init                    193
-     Smart_home_ProcessEvent            203
-     ?Subroutine0                         5
+     Smart_home_Init                    203
+     Smart_home_ProcessEvent            208
      Smart_home_ProcessZDOMsgs          199
+     ?Subroutine0                         5
      ?Subroutine1                         8
-     Smart_home_Send                    224
+     Smart_home_Send                    178
      Sendbuf                              4
      Smart_home_CallBack                  3
      ??Smart_home_Init?relay              6
@@ -1279,14 +1260,14 @@ Warning[Pe223]: function "strlen" declared implicitly
      ?<Constant "Match Success!\n">      16
 
  
- 835 bytes in segment BANKED_CODE
+ 804 bytes in segment BANKED_CODE
   30 bytes in segment BANK_RELAYS
   53 bytes in segment XDATA_ROM_C
   26 bytes in segment XDATA_Z
  
- 865 bytes of CODE  memory
+ 834 bytes of CODE  memory
   53 bytes of CONST memory
   26 bytes of XDATA memory
 
 Errors: none
-Warnings: 5
+Warnings: 3

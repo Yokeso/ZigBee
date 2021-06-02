@@ -91,6 +91,8 @@
 
 #define SERIAL_APP_RSP_CNT  4
 
+uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
+
 //3.21 …Ë÷√ ‰»Î ‰≥ˆ¥ÿ
 // This list should be filled with Application specific Cluster IDs.
 const cId_t Smart_home_ClusterList_IN[1] =
@@ -138,7 +140,6 @@ static uint8 InfraredData;
  * GLOBAL VARIABLES
  */
 
-uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
 byte Coordinator_Msg[INFRAREDMSG_LEN];
 
 /*********************************************************************

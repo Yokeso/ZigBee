@@ -3,7 +3,7 @@
   作 者： 柳成林
   功 能： 射频卡功能节点，实现对于ID卡的读写以及查询
   更新日志(2021)
-  3.24
+  3.27
   + 新增 设置输入输出簇
          Smart_home_HandleKeys()      //按键控制
          Smart_home_ProcessMSGCmd();  //输入控制函数 
@@ -90,6 +90,9 @@
 
 #define SERIAL_APP_RSP_CNT  4
 
+
+uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
+
 //3.21 设置输入输出簇
 // This list should be filled with Application specific Cluster IDs.
 const cId_t Smart_home_ClusterList_IN[1] =
@@ -137,7 +140,6 @@ static uint8 RFIDBuf[5];
  * GLOBAL VARIABLES
  */
 
-uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
 byte Coordinator_Msg[RFIDMSG_LEN];
 
 /*********************************************************************

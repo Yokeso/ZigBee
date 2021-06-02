@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         18/Apr/2021  20:24:43 #
+# IAR C/C++ Compiler V8.10.1.10194/W32 for 8051         03/Jun/2021  00:01:25 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -118,29 +118,21 @@ D:\毕设\CC2530-smart_home\Components\hal\target\CC2530SB\hal_DS18B20.c
       1          /*****************************************************************************
       2          *
       3          * 文 件 名：hal_ds18b20.c
-      4          
-      5          * 作    者: 南京安宸博研电子科技有限公司
-      6          
-      7          * 创建时间: 2019.04.01
-      8          
-      9          * 修改时间: 2019.04.21
-     10          
-     11          * IAR 版本: IAR for 8051 V8.10.1
-     12          
-     13          * 测试平台: Sensor MotherBoard V2.3
-     14          
-     15          * 说    明: 1. DS18B20单线总线通信, CC2530与此通过P1_1管脚进行通信.
-     16          *           2. DS18B20空闲状态时, 总线为高电平.
-     17          *           3. 拉低总线480us可以复位DS18B20.
-     18          *              需连续读取两次, 但不建议连续多次读取传感器, 每次读取传感器间隔
-     19          *              大于5秒即可获得准确的数据.
-     20          *           4. 测量的温度数值12位精度: 后4位是小数, 前面的5位空, 中间的7位是
-     21          *              整数部分.
-     22          *                               
-     23          *****************************************************************************/
-     24          
-     25          // 头文件
-     26          #include <ioCC2530.h>
+      4          * 作    者: 柳成林
+      5          * 创建时间: 2021.3.15
+      6          * 修改时间: 2021.5.10
+      7          * 说    明: 1. DS18B20单线总线通信, CC2530与此通过P1_1管脚进行通信.
+      8          *           2. DS18B20空闲状态时, 总线为高电平.
+      9          *           3. 拉低总线480us可以复位DS18B20.
+     10          *              需连续读取两次, 但不建议连续多次读取传感器, 每次读取传感器间隔
+     11          *              大于5秒即可获得准确的数据.
+     12          *           4. 测量的温度数值12位精度: 后4位是小数, 前面的5位空, 中间的7位是
+     13          *              整数部分.
+     14          *                               
+     15          *****************************************************************************/
+     16          
+     17          // 头文件
+     18          #include <ioCC2530.h>
 
    \                                 In  segment SFR_AN, at 0x90
    \   union <unnamed> volatile __sfr _A_P1
@@ -156,50 +148,50 @@ D:\毕设\CC2530-smart_home\Components\hal\target\CC2530SB\hal_DS18B20.c
    \   unsigned char volatile __sfr P1DIR
    \                     P1DIR:
    \   000000                DS 1
-     27          #include "hal_types.h"
-     28          #include "hal_mcu.h"
+     19          #include "hal_types.h"
+     20          #include "hal_mcu.h"
+     21          
+     22          // 引脚宏定义, 输入/输出是针对MCU而言
+     23          #define SET_DS18B20_PIN_HIGH    (P1_1 = 1)
+     24          #define SET_DS18B20_PIN_LOW     (P1_1 = 0)
+     25          #define SET_DS18B20_PIN_INPUT   (P1DIR &= ~0x02)
+     26          #define SET_DS18B20_PIN_OUTPUT  (P1DIR |= 0x02)
+     27          #define GET_DS18B20_PIN_DATA    (P1_1)
+     28          
      29          
-     30          // 引脚宏定义, 输入/输出是针对MCU而言
-     31          #define SET_DS18B20_PIN_HIGH    (P1_1 = 1)
-     32          #define SET_DS18B20_PIN_LOW     (P1_1 = 0)
-     33          #define SET_DS18B20_PIN_INPUT   (P1DIR &= ~0x02)
-     34          #define SET_DS18B20_PIN_OUTPUT  (P1DIR |= 0x02)
-     35          #define GET_DS18B20_PIN_DATA    (P1_1)
-     36          
-     37          
-     38          // DS18B20相关命令
-     39          #define CONVERT_T_CMD           0x44
-     40          #define SKIP_ROM_CMD            0xCC
-     41          #define READ_SCRATCHPAD_CMD     0xBE
-     42          #define WRITE_SCRATCHPAD_CMD    0x4E
-     43          
-     44          /*****************************************************************************
-     45           * @fn          HalDs18b20DelayNus
-     46           *
-     47           * @brief       裸机条件下、时钟频率为32MHz时实现N个微秒的延时(不精确).
-     48           *
-     49           * @param       n--延时长度
-     50           *
-     51           * @return      none
-     52           */
+     30          // DS18B20相关命令
+     31          #define CONVERT_T_CMD           0x44
+     32          #define SKIP_ROM_CMD            0xCC
+     33          #define READ_SCRATCHPAD_CMD     0xBE
+     34          #define WRITE_SCRATCHPAD_CMD    0x4E
+     35          
+     36          /*****************************************************************************
+     37           * @fn          HalDs18b20DelayNus
+     38           *
+     39           * @brief       裸机条件下、时钟频率为32MHz时实现N个微秒的延时(不精确).
+     40           *
+     41           * @param       n--延时长度
+     42           *
+     43           * @return      none
+     44           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-     53          void HalDs18b20DelayNus(uint16 cnt)
+     45          void HalDs18b20DelayNus(uint16 cnt)
    \                     HalDs18b20DelayNus:
-     54          {
+     46          {
    \   000000                ; Saved register size: 0
    \   000000                ; Auto size: 0
    \   000000   8003         SJMP    ??HalDs18b20DelayNus_0
-     55              while (cnt--)
-     56              {
-     57                  asm("NOP");  
+     47              while (cnt--)
+     48              {
+     49                  asm("NOP");  
    \                     ??HalDs18b20DelayNus_1:
    \   000002   00           NOP
-     58                  asm("NOP");
+     50                  asm("NOP");
    \   000003   00           NOP
-     59                  asm("NOP");
+     51                  asm("NOP");
    \   000004   00           NOP
-     60              }
+     52              }
    \                     ??HalDs18b20DelayNus_0:
    \   000005   EA           MOV     A,R2
    \   000006   F8           MOV     R0,A
@@ -214,80 +206,80 @@ D:\毕设\CC2530-smart_home\Components\hal\target\CC2530SB\hal_DS18B20.c
    \   000011   E8           MOV     A,R0
    \   000012   49           ORL     A,R1
    \   000013   70ED         JNZ     ??HalDs18b20DelayNus_1
-     61          }
+     53          }
    \   000015   02....       LJMP    ?BRET
-     62          
-     63          /*****************************************************************************
-     64           * @fn          DS18B20_Init
-     65           *
-     66           * @brief       对DS18B20进行复位操作.
-     67           *
-     68           * @param       none
-     69           *
-     70           * @return      1--成功, 0--失败
-     71           */
+     54          
+     55          /*****************************************************************************
+     56           * @fn          DS18B20_Init
+     57           *
+     58           * @brief       对DS18B20进行复位操作.
+     59           *
+     60           * @param       none
+     61           *
+     62           * @return      1--成功, 0--失败
+     63           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-     72          uint8 DS18B20_Init(void)
+     64          uint8 DS18B20_Init(void)
    \                     DS18B20_Init:
-     73          {
+     65          {
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
-     74              uint8 opSts = 0;
-     75              halIntState_t intState;
-     76              
-     77              SET_DS18B20_PIN_OUTPUT;
+     66              uint8 opSts = 0;
+     67              halIntState_t intState;
+     68              
+     69              SET_DS18B20_PIN_OUTPUT;
    \   000005   43FE02       ORL     0xfe,#0x2
-     78              SET_DS18B20_PIN_LOW;
+     70              SET_DS18B20_PIN_LOW;
    \   000008   C291         CLR     0x90.1
-     79              HalDs18b20DelayNus(750);    // 480us以上的低电平复位脉冲
+     71              HalDs18b20DelayNus(750);    // 480us以上的低电平复位脉冲
    \   00000A                ; Setup parameters for call to function HalDs18b20DelayNus
    \   00000A   7AEE         MOV     R2,#-0x12
    \   00000C   7B02         MOV     R3,#0x2
    \   00000E   12....       LCALL   ?Subroutine2 & 0xFFFF
-     80              
-     81              SET_DS18B20_PIN_HIGH; 
-     82              SET_DS18B20_PIN_INPUT;      // 高电平持续存在, 等待DS18B20拉低总线
-     83              
-     84              HAL_ENTER_CRITICAL_SECTION(intState);
+     72              
+     73              SET_DS18B20_PIN_HIGH; 
+     74              SET_DS18B20_PIN_INPUT;      // 高电平持续存在, 等待DS18B20拉低总线
+     75              
+     76              HAL_ENTER_CRITICAL_SECTION(intState);
    \                     ??CrossCallReturnLabel_2:
    \   000011   E5A8         MOV     A,0xa8
    \   000013   FE           MOV     R6,A
    \   000014   C2AF         CLR     0xa8.7
-     85              HalDs18b20DelayNus(80);     // 等待80us
+     77              HalDs18b20DelayNus(80);     // 等待80us
    \   000016                ; Setup parameters for call to function HalDs18b20DelayNus
    \   000016   7A50         MOV     R2,#0x50
    \   000018   7B00         MOV     R3,#0x0
    \   00001A   12....       LCALL   ??HalDs18b20DelayNus?relay
-     86              if(GET_DS18B20_PIN_DATA)    // DS18B20发出60~240us的低电平存在脉冲  
+     78              if(GET_DS18B20_PIN_DATA)    // DS18B20发出60~240us的低电平存在脉冲  
    \   00001D   E590         MOV     A,0x90
    \   00001F   FF           MOV     R7,A
-     87              {
-     88                  opSts = 0;  // 初始化失败, 总线上没有设备
-     89              }
-     90              else
-     91              {
-     92                  opSts = 1;  // 初始化成功, 总线上有设备拉低总线
-     93              }
-     94              HAL_EXIT_CRITICAL_SECTION(intState);
+     79              {
+     80                  opSts = 0;  // 初始化失败, 总线上没有设备
+     81              }
+     82              else
+     83              {
+     84                  opSts = 1;  // 初始化成功, 总线上有设备拉低总线
+     85              }
+     86              HAL_EXIT_CRITICAL_SECTION(intState);
    \   000020   EE           MOV     A,R6
    \   000021   A2E7         MOV     C,0xE0 /* A   */.7
    \   000023   92AF         MOV     0xa8.7,C
-     95              
-     96              // 释放总线   
-     97              SET_DS18B20_PIN_OUTPUT;
+     87              
+     88              // 释放总线   
+     89              SET_DS18B20_PIN_OUTPUT;
    \   000025   43FE02       ORL     0xfe,#0x2
-     98              SET_DS18B20_PIN_HIGH;
+     90              SET_DS18B20_PIN_HIGH;
    \   000028   D291         SETB    0x90.1
-     99              HalDs18b20DelayNus(500);
+     91              HalDs18b20DelayNus(500);
    \   00002A                ; Setup parameters for call to function HalDs18b20DelayNus
    \   00002A   7AF4         MOV     R2,#-0xc
    \   00002C   7B01         MOV     R3,#0x1
    \   00002E   12....       LCALL   ??HalDs18b20DelayNus?relay
-    100              
-    101              return(opSts);
+     92              
+     93              return(opSts);
    \   000031   EF           MOV     A,R7
    \   000032   A2E1         MOV     C,0xE0 /* A   */.1
    \   000034   B3           CPL     C
@@ -297,7 +289,7 @@ D:\毕设\CC2530-smart_home\Components\hal\target\CC2530SB\hal_DS18B20.c
    \   000039                REQUIRE P1DIR
    \   000039                REQUIRE _A_P1
    \   000039                REQUIRE _A_IEN0
-    102          }
+     94          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine0:
@@ -316,88 +308,88 @@ D:\毕设\CC2530-smart_home\Components\hal\target\CC2530SB\hal_DS18B20.c
    \   000003   D291         SETB    0x90.1
    \   000005   53FEFD       ANL     0xfe,#0xfd
    \   000008   22           RET
-    103          
-    104          /*****************************************************************************
-    105           * @fn          DS18B20_WriteCMD
-    106           *
-    107           * @brief       向DS18B20写入一个字节的数据, 低位先发送.
-    108           *
-    109           * @param       wdata--写入的数据
-    110           *
-    111           * @return      none
-    112           */
+     95          
+     96          /*****************************************************************************
+     97           * @fn          DS18B20_WriteCMD
+     98           *
+     99           * @brief       向DS18B20写入一个字节的数据, 低位先发送.
+    100           *
+    101           * @param       wdata--写入的数据
+    102           *
+    103           * @return      none
+    104           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    113          void DS18B20_WriteCMD(uint8 wdata)
+    105          void DS18B20_WriteCMD(uint8 wdata)
    \                     DS18B20_WriteCMD:
-    114          {
+    106          {
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
    \   000005   E9           MOV     A,R1
    \   000006   FF           MOV     R7,A
-    115              uint8 i;
-    116              halIntState_t intState;
-    117              
-    118              for (i = 0; i < 8; i++)
+    107              uint8 i;
+    108              halIntState_t intState;
+    109              
+    110              for (i = 0; i < 8; i++)
    \   000007   7E08         MOV     R6,#0x8
-    119              {
-    120                  HAL_ENTER_CRITICAL_SECTION(intState);
+    111              {
+    112                  HAL_ENTER_CRITICAL_SECTION(intState);
    \                     ??DS18B20_WriteCMD_0:
    \   000009   A2AF         MOV     C,0xa8.7
    \   00000B   E4           CLR     A
    \   00000C   33           RLC     A
    \   00000D   F5..         MOV     ?V0 + 0,A
    \   00000F   C2AF         CLR     0xa8.7
-    121                  SET_DS18B20_PIN_LOW;
+    113                  SET_DS18B20_PIN_LOW;
    \   000011   C291         CLR     0x90.1
-    122                  HalDs18b20DelayNus(15);            
+    114                  HalDs18b20DelayNus(15);            
    \   000013                ; Setup parameters for call to function HalDs18b20DelayNus
    \   000013   7A0F         MOV     R2,#0xf
    \   000015   7B00         MOV     R3,#0x0
    \   000017   12....       LCALL   ??HalDs18b20DelayNus?relay
-    123                  
-    124                  if(wdata & 0x01)    
+    115                  
+    116                  if(wdata & 0x01)    
    \   00001A   EF           MOV     A,R7
    \   00001B   A2E0         MOV     C,0xE0 /* A   */.0
    \   00001D   5004         JNC     ??DS18B20_WriteCMD_1
-    125                  {
-    126                      SET_DS18B20_PIN_HIGH;
+    117                  {
+    118                      SET_DS18B20_PIN_HIGH;
    \   00001F   D291         SETB    0x90.1
    \   000021   8002         SJMP    ??DS18B20_WriteCMD_2
-    127                  }
-    128                  else
-    129                  {
-    130                      SET_DS18B20_PIN_LOW;
+    119                  }
+    120                  else
+    121                  {
+    122                      SET_DS18B20_PIN_LOW;
    \                     ??DS18B20_WriteCMD_1:
    \   000023   C291         CLR     0x90.1
-    131                  }
-    132                  
-    133                  wdata >>= 1;
+    123                  }
+    124                  
+    125                  wdata >>= 1;
    \                     ??DS18B20_WriteCMD_2:
    \   000025   C3           CLR     C
    \   000026   13           RRC     A
    \   000027   FF           MOV     R7,A
-    134                  HalDs18b20DelayNus(30); // DS18B20采样时长15~45us
+    126                  HalDs18b20DelayNus(30); // DS18B20采样时长15~45us
    \   000028                ; Setup parameters for call to function HalDs18b20DelayNus
    \   000028   12....       LCALL   ?Subroutine1 & 0xFFFF
-    135                  HAL_EXIT_CRITICAL_SECTION(intState);
-    136                  
-    137                  // 释放总线
-    138                  SET_DS18B20_PIN_HIGH;
+    127                  HAL_EXIT_CRITICAL_SECTION(intState);
+    128                  
+    129                  // 释放总线
+    130                  SET_DS18B20_PIN_HIGH;
    \                     ??CrossCallReturnLabel_0:
    \   00002B   D291         SETB    0x90.1
-    139                  HalDs18b20DelayNus(10); // 总线恢复时间 
+    131                  HalDs18b20DelayNus(10); // 总线恢复时间 
    \   00002D                ; Setup parameters for call to function HalDs18b20DelayNus
    \   00002D   7A0A         MOV     R2,#0xa
    \   00002F   7B00         MOV     R3,#0x0
    \   000031   12....       LCALL   ??HalDs18b20DelayNus?relay
-    140              }
+    132              }
    \   000034   1E           DEC     R6
    \   000035   EE           MOV     A,R6
    \   000036   70D1         JNZ     ??DS18B20_WriteCMD_0
-    141          }
+    133          }
    \   000038   80..         SJMP    ??Subroutine3_0
    \   00003A                REQUIRE _A_IEN0
    \   00003A                REQUIRE _A_P1
@@ -411,133 +403,133 @@ D:\毕设\CC2530-smart_home\Components\hal\target\CC2530SB\hal_DS18B20.c
    \   000009   A2E0         MOV     C,0xE0 /* A   */.0
    \   00000B   92AF         MOV     0xa8.7,C
    \   00000D   22           RET
-    142          
-    143          /*****************************************************************************
-    144           * @fn          DS18B20_ReadByte
-    145           *
-    146           * @brief       从DS18B20读取一个字节的数据.
-    147           *
-    148           * @param       none
-    149           *
-    150           * @return      读出的一个字节数据
-    151           */
+    134          
+    135          /*****************************************************************************
+    136           * @fn          DS18B20_ReadByte
+    137           *
+    138           * @brief       从DS18B20读取一个字节的数据.
+    139           *
+    140           * @param       none
+    141           *
+    142           * @return      读出的一个字节数据
+    143           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    152          uint8 DS18B20_ReadByte(void)
+    144          uint8 DS18B20_ReadByte(void)
    \                     DS18B20_ReadByte:
-    153          {
+    145          {
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
-    154              uint8 bitCnt;
-    155              halIntState_t intState;
-    156              uint8 tmpData = 0;
+    146              uint8 bitCnt;
+    147              halIntState_t intState;
+    148              uint8 tmpData = 0;
    \   000005   7E00         MOV     R6,#0x0
-    157              
-    158              for (bitCnt = 0; bitCnt < 8; bitCnt++)
+    149              
+    150              for (bitCnt = 0; bitCnt < 8; bitCnt++)
    \   000007   7F08         MOV     R7,#0x8
-    159              {
-    160                  HAL_ENTER_CRITICAL_SECTION(intState);
+    151              {
+    152                  HAL_ENTER_CRITICAL_SECTION(intState);
    \                     ??DS18B20_ReadByte_0:
    \   000009   A2AF         MOV     C,0xa8.7
    \   00000B   E4           CLR     A
    \   00000C   33           RLC     A
    \   00000D   F5..         MOV     ?V0 + 0,A
    \   00000F   C2AF         CLR     0xa8.7
-    161                  tmpData >>= 1;
+    153                  tmpData >>= 1;
    \   000011   EE           MOV     A,R6
    \   000012   13           RRC     A
    \   000013   FE           MOV     R6,A
-    162                  
-    163                  // 准备读数据
-    164                  SET_DS18B20_PIN_OUTPUT;
+    154                  
+    155                  // 准备读数据
+    156                  SET_DS18B20_PIN_OUTPUT;
    \   000014   43FE02       ORL     0xfe,#0x2
-    165                  SET_DS18B20_PIN_LOW;
+    157                  SET_DS18B20_PIN_LOW;
    \   000017   C291         CLR     0x90.1
-    166                  HalDs18b20DelayNus(2);  // 延时2us
+    158                  HalDs18b20DelayNus(2);  // 延时2us
    \   000019                ; Setup parameters for call to function HalDs18b20DelayNus
    \   000019   7A02         MOV     R2,#0x2
    \   00001B   7B00         MOV     R3,#0x0
    \   00001D   12....       LCALL   ?Subroutine2 & 0xFFFF
-    167                  // 等待设备响应
-    168                  SET_DS18B20_PIN_HIGH;
-    169                  SET_DS18B20_PIN_INPUT;
-    170                  HalDs18b20DelayNus(15); // 主机延时15us后采样数据
+    159                  // 等待设备响应
+    160                  SET_DS18B20_PIN_HIGH;
+    161                  SET_DS18B20_PIN_INPUT;
+    162                  HalDs18b20DelayNus(15); // 主机延时15us后采样数据
    \                     ??CrossCallReturnLabel_3:
    \   000020                ; Setup parameters for call to function HalDs18b20DelayNus
    \   000020   7A0F         MOV     R2,#0xf
    \   000022   7B00         MOV     R3,#0x0
    \   000024   12....       LCALL   ??HalDs18b20DelayNus?relay
-    171                  if (GET_DS18B20_PIN_DATA)   
+    163                  if (GET_DS18B20_PIN_DATA)   
    \   000027   A291         MOV     C,0x90.1
    \   000029   5004         JNC     ??DS18B20_ReadByte_1
-    172                  {
-    173                      tmpData |= 0x80;
+    164                  {
+    165                      tmpData |= 0x80;
    \   00002B   EE           MOV     A,R6
    \   00002C   D2E7         SETB    0xE0 /* A   */.7
    \   00002E   FE           MOV     R6,A
-    174                  }
-    175                  HalDs18b20DelayNus(30); // 等待从机发送数据结束
+    166                  }
+    167                  HalDs18b20DelayNus(30); // 等待从机发送数据结束
    \                     ??DS18B20_ReadByte_1:
    \   00002F                ; Setup parameters for call to function HalDs18b20DelayNus
    \   00002F   12....       LCALL   ?Subroutine1 & 0xFFFF
-    176                  HAL_EXIT_CRITICAL_SECTION(intState);
-    177                  
-    178                  // 设置引脚为输出, 然后释放总线
-    179                  SET_DS18B20_PIN_OUTPUT;
+    168                  HAL_EXIT_CRITICAL_SECTION(intState);
+    169                  
+    170                  // 设置引脚为输出, 然后释放总线
+    171                  SET_DS18B20_PIN_OUTPUT;
    \                     ??CrossCallReturnLabel_1:
    \   000032   43FE02       ORL     0xfe,#0x2
-    180                  SET_DS18B20_PIN_HIGH;
+    172                  SET_DS18B20_PIN_HIGH;
    \   000035   D291         SETB    0x90.1
-    181                  HalDs18b20DelayNus(10); // 总线恢复时间           
+    173                  HalDs18b20DelayNus(10); // 总线恢复时间           
    \   000037                ; Setup parameters for call to function HalDs18b20DelayNus
    \   000037   7A0A         MOV     R2,#0xa
    \   000039   7B00         MOV     R3,#0x0
    \   00003B   12....       LCALL   ??HalDs18b20DelayNus?relay
-    182              }
+    174              }
    \   00003E   1F           DEC     R7
    \   00003F   EF           MOV     A,R7
    \   000040   70C7         JNZ     ??DS18B20_ReadByte_0
-    183          
-    184              return  tmpData;
+    175          
+    176              return  tmpData;
    \   000042   EE           MOV     A,R6
    \   000043   80..         SJMP    ?Subroutine0
    \   000045                REQUIRE _A_IEN0
    \   000045                REQUIRE P1DIR
    \   000045                REQUIRE _A_P1
-    185          }
-    186          
-    187          /*****************************************************************************
-    188           * @fn          DS18B20_ReadTemp
-    189           *
-    190           * @brief       从DS18B20的ScratchPad读取温度转换结果.
-    191           *
-    192           * @param       none
-    193           *
-    194           * @return      读取的温度数值
-    195           */
+    177          }
+    178          
+    179          /*****************************************************************************
+    180           * @fn          DS18B20_ReadTemp
+    181           *
+    182           * @brief       从DS18B20的ScratchPad读取温度转换结果.
+    183           *
+    184           * @param       none
+    185           *
+    186           * @return      读取的温度数值
+    187           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    196          uint16 DS18B20_ReadTemp(void)
+    188          uint16 DS18B20_ReadTemp(void)
    \                     DS18B20_ReadTemp:
-    197          {
+    189          {
    \   000000   74F6         MOV     A,#-0xa
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 10
    \   000005                ; Auto size: 0
-    198              uint8   tmpLowByte;
-    199              uint16  tmpData;
-    200              
-    201              tmpLowByte  = DS18B20_ReadByte();           // 读低字节
+    190              uint8   tmpLowByte;
+    191              uint16  tmpData;
+    192              
+    193              tmpLowByte  = DS18B20_ReadByte();           // 读低字节
    \   000005                ; Setup parameters for call to function DS18B20_ReadByte
    \   000005   12....       LCALL   ??DS18B20_ReadByte?relay
    \   000008   E9           MOV     A,R1
    \   000009   F5..         MOV     ?V0 + 0,A
-    202              tmpData     = DS18B20_ReadByte() & 0x00FF;  // 读高字节
-    203              tmpData     = ((tmpData << 8) | tmpLowByte);
-    204              
-    205              return  tmpData;
+    194              tmpData     = DS18B20_ReadByte() & 0x00FF;  // 读高字节
+    195              tmpData     = ((tmpData << 8) | tmpLowByte);
+    196              
+    197              return  tmpData;
    \   00000B                ; Setup parameters for call to function DS18B20_ReadByte
    \   00000B   12....       LCALL   ??DS18B20_ReadByte?relay
    \   00000E   AA..         MOV     R2,?V0 + 0
@@ -545,91 +537,91 @@ D:\毕设\CC2530-smart_home\Components\hal\target\CC2530SB\hal_DS18B20.c
    \   000011   FB           MOV     R3,A
    \   000012   7F02         MOV     R7,#0x2
    \   000014   02....       LJMP    ?BANKED_LEAVE_XDATA
-    206          }
-    207          
-    208          /*****************************************************************************
-    209           * @fn          DS18B20_ConvertTemp
-    210           *
-    211           * @brief       控制DS18B20完成一次温度转换.
-    212           *
-    213           * @param       none
-    214           *
-    215           * @return      测量的温度数值, 后4位是小数, 前面的5位空, 中间的7位是整数部分.
-    216           *              返回0表示出错, 这个根据实际情况可以修改合适的数值.
-    217           */
+    198          }
+    199          
+    200          /*****************************************************************************
+    201           * @fn          DS18B20_ConvertTemp
+    202           *
+    203           * @brief       控制DS18B20完成一次温度转换.
+    204           *
+    205           * @param       none
+    206           *
+    207           * @return      测量的温度数值, 后4位是小数, 前面的5位空, 中间的7位是整数部分.
+    208           *              返回0表示出错, 这个根据实际情况可以修改合适的数值.
+    209           */
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    218          uint16 DS18B20_ConvertTemp(void)
+    210          uint16 DS18B20_ConvertTemp(void)
    \                     DS18B20_ConvertTemp:
-    219          {
+    211          {
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
-    220              uint8 timeCnt; 
-    221          
-    222              // 初始化设备
-    223              if (0 == DS18B20_Init())
+    212              uint8 timeCnt; 
+    213          
+    214              // 初始化设备
+    215              if (0 == DS18B20_Init())
    \   000005                ; Setup parameters for call to function DS18B20_Init
    \   000005   12....       LCALL   ??DS18B20_Init?relay
    \   000008   E9           MOV     A,R1
    \   000009   7006         JNZ     ??DS18B20_ConvertTemp_0
-    224              {
-    225                  return(0);  // 初始化失败
+    216              {
+    217                  return(0);  // 初始化失败
    \                     ??DS18B20_ConvertTemp_1:
    \   00000B   7A00         MOV     R2,#0x0
    \   00000D   7B00         MOV     R3,#0x0
    \   00000F   802A         SJMP    ??DS18B20_ConvertTemp_2
-    226              }
-    227              
-    228              DS18B20_WriteCMD(SKIP_ROM_CMD);         // 跳过ROM命令
+    218              }
+    219              
+    220              DS18B20_WriteCMD(SKIP_ROM_CMD);         // 跳过ROM命令
    \                     ??DS18B20_ConvertTemp_0:
    \   000011                ; Setup parameters for call to function DS18B20_WriteCMD
    \   000011   79CC         MOV     R1,#-0x34
    \   000013   12....       LCALL   ??DS18B20_WriteCMD?relay
-    229              DS18B20_WriteCMD(CONVERT_T_CMD);        // 温度转换命令
+    221              DS18B20_WriteCMD(CONVERT_T_CMD);        // 温度转换命令
    \   000016                ; Setup parameters for call to function DS18B20_WriteCMD
    \   000016   7944         MOV     R1,#0x44
    \   000018   12....       LCALL   ??DS18B20_WriteCMD?relay
-    230              // 延时800ms以上, 确保转换完成
-    231              for (timeCnt=0; timeCnt<80; timeCnt++)  
+    222              // 延时800ms以上, 确保转换完成
+    223              for (timeCnt=0; timeCnt<80; timeCnt++)  
    \   00001B   7E50         MOV     R6,#0x50
-    232              {
-    233                  HalDs18b20DelayNus(10000);          //  延时10ms
+    224              {
+    225                  HalDs18b20DelayNus(10000);          //  延时10ms
    \                     ??DS18B20_ConvertTemp_3:
    \   00001D                ; Setup parameters for call to function HalDs18b20DelayNus
    \   00001D   7A10         MOV     R2,#0x10
    \   00001F   7B27         MOV     R3,#0x27
    \   000021   12....       LCALL   ??HalDs18b20DelayNus?relay
-    234              }
+    226              }
    \   000024   1E           DEC     R6
    \   000025   EE           MOV     A,R6
    \   000026   70F5         JNZ     ??DS18B20_ConvertTemp_3
-    235              
-    236              // 再次复位设备
-    237              if (0 == DS18B20_Init())
+    227              
+    228              // 再次复位设备
+    229              if (0 == DS18B20_Init())
    \   000028                ; Setup parameters for call to function DS18B20_Init
    \   000028   12....       LCALL   ??DS18B20_Init?relay
    \   00002B   E9           MOV     A,R1
    \   00002C   60DD         JZ      ??DS18B20_ConvertTemp_1
-    238              {
-    239                  return(0);  // 初始化失败
-    240              }
-    241              
-    242              DS18B20_WriteCMD(SKIP_ROM_CMD);         // 跳过ROM命令
+    230              {
+    231                  return(0);  // 初始化失败
+    232              }
+    233              
+    234              DS18B20_WriteCMD(SKIP_ROM_CMD);         // 跳过ROM命令
    \   00002E                ; Setup parameters for call to function DS18B20_WriteCMD
    \   00002E   79CC         MOV     R1,#-0x34
    \   000030   12....       LCALL   ??DS18B20_WriteCMD?relay
-    243              DS18B20_WriteCMD(READ_SCRATCHPAD_CMD);  // 读取转换结果
+    235              DS18B20_WriteCMD(READ_SCRATCHPAD_CMD);  // 读取转换结果
    \   000033                ; Setup parameters for call to function DS18B20_WriteCMD
    \   000033   79BE         MOV     R1,#-0x42
    \   000035   12....       LCALL   ??DS18B20_WriteCMD?relay
-    244              return(DS18B20_ReadTemp());             // 返回温度值
+    236              return(DS18B20_ReadTemp());             // 返回温度值
    \   000038                ; Setup parameters for call to function DS18B20_ReadTemp
    \   000038   12....       LCALL   ??DS18B20_ReadTemp?relay
    \                     ??DS18B20_ConvertTemp_2:
    \   00003B   02....       LJMP    ??Subroutine3_0 & 0xFFFF
-    245          }
+    237          }
 
    \                                 In  segment BANK_RELAYS, align 1
    \                     ??HalDs18b20DelayNus?relay:

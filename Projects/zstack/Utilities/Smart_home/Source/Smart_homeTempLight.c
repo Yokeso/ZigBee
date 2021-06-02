@@ -44,6 +44,13 @@
 //3.23  屏幕显示的小bug
 #define SMART_HOME_SEND_DELAY   3000
 #define SMART_HOME_MATCH_DELAY  1000
+
+/*********************************************************************
+ * GLOBAL VARIABLES
+ */
+
+uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
+byte Coordinator_Msg[TEMPLIGHTMSG_LEN];
 /*********************************************************************
  * CONSTANTS
  */
@@ -126,12 +133,7 @@ afAddrType_t Coordinator_DstAddr;
  * TYPEDEFS
  */
 
-/*********************************************************************
- * GLOBAL VARIABLES
- */
 
-uint8 Smart_home_TaskID;    // Task ID for internal task/event processing.
-byte Coordinator_Msg[TEMPLIGHTMSG_LEN];
 
 /*********************************************************************
  * EXTERNAL VARIABLES
@@ -173,7 +175,8 @@ void Smart_home_Init( uint8 task_id )
   halUARTCfg_t uartConfig;
 
   Smart_home_TaskID = task_id;
-  Smart_home_MsgID = 0;
+  Smart_home_MsgID = 0x02;
+  uint8 i;
 
   // Register the endpoint/interface description with the AF
   afRegister( (endPointDesc_t *)&Smart_home_epDesc );
@@ -197,6 +200,11 @@ void Smart_home_Init( uint8 task_id )
   Coordinator_DstAddr.addrMode = (afAddrMode_t)AddrNotPresent;
   Coordinator_DstAddr.endPoint = 0;
   Coordinator_DstAddr.addr.shortAddr = 0;
+  
+  for(i=0;i<TEMPLIGHTMSG_LEN;i++)
+  {
+    Coordinator_Msg[i] = 0;
+  }
   
   
   ZDO_RegisterForZDOMsg( Smart_home_TaskID, End_Device_Bind_rsp );
@@ -303,7 +311,7 @@ static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
       if ( ZDO_ParseBindRsp( inMsg ) == ZSuccess )
       {
 #if (HAL_UART == TRUE)
-        HalUARTWrite(HAL_UART_PORT_0, "Bind Success!\n",   strlen("Bind Success!\n"));
+        HalUARTWrite(HAL_UART_PORT_0, "Bind Success!\n",   osal_strlen("Bind Success!\n"));
 #endif
       }
       break;
@@ -323,7 +331,7 @@ static void Smart_home_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
           osal_stop_timerEx( Smart_home_TaskID, SMART_HOME_MATCHRSP_EVT );
   
 #if (HAL_UART == TRUE)
-          HalUARTWrite(HAL_UART_PORT_0, "Match Success!\n",   strlen("Match Success!\n"));
+          HalUARTWrite(HAL_UART_PORT_0, "Match Success!\n",   osal_strlen("Match Success!\n"));
 #endif
           // 开启定时发送数据给协调器的事件
           osal_start_reload_timer( Smart_home_TaskID, SMART_HOME_SEND_MSG_EVT, 
@@ -412,16 +420,12 @@ static void Smart_home_Send(void)
 
 #if HAL_UART==TRUE
   //串口发送原数据，解析工作交给上位机处理
-  HalUARTWrite(HAL_UART_PORT_0, Sendbuf, strlen(Sendbuf));
+  HalUARTWrite(HAL_UART_PORT_0, Sendbuf, osal_strlen(Sendbuf));
 #endif   
   
   do{
-    // put the sequence number in the message
-    tmp = HI_UINT8( Smart_home_MsgID );
-    tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
-    Coordinator_Msg[2] = tmp;
-    tmp = LO_UINT8( Smart_home_MsgID );
-    tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
+    tmp = Smart_home_MsgID;
+    //tmp += (tmp <= 9) ? ('0') : ('A' - 0x0A);
     Coordinator_Msg[3] = tmp;
     
     // 发送给协调器命令 

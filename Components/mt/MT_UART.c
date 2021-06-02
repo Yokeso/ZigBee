@@ -21,7 +21,7 @@
   its documentation for any purpose.
 
   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-  PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+  PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
   INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
@@ -111,7 +111,7 @@ void MT_UartInit ()
   uartConfig.rx.maxBufSize        = MT_UART_DEFAULT_MAX_RX_BUFF;
   uartConfig.tx.maxBufSize        = MT_UART_DEFAULT_MAX_TX_BUFF;
   uartConfig.idleTimeout          = MT_UART_DEFAULT_IDLE_TIMEOUT;
-  uartConfig.intEnable            = TRUE;
+  uartConfig.intEnable            = FALSE;//TRUE;
 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
   uartConfig.callBackFunc         = MT_UartProcessZToolData;
 #elif defined (ZAPP_P1) || defined (ZAPP_P2)
@@ -194,6 +194,7 @@ byte MT_UartCalcFCS( uint8 *msg_ptr, uint8 len )
  ***************************************************************************************************/
 void MT_UartProcessZToolData ( uint8 port, uint8 event )
 {
+  /*
   uint8  ch;
   uint8  bytesInRxBuffer;
   
@@ -215,13 +216,13 @@ void MT_UartProcessZToolData ( uint8 port, uint8 event )
 
         tempDataLen = 0;
 
-        /* Allocate memory for the data */
+        // Allocate memory for the data 
         pMsg = (mtOSALSerialData_t *)osal_msg_allocate( sizeof ( mtOSALSerialData_t ) +
                                                         MT_RPC_FRAME_HDR_SZ + LEN_Token );
 
         if (pMsg)
         {
-          /* Fill up what we can */
+          // Fill up what we can 
           pMsg->hdr.event = CMD_SERIAL_MSG;
           pMsg->msg = (uint8*)(pMsg+1);
           pMsg->msg[MT_RPC_POS_LEN] = LEN_Token;
@@ -241,7 +242,7 @@ void MT_UartProcessZToolData ( uint8 port, uint8 event )
 
       case CMD_STATE2:
         pMsg->msg[MT_RPC_POS_CMD1] = ch;
-        /* If there is no data, skip to FCS state */
+        // If there is no data, skip to FCS state 
         if (LEN_Token)
         {
           state = DATA_STATE;
@@ -254,13 +255,13 @@ void MT_UartProcessZToolData ( uint8 port, uint8 event )
 
       case DATA_STATE:
 
-        /* Fill in the buffer the first byte of the data */
+        // Fill in the buffer the first byte of the data 
         pMsg->msg[MT_RPC_FRAME_HDR_SZ + tempDataLen++] = ch;
 
-        /* Check number of bytes left in the Rx buffer */
+        // Check number of bytes left in the Rx buffer 
         bytesInRxBuffer = Hal_UART_RxBufLen(port);
 
-        /* If the remain of the data is there, read them all, otherwise, just read enough */
+        // If the remain of the data is there, read them all, otherwise, just read enough 
         if (bytesInRxBuffer <= LEN_Token - tempDataLen)
         {
           HalUARTRead (port, &pMsg->msg[MT_RPC_FRAME_HDR_SZ + tempDataLen], bytesInRxBuffer);
@@ -272,7 +273,7 @@ void MT_UartProcessZToolData ( uint8 port, uint8 event )
           tempDataLen += (LEN_Token - tempDataLen);
         }
 
-        /* If number of bytes read is equal to data length, time to move on to FCS */
+        // If number of bytes read is equal to data length, time to move on to FCS 
         if ( tempDataLen == LEN_Token )
             state = FCS_STATE;
 
@@ -282,18 +283,18 @@ void MT_UartProcessZToolData ( uint8 port, uint8 event )
 
         FSC_Token = ch;
 
-        /* Make sure it's correct */
+        // Make sure it's correct 
         if ((MT_UartCalcFCS ((uint8*)&pMsg->msg[0], MT_RPC_FRAME_HDR_SZ + LEN_Token) == FSC_Token))
         {
           osal_msg_send( App_TaskID, (byte *)pMsg );
         }
         else
         {
-          /* deallocate the msg */
+          //deallocate the msg 
           osal_msg_deallocate ( (uint8 *)pMsg );
         }
 
-        /* Reset the state, send or discard the buffers at this point */
+        // Reset the state, send or discard the buffers at this point 
         state = SOP_STATE;
 
         break;
@@ -301,6 +302,35 @@ void MT_UartProcessZToolData ( uint8 port, uint8 event )
       default:
        break;
     }
+  }
+  */
+  uint8 flag=0,i,j=0;   //flagÊÇÅĞ¶ÏÓĞÃ»ÓĞÊÕµ½Êı¾İ£¬j¼ÇÂ¼Êı¾İ³¤¶È
+  uint8 buf[128];     //´®¿Úbuffer×î´ó»º³åÄ¬ÈÏÊÇ128£¬ÎÒÃÇÕâÀïÓÃ128.
+  (void)event;        // Intentionally unreferenced parameter  
+
+  while (Hal_UART_RxBufLen(port)) //¼ì²â´®¿ÚÊı¾İÊÇ·ñ½ÓÊÕÍê³É
+
+  {
+    HalUARTRead (port,&buf[j], 1);  //°ÑÊı¾İ½ÓÊÕ·Åµ½bufÖĞ
+    j++;                           //¼ÇÂ¼×Ö·ûÊı
+    flag=1;                         //ÒÑ¾­´Ó´®¿Ú½ÓÊÕµ½ĞÅÏ¢
+  } 
+
+  if(flag==1)       //ÒÑ¾­´Ó´®¿Ú½ÓÊÕµ½ĞÅÏ¢
+
+  {     /* Allocate memory for the data */
+	    //·ÖÅäÄÚ´æ¿Õ¼ä£¬Îª»ú¹¹ÌåÄÚÈİ+Êı¾İÄÚÈİ+1¸ö¼ÇÂ¼³¤¶ÈµÄÊı¾İ
+     pMsg = (mtOSALSerialData_t *)osal_msg_allocate( sizeof  
+          ( mtOSALSerialData_t )+j+1);
+     //ÊÂ¼şºÅÓÃÔ­À´µÄCMD_SERIAL_MSG
+     pMsg->hdr.event = CMD_SERIAL_MSG;
+     pMsg->msg = (uint8*)(pMsg+1);  // °ÑÊı¾İ¶¨Î»µ½½á¹¹ÌåÊı¾İ²¿·Ö
+     pMsg->msg [0]= j;              //¸øÉÏ²ãµÄÊı¾İµÚÒ»¸öÊÇ³¤¶È
+     for(i=0;i<j;i++)                //´ÓµÚ¶ş¸ö¿ªÊ¼¼ÇÂ¼Êı¾İ 
+       pMsg->msg [i+1]= buf[i];   
+     osal_msg_send( App_TaskID, (byte *)pMsg );  //µÇ¼ÇÈÎÎñ£¬·¢ÍùÉÏ²ã
+  /* deallocate the msg */
+     osal_msg_deallocate ( (uint8 *)pMsg );      //ÊÍ·ÅÄÚ´æ
   }
 }
 

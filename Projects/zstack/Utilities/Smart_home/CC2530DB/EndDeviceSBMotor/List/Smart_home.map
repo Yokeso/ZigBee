@@ -10,7 +10,7 @@ Warning[w6]: Type conflict for external/entry "strlen", in module Smart_homeMoto
 #                                                                              #
 #      IAR Universal Linker V5.0.2.5/W32                                       #
 #                                                                              #
-#           Link time     =  06/May/2021  15:29:48                             #
+#           Link time     =  03/Jun/2021  00:02:12                             #
 #           Target CPU    =  x51                                               #
 #           List file     =  D:\±œ…Ë\CC2530-smart_home\Projects\zstack\Utiliti #
 #                            es\Smart_home\CC2530DB\EndDeviceSBMotor\List\Smar #
@@ -17409,9 +17409,19 @@ XDATA_ID
 
   SEGMENTS IN THE MODULE
   ======================
+XDATA_Z
+  Relative segment, address: XDATA 000004B2 - 000004B2 (0x1 bytes), align: 0
+  Segment part 8.             Intra module refs:   Smart_home_Init
+                                                   Smart_home_ProcessEvent
+                                                   Smart_home_ProcessZDOMsgs
+                                                   Smart_home_epDesc
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           Smart_home_TaskID       000004B2 
+    -------------------------------------------------------------------------
 <XDATA_ROM_C> 1 (was XDATA_ROM_C)
   Relative segment, address: CONST 00008186 - 00008187 (0x2 bytes), align: 0
-  Segment part 8.             Intra module refs:   Smart_home_ProcessEvent
+  Segment part 9.             Intra module refs:   Smart_home_ProcessEvent
                                                    Smart_home_SimpleDesc
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
@@ -17420,7 +17430,7 @@ XDATA_ID
     -------------------------------------------------------------------------
 <XDATA_ROM_C> 1 (was XDATA_ROM_C)
   Relative segment, address: CONST 0000818A - 0000818B (0x2 bytes), align: 0
-  Segment part 9.             Intra module refs:   Smart_home_ProcessEvent
+  Segment part 10.            Intra module refs:   Smart_home_ProcessEvent
                                                    Smart_home_SimpleDesc
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
@@ -17429,37 +17439,27 @@ XDATA_ID
     -------------------------------------------------------------------------
 <XDATA_ROM_C> 1 (was XDATA_ROM_C)
   Relative segment, address: CONST 000080BC - 000080C7 (0xc bytes), align: 0
-  Segment part 10.            Intra module refs:   Smart_home_epDesc
+  Segment part 11.            Intra module refs:   Smart_home_epDesc
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
            Smart_home_SimpleDesc   000080BC 
     -------------------------------------------------------------------------
 <XDATA_ROM_C> 1 (was XDATA_ROM_C)
   Relative segment, address: CONST 00008136 - 0000813B (0x6 bytes), align: 0
-  Segment part 11.            Intra module refs:   Smart_home_Init
+  Segment part 12.            Intra module refs:   Smart_home_Init
                                                    Smart_home_ProcessEvent
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
            Smart_home_epDesc       00008136 
     -------------------------------------------------------------------------
 XDATA_Z
-  Relative segment, address: XDATA 000004B2 - 000004BD (0xc bytes), align: 0
-  Segment part 12.            Intra module refs:   Smart_home_Init
-                                                   Smart_home_ProcessEvent
-                                                   Smart_home_ProcessZDOMsgs
-           ENTRY                   ADDRESS         REF BY
-           =====                   =======         ======
-           Coordinator_DstAddr     000004B2 
-    -------------------------------------------------------------------------
-XDATA_Z
-  Relative segment, address: XDATA 000004BE - 000004BE (0x1 bytes), align: 0
+  Relative segment, address: XDATA 000004B3 - 000004BE (0xc bytes), align: 0
   Segment part 13.            Intra module refs:   Smart_home_Init
                                                    Smart_home_ProcessEvent
                                                    Smart_home_ProcessZDOMsgs
-                                                   Smart_home_epDesc
            ENTRY                   ADDRESS         REF BY
            =====                   =======         ======
-           Smart_home_TaskID       000004BE 
+           Coordinator_DstAddr     000004B3 
     -------------------------------------------------------------------------
 XDATA_Z
   Relative segment, address: XDATA 000004BF - 000004C3 (0x5 bytes), align: 0
